@@ -25403,6 +25403,7 @@
                          * @property {google.cloud.oracledatabase.v1.ComputeModel|null} [computeModel] CloudExadataInfrastructureProperties computeModel
                          * @property {string|null} [databaseServerType] CloudExadataInfrastructureProperties databaseServerType
                          * @property {string|null} [storageServerType] CloudExadataInfrastructureProperties storageServerType
+                         * @property {google.cloud.oracledatabase.v1.IExascaleConfig|null} [exascaleConfig] CloudExadataInfrastructureProperties exascaleConfig
                          */
     
                         /**
@@ -25662,6 +25663,14 @@
                         CloudExadataInfrastructureProperties.prototype.storageServerType = "";
     
                         /**
+                         * CloudExadataInfrastructureProperties exascaleConfig.
+                         * @member {google.cloud.oracledatabase.v1.IExascaleConfig|null|undefined} exascaleConfig
+                         * @memberof google.cloud.oracledatabase.v1.CloudExadataInfrastructureProperties
+                         * @instance
+                         */
+                        CloudExadataInfrastructureProperties.prototype.exascaleConfig = null;
+    
+                        /**
                          * Creates a new CloudExadataInfrastructureProperties instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.oracledatabase.v1.CloudExadataInfrastructureProperties
@@ -25746,6 +25755,8 @@
                                 writer.uint32(/* id 30, wireType 2 =*/242).string(message.storageServerType);
                             if (message.computeModel != null && Object.hasOwnProperty.call(message, "computeModel"))
                                 writer.uint32(/* id 31, wireType 0 =*/248).int32(message.computeModel);
+                            if (message.exascaleConfig != null && Object.hasOwnProperty.call(message, "exascaleConfig"))
+                                $root.google.cloud.oracledatabase.v1.ExascaleConfig.encode(message.exascaleConfig, writer.uint32(/* id 32, wireType 2 =*/258).fork()).ldelim();
                             return writer;
                         };
     
@@ -25908,6 +25919,10 @@
                                         message.storageServerType = reader.string();
                                         break;
                                     }
+                                case 32: {
+                                        message.exascaleConfig = $root.google.cloud.oracledatabase.v1.ExascaleConfig.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7, long);
                                     break;
@@ -26066,6 +26081,11 @@
                             if (message.storageServerType != null && message.hasOwnProperty("storageServerType"))
                                 if (!$util.isString(message.storageServerType))
                                     return "storageServerType: string expected";
+                            if (message.exascaleConfig != null && message.hasOwnProperty("exascaleConfig")) {
+                                var error = $root.google.cloud.oracledatabase.v1.ExascaleConfig.verify(message.exascaleConfig, long + 1);
+                                if (error)
+                                    return "exascaleConfig." + error;
+                            }
                             return null;
                         };
     
@@ -26218,6 +26238,11 @@
                                 message.databaseServerType = String(object.databaseServerType);
                             if (object.storageServerType != null)
                                 message.storageServerType = String(object.storageServerType);
+                            if (object.exascaleConfig != null) {
+                                if (typeof object.exascaleConfig !== "object")
+                                    throw TypeError(".google.cloud.oracledatabase.v1.CloudExadataInfrastructureProperties.exascaleConfig: object expected");
+                                message.exascaleConfig = $root.google.cloud.oracledatabase.v1.ExascaleConfig.fromObject(object.exascaleConfig, long + 1);
+                            }
                             return message;
                         };
     
@@ -26266,6 +26291,7 @@
                                 object.databaseServerType = "";
                                 object.storageServerType = "";
                                 object.computeModel = options.enums === String ? "COMPUTE_MODEL_UNSPECIFIED" : 0;
+                                object.exascaleConfig = null;
                             }
                             if (message.ocid != null && message.hasOwnProperty("ocid"))
                                 object.ocid = message.ocid;
@@ -26330,6 +26356,8 @@
                                 object.storageServerType = message.storageServerType;
                             if (message.computeModel != null && message.hasOwnProperty("computeModel"))
                                 object.computeModel = options.enums === String ? $root.google.cloud.oracledatabase.v1.ComputeModel[message.computeModel] === undefined ? message.computeModel : $root.google.cloud.oracledatabase.v1.ComputeModel[message.computeModel] : message.computeModel;
+                            if (message.exascaleConfig != null && message.hasOwnProperty("exascaleConfig"))
+                                object.exascaleConfig = $root.google.cloud.oracledatabase.v1.ExascaleConfig.toObject(message.exascaleConfig, options);
                             return object;
                         };
     
@@ -26386,6 +26414,247 @@
                         })();
     
                         return CloudExadataInfrastructureProperties;
+                    })();
+    
+                    v1.ExascaleConfig = (function() {
+    
+                        /**
+                         * Properties of an ExascaleConfig.
+                         * @memberof google.cloud.oracledatabase.v1
+                         * @interface IExascaleConfig
+                         * @property {number|null} [totalStorageSizeGb] ExascaleConfig totalStorageSizeGb
+                         * @property {number|null} [availableStorageSizeGb] ExascaleConfig availableStorageSizeGb
+                         */
+    
+                        /**
+                         * Constructs a new ExascaleConfig.
+                         * @memberof google.cloud.oracledatabase.v1
+                         * @classdesc Represents an ExascaleConfig.
+                         * @implements IExascaleConfig
+                         * @constructor
+                         * @param {google.cloud.oracledatabase.v1.IExascaleConfig=} [properties] Properties to set
+                         */
+                        function ExascaleConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExascaleConfig totalStorageSizeGb.
+                         * @member {number} totalStorageSizeGb
+                         * @memberof google.cloud.oracledatabase.v1.ExascaleConfig
+                         * @instance
+                         */
+                        ExascaleConfig.prototype.totalStorageSizeGb = 0;
+    
+                        /**
+                         * ExascaleConfig availableStorageSizeGb.
+                         * @member {number} availableStorageSizeGb
+                         * @memberof google.cloud.oracledatabase.v1.ExascaleConfig
+                         * @instance
+                         */
+                        ExascaleConfig.prototype.availableStorageSizeGb = 0;
+    
+                        /**
+                         * Creates a new ExascaleConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.oracledatabase.v1.ExascaleConfig
+                         * @static
+                         * @param {google.cloud.oracledatabase.v1.IExascaleConfig=} [properties] Properties to set
+                         * @returns {google.cloud.oracledatabase.v1.ExascaleConfig} ExascaleConfig instance
+                         */
+                        ExascaleConfig.create = function create(properties) {
+                            return new ExascaleConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExascaleConfig message. Does not implicitly {@link google.cloud.oracledatabase.v1.ExascaleConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.oracledatabase.v1.ExascaleConfig
+                         * @static
+                         * @param {google.cloud.oracledatabase.v1.IExascaleConfig} message ExascaleConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExascaleConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.totalStorageSizeGb != null && Object.hasOwnProperty.call(message, "totalStorageSizeGb"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.totalStorageSizeGb);
+                            if (message.availableStorageSizeGb != null && Object.hasOwnProperty.call(message, "availableStorageSizeGb"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.availableStorageSizeGb);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExascaleConfig message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ExascaleConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.oracledatabase.v1.ExascaleConfig
+                         * @static
+                         * @param {google.cloud.oracledatabase.v1.IExascaleConfig} message ExascaleConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExascaleConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExascaleConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.oracledatabase.v1.ExascaleConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.oracledatabase.v1.ExascaleConfig} ExascaleConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExascaleConfig.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oracledatabase.v1.ExascaleConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.totalStorageSizeGb = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.availableStorageSizeGb = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExascaleConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.oracledatabase.v1.ExascaleConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.oracledatabase.v1.ExascaleConfig} ExascaleConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExascaleConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExascaleConfig message.
+                         * @function verify
+                         * @memberof google.cloud.oracledatabase.v1.ExascaleConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExascaleConfig.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.totalStorageSizeGb != null && message.hasOwnProperty("totalStorageSizeGb"))
+                                if (!$util.isInteger(message.totalStorageSizeGb))
+                                    return "totalStorageSizeGb: integer expected";
+                            if (message.availableStorageSizeGb != null && message.hasOwnProperty("availableStorageSizeGb"))
+                                if (!$util.isInteger(message.availableStorageSizeGb))
+                                    return "availableStorageSizeGb: integer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExascaleConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.oracledatabase.v1.ExascaleConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.oracledatabase.v1.ExascaleConfig} ExascaleConfig
+                         */
+                        ExascaleConfig.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.oracledatabase.v1.ExascaleConfig)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.oracledatabase.v1.ExascaleConfig();
+                            if (object.totalStorageSizeGb != null)
+                                message.totalStorageSizeGb = object.totalStorageSizeGb | 0;
+                            if (object.availableStorageSizeGb != null)
+                                message.availableStorageSizeGb = object.availableStorageSizeGb | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExascaleConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.oracledatabase.v1.ExascaleConfig
+                         * @static
+                         * @param {google.cloud.oracledatabase.v1.ExascaleConfig} message ExascaleConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExascaleConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.totalStorageSizeGb = 0;
+                                object.availableStorageSizeGb = 0;
+                            }
+                            if (message.totalStorageSizeGb != null && message.hasOwnProperty("totalStorageSizeGb"))
+                                object.totalStorageSizeGb = message.totalStorageSizeGb;
+                            if (message.availableStorageSizeGb != null && message.hasOwnProperty("availableStorageSizeGb"))
+                                object.availableStorageSizeGb = message.availableStorageSizeGb;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExascaleConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.oracledatabase.v1.ExascaleConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExascaleConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ExascaleConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.oracledatabase.v1.ExascaleConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExascaleConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.oracledatabase.v1.ExascaleConfig";
+                        };
+    
+                        return ExascaleConfig;
                     })();
     
                     v1.MaintenanceWindow = (function() {
@@ -27089,6 +27358,270 @@
                         })();
     
                         return MaintenanceWindow;
+                    })();
+    
+                    v1.ConfigureExascaleCloudExadataInfrastructureRequest = (function() {
+    
+                        /**
+                         * Properties of a ConfigureExascaleCloudExadataInfrastructureRequest.
+                         * @memberof google.cloud.oracledatabase.v1
+                         * @interface IConfigureExascaleCloudExadataInfrastructureRequest
+                         * @property {string|null} [name] ConfigureExascaleCloudExadataInfrastructureRequest name
+                         * @property {number|null} [totalStorageSizeGb] ConfigureExascaleCloudExadataInfrastructureRequest totalStorageSizeGb
+                         * @property {string|null} [requestId] ConfigureExascaleCloudExadataInfrastructureRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new ConfigureExascaleCloudExadataInfrastructureRequest.
+                         * @memberof google.cloud.oracledatabase.v1
+                         * @classdesc Represents a ConfigureExascaleCloudExadataInfrastructureRequest.
+                         * @implements IConfigureExascaleCloudExadataInfrastructureRequest
+                         * @constructor
+                         * @param {google.cloud.oracledatabase.v1.IConfigureExascaleCloudExadataInfrastructureRequest=} [properties] Properties to set
+                         */
+                        function ConfigureExascaleCloudExadataInfrastructureRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ConfigureExascaleCloudExadataInfrastructureRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.oracledatabase.v1.ConfigureExascaleCloudExadataInfrastructureRequest
+                         * @instance
+                         */
+                        ConfigureExascaleCloudExadataInfrastructureRequest.prototype.name = "";
+    
+                        /**
+                         * ConfigureExascaleCloudExadataInfrastructureRequest totalStorageSizeGb.
+                         * @member {number} totalStorageSizeGb
+                         * @memberof google.cloud.oracledatabase.v1.ConfigureExascaleCloudExadataInfrastructureRequest
+                         * @instance
+                         */
+                        ConfigureExascaleCloudExadataInfrastructureRequest.prototype.totalStorageSizeGb = 0;
+    
+                        /**
+                         * ConfigureExascaleCloudExadataInfrastructureRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.oracledatabase.v1.ConfigureExascaleCloudExadataInfrastructureRequest
+                         * @instance
+                         */
+                        ConfigureExascaleCloudExadataInfrastructureRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new ConfigureExascaleCloudExadataInfrastructureRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.oracledatabase.v1.ConfigureExascaleCloudExadataInfrastructureRequest
+                         * @static
+                         * @param {google.cloud.oracledatabase.v1.IConfigureExascaleCloudExadataInfrastructureRequest=} [properties] Properties to set
+                         * @returns {google.cloud.oracledatabase.v1.ConfigureExascaleCloudExadataInfrastructureRequest} ConfigureExascaleCloudExadataInfrastructureRequest instance
+                         */
+                        ConfigureExascaleCloudExadataInfrastructureRequest.create = function create(properties) {
+                            return new ConfigureExascaleCloudExadataInfrastructureRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ConfigureExascaleCloudExadataInfrastructureRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.ConfigureExascaleCloudExadataInfrastructureRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.oracledatabase.v1.ConfigureExascaleCloudExadataInfrastructureRequest
+                         * @static
+                         * @param {google.cloud.oracledatabase.v1.IConfigureExascaleCloudExadataInfrastructureRequest} message ConfigureExascaleCloudExadataInfrastructureRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConfigureExascaleCloudExadataInfrastructureRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.totalStorageSizeGb != null && Object.hasOwnProperty.call(message, "totalStorageSizeGb"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.totalStorageSizeGb);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ConfigureExascaleCloudExadataInfrastructureRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ConfigureExascaleCloudExadataInfrastructureRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.oracledatabase.v1.ConfigureExascaleCloudExadataInfrastructureRequest
+                         * @static
+                         * @param {google.cloud.oracledatabase.v1.IConfigureExascaleCloudExadataInfrastructureRequest} message ConfigureExascaleCloudExadataInfrastructureRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConfigureExascaleCloudExadataInfrastructureRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ConfigureExascaleCloudExadataInfrastructureRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.oracledatabase.v1.ConfigureExascaleCloudExadataInfrastructureRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.oracledatabase.v1.ConfigureExascaleCloudExadataInfrastructureRequest} ConfigureExascaleCloudExadataInfrastructureRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConfigureExascaleCloudExadataInfrastructureRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oracledatabase.v1.ConfigureExascaleCloudExadataInfrastructureRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.totalStorageSizeGb = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ConfigureExascaleCloudExadataInfrastructureRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.oracledatabase.v1.ConfigureExascaleCloudExadataInfrastructureRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.oracledatabase.v1.ConfigureExascaleCloudExadataInfrastructureRequest} ConfigureExascaleCloudExadataInfrastructureRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConfigureExascaleCloudExadataInfrastructureRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ConfigureExascaleCloudExadataInfrastructureRequest message.
+                         * @function verify
+                         * @memberof google.cloud.oracledatabase.v1.ConfigureExascaleCloudExadataInfrastructureRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ConfigureExascaleCloudExadataInfrastructureRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.totalStorageSizeGb != null && message.hasOwnProperty("totalStorageSizeGb"))
+                                if (!$util.isInteger(message.totalStorageSizeGb))
+                                    return "totalStorageSizeGb: integer expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ConfigureExascaleCloudExadataInfrastructureRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.oracledatabase.v1.ConfigureExascaleCloudExadataInfrastructureRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.oracledatabase.v1.ConfigureExascaleCloudExadataInfrastructureRequest} ConfigureExascaleCloudExadataInfrastructureRequest
+                         */
+                        ConfigureExascaleCloudExadataInfrastructureRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.oracledatabase.v1.ConfigureExascaleCloudExadataInfrastructureRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.oracledatabase.v1.ConfigureExascaleCloudExadataInfrastructureRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.totalStorageSizeGb != null)
+                                message.totalStorageSizeGb = object.totalStorageSizeGb | 0;
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ConfigureExascaleCloudExadataInfrastructureRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.oracledatabase.v1.ConfigureExascaleCloudExadataInfrastructureRequest
+                         * @static
+                         * @param {google.cloud.oracledatabase.v1.ConfigureExascaleCloudExadataInfrastructureRequest} message ConfigureExascaleCloudExadataInfrastructureRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ConfigureExascaleCloudExadataInfrastructureRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.totalStorageSizeGb = 0;
+                                object.requestId = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.totalStorageSizeGb != null && message.hasOwnProperty("totalStorageSizeGb"))
+                                object.totalStorageSizeGb = message.totalStorageSizeGb;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ConfigureExascaleCloudExadataInfrastructureRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.oracledatabase.v1.ConfigureExascaleCloudExadataInfrastructureRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ConfigureExascaleCloudExadataInfrastructureRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ConfigureExascaleCloudExadataInfrastructureRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.oracledatabase.v1.ConfigureExascaleCloudExadataInfrastructureRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ConfigureExascaleCloudExadataInfrastructureRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.oracledatabase.v1.ConfigureExascaleCloudExadataInfrastructureRequest";
+                        };
+    
+                        return ConfigureExascaleCloudExadataInfrastructureRequest;
                     })();
     
                     v1.ExadbVmCluster = (function() {
@@ -28619,6 +29152,7 @@
                          * @property {google.protobuf.ITimestamp|null} [createTime] ExascaleDbStorageVault createTime
                          * @property {string|null} [entitlementId] ExascaleDbStorageVault entitlementId
                          * @property {Object.<string,string>|null} [labels] ExascaleDbStorageVault labels
+                         * @property {string|null} [exadataInfrastructure] ExascaleDbStorageVault exadataInfrastructure
                          */
     
                         /**
@@ -28694,6 +29228,14 @@
                         ExascaleDbStorageVault.prototype.labels = $util.emptyObject;
     
                         /**
+                         * ExascaleDbStorageVault exadataInfrastructure.
+                         * @member {string} exadataInfrastructure
+                         * @memberof google.cloud.oracledatabase.v1.ExascaleDbStorageVault
+                         * @instance
+                         */
+                        ExascaleDbStorageVault.prototype.exadataInfrastructure = "";
+    
+                        /**
                          * Creates a new ExascaleDbStorageVault instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.oracledatabase.v1.ExascaleDbStorageVault
@@ -28732,6 +29274,8 @@
                             if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
                                 for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 7, wireType 2 =*/58).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.exadataInfrastructure != null && Object.hasOwnProperty.call(message, "exadataInfrastructure"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.exadataInfrastructure);
                             return writer;
                         };
     
@@ -28821,6 +29365,10 @@
                                         message.labels[key] = value;
                                         break;
                                     }
+                                case 8: {
+                                        message.exadataInfrastructure = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7, long);
                                     break;
@@ -28890,6 +29438,9 @@
                                     if (!$util.isString(message.labels[key[i]]))
                                         return "labels: string{k:string} expected";
                             }
+                            if (message.exadataInfrastructure != null && message.hasOwnProperty("exadataInfrastructure"))
+                                if (!$util.isString(message.exadataInfrastructure))
+                                    return "exadataInfrastructure: string expected";
                             return null;
                         };
     
@@ -28937,6 +29488,8 @@
                                     message.labels[keys[i]] = String(object.labels[keys[i]]);
                                 }
                             }
+                            if (object.exadataInfrastructure != null)
+                                message.exadataInfrastructure = String(object.exadataInfrastructure);
                             return message;
                         };
     
@@ -28962,6 +29515,7 @@
                                 object.properties = null;
                                 object.createTime = null;
                                 object.entitlementId = "";
+                                object.exadataInfrastructure = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -28984,6 +29538,8 @@
                                     object.labels[keys2[j]] = message.labels[keys2[j]];
                                 }
                             }
+                            if (message.exadataInfrastructure != null && message.hasOwnProperty("exadataInfrastructure"))
+                                object.exadataInfrastructure = message.exadataInfrastructure;
                             return object;
                         };
     
@@ -70958,6 +71514,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|configureExascaleCloudExadataInfrastructure}.
+                         * @memberof google.cloud.oracledatabase.v1.OracleDatabase
+                         * @typedef ConfigureExascaleCloudExadataInfrastructureCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls ConfigureExascaleCloudExadataInfrastructure.
+                         * @function configureExascaleCloudExadataInfrastructure
+                         * @memberof google.cloud.oracledatabase.v1.OracleDatabase
+                         * @instance
+                         * @param {google.cloud.oracledatabase.v1.IConfigureExascaleCloudExadataInfrastructureRequest} request ConfigureExascaleCloudExadataInfrastructureRequest message or plain object
+                         * @param {google.cloud.oracledatabase.v1.OracleDatabase.ConfigureExascaleCloudExadataInfrastructureCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OracleDatabase.prototype.configureExascaleCloudExadataInfrastructure = function configureExascaleCloudExadataInfrastructure(request, callback) {
+                            return this.rpcCall(configureExascaleCloudExadataInfrastructure, $root.google.cloud.oracledatabase.v1.ConfigureExascaleCloudExadataInfrastructureRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "ConfigureExascaleCloudExadataInfrastructure" });
+    
+                        /**
+                         * Calls ConfigureExascaleCloudExadataInfrastructure.
+                         * @function configureExascaleCloudExadataInfrastructure
+                         * @memberof google.cloud.oracledatabase.v1.OracleDatabase
+                         * @instance
+                         * @param {google.cloud.oracledatabase.v1.IConfigureExascaleCloudExadataInfrastructureRequest} request ConfigureExascaleCloudExadataInfrastructureRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|listCloudVmClusters}.
                          * @memberof google.cloud.oracledatabase.v1.OracleDatabase
                          * @typedef ListCloudVmClustersCallback
@@ -86294,6 +86883,7 @@
                          * @property {string|null} [odbSubnet] CloudVmCluster odbSubnet
                          * @property {string|null} [backupOdbSubnet] CloudVmCluster backupOdbSubnet
                          * @property {google.cloud.oracledatabase.v1.IIdentityConnector|null} [identityConnector] CloudVmCluster identityConnector
+                         * @property {string|null} [exascaleDbStorageVault] CloudVmCluster exascaleDbStorageVault
                          */
     
                         /**
@@ -86425,6 +87015,14 @@
                         CloudVmCluster.prototype.identityConnector = null;
     
                         /**
+                         * CloudVmCluster exascaleDbStorageVault.
+                         * @member {string} exascaleDbStorageVault
+                         * @memberof google.cloud.oracledatabase.v1.CloudVmCluster
+                         * @instance
+                         */
+                        CloudVmCluster.prototype.exascaleDbStorageVault = "";
+    
+                        /**
                          * Creates a new CloudVmCluster instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.oracledatabase.v1.CloudVmCluster
@@ -86477,6 +87075,8 @@
                                 writer.uint32(/* id 15, wireType 2 =*/122).string(message.backupOdbSubnet);
                             if (message.identityConnector != null && Object.hasOwnProperty.call(message, "identityConnector"))
                                 $root.google.cloud.oracledatabase.v1.IdentityConnector.encode(message.identityConnector, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
+                            if (message.exascaleDbStorageVault != null && Object.hasOwnProperty.call(message, "exascaleDbStorageVault"))
+                                writer.uint32(/* id 17, wireType 2 =*/138).string(message.exascaleDbStorageVault);
                             return writer;
                         };
     
@@ -86594,6 +87194,10 @@
                                         message.identityConnector = $root.google.cloud.oracledatabase.v1.IdentityConnector.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
+                                case 17: {
+                                        message.exascaleDbStorageVault = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7, long);
                                     break;
@@ -86686,6 +87290,9 @@
                                 if (error)
                                     return "identityConnector." + error;
                             }
+                            if (message.exascaleDbStorageVault != null && message.hasOwnProperty("exascaleDbStorageVault"))
+                                if (!$util.isString(message.exascaleDbStorageVault))
+                                    return "exascaleDbStorageVault: string expected";
                             return null;
                         };
     
@@ -86750,6 +87357,8 @@
                                     throw TypeError(".google.cloud.oracledatabase.v1.CloudVmCluster.identityConnector: object expected");
                                 message.identityConnector = $root.google.cloud.oracledatabase.v1.IdentityConnector.fromObject(object.identityConnector, long + 1);
                             }
+                            if (object.exascaleDbStorageVault != null)
+                                message.exascaleDbStorageVault = String(object.exascaleDbStorageVault);
                             return message;
                         };
     
@@ -86782,6 +87391,7 @@
                                 object.odbSubnet = "";
                                 object.backupOdbSubnet = "";
                                 object.identityConnector = null;
+                                object.exascaleDbStorageVault = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -86818,6 +87428,8 @@
                                 object.backupOdbSubnet = message.backupOdbSubnet;
                             if (message.identityConnector != null && message.hasOwnProperty("identityConnector"))
                                 object.identityConnector = $root.google.cloud.oracledatabase.v1.IdentityConnector.toObject(message.identityConnector, options);
+                            if (message.exascaleDbStorageVault != null && message.hasOwnProperty("exascaleDbStorageVault"))
+                                object.exascaleDbStorageVault = message.exascaleDbStorageVault;
                             return object;
                         };
     
@@ -86889,6 +87501,7 @@
                          * @property {string|null} [dnsListenerIp] CloudVmClusterProperties dnsListenerIp
                          * @property {string|null} [clusterName] CloudVmClusterProperties clusterName
                          * @property {google.cloud.oracledatabase.v1.ComputeModel|null} [computeModel] CloudVmClusterProperties computeModel
+                         * @property {google.cloud.oracledatabase.v1.CloudVmClusterProperties.StorageManagementType|null} [storageManagementType] CloudVmClusterProperties storageManagementType
                          */
     
                         /**
@@ -87174,6 +87787,14 @@
                         CloudVmClusterProperties.prototype.computeModel = 0;
     
                         /**
+                         * CloudVmClusterProperties storageManagementType.
+                         * @member {google.cloud.oracledatabase.v1.CloudVmClusterProperties.StorageManagementType} storageManagementType
+                         * @memberof google.cloud.oracledatabase.v1.CloudVmClusterProperties
+                         * @instance
+                         */
+                        CloudVmClusterProperties.prototype.storageManagementType = 0;
+    
+                        /**
                          * Creates a new CloudVmClusterProperties instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.oracledatabase.v1.CloudVmClusterProperties
@@ -87266,6 +87887,8 @@
                                 writer.uint32(/* id 36, wireType 2 =*/290).string(message.clusterName);
                             if (message.computeModel != null && Object.hasOwnProperty.call(message, "computeModel"))
                                 writer.uint32(/* id 37, wireType 0 =*/296).int32(message.computeModel);
+                            if (message.storageManagementType != null && Object.hasOwnProperty.call(message, "storageManagementType"))
+                                writer.uint32(/* id 38, wireType 0 =*/304).int32(message.storageManagementType);
                             return writer;
                         };
     
@@ -87442,6 +88065,10 @@
                                     }
                                 case 37: {
                                         message.computeModel = reader.int32();
+                                        break;
+                                    }
+                                case 38: {
+                                        message.storageManagementType = reader.int32();
                                         break;
                                     }
                                 default:
@@ -87622,6 +88249,15 @@
                                 switch (message.computeModel) {
                                 default:
                                     return "computeModel: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.storageManagementType != null && message.hasOwnProperty("storageManagementType"))
+                                switch (message.storageManagementType) {
+                                default:
+                                    return "storageManagementType: enum value expected";
                                 case 0:
                                 case 1:
                                 case 2:
@@ -87825,6 +88461,26 @@
                                 message.computeModel = 2;
                                 break;
                             }
+                            switch (object.storageManagementType) {
+                            default:
+                                if (typeof object.storageManagementType === "number") {
+                                    message.storageManagementType = object.storageManagementType;
+                                    break;
+                                }
+                                break;
+                            case "STORAGE_MANAGEMENT_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.storageManagementType = 0;
+                                break;
+                            case "ASM":
+                            case 1:
+                                message.storageManagementType = 1;
+                                break;
+                            case "EXASCALE":
+                            case 2:
+                                message.storageManagementType = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -87877,6 +88533,7 @@
                                 object.dnsListenerIp = "";
                                 object.clusterName = "";
                                 object.computeModel = options.enums === String ? "COMPUTE_MODEL_UNSPECIFIED" : 0;
+                                object.storageManagementType = options.enums === String ? "STORAGE_MANAGEMENT_TYPE_UNSPECIFIED" : 0;
                             }
                             if (message.ocid != null && message.hasOwnProperty("ocid"))
                                 object.ocid = message.ocid;
@@ -87953,6 +88610,8 @@
                                 object.clusterName = message.clusterName;
                             if (message.computeModel != null && message.hasOwnProperty("computeModel"))
                                 object.computeModel = options.enums === String ? $root.google.cloud.oracledatabase.v1.ComputeModel[message.computeModel] === undefined ? message.computeModel : $root.google.cloud.oracledatabase.v1.ComputeModel[message.computeModel] : message.computeModel;
+                            if (message.storageManagementType != null && message.hasOwnProperty("storageManagementType"))
+                                object.storageManagementType = options.enums === String ? $root.google.cloud.oracledatabase.v1.CloudVmClusterProperties.StorageManagementType[message.storageManagementType] === undefined ? message.storageManagementType : $root.google.cloud.oracledatabase.v1.CloudVmClusterProperties.StorageManagementType[message.storageManagementType] : message.storageManagementType;
                             return object;
                         };
     
@@ -88037,6 +88696,22 @@
                             values[valuesById[5] = "TERMINATED"] = 5;
                             values[valuesById[6] = "FAILED"] = 6;
                             values[valuesById[7] = "MAINTENANCE_IN_PROGRESS"] = 7;
+                            return values;
+                        })();
+    
+                        /**
+                         * StorageManagementType enum.
+                         * @name google.cloud.oracledatabase.v1.CloudVmClusterProperties.StorageManagementType
+                         * @enum {number}
+                         * @property {number} STORAGE_MANAGEMENT_TYPE_UNSPECIFIED=0 STORAGE_MANAGEMENT_TYPE_UNSPECIFIED value
+                         * @property {number} ASM=1 ASM value
+                         * @property {number} EXASCALE=2 EXASCALE value
+                         */
+                        CloudVmClusterProperties.StorageManagementType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STORAGE_MANAGEMENT_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ASM"] = 1;
+                            values[valuesById[2] = "EXASCALE"] = 2;
                             return values;
                         })();
     

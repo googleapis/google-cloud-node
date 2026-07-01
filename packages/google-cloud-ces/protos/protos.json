@@ -14517,15 +14517,6 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
-                        "rootAgent": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "deprecated": true,
-                            "(google.api.field_behavior)": "OPTIONAL",
-                            "(google.api.resource_reference).type": "ces.googleapis.com/Agent"
-                          }
-                        },
                         "agent": {
                           "type": "string",
                           "id": 4,

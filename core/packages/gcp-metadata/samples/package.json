@@ -8,7 +8,7 @@
   "files": [
     "*.js"
   ],
-  "repository": "googleapis/gcp-metadata",
+  "repository": "googleapis/google-cloud-node",
   "private": true,
   "scripts": {
     "test": "mocha"

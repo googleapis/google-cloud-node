@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const EventId = require('eventid');
 import * as extend from 'extend';
+import {EventId} from './utils/event-id';
 import {google} from '../protos/protos';
 import {
   objToStruct,

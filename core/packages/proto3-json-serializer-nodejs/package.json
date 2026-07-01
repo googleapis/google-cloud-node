@@ -3,8 +3,8 @@
   "version": "3.0.5",
   "repository": {
     "type": "git",
-    "directory": "packages/proto3-json-serializer-nodejs",
-    "url": "https://github.com/googleapis/google-cloud-node-core.git"
+    "directory": "core/packages/proto3-json-serializer-nodejs",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
   },
   "description": "Support for proto3 JSON serialiazation/deserialization for protobuf.js",
   "main": "build/src/index.js",

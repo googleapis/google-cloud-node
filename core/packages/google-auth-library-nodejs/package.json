@@ -1,6 +1,6 @@
 {
   "name": "google-auth-library",
-  "version": "10.7.0",
+  "version": "10.9.0",
   "author": "Google Inc.",
   "description": "Google APIs Authentication Client Library for Node.js",
   "engines": {
@@ -10,8 +10,8 @@
   "types": "./build/src/index.d.ts",
   "repository": {
     "type": "git",
-    "directory": "packages/google-auth-library-nodejs",
-    "url": "https://github.com/googleapis/google-cloud-node-core.git"
+    "directory": "core/packages/google-auth-library-nodejs",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
   },
   "keywords": [
     "google",
@@ -86,5 +86,5 @@
     "prelint": "cd samples; npm link ../; npm install"
   },
   "license": "Apache-2.0",
-  "homepage": "https://github.com/googleapis/google-cloud-node-core/tree/main/packages/google-auth-library-nodejs"
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/core/packages/google-auth-library-nodejs"
 }

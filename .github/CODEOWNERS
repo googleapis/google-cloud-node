@@ -5,7 +5,8 @@
 # https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-code-owners#codeowners-syntax
 
 
-# The yoshi-nodejs team is the default owner for nodejs repositories.
+# The cloud sdk nodejs team is the default owner for nodejs repositories.
+# team_members: @pearigee @feywind @danieljbruce @shivanee-p
 *     @googleapis/cloud-sdk-nodejs-team
 /handwritten/bigquery @googleapis/bigquery-team
 /handwritten/cloud-profiler @googleapis/cloud-profiler-team
@@ -13,6 +14,4 @@
 /handwritten/firestore @googleapis/firestore-team
 /handwritten/spanner @googleapis/spanner-team
 /handwritten/bigquery-storage @googleapis/bigquery-team
-/handwritten/pubsub @googleapis/pubsub-team
-/handwritten/bigtable @googleapis/bigtable-team
 /core/packages/google-auth-library-nodejs @googleapis/aion-team

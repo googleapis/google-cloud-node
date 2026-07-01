@@ -17499,6 +17499,8 @@
                          * @interface ICesAppSpec
                          * @property {string|null} [cesApp] CesAppSpec cesApp
                          * @property {google.cloud.dialogflow.v2.Tool.ConfirmationRequirement|null} [confirmationRequirement] CesAppSpec confirmationRequirement
+                         * @property {boolean|null} [proactiveEnabled] CesAppSpec proactiveEnabled
+                         * @property {boolean|null} [reactiveEnabled] CesAppSpec reactiveEnabled
                          */
     
                         /**
@@ -17533,6 +17535,37 @@
                         CesAppSpec.prototype.confirmationRequirement = 0;
     
                         /**
+                         * CesAppSpec proactiveEnabled.
+                         * @member {boolean|null|undefined} proactiveEnabled
+                         * @memberof google.cloud.dialogflow.v2.CesAppSpec
+                         * @instance
+                         */
+                        CesAppSpec.prototype.proactiveEnabled = null;
+    
+                        /**
+                         * CesAppSpec reactiveEnabled.
+                         * @member {boolean|null|undefined} reactiveEnabled
+                         * @memberof google.cloud.dialogflow.v2.CesAppSpec
+                         * @instance
+                         */
+                        CesAppSpec.prototype.reactiveEnabled = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(CesAppSpec.prototype, "_proactiveEnabled", {
+                            get: $util.oneOfGetter($oneOfFields = ["proactiveEnabled"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(CesAppSpec.prototype, "_reactiveEnabled", {
+                            get: $util.oneOfGetter($oneOfFields = ["reactiveEnabled"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new CesAppSpec instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dialogflow.v2.CesAppSpec
@@ -17560,6 +17593,10 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.cesApp);
                             if (message.confirmationRequirement != null && Object.hasOwnProperty.call(message, "confirmationRequirement"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.confirmationRequirement);
+                            if (message.proactiveEnabled != null && Object.hasOwnProperty.call(message, "proactiveEnabled"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.proactiveEnabled);
+                            if (message.reactiveEnabled != null && Object.hasOwnProperty.call(message, "reactiveEnabled"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.reactiveEnabled);
                             return writer;
                         };
     
@@ -17608,6 +17645,14 @@
                                         message.confirmationRequirement = reader.int32();
                                         break;
                                     }
+                                case 3: {
+                                        message.proactiveEnabled = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.reactiveEnabled = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7, long);
                                     break;
@@ -17647,6 +17692,7 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
+                            var properties = {};
                             if (message.cesApp != null && message.hasOwnProperty("cesApp"))
                                 if (!$util.isString(message.cesApp))
                                     return "cesApp: string expected";
@@ -17659,6 +17705,16 @@
                                 case 2:
                                     break;
                                 }
+                            if (message.proactiveEnabled != null && message.hasOwnProperty("proactiveEnabled")) {
+                                properties._proactiveEnabled = 1;
+                                if (typeof message.proactiveEnabled !== "boolean")
+                                    return "proactiveEnabled: boolean expected";
+                            }
+                            if (message.reactiveEnabled != null && message.hasOwnProperty("reactiveEnabled")) {
+                                properties._reactiveEnabled = 1;
+                                if (typeof message.reactiveEnabled !== "boolean")
+                                    return "reactiveEnabled: boolean expected";
+                            }
                             return null;
                         };
     
@@ -17700,6 +17756,10 @@
                                 message.confirmationRequirement = 2;
                                 break;
                             }
+                            if (object.proactiveEnabled != null)
+                                message.proactiveEnabled = Boolean(object.proactiveEnabled);
+                            if (object.reactiveEnabled != null)
+                                message.reactiveEnabled = Boolean(object.reactiveEnabled);
                             return message;
                         };
     
@@ -17724,6 +17784,16 @@
                                 object.cesApp = message.cesApp;
                             if (message.confirmationRequirement != null && message.hasOwnProperty("confirmationRequirement"))
                                 object.confirmationRequirement = options.enums === String ? $root.google.cloud.dialogflow.v2.Tool.ConfirmationRequirement[message.confirmationRequirement] === undefined ? message.confirmationRequirement : $root.google.cloud.dialogflow.v2.Tool.ConfirmationRequirement[message.confirmationRequirement] : message.confirmationRequirement;
+                            if (message.proactiveEnabled != null && message.hasOwnProperty("proactiveEnabled")) {
+                                object.proactiveEnabled = message.proactiveEnabled;
+                                if (options.oneofs)
+                                    object._proactiveEnabled = "proactiveEnabled";
+                            }
+                            if (message.reactiveEnabled != null && message.hasOwnProperty("reactiveEnabled")) {
+                                object.reactiveEnabled = message.reactiveEnabled;
+                                if (options.oneofs)
+                                    object._reactiveEnabled = "reactiveEnabled";
+                            }
                             return object;
                         };
     
@@ -37542,6 +37612,7 @@
                          * @property {google.cloud.dialogflow.v2.IKnowledgeAssistAnswer|null} [knowledgeAssistAnswer] SuggestKnowledgeAssistResponse knowledgeAssistAnswer
                          * @property {string|null} [latestMessage] SuggestKnowledgeAssistResponse latestMessage
                          * @property {number|null} [contextSize] SuggestKnowledgeAssistResponse contextSize
+                         * @property {Array.<google.cloud.dialogflow.v2.KnowledgeAssistAnswer.IAdditionalSuggestedQueryResult>|null} [additionalSuggestedQueryResults] SuggestKnowledgeAssistResponse additionalSuggestedQueryResults
                          */
     
                         /**
@@ -37553,6 +37624,7 @@
                          * @param {google.cloud.dialogflow.v2.ISuggestKnowledgeAssistResponse=} [properties] Properties to set
                          */
                         function SuggestKnowledgeAssistResponse(properties) {
+                            this.additionalSuggestedQueryResults = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null && keys[i] !== "__proto__")
@@ -37584,6 +37656,14 @@
                         SuggestKnowledgeAssistResponse.prototype.contextSize = 0;
     
                         /**
+                         * SuggestKnowledgeAssistResponse additionalSuggestedQueryResults.
+                         * @member {Array.<google.cloud.dialogflow.v2.KnowledgeAssistAnswer.IAdditionalSuggestedQueryResult>} additionalSuggestedQueryResults
+                         * @memberof google.cloud.dialogflow.v2.SuggestKnowledgeAssistResponse
+                         * @instance
+                         */
+                        SuggestKnowledgeAssistResponse.prototype.additionalSuggestedQueryResults = $util.emptyArray;
+    
+                        /**
                          * Creates a new SuggestKnowledgeAssistResponse instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dialogflow.v2.SuggestKnowledgeAssistResponse
@@ -37613,6 +37693,9 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.latestMessage);
                             if (message.contextSize != null && Object.hasOwnProperty.call(message, "contextSize"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.contextSize);
+                            if (message.additionalSuggestedQueryResults != null && message.additionalSuggestedQueryResults.length)
+                                for (var i = 0; i < message.additionalSuggestedQueryResults.length; ++i)
+                                    $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult.encode(message.additionalSuggestedQueryResults[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             return writer;
                         };
     
@@ -37665,6 +37748,12 @@
                                         message.contextSize = reader.int32();
                                         break;
                                     }
+                                case 4: {
+                                        if (!(message.additionalSuggestedQueryResults && message.additionalSuggestedQueryResults.length))
+                                            message.additionalSuggestedQueryResults = [];
+                                        message.additionalSuggestedQueryResults.push($root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult.decode(reader, reader.uint32(), undefined, long + 1));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7, long);
                                     break;
@@ -37715,6 +37804,15 @@
                             if (message.contextSize != null && message.hasOwnProperty("contextSize"))
                                 if (!$util.isInteger(message.contextSize))
                                     return "contextSize: integer expected";
+                            if (message.additionalSuggestedQueryResults != null && message.hasOwnProperty("additionalSuggestedQueryResults")) {
+                                if (!Array.isArray(message.additionalSuggestedQueryResults))
+                                    return "additionalSuggestedQueryResults: array expected";
+                                for (var i = 0; i < message.additionalSuggestedQueryResults.length; ++i) {
+                                    var error = $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult.verify(message.additionalSuggestedQueryResults[i], long + 1);
+                                    if (error)
+                                        return "additionalSuggestedQueryResults." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -37743,6 +37841,16 @@
                                 message.latestMessage = String(object.latestMessage);
                             if (object.contextSize != null)
                                 message.contextSize = object.contextSize | 0;
+                            if (object.additionalSuggestedQueryResults) {
+                                if (!Array.isArray(object.additionalSuggestedQueryResults))
+                                    throw TypeError(".google.cloud.dialogflow.v2.SuggestKnowledgeAssistResponse.additionalSuggestedQueryResults: array expected");
+                                message.additionalSuggestedQueryResults = [];
+                                for (var i = 0; i < object.additionalSuggestedQueryResults.length; ++i) {
+                                    if (typeof object.additionalSuggestedQueryResults[i] !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.v2.SuggestKnowledgeAssistResponse.additionalSuggestedQueryResults: object expected");
+                                    message.additionalSuggestedQueryResults[i] = $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult.fromObject(object.additionalSuggestedQueryResults[i], long + 1);
+                                }
+                            }
                             return message;
                         };
     
@@ -37759,6 +37867,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.additionalSuggestedQueryResults = [];
                             if (options.defaults) {
                                 object.knowledgeAssistAnswer = null;
                                 object.latestMessage = "";
@@ -37770,6 +37880,11 @@
                                 object.latestMessage = message.latestMessage;
                             if (message.contextSize != null && message.hasOwnProperty("contextSize"))
                                 object.contextSize = message.contextSize;
+                            if (message.additionalSuggestedQueryResults && message.additionalSuggestedQueryResults.length) {
+                                object.additionalSuggestedQueryResults = [];
+                                for (var j = 0; j < message.additionalSuggestedQueryResults.length; ++j)
+                                    object.additionalSuggestedQueryResults[j] = $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult.toObject(message.additionalSuggestedQueryResults[j], options);
+                            }
                             return object;
                         };
     
@@ -38944,6 +39059,8 @@
                          * @property {google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.IKnowledgeAssistBehavior|null} [knowledgeAssistBehavior] KnowledgeAssistDebugInfo knowledgeAssistBehavior
                          * @property {google.cloud.dialogflow.v2.IIngestedContextReferenceDebugInfo|null} [ingestedContextReferenceDebugInfo] KnowledgeAssistDebugInfo ingestedContextReferenceDebugInfo
                          * @property {google.cloud.dialogflow.v2.IServiceLatency|null} [serviceLatency] KnowledgeAssistDebugInfo serviceLatency
+                         * @property {google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.IQueryGenerationDebugInfo|null} [queryGenerationDebugInfo] KnowledgeAssistDebugInfo queryGenerationDebugInfo
+                         * @property {google.protobuf.IStruct|null} [cesDebugInfo] KnowledgeAssistDebugInfo cesDebugInfo
                          */
     
                         /**
@@ -39010,6 +39127,22 @@
                         KnowledgeAssistDebugInfo.prototype.serviceLatency = null;
     
                         /**
+                         * KnowledgeAssistDebugInfo queryGenerationDebugInfo.
+                         * @member {google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.IQueryGenerationDebugInfo|null|undefined} queryGenerationDebugInfo
+                         * @memberof google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo
+                         * @instance
+                         */
+                        KnowledgeAssistDebugInfo.prototype.queryGenerationDebugInfo = null;
+    
+                        /**
+                         * KnowledgeAssistDebugInfo cesDebugInfo.
+                         * @member {google.protobuf.IStruct|null|undefined} cesDebugInfo
+                         * @memberof google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo
+                         * @instance
+                         */
+                        KnowledgeAssistDebugInfo.prototype.cesDebugInfo = null;
+    
+                        /**
                          * Creates a new KnowledgeAssistDebugInfo instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo
@@ -39045,6 +39178,10 @@
                                 $root.google.cloud.dialogflow.v2.IngestedContextReferenceDebugInfo.encode(message.ingestedContextReferenceDebugInfo, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             if (message.serviceLatency != null && Object.hasOwnProperty.call(message, "serviceLatency"))
                                 $root.google.cloud.dialogflow.v2.ServiceLatency.encode(message.serviceLatency, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.queryGenerationDebugInfo != null && Object.hasOwnProperty.call(message, "queryGenerationDebugInfo"))
+                                $root.google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo.encode(message.queryGenerationDebugInfo, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.cesDebugInfo != null && Object.hasOwnProperty.call(message, "cesDebugInfo"))
+                                $root.google.protobuf.Struct.encode(message.cesDebugInfo, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             return writer;
                         };
     
@@ -39107,6 +39244,14 @@
                                     }
                                 case 6: {
                                         message.serviceLatency = $root.google.cloud.dialogflow.v2.ServiceLatency.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 7: {
+                                        message.queryGenerationDebugInfo = $root.google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 8: {
+                                        message.cesDebugInfo = $root.google.protobuf.Struct.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 default:
@@ -39205,6 +39350,16 @@
                                 var error = $root.google.cloud.dialogflow.v2.ServiceLatency.verify(message.serviceLatency, long + 1);
                                 if (error)
                                     return "serviceLatency." + error;
+                            }
+                            if (message.queryGenerationDebugInfo != null && message.hasOwnProperty("queryGenerationDebugInfo")) {
+                                var error = $root.google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo.verify(message.queryGenerationDebugInfo, long + 1);
+                                if (error)
+                                    return "queryGenerationDebugInfo." + error;
+                            }
+                            if (message.cesDebugInfo != null && message.hasOwnProperty("cesDebugInfo")) {
+                                var error = $root.google.protobuf.Struct.verify(message.cesDebugInfo, long + 1);
+                                if (error)
+                                    return "cesDebugInfo." + error;
                             }
                             return null;
                         };
@@ -39364,6 +39519,16 @@
                                     throw TypeError(".google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.serviceLatency: object expected");
                                 message.serviceLatency = $root.google.cloud.dialogflow.v2.ServiceLatency.fromObject(object.serviceLatency, long + 1);
                             }
+                            if (object.queryGenerationDebugInfo != null) {
+                                if (typeof object.queryGenerationDebugInfo !== "object")
+                                    throw TypeError(".google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.queryGenerationDebugInfo: object expected");
+                                message.queryGenerationDebugInfo = $root.google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo.fromObject(object.queryGenerationDebugInfo, long + 1);
+                            }
+                            if (object.cesDebugInfo != null) {
+                                if (typeof object.cesDebugInfo !== "object")
+                                    throw TypeError(".google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.cesDebugInfo: object expected");
+                                message.cesDebugInfo = $root.google.protobuf.Struct.fromObject(object.cesDebugInfo, long + 1);
+                            }
                             return message;
                         };
     
@@ -39387,6 +39552,8 @@
                                 object.knowledgeAssistBehavior = null;
                                 object.ingestedContextReferenceDebugInfo = null;
                                 object.serviceLatency = null;
+                                object.queryGenerationDebugInfo = null;
+                                object.cesDebugInfo = null;
                             }
                             if (message.queryGenerationFailureReason != null && message.hasOwnProperty("queryGenerationFailureReason"))
                                 object.queryGenerationFailureReason = options.enums === String ? $root.google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.QueryGenerationFailureReason[message.queryGenerationFailureReason] === undefined ? message.queryGenerationFailureReason : $root.google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.QueryGenerationFailureReason[message.queryGenerationFailureReason] : message.queryGenerationFailureReason;
@@ -39400,6 +39567,10 @@
                                 object.ingestedContextReferenceDebugInfo = $root.google.cloud.dialogflow.v2.IngestedContextReferenceDebugInfo.toObject(message.ingestedContextReferenceDebugInfo, options);
                             if (message.serviceLatency != null && message.hasOwnProperty("serviceLatency"))
                                 object.serviceLatency = $root.google.cloud.dialogflow.v2.ServiceLatency.toObject(message.serviceLatency, options);
+                            if (message.queryGenerationDebugInfo != null && message.hasOwnProperty("queryGenerationDebugInfo"))
+                                object.queryGenerationDebugInfo = $root.google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo.toObject(message.queryGenerationDebugInfo, options);
+                            if (message.cesDebugInfo != null && message.hasOwnProperty("cesDebugInfo"))
+                                object.cesDebugInfo = $root.google.protobuf.Struct.toObject(message.cesDebugInfo, options);
                             return object;
                         };
     
@@ -40065,6 +40236,270 @@
                             return KnowledgeAssistBehavior;
                         })();
     
+                        KnowledgeAssistDebugInfo.QueryGenerationDebugInfo = (function() {
+    
+                            /**
+                             * Properties of a QueryGenerationDebugInfo.
+                             * @memberof google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo
+                             * @interface IQueryGenerationDebugInfo
+                             * @property {number|null} [promptTokenCount] QueryGenerationDebugInfo promptTokenCount
+                             * @property {number|null} [candidatesTokenCount] QueryGenerationDebugInfo candidatesTokenCount
+                             * @property {number|null} [totalTokenCount] QueryGenerationDebugInfo totalTokenCount
+                             */
+    
+                            /**
+                             * Constructs a new QueryGenerationDebugInfo.
+                             * @memberof google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo
+                             * @classdesc Represents a QueryGenerationDebugInfo.
+                             * @implements IQueryGenerationDebugInfo
+                             * @constructor
+                             * @param {google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.IQueryGenerationDebugInfo=} [properties] Properties to set
+                             */
+                            function QueryGenerationDebugInfo(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * QueryGenerationDebugInfo promptTokenCount.
+                             * @member {number} promptTokenCount
+                             * @memberof google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo
+                             * @instance
+                             */
+                            QueryGenerationDebugInfo.prototype.promptTokenCount = 0;
+    
+                            /**
+                             * QueryGenerationDebugInfo candidatesTokenCount.
+                             * @member {number} candidatesTokenCount
+                             * @memberof google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo
+                             * @instance
+                             */
+                            QueryGenerationDebugInfo.prototype.candidatesTokenCount = 0;
+    
+                            /**
+                             * QueryGenerationDebugInfo totalTokenCount.
+                             * @member {number} totalTokenCount
+                             * @memberof google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo
+                             * @instance
+                             */
+                            QueryGenerationDebugInfo.prototype.totalTokenCount = 0;
+    
+                            /**
+                             * Creates a new QueryGenerationDebugInfo instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo
+                             * @static
+                             * @param {google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.IQueryGenerationDebugInfo=} [properties] Properties to set
+                             * @returns {google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo} QueryGenerationDebugInfo instance
+                             */
+                            QueryGenerationDebugInfo.create = function create(properties) {
+                                return new QueryGenerationDebugInfo(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified QueryGenerationDebugInfo message. Does not implicitly {@link google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo
+                             * @static
+                             * @param {google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.IQueryGenerationDebugInfo} message QueryGenerationDebugInfo message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            QueryGenerationDebugInfo.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.promptTokenCount != null && Object.hasOwnProperty.call(message, "promptTokenCount"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.promptTokenCount);
+                                if (message.candidatesTokenCount != null && Object.hasOwnProperty.call(message, "candidatesTokenCount"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.candidatesTokenCount);
+                                if (message.totalTokenCount != null && Object.hasOwnProperty.call(message, "totalTokenCount"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.totalTokenCount);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified QueryGenerationDebugInfo message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo
+                             * @static
+                             * @param {google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.IQueryGenerationDebugInfo} message QueryGenerationDebugInfo message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            QueryGenerationDebugInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a QueryGenerationDebugInfo message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo} QueryGenerationDebugInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            QueryGenerationDebugInfo.decode = function decode(reader, length, error, long) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.promptTokenCount = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.candidatesTokenCount = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.totalTokenCount = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7, long);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a QueryGenerationDebugInfo message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo} QueryGenerationDebugInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            QueryGenerationDebugInfo.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a QueryGenerationDebugInfo message.
+                             * @function verify
+                             * @memberof google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            QueryGenerationDebugInfo.verify = function verify(message, long) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
+                                if (message.promptTokenCount != null && message.hasOwnProperty("promptTokenCount"))
+                                    if (!$util.isInteger(message.promptTokenCount))
+                                        return "promptTokenCount: integer expected";
+                                if (message.candidatesTokenCount != null && message.hasOwnProperty("candidatesTokenCount"))
+                                    if (!$util.isInteger(message.candidatesTokenCount))
+                                        return "candidatesTokenCount: integer expected";
+                                if (message.totalTokenCount != null && message.hasOwnProperty("totalTokenCount"))
+                                    if (!$util.isInteger(message.totalTokenCount))
+                                        return "totalTokenCount: integer expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a QueryGenerationDebugInfo message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo} QueryGenerationDebugInfo
+                             */
+                            QueryGenerationDebugInfo.fromObject = function fromObject(object, long) {
+                                if (object instanceof $root.google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo)
+                                    return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var message = new $root.google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo();
+                                if (object.promptTokenCount != null)
+                                    message.promptTokenCount = object.promptTokenCount | 0;
+                                if (object.candidatesTokenCount != null)
+                                    message.candidatesTokenCount = object.candidatesTokenCount | 0;
+                                if (object.totalTokenCount != null)
+                                    message.totalTokenCount = object.totalTokenCount | 0;
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a QueryGenerationDebugInfo message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo
+                             * @static
+                             * @param {google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo} message QueryGenerationDebugInfo
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            QueryGenerationDebugInfo.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.promptTokenCount = 0;
+                                    object.candidatesTokenCount = 0;
+                                    object.totalTokenCount = 0;
+                                }
+                                if (message.promptTokenCount != null && message.hasOwnProperty("promptTokenCount"))
+                                    object.promptTokenCount = message.promptTokenCount;
+                                if (message.candidatesTokenCount != null && message.hasOwnProperty("candidatesTokenCount"))
+                                    object.candidatesTokenCount = message.candidatesTokenCount;
+                                if (message.totalTokenCount != null && message.hasOwnProperty("totalTokenCount"))
+                                    object.totalTokenCount = message.totalTokenCount;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this QueryGenerationDebugInfo to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            QueryGenerationDebugInfo.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for QueryGenerationDebugInfo
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            QueryGenerationDebugInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo";
+                            };
+    
+                            return QueryGenerationDebugInfo;
+                        })();
+    
                         return KnowledgeAssistDebugInfo;
                     })();
     
@@ -40374,6 +40809,7 @@
                              * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer
                              * @interface ISuggestedQuery
                              * @property {string|null} [queryText] SuggestedQuery queryText
+                             * @property {Array.<google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.ISearchContext>|null} [searchContexts] SuggestedQuery searchContexts
                              */
     
                             /**
@@ -40385,6 +40821,7 @@
                              * @param {google.cloud.dialogflow.v2.KnowledgeAssistAnswer.ISuggestedQuery=} [properties] Properties to set
                              */
                             function SuggestedQuery(properties) {
+                                this.searchContexts = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null && keys[i] !== "__proto__")
@@ -40398,6 +40835,14 @@
                              * @instance
                              */
                             SuggestedQuery.prototype.queryText = "";
+    
+                            /**
+                             * SuggestedQuery searchContexts.
+                             * @member {Array.<google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.ISearchContext>} searchContexts
+                             * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery
+                             * @instance
+                             */
+                            SuggestedQuery.prototype.searchContexts = $util.emptyArray;
     
                             /**
                              * Creates a new SuggestedQuery instance using the specified properties.
@@ -40425,6 +40870,9 @@
                                     writer = $Writer.create();
                                 if (message.queryText != null && Object.hasOwnProperty.call(message, "queryText"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.queryText);
+                                if (message.searchContexts != null && message.searchContexts.length)
+                                    for (var i = 0; i < message.searchContexts.length; ++i)
+                                        $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.SearchContext.encode(message.searchContexts[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                                 return writer;
                             };
     
@@ -40469,6 +40917,12 @@
                                             message.queryText = reader.string();
                                             break;
                                         }
+                                    case 4: {
+                                            if (!(message.searchContexts && message.searchContexts.length))
+                                                message.searchContexts = [];
+                                            message.searchContexts.push($root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.SearchContext.decode(reader, reader.uint32(), undefined, long + 1));
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7, long);
                                         break;
@@ -40511,6 +40965,15 @@
                                 if (message.queryText != null && message.hasOwnProperty("queryText"))
                                     if (!$util.isString(message.queryText))
                                         return "queryText: string expected";
+                                if (message.searchContexts != null && message.hasOwnProperty("searchContexts")) {
+                                    if (!Array.isArray(message.searchContexts))
+                                        return "searchContexts: array expected";
+                                    for (var i = 0; i < message.searchContexts.length; ++i) {
+                                        var error = $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.SearchContext.verify(message.searchContexts[i], long + 1);
+                                        if (error)
+                                            return "searchContexts." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -40532,6 +40995,16 @@
                                 var message = new $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery();
                                 if (object.queryText != null)
                                     message.queryText = String(object.queryText);
+                                if (object.searchContexts) {
+                                    if (!Array.isArray(object.searchContexts))
+                                        throw TypeError(".google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.searchContexts: array expected");
+                                    message.searchContexts = [];
+                                    for (var i = 0; i < object.searchContexts.length; ++i) {
+                                        if (typeof object.searchContexts[i] !== "object")
+                                            throw TypeError(".google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.searchContexts: object expected");
+                                        message.searchContexts[i] = $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.SearchContext.fromObject(object.searchContexts[i], long + 1);
+                                    }
+                                }
                                 return message;
                             };
     
@@ -40548,10 +41021,17 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.searchContexts = [];
                                 if (options.defaults)
                                     object.queryText = "";
                                 if (message.queryText != null && message.hasOwnProperty("queryText"))
                                     object.queryText = message.queryText;
+                                if (message.searchContexts && message.searchContexts.length) {
+                                    object.searchContexts = [];
+                                    for (var j = 0; j < message.searchContexts.length; ++j)
+                                        object.searchContexts[j] = $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.SearchContext.toObject(message.searchContexts[j], options);
+                                }
                                 return object;
                             };
     
@@ -40581,7 +41061,494 @@
                                 return typeUrlPrefix + "/google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery";
                             };
     
+                            SuggestedQuery.SearchContext = (function() {
+    
+                                /**
+                                 * Properties of a SearchContext.
+                                 * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery
+                                 * @interface ISearchContext
+                                 * @property {string|null} [key] SearchContext key
+                                 * @property {string|null} [value] SearchContext value
+                                 */
+    
+                                /**
+                                 * Constructs a new SearchContext.
+                                 * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery
+                                 * @classdesc Represents a SearchContext.
+                                 * @implements ISearchContext
+                                 * @constructor
+                                 * @param {google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.ISearchContext=} [properties] Properties to set
+                                 */
+                                function SearchContext(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * SearchContext key.
+                                 * @member {string} key
+                                 * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.SearchContext
+                                 * @instance
+                                 */
+                                SearchContext.prototype.key = "";
+    
+                                /**
+                                 * SearchContext value.
+                                 * @member {string} value
+                                 * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.SearchContext
+                                 * @instance
+                                 */
+                                SearchContext.prototype.value = "";
+    
+                                /**
+                                 * Creates a new SearchContext instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.SearchContext
+                                 * @static
+                                 * @param {google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.ISearchContext=} [properties] Properties to set
+                                 * @returns {google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.SearchContext} SearchContext instance
+                                 */
+                                SearchContext.create = function create(properties) {
+                                    return new SearchContext(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified SearchContext message. Does not implicitly {@link google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.SearchContext.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.SearchContext
+                                 * @static
+                                 * @param {google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.ISearchContext} message SearchContext message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SearchContext.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.key != null && Object.hasOwnProperty.call(message, "key"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.key);
+                                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified SearchContext message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.SearchContext.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.SearchContext
+                                 * @static
+                                 * @param {google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.ISearchContext} message SearchContext message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SearchContext.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a SearchContext message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.SearchContext
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.SearchContext} SearchContext
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SearchContext.decode = function decode(reader, length, error, long) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $Reader.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.SearchContext();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.key = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.value = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7, long);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a SearchContext message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.SearchContext
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.SearchContext} SearchContext
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SearchContext.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a SearchContext message.
+                                 * @function verify
+                                 * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.SearchContext
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                SearchContext.verify = function verify(message, long) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        return "maximum nesting depth exceeded";
+                                    if (message.key != null && message.hasOwnProperty("key"))
+                                        if (!$util.isString(message.key))
+                                            return "key: string expected";
+                                    if (message.value != null && message.hasOwnProperty("value"))
+                                        if (!$util.isString(message.value))
+                                            return "value: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a SearchContext message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.SearchContext
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.SearchContext} SearchContext
+                                 */
+                                SearchContext.fromObject = function fromObject(object, long) {
+                                    if (object instanceof $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.SearchContext)
+                                        return object;
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
+                                    var message = new $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.SearchContext();
+                                    if (object.key != null)
+                                        message.key = String(object.key);
+                                    if (object.value != null)
+                                        message.value = String(object.value);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a SearchContext message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.SearchContext
+                                 * @static
+                                 * @param {google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.SearchContext} message SearchContext
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                SearchContext.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.key = "";
+                                        object.value = "";
+                                    }
+                                    if (message.key != null && message.hasOwnProperty("key"))
+                                        object.key = message.key;
+                                    if (message.value != null && message.hasOwnProperty("value"))
+                                        object.value = message.value;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this SearchContext to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.SearchContext
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                SearchContext.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for SearchContext
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.SearchContext
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                SearchContext.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.SearchContext";
+                                };
+    
+                                return SearchContext;
+                            })();
+    
                             return SuggestedQuery;
+                        })();
+    
+                        KnowledgeAssistAnswer.AdditionalSuggestedQueryResult = (function() {
+    
+                            /**
+                             * Properties of an AdditionalSuggestedQueryResult.
+                             * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer
+                             * @interface IAdditionalSuggestedQueryResult
+                             * @property {google.cloud.dialogflow.v2.KnowledgeAssistAnswer.ISuggestedQuery|null} [suggestedQuery] AdditionalSuggestedQueryResult suggestedQuery
+                             * @property {string|null} [answerRecord] AdditionalSuggestedQueryResult answerRecord
+                             */
+    
+                            /**
+                             * Constructs a new AdditionalSuggestedQueryResult.
+                             * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer
+                             * @classdesc Represents an AdditionalSuggestedQueryResult.
+                             * @implements IAdditionalSuggestedQueryResult
+                             * @constructor
+                             * @param {google.cloud.dialogflow.v2.KnowledgeAssistAnswer.IAdditionalSuggestedQueryResult=} [properties] Properties to set
+                             */
+                            function AdditionalSuggestedQueryResult(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AdditionalSuggestedQueryResult suggestedQuery.
+                             * @member {google.cloud.dialogflow.v2.KnowledgeAssistAnswer.ISuggestedQuery|null|undefined} suggestedQuery
+                             * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult
+                             * @instance
+                             */
+                            AdditionalSuggestedQueryResult.prototype.suggestedQuery = null;
+    
+                            /**
+                             * AdditionalSuggestedQueryResult answerRecord.
+                             * @member {string} answerRecord
+                             * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult
+                             * @instance
+                             */
+                            AdditionalSuggestedQueryResult.prototype.answerRecord = "";
+    
+                            /**
+                             * Creates a new AdditionalSuggestedQueryResult instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult
+                             * @static
+                             * @param {google.cloud.dialogflow.v2.KnowledgeAssistAnswer.IAdditionalSuggestedQueryResult=} [properties] Properties to set
+                             * @returns {google.cloud.dialogflow.v2.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult} AdditionalSuggestedQueryResult instance
+                             */
+                            AdditionalSuggestedQueryResult.create = function create(properties) {
+                                return new AdditionalSuggestedQueryResult(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AdditionalSuggestedQueryResult message. Does not implicitly {@link google.cloud.dialogflow.v2.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult
+                             * @static
+                             * @param {google.cloud.dialogflow.v2.KnowledgeAssistAnswer.IAdditionalSuggestedQueryResult} message AdditionalSuggestedQueryResult message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AdditionalSuggestedQueryResult.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.suggestedQuery != null && Object.hasOwnProperty.call(message, "suggestedQuery"))
+                                    $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.encode(message.suggestedQuery, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.answerRecord != null && Object.hasOwnProperty.call(message, "answerRecord"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.answerRecord);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AdditionalSuggestedQueryResult message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult
+                             * @static
+                             * @param {google.cloud.dialogflow.v2.KnowledgeAssistAnswer.IAdditionalSuggestedQueryResult} message AdditionalSuggestedQueryResult message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AdditionalSuggestedQueryResult.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AdditionalSuggestedQueryResult message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dialogflow.v2.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult} AdditionalSuggestedQueryResult
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AdditionalSuggestedQueryResult.decode = function decode(reader, length, error, long) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.suggestedQuery = $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.decode(reader, reader.uint32(), undefined, long + 1);
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.answerRecord = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7, long);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AdditionalSuggestedQueryResult message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dialogflow.v2.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult} AdditionalSuggestedQueryResult
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AdditionalSuggestedQueryResult.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AdditionalSuggestedQueryResult message.
+                             * @function verify
+                             * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AdditionalSuggestedQueryResult.verify = function verify(message, long) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
+                                if (message.suggestedQuery != null && message.hasOwnProperty("suggestedQuery")) {
+                                    var error = $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.verify(message.suggestedQuery, long + 1);
+                                    if (error)
+                                        return "suggestedQuery." + error;
+                                }
+                                if (message.answerRecord != null && message.hasOwnProperty("answerRecord"))
+                                    if (!$util.isString(message.answerRecord))
+                                        return "answerRecord: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AdditionalSuggestedQueryResult message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dialogflow.v2.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult} AdditionalSuggestedQueryResult
+                             */
+                            AdditionalSuggestedQueryResult.fromObject = function fromObject(object, long) {
+                                if (object instanceof $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult)
+                                    return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var message = new $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult();
+                                if (object.suggestedQuery != null) {
+                                    if (typeof object.suggestedQuery !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.v2.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult.suggestedQuery: object expected");
+                                    message.suggestedQuery = $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.fromObject(object.suggestedQuery, long + 1);
+                                }
+                                if (object.answerRecord != null)
+                                    message.answerRecord = String(object.answerRecord);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AdditionalSuggestedQueryResult message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult
+                             * @static
+                             * @param {google.cloud.dialogflow.v2.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult} message AdditionalSuggestedQueryResult
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AdditionalSuggestedQueryResult.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.suggestedQuery = null;
+                                    object.answerRecord = "";
+                                }
+                                if (message.suggestedQuery != null && message.hasOwnProperty("suggestedQuery"))
+                                    object.suggestedQuery = $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.toObject(message.suggestedQuery, options);
+                                if (message.answerRecord != null && message.hasOwnProperty("answerRecord"))
+                                    object.answerRecord = message.answerRecord;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AdditionalSuggestedQueryResult to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AdditionalSuggestedQueryResult.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AdditionalSuggestedQueryResult
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AdditionalSuggestedQueryResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dialogflow.v2.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult";
+                            };
+    
+                            return AdditionalSuggestedQueryResult;
                         })();
     
                         KnowledgeAssistAnswer.KnowledgeAnswer = (function() {
@@ -40593,6 +41560,8 @@
                              * @property {string|null} [answerText] KnowledgeAnswer answerText
                              * @property {google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.IFaqSource|null} [faqSource] KnowledgeAnswer faqSource
                              * @property {google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.IGenerativeSource|null} [generativeSource] KnowledgeAnswer generativeSource
+                             * @property {google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.IGenerativeSource|null} [playbookSource] KnowledgeAnswer playbookSource
+                             * @property {google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.IEventSource|null} [eventSource] KnowledgeAnswer eventSource
                              */
     
                             /**
@@ -40634,17 +41603,33 @@
                              */
                             KnowledgeAnswer.prototype.generativeSource = null;
     
+                            /**
+                             * KnowledgeAnswer playbookSource.
+                             * @member {google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.IGenerativeSource|null|undefined} playbookSource
+                             * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer
+                             * @instance
+                             */
+                            KnowledgeAnswer.prototype.playbookSource = null;
+    
+                            /**
+                             * KnowledgeAnswer eventSource.
+                             * @member {google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.IEventSource|null|undefined} eventSource
+                             * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer
+                             * @instance
+                             */
+                            KnowledgeAnswer.prototype.eventSource = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
                             /**
                              * KnowledgeAnswer source.
-                             * @member {"faqSource"|"generativeSource"|undefined} source
+                             * @member {"faqSource"|"generativeSource"|"playbookSource"|"eventSource"|undefined} source
                              * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer
                              * @instance
                              */
                             Object.defineProperty(KnowledgeAnswer.prototype, "source", {
-                                get: $util.oneOfGetter($oneOfFields = ["faqSource", "generativeSource"]),
+                                get: $util.oneOfGetter($oneOfFields = ["faqSource", "generativeSource", "playbookSource", "eventSource"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -40678,6 +41663,10 @@
                                     $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.FaqSource.encode(message.faqSource, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                                 if (message.generativeSource != null && Object.hasOwnProperty.call(message, "generativeSource"))
                                     $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource.encode(message.generativeSource, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.playbookSource != null && Object.hasOwnProperty.call(message, "playbookSource"))
+                                    $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource.encode(message.playbookSource, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                if (message.eventSource != null && Object.hasOwnProperty.call(message, "eventSource"))
+                                    $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource.encode(message.eventSource, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                                 return writer;
                             };
     
@@ -40728,6 +41717,14 @@
                                         }
                                     case 4: {
                                             message.generativeSource = $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource.decode(reader, reader.uint32(), undefined, long + 1);
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.playbookSource = $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource.decode(reader, reader.uint32(), undefined, long + 1);
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.eventSource = $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     default:
@@ -40791,6 +41788,26 @@
                                             return "generativeSource." + error;
                                     }
                                 }
+                                if (message.playbookSource != null && message.hasOwnProperty("playbookSource")) {
+                                    if (properties.source === 1)
+                                        return "source: multiple values";
+                                    properties.source = 1;
+                                    {
+                                        var error = $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource.verify(message.playbookSource, long + 1);
+                                        if (error)
+                                            return "playbookSource." + error;
+                                    }
+                                }
+                                if (message.eventSource != null && message.hasOwnProperty("eventSource")) {
+                                    if (properties.source === 1)
+                                        return "source: multiple values";
+                                    properties.source = 1;
+                                    {
+                                        var error = $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource.verify(message.eventSource, long + 1);
+                                        if (error)
+                                            return "eventSource." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -40822,6 +41839,16 @@
                                         throw TypeError(".google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.generativeSource: object expected");
                                     message.generativeSource = $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource.fromObject(object.generativeSource, long + 1);
                                 }
+                                if (object.playbookSource != null) {
+                                    if (typeof object.playbookSource !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.playbookSource: object expected");
+                                    message.playbookSource = $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource.fromObject(object.playbookSource, long + 1);
+                                }
+                                if (object.eventSource != null) {
+                                    if (typeof object.eventSource !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.eventSource: object expected");
+                                    message.eventSource = $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource.fromObject(object.eventSource, long + 1);
+                                }
                                 return message;
                             };
     
@@ -40851,6 +41878,16 @@
                                     object.generativeSource = $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource.toObject(message.generativeSource, options);
                                     if (options.oneofs)
                                         object.source = "generativeSource";
+                                }
+                                if (message.playbookSource != null && message.hasOwnProperty("playbookSource")) {
+                                    object.playbookSource = $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource.toObject(message.playbookSource, options);
+                                    if (options.oneofs)
+                                        object.source = "playbookSource";
+                                }
+                                if (message.eventSource != null && message.hasOwnProperty("eventSource")) {
+                                    object.eventSource = $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource.toObject(message.eventSource, options);
+                                    if (options.oneofs)
+                                        object.source = "eventSource";
                                 }
                                 return object;
                             };
@@ -41626,6 +42663,252 @@
                                 })();
     
                                 return GenerativeSource;
+                            })();
+    
+                            KnowledgeAnswer.EventSource = (function() {
+    
+                                /**
+                                 * Properties of an EventSource.
+                                 * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer
+                                 * @interface IEventSource
+                                 * @property {string|null} [event] EventSource event
+                                 * @property {google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.IGenerativeSource|null} [snippets] EventSource snippets
+                                 */
+    
+                                /**
+                                 * Constructs a new EventSource.
+                                 * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer
+                                 * @classdesc Represents an EventSource.
+                                 * @implements IEventSource
+                                 * @constructor
+                                 * @param {google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.IEventSource=} [properties] Properties to set
+                                 */
+                                function EventSource(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * EventSource event.
+                                 * @member {string} event
+                                 * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource
+                                 * @instance
+                                 */
+                                EventSource.prototype.event = "";
+    
+                                /**
+                                 * EventSource snippets.
+                                 * @member {google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.IGenerativeSource|null|undefined} snippets
+                                 * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource
+                                 * @instance
+                                 */
+                                EventSource.prototype.snippets = null;
+    
+                                /**
+                                 * Creates a new EventSource instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource
+                                 * @static
+                                 * @param {google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.IEventSource=} [properties] Properties to set
+                                 * @returns {google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource} EventSource instance
+                                 */
+                                EventSource.create = function create(properties) {
+                                    return new EventSource(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified EventSource message. Does not implicitly {@link google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource
+                                 * @static
+                                 * @param {google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.IEventSource} message EventSource message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                EventSource.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.event != null && Object.hasOwnProperty.call(message, "event"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.event);
+                                    if (message.snippets != null && Object.hasOwnProperty.call(message, "snippets"))
+                                        $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource.encode(message.snippets, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified EventSource message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource
+                                 * @static
+                                 * @param {google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.IEventSource} message EventSource message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                EventSource.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an EventSource message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource} EventSource
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                EventSource.decode = function decode(reader, length, error, long) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $Reader.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.event = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.snippets = $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource.decode(reader, reader.uint32(), undefined, long + 1);
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7, long);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an EventSource message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource} EventSource
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                EventSource.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an EventSource message.
+                                 * @function verify
+                                 * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                EventSource.verify = function verify(message, long) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        return "maximum nesting depth exceeded";
+                                    if (message.event != null && message.hasOwnProperty("event"))
+                                        if (!$util.isString(message.event))
+                                            return "event: string expected";
+                                    if (message.snippets != null && message.hasOwnProperty("snippets")) {
+                                        var error = $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource.verify(message.snippets, long + 1);
+                                        if (error)
+                                            return "snippets." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an EventSource message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource} EventSource
+                                 */
+                                EventSource.fromObject = function fromObject(object, long) {
+                                    if (object instanceof $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource)
+                                        return object;
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
+                                    var message = new $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource();
+                                    if (object.event != null)
+                                        message.event = String(object.event);
+                                    if (object.snippets != null) {
+                                        if (typeof object.snippets !== "object")
+                                            throw TypeError(".google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource.snippets: object expected");
+                                        message.snippets = $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource.fromObject(object.snippets, long + 1);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an EventSource message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource
+                                 * @static
+                                 * @param {google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource} message EventSource
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                EventSource.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.event = "";
+                                        object.snippets = null;
+                                    }
+                                    if (message.event != null && message.hasOwnProperty("event"))
+                                        object.event = message.event;
+                                    if (message.snippets != null && message.hasOwnProperty("snippets"))
+                                        object.snippets = $root.google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource.toObject(message.snippets, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this EventSource to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                EventSource.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for EventSource
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                EventSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource";
+                                };
+    
+                                return EventSource;
                             })();
     
                             return KnowledgeAnswer;
@@ -84701,6 +85984,8 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
+                                case 5:
                                     break;
                                 }
                             if (message.answerSources != null && message.hasOwnProperty("answerSources")) {
@@ -84758,6 +86043,14 @@
                             case "INTENT":
                             case 3:
                                 message.answerType = 3;
+                                break;
+                            case "PLAYBOOK":
+                            case 4:
+                                message.answerType = 4;
+                                break;
+                            case "EVENT":
+                            case 5:
+                                message.answerType = 5;
                                 break;
                             }
                             if (object.answerSources) {
@@ -84843,6 +86136,8 @@
                          * @property {number} FAQ=1 FAQ value
                          * @property {number} GENERATIVE=2 GENERATIVE value
                          * @property {number} INTENT=3 INTENT value
+                         * @property {number} PLAYBOOK=4 PLAYBOOK value
+                         * @property {number} EVENT=5 EVENT value
                          */
                         SearchKnowledgeAnswer.AnswerType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -84850,6 +86145,8 @@
                             values[valuesById[1] = "FAQ"] = 1;
                             values[valuesById[2] = "GENERATIVE"] = 2;
                             values[valuesById[3] = "INTENT"] = 3;
+                            values[valuesById[4] = "PLAYBOOK"] = 4;
+                            values[valuesById[5] = "EVENT"] = 5;
                             return values;
                         })();
     
@@ -85756,6 +87053,7 @@
                          * @property {google.cloud.dialogflow.v2.INotificationConfig|null} [newRecognitionResultNotificationConfig] ConversationProfile newRecognitionResultNotificationConfig
                          * @property {google.cloud.dialogflow.v2.ISpeechToTextConfig|null} [sttConfig] ConversationProfile sttConfig
                          * @property {string|null} [languageCode] ConversationProfile languageCode
+                         * @property {google.cloud.dialogflow.v2.ISipConfig|null} [sipConfig] ConversationProfile sipConfig
                          * @property {string|null} [timeZone] ConversationProfile timeZone
                          * @property {string|null} [securitySettings] ConversationProfile securitySettings
                          * @property {google.cloud.dialogflow.v2.ISynthesizeSpeechConfig|null} [ttsConfig] ConversationProfile ttsConfig
@@ -85881,6 +87179,14 @@
                         ConversationProfile.prototype.languageCode = "";
     
                         /**
+                         * ConversationProfile sipConfig.
+                         * @member {google.cloud.dialogflow.v2.ISipConfig|null|undefined} sipConfig
+                         * @memberof google.cloud.dialogflow.v2.ConversationProfile
+                         * @instance
+                         */
+                        ConversationProfile.prototype.sipConfig = null;
+    
+                        /**
                          * ConversationProfile timeZone.
                          * @member {string} timeZone
                          * @memberof google.cloud.dialogflow.v2.ConversationProfile
@@ -85956,6 +87262,8 @@
                                 writer.uint32(/* id 13, wireType 2 =*/106).string(message.securitySettings);
                             if (message.timeZone != null && Object.hasOwnProperty.call(message, "timeZone"))
                                 writer.uint32(/* id 14, wireType 2 =*/114).string(message.timeZone);
+                            if (message.sipConfig != null && Object.hasOwnProperty.call(message, "sipConfig"))
+                                $root.google.cloud.dialogflow.v2.SipConfig.encode(message.sipConfig, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
                             if (message.ttsConfig != null && Object.hasOwnProperty.call(message, "ttsConfig"))
                                 $root.google.cloud.dialogflow.v2.SynthesizeSpeechConfig.encode(message.ttsConfig, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
                             if (message.newRecognitionResultNotificationConfig != null && Object.hasOwnProperty.call(message, "newRecognitionResultNotificationConfig"))
@@ -86050,6 +87358,10 @@
                                     }
                                 case 10: {
                                         message.languageCode = reader.string();
+                                        break;
+                                    }
+                                case 16: {
+                                        message.sipConfig = $root.google.cloud.dialogflow.v2.SipConfig.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 14: {
@@ -86162,6 +87474,11 @@
                             if (message.languageCode != null && message.hasOwnProperty("languageCode"))
                                 if (!$util.isString(message.languageCode))
                                     return "languageCode: string expected";
+                            if (message.sipConfig != null && message.hasOwnProperty("sipConfig")) {
+                                var error = $root.google.cloud.dialogflow.v2.SipConfig.verify(message.sipConfig, long + 1);
+                                if (error)
+                                    return "sipConfig." + error;
+                            }
                             if (message.timeZone != null && message.hasOwnProperty("timeZone"))
                                 if (!$util.isString(message.timeZone))
                                     return "timeZone: string expected";
@@ -86248,6 +87565,11 @@
                             }
                             if (object.languageCode != null)
                                 message.languageCode = String(object.languageCode);
+                            if (object.sipConfig != null) {
+                                if (typeof object.sipConfig !== "object")
+                                    throw TypeError(".google.cloud.dialogflow.v2.ConversationProfile.sipConfig: object expected");
+                                message.sipConfig = $root.google.cloud.dialogflow.v2.SipConfig.fromObject(object.sipConfig, long + 1);
+                            }
                             if (object.timeZone != null)
                                 message.timeZone = String(object.timeZone);
                             if (object.securitySettings != null)
@@ -86288,6 +87610,7 @@
                                 object.updateTime = null;
                                 object.securitySettings = "";
                                 object.timeZone = "";
+                                object.sipConfig = null;
                                 object.ttsConfig = null;
                                 object.newRecognitionResultNotificationConfig = null;
                             }
@@ -86319,6 +87642,8 @@
                                 object.securitySettings = message.securitySettings;
                             if (message.timeZone != null && message.hasOwnProperty("timeZone"))
                                 object.timeZone = message.timeZone;
+                            if (message.sipConfig != null && message.hasOwnProperty("sipConfig"))
+                                object.sipConfig = $root.google.cloud.dialogflow.v2.SipConfig.toObject(message.sipConfig, options);
                             if (message.ttsConfig != null && message.hasOwnProperty("ttsConfig"))
                                 object.ttsConfig = $root.google.cloud.dialogflow.v2.SynthesizeSpeechConfig.toObject(message.ttsConfig, options);
                             if (message.newRecognitionResultNotificationConfig != null && message.hasOwnProperty("newRecognitionResultNotificationConfig"))
@@ -88617,6 +89942,8 @@
                              * @property {boolean|null} [enableQuerySuggestionOnly] SuggestionFeatureConfig enableQuerySuggestionOnly
                              * @property {boolean|null} [enableResponseDebugInfo] SuggestionFeatureConfig enableResponseDebugInfo
                              * @property {google.cloud.dialogflow.v2.IRaiSettings|null} [raiSettings] SuggestionFeatureConfig raiSettings
+                             * @property {google.cloud.dialogflow.v2.TriggerEvent|null} [suggestionTriggerEvent] SuggestionFeatureConfig suggestionTriggerEvent
+                             * @property {boolean|null} [disableQuerySearchContext] SuggestionFeatureConfig disableQuerySearchContext
                              * @property {google.cloud.dialogflow.v2.HumanAgentAssistantConfig.ISuggestionTriggerSettings|null} [suggestionTriggerSettings] SuggestionFeatureConfig suggestionTriggerSettings
                              * @property {google.cloud.dialogflow.v2.HumanAgentAssistantConfig.ISuggestionQueryConfig|null} [queryConfig] SuggestionFeatureConfig queryConfig
                              * @property {google.cloud.dialogflow.v2.HumanAgentAssistantConfig.IConversationModelConfig|null} [conversationModelConfig] SuggestionFeatureConfig conversationModelConfig
@@ -88703,6 +90030,22 @@
                             SuggestionFeatureConfig.prototype.raiSettings = null;
     
                             /**
+                             * SuggestionFeatureConfig suggestionTriggerEvent.
+                             * @member {google.cloud.dialogflow.v2.TriggerEvent} suggestionTriggerEvent
+                             * @memberof google.cloud.dialogflow.v2.HumanAgentAssistantConfig.SuggestionFeatureConfig
+                             * @instance
+                             */
+                            SuggestionFeatureConfig.prototype.suggestionTriggerEvent = 0;
+    
+                            /**
+                             * SuggestionFeatureConfig disableQuerySearchContext.
+                             * @member {boolean} disableQuerySearchContext
+                             * @memberof google.cloud.dialogflow.v2.HumanAgentAssistantConfig.SuggestionFeatureConfig
+                             * @instance
+                             */
+                            SuggestionFeatureConfig.prototype.disableQuerySearchContext = false;
+    
+                            /**
                              * SuggestionFeatureConfig suggestionTriggerSettings.
                              * @member {google.cloud.dialogflow.v2.HumanAgentAssistantConfig.ISuggestionTriggerSettings|null|undefined} suggestionTriggerSettings
                              * @memberof google.cloud.dialogflow.v2.HumanAgentAssistantConfig.SuggestionFeatureConfig
@@ -88782,6 +90125,10 @@
                                     writer.uint32(/* id 18, wireType 0 =*/144).bool(message.enableResponseDebugInfo);
                                 if (message.raiSettings != null && Object.hasOwnProperty.call(message, "raiSettings"))
                                     $root.google.cloud.dialogflow.v2.RaiSettings.encode(message.raiSettings, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
+                                if (message.suggestionTriggerEvent != null && Object.hasOwnProperty.call(message, "suggestionTriggerEvent"))
+                                    writer.uint32(/* id 20, wireType 0 =*/160).int32(message.suggestionTriggerEvent);
+                                if (message.disableQuerySearchContext != null && Object.hasOwnProperty.call(message, "disableQuerySearchContext"))
+                                    writer.uint32(/* id 21, wireType 0 =*/168).bool(message.disableQuerySearchContext);
                                 return writer;
                             };
     
@@ -88852,6 +90199,14 @@
                                         }
                                     case 19: {
                                             message.raiSettings = $root.google.cloud.dialogflow.v2.RaiSettings.decode(reader, reader.uint32(), undefined, long + 1);
+                                            break;
+                                        }
+                                    case 20: {
+                                            message.suggestionTriggerEvent = reader.int32();
+                                            break;
+                                        }
+                                    case 21: {
+                                            message.disableQuerySearchContext = reader.bool();
                                             break;
                                         }
                                     case 10: {
@@ -88937,6 +90292,20 @@
                                     if (error)
                                         return "raiSettings." + error;
                                 }
+                                if (message.suggestionTriggerEvent != null && message.hasOwnProperty("suggestionTriggerEvent"))
+                                    switch (message.suggestionTriggerEvent) {
+                                    default:
+                                        return "suggestionTriggerEvent: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                if (message.disableQuerySearchContext != null && message.hasOwnProperty("disableQuerySearchContext"))
+                                    if (typeof message.disableQuerySearchContext !== "boolean")
+                                        return "disableQuerySearchContext: boolean expected";
                                 if (message.suggestionTriggerSettings != null && message.hasOwnProperty("suggestionTriggerSettings")) {
                                     var error = $root.google.cloud.dialogflow.v2.HumanAgentAssistantConfig.SuggestionTriggerSettings.verify(message.suggestionTriggerSettings, long + 1);
                                     if (error)
@@ -88998,6 +90367,36 @@
                                         throw TypeError(".google.cloud.dialogflow.v2.HumanAgentAssistantConfig.SuggestionFeatureConfig.raiSettings: object expected");
                                     message.raiSettings = $root.google.cloud.dialogflow.v2.RaiSettings.fromObject(object.raiSettings, long + 1);
                                 }
+                                switch (object.suggestionTriggerEvent) {
+                                default:
+                                    if (typeof object.suggestionTriggerEvent === "number") {
+                                        message.suggestionTriggerEvent = object.suggestionTriggerEvent;
+                                        break;
+                                    }
+                                    break;
+                                case "TRIGGER_EVENT_UNSPECIFIED":
+                                case 0:
+                                    message.suggestionTriggerEvent = 0;
+                                    break;
+                                case "END_OF_UTTERANCE":
+                                case 1:
+                                    message.suggestionTriggerEvent = 1;
+                                    break;
+                                case "MANUAL_CALL":
+                                case 2:
+                                    message.suggestionTriggerEvent = 2;
+                                    break;
+                                case "CUSTOMER_MESSAGE":
+                                case 3:
+                                    message.suggestionTriggerEvent = 3;
+                                    break;
+                                case "AGENT_MESSAGE":
+                                case 4:
+                                    message.suggestionTriggerEvent = 4;
+                                    break;
+                                }
+                                if (object.disableQuerySearchContext != null)
+                                    message.disableQuerySearchContext = Boolean(object.disableQuerySearchContext);
                                 if (object.suggestionTriggerSettings != null) {
                                     if (typeof object.suggestionTriggerSettings !== "object")
                                         throw TypeError(".google.cloud.dialogflow.v2.HumanAgentAssistantConfig.SuggestionFeatureConfig.suggestionTriggerSettings: object expected");
@@ -89047,6 +90446,8 @@
                                     object.enableQuerySuggestionOnly = false;
                                     object.enableResponseDebugInfo = false;
                                     object.raiSettings = null;
+                                    object.suggestionTriggerEvent = options.enums === String ? "TRIGGER_EVENT_UNSPECIFIED" : 0;
+                                    object.disableQuerySearchContext = false;
                                 }
                                 if (message.enableEventBasedSuggestion != null && message.hasOwnProperty("enableEventBasedSuggestion"))
                                     object.enableEventBasedSuggestion = message.enableEventBasedSuggestion;
@@ -89072,6 +90473,10 @@
                                     object.enableResponseDebugInfo = message.enableResponseDebugInfo;
                                 if (message.raiSettings != null && message.hasOwnProperty("raiSettings"))
                                     object.raiSettings = $root.google.cloud.dialogflow.v2.RaiSettings.toObject(message.raiSettings, options);
+                                if (message.suggestionTriggerEvent != null && message.hasOwnProperty("suggestionTriggerEvent"))
+                                    object.suggestionTriggerEvent = options.enums === String ? $root.google.cloud.dialogflow.v2.TriggerEvent[message.suggestionTriggerEvent] === undefined ? message.suggestionTriggerEvent : $root.google.cloud.dialogflow.v2.TriggerEvent[message.suggestionTriggerEvent] : message.suggestionTriggerEvent;
+                                if (message.disableQuerySearchContext != null && message.hasOwnProperty("disableQuerySearchContext"))
+                                    object.disableQuerySearchContext = message.disableQuerySearchContext;
                                 return object;
                             };
     
@@ -93440,6 +94845,384 @@
                         };
     
                         return LoggingConfig;
+                    })();
+    
+                    v2.SipConfig = (function() {
+    
+                        /**
+                         * Properties of a SipConfig.
+                         * @memberof google.cloud.dialogflow.v2
+                         * @interface ISipConfig
+                         * @property {boolean|null} [createConversationOnTheFly] SipConfig createConversationOnTheFly
+                         * @property {boolean|null} [inactiveStart] SipConfig inactiveStart
+                         * @property {google.protobuf.IDuration|null} [maxAudioRecordingDuration] SipConfig maxAudioRecordingDuration
+                         * @property {boolean|null} [allowVirtualAgentInteraction] SipConfig allowVirtualAgentInteraction
+                         * @property {boolean|null} [keepConversationRunning] SipConfig keepConversationRunning
+                         * @property {Array.<string>|null} [copyInboundCallLegHeaders] SipConfig copyInboundCallLegHeaders
+                         * @property {boolean|null} [ignoreReinviteMediaDirection] SipConfig ignoreReinviteMediaDirection
+                         */
+    
+                        /**
+                         * Constructs a new SipConfig.
+                         * @memberof google.cloud.dialogflow.v2
+                         * @classdesc Represents a SipConfig.
+                         * @implements ISipConfig
+                         * @constructor
+                         * @param {google.cloud.dialogflow.v2.ISipConfig=} [properties] Properties to set
+                         */
+                        function SipConfig(properties) {
+                            this.copyInboundCallLegHeaders = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SipConfig createConversationOnTheFly.
+                         * @member {boolean} createConversationOnTheFly
+                         * @memberof google.cloud.dialogflow.v2.SipConfig
+                         * @instance
+                         */
+                        SipConfig.prototype.createConversationOnTheFly = false;
+    
+                        /**
+                         * SipConfig inactiveStart.
+                         * @member {boolean} inactiveStart
+                         * @memberof google.cloud.dialogflow.v2.SipConfig
+                         * @instance
+                         */
+                        SipConfig.prototype.inactiveStart = false;
+    
+                        /**
+                         * SipConfig maxAudioRecordingDuration.
+                         * @member {google.protobuf.IDuration|null|undefined} maxAudioRecordingDuration
+                         * @memberof google.cloud.dialogflow.v2.SipConfig
+                         * @instance
+                         */
+                        SipConfig.prototype.maxAudioRecordingDuration = null;
+    
+                        /**
+                         * SipConfig allowVirtualAgentInteraction.
+                         * @member {boolean} allowVirtualAgentInteraction
+                         * @memberof google.cloud.dialogflow.v2.SipConfig
+                         * @instance
+                         */
+                        SipConfig.prototype.allowVirtualAgentInteraction = false;
+    
+                        /**
+                         * SipConfig keepConversationRunning.
+                         * @member {boolean} keepConversationRunning
+                         * @memberof google.cloud.dialogflow.v2.SipConfig
+                         * @instance
+                         */
+                        SipConfig.prototype.keepConversationRunning = false;
+    
+                        /**
+                         * SipConfig copyInboundCallLegHeaders.
+                         * @member {Array.<string>} copyInboundCallLegHeaders
+                         * @memberof google.cloud.dialogflow.v2.SipConfig
+                         * @instance
+                         */
+                        SipConfig.prototype.copyInboundCallLegHeaders = $util.emptyArray;
+    
+                        /**
+                         * SipConfig ignoreReinviteMediaDirection.
+                         * @member {boolean} ignoreReinviteMediaDirection
+                         * @memberof google.cloud.dialogflow.v2.SipConfig
+                         * @instance
+                         */
+                        SipConfig.prototype.ignoreReinviteMediaDirection = false;
+    
+                        /**
+                         * Creates a new SipConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dialogflow.v2.SipConfig
+                         * @static
+                         * @param {google.cloud.dialogflow.v2.ISipConfig=} [properties] Properties to set
+                         * @returns {google.cloud.dialogflow.v2.SipConfig} SipConfig instance
+                         */
+                        SipConfig.create = function create(properties) {
+                            return new SipConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SipConfig message. Does not implicitly {@link google.cloud.dialogflow.v2.SipConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dialogflow.v2.SipConfig
+                         * @static
+                         * @param {google.cloud.dialogflow.v2.ISipConfig} message SipConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SipConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.createConversationOnTheFly != null && Object.hasOwnProperty.call(message, "createConversationOnTheFly"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.createConversationOnTheFly);
+                            if (message.inactiveStart != null && Object.hasOwnProperty.call(message, "inactiveStart"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.inactiveStart);
+                            if (message.maxAudioRecordingDuration != null && Object.hasOwnProperty.call(message, "maxAudioRecordingDuration"))
+                                $root.google.protobuf.Duration.encode(message.maxAudioRecordingDuration, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.allowVirtualAgentInteraction != null && Object.hasOwnProperty.call(message, "allowVirtualAgentInteraction"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.allowVirtualAgentInteraction);
+                            if (message.keepConversationRunning != null && Object.hasOwnProperty.call(message, "keepConversationRunning"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.keepConversationRunning);
+                            if (message.copyInboundCallLegHeaders != null && message.copyInboundCallLegHeaders.length)
+                                for (var i = 0; i < message.copyInboundCallLegHeaders.length; ++i)
+                                    writer.uint32(/* id 8, wireType 2 =*/66).string(message.copyInboundCallLegHeaders[i]);
+                            if (message.ignoreReinviteMediaDirection != null && Object.hasOwnProperty.call(message, "ignoreReinviteMediaDirection"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).bool(message.ignoreReinviteMediaDirection);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SipConfig message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.SipConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dialogflow.v2.SipConfig
+                         * @static
+                         * @param {google.cloud.dialogflow.v2.ISipConfig} message SipConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SipConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SipConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dialogflow.v2.SipConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dialogflow.v2.SipConfig} SipConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SipConfig.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.v2.SipConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.createConversationOnTheFly = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.inactiveStart = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.maxAudioRecordingDuration = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 5: {
+                                        message.allowVirtualAgentInteraction = reader.bool();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.keepConversationRunning = reader.bool();
+                                        break;
+                                    }
+                                case 8: {
+                                        if (!(message.copyInboundCallLegHeaders && message.copyInboundCallLegHeaders.length))
+                                            message.copyInboundCallLegHeaders = [];
+                                        message.copyInboundCallLegHeaders.push(reader.string());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.ignoreReinviteMediaDirection = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SipConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dialogflow.v2.SipConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dialogflow.v2.SipConfig} SipConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SipConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SipConfig message.
+                         * @function verify
+                         * @memberof google.cloud.dialogflow.v2.SipConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SipConfig.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.createConversationOnTheFly != null && message.hasOwnProperty("createConversationOnTheFly"))
+                                if (typeof message.createConversationOnTheFly !== "boolean")
+                                    return "createConversationOnTheFly: boolean expected";
+                            if (message.inactiveStart != null && message.hasOwnProperty("inactiveStart"))
+                                if (typeof message.inactiveStart !== "boolean")
+                                    return "inactiveStart: boolean expected";
+                            if (message.maxAudioRecordingDuration != null && message.hasOwnProperty("maxAudioRecordingDuration")) {
+                                var error = $root.google.protobuf.Duration.verify(message.maxAudioRecordingDuration, long + 1);
+                                if (error)
+                                    return "maxAudioRecordingDuration." + error;
+                            }
+                            if (message.allowVirtualAgentInteraction != null && message.hasOwnProperty("allowVirtualAgentInteraction"))
+                                if (typeof message.allowVirtualAgentInteraction !== "boolean")
+                                    return "allowVirtualAgentInteraction: boolean expected";
+                            if (message.keepConversationRunning != null && message.hasOwnProperty("keepConversationRunning"))
+                                if (typeof message.keepConversationRunning !== "boolean")
+                                    return "keepConversationRunning: boolean expected";
+                            if (message.copyInboundCallLegHeaders != null && message.hasOwnProperty("copyInboundCallLegHeaders")) {
+                                if (!Array.isArray(message.copyInboundCallLegHeaders))
+                                    return "copyInboundCallLegHeaders: array expected";
+                                for (var i = 0; i < message.copyInboundCallLegHeaders.length; ++i)
+                                    if (!$util.isString(message.copyInboundCallLegHeaders[i]))
+                                        return "copyInboundCallLegHeaders: string[] expected";
+                            }
+                            if (message.ignoreReinviteMediaDirection != null && message.hasOwnProperty("ignoreReinviteMediaDirection"))
+                                if (typeof message.ignoreReinviteMediaDirection !== "boolean")
+                                    return "ignoreReinviteMediaDirection: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SipConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dialogflow.v2.SipConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dialogflow.v2.SipConfig} SipConfig
+                         */
+                        SipConfig.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.dialogflow.v2.SipConfig)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.dialogflow.v2.SipConfig();
+                            if (object.createConversationOnTheFly != null)
+                                message.createConversationOnTheFly = Boolean(object.createConversationOnTheFly);
+                            if (object.inactiveStart != null)
+                                message.inactiveStart = Boolean(object.inactiveStart);
+                            if (object.maxAudioRecordingDuration != null) {
+                                if (typeof object.maxAudioRecordingDuration !== "object")
+                                    throw TypeError(".google.cloud.dialogflow.v2.SipConfig.maxAudioRecordingDuration: object expected");
+                                message.maxAudioRecordingDuration = $root.google.protobuf.Duration.fromObject(object.maxAudioRecordingDuration, long + 1);
+                            }
+                            if (object.allowVirtualAgentInteraction != null)
+                                message.allowVirtualAgentInteraction = Boolean(object.allowVirtualAgentInteraction);
+                            if (object.keepConversationRunning != null)
+                                message.keepConversationRunning = Boolean(object.keepConversationRunning);
+                            if (object.copyInboundCallLegHeaders) {
+                                if (!Array.isArray(object.copyInboundCallLegHeaders))
+                                    throw TypeError(".google.cloud.dialogflow.v2.SipConfig.copyInboundCallLegHeaders: array expected");
+                                message.copyInboundCallLegHeaders = [];
+                                for (var i = 0; i < object.copyInboundCallLegHeaders.length; ++i)
+                                    message.copyInboundCallLegHeaders[i] = String(object.copyInboundCallLegHeaders[i]);
+                            }
+                            if (object.ignoreReinviteMediaDirection != null)
+                                message.ignoreReinviteMediaDirection = Boolean(object.ignoreReinviteMediaDirection);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SipConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dialogflow.v2.SipConfig
+                         * @static
+                         * @param {google.cloud.dialogflow.v2.SipConfig} message SipConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SipConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.copyInboundCallLegHeaders = [];
+                            if (options.defaults) {
+                                object.createConversationOnTheFly = false;
+                                object.inactiveStart = false;
+                                object.maxAudioRecordingDuration = null;
+                                object.allowVirtualAgentInteraction = false;
+                                object.keepConversationRunning = false;
+                                object.ignoreReinviteMediaDirection = false;
+                            }
+                            if (message.createConversationOnTheFly != null && message.hasOwnProperty("createConversationOnTheFly"))
+                                object.createConversationOnTheFly = message.createConversationOnTheFly;
+                            if (message.inactiveStart != null && message.hasOwnProperty("inactiveStart"))
+                                object.inactiveStart = message.inactiveStart;
+                            if (message.maxAudioRecordingDuration != null && message.hasOwnProperty("maxAudioRecordingDuration"))
+                                object.maxAudioRecordingDuration = $root.google.protobuf.Duration.toObject(message.maxAudioRecordingDuration, options);
+                            if (message.allowVirtualAgentInteraction != null && message.hasOwnProperty("allowVirtualAgentInteraction"))
+                                object.allowVirtualAgentInteraction = message.allowVirtualAgentInteraction;
+                            if (message.keepConversationRunning != null && message.hasOwnProperty("keepConversationRunning"))
+                                object.keepConversationRunning = message.keepConversationRunning;
+                            if (message.copyInboundCallLegHeaders && message.copyInboundCallLegHeaders.length) {
+                                object.copyInboundCallLegHeaders = [];
+                                for (var j = 0; j < message.copyInboundCallLegHeaders.length; ++j)
+                                    object.copyInboundCallLegHeaders[j] = message.copyInboundCallLegHeaders[j];
+                            }
+                            if (message.ignoreReinviteMediaDirection != null && message.hasOwnProperty("ignoreReinviteMediaDirection"))
+                                object.ignoreReinviteMediaDirection = message.ignoreReinviteMediaDirection;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SipConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dialogflow.v2.SipConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SipConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SipConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dialogflow.v2.SipConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SipConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dialogflow.v2.SipConfig";
+                        };
+    
+                        return SipConfig;
                     })();
     
                     v2.SuggestionFeature = (function() {
@@ -151641,6 +153424,8 @@
                          * @interface ICesAppSpec
                          * @property {string|null} [cesApp] CesAppSpec cesApp
                          * @property {google.cloud.dialogflow.v2beta1.Tool.ConfirmationRequirement|null} [confirmationRequirement] CesAppSpec confirmationRequirement
+                         * @property {boolean|null} [proactiveEnabled] CesAppSpec proactiveEnabled
+                         * @property {boolean|null} [reactiveEnabled] CesAppSpec reactiveEnabled
                          */
     
                         /**
@@ -151675,6 +153460,37 @@
                         CesAppSpec.prototype.confirmationRequirement = 0;
     
                         /**
+                         * CesAppSpec proactiveEnabled.
+                         * @member {boolean|null|undefined} proactiveEnabled
+                         * @memberof google.cloud.dialogflow.v2beta1.CesAppSpec
+                         * @instance
+                         */
+                        CesAppSpec.prototype.proactiveEnabled = null;
+    
+                        /**
+                         * CesAppSpec reactiveEnabled.
+                         * @member {boolean|null|undefined} reactiveEnabled
+                         * @memberof google.cloud.dialogflow.v2beta1.CesAppSpec
+                         * @instance
+                         */
+                        CesAppSpec.prototype.reactiveEnabled = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(CesAppSpec.prototype, "_proactiveEnabled", {
+                            get: $util.oneOfGetter($oneOfFields = ["proactiveEnabled"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(CesAppSpec.prototype, "_reactiveEnabled", {
+                            get: $util.oneOfGetter($oneOfFields = ["reactiveEnabled"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new CesAppSpec instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dialogflow.v2beta1.CesAppSpec
@@ -151702,6 +153518,10 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.cesApp);
                             if (message.confirmationRequirement != null && Object.hasOwnProperty.call(message, "confirmationRequirement"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.confirmationRequirement);
+                            if (message.proactiveEnabled != null && Object.hasOwnProperty.call(message, "proactiveEnabled"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.proactiveEnabled);
+                            if (message.reactiveEnabled != null && Object.hasOwnProperty.call(message, "reactiveEnabled"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.reactiveEnabled);
                             return writer;
                         };
     
@@ -151750,6 +153570,14 @@
                                         message.confirmationRequirement = reader.int32();
                                         break;
                                     }
+                                case 3: {
+                                        message.proactiveEnabled = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.reactiveEnabled = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7, long);
                                     break;
@@ -151789,6 +153617,7 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
+                            var properties = {};
                             if (message.cesApp != null && message.hasOwnProperty("cesApp"))
                                 if (!$util.isString(message.cesApp))
                                     return "cesApp: string expected";
@@ -151801,6 +153630,16 @@
                                 case 2:
                                     break;
                                 }
+                            if (message.proactiveEnabled != null && message.hasOwnProperty("proactiveEnabled")) {
+                                properties._proactiveEnabled = 1;
+                                if (typeof message.proactiveEnabled !== "boolean")
+                                    return "proactiveEnabled: boolean expected";
+                            }
+                            if (message.reactiveEnabled != null && message.hasOwnProperty("reactiveEnabled")) {
+                                properties._reactiveEnabled = 1;
+                                if (typeof message.reactiveEnabled !== "boolean")
+                                    return "reactiveEnabled: boolean expected";
+                            }
                             return null;
                         };
     
@@ -151842,6 +153681,10 @@
                                 message.confirmationRequirement = 2;
                                 break;
                             }
+                            if (object.proactiveEnabled != null)
+                                message.proactiveEnabled = Boolean(object.proactiveEnabled);
+                            if (object.reactiveEnabled != null)
+                                message.reactiveEnabled = Boolean(object.reactiveEnabled);
                             return message;
                         };
     
@@ -151866,6 +153709,16 @@
                                 object.cesApp = message.cesApp;
                             if (message.confirmationRequirement != null && message.hasOwnProperty("confirmationRequirement"))
                                 object.confirmationRequirement = options.enums === String ? $root.google.cloud.dialogflow.v2beta1.Tool.ConfirmationRequirement[message.confirmationRequirement] === undefined ? message.confirmationRequirement : $root.google.cloud.dialogflow.v2beta1.Tool.ConfirmationRequirement[message.confirmationRequirement] : message.confirmationRequirement;
+                            if (message.proactiveEnabled != null && message.hasOwnProperty("proactiveEnabled")) {
+                                object.proactiveEnabled = message.proactiveEnabled;
+                                if (options.oneofs)
+                                    object._proactiveEnabled = "proactiveEnabled";
+                            }
+                            if (message.reactiveEnabled != null && message.hasOwnProperty("reactiveEnabled")) {
+                                object.reactiveEnabled = message.reactiveEnabled;
+                                if (options.oneofs)
+                                    object._reactiveEnabled = "reactiveEnabled";
+                            }
                             return object;
                         };
     
@@ -177179,6 +179032,7 @@
                          * @property {google.cloud.dialogflow.v2beta1.IKnowledgeAssistAnswer|null} [knowledgeAssistAnswer] SuggestKnowledgeAssistResponse knowledgeAssistAnswer
                          * @property {string|null} [latestMessage] SuggestKnowledgeAssistResponse latestMessage
                          * @property {number|null} [contextSize] SuggestKnowledgeAssistResponse contextSize
+                         * @property {Array.<google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.IAdditionalSuggestedQueryResult>|null} [additionalSuggestedQueryResults] SuggestKnowledgeAssistResponse additionalSuggestedQueryResults
                          */
     
                         /**
@@ -177190,6 +179044,7 @@
                          * @param {google.cloud.dialogflow.v2beta1.ISuggestKnowledgeAssistResponse=} [properties] Properties to set
                          */
                         function SuggestKnowledgeAssistResponse(properties) {
+                            this.additionalSuggestedQueryResults = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null && keys[i] !== "__proto__")
@@ -177221,6 +179076,14 @@
                         SuggestKnowledgeAssistResponse.prototype.contextSize = 0;
     
                         /**
+                         * SuggestKnowledgeAssistResponse additionalSuggestedQueryResults.
+                         * @member {Array.<google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.IAdditionalSuggestedQueryResult>} additionalSuggestedQueryResults
+                         * @memberof google.cloud.dialogflow.v2beta1.SuggestKnowledgeAssistResponse
+                         * @instance
+                         */
+                        SuggestKnowledgeAssistResponse.prototype.additionalSuggestedQueryResults = $util.emptyArray;
+    
+                        /**
                          * Creates a new SuggestKnowledgeAssistResponse instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dialogflow.v2beta1.SuggestKnowledgeAssistResponse
@@ -177250,6 +179113,9 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.latestMessage);
                             if (message.contextSize != null && Object.hasOwnProperty.call(message, "contextSize"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.contextSize);
+                            if (message.additionalSuggestedQueryResults != null && message.additionalSuggestedQueryResults.length)
+                                for (var i = 0; i < message.additionalSuggestedQueryResults.length; ++i)
+                                    $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult.encode(message.additionalSuggestedQueryResults[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             return writer;
                         };
     
@@ -177302,6 +179168,12 @@
                                         message.contextSize = reader.int32();
                                         break;
                                     }
+                                case 4: {
+                                        if (!(message.additionalSuggestedQueryResults && message.additionalSuggestedQueryResults.length))
+                                            message.additionalSuggestedQueryResults = [];
+                                        message.additionalSuggestedQueryResults.push($root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult.decode(reader, reader.uint32(), undefined, long + 1));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7, long);
                                     break;
@@ -177352,6 +179224,15 @@
                             if (message.contextSize != null && message.hasOwnProperty("contextSize"))
                                 if (!$util.isInteger(message.contextSize))
                                     return "contextSize: integer expected";
+                            if (message.additionalSuggestedQueryResults != null && message.hasOwnProperty("additionalSuggestedQueryResults")) {
+                                if (!Array.isArray(message.additionalSuggestedQueryResults))
+                                    return "additionalSuggestedQueryResults: array expected";
+                                for (var i = 0; i < message.additionalSuggestedQueryResults.length; ++i) {
+                                    var error = $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult.verify(message.additionalSuggestedQueryResults[i], long + 1);
+                                    if (error)
+                                        return "additionalSuggestedQueryResults." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -177380,6 +179261,16 @@
                                 message.latestMessage = String(object.latestMessage);
                             if (object.contextSize != null)
                                 message.contextSize = object.contextSize | 0;
+                            if (object.additionalSuggestedQueryResults) {
+                                if (!Array.isArray(object.additionalSuggestedQueryResults))
+                                    throw TypeError(".google.cloud.dialogflow.v2beta1.SuggestKnowledgeAssistResponse.additionalSuggestedQueryResults: array expected");
+                                message.additionalSuggestedQueryResults = [];
+                                for (var i = 0; i < object.additionalSuggestedQueryResults.length; ++i) {
+                                    if (typeof object.additionalSuggestedQueryResults[i] !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.v2beta1.SuggestKnowledgeAssistResponse.additionalSuggestedQueryResults: object expected");
+                                    message.additionalSuggestedQueryResults[i] = $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult.fromObject(object.additionalSuggestedQueryResults[i], long + 1);
+                                }
+                            }
                             return message;
                         };
     
@@ -177396,6 +179287,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.additionalSuggestedQueryResults = [];
                             if (options.defaults) {
                                 object.knowledgeAssistAnswer = null;
                                 object.latestMessage = "";
@@ -177407,6 +179300,11 @@
                                 object.latestMessage = message.latestMessage;
                             if (message.contextSize != null && message.hasOwnProperty("contextSize"))
                                 object.contextSize = message.contextSize;
+                            if (message.additionalSuggestedQueryResults && message.additionalSuggestedQueryResults.length) {
+                                object.additionalSuggestedQueryResults = [];
+                                for (var j = 0; j < message.additionalSuggestedQueryResults.length; ++j)
+                                    object.additionalSuggestedQueryResults[j] = $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult.toObject(message.additionalSuggestedQueryResults[j], options);
+                            }
                             return object;
                         };
     
@@ -178581,6 +180479,8 @@
                          * @property {google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.IKnowledgeAssistBehavior|null} [knowledgeAssistBehavior] KnowledgeAssistDebugInfo knowledgeAssistBehavior
                          * @property {google.cloud.dialogflow.v2beta1.IIngestedContextReferenceDebugInfo|null} [ingestedContextReferenceDebugInfo] KnowledgeAssistDebugInfo ingestedContextReferenceDebugInfo
                          * @property {google.cloud.dialogflow.v2beta1.IServiceLatency|null} [serviceLatency] KnowledgeAssistDebugInfo serviceLatency
+                         * @property {google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.IQueryGenerationDebugInfo|null} [queryGenerationDebugInfo] KnowledgeAssistDebugInfo queryGenerationDebugInfo
+                         * @property {google.protobuf.IStruct|null} [cesDebugInfo] KnowledgeAssistDebugInfo cesDebugInfo
                          */
     
                         /**
@@ -178647,6 +180547,22 @@
                         KnowledgeAssistDebugInfo.prototype.serviceLatency = null;
     
                         /**
+                         * KnowledgeAssistDebugInfo queryGenerationDebugInfo.
+                         * @member {google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.IQueryGenerationDebugInfo|null|undefined} queryGenerationDebugInfo
+                         * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo
+                         * @instance
+                         */
+                        KnowledgeAssistDebugInfo.prototype.queryGenerationDebugInfo = null;
+    
+                        /**
+                         * KnowledgeAssistDebugInfo cesDebugInfo.
+                         * @member {google.protobuf.IStruct|null|undefined} cesDebugInfo
+                         * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo
+                         * @instance
+                         */
+                        KnowledgeAssistDebugInfo.prototype.cesDebugInfo = null;
+    
+                        /**
                          * Creates a new KnowledgeAssistDebugInfo instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo
@@ -178682,6 +180598,10 @@
                                 $root.google.cloud.dialogflow.v2beta1.IngestedContextReferenceDebugInfo.encode(message.ingestedContextReferenceDebugInfo, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             if (message.serviceLatency != null && Object.hasOwnProperty.call(message, "serviceLatency"))
                                 $root.google.cloud.dialogflow.v2beta1.ServiceLatency.encode(message.serviceLatency, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.queryGenerationDebugInfo != null && Object.hasOwnProperty.call(message, "queryGenerationDebugInfo"))
+                                $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo.encode(message.queryGenerationDebugInfo, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.cesDebugInfo != null && Object.hasOwnProperty.call(message, "cesDebugInfo"))
+                                $root.google.protobuf.Struct.encode(message.cesDebugInfo, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             return writer;
                         };
     
@@ -178744,6 +180664,14 @@
                                     }
                                 case 6: {
                                         message.serviceLatency = $root.google.cloud.dialogflow.v2beta1.ServiceLatency.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 7: {
+                                        message.queryGenerationDebugInfo = $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 8: {
+                                        message.cesDebugInfo = $root.google.protobuf.Struct.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 default:
@@ -178842,6 +180770,16 @@
                                 var error = $root.google.cloud.dialogflow.v2beta1.ServiceLatency.verify(message.serviceLatency, long + 1);
                                 if (error)
                                     return "serviceLatency." + error;
+                            }
+                            if (message.queryGenerationDebugInfo != null && message.hasOwnProperty("queryGenerationDebugInfo")) {
+                                var error = $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo.verify(message.queryGenerationDebugInfo, long + 1);
+                                if (error)
+                                    return "queryGenerationDebugInfo." + error;
+                            }
+                            if (message.cesDebugInfo != null && message.hasOwnProperty("cesDebugInfo")) {
+                                var error = $root.google.protobuf.Struct.verify(message.cesDebugInfo, long + 1);
+                                if (error)
+                                    return "cesDebugInfo." + error;
                             }
                             return null;
                         };
@@ -179001,6 +180939,16 @@
                                     throw TypeError(".google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.serviceLatency: object expected");
                                 message.serviceLatency = $root.google.cloud.dialogflow.v2beta1.ServiceLatency.fromObject(object.serviceLatency, long + 1);
                             }
+                            if (object.queryGenerationDebugInfo != null) {
+                                if (typeof object.queryGenerationDebugInfo !== "object")
+                                    throw TypeError(".google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.queryGenerationDebugInfo: object expected");
+                                message.queryGenerationDebugInfo = $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo.fromObject(object.queryGenerationDebugInfo, long + 1);
+                            }
+                            if (object.cesDebugInfo != null) {
+                                if (typeof object.cesDebugInfo !== "object")
+                                    throw TypeError(".google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.cesDebugInfo: object expected");
+                                message.cesDebugInfo = $root.google.protobuf.Struct.fromObject(object.cesDebugInfo, long + 1);
+                            }
                             return message;
                         };
     
@@ -179024,6 +180972,8 @@
                                 object.knowledgeAssistBehavior = null;
                                 object.ingestedContextReferenceDebugInfo = null;
                                 object.serviceLatency = null;
+                                object.queryGenerationDebugInfo = null;
+                                object.cesDebugInfo = null;
                             }
                             if (message.queryGenerationFailureReason != null && message.hasOwnProperty("queryGenerationFailureReason"))
                                 object.queryGenerationFailureReason = options.enums === String ? $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.QueryGenerationFailureReason[message.queryGenerationFailureReason] === undefined ? message.queryGenerationFailureReason : $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.QueryGenerationFailureReason[message.queryGenerationFailureReason] : message.queryGenerationFailureReason;
@@ -179037,6 +180987,10 @@
                                 object.ingestedContextReferenceDebugInfo = $root.google.cloud.dialogflow.v2beta1.IngestedContextReferenceDebugInfo.toObject(message.ingestedContextReferenceDebugInfo, options);
                             if (message.serviceLatency != null && message.hasOwnProperty("serviceLatency"))
                                 object.serviceLatency = $root.google.cloud.dialogflow.v2beta1.ServiceLatency.toObject(message.serviceLatency, options);
+                            if (message.queryGenerationDebugInfo != null && message.hasOwnProperty("queryGenerationDebugInfo"))
+                                object.queryGenerationDebugInfo = $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo.toObject(message.queryGenerationDebugInfo, options);
+                            if (message.cesDebugInfo != null && message.hasOwnProperty("cesDebugInfo"))
+                                object.cesDebugInfo = $root.google.protobuf.Struct.toObject(message.cesDebugInfo, options);
                             return object;
                         };
     
@@ -179702,6 +181656,270 @@
                             return KnowledgeAssistBehavior;
                         })();
     
+                        KnowledgeAssistDebugInfo.QueryGenerationDebugInfo = (function() {
+    
+                            /**
+                             * Properties of a QueryGenerationDebugInfo.
+                             * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo
+                             * @interface IQueryGenerationDebugInfo
+                             * @property {number|null} [promptTokenCount] QueryGenerationDebugInfo promptTokenCount
+                             * @property {number|null} [candidatesTokenCount] QueryGenerationDebugInfo candidatesTokenCount
+                             * @property {number|null} [totalTokenCount] QueryGenerationDebugInfo totalTokenCount
+                             */
+    
+                            /**
+                             * Constructs a new QueryGenerationDebugInfo.
+                             * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo
+                             * @classdesc Represents a QueryGenerationDebugInfo.
+                             * @implements IQueryGenerationDebugInfo
+                             * @constructor
+                             * @param {google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.IQueryGenerationDebugInfo=} [properties] Properties to set
+                             */
+                            function QueryGenerationDebugInfo(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * QueryGenerationDebugInfo promptTokenCount.
+                             * @member {number} promptTokenCount
+                             * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo
+                             * @instance
+                             */
+                            QueryGenerationDebugInfo.prototype.promptTokenCount = 0;
+    
+                            /**
+                             * QueryGenerationDebugInfo candidatesTokenCount.
+                             * @member {number} candidatesTokenCount
+                             * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo
+                             * @instance
+                             */
+                            QueryGenerationDebugInfo.prototype.candidatesTokenCount = 0;
+    
+                            /**
+                             * QueryGenerationDebugInfo totalTokenCount.
+                             * @member {number} totalTokenCount
+                             * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo
+                             * @instance
+                             */
+                            QueryGenerationDebugInfo.prototype.totalTokenCount = 0;
+    
+                            /**
+                             * Creates a new QueryGenerationDebugInfo instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo
+                             * @static
+                             * @param {google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.IQueryGenerationDebugInfo=} [properties] Properties to set
+                             * @returns {google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo} QueryGenerationDebugInfo instance
+                             */
+                            QueryGenerationDebugInfo.create = function create(properties) {
+                                return new QueryGenerationDebugInfo(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified QueryGenerationDebugInfo message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo
+                             * @static
+                             * @param {google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.IQueryGenerationDebugInfo} message QueryGenerationDebugInfo message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            QueryGenerationDebugInfo.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.promptTokenCount != null && Object.hasOwnProperty.call(message, "promptTokenCount"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.promptTokenCount);
+                                if (message.candidatesTokenCount != null && Object.hasOwnProperty.call(message, "candidatesTokenCount"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.candidatesTokenCount);
+                                if (message.totalTokenCount != null && Object.hasOwnProperty.call(message, "totalTokenCount"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.totalTokenCount);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified QueryGenerationDebugInfo message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo
+                             * @static
+                             * @param {google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.IQueryGenerationDebugInfo} message QueryGenerationDebugInfo message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            QueryGenerationDebugInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a QueryGenerationDebugInfo message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo} QueryGenerationDebugInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            QueryGenerationDebugInfo.decode = function decode(reader, length, error, long) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.promptTokenCount = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.candidatesTokenCount = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.totalTokenCount = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7, long);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a QueryGenerationDebugInfo message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo} QueryGenerationDebugInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            QueryGenerationDebugInfo.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a QueryGenerationDebugInfo message.
+                             * @function verify
+                             * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            QueryGenerationDebugInfo.verify = function verify(message, long) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
+                                if (message.promptTokenCount != null && message.hasOwnProperty("promptTokenCount"))
+                                    if (!$util.isInteger(message.promptTokenCount))
+                                        return "promptTokenCount: integer expected";
+                                if (message.candidatesTokenCount != null && message.hasOwnProperty("candidatesTokenCount"))
+                                    if (!$util.isInteger(message.candidatesTokenCount))
+                                        return "candidatesTokenCount: integer expected";
+                                if (message.totalTokenCount != null && message.hasOwnProperty("totalTokenCount"))
+                                    if (!$util.isInteger(message.totalTokenCount))
+                                        return "totalTokenCount: integer expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a QueryGenerationDebugInfo message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo} QueryGenerationDebugInfo
+                             */
+                            QueryGenerationDebugInfo.fromObject = function fromObject(object, long) {
+                                if (object instanceof $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo)
+                                    return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var message = new $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo();
+                                if (object.promptTokenCount != null)
+                                    message.promptTokenCount = object.promptTokenCount | 0;
+                                if (object.candidatesTokenCount != null)
+                                    message.candidatesTokenCount = object.candidatesTokenCount | 0;
+                                if (object.totalTokenCount != null)
+                                    message.totalTokenCount = object.totalTokenCount | 0;
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a QueryGenerationDebugInfo message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo
+                             * @static
+                             * @param {google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo} message QueryGenerationDebugInfo
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            QueryGenerationDebugInfo.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.promptTokenCount = 0;
+                                    object.candidatesTokenCount = 0;
+                                    object.totalTokenCount = 0;
+                                }
+                                if (message.promptTokenCount != null && message.hasOwnProperty("promptTokenCount"))
+                                    object.promptTokenCount = message.promptTokenCount;
+                                if (message.candidatesTokenCount != null && message.hasOwnProperty("candidatesTokenCount"))
+                                    object.candidatesTokenCount = message.candidatesTokenCount;
+                                if (message.totalTokenCount != null && message.hasOwnProperty("totalTokenCount"))
+                                    object.totalTokenCount = message.totalTokenCount;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this QueryGenerationDebugInfo to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            QueryGenerationDebugInfo.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for QueryGenerationDebugInfo
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            QueryGenerationDebugInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dialogflow.v2beta1.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo";
+                            };
+    
+                            return QueryGenerationDebugInfo;
+                        })();
+    
                         return KnowledgeAssistDebugInfo;
                     })();
     
@@ -180011,6 +182229,7 @@
                              * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer
                              * @interface ISuggestedQuery
                              * @property {string|null} [queryText] SuggestedQuery queryText
+                             * @property {Array.<google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.ISearchContext>|null} [searchContexts] SuggestedQuery searchContexts
                              */
     
                             /**
@@ -180022,6 +182241,7 @@
                              * @param {google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.ISuggestedQuery=} [properties] Properties to set
                              */
                             function SuggestedQuery(properties) {
+                                this.searchContexts = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null && keys[i] !== "__proto__")
@@ -180035,6 +182255,14 @@
                              * @instance
                              */
                             SuggestedQuery.prototype.queryText = "";
+    
+                            /**
+                             * SuggestedQuery searchContexts.
+                             * @member {Array.<google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.ISearchContext>} searchContexts
+                             * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery
+                             * @instance
+                             */
+                            SuggestedQuery.prototype.searchContexts = $util.emptyArray;
     
                             /**
                              * Creates a new SuggestedQuery instance using the specified properties.
@@ -180062,6 +182290,9 @@
                                     writer = $Writer.create();
                                 if (message.queryText != null && Object.hasOwnProperty.call(message, "queryText"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.queryText);
+                                if (message.searchContexts != null && message.searchContexts.length)
+                                    for (var i = 0; i < message.searchContexts.length; ++i)
+                                        $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.SearchContext.encode(message.searchContexts[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                                 return writer;
                             };
     
@@ -180106,6 +182337,12 @@
                                             message.queryText = reader.string();
                                             break;
                                         }
+                                    case 4: {
+                                            if (!(message.searchContexts && message.searchContexts.length))
+                                                message.searchContexts = [];
+                                            message.searchContexts.push($root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.SearchContext.decode(reader, reader.uint32(), undefined, long + 1));
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7, long);
                                         break;
@@ -180148,6 +182385,15 @@
                                 if (message.queryText != null && message.hasOwnProperty("queryText"))
                                     if (!$util.isString(message.queryText))
                                         return "queryText: string expected";
+                                if (message.searchContexts != null && message.hasOwnProperty("searchContexts")) {
+                                    if (!Array.isArray(message.searchContexts))
+                                        return "searchContexts: array expected";
+                                    for (var i = 0; i < message.searchContexts.length; ++i) {
+                                        var error = $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.SearchContext.verify(message.searchContexts[i], long + 1);
+                                        if (error)
+                                            return "searchContexts." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -180169,6 +182415,16 @@
                                 var message = new $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery();
                                 if (object.queryText != null)
                                     message.queryText = String(object.queryText);
+                                if (object.searchContexts) {
+                                    if (!Array.isArray(object.searchContexts))
+                                        throw TypeError(".google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.searchContexts: array expected");
+                                    message.searchContexts = [];
+                                    for (var i = 0; i < object.searchContexts.length; ++i) {
+                                        if (typeof object.searchContexts[i] !== "object")
+                                            throw TypeError(".google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.searchContexts: object expected");
+                                        message.searchContexts[i] = $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.SearchContext.fromObject(object.searchContexts[i], long + 1);
+                                    }
+                                }
                                 return message;
                             };
     
@@ -180185,10 +182441,17 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.searchContexts = [];
                                 if (options.defaults)
                                     object.queryText = "";
                                 if (message.queryText != null && message.hasOwnProperty("queryText"))
                                     object.queryText = message.queryText;
+                                if (message.searchContexts && message.searchContexts.length) {
+                                    object.searchContexts = [];
+                                    for (var j = 0; j < message.searchContexts.length; ++j)
+                                        object.searchContexts[j] = $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.SearchContext.toObject(message.searchContexts[j], options);
+                                }
                                 return object;
                             };
     
@@ -180218,7 +182481,494 @@
                                 return typeUrlPrefix + "/google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery";
                             };
     
+                            SuggestedQuery.SearchContext = (function() {
+    
+                                /**
+                                 * Properties of a SearchContext.
+                                 * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery
+                                 * @interface ISearchContext
+                                 * @property {string|null} [key] SearchContext key
+                                 * @property {string|null} [value] SearchContext value
+                                 */
+    
+                                /**
+                                 * Constructs a new SearchContext.
+                                 * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery
+                                 * @classdesc Represents a SearchContext.
+                                 * @implements ISearchContext
+                                 * @constructor
+                                 * @param {google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.ISearchContext=} [properties] Properties to set
+                                 */
+                                function SearchContext(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * SearchContext key.
+                                 * @member {string} key
+                                 * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.SearchContext
+                                 * @instance
+                                 */
+                                SearchContext.prototype.key = "";
+    
+                                /**
+                                 * SearchContext value.
+                                 * @member {string} value
+                                 * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.SearchContext
+                                 * @instance
+                                 */
+                                SearchContext.prototype.value = "";
+    
+                                /**
+                                 * Creates a new SearchContext instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.SearchContext
+                                 * @static
+                                 * @param {google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.ISearchContext=} [properties] Properties to set
+                                 * @returns {google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.SearchContext} SearchContext instance
+                                 */
+                                SearchContext.create = function create(properties) {
+                                    return new SearchContext(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified SearchContext message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.SearchContext.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.SearchContext
+                                 * @static
+                                 * @param {google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.ISearchContext} message SearchContext message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SearchContext.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.key != null && Object.hasOwnProperty.call(message, "key"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.key);
+                                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified SearchContext message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.SearchContext.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.SearchContext
+                                 * @static
+                                 * @param {google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.ISearchContext} message SearchContext message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SearchContext.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a SearchContext message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.SearchContext
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.SearchContext} SearchContext
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SearchContext.decode = function decode(reader, length, error, long) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $Reader.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.SearchContext();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.key = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.value = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7, long);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a SearchContext message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.SearchContext
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.SearchContext} SearchContext
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SearchContext.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a SearchContext message.
+                                 * @function verify
+                                 * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.SearchContext
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                SearchContext.verify = function verify(message, long) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        return "maximum nesting depth exceeded";
+                                    if (message.key != null && message.hasOwnProperty("key"))
+                                        if (!$util.isString(message.key))
+                                            return "key: string expected";
+                                    if (message.value != null && message.hasOwnProperty("value"))
+                                        if (!$util.isString(message.value))
+                                            return "value: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a SearchContext message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.SearchContext
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.SearchContext} SearchContext
+                                 */
+                                SearchContext.fromObject = function fromObject(object, long) {
+                                    if (object instanceof $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.SearchContext)
+                                        return object;
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
+                                    var message = new $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.SearchContext();
+                                    if (object.key != null)
+                                        message.key = String(object.key);
+                                    if (object.value != null)
+                                        message.value = String(object.value);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a SearchContext message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.SearchContext
+                                 * @static
+                                 * @param {google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.SearchContext} message SearchContext
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                SearchContext.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.key = "";
+                                        object.value = "";
+                                    }
+                                    if (message.key != null && message.hasOwnProperty("key"))
+                                        object.key = message.key;
+                                    if (message.value != null && message.hasOwnProperty("value"))
+                                        object.value = message.value;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this SearchContext to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.SearchContext
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                SearchContext.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for SearchContext
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.SearchContext
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                SearchContext.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.SearchContext";
+                                };
+    
+                                return SearchContext;
+                            })();
+    
                             return SuggestedQuery;
+                        })();
+    
+                        KnowledgeAssistAnswer.AdditionalSuggestedQueryResult = (function() {
+    
+                            /**
+                             * Properties of an AdditionalSuggestedQueryResult.
+                             * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer
+                             * @interface IAdditionalSuggestedQueryResult
+                             * @property {google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.ISuggestedQuery|null} [suggestedQuery] AdditionalSuggestedQueryResult suggestedQuery
+                             * @property {string|null} [answerRecord] AdditionalSuggestedQueryResult answerRecord
+                             */
+    
+                            /**
+                             * Constructs a new AdditionalSuggestedQueryResult.
+                             * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer
+                             * @classdesc Represents an AdditionalSuggestedQueryResult.
+                             * @implements IAdditionalSuggestedQueryResult
+                             * @constructor
+                             * @param {google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.IAdditionalSuggestedQueryResult=} [properties] Properties to set
+                             */
+                            function AdditionalSuggestedQueryResult(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AdditionalSuggestedQueryResult suggestedQuery.
+                             * @member {google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.ISuggestedQuery|null|undefined} suggestedQuery
+                             * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult
+                             * @instance
+                             */
+                            AdditionalSuggestedQueryResult.prototype.suggestedQuery = null;
+    
+                            /**
+                             * AdditionalSuggestedQueryResult answerRecord.
+                             * @member {string} answerRecord
+                             * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult
+                             * @instance
+                             */
+                            AdditionalSuggestedQueryResult.prototype.answerRecord = "";
+    
+                            /**
+                             * Creates a new AdditionalSuggestedQueryResult instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult
+                             * @static
+                             * @param {google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.IAdditionalSuggestedQueryResult=} [properties] Properties to set
+                             * @returns {google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult} AdditionalSuggestedQueryResult instance
+                             */
+                            AdditionalSuggestedQueryResult.create = function create(properties) {
+                                return new AdditionalSuggestedQueryResult(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AdditionalSuggestedQueryResult message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult
+                             * @static
+                             * @param {google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.IAdditionalSuggestedQueryResult} message AdditionalSuggestedQueryResult message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AdditionalSuggestedQueryResult.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.suggestedQuery != null && Object.hasOwnProperty.call(message, "suggestedQuery"))
+                                    $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.encode(message.suggestedQuery, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.answerRecord != null && Object.hasOwnProperty.call(message, "answerRecord"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.answerRecord);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AdditionalSuggestedQueryResult message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult
+                             * @static
+                             * @param {google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.IAdditionalSuggestedQueryResult} message AdditionalSuggestedQueryResult message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AdditionalSuggestedQueryResult.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AdditionalSuggestedQueryResult message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult} AdditionalSuggestedQueryResult
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AdditionalSuggestedQueryResult.decode = function decode(reader, length, error, long) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.suggestedQuery = $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.decode(reader, reader.uint32(), undefined, long + 1);
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.answerRecord = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7, long);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AdditionalSuggestedQueryResult message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult} AdditionalSuggestedQueryResult
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AdditionalSuggestedQueryResult.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AdditionalSuggestedQueryResult message.
+                             * @function verify
+                             * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AdditionalSuggestedQueryResult.verify = function verify(message, long) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
+                                if (message.suggestedQuery != null && message.hasOwnProperty("suggestedQuery")) {
+                                    var error = $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.verify(message.suggestedQuery, long + 1);
+                                    if (error)
+                                        return "suggestedQuery." + error;
+                                }
+                                if (message.answerRecord != null && message.hasOwnProperty("answerRecord"))
+                                    if (!$util.isString(message.answerRecord))
+                                        return "answerRecord: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AdditionalSuggestedQueryResult message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult} AdditionalSuggestedQueryResult
+                             */
+                            AdditionalSuggestedQueryResult.fromObject = function fromObject(object, long) {
+                                if (object instanceof $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult)
+                                    return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var message = new $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult();
+                                if (object.suggestedQuery != null) {
+                                    if (typeof object.suggestedQuery !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult.suggestedQuery: object expected");
+                                    message.suggestedQuery = $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.fromObject(object.suggestedQuery, long + 1);
+                                }
+                                if (object.answerRecord != null)
+                                    message.answerRecord = String(object.answerRecord);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AdditionalSuggestedQueryResult message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult
+                             * @static
+                             * @param {google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult} message AdditionalSuggestedQueryResult
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AdditionalSuggestedQueryResult.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.suggestedQuery = null;
+                                    object.answerRecord = "";
+                                }
+                                if (message.suggestedQuery != null && message.hasOwnProperty("suggestedQuery"))
+                                    object.suggestedQuery = $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.SuggestedQuery.toObject(message.suggestedQuery, options);
+                                if (message.answerRecord != null && message.hasOwnProperty("answerRecord"))
+                                    object.answerRecord = message.answerRecord;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AdditionalSuggestedQueryResult to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AdditionalSuggestedQueryResult.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AdditionalSuggestedQueryResult
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AdditionalSuggestedQueryResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult";
+                            };
+    
+                            return AdditionalSuggestedQueryResult;
                         })();
     
                         KnowledgeAssistAnswer.KnowledgeAnswer = (function() {
@@ -180230,6 +182980,8 @@
                              * @property {string|null} [answerText] KnowledgeAnswer answerText
                              * @property {google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.IFaqSource|null} [faqSource] KnowledgeAnswer faqSource
                              * @property {google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.IGenerativeSource|null} [generativeSource] KnowledgeAnswer generativeSource
+                             * @property {google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.IGenerativeSource|null} [playbookSource] KnowledgeAnswer playbookSource
+                             * @property {google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.IEventSource|null} [eventSource] KnowledgeAnswer eventSource
                              */
     
                             /**
@@ -180271,17 +183023,33 @@
                              */
                             KnowledgeAnswer.prototype.generativeSource = null;
     
+                            /**
+                             * KnowledgeAnswer playbookSource.
+                             * @member {google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.IGenerativeSource|null|undefined} playbookSource
+                             * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer
+                             * @instance
+                             */
+                            KnowledgeAnswer.prototype.playbookSource = null;
+    
+                            /**
+                             * KnowledgeAnswer eventSource.
+                             * @member {google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.IEventSource|null|undefined} eventSource
+                             * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer
+                             * @instance
+                             */
+                            KnowledgeAnswer.prototype.eventSource = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
                             /**
                              * KnowledgeAnswer source.
-                             * @member {"faqSource"|"generativeSource"|undefined} source
+                             * @member {"faqSource"|"generativeSource"|"playbookSource"|"eventSource"|undefined} source
                              * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer
                              * @instance
                              */
                             Object.defineProperty(KnowledgeAnswer.prototype, "source", {
-                                get: $util.oneOfGetter($oneOfFields = ["faqSource", "generativeSource"]),
+                                get: $util.oneOfGetter($oneOfFields = ["faqSource", "generativeSource", "playbookSource", "eventSource"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -180315,6 +183083,10 @@
                                     $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.FaqSource.encode(message.faqSource, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                                 if (message.generativeSource != null && Object.hasOwnProperty.call(message, "generativeSource"))
                                     $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource.encode(message.generativeSource, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.playbookSource != null && Object.hasOwnProperty.call(message, "playbookSource"))
+                                    $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource.encode(message.playbookSource, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                if (message.eventSource != null && Object.hasOwnProperty.call(message, "eventSource"))
+                                    $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource.encode(message.eventSource, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                                 return writer;
                             };
     
@@ -180365,6 +183137,14 @@
                                         }
                                     case 4: {
                                             message.generativeSource = $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource.decode(reader, reader.uint32(), undefined, long + 1);
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.playbookSource = $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource.decode(reader, reader.uint32(), undefined, long + 1);
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.eventSource = $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     default:
@@ -180428,6 +183208,26 @@
                                             return "generativeSource." + error;
                                     }
                                 }
+                                if (message.playbookSource != null && message.hasOwnProperty("playbookSource")) {
+                                    if (properties.source === 1)
+                                        return "source: multiple values";
+                                    properties.source = 1;
+                                    {
+                                        var error = $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource.verify(message.playbookSource, long + 1);
+                                        if (error)
+                                            return "playbookSource." + error;
+                                    }
+                                }
+                                if (message.eventSource != null && message.hasOwnProperty("eventSource")) {
+                                    if (properties.source === 1)
+                                        return "source: multiple values";
+                                    properties.source = 1;
+                                    {
+                                        var error = $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource.verify(message.eventSource, long + 1);
+                                        if (error)
+                                            return "eventSource." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -180459,6 +183259,16 @@
                                         throw TypeError(".google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.generativeSource: object expected");
                                     message.generativeSource = $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource.fromObject(object.generativeSource, long + 1);
                                 }
+                                if (object.playbookSource != null) {
+                                    if (typeof object.playbookSource !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.playbookSource: object expected");
+                                    message.playbookSource = $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource.fromObject(object.playbookSource, long + 1);
+                                }
+                                if (object.eventSource != null) {
+                                    if (typeof object.eventSource !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.eventSource: object expected");
+                                    message.eventSource = $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource.fromObject(object.eventSource, long + 1);
+                                }
                                 return message;
                             };
     
@@ -180488,6 +183298,16 @@
                                     object.generativeSource = $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource.toObject(message.generativeSource, options);
                                     if (options.oneofs)
                                         object.source = "generativeSource";
+                                }
+                                if (message.playbookSource != null && message.hasOwnProperty("playbookSource")) {
+                                    object.playbookSource = $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource.toObject(message.playbookSource, options);
+                                    if (options.oneofs)
+                                        object.source = "playbookSource";
+                                }
+                                if (message.eventSource != null && message.hasOwnProperty("eventSource")) {
+                                    object.eventSource = $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource.toObject(message.eventSource, options);
+                                    if (options.oneofs)
+                                        object.source = "eventSource";
                                 }
                                 return object;
                             };
@@ -181263,6 +184083,252 @@
                                 })();
     
                                 return GenerativeSource;
+                            })();
+    
+                            KnowledgeAnswer.EventSource = (function() {
+    
+                                /**
+                                 * Properties of an EventSource.
+                                 * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer
+                                 * @interface IEventSource
+                                 * @property {string|null} [event] EventSource event
+                                 * @property {google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.IGenerativeSource|null} [snippets] EventSource snippets
+                                 */
+    
+                                /**
+                                 * Constructs a new EventSource.
+                                 * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer
+                                 * @classdesc Represents an EventSource.
+                                 * @implements IEventSource
+                                 * @constructor
+                                 * @param {google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.IEventSource=} [properties] Properties to set
+                                 */
+                                function EventSource(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * EventSource event.
+                                 * @member {string} event
+                                 * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource
+                                 * @instance
+                                 */
+                                EventSource.prototype.event = "";
+    
+                                /**
+                                 * EventSource snippets.
+                                 * @member {google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.IGenerativeSource|null|undefined} snippets
+                                 * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource
+                                 * @instance
+                                 */
+                                EventSource.prototype.snippets = null;
+    
+                                /**
+                                 * Creates a new EventSource instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource
+                                 * @static
+                                 * @param {google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.IEventSource=} [properties] Properties to set
+                                 * @returns {google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource} EventSource instance
+                                 */
+                                EventSource.create = function create(properties) {
+                                    return new EventSource(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified EventSource message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource
+                                 * @static
+                                 * @param {google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.IEventSource} message EventSource message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                EventSource.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.event != null && Object.hasOwnProperty.call(message, "event"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.event);
+                                    if (message.snippets != null && Object.hasOwnProperty.call(message, "snippets"))
+                                        $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource.encode(message.snippets, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified EventSource message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource
+                                 * @static
+                                 * @param {google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.IEventSource} message EventSource message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                EventSource.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an EventSource message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource} EventSource
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                EventSource.decode = function decode(reader, length, error, long) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $Reader.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.event = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.snippets = $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource.decode(reader, reader.uint32(), undefined, long + 1);
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7, long);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an EventSource message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource} EventSource
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                EventSource.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an EventSource message.
+                                 * @function verify
+                                 * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                EventSource.verify = function verify(message, long) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        return "maximum nesting depth exceeded";
+                                    if (message.event != null && message.hasOwnProperty("event"))
+                                        if (!$util.isString(message.event))
+                                            return "event: string expected";
+                                    if (message.snippets != null && message.hasOwnProperty("snippets")) {
+                                        var error = $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource.verify(message.snippets, long + 1);
+                                        if (error)
+                                            return "snippets." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an EventSource message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource} EventSource
+                                 */
+                                EventSource.fromObject = function fromObject(object, long) {
+                                    if (object instanceof $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource)
+                                        return object;
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
+                                    var message = new $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource();
+                                    if (object.event != null)
+                                        message.event = String(object.event);
+                                    if (object.snippets != null) {
+                                        if (typeof object.snippets !== "object")
+                                            throw TypeError(".google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource.snippets: object expected");
+                                        message.snippets = $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource.fromObject(object.snippets, long + 1);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an EventSource message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource
+                                 * @static
+                                 * @param {google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource} message EventSource
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                EventSource.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.event = "";
+                                        object.snippets = null;
+                                    }
+                                    if (message.event != null && message.hasOwnProperty("event"))
+                                        object.event = message.event;
+                                    if (message.snippets != null && message.hasOwnProperty("snippets"))
+                                        object.snippets = $root.google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource.toObject(message.snippets, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this EventSource to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                EventSource.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for EventSource
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                EventSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.dialogflow.v2beta1.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource";
+                                };
+    
+                                return EventSource;
                             })();
     
                             return KnowledgeAnswer;
@@ -182307,6 +185373,7 @@
                              * @property {string|null} [intent] TurnInput intent
                              * @property {string|null} [event] TurnInput event
                              * @property {google.protobuf.IStruct|null} [virtualAgentParameters] TurnInput virtualAgentParameters
+                             * @property {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.IToolResponses|null} [toolResponses] TurnInput toolResponses
                              */
     
                             /**
@@ -182356,6 +185423,14 @@
                              */
                             TurnInput.prototype.virtualAgentParameters = null;
     
+                            /**
+                             * TurnInput toolResponses.
+                             * @member {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.IToolResponses|null|undefined} toolResponses
+                             * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput
+                             * @instance
+                             */
+                            TurnInput.prototype.toolResponses = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -182402,6 +185477,8 @@
                                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.event);
                                 if (message.virtualAgentParameters != null && Object.hasOwnProperty.call(message, "virtualAgentParameters"))
                                     $root.google.protobuf.Struct.encode(message.virtualAgentParameters, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.toolResponses != null && Object.hasOwnProperty.call(message, "toolResponses"))
+                                    $root.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponses.encode(message.toolResponses, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                                 return writer;
                             };
     
@@ -182456,6 +185533,10 @@
                                         }
                                     case 4: {
                                             message.virtualAgentParameters = $root.google.protobuf.Struct.decode(reader, reader.uint32(), undefined, long + 1);
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.toolResponses = $root.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponses.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     default:
@@ -182522,6 +185603,11 @@
                                     if (error)
                                         return "virtualAgentParameters." + error;
                                 }
+                                if (message.toolResponses != null && message.hasOwnProperty("toolResponses")) {
+                                    var error = $root.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponses.verify(message.toolResponses, long + 1);
+                                    if (error)
+                                        return "toolResponses." + error;
+                                }
                                 return null;
                             };
     
@@ -182552,6 +185638,11 @@
                                         throw TypeError(".google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.virtualAgentParameters: object expected");
                                     message.virtualAgentParameters = $root.google.protobuf.Struct.fromObject(object.virtualAgentParameters, long + 1);
                                 }
+                                if (object.toolResponses != null) {
+                                    if (typeof object.toolResponses !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.toolResponses: object expected");
+                                    message.toolResponses = $root.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponses.fromObject(object.toolResponses, long + 1);
+                                }
                                 return message;
                             };
     
@@ -182568,8 +185659,10 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults)
+                                if (options.defaults) {
                                     object.virtualAgentParameters = null;
+                                    object.toolResponses = null;
+                                }
                                 if (message.text != null && message.hasOwnProperty("text")) {
                                     object.text = message.text;
                                     if (options.oneofs)
@@ -182587,6 +185680,8 @@
                                 }
                                 if (message.virtualAgentParameters != null && message.hasOwnProperty("virtualAgentParameters"))
                                     object.virtualAgentParameters = $root.google.protobuf.Struct.toObject(message.virtualAgentParameters, options);
+                                if (message.toolResponses != null && message.hasOwnProperty("toolResponses"))
+                                    object.toolResponses = $root.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponses.toObject(message.toolResponses, options);
                                 return object;
                             };
     
@@ -182615,6 +185710,513 @@
                                 }
                                 return typeUrlPrefix + "/google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput";
                             };
+    
+                            TurnInput.ToolResponse = (function() {
+    
+                                /**
+                                 * Properties of a ToolResponse.
+                                 * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput
+                                 * @interface IToolResponse
+                                 * @property {string|null} [id] ToolResponse id
+                                 * @property {string|null} [tool] ToolResponse tool
+                                 * @property {google.protobuf.IStruct|null} [response] ToolResponse response
+                                 */
+    
+                                /**
+                                 * Constructs a new ToolResponse.
+                                 * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput
+                                 * @classdesc Represents a ToolResponse.
+                                 * @implements IToolResponse
+                                 * @constructor
+                                 * @param {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.IToolResponse=} [properties] Properties to set
+                                 */
+                                function ToolResponse(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ToolResponse id.
+                                 * @member {string} id
+                                 * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponse
+                                 * @instance
+                                 */
+                                ToolResponse.prototype.id = "";
+    
+                                /**
+                                 * ToolResponse tool.
+                                 * @member {string} tool
+                                 * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponse
+                                 * @instance
+                                 */
+                                ToolResponse.prototype.tool = "";
+    
+                                /**
+                                 * ToolResponse response.
+                                 * @member {google.protobuf.IStruct|null|undefined} response
+                                 * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponse
+                                 * @instance
+                                 */
+                                ToolResponse.prototype.response = null;
+    
+                                /**
+                                 * Creates a new ToolResponse instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponse
+                                 * @static
+                                 * @param {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.IToolResponse=} [properties] Properties to set
+                                 * @returns {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponse} ToolResponse instance
+                                 */
+                                ToolResponse.create = function create(properties) {
+                                    return new ToolResponse(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ToolResponse message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponse.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponse
+                                 * @static
+                                 * @param {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.IToolResponse} message ToolResponse message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ToolResponse.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                                    if (message.tool != null && Object.hasOwnProperty.call(message, "tool"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.tool);
+                                    if (message.response != null && Object.hasOwnProperty.call(message, "response"))
+                                        $root.google.protobuf.Struct.encode(message.response, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ToolResponse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponse.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponse
+                                 * @static
+                                 * @param {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.IToolResponse} message ToolResponse message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ToolResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a ToolResponse message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponse
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponse} ToolResponse
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ToolResponse.decode = function decode(reader, length, error, long) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $Reader.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponse();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.id = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.tool = reader.string();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.response = $root.google.protobuf.Struct.decode(reader, reader.uint32(), undefined, long + 1);
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7, long);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a ToolResponse message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponse
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponse} ToolResponse
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ToolResponse.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a ToolResponse message.
+                                 * @function verify
+                                 * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponse
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ToolResponse.verify = function verify(message, long) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        return "maximum nesting depth exceeded";
+                                    if (message.id != null && message.hasOwnProperty("id"))
+                                        if (!$util.isString(message.id))
+                                            return "id: string expected";
+                                    if (message.tool != null && message.hasOwnProperty("tool"))
+                                        if (!$util.isString(message.tool))
+                                            return "tool: string expected";
+                                    if (message.response != null && message.hasOwnProperty("response")) {
+                                        var error = $root.google.protobuf.Struct.verify(message.response, long + 1);
+                                        if (error)
+                                            return "response." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a ToolResponse message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponse
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponse} ToolResponse
+                                 */
+                                ToolResponse.fromObject = function fromObject(object, long) {
+                                    if (object instanceof $root.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponse)
+                                        return object;
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
+                                    var message = new $root.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponse();
+                                    if (object.id != null)
+                                        message.id = String(object.id);
+                                    if (object.tool != null)
+                                        message.tool = String(object.tool);
+                                    if (object.response != null) {
+                                        if (typeof object.response !== "object")
+                                            throw TypeError(".google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponse.response: object expected");
+                                        message.response = $root.google.protobuf.Struct.fromObject(object.response, long + 1);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a ToolResponse message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponse
+                                 * @static
+                                 * @param {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponse} message ToolResponse
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ToolResponse.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.id = "";
+                                        object.tool = "";
+                                        object.response = null;
+                                    }
+                                    if (message.id != null && message.hasOwnProperty("id"))
+                                        object.id = message.id;
+                                    if (message.tool != null && message.hasOwnProperty("tool"))
+                                        object.tool = message.tool;
+                                    if (message.response != null && message.hasOwnProperty("response"))
+                                        object.response = $root.google.protobuf.Struct.toObject(message.response, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ToolResponse to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponse
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ToolResponse.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for ToolResponse
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponse
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ToolResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponse";
+                                };
+    
+                                return ToolResponse;
+                            })();
+    
+                            TurnInput.ToolResponses = (function() {
+    
+                                /**
+                                 * Properties of a ToolResponses.
+                                 * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput
+                                 * @interface IToolResponses
+                                 * @property {Array.<google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.IToolResponse>|null} [toolResponses] ToolResponses toolResponses
+                                 */
+    
+                                /**
+                                 * Constructs a new ToolResponses.
+                                 * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput
+                                 * @classdesc Represents a ToolResponses.
+                                 * @implements IToolResponses
+                                 * @constructor
+                                 * @param {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.IToolResponses=} [properties] Properties to set
+                                 */
+                                function ToolResponses(properties) {
+                                    this.toolResponses = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ToolResponses toolResponses.
+                                 * @member {Array.<google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.IToolResponse>} toolResponses
+                                 * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponses
+                                 * @instance
+                                 */
+                                ToolResponses.prototype.toolResponses = $util.emptyArray;
+    
+                                /**
+                                 * Creates a new ToolResponses instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponses
+                                 * @static
+                                 * @param {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.IToolResponses=} [properties] Properties to set
+                                 * @returns {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponses} ToolResponses instance
+                                 */
+                                ToolResponses.create = function create(properties) {
+                                    return new ToolResponses(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ToolResponses message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponses.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponses
+                                 * @static
+                                 * @param {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.IToolResponses} message ToolResponses message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ToolResponses.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.toolResponses != null && message.toolResponses.length)
+                                        for (var i = 0; i < message.toolResponses.length; ++i)
+                                            $root.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponse.encode(message.toolResponses[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ToolResponses message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponses.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponses
+                                 * @static
+                                 * @param {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.IToolResponses} message ToolResponses message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ToolResponses.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a ToolResponses message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponses
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponses} ToolResponses
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ToolResponses.decode = function decode(reader, length, error, long) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $Reader.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponses();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                if (!(message.toolResponses && message.toolResponses.length))
+                                                    message.toolResponses = [];
+                                                message.toolResponses.push($root.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponse.decode(reader, reader.uint32(), undefined, long + 1));
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7, long);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a ToolResponses message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponses
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponses} ToolResponses
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ToolResponses.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a ToolResponses message.
+                                 * @function verify
+                                 * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponses
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ToolResponses.verify = function verify(message, long) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        return "maximum nesting depth exceeded";
+                                    if (message.toolResponses != null && message.hasOwnProperty("toolResponses")) {
+                                        if (!Array.isArray(message.toolResponses))
+                                            return "toolResponses: array expected";
+                                        for (var i = 0; i < message.toolResponses.length; ++i) {
+                                            var error = $root.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponse.verify(message.toolResponses[i], long + 1);
+                                            if (error)
+                                                return "toolResponses." + error;
+                                        }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a ToolResponses message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponses
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponses} ToolResponses
+                                 */
+                                ToolResponses.fromObject = function fromObject(object, long) {
+                                    if (object instanceof $root.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponses)
+                                        return object;
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
+                                    var message = new $root.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponses();
+                                    if (object.toolResponses) {
+                                        if (!Array.isArray(object.toolResponses))
+                                            throw TypeError(".google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponses.toolResponses: array expected");
+                                        message.toolResponses = [];
+                                        for (var i = 0; i < object.toolResponses.length; ++i) {
+                                            if (typeof object.toolResponses[i] !== "object")
+                                                throw TypeError(".google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponses.toolResponses: object expected");
+                                            message.toolResponses[i] = $root.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponse.fromObject(object.toolResponses[i], long + 1);
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a ToolResponses message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponses
+                                 * @static
+                                 * @param {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponses} message ToolResponses
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ToolResponses.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.toolResponses = [];
+                                    if (message.toolResponses && message.toolResponses.length) {
+                                        object.toolResponses = [];
+                                        for (var j = 0; j < message.toolResponses.length; ++j)
+                                            object.toolResponses[j] = $root.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponse.toObject(message.toolResponses[j], options);
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ToolResponses to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponses
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ToolResponses.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for ToolResponses
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponses
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ToolResponses.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest.TurnInput.ToolResponses";
+                                };
+    
+                                return ToolResponses;
+                            })();
     
                             return TurnInput;
                         })();
@@ -182940,6 +186542,7 @@
                          * @property {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.IBargeInSignal|null} [bargeInSignal] BidiStreamingAnalyzeContentResponse bargeInSignal
                          * @property {google.cloud.dialogflow.v2beta1.IAnalyzeContentResponse|null} [analyzeContentResponse] BidiStreamingAnalyzeContentResponse analyzeContentResponse
                          * @property {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ITurnComplete|null} [turnComplete] BidiStreamingAnalyzeContentResponse turnComplete
+                         * @property {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.IToolCalls|null} [toolCalls] BidiStreamingAnalyzeContentResponse toolCalls
                          */
     
                         /**
@@ -182989,17 +186592,25 @@
                          */
                         BidiStreamingAnalyzeContentResponse.prototype.turnComplete = null;
     
+                        /**
+                         * BidiStreamingAnalyzeContentResponse toolCalls.
+                         * @member {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.IToolCalls|null|undefined} toolCalls
+                         * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse
+                         * @instance
+                         */
+                        BidiStreamingAnalyzeContentResponse.prototype.toolCalls = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * BidiStreamingAnalyzeContentResponse response.
-                         * @member {"recognitionResult"|"bargeInSignal"|"analyzeContentResponse"|"turnComplete"|undefined} response
+                         * @member {"recognitionResult"|"bargeInSignal"|"analyzeContentResponse"|"turnComplete"|"toolCalls"|undefined} response
                          * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse
                          * @instance
                          */
                         Object.defineProperty(BidiStreamingAnalyzeContentResponse.prototype, "response", {
-                            get: $util.oneOfGetter($oneOfFields = ["recognitionResult", "bargeInSignal", "analyzeContentResponse", "turnComplete"]),
+                            get: $util.oneOfGetter($oneOfFields = ["recognitionResult", "bargeInSignal", "analyzeContentResponse", "turnComplete", "toolCalls"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -183035,6 +186646,8 @@
                                 $root.google.cloud.dialogflow.v2beta1.AnalyzeContentResponse.encode(message.analyzeContentResponse, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.turnComplete != null && Object.hasOwnProperty.call(message, "turnComplete"))
                                 $root.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.TurnComplete.encode(message.turnComplete, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.toolCalls != null && Object.hasOwnProperty.call(message, "toolCalls"))
+                                $root.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCalls.encode(message.toolCalls, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             return writer;
                         };
     
@@ -183089,6 +186702,10 @@
                                     }
                                 case 4: {
                                         message.turnComplete = $root.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.TurnComplete.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 5: {
+                                        message.toolCalls = $root.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCalls.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 default:
@@ -183169,6 +186786,16 @@
                                         return "turnComplete." + error;
                                 }
                             }
+                            if (message.toolCalls != null && message.hasOwnProperty("toolCalls")) {
+                                if (properties.response === 1)
+                                    return "response: multiple values";
+                                properties.response = 1;
+                                {
+                                    var error = $root.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCalls.verify(message.toolCalls, long + 1);
+                                    if (error)
+                                        return "toolCalls." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -183208,6 +186835,11 @@
                                     throw TypeError(".google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.turnComplete: object expected");
                                 message.turnComplete = $root.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.TurnComplete.fromObject(object.turnComplete, long + 1);
                             }
+                            if (object.toolCalls != null) {
+                                if (typeof object.toolCalls !== "object")
+                                    throw TypeError(".google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.toolCalls: object expected");
+                                message.toolCalls = $root.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCalls.fromObject(object.toolCalls, long + 1);
+                            }
                             return message;
                         };
     
@@ -183243,6 +186875,11 @@
                                 object.turnComplete = $root.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.TurnComplete.toObject(message.turnComplete, options);
                                 if (options.oneofs)
                                     object.response = "turnComplete";
+                            }
+                            if (message.toolCalls != null && message.hasOwnProperty("toolCalls")) {
+                                object.toolCalls = $root.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCalls.toObject(message.toolCalls, options);
+                                if (options.oneofs)
+                                    object.response = "toolCalls";
                             }
                             return object;
                         };
@@ -183649,6 +187286,513 @@
                             };
     
                             return TurnComplete;
+                        })();
+    
+                        BidiStreamingAnalyzeContentResponse.ToolCall = (function() {
+    
+                            /**
+                             * Properties of a ToolCall.
+                             * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse
+                             * @interface IToolCall
+                             * @property {string|null} [id] ToolCall id
+                             * @property {string|null} [tool] ToolCall tool
+                             * @property {google.protobuf.IStruct|null} [args] ToolCall args
+                             */
+    
+                            /**
+                             * Constructs a new ToolCall.
+                             * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse
+                             * @classdesc Represents a ToolCall.
+                             * @implements IToolCall
+                             * @constructor
+                             * @param {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.IToolCall=} [properties] Properties to set
+                             */
+                            function ToolCall(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ToolCall id.
+                             * @member {string} id
+                             * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCall
+                             * @instance
+                             */
+                            ToolCall.prototype.id = "";
+    
+                            /**
+                             * ToolCall tool.
+                             * @member {string} tool
+                             * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCall
+                             * @instance
+                             */
+                            ToolCall.prototype.tool = "";
+    
+                            /**
+                             * ToolCall args.
+                             * @member {google.protobuf.IStruct|null|undefined} args
+                             * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCall
+                             * @instance
+                             */
+                            ToolCall.prototype.args = null;
+    
+                            /**
+                             * Creates a new ToolCall instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCall
+                             * @static
+                             * @param {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.IToolCall=} [properties] Properties to set
+                             * @returns {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCall} ToolCall instance
+                             */
+                            ToolCall.create = function create(properties) {
+                                return new ToolCall(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ToolCall message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCall.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCall
+                             * @static
+                             * @param {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.IToolCall} message ToolCall message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ToolCall.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                                if (message.tool != null && Object.hasOwnProperty.call(message, "tool"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.tool);
+                                if (message.args != null && Object.hasOwnProperty.call(message, "args"))
+                                    $root.google.protobuf.Struct.encode(message.args, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ToolCall message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCall.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCall
+                             * @static
+                             * @param {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.IToolCall} message ToolCall message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ToolCall.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ToolCall message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCall
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCall} ToolCall
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ToolCall.decode = function decode(reader, length, error, long) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCall();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.id = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.tool = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.args = $root.google.protobuf.Struct.decode(reader, reader.uint32(), undefined, long + 1);
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7, long);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ToolCall message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCall
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCall} ToolCall
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ToolCall.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ToolCall message.
+                             * @function verify
+                             * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCall
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ToolCall.verify = function verify(message, long) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
+                                if (message.id != null && message.hasOwnProperty("id"))
+                                    if (!$util.isString(message.id))
+                                        return "id: string expected";
+                                if (message.tool != null && message.hasOwnProperty("tool"))
+                                    if (!$util.isString(message.tool))
+                                        return "tool: string expected";
+                                if (message.args != null && message.hasOwnProperty("args")) {
+                                    var error = $root.google.protobuf.Struct.verify(message.args, long + 1);
+                                    if (error)
+                                        return "args." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ToolCall message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCall
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCall} ToolCall
+                             */
+                            ToolCall.fromObject = function fromObject(object, long) {
+                                if (object instanceof $root.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCall)
+                                    return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var message = new $root.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCall();
+                                if (object.id != null)
+                                    message.id = String(object.id);
+                                if (object.tool != null)
+                                    message.tool = String(object.tool);
+                                if (object.args != null) {
+                                    if (typeof object.args !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCall.args: object expected");
+                                    message.args = $root.google.protobuf.Struct.fromObject(object.args, long + 1);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ToolCall message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCall
+                             * @static
+                             * @param {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCall} message ToolCall
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ToolCall.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.id = "";
+                                    object.tool = "";
+                                    object.args = null;
+                                }
+                                if (message.id != null && message.hasOwnProperty("id"))
+                                    object.id = message.id;
+                                if (message.tool != null && message.hasOwnProperty("tool"))
+                                    object.tool = message.tool;
+                                if (message.args != null && message.hasOwnProperty("args"))
+                                    object.args = $root.google.protobuf.Struct.toObject(message.args, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ToolCall to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCall
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ToolCall.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ToolCall
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCall
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ToolCall.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCall";
+                            };
+    
+                            return ToolCall;
+                        })();
+    
+                        BidiStreamingAnalyzeContentResponse.ToolCalls = (function() {
+    
+                            /**
+                             * Properties of a ToolCalls.
+                             * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse
+                             * @interface IToolCalls
+                             * @property {Array.<google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.IToolCall>|null} [toolCalls] ToolCalls toolCalls
+                             */
+    
+                            /**
+                             * Constructs a new ToolCalls.
+                             * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse
+                             * @classdesc Represents a ToolCalls.
+                             * @implements IToolCalls
+                             * @constructor
+                             * @param {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.IToolCalls=} [properties] Properties to set
+                             */
+                            function ToolCalls(properties) {
+                                this.toolCalls = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ToolCalls toolCalls.
+                             * @member {Array.<google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.IToolCall>} toolCalls
+                             * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCalls
+                             * @instance
+                             */
+                            ToolCalls.prototype.toolCalls = $util.emptyArray;
+    
+                            /**
+                             * Creates a new ToolCalls instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCalls
+                             * @static
+                             * @param {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.IToolCalls=} [properties] Properties to set
+                             * @returns {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCalls} ToolCalls instance
+                             */
+                            ToolCalls.create = function create(properties) {
+                                return new ToolCalls(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ToolCalls message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCalls.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCalls
+                             * @static
+                             * @param {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.IToolCalls} message ToolCalls message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ToolCalls.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.toolCalls != null && message.toolCalls.length)
+                                    for (var i = 0; i < message.toolCalls.length; ++i)
+                                        $root.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCall.encode(message.toolCalls[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ToolCalls message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCalls.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCalls
+                             * @static
+                             * @param {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.IToolCalls} message ToolCalls message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ToolCalls.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ToolCalls message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCalls
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCalls} ToolCalls
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ToolCalls.decode = function decode(reader, length, error, long) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCalls();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.toolCalls && message.toolCalls.length))
+                                                message.toolCalls = [];
+                                            message.toolCalls.push($root.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCall.decode(reader, reader.uint32(), undefined, long + 1));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7, long);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ToolCalls message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCalls
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCalls} ToolCalls
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ToolCalls.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ToolCalls message.
+                             * @function verify
+                             * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCalls
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ToolCalls.verify = function verify(message, long) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
+                                if (message.toolCalls != null && message.hasOwnProperty("toolCalls")) {
+                                    if (!Array.isArray(message.toolCalls))
+                                        return "toolCalls: array expected";
+                                    for (var i = 0; i < message.toolCalls.length; ++i) {
+                                        var error = $root.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCall.verify(message.toolCalls[i], long + 1);
+                                        if (error)
+                                            return "toolCalls." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ToolCalls message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCalls
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCalls} ToolCalls
+                             */
+                            ToolCalls.fromObject = function fromObject(object, long) {
+                                if (object instanceof $root.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCalls)
+                                    return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var message = new $root.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCalls();
+                                if (object.toolCalls) {
+                                    if (!Array.isArray(object.toolCalls))
+                                        throw TypeError(".google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCalls.toolCalls: array expected");
+                                    message.toolCalls = [];
+                                    for (var i = 0; i < object.toolCalls.length; ++i) {
+                                        if (typeof object.toolCalls[i] !== "object")
+                                            throw TypeError(".google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCalls.toolCalls: object expected");
+                                        message.toolCalls[i] = $root.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCall.fromObject(object.toolCalls[i], long + 1);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ToolCalls message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCalls
+                             * @static
+                             * @param {google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCalls} message ToolCalls
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ToolCalls.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.toolCalls = [];
+                                if (message.toolCalls && message.toolCalls.length) {
+                                    object.toolCalls = [];
+                                    for (var j = 0; j < message.toolCalls.length; ++j)
+                                        object.toolCalls[j] = $root.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCall.toObject(message.toolCalls[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ToolCalls to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCalls
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ToolCalls.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ToolCalls
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCalls
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ToolCalls.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse.ToolCalls";
+                            };
+    
+                            return ToolCalls;
                         })();
     
                         return BidiStreamingAnalyzeContentResponse;
@@ -232683,6 +236827,8 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
+                                case 5:
                                     break;
                                 }
                             if (message.answerSources != null && message.hasOwnProperty("answerSources")) {
@@ -232740,6 +236886,14 @@
                             case "INTENT":
                             case 3:
                                 message.answerType = 3;
+                                break;
+                            case "PLAYBOOK":
+                            case 4:
+                                message.answerType = 4;
+                                break;
+                            case "EVENT":
+                            case 5:
+                                message.answerType = 5;
                                 break;
                             }
                             if (object.answerSources) {
@@ -232825,6 +236979,8 @@
                          * @property {number} FAQ=1 FAQ value
                          * @property {number} GENERATIVE=2 GENERATIVE value
                          * @property {number} INTENT=3 INTENT value
+                         * @property {number} PLAYBOOK=4 PLAYBOOK value
+                         * @property {number} EVENT=5 EVENT value
                          */
                         SearchKnowledgeAnswer.AnswerType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -232832,6 +236988,8 @@
                             values[valuesById[1] = "FAQ"] = 1;
                             values[valuesById[2] = "GENERATIVE"] = 2;
                             values[valuesById[3] = "INTENT"] = 3;
+                            values[valuesById[4] = "PLAYBOOK"] = 4;
+                            values[valuesById[5] = "EVENT"] = 5;
                             return values;
                         })();
     
@@ -233739,6 +237897,7 @@
                          * @property {google.cloud.dialogflow.v2beta1.INotificationConfig|null} [newRecognitionResultNotificationConfig] ConversationProfile newRecognitionResultNotificationConfig
                          * @property {google.cloud.dialogflow.v2beta1.ISpeechToTextConfig|null} [sttConfig] ConversationProfile sttConfig
                          * @property {string|null} [languageCode] ConversationProfile languageCode
+                         * @property {google.cloud.dialogflow.v2beta1.ISipConfig|null} [sipConfig] ConversationProfile sipConfig
                          * @property {string|null} [timeZone] ConversationProfile timeZone
                          * @property {string|null} [securitySettings] ConversationProfile securitySettings
                          * @property {google.cloud.dialogflow.v2beta1.ISynthesizeSpeechConfig|null} [ttsConfig] ConversationProfile ttsConfig
@@ -233872,6 +238031,14 @@
                         ConversationProfile.prototype.languageCode = "";
     
                         /**
+                         * ConversationProfile sipConfig.
+                         * @member {google.cloud.dialogflow.v2beta1.ISipConfig|null|undefined} sipConfig
+                         * @memberof google.cloud.dialogflow.v2beta1.ConversationProfile
+                         * @instance
+                         */
+                        ConversationProfile.prototype.sipConfig = null;
+    
+                        /**
                          * ConversationProfile timeZone.
                          * @member {string} timeZone
                          * @memberof google.cloud.dialogflow.v2beta1.ConversationProfile
@@ -233947,6 +238114,8 @@
                                 writer.uint32(/* id 13, wireType 2 =*/106).string(message.securitySettings);
                             if (message.timeZone != null && Object.hasOwnProperty.call(message, "timeZone"))
                                 writer.uint32(/* id 14, wireType 2 =*/114).string(message.timeZone);
+                            if (message.sipConfig != null && Object.hasOwnProperty.call(message, "sipConfig"))
+                                $root.google.cloud.dialogflow.v2beta1.SipConfig.encode(message.sipConfig, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
                             if (message.ttsConfig != null && Object.hasOwnProperty.call(message, "ttsConfig"))
                                 $root.google.cloud.dialogflow.v2beta1.SynthesizeSpeechConfig.encode(message.ttsConfig, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
                             if (message.newRecognitionResultNotificationConfig != null && Object.hasOwnProperty.call(message, "newRecognitionResultNotificationConfig"))
@@ -234047,6 +238216,10 @@
                                     }
                                 case 10: {
                                         message.languageCode = reader.string();
+                                        break;
+                                    }
+                                case 16: {
+                                        message.sipConfig = $root.google.cloud.dialogflow.v2beta1.SipConfig.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 14: {
@@ -234162,6 +238335,11 @@
                             if (message.languageCode != null && message.hasOwnProperty("languageCode"))
                                 if (!$util.isString(message.languageCode))
                                     return "languageCode: string expected";
+                            if (message.sipConfig != null && message.hasOwnProperty("sipConfig")) {
+                                var error = $root.google.cloud.dialogflow.v2beta1.SipConfig.verify(message.sipConfig, long + 1);
+                                if (error)
+                                    return "sipConfig." + error;
+                            }
                             if (message.timeZone != null && message.hasOwnProperty("timeZone"))
                                 if (!$util.isString(message.timeZone))
                                     return "timeZone: string expected";
@@ -234250,6 +238428,11 @@
                             }
                             if (object.languageCode != null)
                                 message.languageCode = String(object.languageCode);
+                            if (object.sipConfig != null) {
+                                if (typeof object.sipConfig !== "object")
+                                    throw TypeError(".google.cloud.dialogflow.v2beta1.ConversationProfile.sipConfig: object expected");
+                                message.sipConfig = $root.google.cloud.dialogflow.v2beta1.SipConfig.fromObject(object.sipConfig, long + 1);
+                            }
                             if (object.timeZone != null)
                                 message.timeZone = String(object.timeZone);
                             if (object.securitySettings != null)
@@ -234290,6 +238473,7 @@
                                 object.updateTime = null;
                                 object.securitySettings = "";
                                 object.timeZone = "";
+                                object.sipConfig = null;
                                 object.ttsConfig = null;
                                 object.newRecognitionResultNotificationConfig = null;
                                 object.useBidiStreaming = false;
@@ -234322,6 +238506,8 @@
                                 object.securitySettings = message.securitySettings;
                             if (message.timeZone != null && message.hasOwnProperty("timeZone"))
                                 object.timeZone = message.timeZone;
+                            if (message.sipConfig != null && message.hasOwnProperty("sipConfig"))
+                                object.sipConfig = $root.google.cloud.dialogflow.v2beta1.SipConfig.toObject(message.sipConfig, options);
                             if (message.ttsConfig != null && message.hasOwnProperty("ttsConfig"))
                                 object.ttsConfig = $root.google.cloud.dialogflow.v2beta1.SynthesizeSpeechConfig.toObject(message.ttsConfig, options);
                             if (message.newRecognitionResultNotificationConfig != null && message.hasOwnProperty("newRecognitionResultNotificationConfig"))
@@ -235165,9 +239351,10 @@
                              * @property {boolean|null} [enableQuerySuggestionOnly] SuggestionFeatureConfig enableQuerySuggestionOnly
                              * @property {boolean|null} [enableResponseDebugInfo] SuggestionFeatureConfig enableResponseDebugInfo
                              * @property {google.cloud.dialogflow.v2beta1.IRaiSettings|null} [raiSettings] SuggestionFeatureConfig raiSettings
+                             * @property {google.cloud.dialogflow.v2beta1.TriggerEvent|null} [suggestionTriggerEvent] SuggestionFeatureConfig suggestionTriggerEvent
+                             * @property {boolean|null} [disableQuerySearchContext] SuggestionFeatureConfig disableQuerySearchContext
                              * @property {google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ISuggestionTriggerSettings|null} [suggestionTriggerSettings] SuggestionFeatureConfig suggestionTriggerSettings
                              * @property {google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ISuggestionQueryConfig|null} [queryConfig] SuggestionFeatureConfig queryConfig
-                             * @property {google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.IConversationModelConfig|null} [conversationModelConfig] SuggestionFeatureConfig conversationModelConfig
                              * @property {google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.IConversationProcessConfig|null} [conversationProcessConfig] SuggestionFeatureConfig conversationProcessConfig
                              */
     
@@ -235251,6 +239438,22 @@
                             SuggestionFeatureConfig.prototype.raiSettings = null;
     
                             /**
+                             * SuggestionFeatureConfig suggestionTriggerEvent.
+                             * @member {google.cloud.dialogflow.v2beta1.TriggerEvent} suggestionTriggerEvent
+                             * @memberof google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.SuggestionFeatureConfig
+                             * @instance
+                             */
+                            SuggestionFeatureConfig.prototype.suggestionTriggerEvent = 0;
+    
+                            /**
+                             * SuggestionFeatureConfig disableQuerySearchContext.
+                             * @member {boolean} disableQuerySearchContext
+                             * @memberof google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.SuggestionFeatureConfig
+                             * @instance
+                             */
+                            SuggestionFeatureConfig.prototype.disableQuerySearchContext = false;
+    
+                            /**
                              * SuggestionFeatureConfig suggestionTriggerSettings.
                              * @member {google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ISuggestionTriggerSettings|null|undefined} suggestionTriggerSettings
                              * @memberof google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.SuggestionFeatureConfig
@@ -235265,14 +239468,6 @@
                              * @instance
                              */
                             SuggestionFeatureConfig.prototype.queryConfig = null;
-    
-                            /**
-                             * SuggestionFeatureConfig conversationModelConfig.
-                             * @member {google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.IConversationModelConfig|null|undefined} conversationModelConfig
-                             * @memberof google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.SuggestionFeatureConfig
-                             * @instance
-                             */
-                            SuggestionFeatureConfig.prototype.conversationModelConfig = null;
     
                             /**
                              * SuggestionFeatureConfig conversationProcessConfig.
@@ -235312,8 +239507,6 @@
                                     $root.google.cloud.dialogflow.v2beta1.SuggestionFeature.encode(message.suggestionFeature, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                                 if (message.queryConfig != null && Object.hasOwnProperty.call(message, "queryConfig"))
                                     $root.google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.SuggestionQueryConfig.encode(message.queryConfig, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-                                if (message.conversationModelConfig != null && Object.hasOwnProperty.call(message, "conversationModelConfig"))
-                                    $root.google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationModelConfig.encode(message.conversationModelConfig, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                                 if (message.conversationProcessConfig != null && Object.hasOwnProperty.call(message, "conversationProcessConfig"))
                                     $root.google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationProcessConfig.encode(message.conversationProcessConfig, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                                 if (message.suggestionTriggerSettings != null && Object.hasOwnProperty.call(message, "suggestionTriggerSettings"))
@@ -235330,6 +239523,10 @@
                                     writer.uint32(/* id 18, wireType 0 =*/144).bool(message.enableResponseDebugInfo);
                                 if (message.raiSettings != null && Object.hasOwnProperty.call(message, "raiSettings"))
                                     $root.google.cloud.dialogflow.v2beta1.RaiSettings.encode(message.raiSettings, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
+                                if (message.suggestionTriggerEvent != null && Object.hasOwnProperty.call(message, "suggestionTriggerEvent"))
+                                    writer.uint32(/* id 20, wireType 0 =*/160).int32(message.suggestionTriggerEvent);
+                                if (message.disableQuerySearchContext != null && Object.hasOwnProperty.call(message, "disableQuerySearchContext"))
+                                    writer.uint32(/* id 21, wireType 0 =*/168).bool(message.disableQuerySearchContext);
                                 return writer;
                             };
     
@@ -235402,16 +239599,20 @@
                                             message.raiSettings = $root.google.cloud.dialogflow.v2beta1.RaiSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
+                                    case 20: {
+                                            message.suggestionTriggerEvent = reader.int32();
+                                            break;
+                                        }
+                                    case 21: {
+                                            message.disableQuerySearchContext = reader.bool();
+                                            break;
+                                        }
                                     case 10: {
                                             message.suggestionTriggerSettings = $root.google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.SuggestionTriggerSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     case 6: {
                                             message.queryConfig = $root.google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.SuggestionQueryConfig.decode(reader, reader.uint32(), undefined, long + 1);
-                                            break;
-                                        }
-                                    case 7: {
-                                            message.conversationModelConfig = $root.google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationModelConfig.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     case 8: {
@@ -235485,6 +239686,20 @@
                                     if (error)
                                         return "raiSettings." + error;
                                 }
+                                if (message.suggestionTriggerEvent != null && message.hasOwnProperty("suggestionTriggerEvent"))
+                                    switch (message.suggestionTriggerEvent) {
+                                    default:
+                                        return "suggestionTriggerEvent: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                if (message.disableQuerySearchContext != null && message.hasOwnProperty("disableQuerySearchContext"))
+                                    if (typeof message.disableQuerySearchContext !== "boolean")
+                                        return "disableQuerySearchContext: boolean expected";
                                 if (message.suggestionTriggerSettings != null && message.hasOwnProperty("suggestionTriggerSettings")) {
                                     var error = $root.google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.SuggestionTriggerSettings.verify(message.suggestionTriggerSettings, long + 1);
                                     if (error)
@@ -235494,11 +239709,6 @@
                                     var error = $root.google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.SuggestionQueryConfig.verify(message.queryConfig, long + 1);
                                     if (error)
                                         return "queryConfig." + error;
-                                }
-                                if (message.conversationModelConfig != null && message.hasOwnProperty("conversationModelConfig")) {
-                                    var error = $root.google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationModelConfig.verify(message.conversationModelConfig, long + 1);
-                                    if (error)
-                                        return "conversationModelConfig." + error;
                                 }
                                 if (message.conversationProcessConfig != null && message.hasOwnProperty("conversationProcessConfig")) {
                                     var error = $root.google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationProcessConfig.verify(message.conversationProcessConfig, long + 1);
@@ -235546,6 +239756,36 @@
                                         throw TypeError(".google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.SuggestionFeatureConfig.raiSettings: object expected");
                                     message.raiSettings = $root.google.cloud.dialogflow.v2beta1.RaiSettings.fromObject(object.raiSettings, long + 1);
                                 }
+                                switch (object.suggestionTriggerEvent) {
+                                default:
+                                    if (typeof object.suggestionTriggerEvent === "number") {
+                                        message.suggestionTriggerEvent = object.suggestionTriggerEvent;
+                                        break;
+                                    }
+                                    break;
+                                case "TRIGGER_EVENT_UNSPECIFIED":
+                                case 0:
+                                    message.suggestionTriggerEvent = 0;
+                                    break;
+                                case "END_OF_UTTERANCE":
+                                case 1:
+                                    message.suggestionTriggerEvent = 1;
+                                    break;
+                                case "MANUAL_CALL":
+                                case 2:
+                                    message.suggestionTriggerEvent = 2;
+                                    break;
+                                case "CUSTOMER_MESSAGE":
+                                case 3:
+                                    message.suggestionTriggerEvent = 3;
+                                    break;
+                                case "AGENT_MESSAGE":
+                                case 4:
+                                    message.suggestionTriggerEvent = 4;
+                                    break;
+                                }
+                                if (object.disableQuerySearchContext != null)
+                                    message.disableQuerySearchContext = Boolean(object.disableQuerySearchContext);
                                 if (object.suggestionTriggerSettings != null) {
                                     if (typeof object.suggestionTriggerSettings !== "object")
                                         throw TypeError(".google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.SuggestionFeatureConfig.suggestionTriggerSettings: object expected");
@@ -235555,11 +239795,6 @@
                                     if (typeof object.queryConfig !== "object")
                                         throw TypeError(".google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.SuggestionFeatureConfig.queryConfig: object expected");
                                     message.queryConfig = $root.google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.SuggestionQueryConfig.fromObject(object.queryConfig, long + 1);
-                                }
-                                if (object.conversationModelConfig != null) {
-                                    if (typeof object.conversationModelConfig !== "object")
-                                        throw TypeError(".google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.SuggestionFeatureConfig.conversationModelConfig: object expected");
-                                    message.conversationModelConfig = $root.google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationModelConfig.fromObject(object.conversationModelConfig, long + 1);
                                 }
                                 if (object.conversationProcessConfig != null) {
                                     if (typeof object.conversationProcessConfig !== "object")
@@ -235586,7 +239821,6 @@
                                     object.enableEventBasedSuggestion = false;
                                     object.suggestionFeature = null;
                                     object.queryConfig = null;
-                                    object.conversationModelConfig = null;
                                     object.conversationProcessConfig = null;
                                     object.suggestionTriggerSettings = null;
                                     object.disableAgentQueryLogging = false;
@@ -235595,6 +239829,8 @@
                                     object.enableQuerySuggestionOnly = false;
                                     object.enableResponseDebugInfo = false;
                                     object.raiSettings = null;
+                                    object.suggestionTriggerEvent = options.enums === String ? "TRIGGER_EVENT_UNSPECIFIED" : 0;
+                                    object.disableQuerySearchContext = false;
                                 }
                                 if (message.enableEventBasedSuggestion != null && message.hasOwnProperty("enableEventBasedSuggestion"))
                                     object.enableEventBasedSuggestion = message.enableEventBasedSuggestion;
@@ -235602,8 +239838,6 @@
                                     object.suggestionFeature = $root.google.cloud.dialogflow.v2beta1.SuggestionFeature.toObject(message.suggestionFeature, options);
                                 if (message.queryConfig != null && message.hasOwnProperty("queryConfig"))
                                     object.queryConfig = $root.google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.SuggestionQueryConfig.toObject(message.queryConfig, options);
-                                if (message.conversationModelConfig != null && message.hasOwnProperty("conversationModelConfig"))
-                                    object.conversationModelConfig = $root.google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationModelConfig.toObject(message.conversationModelConfig, options);
                                 if (message.conversationProcessConfig != null && message.hasOwnProperty("conversationProcessConfig"))
                                     object.conversationProcessConfig = $root.google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationProcessConfig.toObject(message.conversationProcessConfig, options);
                                 if (message.suggestionTriggerSettings != null && message.hasOwnProperty("suggestionTriggerSettings"))
@@ -235620,6 +239854,10 @@
                                     object.enableResponseDebugInfo = message.enableResponseDebugInfo;
                                 if (message.raiSettings != null && message.hasOwnProperty("raiSettings"))
                                     object.raiSettings = $root.google.cloud.dialogflow.v2beta1.RaiSettings.toObject(message.raiSettings, options);
+                                if (message.suggestionTriggerEvent != null && message.hasOwnProperty("suggestionTriggerEvent"))
+                                    object.suggestionTriggerEvent = options.enums === String ? $root.google.cloud.dialogflow.v2beta1.TriggerEvent[message.suggestionTriggerEvent] === undefined ? message.suggestionTriggerEvent : $root.google.cloud.dialogflow.v2beta1.TriggerEvent[message.suggestionTriggerEvent] : message.suggestionTriggerEvent;
+                                if (message.disableQuerySearchContext != null && message.hasOwnProperty("disableQuerySearchContext"))
+                                    object.disableQuerySearchContext = message.disableQuerySearchContext;
                                 return object;
                             };
     
@@ -237987,247 +242225,6 @@
                             return SuggestionQueryConfig;
                         })();
     
-                        HumanAgentAssistantConfig.ConversationModelConfig = (function() {
-    
-                            /**
-                             * Properties of a ConversationModelConfig.
-                             * @memberof google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig
-                             * @interface IConversationModelConfig
-                             * @property {string|null} [model] ConversationModelConfig model
-                             * @property {string|null} [baselineModelVersion] ConversationModelConfig baselineModelVersion
-                             */
-    
-                            /**
-                             * Constructs a new ConversationModelConfig.
-                             * @memberof google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig
-                             * @classdesc Represents a ConversationModelConfig.
-                             * @implements IConversationModelConfig
-                             * @constructor
-                             * @param {google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.IConversationModelConfig=} [properties] Properties to set
-                             */
-                            function ConversationModelConfig(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * ConversationModelConfig model.
-                             * @member {string} model
-                             * @memberof google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationModelConfig
-                             * @instance
-                             */
-                            ConversationModelConfig.prototype.model = "";
-    
-                            /**
-                             * ConversationModelConfig baselineModelVersion.
-                             * @member {string} baselineModelVersion
-                             * @memberof google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationModelConfig
-                             * @instance
-                             */
-                            ConversationModelConfig.prototype.baselineModelVersion = "";
-    
-                            /**
-                             * Creates a new ConversationModelConfig instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationModelConfig
-                             * @static
-                             * @param {google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.IConversationModelConfig=} [properties] Properties to set
-                             * @returns {google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationModelConfig} ConversationModelConfig instance
-                             */
-                            ConversationModelConfig.create = function create(properties) {
-                                return new ConversationModelConfig(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified ConversationModelConfig message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationModelConfig.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationModelConfig
-                             * @static
-                             * @param {google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.IConversationModelConfig} message ConversationModelConfig message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            ConversationModelConfig.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.model != null && Object.hasOwnProperty.call(message, "model"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.model);
-                                if (message.baselineModelVersion != null && Object.hasOwnProperty.call(message, "baselineModelVersion"))
-                                    writer.uint32(/* id 8, wireType 2 =*/66).string(message.baselineModelVersion);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified ConversationModelConfig message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationModelConfig.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationModelConfig
-                             * @static
-                             * @param {google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.IConversationModelConfig} message ConversationModelConfig message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            ConversationModelConfig.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a ConversationModelConfig message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationModelConfig
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationModelConfig} ConversationModelConfig
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            ConversationModelConfig.decode = function decode(reader, length, error, long) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                if (long === undefined)
-                                    long = 0;
-                                if (long > $Reader.recursionLimit)
-                                    throw Error("maximum nesting depth exceeded");
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationModelConfig();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.model = reader.string();
-                                            break;
-                                        }
-                                    case 8: {
-                                            message.baselineModelVersion = reader.string();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7, long);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a ConversationModelConfig message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationModelConfig
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationModelConfig} ConversationModelConfig
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            ConversationModelConfig.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a ConversationModelConfig message.
-                             * @function verify
-                             * @memberof google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationModelConfig
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            ConversationModelConfig.verify = function verify(message, long) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (long === undefined)
-                                    long = 0;
-                                if (long > $util.recursionLimit)
-                                    return "maximum nesting depth exceeded";
-                                if (message.model != null && message.hasOwnProperty("model"))
-                                    if (!$util.isString(message.model))
-                                        return "model: string expected";
-                                if (message.baselineModelVersion != null && message.hasOwnProperty("baselineModelVersion"))
-                                    if (!$util.isString(message.baselineModelVersion))
-                                        return "baselineModelVersion: string expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a ConversationModelConfig message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationModelConfig
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationModelConfig} ConversationModelConfig
-                             */
-                            ConversationModelConfig.fromObject = function fromObject(object, long) {
-                                if (object instanceof $root.google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationModelConfig)
-                                    return object;
-                                if (long === undefined)
-                                    long = 0;
-                                if (long > $util.recursionLimit)
-                                    throw Error("maximum nesting depth exceeded");
-                                var message = new $root.google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationModelConfig();
-                                if (object.model != null)
-                                    message.model = String(object.model);
-                                if (object.baselineModelVersion != null)
-                                    message.baselineModelVersion = String(object.baselineModelVersion);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a ConversationModelConfig message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationModelConfig
-                             * @static
-                             * @param {google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationModelConfig} message ConversationModelConfig
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            ConversationModelConfig.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    object.model = "";
-                                    object.baselineModelVersion = "";
-                                }
-                                if (message.model != null && message.hasOwnProperty("model"))
-                                    object.model = message.model;
-                                if (message.baselineModelVersion != null && message.hasOwnProperty("baselineModelVersion"))
-                                    object.baselineModelVersion = message.baselineModelVersion;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this ConversationModelConfig to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationModelConfig
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            ConversationModelConfig.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for ConversationModelConfig
-                             * @function getTypeUrl
-                             * @memberof google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationModelConfig
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            ConversationModelConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationModelConfig";
-                            };
-    
-                            return ConversationModelConfig;
-                        })();
-    
                         HumanAgentAssistantConfig.ConversationProcessConfig = (function() {
     
                             /**
@@ -239988,6 +243985,384 @@
                         };
     
                         return LoggingConfig;
+                    })();
+    
+                    v2beta1.SipConfig = (function() {
+    
+                        /**
+                         * Properties of a SipConfig.
+                         * @memberof google.cloud.dialogflow.v2beta1
+                         * @interface ISipConfig
+                         * @property {boolean|null} [createConversationOnTheFly] SipConfig createConversationOnTheFly
+                         * @property {boolean|null} [inactiveStart] SipConfig inactiveStart
+                         * @property {google.protobuf.IDuration|null} [maxAudioRecordingDuration] SipConfig maxAudioRecordingDuration
+                         * @property {boolean|null} [allowVirtualAgentInteraction] SipConfig allowVirtualAgentInteraction
+                         * @property {boolean|null} [keepConversationRunning] SipConfig keepConversationRunning
+                         * @property {Array.<string>|null} [copyInboundCallLegHeaders] SipConfig copyInboundCallLegHeaders
+                         * @property {boolean|null} [ignoreReinviteMediaDirection] SipConfig ignoreReinviteMediaDirection
+                         */
+    
+                        /**
+                         * Constructs a new SipConfig.
+                         * @memberof google.cloud.dialogflow.v2beta1
+                         * @classdesc Represents a SipConfig.
+                         * @implements ISipConfig
+                         * @constructor
+                         * @param {google.cloud.dialogflow.v2beta1.ISipConfig=} [properties] Properties to set
+                         */
+                        function SipConfig(properties) {
+                            this.copyInboundCallLegHeaders = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SipConfig createConversationOnTheFly.
+                         * @member {boolean} createConversationOnTheFly
+                         * @memberof google.cloud.dialogflow.v2beta1.SipConfig
+                         * @instance
+                         */
+                        SipConfig.prototype.createConversationOnTheFly = false;
+    
+                        /**
+                         * SipConfig inactiveStart.
+                         * @member {boolean} inactiveStart
+                         * @memberof google.cloud.dialogflow.v2beta1.SipConfig
+                         * @instance
+                         */
+                        SipConfig.prototype.inactiveStart = false;
+    
+                        /**
+                         * SipConfig maxAudioRecordingDuration.
+                         * @member {google.protobuf.IDuration|null|undefined} maxAudioRecordingDuration
+                         * @memberof google.cloud.dialogflow.v2beta1.SipConfig
+                         * @instance
+                         */
+                        SipConfig.prototype.maxAudioRecordingDuration = null;
+    
+                        /**
+                         * SipConfig allowVirtualAgentInteraction.
+                         * @member {boolean} allowVirtualAgentInteraction
+                         * @memberof google.cloud.dialogflow.v2beta1.SipConfig
+                         * @instance
+                         */
+                        SipConfig.prototype.allowVirtualAgentInteraction = false;
+    
+                        /**
+                         * SipConfig keepConversationRunning.
+                         * @member {boolean} keepConversationRunning
+                         * @memberof google.cloud.dialogflow.v2beta1.SipConfig
+                         * @instance
+                         */
+                        SipConfig.prototype.keepConversationRunning = false;
+    
+                        /**
+                         * SipConfig copyInboundCallLegHeaders.
+                         * @member {Array.<string>} copyInboundCallLegHeaders
+                         * @memberof google.cloud.dialogflow.v2beta1.SipConfig
+                         * @instance
+                         */
+                        SipConfig.prototype.copyInboundCallLegHeaders = $util.emptyArray;
+    
+                        /**
+                         * SipConfig ignoreReinviteMediaDirection.
+                         * @member {boolean} ignoreReinviteMediaDirection
+                         * @memberof google.cloud.dialogflow.v2beta1.SipConfig
+                         * @instance
+                         */
+                        SipConfig.prototype.ignoreReinviteMediaDirection = false;
+    
+                        /**
+                         * Creates a new SipConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dialogflow.v2beta1.SipConfig
+                         * @static
+                         * @param {google.cloud.dialogflow.v2beta1.ISipConfig=} [properties] Properties to set
+                         * @returns {google.cloud.dialogflow.v2beta1.SipConfig} SipConfig instance
+                         */
+                        SipConfig.create = function create(properties) {
+                            return new SipConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SipConfig message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.SipConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dialogflow.v2beta1.SipConfig
+                         * @static
+                         * @param {google.cloud.dialogflow.v2beta1.ISipConfig} message SipConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SipConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.createConversationOnTheFly != null && Object.hasOwnProperty.call(message, "createConversationOnTheFly"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.createConversationOnTheFly);
+                            if (message.inactiveStart != null && Object.hasOwnProperty.call(message, "inactiveStart"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.inactiveStart);
+                            if (message.maxAudioRecordingDuration != null && Object.hasOwnProperty.call(message, "maxAudioRecordingDuration"))
+                                $root.google.protobuf.Duration.encode(message.maxAudioRecordingDuration, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.allowVirtualAgentInteraction != null && Object.hasOwnProperty.call(message, "allowVirtualAgentInteraction"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.allowVirtualAgentInteraction);
+                            if (message.keepConversationRunning != null && Object.hasOwnProperty.call(message, "keepConversationRunning"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.keepConversationRunning);
+                            if (message.copyInboundCallLegHeaders != null && message.copyInboundCallLegHeaders.length)
+                                for (var i = 0; i < message.copyInboundCallLegHeaders.length; ++i)
+                                    writer.uint32(/* id 8, wireType 2 =*/66).string(message.copyInboundCallLegHeaders[i]);
+                            if (message.ignoreReinviteMediaDirection != null && Object.hasOwnProperty.call(message, "ignoreReinviteMediaDirection"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).bool(message.ignoreReinviteMediaDirection);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SipConfig message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.SipConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dialogflow.v2beta1.SipConfig
+                         * @static
+                         * @param {google.cloud.dialogflow.v2beta1.ISipConfig} message SipConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SipConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SipConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dialogflow.v2beta1.SipConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dialogflow.v2beta1.SipConfig} SipConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SipConfig.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.v2beta1.SipConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.createConversationOnTheFly = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.inactiveStart = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.maxAudioRecordingDuration = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 5: {
+                                        message.allowVirtualAgentInteraction = reader.bool();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.keepConversationRunning = reader.bool();
+                                        break;
+                                    }
+                                case 8: {
+                                        if (!(message.copyInboundCallLegHeaders && message.copyInboundCallLegHeaders.length))
+                                            message.copyInboundCallLegHeaders = [];
+                                        message.copyInboundCallLegHeaders.push(reader.string());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.ignoreReinviteMediaDirection = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SipConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dialogflow.v2beta1.SipConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dialogflow.v2beta1.SipConfig} SipConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SipConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SipConfig message.
+                         * @function verify
+                         * @memberof google.cloud.dialogflow.v2beta1.SipConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SipConfig.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.createConversationOnTheFly != null && message.hasOwnProperty("createConversationOnTheFly"))
+                                if (typeof message.createConversationOnTheFly !== "boolean")
+                                    return "createConversationOnTheFly: boolean expected";
+                            if (message.inactiveStart != null && message.hasOwnProperty("inactiveStart"))
+                                if (typeof message.inactiveStart !== "boolean")
+                                    return "inactiveStart: boolean expected";
+                            if (message.maxAudioRecordingDuration != null && message.hasOwnProperty("maxAudioRecordingDuration")) {
+                                var error = $root.google.protobuf.Duration.verify(message.maxAudioRecordingDuration, long + 1);
+                                if (error)
+                                    return "maxAudioRecordingDuration." + error;
+                            }
+                            if (message.allowVirtualAgentInteraction != null && message.hasOwnProperty("allowVirtualAgentInteraction"))
+                                if (typeof message.allowVirtualAgentInteraction !== "boolean")
+                                    return "allowVirtualAgentInteraction: boolean expected";
+                            if (message.keepConversationRunning != null && message.hasOwnProperty("keepConversationRunning"))
+                                if (typeof message.keepConversationRunning !== "boolean")
+                                    return "keepConversationRunning: boolean expected";
+                            if (message.copyInboundCallLegHeaders != null && message.hasOwnProperty("copyInboundCallLegHeaders")) {
+                                if (!Array.isArray(message.copyInboundCallLegHeaders))
+                                    return "copyInboundCallLegHeaders: array expected";
+                                for (var i = 0; i < message.copyInboundCallLegHeaders.length; ++i)
+                                    if (!$util.isString(message.copyInboundCallLegHeaders[i]))
+                                        return "copyInboundCallLegHeaders: string[] expected";
+                            }
+                            if (message.ignoreReinviteMediaDirection != null && message.hasOwnProperty("ignoreReinviteMediaDirection"))
+                                if (typeof message.ignoreReinviteMediaDirection !== "boolean")
+                                    return "ignoreReinviteMediaDirection: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SipConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dialogflow.v2beta1.SipConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dialogflow.v2beta1.SipConfig} SipConfig
+                         */
+                        SipConfig.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.dialogflow.v2beta1.SipConfig)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.dialogflow.v2beta1.SipConfig();
+                            if (object.createConversationOnTheFly != null)
+                                message.createConversationOnTheFly = Boolean(object.createConversationOnTheFly);
+                            if (object.inactiveStart != null)
+                                message.inactiveStart = Boolean(object.inactiveStart);
+                            if (object.maxAudioRecordingDuration != null) {
+                                if (typeof object.maxAudioRecordingDuration !== "object")
+                                    throw TypeError(".google.cloud.dialogflow.v2beta1.SipConfig.maxAudioRecordingDuration: object expected");
+                                message.maxAudioRecordingDuration = $root.google.protobuf.Duration.fromObject(object.maxAudioRecordingDuration, long + 1);
+                            }
+                            if (object.allowVirtualAgentInteraction != null)
+                                message.allowVirtualAgentInteraction = Boolean(object.allowVirtualAgentInteraction);
+                            if (object.keepConversationRunning != null)
+                                message.keepConversationRunning = Boolean(object.keepConversationRunning);
+                            if (object.copyInboundCallLegHeaders) {
+                                if (!Array.isArray(object.copyInboundCallLegHeaders))
+                                    throw TypeError(".google.cloud.dialogflow.v2beta1.SipConfig.copyInboundCallLegHeaders: array expected");
+                                message.copyInboundCallLegHeaders = [];
+                                for (var i = 0; i < object.copyInboundCallLegHeaders.length; ++i)
+                                    message.copyInboundCallLegHeaders[i] = String(object.copyInboundCallLegHeaders[i]);
+                            }
+                            if (object.ignoreReinviteMediaDirection != null)
+                                message.ignoreReinviteMediaDirection = Boolean(object.ignoreReinviteMediaDirection);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SipConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dialogflow.v2beta1.SipConfig
+                         * @static
+                         * @param {google.cloud.dialogflow.v2beta1.SipConfig} message SipConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SipConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.copyInboundCallLegHeaders = [];
+                            if (options.defaults) {
+                                object.createConversationOnTheFly = false;
+                                object.inactiveStart = false;
+                                object.maxAudioRecordingDuration = null;
+                                object.allowVirtualAgentInteraction = false;
+                                object.keepConversationRunning = false;
+                                object.ignoreReinviteMediaDirection = false;
+                            }
+                            if (message.createConversationOnTheFly != null && message.hasOwnProperty("createConversationOnTheFly"))
+                                object.createConversationOnTheFly = message.createConversationOnTheFly;
+                            if (message.inactiveStart != null && message.hasOwnProperty("inactiveStart"))
+                                object.inactiveStart = message.inactiveStart;
+                            if (message.maxAudioRecordingDuration != null && message.hasOwnProperty("maxAudioRecordingDuration"))
+                                object.maxAudioRecordingDuration = $root.google.protobuf.Duration.toObject(message.maxAudioRecordingDuration, options);
+                            if (message.allowVirtualAgentInteraction != null && message.hasOwnProperty("allowVirtualAgentInteraction"))
+                                object.allowVirtualAgentInteraction = message.allowVirtualAgentInteraction;
+                            if (message.keepConversationRunning != null && message.hasOwnProperty("keepConversationRunning"))
+                                object.keepConversationRunning = message.keepConversationRunning;
+                            if (message.copyInboundCallLegHeaders && message.copyInboundCallLegHeaders.length) {
+                                object.copyInboundCallLegHeaders = [];
+                                for (var j = 0; j < message.copyInboundCallLegHeaders.length; ++j)
+                                    object.copyInboundCallLegHeaders[j] = message.copyInboundCallLegHeaders[j];
+                            }
+                            if (message.ignoreReinviteMediaDirection != null && message.hasOwnProperty("ignoreReinviteMediaDirection"))
+                                object.ignoreReinviteMediaDirection = message.ignoreReinviteMediaDirection;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SipConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dialogflow.v2beta1.SipConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SipConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SipConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dialogflow.v2beta1.SipConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SipConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dialogflow.v2beta1.SipConfig";
+                        };
+    
+                        return SipConfig;
                     })();
     
                     v2beta1.ListConversationProfilesRequest = (function() {

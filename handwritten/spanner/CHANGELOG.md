@@ -5,6 +5,32 @@
 
 [1]: https://www.npmjs.com/package/nodejs-spanner?activeTab=versions
 
+## [8.8.0](https://github.com/googleapis/google-cloud-node/compare/spanner-v8.7.1...spanner-v8.8.0) (2026-06-24)
+
+
+### Features
+
+* **spanner:** `isolation_level` and `read_lock_mode` are added to message `.google.spanner.v1.CommitResponse` ([4715de9](https://github.com/googleapis/google-cloud-node/commit/4715de939397c0a08926076bb57c563dab240673))
+* **spanner:** Add cache updates API ([#8124](https://github.com/googleapis/google-cloud-node/issues/8124)) ([4715de9](https://github.com/googleapis/google-cloud-node/commit/4715de939397c0a08926076bb57c563dab240673))
+* **spanner:** Add cache updates API ([#8307](https://github.com/googleapis/google-cloud-node/issues/8307)) ([f1d31f9](https://github.com/googleapis/google-cloud-node/commit/f1d31f94690486f4d443400fa4018a32b8bea04e))
+* **spanner:** Optimize replaceProjectIdToken from projectify ([#8412](https://github.com/googleapis/google-cloud-node/issues/8412)) ([28b6350](https://github.com/googleapis/google-cloud-node/commit/28b6350209bfb60125e0575331b2aa297500eb75))
+* **spanner:** Optimize RequestId propagation and minimize OpenTelemetry active tracing overhead ([#8329](https://github.com/googleapis/google-cloud-node/issues/8329)) ([a59dde9](https://github.com/googleapis/google-cloud-node/commit/a59dde9b4827e7c601cd5f18a1cf528e9bae1847))
+
+
+### Bug Fixes
+
+* **deps:** Remove vulnerable dependency `uuid` ([#8120](https://github.com/googleapis/google-cloud-node/issues/8120)) ([3ec901e](https://github.com/googleapis/google-cloud-node/commit/3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a))
+* **spanner:** Avoid overriding host context manager and isolate session creation context ([#8441](https://github.com/googleapis/google-cloud-node/issues/8441)) ([2a7c79f](https://github.com/googleapis/google-cloud-node/commit/2a7c79feb906e5a8c7fa5520e26e59607dcffac1))
+* **spanner:** Isolate OpenTelemetry background timers in ROOT_CONTEXT to prevent context and memory leaks ([#8399](https://github.com/googleapis/google-cloud-node/issues/8399)) ([f9e1102](https://github.com/googleapis/google-cloud-node/commit/f9e1102daa40a155d3eafeed31b63625f91c6d6c))
+* **spanner:** Resolve prelint, eslint, and prettier CI build failures ([#8359](https://github.com/googleapis/google-cloud-node/issues/8359)) ([600ccca](https://github.com/googleapis/google-cloud-node/commit/600ccca895ff8429fed55c1d14523b2533080818))
+* Specify explicit destinations in spanner owlbot.py ([#8304](https://github.com/googleapis/google-cloud-node/issues/8304)) ([f81f0a6](https://github.com/googleapis/google-cloud-node/commit/f81f0a63fde72a238dcb987be90f0f93e0757f0e))
+
+
+### Performance Improvements
+
+* **spanner:** Optimize query result decoding ([#8452](https://github.com/googleapis/google-cloud-node/issues/8452)) ([6ab8de0](https://github.com/googleapis/google-cloud-node/commit/6ab8de0035e901d5781523a472b441880b3605ac))
+* **spanner:** Precompute common headers ([#8451](https://github.com/googleapis/google-cloud-node/issues/8451)) ([894cd8d](https://github.com/googleapis/google-cloud-node/commit/894cd8d4728a4aa74dc9df5ce4960b24a24c3bec))
+
 ## [8.7.1](https://github.com/googleapis/google-cloud-node/compare/spanner-v8.7.0...spanner-v8.7.1) (2026-05-06)
 
 
