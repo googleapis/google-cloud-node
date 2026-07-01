@@ -283,6 +283,16 @@ const replacements = [
   },
   {
     files: 'packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts',
+    searchPattern: /SqlBackupsServiceClient,/gs,
+    replacement: ''
+  },
+  {
+    files: 'packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts',
+    searchPattern: /SqlFeatureEligibilityServiceClient,/gs,
+    replacement: ''
+  },
+  {
+    files: 'packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts',
     searchPattern: /SqlEventsServiceClient,/gs,
     replacement: ''
   },
