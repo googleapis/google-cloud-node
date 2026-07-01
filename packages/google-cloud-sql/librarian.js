@@ -278,37 +278,37 @@ const replacements = [
   },
   {
     files: 'packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts',
-    searchPattern: /SqlAvailableDatabaseVersionsServiceClient,/gs,
+    searchPattern: /SqlAvailableDatabaseVersionsServiceClient,/s,
     replacement: ''
   },
   {
     files: 'packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts',
-    searchPattern: /SqlBackupsServiceClient,/gs,
+    searchPattern: /SqlBackupsServiceClient,/s,
     replacement: ''
   },
   {
     files: 'packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts',
-    searchPattern: /SqlFeatureEligibilityServiceClient,/gs,
+    searchPattern: /SqlFeatureEligibilityServiceClient,/s,
     replacement: ''
   },
   {
     files: 'packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts',
-    searchPattern: /SqlEventsServiceClient,/gs,
+    searchPattern: /SqlEventsServiceClient,/s,
     replacement: ''
   },
   {
     files: 'packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts',
-    searchPattern: /SqlIamPoliciesServiceClient,/gs,
+    searchPattern: /SqlIamPoliciesServiceClient,/s,
     replacement: ''
   },
   {
     files: 'packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts',
-    searchPattern: /SqlInstanceNamesServiceClient,/gs,
+    searchPattern: /SqlInstanceNamesServiceClient,/s,
     replacement: ''
   },
   {
     files: 'packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts',
-    searchPattern: /SqlRegionsServiceClient,/gs,
+    searchPattern: /SqlRegionsServiceClient,/s,
     replacement: ''
   },
   {
