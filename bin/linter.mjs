@@ -17,6 +17,7 @@ import {existsSync} from 'fs';
 import path from 'path';
 import {promisify} from 'util';
 import {ESLint} from 'eslint';
+import ts from 'typescript';
 
 // --- Globals & Promisified API Wrappers ---
 const execFileAsync = promisify(execFile);
@@ -39,7 +40,7 @@ async function run() {
     ]);
 
     if (!eslintPassed || !typeSafetyPassed) {
-      throw new Error('Linter checks failed.');
+      throw new Error('Linter checks failed. Please fix. To rerun the linter, run: npm run lint');
     }
   } catch (err) {
     console.error('\nLinter failed:', err.message);
@@ -128,8 +129,7 @@ async function checkEslint(filesToCheck) {
     }
 
     if (hasBlockingErrors) {
-      console.error('\n[ERROR] Blocking ESLint violations were detected.');
-      console.error('ESLint errors are blocking and must be fixed.');
+      console.error('\n[ERROR] Blocking ESLint violations were detected. ESLint errors are blocking and must be fixed.');
       if (hasFormattingErrors) {
         console.log(
           `\nTo fix formatting issues, run:\n  ./node_modules/.bin/eslint --fix ${filesToCheck.map(f => `"${f}"`).join(' ')}`,
@@ -152,31 +152,13 @@ async function checkEslint(filesToCheck) {
  * Caches directories to avoid redundant disk operations.
  */
 function findTsconfigDir(filePath) {
-  let dir = path.dirname(filePath);
-  const visited = [];
-
-  while (dir && dir !== '.' && dir !== path.sep) {
-    if (tsconfigCache.has(dir)) {
-      const cachedVal = tsconfigCache.get(dir);
-      for (const v of visited) {
-        tsconfigCache.set(v, cachedVal);
-      }
-      return cachedVal;
-    }
-    visited.push(dir);
-    if (existsSync(path.join(dir, 'tsconfig.json'))) {
-      for (const v of visited) {
-        tsconfigCache.set(v, dir);
-      }
-      return dir;
-    }
-    dir = path.dirname(dir);
+  const dir = path.dirname(filePath);
+  if (tsconfigCache.has(dir)) {
+    return tsconfigCache.get(dir);
   }
-
-  const result = (dir === '.' && existsSync(path.join('.', 'tsconfig.json'))) ? '.' : null;
-  for (const v of visited) {
-    tsconfigCache.set(v, result);
-  }
+  const configPath = ts.findConfigFile(dir, ts.sys.fileExists);
+  const result = configPath ? path.dirname(configPath) : null;
+  tsconfigCache.set(dir, result);
   return result;
 }
 
