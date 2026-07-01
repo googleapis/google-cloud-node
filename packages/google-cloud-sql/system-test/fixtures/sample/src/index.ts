@@ -37,7 +37,7 @@ import {
 
 // check that the client class type name can be used
 function doStuffWithSqlAvailableDatabaseVersionsServiceClient(
-  client: 
+  client: SqlAvailableDatabaseVersionsServiceClient,
 ) {
   client.close();
 }
@@ -59,7 +59,7 @@ function doStuffWithSqlDatabasesServiceClient(
 }
 
 function doStuffWithSqlFeatureEligibilityServiceClient(
-  client: 
+  client: SqlFeatureEligibilityServiceClient,
 ) {
   client.close();
 }
@@ -67,12 +67,12 @@ function doStuffWithSqlFlagsServiceClient(client: SqlFlagsServiceClient) {
   client.close();
 }
 function doStuffWithSqlIamPoliciesServiceClient(
-  client: 
+  client: SqlIamPoliciesServiceClient,
 ) {
   client.close();
 }
 function doStuffWithSqlInstanceNamesServiceClient(
-  client: 
+  client: SqlInstanceNamesServiceClient,
 ) {
   client.close();
 }
