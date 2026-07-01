@@ -25,8 +25,8 @@
   ],
   "repository": {
     "type": "git",
-    "directory": "packages/teeny-request",
-    "url": "https://github.com/googleapis/google-cloud-node-core.git"
+    "directory": "core/packages/teeny-request",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
   },
   "keywords": [
     "request",
@@ -36,9 +36,9 @@
   "author": "fhinkel",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/googleapis/teeny-request/issues"
+    "url": "https://github.com/googleapis/google-cloud-node/issues"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node-core/tree/main/packages/teeny-request",
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/core/packages/teeny-request",
   "dependencies": {
     "http-proxy-agent": "^7.0.0",
     "https-proxy-agent": "^7.0.1",

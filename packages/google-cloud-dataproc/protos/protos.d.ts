@@ -6245,6 +6245,9 @@ export namespace google {
 
                     /** GceClusterConfig confidentialInstanceConfig */
                     confidentialInstanceConfig?: (google.cloud.dataproc.v1.IConfidentialInstanceConfig|null);
+
+                    /** GceClusterConfig resourceManagerTags */
+                    resourceManagerTags?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a GceClusterConfig. */
@@ -6294,6 +6297,9 @@ export namespace google {
 
                     /** GceClusterConfig confidentialInstanceConfig. */
                     public confidentialInstanceConfig?: (google.cloud.dataproc.v1.IConfidentialInstanceConfig|null);
+
+                    /** GceClusterConfig resourceManagerTags. */
+                    public resourceManagerTags: { [k: string]: string };
 
                     /**
                      * Creates a new GceClusterConfig instance using the specified properties.
@@ -6595,6 +6601,9 @@ export namespace google {
 
                     /** ConfidentialInstanceConfig enableConfidentialCompute */
                     enableConfidentialCompute?: (boolean|null);
+
+                    /** ConfidentialInstanceConfig confidentialInstanceType */
+                    confidentialInstanceType?: (google.cloud.dataproc.v1.ConfidentialInstanceConfig.ConfidentialInstanceType|keyof typeof google.cloud.dataproc.v1.ConfidentialInstanceConfig.ConfidentialInstanceType|null);
                 }
 
                 /** Represents a ConfidentialInstanceConfig. */
@@ -6608,6 +6617,9 @@ export namespace google {
 
                     /** ConfidentialInstanceConfig enableConfidentialCompute. */
                     public enableConfidentialCompute: boolean;
+
+                    /** ConfidentialInstanceConfig confidentialInstanceType. */
+                    public confidentialInstanceType: (google.cloud.dataproc.v1.ConfidentialInstanceConfig.ConfidentialInstanceType|keyof typeof google.cloud.dataproc.v1.ConfidentialInstanceConfig.ConfidentialInstanceType);
 
                     /**
                      * Creates a new ConfidentialInstanceConfig instance using the specified properties.
@@ -6685,6 +6697,17 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ConfidentialInstanceConfig {
+
+                    /** ConfidentialInstanceType enum. */
+                    enum ConfidentialInstanceType {
+                        CONFIDENTIAL_INSTANCE_TYPE_UNSPECIFIED = 0,
+                        SEV = 1,
+                        SEV_SNP = 2,
+                        TDX = 3
+                    }
                 }
 
                 /** Properties of an InstanceGroupConfig. */

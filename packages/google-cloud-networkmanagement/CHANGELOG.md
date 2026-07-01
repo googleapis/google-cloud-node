@@ -1,5 +1,13 @@
 # Changelog
 
+## [5.5.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v5.4.0...network-management-v5.5.0) (2026-06-25)
+
+
+### Features
+
+* Update API sources and regenerate ([#8672](https://github.com/googleapis/google-cloud-node/issues/8672)) ([3391fd2](https://github.com/googleapis/google-cloud-node/commit/3391fd27d1c15e051293207a07c6db00e760d370))
+* Update sources and regenerate ([#8714](https://github.com/googleapis/google-cloud-node/issues/8714)) ([65e2f6d](https://github.com/googleapis/google-cloud-node/commit/65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa))
+
 ## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v5.3.1...network-management-v5.4.0) (2026-06-01)
 
 

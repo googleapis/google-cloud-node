@@ -4,8 +4,8 @@
   "description": "A common tooling library used by the googleapis npm module. You probably don't want to use this directly.",
   "repository": {
     "type": "git",
-    "directory": "packages/nodejs-googleapis-common",
-    "url": "https://github.com/googleapis/google-cloud-node-core.git"
+    "directory": "core/packages/nodejs-googleapis-common",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
   },
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",
@@ -89,5 +89,5 @@
   "engines": {
     "node": ">=18.0.0"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node-core/tree/main/packages/nodejs-googleapis-common"
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/core/packages/nodejs-googleapis-common"
 }

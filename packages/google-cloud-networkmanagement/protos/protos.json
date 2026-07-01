@@ -199,6 +199,10 @@
                           "type": "string",
                           "id": 21
                         },
+                        "dmsPrivateConnection": {
+                          "type": "string",
+                          "id": 22
+                        },
                         "cloudFunction": {
                           "type": "CloudFunctionEndpoint",
                           "id": 10
@@ -210,6 +214,10 @@
                         "cloudRunRevision": {
                           "type": "CloudRunRevisionEndpoint",
                           "id": 12
+                        },
+                        "cloudRunJob": {
+                          "type": "string",
+                          "id": 24
                         },
                         "network": {
                           "type": "string",
@@ -482,12 +490,14 @@
                             "cloudFunction",
                             "appEngineVersion",
                             "cloudRunRevision",
+                            "cloudRunJob",
                             "nat",
                             "proxyConnection",
                             "loadBalancerBackendInfo",
                             "storageBucket",
                             "serverlessNeg",
-                            "ngfwPacketInspection"
+                            "ngfwPacketInspection",
+                            "dmsPrivateConnection"
                           ]
                         }
                       },
@@ -631,6 +641,10 @@
                           "type": "CloudRunRevisionInfo",
                           "id": 23
                         },
+                        "cloudRunJob": {
+                          "type": "CloudRunJobInfo",
+                          "id": 45
+                        },
                         "nat": {
                           "type": "NatInfo",
                           "id": 25
@@ -654,6 +668,10 @@
                         "ngfwPacketInspection": {
                           "type": "NgfwPacketInspectionInfo",
                           "id": 42
+                        },
+                        "dmsPrivateConnection": {
+                          "type": "PrivateConnectionInfo",
+                          "id": 43
                         }
                       },
                       "nested": {
@@ -680,9 +698,11 @@
                             "START_FROM_CLOUD_FUNCTION": 23,
                             "START_FROM_APP_ENGINE_VERSION": 25,
                             "START_FROM_CLOUD_RUN_REVISION": 26,
+                            "START_FROM_CLOUD_RUN_JOB": 50,
                             "START_FROM_STORAGE_BUCKET": 29,
                             "START_FROM_PSC_PUBLISHED_SERVICE": 30,
                             "START_FROM_SERVERLESS_NEG": 31,
+                            "START_FROM_DMS_PRIVATE_CONNECTION": 48,
                             "APPLY_INGRESS_FIREWALL_RULE": 4,
                             "APPLY_EGRESS_FIREWALL_RULE": 5,
                             "APPLY_ROUTE": 6,
@@ -1457,7 +1477,9 @@
                             "GOOGLE_MANAGED_SERVICE": 15,
                             "REDIS_INSTANCE": 16,
                             "REDIS_CLUSTER": 17,
-                            "GKE_POD": 19
+                            "GKE_POD": 19,
+                            "CLOUD_RUN_JOB": 20,
+                            "DMS_PRIVATE_CONNECTION": 21
                           }
                         },
                         "GoogleServiceType": {
@@ -1689,6 +1711,7 @@
                             "CLOUD_SQL_INSTANCE_UNAUTHORIZED_ACCESS": 17,
                             "DROPPED_INSIDE_GKE_SERVICE": 18,
                             "DROPPED_INSIDE_CLOUD_SQL_SERVICE": 19,
+                            "DROPPED_INSIDE_DMS_PRIVATE_CONNECTION": 114,
                             "GOOGLE_MANAGED_SERVICE_NO_PEERING": 20,
                             "GOOGLE_MANAGED_SERVICE_NO_PSC_ENDPOINT": 38,
                             "GKE_PSC_ENDPOINT_MISSING": 36,
@@ -1716,6 +1739,7 @@
                             "HYBRID_NEG_NON_DYNAMIC_ROUTE_MATCHED": 55,
                             "HYBRID_NEG_NON_LOCAL_DYNAMIC_ROUTE_MATCHED": 56,
                             "CLOUD_RUN_REVISION_NOT_READY": 29,
+                            "CLOUD_RUN_JOB_NOT_READY": 113,
                             "DROPPED_INSIDE_PSC_SERVICE_PRODUCER": 37,
                             "LOAD_BALANCER_HAS_NO_PROXY_SUBNET": 39,
                             "CLOUD_NAT_NO_ADDRESSES": 40,
@@ -1754,7 +1778,8 @@
                             "HYBRID_SUBNET_REGION_MISMATCH": 105,
                             "HYBRID_SUBNET_NO_ROUTE": 106,
                             "GKE_NETWORK_POLICY": 108,
-                            "NO_VALID_ROUTE_FROM_GOOGLE_MANAGED_NETWORK_TO_DESTINATION": 110
+                            "NO_VALID_ROUTE_FROM_GOOGLE_MANAGED_NETWORK_TO_DESTINATION": 110,
+                            "PRIVATE_CONNECTION_NO_RUNNING_INSTANCE": 111
                           }
                         }
                       }
@@ -1995,6 +2020,22 @@
                         "serviceUri": {
                           "type": "string",
                           "id": 5
+                        }
+                      }
+                    },
+                    "CloudRunJobInfo": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },
@@ -2297,6 +2338,14 @@
                     "NgfwPacketInspectionInfo": {
                       "fields": {
                         "securityProfileGroupUri": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "PrivateConnectionInfo": {
+                      "fields": {
+                        "uri": {
                           "type": "string",
                           "id": 1
                         }

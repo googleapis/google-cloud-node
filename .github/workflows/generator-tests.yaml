@@ -1,3 +1,6 @@
+permissions:
+  contents: read
+
 name: generator-tests
 on:
   push:
@@ -18,22 +21,23 @@ jobs:
     runs-on: ubuntu-latest
     container: gcr.io/gapic-images/googleapis:20250404
     steps:
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
       with:
         fetch-depth: 300
+        persist-credentials: false
 
     - name: Mark repo as safe for git
       run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
     - name: Cache Bazel files
       id: cache-bazel
-      uses: actions/cache@v5
+      uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5
       with:
         path: ~/.cache/bazel
         key: ${{ runner.os }}-googleapis-20250422-${{ secrets.CACHE_VERSION }}
 
     - name: Setup Node.js
-      uses: actions/setup-node@v6
+      uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
       with:
         node-version: 24.x
 
@@ -71,7 +75,7 @@ jobs:
         tar cfz ~/artifacts/node_modules.tar.gz node_modules
 
     - name: Save artifacts
-      uses: actions/upload-artifact@v5
+      uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5
       with:
         name: artifacts
         path: ~/artifacts

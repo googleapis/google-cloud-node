@@ -5616,8 +5616,8 @@
                     "java_package": "com.google.cloud.dataform.v1beta1",
                     "php_namespace": "Google\\Cloud\\Dataform\\V1beta1",
                     "ruby_package": "Google::Cloud::Dataform::V1beta1",
-                    "(google.api.resource_definition).type": "aiplatform.googleapis.com/NotebookRuntimeTemplate",
-                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/notebookRuntimeTemplates/{notebook_runtime_template}"
+                    "(google.api.resource_definition).type": "developerconnect.googleapis.com/GitRepositoryLink",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/connections/{connection}/gitRepositoryLinks/{git_repository_link}"
                   },
                   "nested": {
                     "Dataform": {
@@ -5699,6 +5699,34 @@
                             },
                             {
                               "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "DeleteTeamFolderTree": {
+                          "requestType": "DeleteTeamFolderTreeRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/teamFolders/*}:deleteTree",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,force",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "DeleteFolderTreeMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/teamFolders/*}:deleteTree",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,force"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "DeleteFolderTreeMetadata"
+                              }
                             }
                           ]
                         },
@@ -5807,6 +5835,34 @@
                             },
                             {
                               "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "DeleteFolderTree": {
+                          "requestType": "DeleteFolderTreeRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/folders/*}:deleteTree",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,force",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "DeleteFolderTreeMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/folders/*}:deleteTree",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,force"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "DeleteFolderTreeMetadata"
+                              }
                             }
                           ]
                         },
@@ -5965,6 +6021,34 @@
                             },
                             {
                               "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "DeleteRepositoryLongRunning": {
+                          "requestType": "DeleteRepositoryLongRunningRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/repositories/*}:deleteLongRunning",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,force",
+                            "(google.longrunning.operation_info).response_type": "DeleteRepositoryLongRunningResponse",
+                            "(google.longrunning.operation_info).metadata_type": "DeleteRepositoryLongRunningMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/repositories/*}:deleteLongRunning",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,force"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "DeleteRepositoryLongRunningResponse",
+                                "metadata_type": "DeleteRepositoryLongRunningMetadata"
+                              }
                             }
                           ]
                         },
@@ -6912,6 +6996,13 @@
                         }
                       }
                     },
+                    "DirectoryContentsView": {
+                      "values": {
+                        "DIRECTORY_CONTENTS_VIEW_UNSPECIFIED": 0,
+                        "DIRECTORY_CONTENTS_VIEW_BASIC": 1,
+                        "DIRECTORY_CONTENTS_VIEW_METADATA": 2
+                      }
+                    },
                     "DataEncryptionState": {
                       "fields": {
                         "kmsKeyVersionName": {
@@ -7056,6 +7147,13 @@
                       },
                       "nested": {
                         "GitRemoteSettings": {
+                          "oneofs": {
+                            "_gitRepositoryLink": {
+                              "oneof": [
+                                "gitRepositoryLink"
+                              ]
+                            }
+                          },
                           "fields": {
                             "url": {
                               "type": "string",
@@ -7068,7 +7166,14 @@
                               "type": "string",
                               "id": 2,
                               "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "effectiveDefaultBranch": {
+                              "type": "string",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
                             },
                             "authenticationTokenSecretVersion": {
@@ -7084,6 +7189,15 @@
                               "id": 5,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "gitRepositoryLink": {
+                              "type": "string",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).type": "developerconnect.googleapis.com/GitRepositoryLink",
+                                "proto3_optional": true
                               }
                             },
                             "tokenStatus": {
@@ -7305,6 +7419,28 @@
                       }
                     },
                     "DeleteRepositoryRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataform.googleapis.com/Repository"
+                          }
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteRepositoryLongRunningResponse": {
+                      "fields": {}
+                    },
+                    "DeleteRepositoryLongRunningRequest": {
                       "fields": {
                         "name": {
                           "type": "string",
@@ -7589,7 +7725,8 @@
                             "TOKEN_STATUS_UNSPECIFIED": 0,
                             "NOT_FOUND": 1,
                             "INVALID": 2,
-                            "VALID": 3
+                            "VALID": 3,
+                            "PERMISSION_DENIED": 4
                           }
                         }
                       }
@@ -8062,6 +8199,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "view": {
+                          "type": "DirectoryContentsView",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -8095,6 +8239,28 @@
                         "directory": {
                           "type": "string",
                           "id": 2
+                        },
+                        "metadata": {
+                          "type": "FilesystemEntryMetadata",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "FilesystemEntryMetadata": {
+                      "fields": {
+                        "sizeBytes": {
+                          "type": "int64",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -10446,7 +10612,10 @@
                         },
                         "folderId": {
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "deprecated": true
+                          }
                         }
                       }
                     },
@@ -10515,6 +10684,94 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "dataform.googleapis.com/Folder"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteFolderTreeRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataform.googleapis.com/Folder"
+                          }
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteTeamFolderTreeRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataform.googleapis.com/TeamFolder"
+                          }
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteFolderTreeMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "target": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "percentComplete": {
+                          "type": "int32",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "INITIALIZED": 1,
+                            "IN_PROGRESS": 2,
+                            "SUCCEEDED": 3,
+                            "FAILED": 4
                           }
                         }
                       }
@@ -10754,7 +11011,10 @@
                         },
                         "teamFolderId": {
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "deprecated": true
+                          }
                         }
                       }
                     },
@@ -11029,6 +11289,70 @@
                             "IN_PROGRESS": 2,
                             "SUCCESS": 3,
                             "FAILED": 4
+                          }
+                        }
+                      }
+                    },
+                    "DeleteRepositoryLongRunningMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "target": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "dataform.googleapis.com/Repository"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "percentComplete": {
+                          "type": "int32",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "childResourcesCount": {
+                          "type": "int64",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "remainingChildResourcesCount": {
+                          "type": "int64",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "RUNNING": 1,
+                            "SUCCEEDED": 2,
+                            "FAILED": 3
                           }
                         }
                       }
