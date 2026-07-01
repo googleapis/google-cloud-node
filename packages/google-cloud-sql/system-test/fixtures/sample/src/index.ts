@@ -42,9 +42,7 @@ function doStuffWithSqlBackupRunsServiceClient(
 ) {
   client.close();
 }
-function doStuffWithSqlBackupsServiceClient(client: SqlBackupsServiceClient) {
-  client.close();
-}
+
 function doStuffWithSqlConnectServiceClient(client: SqlConnectServiceClient) {
   client.close();
 }
@@ -54,11 +52,7 @@ function doStuffWithSqlDatabasesServiceClient(
   client.close();
 }
 
-function doStuffWithSqlFeatureEligibilityServiceClient(
-  client: SqlFeatureEligibilityServiceClient,
-) {
-  client.close();
-}
+
 function doStuffWithSqlFlagsServiceClient(client: SqlFlagsServiceClient) {
   client.close();
 }
