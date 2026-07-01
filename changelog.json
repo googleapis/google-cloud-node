@@ -4,6 +4,23 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "d9399f0cf44b79e2b38ce429b17709ee9845544e",
+          "message": "Migrate google-cloud-capacityplanner to librarian v0.22.0",
+          "issues": [
+            "8773"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/capacityplanner",
+      "id": "d3f5584e-4924-4d9c-9236-67a0ec3f40a3",
+      "createTime": "2026-06-29T17:40:53.096Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "07b13a17e6533184c708dc388c3fa3dc6581f7a9",
           "message": "Prevent comma corruption when draining stream error responses",
