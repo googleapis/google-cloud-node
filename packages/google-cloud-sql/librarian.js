@@ -243,12 +243,22 @@ const replacements = [
   },
   {
     files: 'packages/google-cloud-sql/system-test/fixtures/sample/src/index.js',
-    searchPattern: /const sqlAvailableDatabaseVersionsServiceClient =\n    new sql.SqlAvailableDatabaseVersionsServiceClient\(\);/gs,
+    searchPattern: /const sqlAvailableDatabaseVersionsServiceClient = new sql.SqlAvailableDatabaseVersionsServiceClient\(\);/gs,
+    replacement: ''
+  },
+  {
+    files: 'packages/google-cloud-sql/system-test/fixtures/sample/src/index.js',
+    searchPattern: /const sqlBackupsServiceClient = new sql.SqlBackupsServiceClient\(\);/gs,
     replacement: ''
   },
   {
     files: 'packages/google-cloud-sql/system-test/fixtures/sample/src/index.js',
     searchPattern: /const sqlEventsServiceClient = new sql.SqlEventsServiceClient\(\);/gs,
+    replacement: ''
+  },
+  {
+    files: 'packages/google-cloud-sql/system-test/fixtures/sample/src/index.js',
+    searchPattern: /const sqlFeatureEligibilityServiceClient = new sql.SqlFeatureEligibilityServiceClient\(\);/gs,
     replacement: ''
   },
   {
