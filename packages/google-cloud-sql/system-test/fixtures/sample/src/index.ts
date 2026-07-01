@@ -19,11 +19,11 @@
 import {
   
   SqlBackupRunsServiceClient,
-  SqlBackupsServiceClient,
+  
   SqlConnectServiceClient,
   SqlDatabasesServiceClient,
   
-  SqlFeatureEligibilityServiceClient,
+  
   SqlFlagsServiceClient,
   
   
@@ -59,7 +59,7 @@ function doStuffWithSqlDatabasesServiceClient(
 }
 
 function doStuffWithSqlFeatureEligibilityServiceClient(
-  client: SqlFeatureEligibilityServiceClient,
+  client: 
 ) {
   client.close();
 }
