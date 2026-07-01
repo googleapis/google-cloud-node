@@ -23,16 +23,16 @@ import * as v1beta4 from './v1beta4';
 
 const SqlBackupRunsServiceClient = v1.SqlBackupRunsServiceClient;
 type SqlBackupRunsServiceClient = v1.SqlBackupRunsServiceClient;
-const SqlBackupsServiceClient = v1.SqlBackupsServiceClient;
-type SqlBackupsServiceClient = v1.SqlBackupsServiceClient;
+
+
 const SqlConnectServiceClient = v1.SqlConnectServiceClient;
 type SqlConnectServiceClient = v1.SqlConnectServiceClient;
 const SqlDatabasesServiceClient = v1.SqlDatabasesServiceClient;
 type SqlDatabasesServiceClient = v1.SqlDatabasesServiceClient;
 
 
-const SqlFeatureEligibilityServiceClient = v1.SqlFeatureEligibilityServiceClient;
-type SqlFeatureEligibilityServiceClient = v1.SqlFeatureEligibilityServiceClient;
+
+
 const SqlFlagsServiceClient = v1.SqlFlagsServiceClient;
 type SqlFlagsServiceClient = v1.SqlFlagsServiceClient;
 
@@ -52,7 +52,7 @@ type SqlTiersServiceClient = v1.SqlTiersServiceClient;
 const SqlUsersServiceClient = v1.SqlUsersServiceClient;
 type SqlUsersServiceClient = v1.SqlUsersServiceClient;
 
-export {v1, v1beta4,  SqlBackupRunsServiceClient, SqlBackupsServiceClient, SqlConnectServiceClient, SqlDatabasesServiceClient,  SqlFeatureEligibilityServiceClient, SqlFlagsServiceClient,   SqlInstancesServiceClient, SqlOperationsServiceClient,  SqlSslCertsServiceClient, SqlTiersServiceClient, SqlUsersServiceClient};
-export default {v1, v1beta4,  SqlBackupRunsServiceClient, SqlBackupsServiceClient, SqlConnectServiceClient, SqlDatabasesServiceClient,  SqlFeatureEligibilityServiceClient, SqlFlagsServiceClient,   SqlInstancesServiceClient, SqlOperationsServiceClient,  SqlSslCertsServiceClient, SqlTiersServiceClient, SqlUsersServiceClient};
+export {v1, v1beta4,  SqlBackupRunsServiceClient, SqlConnectServiceClient, SqlDatabasesServiceClient,  SqlFlagsServiceClient,   SqlInstancesServiceClient, SqlOperationsServiceClient,  SqlSslCertsServiceClient, SqlTiersServiceClient, SqlUsersServiceClient};
+export default {v1, v1beta4,  SqlBackupRunsServiceClient, SqlConnectServiceClient, SqlDatabasesServiceClient,  SqlFlagsServiceClient,   SqlInstancesServiceClient, SqlOperationsServiceClient,  SqlSslCertsServiceClient, SqlTiersServiceClient, SqlUsersServiceClient};
 import * as protos from '../protos/protos';
 export {protos};
