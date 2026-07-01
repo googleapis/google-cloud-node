@@ -228,6 +228,18 @@ describe('Publisher', () => {
         createdSpan.attributes['messaging.destination.name'],
         topicId,
       );
+      assert.strictEqual(
+        createdSpan.attributes['messaging.operation.type'],
+        'send',
+      );
+      assert.strictEqual(
+        createdSpan.attributes['messaging.operation.name'],
+        'publish',
+      );
+      assert.strictEqual(
+        createdSpan.attributes['code.function.name'],
+        'Publisher.publishMessage',
+      );
       assert.strictEqual(createdSpan.name, `${topicId} create`);
       assert.strictEqual(
         createdSpan.kind,

@@ -27,6 +27,23 @@ import {
   Link,
 } from '@opentelemetry/api';
 import {W3CTraceContextPropagator} from '@opentelemetry/core';
+import {
+  ATTR_CODE_FUNCTION_NAME,
+} from '@opentelemetry/semantic-conventions';
+import {
+  ATTR_MESSAGING_SYSTEM,
+  MESSAGING_SYSTEM_VALUE_GCP_PUBSUB,
+  ATTR_MESSAGING_DESTINATION_NAME,
+  ATTR_MESSAGING_BATCH_MESSAGE_COUNT,
+  ATTR_MESSAGING_MESSAGE_ENVELOPE_SIZE,
+  ATTR_MESSAGING_OPERATION,
+  ATTR_MESSAGING_OPERATION_TYPE,
+  ATTR_MESSAGING_OPERATION_NAME,
+  ATTR_MESSAGING_GCP_PUBSUB_MESSAGE_ACK_ID,
+  ATTR_MESSAGING_GCP_PUBSUB_MESSAGE_ORDERING_KEY,
+  ATTR_MESSAGING_GCP_PUBSUB_MESSAGE_ACK_DEADLINE,
+  ATTR_CODE_FUNCTION,
+} from '@opentelemetry/semantic-conventions/incubating';
 import {Attributes, PubsubMessage} from './publisher/pubsub-message';
 import {Duration} from './temporal';
 
@@ -325,24 +342,37 @@ export class PubsubSpans {
     const spanAttributes = {
       // Add Opentelemetry semantic convention attributes to the span, based on:
       // https://github.com/open-telemetry/semantic-conventions/blob/v1.24.0/docs/messaging/messaging-spans.md
-      ['messaging.system']: 'gcp_pubsub',
-      ['messaging.destination.name']: destinationId ?? destinationName,
+      [ATTR_MESSAGING_SYSTEM]: MESSAGING_SYSTEM_VALUE_GCP_PUBSUB,
+      [ATTR_MESSAGING_DESTINATION_NAME]: destinationId ?? destinationName,
       ['gcp.project_id']: projectId,
-      ['code.function']: caller ?? 'unknown',
+      [ATTR_CODE_FUNCTION]: caller ?? 'unknown',
+      [ATTR_CODE_FUNCTION_NAME]: caller ?? 'unknown',
     } as SpanAttributes;
+
+    if (operation) {
+      spanAttributes[ATTR_MESSAGING_OPERATION] = operation;
+
+      // Populate new messaging.operation.type and messaging.operation.name attributes
+      if (operation === 'create') {
+        spanAttributes[ATTR_MESSAGING_OPERATION_TYPE] = 'send';
+        spanAttributes[ATTR_MESSAGING_OPERATION_NAME] = 'publish';
+      } else if (operation === 'receive') {
+        spanAttributes[ATTR_MESSAGING_OPERATION_TYPE] = 'receive';
+      }
+    }
 
     if (message) {
       if (message.calculatedSize) {
-        spanAttributes['messaging.message.envelope.size'] =
+        spanAttributes[ATTR_MESSAGING_MESSAGE_ENVELOPE_SIZE] =
           message.calculatedSize;
       } else {
         if (message.data?.length) {
-          spanAttributes['messaging.message.envelope.size'] =
+          spanAttributes[ATTR_MESSAGING_MESSAGE_ENVELOPE_SIZE] =
             message.data?.length;
         }
       }
       if (message.orderingKey) {
-        spanAttributes['messaging.gcp_pubsub.message.ordering_key'] =
+        spanAttributes[ATTR_MESSAGING_GCP_PUBSUB_MESSAGE_ORDERING_KEY] =
           message.orderingKey;
       }
       if (message.isExactlyOnceDelivery) {
@@ -350,10 +380,7 @@ export class PubsubSpans {
           message.isExactlyOnceDelivery;
       }
       if (message.ackId) {
-        spanAttributes['messaging.gcp_pubsub.message.ack_id'] = message.ackId;
-      }
-      if (operation) {
-        spanAttributes['messaging.operation'] = operation;
+        spanAttributes[ATTR_MESSAGING_GCP_PUBSUB_MESSAGE_ACK_ID] = message.ackId;
       }
     }
 
@@ -381,7 +408,7 @@ export class PubsubSpans {
     });
     if (topicInfo.topicId) {
       span.updateName(`${topicInfo.topicId} create`);
-      span.setAttribute('messaging.destination.name', topicInfo.topicId);
+      span.setAttribute(ATTR_MESSAGING_DESTINATION_NAME, topicInfo.topicId);
     }
 
     return span;
@@ -391,7 +418,7 @@ export class PubsubSpans {
     const topicInfo = getTopicInfo(topicName);
     if (topicInfo.topicId) {
       span.updateName(`${topicInfo.topicId} create`);
-      span.setAttribute('messaging.destination.name', topicInfo.topicId);
+      span.setAttribute(ATTR_MESSAGING_DESTINATION_NAME, topicInfo.topicId);
     } else {
       span.updateName(`${topicName} create`);
     }
@@ -419,7 +446,7 @@ export class PubsubSpans {
       'receive',
     );
     if (subInfo.subId) {
-      attributes['messaging.destination.name'] = subInfo.subId;
+      attributes[ATTR_MESSAGING_DESTINATION_NAME] = subInfo.subId;
     }
 
     if (context) {
@@ -500,7 +527,7 @@ export class PubsubSpans {
       },
       ROOT_CONTEXT,
     );
-    span?.setAttribute('messaging.batch.message_count', messages.length);
+    span?.setAttribute(ATTR_MESSAGING_BATCH_MESSAGE_COUNT, messages.length);
     if (span) {
       // Also attempt to link from message spans back to the publish RPC span.
       messages.forEach(m => {
@@ -544,7 +571,9 @@ export class PubsubSpans {
       ROOT_CONTEXT,
     );
 
-    span?.setAttribute('messaging.batch.message_count', messageSpans.length);
+    span?.setAttribute(ATTR_MESSAGING_BATCH_MESSAGE_COUNT, messageSpans.length);
+    span?.setAttribute(ATTR_MESSAGING_OPERATION_TYPE, 'settle');
+    span?.setAttribute(ATTR_MESSAGING_OPERATION_NAME, 'ack');
 
     if (span) {
       // Also attempt to link from the subscribe span(s) back to the publish RPC span.
@@ -592,7 +621,9 @@ export class PubsubSpans {
       ROOT_CONTEXT,
     );
 
-    span?.setAttribute('messaging.batch.message_count', messageSpans.length);
+    span?.setAttribute(ATTR_MESSAGING_BATCH_MESSAGE_COUNT, messageSpans.length);
+    span?.setAttribute(ATTR_MESSAGING_OPERATION_TYPE, 'settle');
+    span?.setAttribute(ATTR_MESSAGING_OPERATION_NAME, type);
 
     if (span) {
       // Also attempt to link from the subscribe span(s) back to the publish RPC span.
@@ -606,6 +637,10 @@ export class PubsubSpans {
     if (deadline) {
       span?.setAttribute(
         'messaging.gcp_pubsub.message.ack_deadline_seconds',
+        deadline.totalOf('second'),
+      );
+      span?.setAttribute(
+        ATTR_MESSAGING_GCP_PUBSUB_MESSAGE_ACK_DEADLINE,
         deadline.totalOf('second'),
       );
     }

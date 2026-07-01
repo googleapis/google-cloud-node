@@ -225,7 +225,10 @@ describe('OpenTelemetryTracer', () => {
           message.isExactlyOnceDelivery,
         'messaging.gcp_pubsub.message.ack_id': message.ackId,
         'messaging.operation': 'create',
+        'messaging.operation.type': 'send',
+        'messaging.operation.name': 'publish',
         'code.function': 'tests',
+        'code.function.name': 'tests',
       });
 
       // Check again with no calculated size and other parameters missing.
@@ -244,9 +247,12 @@ describe('OpenTelemetryTracer', () => {
         'messaging.system': 'gcp_pubsub',
         'messaging.destination.name': topicInfo.topicId,
         'messaging.operation': 'create',
+        'messaging.operation.type': 'send',
+        'messaging.operation.name': 'publish',
         'gcp.project_id': topicInfo.projectId,
         'messaging.message.envelope.size': message.data?.length,
         'code.function': 'tests',
+        'code.function.name': 'tests',
       });
     });
   });
@@ -289,11 +295,13 @@ describe('OpenTelemetryTracer', () => {
       assert.ok(firstSpan);
       assert.strictEqual(firstSpan.name, `${tests.topicInfo.topicId} create`);
       assert.strictEqual(firstSpan.attributes['messaging.operation'], 'create');
+      assert.strictEqual(firstSpan.attributes['messaging.operation.type'], 'send');
+      assert.strictEqual(firstSpan.attributes['messaging.operation.name'], 'publish');
+      assert.strictEqual(firstSpan.attributes['code.function.name'], 'tests');
       assert.strictEqual(
         firstSpan.attributes['messaging.destination.name'],
         tests.topicInfo.topicId,
       );
-      assert.strictEqual(firstSpan.attributes['messaging.operation'], 'create');
       assert.strictEqual(
         firstSpan.attributes['messaging.system'],
         'gcp_pubsub',
@@ -353,12 +361,16 @@ describe('OpenTelemetryTracer', () => {
         'receive',
       );
       assert.strictEqual(
-        childReadSpan.attributes['messaging.destination.name'],
-        'sub',
+        childReadSpan.attributes['messaging.operation.type'],
+        'receive',
       );
       assert.strictEqual(
-        childReadSpan.attributes['messaging.operation'],
-        'receive',
+        childReadSpan.attributes['code.function.name'],
+        'tests',
+      );
+      assert.strictEqual(
+        childReadSpan.attributes['messaging.destination.name'],
+        'sub',
       );
       assert.strictEqual(childReadSpan.kind, SpanKind.CONSUMER);
       assert.ok(childReadSpan.parentSpanContext?.spanId);
@@ -390,6 +402,22 @@ describe('OpenTelemetryTracer', () => {
       assert.strictEqual(
         publishReadSpan.attributes['messaging.batch.message_count'],
         1,
+      );
+      assert.strictEqual(
+        publishReadSpan.attributes['messaging.operation'],
+        'create',
+      );
+      assert.strictEqual(
+        publishReadSpan.attributes['messaging.operation.type'],
+        'send',
+      );
+      assert.strictEqual(
+        publishReadSpan.attributes['messaging.operation.name'],
+        'publish',
+      );
+      assert.strictEqual(
+        publishReadSpan.attributes['code.function.name'],
+        'test',
       );
       assert.strictEqual(publishReadSpan.links.length, 1);
       assert.strictEqual(childReadSpan.links.length, 1);
@@ -427,6 +455,22 @@ describe('OpenTelemetryTracer', () => {
       assert.strictEqual(
         firstSpan.attributes['messaging.batch.message_count'],
         1,
+      );
+      assert.strictEqual(
+        firstSpan.attributes['messaging.operation'],
+        'receive',
+      );
+      assert.strictEqual(
+        firstSpan.attributes['messaging.operation.type'],
+        'settle',
+      );
+      assert.strictEqual(
+        firstSpan.attributes['messaging.operation.name'],
+        'ack',
+      );
+      assert.strictEqual(
+        firstSpan.attributes['code.function.name'],
+        'tests',
       );
       assert.strictEqual(
         firstSpan.attributes['messaging.system'],
@@ -467,8 +511,30 @@ describe('OpenTelemetryTracer', () => {
         subName,
       );
       assert.strictEqual(
+        firstSpan.attributes['messaging.operation'],
+        'receive',
+      );
+      assert.strictEqual(
+        firstSpan.attributes['messaging.operation.type'],
+        'settle',
+      );
+      assert.strictEqual(
+        firstSpan.attributes['messaging.operation.name'],
+        'modack',
+      );
+      assert.strictEqual(
+        firstSpan.attributes['code.function.name'],
+        'test',
+      );
+      assert.strictEqual(
         firstSpan.attributes[
           'messaging.gcp_pubsub.message.ack_deadline_seconds'
+        ],
+        1,
+      );
+      assert.strictEqual(
+        firstSpan.attributes[
+          'messaging.gcp_pubsub.message.ack_deadline'
         ],
         1,
       );
