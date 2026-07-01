@@ -4,6 +4,66 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "d9399f0cf44b79e2b38ce429b17709ee9845544e",
+          "message": "Migrate google-cloud-capacityplanner to librarian v0.22.0",
+          "issues": [
+            "8773"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/capacityplanner",
+      "id": "d3f5584e-4924-4d9c-9236-67a0ec3f40a3",
+      "createTime": "2026-06-29T17:40:53.096Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07b13a17e6533184c708dc388c3fa3dc6581f7a9",
+          "message": "Prevent comma corruption when draining stream error responses",
+          "issues": [
+            "8779"
+          ],
+          "scope": "gaxios"
+        },
+        {
+          "type": "fix",
+          "sha": "368f18ecc361310e7bfb323ba0e7836186ea08d1",
+          "message": "Correct repository URLs in core package.json files",
+          "issues": [
+            "8722"
+          ]
+        }
+      ],
+      "version": "7.1.6",
+      "language": "JAVASCRIPT",
+      "artifactName": "gaxios",
+      "id": "35cfd7ef-33af-4254-aa72-f4a34ddf8f2c",
+      "createTime": "2026-06-30T19:41:56.401Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d9399f0cf44b79e2b38ce429b17709ee9845544e",
+          "message": "Migrate google-cloud-capacityplanner to librarian v0.22.0",
+          "issues": [
+            "8773"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/capacityplanner",
+      "id": "d3f5584e-4924-4d9c-9236-67a0ec3f40a3",
+      "createTime": "2026-06-29T17:40:53.096Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "368f18ecc361310e7bfb323ba0e7836186ea08d1",
           "message": "Correct repository URLs in core package.json files",
@@ -81397,5 +81457,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-06-26T14:32:48.723Z"
+  "updateTime": "2026-06-30T19:41:56.401Z"
 }

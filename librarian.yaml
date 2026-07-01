@@ -193,10 +193,10 @@ libraries:
         - omit_common_resources: true
           path: google/cloud/advisorynotifications/v1
   - name: google-cloud-agentregistry
+    version: 0.1.0
     apis:
       - path: google/cloud/agentregistry/v1
     copyright_year: "2026"
-    version: 0.1.0
   - name: google-cloud-aiplatform
     version: 6.8.1
     apis:
@@ -547,11 +547,10 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/binary-authorization'
   - name: google-cloud-capacityplanner
-    version: 0.1.3
+    version: 0.2.0
     apis:
       - path: google/cloud/capacityplanner/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta
   - name: google-cloud-certificatemanager
@@ -925,7 +924,7 @@ libraries:
         nodejs:
           mixins: google.longrunning.Operations;google.cloud.location.Locations;google.iam.v1.IAMPolicy
     copyright_year: "2026"
-    skip_generate: true
+
     nodejs:
       default_version: v1
   - name: google-cloud-gdchardwaremanagement
