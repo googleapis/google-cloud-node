@@ -36,11 +36,7 @@ import {
 } from '@google-cloud/sql';
 
 // check that the client class type name can be used
-function doStuffWithSqlAvailableDatabaseVersionsServiceClient(
-  client: SqlAvailableDatabaseVersionsServiceClient,
-) {
-  client.close();
-}
+
 function doStuffWithSqlBackupRunsServiceClient(
   client: SqlBackupRunsServiceClient,
 ) {
