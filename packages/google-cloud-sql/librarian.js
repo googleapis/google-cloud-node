@@ -313,7 +313,7 @@ const replacements = [
   },
   {
     files: 'packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts',
-    searchPattern: /function doStuffWithSqlAvailableDatabaseVersionsServiceClient\(\n  client: SqlAvailableDatabaseVersionsServiceClient\n\) {\n  client.close\(\);\n}/gs,
+    searchPattern: /function doStuffWithSqlAvailableDatabaseVersionsServiceClient\s*\(\s*client:\s*SqlAvailableDatabaseVersionsServiceClient,?\s*\)\s*\{\s*client\.close\(\);\s*\}/gs,
     replacement: ''
   },
   {
