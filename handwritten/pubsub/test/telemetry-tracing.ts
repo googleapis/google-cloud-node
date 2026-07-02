@@ -295,8 +295,14 @@ describe('OpenTelemetryTracer', () => {
       assert.ok(firstSpan);
       assert.strictEqual(firstSpan.name, `${tests.topicInfo.topicId} create`);
       assert.strictEqual(firstSpan.attributes['messaging.operation'], 'create');
-      assert.strictEqual(firstSpan.attributes['messaging.operation.type'], 'send');
-      assert.strictEqual(firstSpan.attributes['messaging.operation.name'], 'publish');
+      assert.strictEqual(
+        firstSpan.attributes['messaging.operation.type'],
+        'send',
+      );
+      assert.strictEqual(
+        firstSpan.attributes['messaging.operation.name'],
+        'publish',
+      );
       assert.strictEqual(firstSpan.attributes['code.function.name'], 'tests');
       assert.strictEqual(
         firstSpan.attributes['messaging.destination.name'],
@@ -468,10 +474,7 @@ describe('OpenTelemetryTracer', () => {
         firstSpan.attributes['messaging.operation.name'],
         'ack',
       );
-      assert.strictEqual(
-        firstSpan.attributes['code.function.name'],
-        'tests',
-      );
+      assert.strictEqual(firstSpan.attributes['code.function.name'], 'tests');
       assert.strictEqual(
         firstSpan.attributes['messaging.system'],
         'gcp_pubsub',
@@ -522,10 +525,7 @@ describe('OpenTelemetryTracer', () => {
         firstSpan.attributes['messaging.operation.name'],
         'modack',
       );
-      assert.strictEqual(
-        firstSpan.attributes['code.function.name'],
-        'test',
-      );
+      assert.strictEqual(firstSpan.attributes['code.function.name'], 'test');
       assert.strictEqual(
         firstSpan.attributes[
           'messaging.gcp_pubsub.message.ack_deadline_seconds'
@@ -533,9 +533,7 @@ describe('OpenTelemetryTracer', () => {
         1,
       );
       assert.strictEqual(
-        firstSpan.attributes[
-          'messaging.gcp_pubsub.message.ack_deadline'
-        ],
+        firstSpan.attributes['messaging.gcp_pubsub.message.ack_deadline'],
         1,
       );
       assert.strictEqual(

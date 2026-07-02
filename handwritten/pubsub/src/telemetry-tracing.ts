@@ -27,9 +27,7 @@ import {
   Link,
 } from '@opentelemetry/api';
 import {W3CTraceContextPropagator} from '@opentelemetry/core';
-import {
-  ATTR_CODE_FUNCTION_NAME,
-} from '@opentelemetry/semantic-conventions';
+import {ATTR_CODE_FUNCTION_NAME} from '@opentelemetry/semantic-conventions';
 import {
   ATTR_MESSAGING_SYSTEM,
   MESSAGING_SYSTEM_VALUE_GCP_PUBSUB,
@@ -380,7 +378,8 @@ export class PubsubSpans {
           message.isExactlyOnceDelivery;
       }
       if (message.ackId) {
-        spanAttributes[ATTR_MESSAGING_GCP_PUBSUB_MESSAGE_ACK_ID] = message.ackId;
+        spanAttributes[ATTR_MESSAGING_GCP_PUBSUB_MESSAGE_ACK_ID] =
+          message.ackId;
       }
     }
 

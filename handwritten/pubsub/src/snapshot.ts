@@ -17,8 +17,8 @@
 import {CallOptions} from 'google-gax';
 
 import {google} from '../protos/protos';
-import {PubSub} from './pubsub';
 import {
+  PubSub,
   EmptyCallback,
   EmptyResponse,
   RequestCallback,
