@@ -308,9 +308,9 @@ export class Snapshot extends EventEmitter {
     | undefined
     | null;
   id?: Uint8Array | string;
-  public _affinityKey?: string;
-  public _bindGaxOpts?: CallOptions;
-  public _unbindGaxOpts?: CallOptions;
+  protected _affinityKey?: string;
+  protected _bindGaxOpts?: CallOptions;
+  protected _unbindGaxOpts?: CallOptions;
   multiplexedSessionPreviousTransactionId?: Uint8Array | string;
   ended: boolean;
   metadata?: spannerClient.spanner.v1.ITransaction;
@@ -404,9 +404,7 @@ export class Snapshot extends EventEmitter {
           },
         },
       };
-    }
-    this.request = (config: any, callback: Function) => {
-      if (this._affinityKey) {
+      this.request = (config: any, callback?: Function) => {
         let gaxOpts;
         if (!config.gaxOpts || Object.keys(config.gaxOpts).length === 0) {
           gaxOpts = this._bindGaxOpts as any;
@@ -418,12 +416,10 @@ export class Snapshot extends EventEmitter {
           );
         }
         config = Object.assign({}, config, {gaxOpts});
-      }
-      return session.request(config, callback);
-    };
+        return session.request(config, callback);
+      };
 
-    this.requestStream = (config: any) => {
-      if (this._affinityKey) {
+      this.requestStream = (config: any) => {
         let gaxOpts;
         if (!config.gaxOpts || Object.keys(config.gaxOpts).length === 0) {
           gaxOpts = this._bindGaxOpts as any;
@@ -435,9 +431,12 @@ export class Snapshot extends EventEmitter {
           );
         }
         config = Object.assign({}, config, {gaxOpts});
-      }
-      return session.requestStream(config);
-    };
+        return session.requestStream(config);
+      };
+    } else {
+      this.request = session.request.bind(session);
+      this.requestStream = session.requestStream.bind(session);
+    }
 
     const readOnly = Snapshot.encodeTimestampBounds(options || {});
     this._options = {readOnly};
