@@ -824,8 +824,6 @@ libraries:
         nodejs:
           mixins: google.longrunning.Operations;google.cloud.location.Locations
       - path: google/cloud/dialogflow/cx/v3beta1
-        nodejs:
-          mixins: google.longrunning.Operations;google.cloud.location.Locations
     copyright_year: "2026"
     nodejs:
       default_version: v3
