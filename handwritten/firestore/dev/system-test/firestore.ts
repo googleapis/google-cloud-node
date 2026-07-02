@@ -1038,7 +1038,7 @@ describe('DocumentReference class', () => {
       });
   });
 
-  it('supports increment() with set() with merge', () => {
+  it.skip('supports increment() with set() with merge', () => {
     // Test skipped due to kokoro to GCB migration.
     const baseData = {sum: 1};
     const updateData = {sum: FieldValue.increment(1)};
