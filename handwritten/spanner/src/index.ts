@@ -1734,6 +1734,10 @@ class Spanner extends GrpcService {
         // Attach the x-goog-spanner-request-id to the currently active span.
         attributeXGoogSpannerRequestIdToActiveSpan(config);
       }
+      if (config.channelHint !== undefined) {
+        config.gaxOpts = config.gaxOpts || {};
+        config.gaxOpts.channelHint = config.channelHint;
+      }
       const interceptors: any[] = [];
       if (this._metricsEnabled) {
         interceptors.push(MetricInterceptor);

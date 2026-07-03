@@ -283,6 +283,18 @@ export class SpannerClient {
       return this.spannerStub;
     }
 
+    const spannerService = (this._protos as any).google.spanner.v1.Spanner;
+    if (
+      process.env.USE_ARROW_PARSER === 'true' &&
+      spannerService &&
+      spannerService.service &&
+      spannerService.service.ExecuteStreamingSql
+    ) {
+      spannerService.service.ExecuteStreamingSql.responseDeserialize = (
+        bytes: Buffer,
+      ) => bytes;
+    }
+
     // Put together the "service stub" for
     // google.spanner.v1.Spanner.
     this.spannerStub = this._gaxGrpc.createStub(
@@ -295,6 +307,21 @@ export class SpannerClient {
       this._opts,
       this._providedCustomServicePath,
     ) as Promise<{[method: string]: Function}>;
+
+    this.spannerStub = this.spannerStub.then((stub) => {
+      if (process.env.USE_NATIVE_PROXY === 'true') {
+        const { wrapStubWithNativeProxy } = require('./native_proxy_helper');
+        const apiEndpoint = this._opts.apiEndpoint || 'spanner.googleapis.com';
+        const endpoint = this._opts.port ? `${apiEndpoint}:${this._opts.port}` : apiEndpoint;
+        const wrapped = wrapStubWithNativeProxy(
+          stub,
+          spannerService.service,
+          endpoint
+        );
+        return wrapped;
+      }
+      return stub;
+    });
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -356,6 +383,38 @@ export class SpannerClient {
       );
 
       this.innerApiCalls[methodName] = apiCall;
+    }
+
+    if (process.env.USE_NATIVE_PROXY === 'true') {
+      this.spannerStub.then(wrappedStub => {
+        const streamingMethods = ['executeStreamingSql', 'streamingRead', 'batchWrite'];
+        const unaryMethods = [
+          'createSession',
+          'batchCreateSessions',
+          'getSession',
+          'deleteSession',
+          'executeSql',
+          'executeBatchDml',
+          'read',
+          'beginTransaction',
+          'commit',
+          'rollback',
+          'partitionQuery',
+          'partitionRead'
+        ];
+
+        for (const methodName of streamingMethods) {
+          this.innerApiCalls[methodName] = (request: any, options: any) => {
+            return (wrappedStub as any)[methodName](request, null, options);
+          };
+        }
+
+        for (const methodName of unaryMethods) {
+          this.innerApiCalls[methodName] = (request: any, options: any, callback: any) => {
+            return (wrappedStub as any)[methodName](request, null, options, callback);
+          };
+        }
+      });
     }
 
     return this.spannerStub;

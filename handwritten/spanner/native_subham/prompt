@@ -1,0 +1,484 @@
+You are an expert Rust and Node.js systems engineer. Your task is to modify
+an existing Rust native extension for the Node.js Google Cloud Spanner client
+library to replace the current AsyncTask pattern with ThreadsafeFunction +
+direct Tokio spawn. This is a targeted change to src/lib.rs only. No other
+files need to change.
+
+This prompt is fully self-contained. You have no prior context about this
+project. Every decision is specified below. Do not make assumptions. Do not
+ask clarifying questions. Implement exactly what is described.
+
+════════════════════════════════════════════════════════════════
+WHY THIS CHANGE IS BEING MADE — READ THIS FULLY
+════════════════════════════════════════════════════════════════
+
+CURRENT PROBLEM WITH AsyncTask:
+The existing implementation uses napi-rs AsyncTask to run gRPC requests.
+AsyncTask schedules work on libuv's thread pool — a fixed set of OS threads
+Node.js uses for blocking operations. The default pool size is 4 threads.
+
+Each AsyncTask occupies one libuv thread for the entire duration of the
+request including the ~4ms network wait. With 4 threads and 4ms per request:
+  4 threads × (1000ms ÷ 4ms) = ~1000 QPS maximum
+
+This is a hard ceiling. Adding more concurrent requests beyond 4 just queues
+them waiting for a libuv thread to become free. The ceiling can be raised by
+setting UV_THREADPOOL_SIZE=128 as an environment variable, but this:
+  - Requires customer action (not transparent on version upgrade)
+  - Blocks 128 OS threads as waiting rooms for Tokio (~128MB memory)
+  - Shares the pool with file I/O, DNS, crypto operations
+  - Still has a ceiling at 128 concurrent requests
+
+THE CORRECT FIX — ThreadsafeFunction + direct Tokio spawn:
+Instead of scheduling work on libuv's thread pool, spawn work directly
+onto the static Tokio runtime that already exists in the extension.
+The V8 thread receives a Promise immediately and is never blocked.
+Tokio handles the async gRPC work on its own worker threads completely
+independently of libuv. When Tokio completes the network call, it uses
+a ThreadsafeFunction to safely call back into the V8 thread to resolve
+the Promise.
+
+This eliminates libuv from the critical path entirely:
+  - Zero libuv threads occupied during network wait
+  - No ceiling from thread pool size
+  - No customer action required
+  - No memory overhead of blocked threads
+  - Tokio's 4 worker threads handle thousands of concurrent async tasks
+  - Concurrency limited only by network and Spanner capacity
+
+ARCHITECTURE COMPARISON:
+
+Current (AsyncTask):
+  JS calls executeSqlNative()
+    → napi-rs takes libuv thread from pool
+      → libuv thread blocks for ~4ms waiting for Tokio
+        → Tokio does actual network work
+          → libuv thread released
+            → resolve() called on V8 thread
+
+Target (ThreadsafeFunction + Tokio):
+  JS calls executeSqlNative()
+    → napi-rs creates Promise, returns to JS immediately
+      → RUNTIME.spawn() submits task to Tokio directly
+        → Tokio does actual network work (no libuv involved)
+          → Tokio calls tsfn.call() when complete
+            → napi-rs safely wakes V8 event loop
+              → V8 thread runs conversion, Promise resolves
+
+════════════════════════════════════════════════════════════════
+CURRENT STATE OF THE CODEBASE
+════════════════════════════════════════════════════════════════
+
+The existing src/lib.rs has this structure:
+
+1. Static RUNTIME: Lazy<tokio::runtime::Runtime>
+   new_multi_thread(), worker_threads(4) — KEEP THIS UNCHANGED
+
+2. Static CHANNELS: Lazy<Vec<Channel>>
+   Pool of pre-established tonic channels — KEEP THIS UNCHANGED
+
+3. Static REQUEST_COUNTER: AtomicUsize
+   Round-robin channel selection — KEEP THIS UNCHANGED
+
+4. AuthInterceptor struct implementing tonic::service::Interceptor
+   Injects Bearer token and google-cloud-resource-prefix headers
+   — KEEP THIS UNCHANGED
+
+5. SpannerTask struct implementing napi::Task:
+   pub struct SpannerTask {
+       session: String,
+       sql: String,
+       token: String,
+       channel_count: i32,
+   }
+   impl Task for SpannerTask {
+       type Output = Vec<Vec<String>>;
+       type JsValue = JsObject;
+       fn compute(&mut self) -> Result<Self::Output> { ... }
+       fn resolve(&mut self, env: Env, output: Self::Output)
+           -> Result<Self::JsValue> { ... }
+   }
+   — THIS IS WHAT YOU ARE REPLACING
+
+6. execute_sql_native exported function that returns AsyncTask
+   — THIS IS WHAT YOU ARE REPLACING
+
+7. decode_result_set and proto_value_to_string helper functions
+   — KEEP THESE UNCHANGED, REUSE THEM
+
+════════════════════════════════════════════════════════════════
+EXACTLY WHAT TO CHANGE IN src/lib.rs
+════════════════════════════════════════════════════════════════
+
+REMOVE entirely:
+  - The SpannerTask struct
+  - The impl Task for SpannerTask block
+  - The existing execute_sql_native function that returns AsyncTask
+
+ADD in their place:
+
+1. Updated imports at the top of the file.
+   Add these to the existing use statements:
+   
+   use napi::threadsafe_function::{
+       ThreadsafeFunction,
+       ThreadSafeFunctionCallMode,
+       ErrorStrategy,
+   };
+   use napi::{JsFunction, CallContext};
+
+   Keep all existing imports. Only add what is listed above.
+
+2. New execute_sql_native function:
+
+   #[napi]
+   pub fn execute_sql_native(
+       env: Env,
+       session_name: String,
+       sql: String,
+       token: String,
+       channel_count: i32,
+       callback: JsFunction,
+   ) -> napi::Result<()> {
+
+       // Create a ThreadsafeFunction from the JS callback.
+       // This is a handle that can be called safely from any thread
+       // including Tokio worker threads which have no access to V8.
+       // The closure provided here runs ON THE V8 THREAD when called back.
+       // It receives the Vec<Vec<String>> result from Rust and converts
+       // it to a JavaScript Array to resolve the Promise.
+       let tsfn: ThreadsafeFunction
+           Vec<Vec<String>>,
+           ErrorStrategy::CalleeHandled
+       > = callback.create_threadsafe_function(
+           0,
+           |ctx: napi::threadsafe_function::ThreadSafeCallContext<Vec<Vec<String>>>| {
+               // This closure runs on V8 thread — safe to create JS objects
+               let rows = ctx.value;
+               let mut outer = ctx.env.create_array_with_length(rows.len())?;
+               for (i, row) in rows.into_iter().enumerate() {
+                   let mut inner = ctx.env
+                       .create_array_with_length(row.len())?;
+                   for (j, cell) in row.into_iter().enumerate() {
+                       let js_str = ctx.env.create_string(&cell)?;
+                       inner.set_element(j as u32, js_str)?;
+                   }
+                   outer.set_element(i as u32, inner)?;
+               }
+               Ok(vec![outer.into_unknown()])
+           }
+       )?;
+
+       // Clone values needed inside the async task.
+       // Cannot move String references across the spawn boundary
+       // without cloning because the async task may outlive this
+       // function call on the V8 thread.
+       let session_clone  = session_name.clone();
+       let sql_clone      = sql.clone();
+       let token_clone    = token.clone();
+
+       // Spawn DIRECTLY onto the static Tokio runtime.
+       // This returns immediately — V8 thread is free.
+       // libuv thread pool is NOT involved at all.
+       // Tokio manages this async task on its own worker threads.
+       RUNTIME.spawn(async move {
+           // Channel selection — same round-robin logic as before
+           let count = channel_count.max(1) as usize;
+           let idx = REQUEST_COUNTER.fetch_add(1, Ordering::Relaxed)
+               % count.min(CHANNELS.len());
+           let channel = CHANNELS[idx].clone();
+
+           // Build interceptor and client — same as before
+           let interceptor = AuthInterceptor {
+               token: token_clone,
+               session_name: session_clone.clone(),
+           };
+           let mut client = SpannerClient::with_interceptor(
+               channel,
+               interceptor
+           );
+
+           // Build request — same as before
+           let request = ExecuteSqlRequest {
+               session: session_clone,
+               sql: sql_clone,
+               ..Default::default()
+           };
+
+           // Execute gRPC call — Tokio awaits, no thread blocked
+           let result = client.execute_sql(request).await;
+
+           // Call back into V8 with result via ThreadsafeFunction
+           // NonBlocking means Tokio does not wait for V8 to process
+           // the callback before continuing
+           match result {
+               Ok(response) => {
+                   let rows = decode_result_set(response.into_inner());
+                   tsfn.call(
+                       Ok(rows),
+                       ThreadSafeFunctionCallMode::NonBlocking
+                   );
+               }
+               Err(status) => {
+                   tsfn.call(
+                       Err(napi::Error::from_reason(format!(
+                           "gRPC execute_sql failed: ({:?}) {}",
+                           status.code(),
+                           status.message()
+                       ))),
+                       ThreadSafeFunctionCallMode::NonBlocking
+                   );
+               }
+           }
+       });
+
+       // Return Ok(()) immediately.
+       // The Promise is handled by napi-rs via the ThreadsafeFunction.
+       // V8 thread is free from this point.
+       Ok(())
+   }
+
+════════════════════════════════════════════════════════════════
+CARGO.toml CHANGES REQUIRED
+════════════════════════════════════════════════════════════════
+
+The existing napi dependency must have the "napi4" feature enabled
+for ThreadsafeFunction support. Verify the napi dependency in
+Cargo.toml includes "napi4":
+
+  napi = { version = "2", features = ["async", "napi4"] }
+
+If "napi4" is already present, no change needed.
+If it is missing, add it. Do not change any other dependency.
+
+════════════════════════════════════════════════════════════════
+poc_bridge.js CHANGES REQUIRED
+════════════════════════════════════════════════════════════════
+
+The JavaScript bridge must change how it calls the native function
+because the function signature changed. The Rust function now takes
+a callback as the last argument instead of returning a Promise
+directly via AsyncTask.
+
+napi-rs automatically wraps a function that takes a callback as its
+last argument into a Promise when called from JavaScript. This means
+from JavaScript the call still looks like a normal async await.
+No other behavior changes.
+
+Find this in poc_bridge.js:
+
+  async executeSqlNative(sql, channelCount = 1) {
+      const sessionName = await this._getSessionName();
+      const token = await this._getFreshToken();
+      return await spannerNative.executeSqlNative(
+          sessionName, sql, token, channelCount
+      );
+  }
+
+The call signature stays the same — napi-rs handles the callback
+to Promise wrapping automatically. No change needed to poc_bridge.js
+unless the existing call throws a type error about missing callback
+argument. If it does, change to:
+
+  async executeSqlNative(sql, channelCount = 1) {
+      const sessionName = await this._getSessionName();
+      const token = await this._getFreshToken();
+      return new Promise((resolve, reject) => {
+          spannerNative.executeSqlNative(
+              sessionName,
+              sql,
+              token,
+              channelCount,
+              (err, result) => {
+                  if (err) reject(err);
+                  else resolve(result);
+              }
+          );
+      });
+  }
+
+Try the automatic Promise wrapping first. Only use the explicit
+Promise constructor if napi-rs does not wrap it automatically.
+
+════════════════════════════════════════════════════════════════
+VERIFICATION STEPS — RUN THESE IN ORDER
+════════════════════════════════════════════════════════════════
+
+Step 1: Compile
+  napi build --platform --release
+  Must compile with zero errors.
+  If there are lifetime errors related to tsfn or the async move
+  block, the fix is to ensure tsfn is moved into the async block:
+    RUNTIME.spawn(async move {
+        // tsfn is moved here and dropped after call()
+    });
+
+Step 2: Smoke test with single request
+  node -e "
+    const { NativeSpannerDatabase } = require('./__test__/poc_bridge.js');
+    const db = new NativeSpannerDatabase(
+      'your-project', 'your-instance', 'your-database'
+    );
+    db.executeSqlNative('SELECT * FROM AsyncBenchmarkTable LIMIT 1', 1)
+      .then(rows => {
+        console.log('SUCCESS rows:', rows.length);
+        process.exit(0);
+      })
+      .catch(err => {
+        console.error('FAILED:', err);
+        process.exit(1);
+      });
+  "
+  Must print SUCCESS without error.
+
+Step 3: Verify event loop is not blocked
+  node -e "
+    const { NativeSpannerDatabase } = require('./__test__/poc_bridge.js');
+    const db = new NativeSpannerDatabase(
+      'your-project', 'your-instance', 'your-database'
+    );
+    
+    // Start a timer that fires every 10ms
+    // If V8 thread is blocked this timer will fire late
+    let lagDetected = false;
+    const start = Date.now();
+    const interval = setInterval(() => {
+      const lag = Date.now() - start - 10;
+      if (lag > 5) {
+        console.log('EVENT LOOP LAG DETECTED:', lag, 'ms — V8 may be blocked');
+        lagDetected = true;
+      }
+    }, 10);
+    
+    // Fire 20 concurrent requests
+    const promises = Array.from({ length: 20 }, () =>
+      db.executeSqlNative(
+        'SELECT * FROM AsyncBenchmarkTable LIMIT 1', 4
+      )
+    );
+    
+    Promise.all(promises).then(results => {
+      clearInterval(interval);
+      console.log('All', results.length, 'requests completed');
+      if (!lagDetected) console.log('PASS: No event loop lag detected');
+      process.exit(0);
+    }).catch(err => {
+      clearInterval(interval);
+      console.error('FAILED:', err);
+      process.exit(1);
+    });
+  "
+  Must print PASS with no lag detected.
+  If lag is detected, the V8 thread is still being blocked somewhere.
+
+Step 4: Run full benchmark WITHOUT UV_THREADPOOL_SIZE set
+  node __test__/benchmark.js
+  Do NOT set UV_THREADPOOL_SIZE environment variable.
+  The benchmark must show meaningful QPS improvement over the
+  JavaScript baseline WITHOUT the environment variable.
+  This proves libuv is no longer the bottleneck.
+
+Step 5: Compare with UV_THREADPOOL_SIZE=128 result
+  UV_THREADPOOL_SIZE=128 node __test__/benchmark.js
+  Results should be similar to Step 4 because libuv is no longer
+  involved. If Step 4 and Step 5 results are nearly identical,
+  the ThreadsafeFunction implementation is working correctly.
+  If Step 5 is significantly better than Step 4, the async spawn
+  is still using libuv somewhere — investigate.
+
+════════════════════════════════════════════════════════════════
+KNOWN COMPILATION ISSUES TO HANDLE PROACTIVELY
+════════════════════════════════════════════════════════════════
+
+Issue 1: tsfn lifetime in async move block
+  ThreadsafeFunction must be moved into the async block.
+  It implements Send so this is safe.
+  If compiler complains about tsfn not living long enough:
+    let tsfn = tsfn;  // ensure it is an owned value
+    RUNTIME.spawn(async move {
+        // tsfn moved here
+        tsfn.call(...);
+        // tsfn dropped here — this is correct
+    });
+
+Issue 2: ThreadSafeCallContext import path
+  In napi-rs 2.x the import path is:
+    use napi::threadsafe_function::ThreadSafeCallContext;
+  Not:
+    use napi::ThreadSafeCallContext;
+  Use the full path as shown in the imports section above.
+
+Issue 3: into_unknown() method
+  When adding JS values to the vec returned from the tsfn closure,
+  each value must be converted to JsUnknown:
+    Ok(vec![outer.into_unknown()])
+  If into_unknown() is not available, use:
+    Ok(vec![outer.coerce_to_object()?.into_unknown()])
+
+Issue 4: ErrorStrategy import
+  ErrorStrategy is in the threadsafe_function module:
+    use napi::threadsafe_function::ErrorStrategy;
+  Not at the napi root level.
+
+Issue 5: napi-rs version differences
+  If the project uses napi 2.x earlier than 2.14, the
+  ThreadsafeFunction API may have slightly different method names.
+  Check the napi crate version in Cargo.toml.
+  If version is below 2.14, upgrade to 2.16 or latest 2.x:
+    napi = { version = "2.16", features = ["async", "napi4"] }
+
+════════════════════════════════════════════════════════════════
+WHAT SUCCESS LOOKS LIKE
+════════════════════════════════════════════════════════════════
+
+After this change the benchmark should show:
+
+1. WITHOUT UV_THREADPOOL_SIZE set:
+   Similar QPS improvement to the previous results that required
+   UV_THREADPOOL_SIZE=128. The improvement is now achieved
+   transparently without any environment variable.
+
+2. Event loop lag:
+   Near zero at all concurrency levels including high concurrency.
+   The V8 thread is free during all network wait time.
+
+3. WITH UV_THREADPOOL_SIZE=128:
+   Nearly identical results to without it. This proves libuv
+   thread pool is no longer involved in the critical path.
+
+4. The JavaScript API is unchanged:
+   const rows = await db.executeSqlNative(sql, channelCount);
+   Works exactly as before from the caller's perspective.
+
+════════════════════════════════════════════════════════════════
+FILES TO MODIFY
+════════════════════════════════════════════════════════════════
+
+Modify:  src/lib.rs         ← primary change, described above
+Verify:  Cargo.toml         ← ensure napi4 feature present
+Maybe:   __test__/poc_bridge.js  ← only if callback wrapping needed
+
+Do NOT modify:
+  build.rs
+  package.json
+  __test__/benchmark.js
+  proto/ directory
+  Any other file
+
+════════════════════════════════════════════════════════════════
+OUTPUT
+════════════════════════════════════════════════════════════════
+
+Produce the complete modified src/lib.rs file in full.
+Do not produce diffs or partial files.
+Produce the complete file so it can be directly written to disk.
+
+After producing src/lib.rs, state whether Cargo.toml needs
+a change and if so produce the complete modified Cargo.toml.
+
+After that, state whether poc_bridge.js needs a change and
+if so produce only the executeSqlNative method, not the full file.
+
+Run the verification steps in order and report the result of each.
+If any step fails, fix the issue and re-run before proceeding.
+Do not report success until all five verification steps pass.

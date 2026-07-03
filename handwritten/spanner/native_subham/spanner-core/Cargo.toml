@@ -1,0 +1,15 @@
+[package]
+name = "spanner-core"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tokio = { version = "1", features = ["full", "rt-multi-thread"] }
+tonic = { version = "0.12", features = ["tls", "tls-roots"] }
+prost = "0.13"
+prost-types = "0.13"
+gcp_auth = "0.7.3"
+num_cpus = "1"
+
+[build-dependencies]
+tonic-build = "0.12"

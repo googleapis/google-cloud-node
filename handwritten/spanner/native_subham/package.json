@@ -1,0 +1,19 @@
+{
+  "name": "@google-cloud/spanner-native",
+  "version": "0.1.0",
+  "main": "index.js",
+  "napi": {
+    "name": "native-subham",
+    "triples": {
+      "defaults": true,
+      "additional": ["aarch64-apple-darwin"]
+    }
+  },
+  "scripts": {
+    "build": "napi build --platform --release",
+    "build:debug": "napi build --platform"
+  },
+  "devDependencies": {
+    "@napi-rs/cli": "^2"
+  }
+}

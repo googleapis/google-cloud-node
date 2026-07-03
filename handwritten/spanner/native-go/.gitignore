@@ -1,0 +1,9 @@
+# Compiled shared library / Node addon
+native.node
+native.h
+
+# Log files
+*.log
+
+# Local temporary or scratch files
+scratch*

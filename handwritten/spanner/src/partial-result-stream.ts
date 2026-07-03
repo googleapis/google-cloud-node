@@ -29,8 +29,16 @@ import {google} from '../protos/protos';
 import * as stream from 'stream';
 import {isDefined, isEmpty, isString} from './helper';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let tableFromIPC: any;
+
 const originalDecode = codec.decode;
 const originalConvertFieldsToJson = codec.convertFieldsToJson;
+
+function rowToJSON(this: any[], options?: JSONOptions): Json {
+  return codec.convertFieldsToJson(this, options);
+}
+
 
 export type ResumeToken = string | Uint8Array;
 
@@ -100,6 +108,7 @@ export interface RowOptions {
    */
   columnsMetadata?: object;
   gaxOptions?: CallOptions;
+  arrow?: boolean;
 }
 
 /**
@@ -192,9 +201,14 @@ export class PartialResultStream extends Transform implements ResultEvents {
   private _pendingValueForResume?: p.IValue;
   private _values: p.IValue[];
   private _numPushFailed = 0;
+  private _rustParser: any;
+  private _bufferQueue: any;
+  private _arrowReader: any;
+  cpuTime: number;
   constructor(options = {}) {
     super({objectMode: true});
 
+    this.cpuTime = 0;
     this._destroyed = false;
     this._options = Object.assign({maxResumeRetries: 20}, options);
     this._values = [];
@@ -210,6 +224,10 @@ export class PartialResultStream extends Transform implements ResultEvents {
     }
 
     this._destroyed = true;
+
+    if (this._bufferQueue) {
+      this._bufferQueue.end();
+    }
 
     process.nextTick(() => {
       if (err) {
@@ -229,10 +247,190 @@ export class PartialResultStream extends Transform implements ResultEvents {
    * @param {function} next Function to be called upon completion.
    */
   _transform(
-    chunk: google.spanner.v1.PartialResultSet,
+    chunk: google.spanner.v1.PartialResultSet | Buffer,
     enc: string,
     next: Function,
   ): void {
+    const { performance } = require('perf_hooks');
+    const start = performance.now();
+    const wrappedNext = (err?: Error) => {
+      this.cpuTime += (performance.now() - start);
+      next(err);
+    };
+
+    try {
+      this._transformOriginal(chunk, enc, wrappedNext);
+    } catch (e) {
+      this.cpuTime += (performance.now() - start);
+      throw e;
+    }
+  }
+
+  _transformOriginal(
+    chunk: any,
+    enc: string,
+    next: Function,
+  ): void {
+    if (chunk && typeof chunk === 'object' && 'typeFlag' in chunk) {
+      const typeFlag = chunk.typeFlag;
+      const payload = chunk.payload;
+
+      try {
+        if (typeFlag === 2) {
+          const metadata = JSON.parse(payload.toString());
+          this.emit('response', { metadata });
+          if (metadata.rowType && metadata.rowType.fields) {
+            this._fields = metadata.rowType.fields as google.spanner.v1.StructType.Field[];
+            this._decoders = this._fields.map(({name, type}) => {
+              const columnMetadata =
+                this._options.columnsMetadata &&
+                name !== null &&
+                name !== undefined &&
+                Object.prototype.hasOwnProperty.call(
+                  this._options.columnsMetadata,
+                  name,
+                )
+                  ? (this._options.columnsMetadata as any)[name]
+                  : undefined;
+              return codec.getDecoder(
+                type as google.spanner.v1.Type,
+                columnMetadata,
+                this._options.json ? this._options.jsonOptions || {} : undefined,
+              );
+            });
+          }
+          next();
+          return;
+        }
+
+        if (typeFlag === 3) {
+          const stats = JSON.parse(payload.toString());
+          this.emit('stats', stats);
+          next();
+          return;
+        }
+
+        if (typeFlag === 4) {
+          const { rows, metadata } = payload;
+          if (metadata && metadata.fields) {
+            const formattedMetadata = { rowType: { fields: metadata.fields } };
+            this.emit('response', { metadata: formattedMetadata });
+            this._fields = metadata.fields as google.spanner.v1.StructType.Field[];
+            this._decoders = this._fields.map(({name, type}) => {
+              const columnMetadata =
+                this._options.columnsMetadata &&
+                name !== null &&
+                name !== undefined &&
+                Object.prototype.hasOwnProperty.call(
+                  this._options.columnsMetadata,
+                  name,
+                )
+                  ? (this._options.columnsMetadata as any)[name]
+                  : undefined;
+              return codec.getDecoder(
+                type as google.spanner.v1.Type,
+                columnMetadata,
+                this._options.json ? this._options.jsonOptions || {} : undefined,
+              );
+            });
+          }
+
+          if (rows) {
+            if (!this._fields) {
+              this.destroy(new Error('Received rows before metadata fields schema'));
+              return;
+            }
+            for (const rawRow of rows) {
+              const fields = rawRow.map((value: any, index: number) => {
+                const { name } = this._fields![index];
+                const decodedValue = this._decoders![index](value);
+                return {
+                  name,
+                  value: decodedValue,
+                };
+              });
+
+              Object.defineProperty(fields, 'toJSON', {
+                value: (options?: any): Json => {
+                  return codec.convertFieldsToJson(fields, options);
+                },
+              });
+
+              if (this._options.json) {
+                this.push((fields as any).toJSON(this._options.jsonOptions));
+              } else {
+                this.push(fields);
+              }
+            }
+          }
+          next();
+          return;
+        }
+
+        if (typeFlag === 0) {
+          const partialResultSet = google.spanner.v1.PartialResultSet.decode(payload);
+
+          if (partialResultSet.metadata) {
+            this.emit('response', partialResultSet);
+            if (partialResultSet.metadata.rowType && partialResultSet.metadata.rowType.fields) {
+              this._fields = partialResultSet.metadata.rowType.fields as google.spanner.v1.StructType.Field[];
+              this._decoders = this._fields.map(({name, type}) => {
+                const columnMetadata =
+                  this._options.columnsMetadata &&
+                  name !== null &&
+                  name !== undefined &&
+                  Object.prototype.hasOwnProperty.call(
+                    this._options.columnsMetadata,
+                    name,
+                  )
+                    ? (this._options.columnsMetadata as any)[name]
+                    : undefined;
+                return codec.getDecoder(
+                  type as google.spanner.v1.Type,
+                  columnMetadata,
+                  this._options.json ? this._options.jsonOptions || {} : undefined,
+                );
+              });
+            }
+          }
+
+          if (partialResultSet.stats) {
+            this.emit('stats', partialResultSet.stats);
+          }
+
+          if (partialResultSet.last) {
+            if (this._bufferQueue) {
+              this._bufferQueue.end();
+            } else {
+              this.push(null);
+            }
+            next();
+            return;
+          }
+          next();
+          return;
+        } else if (typeFlag === 1) {
+          if (!this._bufferQueue) {
+            this._bufferQueue = new BufferQueue();
+            this._bufferQueue.push(payload);
+            
+            const { RecordBatchReader } = require('apache-arrow');
+            RecordBatchReader.from(this._bufferQueue).then((reader: any) => {
+              this._arrowReader = reader;
+              this._consumeArrowReader();
+            }).catch(err => this.emit('error', err));
+          } else {
+            this._bufferQueue.push(payload);
+          }
+          next();
+          return;
+        }
+      } catch (e) {
+        throw e;
+      }
+      return;
+    }
+
     this.emit('response', chunk);
 
     if (chunk.stats) {
@@ -424,6 +622,68 @@ export class PartialResultStream extends Transform implements ResultEvents {
    * @param {Value[]} values The raw cell values for the current row.
    * @returns {Json} The plain JavaScript object representing the row.
    */
+  private async _consumeArrowReader(): Promise<void> {
+    try {
+      while (true) {
+        const res = await this._arrowReader.next();
+        if (res.done) {
+          break;
+        }
+        const batch = res.value;
+        this._pushRecordBatch(batch);
+      }
+      this.push(null);
+    } catch (err) {
+      this.emit('error', err);
+    }
+  }
+
+  private _pushRecordBatch(batch: any) {
+    if (this._options.arrow) {
+      const { Table } = require('apache-arrow');
+      const table = new Table(batch.schema, [batch]);
+      this.push(table);
+    } else {
+      const fields = this._fields;
+      const numRows = batch.numRows;
+      const columns = fields.map(f => f.name);
+      const vectors = columns.map(colName => batch.getChild(colName));
+      const decoders = this._decoders;
+      const wrapNumbers = this._options.jsonOptions?.wrapNumbers === true;
+
+      for (let i = 0; i < numRows; i++) {
+        if (this._options.json) {
+          const plainRow: Record<string, any> = {};
+          for (let c = 0; c < fields.length; c++) {
+            const fieldName = fields[c].name;
+            let val = vectors[c] ? vectors[c].get(i) : null;
+            if (wrapNumbers || this._options.columnsMetadata) {
+              val = decoders[c](val);
+            }
+            plainRow[fieldName] = val;
+          }
+          this.push(plainRow);
+        } else {
+          const legacyRow = new Array(fields.length);
+          for (let c = 0; c < fields.length; c++) {
+            const f = fields[c];
+            let val = vectors[c] ? vectors[c].get(i) : null;
+            legacyRow[c] = {
+              name: f.name,
+              value: decoders[c](val),
+            };
+          }
+          Object.defineProperty(legacyRow, 'toJSON', {
+            value: rowToJSON,
+            configurable: true,
+            writable: true,
+          });
+          this.push(legacyRow);
+        }
+      }
+    }
+  }
+
   private _createJsonRow(values: Value[]): Json {
     const json: Json = {};
     const fields = this._fields;
@@ -473,9 +733,9 @@ export class PartialResultStream extends Transform implements ResultEvents {
     }
 
     Object.defineProperty(fields, 'toJSON', {
-      value: (options?: JSONOptions): Json => {
-        return codec.convertFieldsToJson(fields, options);
-      },
+      value: rowToJSON,
+      configurable: true,
+      writable: true,
     });
 
     return fields as Row;
@@ -634,9 +894,13 @@ export function partialResultStream(
       // The timeout has reached so this will flush any rows the
       // checkpoint stream has queued. After that, we will destroy the
       // user's stream with the Deadline exceeded error.
-      setImmediate(() =>
-        batchAndSplitOnTokenStream.destroy(new DeadlineError(err)),
-      );
+      setImmediate(() => {
+        if (process.env.USE_NATIVE_PROXY === 'true') {
+          userStream.destroy(new DeadlineError(err));
+        } else {
+          batchAndSplitOnTokenStream.destroy(new DeadlineError(err));
+        }
+      });
       return;
     }
 
@@ -652,7 +916,13 @@ export function partialResultStream(
       // This is not a retryable error so this will flush any rows the
       // checkpoint stream has queued. After that, we will destroy the
       // user's stream with the same error.
-      setImmediate(() => batchAndSplitOnTokenStream.destroy(err));
+      setImmediate(() => {
+        if (process.env.USE_NATIVE_PROXY === 'true') {
+          userStream.destroy(err);
+        } else {
+          batchAndSplitOnTokenStream.destroy(err);
+        }
+      });
       return;
     }
 
@@ -683,6 +953,15 @@ export function partialResultStream(
     setImmediate(() => retry(err)),
   );
 
+  if (process.env.USE_NATIVE_PROXY === 'true') {
+    return (
+      requestsStream
+        .pipe(userStream)
+        .on('paused', () => requestsStream.pause())
+        .on('resumed', () => requestsStream.resume())
+    ) as any;
+  }
+
   return (
     requestsStream
       .pipe(batchAndSplitOnTokenStream)
@@ -701,4 +980,45 @@ export function partialResultStream(
 
 function _hasResumeToken(chunk: google.spanner.v1.PartialResultSet): boolean {
   return isDefined(chunk.resumeToken) && chunk.resumeToken.length > 0;
+}
+
+class BufferQueue {
+  private queue: Uint8Array[] = [];
+  private resolver?: (value: IteratorResult<Uint8Array>) => void;
+  private done = false;
+
+  next(): Promise<IteratorResult<Uint8Array>> {
+    if (this.queue.length > 0) {
+      return Promise.resolve({ value: this.queue.shift()!, done: false });
+    }
+    if (this.done) {
+      return Promise.resolve({ value: undefined as any, done: true });
+    }
+    return new Promise((resolve) => {
+      this.resolver = resolve;
+    });
+  }
+
+  push(buf: Uint8Array) {
+    if (this.resolver) {
+      const res = this.resolver;
+      this.resolver = undefined;
+      res({ value: buf, done: false });
+    } else {
+      this.queue.push(buf);
+    }
+  }
+
+  end() {
+    this.done = true;
+    if (this.resolver) {
+      const res = this.resolver;
+      this.resolver = undefined;
+      res({ value: undefined as any, done: true });
+    }
+  }
+
+  [Symbol.asyncIterator]() {
+    return this;
+  }
 }

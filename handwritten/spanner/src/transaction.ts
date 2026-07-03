@@ -34,7 +34,25 @@ import {Session} from './session';
 import {Key} from './table';
 import {Span} from './instrument';
 import {google as spannerClient} from '../protos/protos';
-import {NormalCallback, addLeaderAwareRoutingHeader} from './common';
+import {NormalCallback, addLeaderAwareRoutingHeader, getNextGlobalChannelHint} from './common';
+import {
+  useNativeProxy,
+  getNativeProxyInstance,
+  incrementNextStreamId,
+  activeStreams,
+  serializeHeaders,
+  getExecuteStreamingSqlSerializer,
+  useRustPoc2,
+  getRustCoreHandle,
+  getExecuteStreamingSqlNative,
+  RustRowStream,
+  serializeHeadersSubham,
+  useNativeV8,
+  
+  getExecuteStreamingSqlProxyNative,
+  ProxyRowStream,
+  
+} from './v1/native_proxy_helper';
 import {google} from '../protos/protos';
 import IsolationLevel = google.spanner.v1.TransactionOptions.IsolationLevel;
 import IAny = google.protobuf.IAny;
@@ -49,6 +67,7 @@ import {
   setSpanErrorAndException,
   traceConfig,
 } from './instrument';
+
 import {RunTransactionOptions} from './transaction-runner';
 import {injectRequestIDIntoHeaders, nextNthRequest} from './request_id_header';
 
@@ -297,8 +316,7 @@ export class Snapshot extends EventEmitter {
   metadata?: spannerClient.spanner.v1.ITransaction;
   readTimestamp?: PreciseDate;
   readTimestampProto?: spannerClient.protobuf.ITimestamp;
-  request: (config: {}, callback: Function) => void;
-  requestStream: (config: {}) => Readable;
+  private _channelHint?: number;
   session: Session;
   queryOptions?: IQueryOptions;
   commonHeaders_: {[k: string]: string};
@@ -361,9 +379,6 @@ export class Snapshot extends EventEmitter {
     this.ended = false;
     this.session = session;
     this.queryOptions = Object.assign({}, queryOptions);
-    this.request = session.request.bind(session);
-    this.requestStream = session.requestStream.bind(session);
-
     const readOnly = Snapshot.encodeTimestampBounds(options || {});
     this._options = {readOnly};
     this._dbName = (this.session.parent as Database).formattedName_;
@@ -377,6 +392,27 @@ export class Snapshot extends EventEmitter {
     };
     this._latestPreCommitToken = null;
     this._mutationKey = null;
+  }
+
+  request(config: any, callback: any): any {
+    config.channelHint = this._getChannelHint();
+    return this.session.request(config, callback);
+  }
+
+  requestStream(config: any): any {
+    config.channelHint = this._getChannelHint();
+    return this.session.requestStream(config);
+  }
+
+  private _getChannelHint(): number {
+    if (this._channelHint === undefined) {
+      if (this.session.metadata && (this.session.metadata as any).multiplexed) {
+        this._channelHint = getNextGlobalChannelHint();
+      } else {
+        this._channelHint = this.session._channelHint;
+      }
+    }
+    return this._channelHint;
   }
 
   protected _updatePrecommitToken(resp: PrecommitTokenProvider): void {
@@ -1495,9 +1531,222 @@ export class Snapshot extends EventEmitter {
       ...this._traceConfig,
     };
     return startTrace('Snapshot.runStream', traceConfig, span => {
-      let attempt = 0;
       const database = this.session.parent as Database;
       const nthRequest = nextNthRequest(database);
+
+      if (useRustPoc2) {
+        try {
+          sanitizeRequest();
+        } catch (e) {
+          const errorStream = new PassThrough();
+          setSpanErrorAndException(span, e as Error);
+          span.end();
+          setImmediate(() => errorStream.destroy(e as Error));
+          return errorStream as any;
+        }
+
+        const requestMessage = google.spanner.v1.ExecuteSqlRequest.fromObject(reqOpts);
+        const requestBytes = google.spanner.v1.ExecuteSqlRequest.encode(requestMessage).finish();
+        
+        const finalHeaders = injectRequestIDIntoHeaders(headers, this.session, nthRequest, 1);
+        const serializedHeaders = serializeHeadersSubham(finalHeaders);
+
+        const outStream = new RustRowStream({
+          json,
+          jsonOptions,
+          columnsMetadata,
+        });
+
+        const executeNative = getExecuteStreamingSqlNative();
+        executeNative(
+          getRustCoreHandle(),
+          reqOpts.session,
+          serializedHeaders,
+          requestBytes,
+          {},
+          (err: any, batch: any, telemetry: any, schemaMetadata: any) => {
+            if (err) {
+              outStream.destroy(err);
+              span.end();
+              return;
+            }
+            if (batch === null) {
+              outStream.push(null);
+              span.end();
+            } else {
+              if (schemaMetadata) {
+                outStream.setMetadata(schemaMetadata);
+              }
+              outStream.pushBatch(batch);
+            }
+          }
+        );
+
+        return outStream as any;
+      }
+
+      if (useNativeProxy) {
+        if (useNativeV8) {
+          try {
+            sanitizeRequest();
+          } catch (e) {
+            const errorStream = new PassThrough();
+            setSpanErrorAndException(span, e as Error);
+            span.end();
+            setImmediate(() => errorStream.destroy(e as Error));
+            return errorStream as any;
+          }
+
+          const serializer = getExecuteStreamingSqlSerializer();
+          const requestBytes = serializer 
+            ? serializer(reqOpts)
+            : google.spanner.v1.ExecuteSqlRequest.encode(google.spanner.v1.ExecuteSqlRequest.create(reqOpts)).finish();
+
+          const finalHeaders = injectRequestIDIntoHeaders(
+            headers,
+            this.session,
+            nthRequest,
+            1,
+          );
+          const serializedHeaders = serializeHeaders(finalHeaders);
+          const channelHint = getNextGlobalChannelHint();
+
+          const outStream = new ProxyRowStream({
+            json,
+            jsonOptions,
+            columnsMetadata,
+          });
+
+          const executeNative = getExecuteStreamingSqlProxyNative();
+          executeNative(
+            getNativeProxyInstance(),
+            requestBytes,
+            serializedHeaders,
+            channelHint,
+            
+            (err: any, batch: any, schemaMetadata: any, isEof: boolean) => {
+              if (err) {
+                outStream.destroy(err);
+                span.end();
+                return;
+              }
+              if (batch) {
+                const hasData = batch.length > 0;
+                if (hasData) {
+                  if (schemaMetadata) {
+                    outStream.setMetadata(schemaMetadata.fields);
+                  }
+                  outStream.pushBatch(batch);
+                }
+              }
+              if (isEof) {
+                outStream.push(null);
+                span.end();
+              }
+            }
+          );
+
+          return outStream as any;
+        }
+
+        const nativeProxy = getNativeProxyInstance();
+        if (nativeProxy) {
+          try {
+            sanitizeRequest();
+          } catch (e) {
+            const errorStream = new PassThrough();
+            setSpanErrorAndException(span, e as Error);
+            span.end();
+            setImmediate(() => errorStream.destroy(e as Error));
+            return errorStream as any;
+          }
+
+          const serializer = getExecuteStreamingSqlSerializer();
+          const requestBytes = serializer 
+            ? serializer(reqOpts)
+            : google.spanner.v1.ExecuteSqlRequest.encode(google.spanner.v1.ExecuteSqlRequest.create(reqOpts)).finish();
+
+          const finalHeaders = injectRequestIDIntoHeaders(
+            headers,
+            this.session,
+            nthRequest,
+            1,
+          );
+          const serializedHeaders = serializeHeaders(finalHeaders);
+          
+          const channelHint = getNextGlobalChannelHint();
+          const streamId = incrementNextStreamId();
+
+          const nativeStream = new Readable({
+            objectMode: true,
+            read() {}
+          });
+
+          activeStreams.set(streamId, (err: any, events: any) => {
+            if (err) {
+              nativeStream.destroy(err);
+              span.end();
+              return;
+            }
+            if (events) {
+              for (const event of events) {
+                const { typeFlag, payload } = event;
+                if (payload === null || (payload instanceof ArrayBuffer && payload.byteLength === 0) || (Buffer.isBuffer(payload) && payload.length === 0)) {
+                  nativeStream.push(null);
+                  span.end();
+                  return;
+                }
+                if (typeFlag === 4) {
+                  nativeStream.push({ typeFlag, payload });
+                } else {
+                  nativeStream.push({ typeFlag, payload: Buffer.from(payload) });
+                }
+              }
+            }
+          });
+
+          finished(nativeStream, () => {
+            activeStreams.delete(streamId);
+          });
+
+          nativeProxy.makeStreamingCall(
+            '/google.spanner.v1.Spanner/ExecuteStreamingSql',
+            requestBytes,
+            serializedHeaders,
+            channelHint,
+            streamId
+          );
+
+          return partialResultStream(
+            () => nativeStream,
+            {
+              json,
+              jsonOptions,
+              maxResumeRetries,
+              columnsMetadata,
+              gaxOptions,
+            }
+          )
+          .on('response', response => {
+            this._updatePrecommitToken(response);
+            if (response.metadata && response.metadata!.transaction && !this.id) {
+              this._update(response.metadata!.transaction, span);
+            }
+          })
+          .on('error', err => {
+            setSpanError(span, err as Error);
+            span.end();
+          })
+          .on('end', err => {
+            if (err) {
+              setSpanError(span, err as Error);
+            }
+            span.end();
+          }) as any;
+        }
+      }
+
+      let attempt = 0;
       const makeRequest = (resumeToken?: ResumeToken): Readable => {
         attempt++;
 

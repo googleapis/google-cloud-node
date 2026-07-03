@@ -3176,8 +3176,16 @@ class Database extends common.GrpcServiceObject {
 
           this._releaseOnEnd(session!, snapshot, span);
 
+          const linkCpuTime = (src: any, dst: any) => {
+            src.once('end', () => {
+              dst.cpuTime = dst.cpuTime || 0;
+              dst.cpuTime += src.cpuTime || 0;
+            });
+          };
+
           let dataReceived = false;
           let dataStream = snapshot.runStream(query);
+          linkCpuTime(dataStream, proxyStream);
 
           const endListener = () => {
             snapshot.end();
@@ -3209,6 +3217,7 @@ class Database extends common.GrpcServiceObject {
                 span.end();
                 // Create a new data stream and add it to the end user stream.
                 dataStream = this.runStream(query, options);
+                linkCpuTime(dataStream, proxyStream);
                 dataStream.pipe(proxyStream);
               } else {
                 proxyStream.destroy(err);

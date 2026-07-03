@@ -1,0 +1,6 @@
+target/
+node_modules/
+*.node
+benchmark_results.json
+index.js
+index.d.ts

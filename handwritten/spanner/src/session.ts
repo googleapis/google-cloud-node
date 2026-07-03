@@ -36,7 +36,7 @@ import {
   CreateSessionOptions,
 } from './database';
 import {ServiceObjectConfig} from '@google-cloud/common';
-import {NormalCallback, addLeaderAwareRoutingHeader} from './common';
+import {NormalCallback, addLeaderAwareRoutingHeader, getNextGlobalChannelHint} from './common';
 import {ObservabilityOptions} from './instrument';
 import {grpc, CallOptions} from 'google-gax';
 import IRequestOptions = google.spanner.v1.IRequestOptions;
@@ -115,6 +115,7 @@ export class Session extends common.GrpcServiceObject {
   lastError?: grpc.ServiceError;
   commonHeaders_: {[k: string]: string};
   _observabilityOptions?: ObservabilityOptions;
+  _channelHint: number;
   constructor(database: Database, name?: string) {
     const methods = {
       /**
@@ -260,6 +261,7 @@ export class Session extends common.GrpcServiceObject {
     this.commonHeaders_ = {...database.commonHeaders_};
     this.request = database.request;
     this.requestStream = database.requestStream;
+    this._channelHint = getNextGlobalChannelHint();
 
     if (name) {
       this.formattedName_ = Session.formatName_(database.formattedName_, name);

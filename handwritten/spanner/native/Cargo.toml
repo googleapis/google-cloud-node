@@ -1,0 +1,26 @@
+[package]
+name = "native"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+google-cloud-spanner = { git = "https://github.com/olavloite/google-cloud-rust.git", branch = "spanner-pass-through-grpc-proxy", package = "google-cloud-spanner", features = [] }
+google-cloud-gax = { git = "https://github.com/olavloite/google-cloud-rust.git", branch = "spanner-pass-through-grpc-proxy", package = "google-cloud-gax" }
+google-cloud-gax-internal = { git = "https://github.com/olavloite/google-cloud-rust.git", branch = "spanner-pass-through-grpc-proxy", package = "google-cloud-gax-internal" }
+napi = { version = "2.16", default-features = false, features = ["napi4", "tokio_rt"] }
+napi-derive = "2.16"
+prost = { version = "0.14", default-features = false, features = ["std"] }
+prost-types = { version = "0.14", default-features = false }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+bytes = "1.10"
+base64 = "0.22"
+tokio = { version = "1.52.3", features = ["full"] }
+tonic = { version = "0.14.5", features = ["tls-native-roots", "transport"] }
+tower = { version = "0.5.2", features = ["util"] }
+http = "1.1"
+futures = "0.3"
+

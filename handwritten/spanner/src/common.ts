@@ -126,3 +126,8 @@ export function getCommonHeaders(
 
   return headers;
 }
+
+let globalChannelHint = 0;
+export function getNextGlobalChannelHint(): number {
+  return globalChannelHint++;
+}
