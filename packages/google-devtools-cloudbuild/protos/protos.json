@@ -2891,13 +2891,22 @@
                           }
                         },
                         "MachineType": {
+                          "valuesOptions": {
+                            "N1_HIGHCPU_8": {
+                              "deprecated": true
+                            },
+                            "N1_HIGHCPU_32": {
+                              "deprecated": true
+                            }
+                          },
                           "values": {
                             "UNSPECIFIED": 0,
                             "N1_HIGHCPU_8": 1,
                             "N1_HIGHCPU_32": 2,
                             "E2_HIGHCPU_8": 5,
                             "E2_HIGHCPU_32": 6,
-                            "E2_MEDIUM": 7
+                            "E2_MEDIUM": 7,
+                            "E2_STANDARD_2": 11
                           }
                         },
                         "SubstitutionOption": {

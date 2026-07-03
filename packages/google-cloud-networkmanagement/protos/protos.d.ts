@@ -249,6 +249,9 @@ export namespace google {
                     /** Endpoint gkePod */
                     gkePod?: (string|null);
 
+                    /** Endpoint dmsPrivateConnection */
+                    dmsPrivateConnection?: (string|null);
+
                     /** Endpoint cloudFunction */
                     cloudFunction?: (google.cloud.networkmanagement.v1.Endpoint.ICloudFunctionEndpoint|null);
 
@@ -257,6 +260,9 @@ export namespace google {
 
                     /** Endpoint cloudRunRevision */
                     cloudRunRevision?: (google.cloud.networkmanagement.v1.Endpoint.ICloudRunRevisionEndpoint|null);
+
+                    /** Endpoint cloudRunJob */
+                    cloudRunJob?: (string|null);
 
                     /** Endpoint network */
                     network?: (string|null);
@@ -316,6 +322,9 @@ export namespace google {
                     /** Endpoint gkePod. */
                     public gkePod: string;
 
+                    /** Endpoint dmsPrivateConnection. */
+                    public dmsPrivateConnection: string;
+
                     /** Endpoint cloudFunction. */
                     public cloudFunction?: (google.cloud.networkmanagement.v1.Endpoint.ICloudFunctionEndpoint|null);
 
@@ -324,6 +333,9 @@ export namespace google {
 
                     /** Endpoint cloudRunRevision. */
                     public cloudRunRevision?: (google.cloud.networkmanagement.v1.Endpoint.ICloudRunRevisionEndpoint|null);
+
+                    /** Endpoint cloudRunJob. */
+                    public cloudRunJob: string;
 
                     /** Endpoint network. */
                     public network: string;
@@ -1670,6 +1682,9 @@ export namespace google {
                     /** Step cloudRunRevision */
                     cloudRunRevision?: (google.cloud.networkmanagement.v1.ICloudRunRevisionInfo|null);
 
+                    /** Step cloudRunJob */
+                    cloudRunJob?: (google.cloud.networkmanagement.v1.ICloudRunJobInfo|null);
+
                     /** Step nat */
                     nat?: (google.cloud.networkmanagement.v1.INatInfo|null);
 
@@ -1687,6 +1702,9 @@ export namespace google {
 
                     /** Step ngfwPacketInspection */
                     ngfwPacketInspection?: (google.cloud.networkmanagement.v1.INgfwPacketInspectionInfo|null);
+
+                    /** Step dmsPrivateConnection */
+                    dmsPrivateConnection?: (google.cloud.networkmanagement.v1.IPrivateConnectionInfo|null);
                 }
 
                 /** Represents a Step. */
@@ -1800,6 +1818,9 @@ export namespace google {
                     /** Step cloudRunRevision. */
                     public cloudRunRevision?: (google.cloud.networkmanagement.v1.ICloudRunRevisionInfo|null);
 
+                    /** Step cloudRunJob. */
+                    public cloudRunJob?: (google.cloud.networkmanagement.v1.ICloudRunJobInfo|null);
+
                     /** Step nat. */
                     public nat?: (google.cloud.networkmanagement.v1.INatInfo|null);
 
@@ -1818,8 +1839,11 @@ export namespace google {
                     /** Step ngfwPacketInspection. */
                     public ngfwPacketInspection?: (google.cloud.networkmanagement.v1.INgfwPacketInspectionInfo|null);
 
+                    /** Step dmsPrivateConnection. */
+                    public dmsPrivateConnection?: (google.cloud.networkmanagement.v1.IPrivateConnectionInfo|null);
+
                     /** Step stepInfo. */
-                    public stepInfo?: ("instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"hybridSubnet"|"vpnGateway"|"vpnTunnel"|"interconnectAttachment"|"vpcConnector"|"directVpcEgressConnection"|"serverlessExternalConnection"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"gkePod"|"ipMasqueradingSkipped"|"gkeNetworkPolicy"|"gkeNetworkPolicySkipped"|"cloudSqlInstance"|"redisInstance"|"redisCluster"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"nat"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket"|"serverlessNeg"|"ngfwPacketInspection");
+                    public stepInfo?: ("instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"hybridSubnet"|"vpnGateway"|"vpnTunnel"|"interconnectAttachment"|"vpcConnector"|"directVpcEgressConnection"|"serverlessExternalConnection"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"gkePod"|"ipMasqueradingSkipped"|"gkeNetworkPolicy"|"gkeNetworkPolicySkipped"|"cloudSqlInstance"|"redisInstance"|"redisCluster"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"cloudRunJob"|"nat"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket"|"serverlessNeg"|"ngfwPacketInspection"|"dmsPrivateConnection");
 
                     /**
                      * Creates a new Step instance using the specified properties.
@@ -1916,9 +1940,11 @@ export namespace google {
                         START_FROM_CLOUD_FUNCTION = 23,
                         START_FROM_APP_ENGINE_VERSION = 25,
                         START_FROM_CLOUD_RUN_REVISION = 26,
+                        START_FROM_CLOUD_RUN_JOB = 50,
                         START_FROM_STORAGE_BUCKET = 29,
                         START_FROM_PSC_PUBLISHED_SERVICE = 30,
                         START_FROM_SERVERLESS_NEG = 31,
+                        START_FROM_DMS_PRIVATE_CONNECTION = 48,
                         APPLY_INGRESS_FIREWALL_RULE = 4,
                         APPLY_EGRESS_FIREWALL_RULE = 5,
                         APPLY_ROUTE = 6,
@@ -4084,7 +4110,9 @@ export namespace google {
                         GOOGLE_MANAGED_SERVICE = 15,
                         REDIS_INSTANCE = 16,
                         REDIS_CLUSTER = 17,
-                        GKE_POD = 19
+                        GKE_POD = 19,
+                        CLOUD_RUN_JOB = 20,
+                        DMS_PRIVATE_CONNECTION = 21
                     }
 
                     /** GoogleServiceType enum. */
@@ -4567,6 +4595,7 @@ export namespace google {
                         CLOUD_SQL_INSTANCE_UNAUTHORIZED_ACCESS = 17,
                         DROPPED_INSIDE_GKE_SERVICE = 18,
                         DROPPED_INSIDE_CLOUD_SQL_SERVICE = 19,
+                        DROPPED_INSIDE_DMS_PRIVATE_CONNECTION = 114,
                         GOOGLE_MANAGED_SERVICE_NO_PEERING = 20,
                         GOOGLE_MANAGED_SERVICE_NO_PSC_ENDPOINT = 38,
                         GKE_PSC_ENDPOINT_MISSING = 36,
@@ -4594,6 +4623,7 @@ export namespace google {
                         HYBRID_NEG_NON_DYNAMIC_ROUTE_MATCHED = 55,
                         HYBRID_NEG_NON_LOCAL_DYNAMIC_ROUTE_MATCHED = 56,
                         CLOUD_RUN_REVISION_NOT_READY = 29,
+                        CLOUD_RUN_JOB_NOT_READY = 113,
                         DROPPED_INSIDE_PSC_SERVICE_PRODUCER = 37,
                         LOAD_BALANCER_HAS_NO_PROXY_SUBNET = 39,
                         CLOUD_NAT_NO_ADDRESSES = 40,
@@ -4632,7 +4662,8 @@ export namespace google {
                         HYBRID_SUBNET_REGION_MISMATCH = 105,
                         HYBRID_SUBNET_NO_ROUTE = 106,
                         GKE_NETWORK_POLICY = 108,
-                        NO_VALID_ROUTE_FROM_GOOGLE_MANAGED_NETWORK_TO_DESTINATION = 110
+                        NO_VALID_ROUTE_FROM_GOOGLE_MANAGED_NETWORK_TO_DESTINATION = 110,
+                        PRIVATE_CONNECTION_NO_RUNNING_INSTANCE = 111
                     }
                 }
 
@@ -5814,6 +5845,115 @@ export namespace google {
 
                     /**
                      * Gets the default type url for CloudRunRevisionInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CloudRunJobInfo. */
+                interface ICloudRunJobInfo {
+
+                    /** CloudRunJobInfo displayName */
+                    displayName?: (string|null);
+
+                    /** CloudRunJobInfo uri */
+                    uri?: (string|null);
+
+                    /** CloudRunJobInfo location */
+                    location?: (string|null);
+                }
+
+                /** Represents a CloudRunJobInfo. */
+                class CloudRunJobInfo implements ICloudRunJobInfo {
+
+                    /**
+                     * Constructs a new CloudRunJobInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1.ICloudRunJobInfo);
+
+                    /** CloudRunJobInfo displayName. */
+                    public displayName: string;
+
+                    /** CloudRunJobInfo uri. */
+                    public uri: string;
+
+                    /** CloudRunJobInfo location. */
+                    public location: string;
+
+                    /**
+                     * Creates a new CloudRunJobInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CloudRunJobInfo instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1.ICloudRunJobInfo): google.cloud.networkmanagement.v1.CloudRunJobInfo;
+
+                    /**
+                     * Encodes the specified CloudRunJobInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1.CloudRunJobInfo.verify|verify} messages.
+                     * @param message CloudRunJobInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1.ICloudRunJobInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CloudRunJobInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.CloudRunJobInfo.verify|verify} messages.
+                     * @param message CloudRunJobInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1.ICloudRunJobInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CloudRunJobInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CloudRunJobInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1.CloudRunJobInfo;
+
+                    /**
+                     * Decodes a CloudRunJobInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CloudRunJobInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1.CloudRunJobInfo;
+
+                    /**
+                     * Verifies a CloudRunJobInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CloudRunJobInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CloudRunJobInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1.CloudRunJobInfo;
+
+                    /**
+                     * Creates a plain object from a CloudRunJobInfo message. Also converts values to other types if specified.
+                     * @param message CloudRunJobInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1.CloudRunJobInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CloudRunJobInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CloudRunJobInfo
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -7080,6 +7220,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for NgfwPacketInspectionInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PrivateConnectionInfo. */
+                interface IPrivateConnectionInfo {
+
+                    /** PrivateConnectionInfo uri */
+                    uri?: (string|null);
+                }
+
+                /** Represents a PrivateConnectionInfo. */
+                class PrivateConnectionInfo implements IPrivateConnectionInfo {
+
+                    /**
+                     * Constructs a new PrivateConnectionInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1.IPrivateConnectionInfo);
+
+                    /** PrivateConnectionInfo uri. */
+                    public uri: string;
+
+                    /**
+                     * Creates a new PrivateConnectionInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PrivateConnectionInfo instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1.IPrivateConnectionInfo): google.cloud.networkmanagement.v1.PrivateConnectionInfo;
+
+                    /**
+                     * Encodes the specified PrivateConnectionInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1.PrivateConnectionInfo.verify|verify} messages.
+                     * @param message PrivateConnectionInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1.IPrivateConnectionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PrivateConnectionInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.PrivateConnectionInfo.verify|verify} messages.
+                     * @param message PrivateConnectionInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1.IPrivateConnectionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PrivateConnectionInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PrivateConnectionInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1.PrivateConnectionInfo;
+
+                    /**
+                     * Decodes a PrivateConnectionInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PrivateConnectionInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1.PrivateConnectionInfo;
+
+                    /**
+                     * Verifies a PrivateConnectionInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PrivateConnectionInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PrivateConnectionInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1.PrivateConnectionInfo;
+
+                    /**
+                     * Creates a plain object from a PrivateConnectionInfo message. Also converts values to other types if specified.
+                     * @param message PrivateConnectionInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1.PrivateConnectionInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PrivateConnectionInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PrivateConnectionInfo
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

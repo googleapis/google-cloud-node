@@ -45647,6 +45647,7 @@
                                 return "quoteType: enum value expected";
                             case 0:
                             case 1:
+                            case 2:
                                 break;
                             }
                         if (message.quotedMessageSnapshot != null && message.hasOwnProperty("quotedMessageSnapshot")) {
@@ -45699,6 +45700,10 @@
                         case "REPLY":
                         case 1:
                             message.quoteType = 1;
+                            break;
+                        case "FORWARD":
+                        case 2:
+                            message.quoteType = 2;
                             break;
                         }
                         if (object.quotedMessageSnapshot != null) {
@@ -45779,11 +45784,13 @@
                      * @enum {number}
                      * @property {number} QUOTE_TYPE_UNSPECIFIED=0 QUOTE_TYPE_UNSPECIFIED value
                      * @property {number} REPLY=1 REPLY value
+                     * @property {number} FORWARD=2 FORWARD value
                      */
                     QuotedMessageMetadata.QuoteType = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
                         values[valuesById[0] = "QUOTE_TYPE_UNSPECIFIED"] = 0;
                         values[valuesById[1] = "REPLY"] = 1;
+                        values[valuesById[2] = "FORWARD"] = 2;
                         return values;
                     })();
     

@@ -275,9 +275,24 @@
                 "testIamPermissions"
               ]
             },
+            "DeleteTeamFolderTree": {
+              "methods": [
+                "deleteTeamFolderTree"
+              ]
+            },
+            "DeleteFolderTree": {
+              "methods": [
+                "deleteFolderTree"
+              ]
+            },
             "MoveFolder": {
               "methods": [
                 "moveFolder"
+              ]
+            },
+            "DeleteRepositoryLongRunning": {
+              "methods": [
+                "deleteRepositoryLongRunning"
               ]
             },
             "MoveRepository": {
@@ -667,9 +682,24 @@
                 "testIamPermissions"
               ]
             },
+            "DeleteTeamFolderTree": {
+              "methods": [
+                "deleteTeamFolderTree"
+              ]
+            },
+            "DeleteFolderTree": {
+              "methods": [
+                "deleteFolderTree"
+              ]
+            },
             "MoveFolder": {
               "methods": [
                 "moveFolder"
+              ]
+            },
+            "DeleteRepositoryLongRunning": {
+              "methods": [
+                "deleteRepositoryLongRunning"
               ]
             },
             "MoveRepository": {

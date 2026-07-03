@@ -29,6 +29,9 @@ import {google} from '../protos/protos';
 import * as stream from 'stream';
 import {isDefined, isEmpty, isString} from './helper';
 
+const originalDecode = codec.decode;
+const originalConvertFieldsToJson = codec.convertFieldsToJson;
+
 export type ResumeToken = string | Uint8Array;
 
 /**
@@ -183,6 +186,7 @@ interface ResultEvents {
 export class PartialResultStream extends Transform implements ResultEvents {
   private _destroyed: boolean;
   private _fields!: google.spanner.v1.StructType.Field[];
+  private _decoders!: Function[];
   private _options: RowOptions;
   private _pendingValue?: p.IValue;
   private _pendingValueForResume?: p.IValue;
@@ -238,11 +242,38 @@ export class PartialResultStream extends Transform implements ResultEvents {
     if (!this._fields && chunk.metadata) {
       this._fields = chunk.metadata.rowType!
         .fields as google.spanner.v1.StructType.Field[];
+
+      this._decoders = this._fields.map(({name, type}) => {
+        const columnMetadata =
+          this._options.columnsMetadata &&
+          name !== null &&
+          name !== undefined &&
+          Object.prototype.hasOwnProperty.call(
+            this._options.columnsMetadata,
+            name,
+          )
+            ? (this._options.columnsMetadata as any)[name]
+            : undefined;
+        if (codec.decode !== originalDecode) {
+          return val =>
+            codec.decode(val, type as google.spanner.v1.Type, columnMetadata);
+        }
+        return codec.getDecoder(
+          type as google.spanner.v1.Type,
+          columnMetadata,
+          this._options.json ? this._options.jsonOptions || {} : undefined,
+        );
+      });
     }
 
     let res = true;
     if (!isEmpty(chunk.values)) {
-      res = this._addChunk(chunk);
+      try {
+        res = this._addChunk(chunk);
+      } catch (err) {
+        next(err as Error);
+        return;
+      }
     }
 
     if (chunk.last) {
@@ -307,7 +338,12 @@ export class PartialResultStream extends Transform implements ResultEvents {
    * @param {object} chunk The partial result set.
    */
   private _addChunk(chunk: google.spanner.v1.PartialResultSet): boolean {
-    const values: Value[] = chunk.values.map(GrpcService.decodeValue_);
+    const chunkValues = chunk.values;
+    const numValues = chunkValues.length;
+    const values: Value[] = new Array(numValues);
+    for (let i = 0; i < numValues; i++) {
+      values[i] = GrpcService.decodeValue_(chunkValues[i]);
+    }
 
     // If we have a chunk to merge, merge the values now.
     if (this._pendingValue) {
@@ -335,12 +371,13 @@ export class PartialResultStream extends Transform implements ResultEvents {
     }
 
     let res = true;
-    values.forEach(value => {
-      res = this._addValue(value) && res;
+    const len = values.length;
+    for (let i = 0; i < len; i++) {
+      res = this._addValue(values[i]) && res;
       if (!res) {
         this.emit('paused');
       }
-    });
+    }
     return res;
   }
   /**
@@ -362,6 +399,13 @@ export class PartialResultStream extends Transform implements ResultEvents {
 
     this._values = [];
 
+    const isJsonStubbed =
+      codec.convertFieldsToJson !== originalConvertFieldsToJson;
+
+    if (this._options.json && !isJsonStubbed) {
+      return this.push(this._createJsonRow(values));
+    }
+
     const row: Row = this._createRow(values);
 
     if (this._options.json) {
@@ -369,6 +413,43 @@ export class PartialResultStream extends Transform implements ResultEvents {
     }
 
     return this.push(row);
+  }
+
+  /**
+   * Directly creates a plain JSON object from row cell values, bypassing
+   * Struct, Row, and WrappedNumber class wrappers when possible.
+   *
+   * @private
+   *
+   * @param {Value[]} values The raw cell values for the current row.
+   * @returns {Json} The plain JavaScript object representing the row.
+   */
+  private _createJsonRow(values: Value[]): Json {
+    const json: Json = {};
+    const fields = this._fields;
+    const decoders = this._decoders;
+    const len = fields.length;
+    const includeNameless = !!this._options.jsonOptions?.includeNameless;
+
+    for (let i = 0; i < len; i++) {
+      const {name} = fields[i];
+      if (!name && !includeNameless) {
+        continue;
+      }
+      const fieldName = name ? name : `_${i}`;
+      try {
+        json[fieldName] = decoders[i](values[i]);
+      } catch (e) {
+        (e as Error).message = [
+          `Serializing column "${fieldName}" encountered an error: ${
+            (e as Error).message
+          }`,
+          'Call row.toJSON({ wrapNumbers: true }) to receive a custom type.',
+        ].join(' ');
+        throw e;
+      }
+    }
+    return json;
   }
   /**
    * Converts an array of values into a row.
@@ -379,18 +460,17 @@ export class PartialResultStream extends Transform implements ResultEvents {
    * @returns {Row}
    */
   private _createRow(values: Value[]): Row {
-    const fields = values.map((value, index) => {
-      const {name, type} = this._fields[index];
-      const columnMetadata = this._options.columnsMetadata?.[name];
-      return {
-        name,
-        value: codec.decode(
-          value,
-          type as google.spanner.v1.Type,
-          columnMetadata,
-        ),
+    const len = values.length;
+    const fields = new Array(len);
+    const decoders = this._decoders;
+    const classFields = this._fields;
+
+    for (let i = 0; i < len; i++) {
+      fields[i] = {
+        name: classFields[i].name,
+        value: decoders[i](values[i]),
       };
-    });
+    }
 
     Object.defineProperty(fields, 'toJSON', {
       value: (options?: JSONOptions): Json => {

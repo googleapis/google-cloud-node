@@ -18,8 +18,8 @@
   ],
   "repository": {
     "type": "git",
-    "directory": "dev-packages/jsdoc-region-tag",
-    "url": "https://github.com/googleapis/google-cloud-node-core.git"
+    "directory": "core/dev-packages/jsdoc-region-tag",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
   },
   "keywords": [
     "region",
@@ -30,9 +30,9 @@
   "author": "Google LLC",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/googleapis/google-cloud-node-core/issues"
+    "url": "https://github.com/googleapis/google-cloud-node/issues"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node-core/tree/main/dev-packages/jsdoc-region-tag",
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/core/dev-packages/jsdoc-region-tag",
   "dependencies": {
     "glob": "^7.1.6"
   },

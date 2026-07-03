@@ -3032,7 +3032,7 @@ describe('googleauth', () => {
       assert.ok(client instanceof GdchClient);
       assert.strictEqual(
         (client as GdchClient).apiAudience,
-        'https://hardwaremanagement.us-west1.gdch.google.com/'
+        'https://hardwaremanagement.us-west1.gdch.google.com'
       );
     });
 
@@ -3048,7 +3048,7 @@ describe('googleauth', () => {
       assert.ok(client instanceof GdchClient);
       assert.strictEqual(
         (client as GdchClient).apiAudience,
-        'https://hardwaremanagement.us-west1.gdch.google.com/'
+        'https://hardwaremanagement.us-west1.gdch.google.com'
       );
     });
 
@@ -3064,7 +3064,7 @@ describe('googleauth', () => {
       assert.ok(client instanceof GdchClient);
       assert.strictEqual(
         (client as GdchClient).apiAudience,
-        'http://hardwaremanagement.us-west1.gdch.google.com/'
+        'http://hardwaremanagement.us-west1.gdch.google.com'
       );
     });
 
