@@ -50058,6 +50058,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.dataform.v1beta1.Dataform|deleteTeamFolderTree}.
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @typedef DeleteTeamFolderTreeCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteTeamFolderTree.
+                         * @function deleteTeamFolderTree
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @instance
+                         * @param {google.cloud.dataform.v1beta1.IDeleteTeamFolderTreeRequest} request DeleteTeamFolderTreeRequest message or plain object
+                         * @param {google.cloud.dataform.v1beta1.Dataform.DeleteTeamFolderTreeCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Dataform.prototype.deleteTeamFolderTree = function deleteTeamFolderTree(request, callback) {
+                            return this.rpcCall(deleteTeamFolderTree, $root.google.cloud.dataform.v1beta1.DeleteTeamFolderTreeRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteTeamFolderTree" });
+    
+                        /**
+                         * Calls DeleteTeamFolderTree.
+                         * @function deleteTeamFolderTree
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @instance
+                         * @param {google.cloud.dataform.v1beta1.IDeleteTeamFolderTreeRequest} request DeleteTeamFolderTreeRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.dataform.v1beta1.Dataform|queryTeamFolderContents}.
                          * @memberof google.cloud.dataform.v1beta1.Dataform
                          * @typedef QueryTeamFolderContentsCallback
@@ -50252,6 +50285,39 @@
                          * @instance
                          * @param {google.cloud.dataform.v1beta1.IDeleteFolderRequest} request DeleteFolderRequest message or plain object
                          * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.dataform.v1beta1.Dataform|deleteFolderTree}.
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @typedef DeleteFolderTreeCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteFolderTree.
+                         * @function deleteFolderTree
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @instance
+                         * @param {google.cloud.dataform.v1beta1.IDeleteFolderTreeRequest} request DeleteFolderTreeRequest message or plain object
+                         * @param {google.cloud.dataform.v1beta1.Dataform.DeleteFolderTreeCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Dataform.prototype.deleteFolderTree = function deleteFolderTree(request, callback) {
+                            return this.rpcCall(deleteFolderTree, $root.google.cloud.dataform.v1beta1.DeleteFolderTreeRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteFolderTree" });
+    
+                        /**
+                         * Calls DeleteFolderTree.
+                         * @function deleteFolderTree
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @instance
+                         * @param {google.cloud.dataform.v1beta1.IDeleteFolderTreeRequest} request DeleteFolderTreeRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
                          * @variation 2
                          */
     
@@ -50516,6 +50582,39 @@
                          * @instance
                          * @param {google.cloud.dataform.v1beta1.IDeleteRepositoryRequest} request DeleteRepositoryRequest message or plain object
                          * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.dataform.v1beta1.Dataform|deleteRepositoryLongRunning}.
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @typedef DeleteRepositoryLongRunningCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteRepositoryLongRunning.
+                         * @function deleteRepositoryLongRunning
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @instance
+                         * @param {google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningRequest} request DeleteRepositoryLongRunningRequest message or plain object
+                         * @param {google.cloud.dataform.v1beta1.Dataform.DeleteRepositoryLongRunningCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Dataform.prototype.deleteRepositoryLongRunning = function deleteRepositoryLongRunning(request, callback) {
+                            return this.rpcCall(deleteRepositoryLongRunning, $root.google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteRepositoryLongRunning" });
+    
+                        /**
+                         * Calls DeleteRepositoryLongRunning.
+                         * @function deleteRepositoryLongRunning
+                         * @memberof google.cloud.dataform.v1beta1.Dataform
+                         * @instance
+                         * @param {google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningRequest} request DeleteRepositoryLongRunningRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
                          * @variation 2
                          */
     
@@ -52271,6 +52370,22 @@
                         return Dataform;
                     })();
     
+                    /**
+                     * DirectoryContentsView enum.
+                     * @name google.cloud.dataform.v1beta1.DirectoryContentsView
+                     * @enum {number}
+                     * @property {number} DIRECTORY_CONTENTS_VIEW_UNSPECIFIED=0 DIRECTORY_CONTENTS_VIEW_UNSPECIFIED value
+                     * @property {number} DIRECTORY_CONTENTS_VIEW_BASIC=1 DIRECTORY_CONTENTS_VIEW_BASIC value
+                     * @property {number} DIRECTORY_CONTENTS_VIEW_METADATA=2 DIRECTORY_CONTENTS_VIEW_METADATA value
+                     */
+                    v1beta1.DirectoryContentsView = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "DIRECTORY_CONTENTS_VIEW_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "DIRECTORY_CONTENTS_VIEW_BASIC"] = 1;
+                        values[valuesById[2] = "DIRECTORY_CONTENTS_VIEW_METADATA"] = 2;
+                        return values;
+                    })();
+    
                     v1beta1.DataEncryptionState = (function() {
     
                         /**
@@ -53108,8 +53223,10 @@
                              * @interface IGitRemoteSettings
                              * @property {string|null} [url] GitRemoteSettings url
                              * @property {string|null} [defaultBranch] GitRemoteSettings defaultBranch
+                             * @property {string|null} [effectiveDefaultBranch] GitRemoteSettings effectiveDefaultBranch
                              * @property {string|null} [authenticationTokenSecretVersion] GitRemoteSettings authenticationTokenSecretVersion
                              * @property {google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.ISshAuthenticationConfig|null} [sshAuthenticationConfig] GitRemoteSettings sshAuthenticationConfig
+                             * @property {string|null} [gitRepositoryLink] GitRemoteSettings gitRepositoryLink
                              * @property {google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.TokenStatus|null} [tokenStatus] GitRemoteSettings tokenStatus
                              */
     
@@ -53145,6 +53262,14 @@
                             GitRemoteSettings.prototype.defaultBranch = "";
     
                             /**
+                             * GitRemoteSettings effectiveDefaultBranch.
+                             * @member {string} effectiveDefaultBranch
+                             * @memberof google.cloud.dataform.v1beta1.Repository.GitRemoteSettings
+                             * @instance
+                             */
+                            GitRemoteSettings.prototype.effectiveDefaultBranch = "";
+    
+                            /**
                              * GitRemoteSettings authenticationTokenSecretVersion.
                              * @member {string} authenticationTokenSecretVersion
                              * @memberof google.cloud.dataform.v1beta1.Repository.GitRemoteSettings
@@ -53161,12 +53286,29 @@
                             GitRemoteSettings.prototype.sshAuthenticationConfig = null;
     
                             /**
+                             * GitRemoteSettings gitRepositoryLink.
+                             * @member {string|null|undefined} gitRepositoryLink
+                             * @memberof google.cloud.dataform.v1beta1.Repository.GitRemoteSettings
+                             * @instance
+                             */
+                            GitRemoteSettings.prototype.gitRepositoryLink = null;
+    
+                            /**
                              * GitRemoteSettings tokenStatus.
                              * @member {google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.TokenStatus} tokenStatus
                              * @memberof google.cloud.dataform.v1beta1.Repository.GitRemoteSettings
                              * @instance
                              */
                             GitRemoteSettings.prototype.tokenStatus = 0;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(GitRemoteSettings.prototype, "_gitRepositoryLink", {
+                                get: $util.oneOfGetter($oneOfFields = ["gitRepositoryLink"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
     
                             /**
                              * Creates a new GitRemoteSettings instance using the specified properties.
@@ -53202,6 +53344,10 @@
                                     writer.uint32(/* id 4, wireType 0 =*/32).int32(message.tokenStatus);
                                 if (message.sshAuthenticationConfig != null && Object.hasOwnProperty.call(message, "sshAuthenticationConfig"))
                                     $root.google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.SshAuthenticationConfig.encode(message.sshAuthenticationConfig, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.gitRepositoryLink != null && Object.hasOwnProperty.call(message, "gitRepositoryLink"))
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.gitRepositoryLink);
+                                if (message.effectiveDefaultBranch != null && Object.hasOwnProperty.call(message, "effectiveDefaultBranch"))
+                                    writer.uint32(/* id 9, wireType 2 =*/74).string(message.effectiveDefaultBranch);
                                 return writer;
                             };
     
@@ -53250,12 +53396,20 @@
                                             message.defaultBranch = reader.string();
                                             break;
                                         }
+                                    case 9: {
+                                            message.effectiveDefaultBranch = reader.string();
+                                            break;
+                                        }
                                     case 3: {
                                             message.authenticationTokenSecretVersion = reader.string();
                                             break;
                                         }
                                     case 5: {
                                             message.sshAuthenticationConfig = $root.google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.SshAuthenticationConfig.decode(reader, reader.uint32(), undefined, long + 1);
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.gitRepositoryLink = reader.string();
                                             break;
                                         }
                                     case 4: {
@@ -53301,12 +53455,16 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
+                                var properties = {};
                                 if (message.url != null && message.hasOwnProperty("url"))
                                     if (!$util.isString(message.url))
                                         return "url: string expected";
                                 if (message.defaultBranch != null && message.hasOwnProperty("defaultBranch"))
                                     if (!$util.isString(message.defaultBranch))
                                         return "defaultBranch: string expected";
+                                if (message.effectiveDefaultBranch != null && message.hasOwnProperty("effectiveDefaultBranch"))
+                                    if (!$util.isString(message.effectiveDefaultBranch))
+                                        return "effectiveDefaultBranch: string expected";
                                 if (message.authenticationTokenSecretVersion != null && message.hasOwnProperty("authenticationTokenSecretVersion"))
                                     if (!$util.isString(message.authenticationTokenSecretVersion))
                                         return "authenticationTokenSecretVersion: string expected";
@@ -53314,6 +53472,11 @@
                                     var error = $root.google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.SshAuthenticationConfig.verify(message.sshAuthenticationConfig, long + 1);
                                     if (error)
                                         return "sshAuthenticationConfig." + error;
+                                }
+                                if (message.gitRepositoryLink != null && message.hasOwnProperty("gitRepositoryLink")) {
+                                    properties._gitRepositoryLink = 1;
+                                    if (!$util.isString(message.gitRepositoryLink))
+                                        return "gitRepositoryLink: string expected";
                                 }
                                 if (message.tokenStatus != null && message.hasOwnProperty("tokenStatus"))
                                     switch (message.tokenStatus) {
@@ -53348,6 +53511,8 @@
                                     message.url = String(object.url);
                                 if (object.defaultBranch != null)
                                     message.defaultBranch = String(object.defaultBranch);
+                                if (object.effectiveDefaultBranch != null)
+                                    message.effectiveDefaultBranch = String(object.effectiveDefaultBranch);
                                 if (object.authenticationTokenSecretVersion != null)
                                     message.authenticationTokenSecretVersion = String(object.authenticationTokenSecretVersion);
                                 if (object.sshAuthenticationConfig != null) {
@@ -53355,6 +53520,8 @@
                                         throw TypeError(".google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.sshAuthenticationConfig: object expected");
                                     message.sshAuthenticationConfig = $root.google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.SshAuthenticationConfig.fromObject(object.sshAuthenticationConfig, long + 1);
                                 }
+                                if (object.gitRepositoryLink != null)
+                                    message.gitRepositoryLink = String(object.gitRepositoryLink);
                                 switch (object.tokenStatus) {
                                 default:
                                     if (typeof object.tokenStatus === "number") {
@@ -53401,6 +53568,7 @@
                                     object.authenticationTokenSecretVersion = "";
                                     object.tokenStatus = options.enums === String ? "TOKEN_STATUS_UNSPECIFIED" : 0;
                                     object.sshAuthenticationConfig = null;
+                                    object.effectiveDefaultBranch = "";
                                 }
                                 if (message.url != null && message.hasOwnProperty("url"))
                                     object.url = message.url;
@@ -53412,6 +53580,13 @@
                                     object.tokenStatus = options.enums === String ? $root.google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.TokenStatus[message.tokenStatus] === undefined ? message.tokenStatus : $root.google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.TokenStatus[message.tokenStatus] : message.tokenStatus;
                                 if (message.sshAuthenticationConfig != null && message.hasOwnProperty("sshAuthenticationConfig"))
                                     object.sshAuthenticationConfig = $root.google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.SshAuthenticationConfig.toObject(message.sshAuthenticationConfig, options);
+                                if (message.gitRepositoryLink != null && message.hasOwnProperty("gitRepositoryLink")) {
+                                    object.gitRepositoryLink = message.gitRepositoryLink;
+                                    if (options.oneofs)
+                                        object._gitRepositoryLink = "gitRepositoryLink";
+                                }
+                                if (message.effectiveDefaultBranch != null && message.hasOwnProperty("effectiveDefaultBranch"))
+                                    object.effectiveDefaultBranch = message.effectiveDefaultBranch;
                                 return object;
                             };
     
@@ -56029,6 +56204,436 @@
                         };
     
                         return DeleteRepositoryRequest;
+                    })();
+    
+                    v1beta1.DeleteRepositoryLongRunningResponse = (function() {
+    
+                        /**
+                         * Properties of a DeleteRepositoryLongRunningResponse.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @interface IDeleteRepositoryLongRunningResponse
+                         */
+    
+                        /**
+                         * Constructs a new DeleteRepositoryLongRunningResponse.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @classdesc Represents a DeleteRepositoryLongRunningResponse.
+                         * @implements IDeleteRepositoryLongRunningResponse
+                         * @constructor
+                         * @param {google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningResponse=} [properties] Properties to set
+                         */
+                        function DeleteRepositoryLongRunningResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new DeleteRepositoryLongRunningResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningResponse
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningResponse=} [properties] Properties to set
+                         * @returns {google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningResponse} DeleteRepositoryLongRunningResponse instance
+                         */
+                        DeleteRepositoryLongRunningResponse.create = function create(properties) {
+                            return new DeleteRepositoryLongRunningResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteRepositoryLongRunningResponse message. Does not implicitly {@link google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningResponse
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningResponse} message DeleteRepositoryLongRunningResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteRepositoryLongRunningResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteRepositoryLongRunningResponse message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningResponse
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningResponse} message DeleteRepositoryLongRunningResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteRepositoryLongRunningResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteRepositoryLongRunningResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningResponse} DeleteRepositoryLongRunningResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteRepositoryLongRunningResponse.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteRepositoryLongRunningResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningResponse} DeleteRepositoryLongRunningResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteRepositoryLongRunningResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteRepositoryLongRunningResponse message.
+                         * @function verify
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteRepositoryLongRunningResponse.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteRepositoryLongRunningResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningResponse} DeleteRepositoryLongRunningResponse
+                         */
+                        DeleteRepositoryLongRunningResponse.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningResponse)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            return new $root.google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningResponse();
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteRepositoryLongRunningResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningResponse
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningResponse} message DeleteRepositoryLongRunningResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteRepositoryLongRunningResponse.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this DeleteRepositoryLongRunningResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteRepositoryLongRunningResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteRepositoryLongRunningResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteRepositoryLongRunningResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningResponse";
+                        };
+    
+                        return DeleteRepositoryLongRunningResponse;
+                    })();
+    
+                    v1beta1.DeleteRepositoryLongRunningRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteRepositoryLongRunningRequest.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @interface IDeleteRepositoryLongRunningRequest
+                         * @property {string|null} [name] DeleteRepositoryLongRunningRequest name
+                         * @property {boolean|null} [force] DeleteRepositoryLongRunningRequest force
+                         */
+    
+                        /**
+                         * Constructs a new DeleteRepositoryLongRunningRequest.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @classdesc Represents a DeleteRepositoryLongRunningRequest.
+                         * @implements IDeleteRepositoryLongRunningRequest
+                         * @constructor
+                         * @param {google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningRequest=} [properties] Properties to set
+                         */
+                        function DeleteRepositoryLongRunningRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteRepositoryLongRunningRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningRequest
+                         * @instance
+                         */
+                        DeleteRepositoryLongRunningRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteRepositoryLongRunningRequest force.
+                         * @member {boolean} force
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningRequest
+                         * @instance
+                         */
+                        DeleteRepositoryLongRunningRequest.prototype.force = false;
+    
+                        /**
+                         * Creates a new DeleteRepositoryLongRunningRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningRequest=} [properties] Properties to set
+                         * @returns {google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningRequest} DeleteRepositoryLongRunningRequest instance
+                         */
+                        DeleteRepositoryLongRunningRequest.create = function create(properties) {
+                            return new DeleteRepositoryLongRunningRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteRepositoryLongRunningRequest message. Does not implicitly {@link google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningRequest} message DeleteRepositoryLongRunningRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteRepositoryLongRunningRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.force != null && Object.hasOwnProperty.call(message, "force"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.force);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteRepositoryLongRunningRequest message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningRequest} message DeleteRepositoryLongRunningRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteRepositoryLongRunningRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteRepositoryLongRunningRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningRequest} DeleteRepositoryLongRunningRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteRepositoryLongRunningRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.force = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteRepositoryLongRunningRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningRequest} DeleteRepositoryLongRunningRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteRepositoryLongRunningRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteRepositoryLongRunningRequest message.
+                         * @function verify
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteRepositoryLongRunningRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                if (typeof message.force !== "boolean")
+                                    return "force: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteRepositoryLongRunningRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningRequest} DeleteRepositoryLongRunningRequest
+                         */
+                        DeleteRepositoryLongRunningRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.force != null)
+                                message.force = Boolean(object.force);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteRepositoryLongRunningRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningRequest} message DeleteRepositoryLongRunningRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteRepositoryLongRunningRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.force = false;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                object.force = message.force;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteRepositoryLongRunningRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteRepositoryLongRunningRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteRepositoryLongRunningRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteRepositoryLongRunningRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningRequest";
+                        };
+    
+                        return DeleteRepositoryLongRunningRequest;
                     })();
     
                     v1beta1.CommitRepositoryChangesRequest = (function() {
@@ -59778,6 +60383,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             return null;
@@ -59821,6 +60427,10 @@
                             case "VALID":
                             case 3:
                                 message.tokenStatus = 3;
+                                break;
+                            case "PERMISSION_DENIED":
+                            case 4:
+                                message.tokenStatus = 4;
                                 break;
                             }
                             return message;
@@ -59880,6 +60490,7 @@
                          * @property {number} NOT_FOUND=1 NOT_FOUND value
                          * @property {number} INVALID=2 INVALID value
                          * @property {number} VALID=3 VALID value
+                         * @property {number} PERMISSION_DENIED=4 PERMISSION_DENIED value
                          */
                         ComputeRepositoryAccessTokenStatusResponse.TokenStatus = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -59887,6 +60498,7 @@
                             values[valuesById[1] = "NOT_FOUND"] = 1;
                             values[valuesById[2] = "INVALID"] = 2;
                             values[valuesById[3] = "VALID"] = 3;
+                            values[valuesById[4] = "PERMISSION_DENIED"] = 4;
                             return values;
                         })();
     
@@ -65827,6 +66439,7 @@
                          * @property {string|null} [path] QueryDirectoryContentsRequest path
                          * @property {number|null} [pageSize] QueryDirectoryContentsRequest pageSize
                          * @property {string|null} [pageToken] QueryDirectoryContentsRequest pageToken
+                         * @property {google.cloud.dataform.v1beta1.DirectoryContentsView|null} [view] QueryDirectoryContentsRequest view
                          */
     
                         /**
@@ -65877,6 +66490,14 @@
                         QueryDirectoryContentsRequest.prototype.pageToken = "";
     
                         /**
+                         * QueryDirectoryContentsRequest view.
+                         * @member {google.cloud.dataform.v1beta1.DirectoryContentsView} view
+                         * @memberof google.cloud.dataform.v1beta1.QueryDirectoryContentsRequest
+                         * @instance
+                         */
+                        QueryDirectoryContentsRequest.prototype.view = 0;
+    
+                        /**
                          * Creates a new QueryDirectoryContentsRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dataform.v1beta1.QueryDirectoryContentsRequest
@@ -65908,6 +66529,8 @@
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.pageSize);
                             if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.pageToken);
+                            if (message.view != null && Object.hasOwnProperty.call(message, "view"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.view);
                             return writer;
                         };
     
@@ -65964,6 +66587,10 @@
                                         message.pageToken = reader.string();
                                         break;
                                     }
+                                case 5: {
+                                        message.view = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7, long);
                                     break;
@@ -66015,6 +66642,15 @@
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 if (!$util.isString(message.pageToken))
                                     return "pageToken: string expected";
+                            if (message.view != null && message.hasOwnProperty("view"))
+                                switch (message.view) {
+                                default:
+                                    return "view: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -66042,6 +66678,26 @@
                                 message.pageSize = object.pageSize | 0;
                             if (object.pageToken != null)
                                 message.pageToken = String(object.pageToken);
+                            switch (object.view) {
+                            default:
+                                if (typeof object.view === "number") {
+                                    message.view = object.view;
+                                    break;
+                                }
+                                break;
+                            case "DIRECTORY_CONTENTS_VIEW_UNSPECIFIED":
+                            case 0:
+                                message.view = 0;
+                                break;
+                            case "DIRECTORY_CONTENTS_VIEW_BASIC":
+                            case 1:
+                                message.view = 1;
+                                break;
+                            case "DIRECTORY_CONTENTS_VIEW_METADATA":
+                            case 2:
+                                message.view = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -66063,6 +66719,7 @@
                                 object.path = "";
                                 object.pageSize = 0;
                                 object.pageToken = "";
+                                object.view = options.enums === String ? "DIRECTORY_CONTENTS_VIEW_UNSPECIFIED" : 0;
                             }
                             if (message.workspace != null && message.hasOwnProperty("workspace"))
                                 object.workspace = message.workspace;
@@ -66072,6 +66729,8 @@
                                 object.pageSize = message.pageSize;
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 object.pageToken = message.pageToken;
+                            if (message.view != null && message.hasOwnProperty("view"))
+                                object.view = options.enums === String ? $root.google.cloud.dataform.v1beta1.DirectoryContentsView[message.view] === undefined ? message.view : $root.google.cloud.dataform.v1beta1.DirectoryContentsView[message.view] : message.view;
                             return object;
                         };
     
@@ -66374,6 +67033,7 @@
                          * @interface IDirectoryEntry
                          * @property {string|null} [file] DirectoryEntry file
                          * @property {string|null} [directory] DirectoryEntry directory
+                         * @property {google.cloud.dataform.v1beta1.IFilesystemEntryMetadata|null} [metadata] DirectoryEntry metadata
                          */
     
                         /**
@@ -66406,6 +67066,14 @@
                          * @instance
                          */
                         DirectoryEntry.prototype.directory = null;
+    
+                        /**
+                         * DirectoryEntry metadata.
+                         * @member {google.cloud.dataform.v1beta1.IFilesystemEntryMetadata|null|undefined} metadata
+                         * @memberof google.cloud.dataform.v1beta1.DirectoryEntry
+                         * @instance
+                         */
+                        DirectoryEntry.prototype.metadata = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -66449,6 +67117,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.file);
                             if (message.directory != null && Object.hasOwnProperty.call(message, "directory"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.directory);
+                            if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata"))
+                                $root.google.cloud.dataform.v1beta1.FilesystemEntryMetadata.encode(message.metadata, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -66495,6 +67165,10 @@
                                     }
                                 case 2: {
                                         message.directory = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.metadata = $root.google.cloud.dataform.v1beta1.FilesystemEntryMetadata.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 default:
@@ -66549,6 +67223,11 @@
                                 if (!$util.isString(message.directory))
                                     return "directory: string expected";
                             }
+                            if (message.metadata != null && message.hasOwnProperty("metadata")) {
+                                var error = $root.google.cloud.dataform.v1beta1.FilesystemEntryMetadata.verify(message.metadata, long + 1);
+                                if (error)
+                                    return "metadata." + error;
+                            }
                             return null;
                         };
     
@@ -66572,6 +67251,11 @@
                                 message.file = String(object.file);
                             if (object.directory != null)
                                 message.directory = String(object.directory);
+                            if (object.metadata != null) {
+                                if (typeof object.metadata !== "object")
+                                    throw TypeError(".google.cloud.dataform.v1beta1.DirectoryEntry.metadata: object expected");
+                                message.metadata = $root.google.cloud.dataform.v1beta1.FilesystemEntryMetadata.fromObject(object.metadata, long + 1);
+                            }
                             return message;
                         };
     
@@ -66588,6 +67272,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.defaults)
+                                object.metadata = null;
                             if (message.file != null && message.hasOwnProperty("file")) {
                                 object.file = message.file;
                                 if (options.oneofs)
@@ -66598,6 +67284,8 @@
                                 if (options.oneofs)
                                     object.entry = "directory";
                             }
+                            if (message.metadata != null && message.hasOwnProperty("metadata"))
+                                object.metadata = $root.google.cloud.dataform.v1beta1.FilesystemEntryMetadata.toObject(message.metadata, options);
                             return object;
                         };
     
@@ -66628,6 +67316,266 @@
                         };
     
                         return DirectoryEntry;
+                    })();
+    
+                    v1beta1.FilesystemEntryMetadata = (function() {
+    
+                        /**
+                         * Properties of a FilesystemEntryMetadata.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @interface IFilesystemEntryMetadata
+                         * @property {number|Long|null} [sizeBytes] FilesystemEntryMetadata sizeBytes
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] FilesystemEntryMetadata updateTime
+                         */
+    
+                        /**
+                         * Constructs a new FilesystemEntryMetadata.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @classdesc Represents a FilesystemEntryMetadata.
+                         * @implements IFilesystemEntryMetadata
+                         * @constructor
+                         * @param {google.cloud.dataform.v1beta1.IFilesystemEntryMetadata=} [properties] Properties to set
+                         */
+                        function FilesystemEntryMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FilesystemEntryMetadata sizeBytes.
+                         * @member {number|Long} sizeBytes
+                         * @memberof google.cloud.dataform.v1beta1.FilesystemEntryMetadata
+                         * @instance
+                         */
+                        FilesystemEntryMetadata.prototype.sizeBytes = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * FilesystemEntryMetadata updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.dataform.v1beta1.FilesystemEntryMetadata
+                         * @instance
+                         */
+                        FilesystemEntryMetadata.prototype.updateTime = null;
+    
+                        /**
+                         * Creates a new FilesystemEntryMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataform.v1beta1.FilesystemEntryMetadata
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IFilesystemEntryMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.dataform.v1beta1.FilesystemEntryMetadata} FilesystemEntryMetadata instance
+                         */
+                        FilesystemEntryMetadata.create = function create(properties) {
+                            return new FilesystemEntryMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FilesystemEntryMetadata message. Does not implicitly {@link google.cloud.dataform.v1beta1.FilesystemEntryMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataform.v1beta1.FilesystemEntryMetadata
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IFilesystemEntryMetadata} message FilesystemEntryMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FilesystemEntryMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.sizeBytes != null && Object.hasOwnProperty.call(message, "sizeBytes"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.sizeBytes);
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FilesystemEntryMetadata message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.FilesystemEntryMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.FilesystemEntryMetadata
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IFilesystemEntryMetadata} message FilesystemEntryMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FilesystemEntryMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FilesystemEntryMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataform.v1beta1.FilesystemEntryMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataform.v1beta1.FilesystemEntryMetadata} FilesystemEntryMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FilesystemEntryMetadata.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.FilesystemEntryMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.sizeBytes = reader.int64();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FilesystemEntryMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.FilesystemEntryMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataform.v1beta1.FilesystemEntryMetadata} FilesystemEntryMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FilesystemEntryMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FilesystemEntryMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.dataform.v1beta1.FilesystemEntryMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FilesystemEntryMetadata.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.sizeBytes != null && message.hasOwnProperty("sizeBytes"))
+                                if (!$util.isInteger(message.sizeBytes) && !(message.sizeBytes && $util.isInteger(message.sizeBytes.low) && $util.isInteger(message.sizeBytes.high)))
+                                    return "sizeBytes: integer|Long expected";
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime, long + 1);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FilesystemEntryMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataform.v1beta1.FilesystemEntryMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataform.v1beta1.FilesystemEntryMetadata} FilesystemEntryMetadata
+                         */
+                        FilesystemEntryMetadata.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.dataform.v1beta1.FilesystemEntryMetadata)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.dataform.v1beta1.FilesystemEntryMetadata();
+                            if (object.sizeBytes != null)
+                                if ($util.Long)
+                                    (message.sizeBytes = $util.Long.fromValue(object.sizeBytes)).unsigned = false;
+                                else if (typeof object.sizeBytes === "string")
+                                    message.sizeBytes = parseInt(object.sizeBytes, 10);
+                                else if (typeof object.sizeBytes === "number")
+                                    message.sizeBytes = object.sizeBytes;
+                                else if (typeof object.sizeBytes === "object")
+                                    message.sizeBytes = new $util.LongBits(object.sizeBytes.low >>> 0, object.sizeBytes.high >>> 0).toNumber();
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.dataform.v1beta1.FilesystemEntryMetadata.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime, long + 1);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FilesystemEntryMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataform.v1beta1.FilesystemEntryMetadata
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.FilesystemEntryMetadata} message FilesystemEntryMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FilesystemEntryMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.sizeBytes = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.sizeBytes = options.longs === String ? "0" : 0;
+                                object.updateTime = null;
+                            }
+                            if (message.sizeBytes != null && message.hasOwnProperty("sizeBytes"))
+                                if (typeof message.sizeBytes === "number")
+                                    object.sizeBytes = options.longs === String ? String(message.sizeBytes) : message.sizeBytes;
+                                else
+                                    object.sizeBytes = options.longs === String ? $util.Long.prototype.toString.call(message.sizeBytes) : options.longs === Number ? new $util.LongBits(message.sizeBytes.low >>> 0, message.sizeBytes.high >>> 0).toNumber() : message.sizeBytes;
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FilesystemEntryMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataform.v1beta1.FilesystemEntryMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FilesystemEntryMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FilesystemEntryMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataform.v1beta1.FilesystemEntryMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FilesystemEntryMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataform.v1beta1.FilesystemEntryMetadata";
+                        };
+    
+                        return FilesystemEntryMetadata;
                     })();
     
                     v1beta1.SearchFilesRequest = (function() {
@@ -93047,6 +93995,862 @@
                         return DeleteFolderRequest;
                     })();
     
+                    v1beta1.DeleteFolderTreeRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteFolderTreeRequest.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @interface IDeleteFolderTreeRequest
+                         * @property {string|null} [name] DeleteFolderTreeRequest name
+                         * @property {boolean|null} [force] DeleteFolderTreeRequest force
+                         */
+    
+                        /**
+                         * Constructs a new DeleteFolderTreeRequest.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @classdesc Represents a DeleteFolderTreeRequest.
+                         * @implements IDeleteFolderTreeRequest
+                         * @constructor
+                         * @param {google.cloud.dataform.v1beta1.IDeleteFolderTreeRequest=} [properties] Properties to set
+                         */
+                        function DeleteFolderTreeRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteFolderTreeRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.dataform.v1beta1.DeleteFolderTreeRequest
+                         * @instance
+                         */
+                        DeleteFolderTreeRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteFolderTreeRequest force.
+                         * @member {boolean} force
+                         * @memberof google.cloud.dataform.v1beta1.DeleteFolderTreeRequest
+                         * @instance
+                         */
+                        DeleteFolderTreeRequest.prototype.force = false;
+    
+                        /**
+                         * Creates a new DeleteFolderTreeRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataform.v1beta1.DeleteFolderTreeRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IDeleteFolderTreeRequest=} [properties] Properties to set
+                         * @returns {google.cloud.dataform.v1beta1.DeleteFolderTreeRequest} DeleteFolderTreeRequest instance
+                         */
+                        DeleteFolderTreeRequest.create = function create(properties) {
+                            return new DeleteFolderTreeRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteFolderTreeRequest message. Does not implicitly {@link google.cloud.dataform.v1beta1.DeleteFolderTreeRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataform.v1beta1.DeleteFolderTreeRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IDeleteFolderTreeRequest} message DeleteFolderTreeRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteFolderTreeRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.force != null && Object.hasOwnProperty.call(message, "force"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.force);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteFolderTreeRequest message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.DeleteFolderTreeRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.DeleteFolderTreeRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IDeleteFolderTreeRequest} message DeleteFolderTreeRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteFolderTreeRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteFolderTreeRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataform.v1beta1.DeleteFolderTreeRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataform.v1beta1.DeleteFolderTreeRequest} DeleteFolderTreeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteFolderTreeRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.DeleteFolderTreeRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.force = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteFolderTreeRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.DeleteFolderTreeRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataform.v1beta1.DeleteFolderTreeRequest} DeleteFolderTreeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteFolderTreeRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteFolderTreeRequest message.
+                         * @function verify
+                         * @memberof google.cloud.dataform.v1beta1.DeleteFolderTreeRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteFolderTreeRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                if (typeof message.force !== "boolean")
+                                    return "force: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteFolderTreeRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataform.v1beta1.DeleteFolderTreeRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataform.v1beta1.DeleteFolderTreeRequest} DeleteFolderTreeRequest
+                         */
+                        DeleteFolderTreeRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.dataform.v1beta1.DeleteFolderTreeRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.dataform.v1beta1.DeleteFolderTreeRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.force != null)
+                                message.force = Boolean(object.force);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteFolderTreeRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataform.v1beta1.DeleteFolderTreeRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.DeleteFolderTreeRequest} message DeleteFolderTreeRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteFolderTreeRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.force = false;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                object.force = message.force;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteFolderTreeRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataform.v1beta1.DeleteFolderTreeRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteFolderTreeRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteFolderTreeRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataform.v1beta1.DeleteFolderTreeRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteFolderTreeRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataform.v1beta1.DeleteFolderTreeRequest";
+                        };
+    
+                        return DeleteFolderTreeRequest;
+                    })();
+    
+                    v1beta1.DeleteTeamFolderTreeRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteTeamFolderTreeRequest.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @interface IDeleteTeamFolderTreeRequest
+                         * @property {string|null} [name] DeleteTeamFolderTreeRequest name
+                         * @property {boolean|null} [force] DeleteTeamFolderTreeRequest force
+                         */
+    
+                        /**
+                         * Constructs a new DeleteTeamFolderTreeRequest.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @classdesc Represents a DeleteTeamFolderTreeRequest.
+                         * @implements IDeleteTeamFolderTreeRequest
+                         * @constructor
+                         * @param {google.cloud.dataform.v1beta1.IDeleteTeamFolderTreeRequest=} [properties] Properties to set
+                         */
+                        function DeleteTeamFolderTreeRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteTeamFolderTreeRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.dataform.v1beta1.DeleteTeamFolderTreeRequest
+                         * @instance
+                         */
+                        DeleteTeamFolderTreeRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteTeamFolderTreeRequest force.
+                         * @member {boolean} force
+                         * @memberof google.cloud.dataform.v1beta1.DeleteTeamFolderTreeRequest
+                         * @instance
+                         */
+                        DeleteTeamFolderTreeRequest.prototype.force = false;
+    
+                        /**
+                         * Creates a new DeleteTeamFolderTreeRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataform.v1beta1.DeleteTeamFolderTreeRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IDeleteTeamFolderTreeRequest=} [properties] Properties to set
+                         * @returns {google.cloud.dataform.v1beta1.DeleteTeamFolderTreeRequest} DeleteTeamFolderTreeRequest instance
+                         */
+                        DeleteTeamFolderTreeRequest.create = function create(properties) {
+                            return new DeleteTeamFolderTreeRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteTeamFolderTreeRequest message. Does not implicitly {@link google.cloud.dataform.v1beta1.DeleteTeamFolderTreeRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataform.v1beta1.DeleteTeamFolderTreeRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IDeleteTeamFolderTreeRequest} message DeleteTeamFolderTreeRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteTeamFolderTreeRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.force != null && Object.hasOwnProperty.call(message, "force"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.force);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteTeamFolderTreeRequest message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.DeleteTeamFolderTreeRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.DeleteTeamFolderTreeRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IDeleteTeamFolderTreeRequest} message DeleteTeamFolderTreeRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteTeamFolderTreeRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteTeamFolderTreeRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataform.v1beta1.DeleteTeamFolderTreeRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataform.v1beta1.DeleteTeamFolderTreeRequest} DeleteTeamFolderTreeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteTeamFolderTreeRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.DeleteTeamFolderTreeRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.force = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteTeamFolderTreeRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.DeleteTeamFolderTreeRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataform.v1beta1.DeleteTeamFolderTreeRequest} DeleteTeamFolderTreeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteTeamFolderTreeRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteTeamFolderTreeRequest message.
+                         * @function verify
+                         * @memberof google.cloud.dataform.v1beta1.DeleteTeamFolderTreeRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteTeamFolderTreeRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                if (typeof message.force !== "boolean")
+                                    return "force: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteTeamFolderTreeRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataform.v1beta1.DeleteTeamFolderTreeRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataform.v1beta1.DeleteTeamFolderTreeRequest} DeleteTeamFolderTreeRequest
+                         */
+                        DeleteTeamFolderTreeRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.dataform.v1beta1.DeleteTeamFolderTreeRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.dataform.v1beta1.DeleteTeamFolderTreeRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.force != null)
+                                message.force = Boolean(object.force);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteTeamFolderTreeRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataform.v1beta1.DeleteTeamFolderTreeRequest
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.DeleteTeamFolderTreeRequest} message DeleteTeamFolderTreeRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteTeamFolderTreeRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.force = false;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                object.force = message.force;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteTeamFolderTreeRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataform.v1beta1.DeleteTeamFolderTreeRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteTeamFolderTreeRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteTeamFolderTreeRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataform.v1beta1.DeleteTeamFolderTreeRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteTeamFolderTreeRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataform.v1beta1.DeleteTeamFolderTreeRequest";
+                        };
+    
+                        return DeleteTeamFolderTreeRequest;
+                    })();
+    
+                    v1beta1.DeleteFolderTreeMetadata = (function() {
+    
+                        /**
+                         * Properties of a DeleteFolderTreeMetadata.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @interface IDeleteFolderTreeMetadata
+                         * @property {google.protobuf.ITimestamp|null} [createTime] DeleteFolderTreeMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] DeleteFolderTreeMetadata endTime
+                         * @property {string|null} [target] DeleteFolderTreeMetadata target
+                         * @property {google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata.State|null} [state] DeleteFolderTreeMetadata state
+                         * @property {number|null} [percentComplete] DeleteFolderTreeMetadata percentComplete
+                         */
+    
+                        /**
+                         * Constructs a new DeleteFolderTreeMetadata.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @classdesc Represents a DeleteFolderTreeMetadata.
+                         * @implements IDeleteFolderTreeMetadata
+                         * @constructor
+                         * @param {google.cloud.dataform.v1beta1.IDeleteFolderTreeMetadata=} [properties] Properties to set
+                         */
+                        function DeleteFolderTreeMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteFolderTreeMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata
+                         * @instance
+                         */
+                        DeleteFolderTreeMetadata.prototype.createTime = null;
+    
+                        /**
+                         * DeleteFolderTreeMetadata endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata
+                         * @instance
+                         */
+                        DeleteFolderTreeMetadata.prototype.endTime = null;
+    
+                        /**
+                         * DeleteFolderTreeMetadata target.
+                         * @member {string} target
+                         * @memberof google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata
+                         * @instance
+                         */
+                        DeleteFolderTreeMetadata.prototype.target = "";
+    
+                        /**
+                         * DeleteFolderTreeMetadata state.
+                         * @member {google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata.State} state
+                         * @memberof google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata
+                         * @instance
+                         */
+                        DeleteFolderTreeMetadata.prototype.state = 0;
+    
+                        /**
+                         * DeleteFolderTreeMetadata percentComplete.
+                         * @member {number} percentComplete
+                         * @memberof google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata
+                         * @instance
+                         */
+                        DeleteFolderTreeMetadata.prototype.percentComplete = 0;
+    
+                        /**
+                         * Creates a new DeleteFolderTreeMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IDeleteFolderTreeMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata} DeleteFolderTreeMetadata instance
+                         */
+                        DeleteFolderTreeMetadata.create = function create(properties) {
+                            return new DeleteFolderTreeMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteFolderTreeMetadata message. Does not implicitly {@link google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IDeleteFolderTreeMetadata} message DeleteFolderTreeMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteFolderTreeMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.target != null && Object.hasOwnProperty.call(message, "target"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.target);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.state);
+                            if (message.percentComplete != null && Object.hasOwnProperty.call(message, "percentComplete"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.percentComplete);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteFolderTreeMetadata message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IDeleteFolderTreeMetadata} message DeleteFolderTreeMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteFolderTreeMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteFolderTreeMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata} DeleteFolderTreeMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteFolderTreeMetadata.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 2: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 3: {
+                                        message.target = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.percentComplete = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteFolderTreeMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata} DeleteFolderTreeMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteFolderTreeMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteFolderTreeMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteFolderTreeMetadata.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime, long + 1);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime, long + 1);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                            if (message.target != null && message.hasOwnProperty("target"))
+                                if (!$util.isString(message.target))
+                                    return "target: string expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.percentComplete != null && message.hasOwnProperty("percentComplete"))
+                                if (!$util.isInteger(message.percentComplete))
+                                    return "percentComplete: integer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteFolderTreeMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata} DeleteFolderTreeMetadata
+                         */
+                        DeleteFolderTreeMetadata.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata();
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime, long + 1);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime, long + 1);
+                            }
+                            if (object.target != null)
+                                message.target = String(object.target);
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "INITIALIZED":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "IN_PROGRESS":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "SUCCEEDED":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "FAILED":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            }
+                            if (object.percentComplete != null)
+                                message.percentComplete = object.percentComplete | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteFolderTreeMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata} message DeleteFolderTreeMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteFolderTreeMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.createTime = null;
+                                object.endTime = null;
+                                object.target = "";
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.percentComplete = 0;
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (message.target != null && message.hasOwnProperty("target"))
+                                object.target = message.target;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata.State[message.state] === undefined ? message.state : $root.google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata.State[message.state] : message.state;
+                            if (message.percentComplete != null && message.hasOwnProperty("percentComplete"))
+                                object.percentComplete = message.percentComplete;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteFolderTreeMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteFolderTreeMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteFolderTreeMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteFolderTreeMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata";
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} INITIALIZED=1 INITIALIZED value
+                         * @property {number} IN_PROGRESS=2 IN_PROGRESS value
+                         * @property {number} SUCCEEDED=3 SUCCEEDED value
+                         * @property {number} FAILED=4 FAILED value
+                         */
+                        DeleteFolderTreeMetadata.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "INITIALIZED"] = 1;
+                            values[valuesById[2] = "IN_PROGRESS"] = 2;
+                            values[valuesById[3] = "SUCCEEDED"] = 3;
+                            values[valuesById[4] = "FAILED"] = 4;
+                            return values;
+                        })();
+    
+                        return DeleteFolderTreeMetadata;
+                    })();
+    
                     v1beta1.QueryFolderContentsRequest = (function() {
     
                         /**
@@ -98471,6 +100275,447 @@
                         })();
     
                         return MoveRepositoryMetadata;
+                    })();
+    
+                    v1beta1.DeleteRepositoryLongRunningMetadata = (function() {
+    
+                        /**
+                         * Properties of a DeleteRepositoryLongRunningMetadata.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @interface IDeleteRepositoryLongRunningMetadata
+                         * @property {google.protobuf.ITimestamp|null} [createTime] DeleteRepositoryLongRunningMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] DeleteRepositoryLongRunningMetadata endTime
+                         * @property {string|null} [target] DeleteRepositoryLongRunningMetadata target
+                         * @property {google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata.State|null} [state] DeleteRepositoryLongRunningMetadata state
+                         * @property {number|null} [percentComplete] DeleteRepositoryLongRunningMetadata percentComplete
+                         * @property {number|Long|null} [childResourcesCount] DeleteRepositoryLongRunningMetadata childResourcesCount
+                         * @property {number|Long|null} [remainingChildResourcesCount] DeleteRepositoryLongRunningMetadata remainingChildResourcesCount
+                         */
+    
+                        /**
+                         * Constructs a new DeleteRepositoryLongRunningMetadata.
+                         * @memberof google.cloud.dataform.v1beta1
+                         * @classdesc Represents a DeleteRepositoryLongRunningMetadata.
+                         * @implements IDeleteRepositoryLongRunningMetadata
+                         * @constructor
+                         * @param {google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningMetadata=} [properties] Properties to set
+                         */
+                        function DeleteRepositoryLongRunningMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteRepositoryLongRunningMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata
+                         * @instance
+                         */
+                        DeleteRepositoryLongRunningMetadata.prototype.createTime = null;
+    
+                        /**
+                         * DeleteRepositoryLongRunningMetadata endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata
+                         * @instance
+                         */
+                        DeleteRepositoryLongRunningMetadata.prototype.endTime = null;
+    
+                        /**
+                         * DeleteRepositoryLongRunningMetadata target.
+                         * @member {string} target
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata
+                         * @instance
+                         */
+                        DeleteRepositoryLongRunningMetadata.prototype.target = "";
+    
+                        /**
+                         * DeleteRepositoryLongRunningMetadata state.
+                         * @member {google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata.State} state
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata
+                         * @instance
+                         */
+                        DeleteRepositoryLongRunningMetadata.prototype.state = 0;
+    
+                        /**
+                         * DeleteRepositoryLongRunningMetadata percentComplete.
+                         * @member {number} percentComplete
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata
+                         * @instance
+                         */
+                        DeleteRepositoryLongRunningMetadata.prototype.percentComplete = 0;
+    
+                        /**
+                         * DeleteRepositoryLongRunningMetadata childResourcesCount.
+                         * @member {number|Long} childResourcesCount
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata
+                         * @instance
+                         */
+                        DeleteRepositoryLongRunningMetadata.prototype.childResourcesCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * DeleteRepositoryLongRunningMetadata remainingChildResourcesCount.
+                         * @member {number|Long} remainingChildResourcesCount
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata
+                         * @instance
+                         */
+                        DeleteRepositoryLongRunningMetadata.prototype.remainingChildResourcesCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Creates a new DeleteRepositoryLongRunningMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata} DeleteRepositoryLongRunningMetadata instance
+                         */
+                        DeleteRepositoryLongRunningMetadata.create = function create(properties) {
+                            return new DeleteRepositoryLongRunningMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteRepositoryLongRunningMetadata message. Does not implicitly {@link google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningMetadata} message DeleteRepositoryLongRunningMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteRepositoryLongRunningMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.target != null && Object.hasOwnProperty.call(message, "target"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.target);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.state);
+                            if (message.percentComplete != null && Object.hasOwnProperty.call(message, "percentComplete"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.percentComplete);
+                            if (message.childResourcesCount != null && Object.hasOwnProperty.call(message, "childResourcesCount"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int64(message.childResourcesCount);
+                            if (message.remainingChildResourcesCount != null && Object.hasOwnProperty.call(message, "remainingChildResourcesCount"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int64(message.remainingChildResourcesCount);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteRepositoryLongRunningMetadata message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningMetadata} message DeleteRepositoryLongRunningMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteRepositoryLongRunningMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteRepositoryLongRunningMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata} DeleteRepositoryLongRunningMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteRepositoryLongRunningMetadata.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 2: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 3: {
+                                        message.target = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.percentComplete = reader.int32();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.childResourcesCount = reader.int64();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.remainingChildResourcesCount = reader.int64();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteRepositoryLongRunningMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata} DeleteRepositoryLongRunningMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteRepositoryLongRunningMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteRepositoryLongRunningMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteRepositoryLongRunningMetadata.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime, long + 1);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime, long + 1);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                            if (message.target != null && message.hasOwnProperty("target"))
+                                if (!$util.isString(message.target))
+                                    return "target: string expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.percentComplete != null && message.hasOwnProperty("percentComplete"))
+                                if (!$util.isInteger(message.percentComplete))
+                                    return "percentComplete: integer expected";
+                            if (message.childResourcesCount != null && message.hasOwnProperty("childResourcesCount"))
+                                if (!$util.isInteger(message.childResourcesCount) && !(message.childResourcesCount && $util.isInteger(message.childResourcesCount.low) && $util.isInteger(message.childResourcesCount.high)))
+                                    return "childResourcesCount: integer|Long expected";
+                            if (message.remainingChildResourcesCount != null && message.hasOwnProperty("remainingChildResourcesCount"))
+                                if (!$util.isInteger(message.remainingChildResourcesCount) && !(message.remainingChildResourcesCount && $util.isInteger(message.remainingChildResourcesCount.low) && $util.isInteger(message.remainingChildResourcesCount.high)))
+                                    return "remainingChildResourcesCount: integer|Long expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteRepositoryLongRunningMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata} DeleteRepositoryLongRunningMetadata
+                         */
+                        DeleteRepositoryLongRunningMetadata.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata();
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime, long + 1);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime, long + 1);
+                            }
+                            if (object.target != null)
+                                message.target = String(object.target);
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "RUNNING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "SUCCEEDED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "FAILED":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            }
+                            if (object.percentComplete != null)
+                                message.percentComplete = object.percentComplete | 0;
+                            if (object.childResourcesCount != null)
+                                if ($util.Long)
+                                    (message.childResourcesCount = $util.Long.fromValue(object.childResourcesCount)).unsigned = false;
+                                else if (typeof object.childResourcesCount === "string")
+                                    message.childResourcesCount = parseInt(object.childResourcesCount, 10);
+                                else if (typeof object.childResourcesCount === "number")
+                                    message.childResourcesCount = object.childResourcesCount;
+                                else if (typeof object.childResourcesCount === "object")
+                                    message.childResourcesCount = new $util.LongBits(object.childResourcesCount.low >>> 0, object.childResourcesCount.high >>> 0).toNumber();
+                            if (object.remainingChildResourcesCount != null)
+                                if ($util.Long)
+                                    (message.remainingChildResourcesCount = $util.Long.fromValue(object.remainingChildResourcesCount)).unsigned = false;
+                                else if (typeof object.remainingChildResourcesCount === "string")
+                                    message.remainingChildResourcesCount = parseInt(object.remainingChildResourcesCount, 10);
+                                else if (typeof object.remainingChildResourcesCount === "number")
+                                    message.remainingChildResourcesCount = object.remainingChildResourcesCount;
+                                else if (typeof object.remainingChildResourcesCount === "object")
+                                    message.remainingChildResourcesCount = new $util.LongBits(object.remainingChildResourcesCount.low >>> 0, object.remainingChildResourcesCount.high >>> 0).toNumber();
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteRepositoryLongRunningMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata
+                         * @static
+                         * @param {google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata} message DeleteRepositoryLongRunningMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteRepositoryLongRunningMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.createTime = null;
+                                object.endTime = null;
+                                object.target = "";
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.percentComplete = 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.childResourcesCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.childResourcesCount = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.remainingChildResourcesCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.remainingChildResourcesCount = options.longs === String ? "0" : 0;
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (message.target != null && message.hasOwnProperty("target"))
+                                object.target = message.target;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata.State[message.state] === undefined ? message.state : $root.google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata.State[message.state] : message.state;
+                            if (message.percentComplete != null && message.hasOwnProperty("percentComplete"))
+                                object.percentComplete = message.percentComplete;
+                            if (message.childResourcesCount != null && message.hasOwnProperty("childResourcesCount"))
+                                if (typeof message.childResourcesCount === "number")
+                                    object.childResourcesCount = options.longs === String ? String(message.childResourcesCount) : message.childResourcesCount;
+                                else
+                                    object.childResourcesCount = options.longs === String ? $util.Long.prototype.toString.call(message.childResourcesCount) : options.longs === Number ? new $util.LongBits(message.childResourcesCount.low >>> 0, message.childResourcesCount.high >>> 0).toNumber() : message.childResourcesCount;
+                            if (message.remainingChildResourcesCount != null && message.hasOwnProperty("remainingChildResourcesCount"))
+                                if (typeof message.remainingChildResourcesCount === "number")
+                                    object.remainingChildResourcesCount = options.longs === String ? String(message.remainingChildResourcesCount) : message.remainingChildResourcesCount;
+                                else
+                                    object.remainingChildResourcesCount = options.longs === String ? $util.Long.prototype.toString.call(message.remainingChildResourcesCount) : options.longs === Number ? new $util.LongBits(message.remainingChildResourcesCount.low >>> 0, message.remainingChildResourcesCount.high >>> 0).toNumber() : message.remainingChildResourcesCount;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteRepositoryLongRunningMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteRepositoryLongRunningMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteRepositoryLongRunningMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteRepositoryLongRunningMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata";
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} RUNNING=1 RUNNING value
+                         * @property {number} SUCCEEDED=2 SUCCEEDED value
+                         * @property {number} FAILED=3 FAILED value
+                         */
+                        DeleteRepositoryLongRunningMetadata.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "RUNNING"] = 1;
+                            values[valuesById[2] = "SUCCEEDED"] = 2;
+                            values[valuesById[3] = "FAILED"] = 3;
+                            return values;
+                        })();
+    
+                        return DeleteRepositoryLongRunningMetadata;
                     })();
     
                     return v1beta1;

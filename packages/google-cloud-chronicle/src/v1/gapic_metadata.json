@@ -757,6 +757,34 @@
         }
       }
     },
+    "RuleExecutionErrorService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RuleExecutionErrorServiceClient",
+          "rpcs": {
+            "ListRuleExecutionErrors": {
+              "methods": [
+                "listRuleExecutionErrors",
+                "listRuleExecutionErrorsStream",
+                "listRuleExecutionErrorsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RuleExecutionErrorServiceClient",
+          "rpcs": {
+            "ListRuleExecutionErrors": {
+              "methods": [
+                "listRuleExecutionErrors",
+                "listRuleExecutionErrorsStream",
+                "listRuleExecutionErrorsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "RuleService": {
       "clients": {
         "grpc": {

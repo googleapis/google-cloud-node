@@ -2421,6 +2421,98 @@ describe('v1.EntityServiceClient', () => {
       });
     });
 
+    describe('ruleExecutionError', async () => {
+      const fakePath = '/rendered/path/ruleExecutionError';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        rule_execution_error: 'ruleExecutionErrorValue',
+      };
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.ruleExecutionErrorPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.ruleExecutionErrorPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('ruleExecutionErrorPath', () => {
+        const result = client.ruleExecutionErrorPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'ruleExecutionErrorValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.ruleExecutionErrorPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromRuleExecutionErrorName', () => {
+        const result = client.matchProjectFromRuleExecutionErrorName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.ruleExecutionErrorPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromRuleExecutionErrorName', () => {
+        const result = client.matchLocationFromRuleExecutionErrorName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.ruleExecutionErrorPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromRuleExecutionErrorName', () => {
+        const result = client.matchInstanceFromRuleExecutionErrorName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (
+            client.pathTemplates.ruleExecutionErrorPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchRuleExecutionErrorFromRuleExecutionErrorName', () => {
+        const result =
+          client.matchRuleExecutionErrorFromRuleExecutionErrorName(fakePath);
+        assert.strictEqual(result, 'ruleExecutionErrorValue');
+        assert(
+          (
+            client.pathTemplates.ruleExecutionErrorPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('watchlist', async () => {
       const fakePath = '/rendered/path/watchlist';
       const expectedParameters = {

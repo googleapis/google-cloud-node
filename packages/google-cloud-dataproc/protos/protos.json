@@ -2277,6 +2277,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "resourceManagerTags": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -2352,7 +2360,25 @@
                           "type": "bool",
                           "id": 1,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "confidentialInstanceType": {
+                          "type": "ConfidentialInstanceType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ConfidentialInstanceType": {
+                          "values": {
+                            "CONFIDENTIAL_INSTANCE_TYPE_UNSPECIFIED": 0,
+                            "SEV": 1,
+                            "SEV_SNP": 2,
+                            "TDX": 3
                           }
                         }
                       }

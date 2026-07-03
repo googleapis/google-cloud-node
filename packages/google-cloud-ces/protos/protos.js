@@ -123287,7 +123287,6 @@
                          * @interface IAgentTool
                          * @property {string|null} [name] AgentTool name
                          * @property {string|null} [description] AgentTool description
-                         * @property {string|null} [rootAgent] AgentTool rootAgent
                          * @property {string|null} [agent] AgentTool agent
                          */
     
@@ -123321,14 +123320,6 @@
                          * @instance
                          */
                         AgentTool.prototype.description = "";
-    
-                        /**
-                         * AgentTool rootAgent.
-                         * @member {string} rootAgent
-                         * @memberof google.cloud.ces.v1beta.AgentTool
-                         * @instance
-                         */
-                        AgentTool.prototype.rootAgent = "";
     
                         /**
                          * AgentTool agent.
@@ -123366,8 +123357,6 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                             if (message.description != null && Object.hasOwnProperty.call(message, "description"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
-                            if (message.rootAgent != null && Object.hasOwnProperty.call(message, "rootAgent"))
-                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.rootAgent);
                             if (message.agent != null && Object.hasOwnProperty.call(message, "agent"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.agent);
                             return writer;
@@ -123416,10 +123405,6 @@
                                     }
                                 case 2: {
                                         message.description = reader.string();
-                                        break;
-                                    }
-                                case 3: {
-                                        message.rootAgent = reader.string();
                                         break;
                                     }
                                 case 4: {
@@ -123471,9 +123456,6 @@
                             if (message.description != null && message.hasOwnProperty("description"))
                                 if (!$util.isString(message.description))
                                     return "description: string expected";
-                            if (message.rootAgent != null && message.hasOwnProperty("rootAgent"))
-                                if (!$util.isString(message.rootAgent))
-                                    return "rootAgent: string expected";
                             if (message.agent != null && message.hasOwnProperty("agent"))
                                 if (!$util.isString(message.agent))
                                     return "agent: string expected";
@@ -123500,8 +123482,6 @@
                                 message.name = String(object.name);
                             if (object.description != null)
                                 message.description = String(object.description);
-                            if (object.rootAgent != null)
-                                message.rootAgent = String(object.rootAgent);
                             if (object.agent != null)
                                 message.agent = String(object.agent);
                             return message;
@@ -123523,15 +123503,12 @@
                             if (options.defaults) {
                                 object.name = "";
                                 object.description = "";
-                                object.rootAgent = "";
                                 object.agent = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.description != null && message.hasOwnProperty("description"))
                                 object.description = message.description;
-                            if (message.rootAgent != null && message.hasOwnProperty("rootAgent"))
-                                object.rootAgent = message.rootAgent;
                             if (message.agent != null && message.hasOwnProperty("agent"))
                                 object.agent = message.agent;
                             return object;

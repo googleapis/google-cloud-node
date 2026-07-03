@@ -13426,6 +13426,7 @@
                          * @interface IDeleteCollectionRequest
                          * @property {string|null} [name] DeleteCollectionRequest name
                          * @property {string|null} [requestId] DeleteCollectionRequest requestId
+                         * @property {boolean|null} [force] DeleteCollectionRequest force
                          */
     
                         /**
@@ -13460,6 +13461,14 @@
                         DeleteCollectionRequest.prototype.requestId = "";
     
                         /**
+                         * DeleteCollectionRequest force.
+                         * @member {boolean} force
+                         * @memberof google.cloud.vectorsearch.v1.DeleteCollectionRequest
+                         * @instance
+                         */
+                        DeleteCollectionRequest.prototype.force = false;
+    
+                        /**
                          * Creates a new DeleteCollectionRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.vectorsearch.v1.DeleteCollectionRequest
@@ -13487,6 +13496,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                             if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            if (message.force != null && Object.hasOwnProperty.call(message, "force"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.force);
                             return writer;
                         };
     
@@ -13535,6 +13546,10 @@
                                         message.requestId = reader.string();
                                         break;
                                     }
+                                case 3: {
+                                        message.force = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7, long);
                                     break;
@@ -13580,6 +13595,9 @@
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
                                 if (!$util.isString(message.requestId))
                                     return "requestId: string expected";
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                if (typeof message.force !== "boolean")
+                                    return "force: boolean expected";
                             return null;
                         };
     
@@ -13603,6 +13621,8 @@
                                 message.name = String(object.name);
                             if (object.requestId != null)
                                 message.requestId = String(object.requestId);
+                            if (object.force != null)
+                                message.force = Boolean(object.force);
                             return message;
                         };
     
@@ -13622,11 +13642,14 @@
                             if (options.defaults) {
                                 object.name = "";
                                 object.requestId = "";
+                                object.force = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
                                 object.requestId = message.requestId;
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                object.force = message.force;
                             return object;
                         };
     
@@ -17334,6 +17357,7 @@
                          * @interface IExportDataObjectsRequest
                          * @property {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.IGcsExportDestination|null} [gcsDestination] ExportDataObjectsRequest gcsDestination
                          * @property {string|null} [name] ExportDataObjectsRequest name
+                         * @property {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.IFieldFilter|null} [fieldFilter] ExportDataObjectsRequest fieldFilter
                          */
     
                         /**
@@ -17366,6 +17390,14 @@
                          * @instance
                          */
                         ExportDataObjectsRequest.prototype.name = "";
+    
+                        /**
+                         * ExportDataObjectsRequest fieldFilter.
+                         * @member {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.IFieldFilter|null|undefined} fieldFilter
+                         * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest
+                         * @instance
+                         */
+                        ExportDataObjectsRequest.prototype.fieldFilter = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -17409,6 +17441,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                             if (message.gcsDestination != null && Object.hasOwnProperty.call(message, "gcsDestination"))
                                 $root.google.cloud.vectorsearch.v1.ExportDataObjectsRequest.GcsExportDestination.encode(message.gcsDestination, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.fieldFilter != null && Object.hasOwnProperty.call(message, "fieldFilter"))
+                                $root.google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.encode(message.fieldFilter, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -17455,6 +17489,10 @@
                                     }
                                 case 1: {
                                         message.name = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.fieldFilter = $root.google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 default:
@@ -17508,6 +17546,11 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.fieldFilter != null && message.hasOwnProperty("fieldFilter")) {
+                                var error = $root.google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.verify(message.fieldFilter, long + 1);
+                                if (error)
+                                    return "fieldFilter." + error;
+                            }
                             return null;
                         };
     
@@ -17534,6 +17577,11 @@
                             }
                             if (object.name != null)
                                 message.name = String(object.name);
+                            if (object.fieldFilter != null) {
+                                if (typeof object.fieldFilter !== "object")
+                                    throw TypeError(".google.cloud.vectorsearch.v1.ExportDataObjectsRequest.fieldFilter: object expected");
+                                message.fieldFilter = $root.google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.fromObject(object.fieldFilter, long + 1);
+                            }
                             return message;
                         };
     
@@ -17550,8 +17598,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.name = "";
+                                object.fieldFilter = null;
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.gcsDestination != null && message.hasOwnProperty("gcsDestination")) {
@@ -17559,6 +17609,8 @@
                                 if (options.oneofs)
                                     object.destination = "gcsDestination";
                             }
+                            if (message.fieldFilter != null && message.hasOwnProperty("fieldFilter"))
+                                object.fieldFilter = $root.google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.toObject(message.fieldFilter, options);
                             return object;
                         };
     
@@ -17860,6 +17912,515 @@
                             })();
     
                             return GcsExportDestination;
+                        })();
+    
+                        ExportDataObjectsRequest.FieldFilter = (function() {
+    
+                            /**
+                             * Properties of a FieldFilter.
+                             * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest
+                             * @interface IFieldFilter
+                             * @property {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.IFieldList|null} [includedFields] FieldFilter includedFields
+                             * @property {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.IFieldList|null} [excludedFields] FieldFilter excludedFields
+                             */
+    
+                            /**
+                             * Constructs a new FieldFilter.
+                             * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest
+                             * @classdesc Represents a FieldFilter.
+                             * @implements IFieldFilter
+                             * @constructor
+                             * @param {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.IFieldFilter=} [properties] Properties to set
+                             */
+                            function FieldFilter(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * FieldFilter includedFields.
+                             * @member {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.IFieldList|null|undefined} includedFields
+                             * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter
+                             * @instance
+                             */
+                            FieldFilter.prototype.includedFields = null;
+    
+                            /**
+                             * FieldFilter excludedFields.
+                             * @member {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.IFieldList|null|undefined} excludedFields
+                             * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter
+                             * @instance
+                             */
+                            FieldFilter.prototype.excludedFields = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * FieldFilter selector.
+                             * @member {"includedFields"|"excludedFields"|undefined} selector
+                             * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter
+                             * @instance
+                             */
+                            Object.defineProperty(FieldFilter.prototype, "selector", {
+                                get: $util.oneOfGetter($oneOfFields = ["includedFields", "excludedFields"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new FieldFilter instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter
+                             * @static
+                             * @param {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.IFieldFilter=} [properties] Properties to set
+                             * @returns {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter} FieldFilter instance
+                             */
+                            FieldFilter.create = function create(properties) {
+                                return new FieldFilter(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified FieldFilter message. Does not implicitly {@link google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter
+                             * @static
+                             * @param {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.IFieldFilter} message FieldFilter message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FieldFilter.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.includedFields != null && Object.hasOwnProperty.call(message, "includedFields"))
+                                    $root.google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList.encode(message.includedFields, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.excludedFields != null && Object.hasOwnProperty.call(message, "excludedFields"))
+                                    $root.google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList.encode(message.excludedFields, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified FieldFilter message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter
+                             * @static
+                             * @param {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.IFieldFilter} message FieldFilter message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FieldFilter.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a FieldFilter message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter} FieldFilter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FieldFilter.decode = function decode(reader, length, error, long) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.includedFields = $root.google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList.decode(reader, reader.uint32(), undefined, long + 1);
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.excludedFields = $root.google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList.decode(reader, reader.uint32(), undefined, long + 1);
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7, long);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a FieldFilter message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter} FieldFilter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FieldFilter.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a FieldFilter message.
+                             * @function verify
+                             * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            FieldFilter.verify = function verify(message, long) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
+                                var properties = {};
+                                if (message.includedFields != null && message.hasOwnProperty("includedFields")) {
+                                    properties.selector = 1;
+                                    {
+                                        var error = $root.google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList.verify(message.includedFields, long + 1);
+                                        if (error)
+                                            return "includedFields." + error;
+                                    }
+                                }
+                                if (message.excludedFields != null && message.hasOwnProperty("excludedFields")) {
+                                    if (properties.selector === 1)
+                                        return "selector: multiple values";
+                                    properties.selector = 1;
+                                    {
+                                        var error = $root.google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList.verify(message.excludedFields, long + 1);
+                                        if (error)
+                                            return "excludedFields." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a FieldFilter message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter} FieldFilter
+                             */
+                            FieldFilter.fromObject = function fromObject(object, long) {
+                                if (object instanceof $root.google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter)
+                                    return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var message = new $root.google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter();
+                                if (object.includedFields != null) {
+                                    if (typeof object.includedFields !== "object")
+                                        throw TypeError(".google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.includedFields: object expected");
+                                    message.includedFields = $root.google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList.fromObject(object.includedFields, long + 1);
+                                }
+                                if (object.excludedFields != null) {
+                                    if (typeof object.excludedFields !== "object")
+                                        throw TypeError(".google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.excludedFields: object expected");
+                                    message.excludedFields = $root.google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList.fromObject(object.excludedFields, long + 1);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a FieldFilter message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter
+                             * @static
+                             * @param {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter} message FieldFilter
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            FieldFilter.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.includedFields != null && message.hasOwnProperty("includedFields")) {
+                                    object.includedFields = $root.google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList.toObject(message.includedFields, options);
+                                    if (options.oneofs)
+                                        object.selector = "includedFields";
+                                }
+                                if (message.excludedFields != null && message.hasOwnProperty("excludedFields")) {
+                                    object.excludedFields = $root.google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList.toObject(message.excludedFields, options);
+                                    if (options.oneofs)
+                                        object.selector = "excludedFields";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this FieldFilter to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            FieldFilter.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for FieldFilter
+                             * @function getTypeUrl
+                             * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            FieldFilter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter";
+                            };
+    
+                            FieldFilter.FieldList = (function() {
+    
+                                /**
+                                 * Properties of a FieldList.
+                                 * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter
+                                 * @interface IFieldList
+                                 * @property {Array.<string>|null} [fields] FieldList fields
+                                 */
+    
+                                /**
+                                 * Constructs a new FieldList.
+                                 * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter
+                                 * @classdesc Represents a FieldList.
+                                 * @implements IFieldList
+                                 * @constructor
+                                 * @param {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.IFieldList=} [properties] Properties to set
+                                 */
+                                function FieldList(properties) {
+                                    this.fields = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * FieldList fields.
+                                 * @member {Array.<string>} fields
+                                 * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList
+                                 * @instance
+                                 */
+                                FieldList.prototype.fields = $util.emptyArray;
+    
+                                /**
+                                 * Creates a new FieldList instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList
+                                 * @static
+                                 * @param {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.IFieldList=} [properties] Properties to set
+                                 * @returns {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList} FieldList instance
+                                 */
+                                FieldList.create = function create(properties) {
+                                    return new FieldList(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified FieldList message. Does not implicitly {@link google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList
+                                 * @static
+                                 * @param {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.IFieldList} message FieldList message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                FieldList.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.fields != null && message.fields.length)
+                                        for (var i = 0; i < message.fields.length; ++i)
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.fields[i]);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified FieldList message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList
+                                 * @static
+                                 * @param {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.IFieldList} message FieldList message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                FieldList.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a FieldList message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList} FieldList
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                FieldList.decode = function decode(reader, length, error, long) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $Reader.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                if (!(message.fields && message.fields.length))
+                                                    message.fields = [];
+                                                message.fields.push(reader.string());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7, long);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a FieldList message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList} FieldList
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                FieldList.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a FieldList message.
+                                 * @function verify
+                                 * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                FieldList.verify = function verify(message, long) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        return "maximum nesting depth exceeded";
+                                    if (message.fields != null && message.hasOwnProperty("fields")) {
+                                        if (!Array.isArray(message.fields))
+                                            return "fields: array expected";
+                                        for (var i = 0; i < message.fields.length; ++i)
+                                            if (!$util.isString(message.fields[i]))
+                                                return "fields: string[] expected";
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a FieldList message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList} FieldList
+                                 */
+                                FieldList.fromObject = function fromObject(object, long) {
+                                    if (object instanceof $root.google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList)
+                                        return object;
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
+                                    var message = new $root.google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList();
+                                    if (object.fields) {
+                                        if (!Array.isArray(object.fields))
+                                            throw TypeError(".google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList.fields: array expected");
+                                        message.fields = [];
+                                        for (var i = 0; i < object.fields.length; ++i)
+                                            message.fields[i] = String(object.fields[i]);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a FieldList message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList
+                                 * @static
+                                 * @param {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList} message FieldList
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                FieldList.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.fields = [];
+                                    if (message.fields && message.fields.length) {
+                                        object.fields = [];
+                                        for (var j = 0; j < message.fields.length; ++j)
+                                            object.fields[j] = message.fields[j];
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this FieldList to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                FieldList.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for FieldList
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                FieldList.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList";
+                                };
+    
+                                return FieldList;
+                            })();
+    
+                            return FieldFilter;
                         })();
     
                         return ExportDataObjectsRequest;
@@ -34061,6 +34622,7 @@
                          * @interface IDeleteCollectionRequest
                          * @property {string|null} [name] DeleteCollectionRequest name
                          * @property {string|null} [requestId] DeleteCollectionRequest requestId
+                         * @property {boolean|null} [force] DeleteCollectionRequest force
                          */
     
                         /**
@@ -34095,6 +34657,14 @@
                         DeleteCollectionRequest.prototype.requestId = "";
     
                         /**
+                         * DeleteCollectionRequest force.
+                         * @member {boolean} force
+                         * @memberof google.cloud.vectorsearch.v1beta.DeleteCollectionRequest
+                         * @instance
+                         */
+                        DeleteCollectionRequest.prototype.force = false;
+    
+                        /**
                          * Creates a new DeleteCollectionRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.vectorsearch.v1beta.DeleteCollectionRequest
@@ -34122,6 +34692,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                             if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            if (message.force != null && Object.hasOwnProperty.call(message, "force"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.force);
                             return writer;
                         };
     
@@ -34170,6 +34742,10 @@
                                         message.requestId = reader.string();
                                         break;
                                     }
+                                case 3: {
+                                        message.force = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7, long);
                                     break;
@@ -34215,6 +34791,9 @@
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
                                 if (!$util.isString(message.requestId))
                                     return "requestId: string expected";
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                if (typeof message.force !== "boolean")
+                                    return "force: boolean expected";
                             return null;
                         };
     
@@ -34238,6 +34817,8 @@
                                 message.name = String(object.name);
                             if (object.requestId != null)
                                 message.requestId = String(object.requestId);
+                            if (object.force != null)
+                                message.force = Boolean(object.force);
                             return message;
                         };
     
@@ -34257,11 +34838,14 @@
                             if (options.defaults) {
                                 object.name = "";
                                 object.requestId = "";
+                                object.force = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
                                 object.requestId = message.requestId;
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                object.force = message.force;
                             return object;
                         };
     
@@ -37969,6 +38553,7 @@
                          * @interface IExportDataObjectsRequest
                          * @property {google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.IGcsExportDestination|null} [gcsDestination] ExportDataObjectsRequest gcsDestination
                          * @property {string|null} [name] ExportDataObjectsRequest name
+                         * @property {google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.IFieldFilter|null} [fieldFilter] ExportDataObjectsRequest fieldFilter
                          */
     
                         /**
@@ -38001,6 +38586,14 @@
                          * @instance
                          */
                         ExportDataObjectsRequest.prototype.name = "";
+    
+                        /**
+                         * ExportDataObjectsRequest fieldFilter.
+                         * @member {google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.IFieldFilter|null|undefined} fieldFilter
+                         * @memberof google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest
+                         * @instance
+                         */
+                        ExportDataObjectsRequest.prototype.fieldFilter = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -38044,6 +38637,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                             if (message.gcsDestination != null && Object.hasOwnProperty.call(message, "gcsDestination"))
                                 $root.google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.GcsExportDestination.encode(message.gcsDestination, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.fieldFilter != null && Object.hasOwnProperty.call(message, "fieldFilter"))
+                                $root.google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.encode(message.fieldFilter, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -38090,6 +38685,10 @@
                                     }
                                 case 1: {
                                         message.name = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.fieldFilter = $root.google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 default:
@@ -38143,6 +38742,11 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.fieldFilter != null && message.hasOwnProperty("fieldFilter")) {
+                                var error = $root.google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.verify(message.fieldFilter, long + 1);
+                                if (error)
+                                    return "fieldFilter." + error;
+                            }
                             return null;
                         };
     
@@ -38169,6 +38773,11 @@
                             }
                             if (object.name != null)
                                 message.name = String(object.name);
+                            if (object.fieldFilter != null) {
+                                if (typeof object.fieldFilter !== "object")
+                                    throw TypeError(".google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.fieldFilter: object expected");
+                                message.fieldFilter = $root.google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.fromObject(object.fieldFilter, long + 1);
+                            }
                             return message;
                         };
     
@@ -38185,8 +38794,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.name = "";
+                                object.fieldFilter = null;
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.gcsDestination != null && message.hasOwnProperty("gcsDestination")) {
@@ -38194,6 +38805,8 @@
                                 if (options.oneofs)
                                     object.destination = "gcsDestination";
                             }
+                            if (message.fieldFilter != null && message.hasOwnProperty("fieldFilter"))
+                                object.fieldFilter = $root.google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.toObject(message.fieldFilter, options);
                             return object;
                         };
     
@@ -38502,6 +39115,515 @@
                             })();
     
                             return GcsExportDestination;
+                        })();
+    
+                        ExportDataObjectsRequest.FieldFilter = (function() {
+    
+                            /**
+                             * Properties of a FieldFilter.
+                             * @memberof google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest
+                             * @interface IFieldFilter
+                             * @property {google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.IFieldList|null} [includedFields] FieldFilter includedFields
+                             * @property {google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.IFieldList|null} [excludedFields] FieldFilter excludedFields
+                             */
+    
+                            /**
+                             * Constructs a new FieldFilter.
+                             * @memberof google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest
+                             * @classdesc Represents a FieldFilter.
+                             * @implements IFieldFilter
+                             * @constructor
+                             * @param {google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.IFieldFilter=} [properties] Properties to set
+                             */
+                            function FieldFilter(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * FieldFilter includedFields.
+                             * @member {google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.IFieldList|null|undefined} includedFields
+                             * @memberof google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter
+                             * @instance
+                             */
+                            FieldFilter.prototype.includedFields = null;
+    
+                            /**
+                             * FieldFilter excludedFields.
+                             * @member {google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.IFieldList|null|undefined} excludedFields
+                             * @memberof google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter
+                             * @instance
+                             */
+                            FieldFilter.prototype.excludedFields = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * FieldFilter selector.
+                             * @member {"includedFields"|"excludedFields"|undefined} selector
+                             * @memberof google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter
+                             * @instance
+                             */
+                            Object.defineProperty(FieldFilter.prototype, "selector", {
+                                get: $util.oneOfGetter($oneOfFields = ["includedFields", "excludedFields"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new FieldFilter instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter
+                             * @static
+                             * @param {google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.IFieldFilter=} [properties] Properties to set
+                             * @returns {google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter} FieldFilter instance
+                             */
+                            FieldFilter.create = function create(properties) {
+                                return new FieldFilter(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified FieldFilter message. Does not implicitly {@link google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter
+                             * @static
+                             * @param {google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.IFieldFilter} message FieldFilter message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FieldFilter.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.includedFields != null && Object.hasOwnProperty.call(message, "includedFields"))
+                                    $root.google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList.encode(message.includedFields, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.excludedFields != null && Object.hasOwnProperty.call(message, "excludedFields"))
+                                    $root.google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList.encode(message.excludedFields, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified FieldFilter message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter
+                             * @static
+                             * @param {google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.IFieldFilter} message FieldFilter message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FieldFilter.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a FieldFilter message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter} FieldFilter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FieldFilter.decode = function decode(reader, length, error, long) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.includedFields = $root.google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList.decode(reader, reader.uint32(), undefined, long + 1);
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.excludedFields = $root.google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList.decode(reader, reader.uint32(), undefined, long + 1);
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7, long);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a FieldFilter message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter} FieldFilter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FieldFilter.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a FieldFilter message.
+                             * @function verify
+                             * @memberof google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            FieldFilter.verify = function verify(message, long) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
+                                var properties = {};
+                                if (message.includedFields != null && message.hasOwnProperty("includedFields")) {
+                                    properties.selector = 1;
+                                    {
+                                        var error = $root.google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList.verify(message.includedFields, long + 1);
+                                        if (error)
+                                            return "includedFields." + error;
+                                    }
+                                }
+                                if (message.excludedFields != null && message.hasOwnProperty("excludedFields")) {
+                                    if (properties.selector === 1)
+                                        return "selector: multiple values";
+                                    properties.selector = 1;
+                                    {
+                                        var error = $root.google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList.verify(message.excludedFields, long + 1);
+                                        if (error)
+                                            return "excludedFields." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a FieldFilter message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter} FieldFilter
+                             */
+                            FieldFilter.fromObject = function fromObject(object, long) {
+                                if (object instanceof $root.google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter)
+                                    return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var message = new $root.google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter();
+                                if (object.includedFields != null) {
+                                    if (typeof object.includedFields !== "object")
+                                        throw TypeError(".google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.includedFields: object expected");
+                                    message.includedFields = $root.google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList.fromObject(object.includedFields, long + 1);
+                                }
+                                if (object.excludedFields != null) {
+                                    if (typeof object.excludedFields !== "object")
+                                        throw TypeError(".google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.excludedFields: object expected");
+                                    message.excludedFields = $root.google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList.fromObject(object.excludedFields, long + 1);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a FieldFilter message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter
+                             * @static
+                             * @param {google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter} message FieldFilter
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            FieldFilter.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.includedFields != null && message.hasOwnProperty("includedFields")) {
+                                    object.includedFields = $root.google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList.toObject(message.includedFields, options);
+                                    if (options.oneofs)
+                                        object.selector = "includedFields";
+                                }
+                                if (message.excludedFields != null && message.hasOwnProperty("excludedFields")) {
+                                    object.excludedFields = $root.google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList.toObject(message.excludedFields, options);
+                                    if (options.oneofs)
+                                        object.selector = "excludedFields";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this FieldFilter to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            FieldFilter.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for FieldFilter
+                             * @function getTypeUrl
+                             * @memberof google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            FieldFilter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter";
+                            };
+    
+                            FieldFilter.FieldList = (function() {
+    
+                                /**
+                                 * Properties of a FieldList.
+                                 * @memberof google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter
+                                 * @interface IFieldList
+                                 * @property {Array.<string>|null} [fields] FieldList fields
+                                 */
+    
+                                /**
+                                 * Constructs a new FieldList.
+                                 * @memberof google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter
+                                 * @classdesc Represents a FieldList.
+                                 * @implements IFieldList
+                                 * @constructor
+                                 * @param {google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.IFieldList=} [properties] Properties to set
+                                 */
+                                function FieldList(properties) {
+                                    this.fields = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * FieldList fields.
+                                 * @member {Array.<string>} fields
+                                 * @memberof google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList
+                                 * @instance
+                                 */
+                                FieldList.prototype.fields = $util.emptyArray;
+    
+                                /**
+                                 * Creates a new FieldList instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList
+                                 * @static
+                                 * @param {google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.IFieldList=} [properties] Properties to set
+                                 * @returns {google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList} FieldList instance
+                                 */
+                                FieldList.create = function create(properties) {
+                                    return new FieldList(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified FieldList message. Does not implicitly {@link google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList
+                                 * @static
+                                 * @param {google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.IFieldList} message FieldList message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                FieldList.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.fields != null && message.fields.length)
+                                        for (var i = 0; i < message.fields.length; ++i)
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.fields[i]);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified FieldList message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList
+                                 * @static
+                                 * @param {google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.IFieldList} message FieldList message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                FieldList.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a FieldList message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList} FieldList
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                FieldList.decode = function decode(reader, length, error, long) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $Reader.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                if (!(message.fields && message.fields.length))
+                                                    message.fields = [];
+                                                message.fields.push(reader.string());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7, long);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a FieldList message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList} FieldList
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                FieldList.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a FieldList message.
+                                 * @function verify
+                                 * @memberof google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                FieldList.verify = function verify(message, long) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        return "maximum nesting depth exceeded";
+                                    if (message.fields != null && message.hasOwnProperty("fields")) {
+                                        if (!Array.isArray(message.fields))
+                                            return "fields: array expected";
+                                        for (var i = 0; i < message.fields.length; ++i)
+                                            if (!$util.isString(message.fields[i]))
+                                                return "fields: string[] expected";
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a FieldList message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList} FieldList
+                                 */
+                                FieldList.fromObject = function fromObject(object, long) {
+                                    if (object instanceof $root.google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList)
+                                        return object;
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
+                                    var message = new $root.google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList();
+                                    if (object.fields) {
+                                        if (!Array.isArray(object.fields))
+                                            throw TypeError(".google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList.fields: array expected");
+                                        message.fields = [];
+                                        for (var i = 0; i < object.fields.length; ++i)
+                                            message.fields[i] = String(object.fields[i]);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a FieldList message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList
+                                 * @static
+                                 * @param {google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList} message FieldList
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                FieldList.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.fields = [];
+                                    if (message.fields && message.fields.length) {
+                                        object.fields = [];
+                                        for (var j = 0; j < message.fields.length; ++j)
+                                            object.fields[j] = message.fields[j];
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this FieldList to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                FieldList.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for FieldList
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                FieldList.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList";
+                                };
+    
+                                return FieldList;
+                            })();
+    
+                            return FieldFilter;
                         })();
     
                         return ExportDataObjectsRequest;

@@ -2786,6 +2786,209 @@ describe('v1.OracleDatabaseClient', () => {
     });
   });
 
+  describe('configureExascaleCloudExadataInfrastructure', () => {
+    it('invokes configureExascaleCloudExadataInfrastructure without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ConfigureExascaleCloudExadataInfrastructureRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ConfigureExascaleCloudExadataInfrastructureRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.configureExascaleCloudExadataInfrastructure =
+        stubLongRunningCall(expectedResponse);
+      const [operation] =
+        await client.configureExascaleCloudExadataInfrastructure(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .configureExascaleCloudExadataInfrastructure as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .configureExascaleCloudExadataInfrastructure as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes configureExascaleCloudExadataInfrastructure without error using callback', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ConfigureExascaleCloudExadataInfrastructureRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ConfigureExascaleCloudExadataInfrastructureRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.configureExascaleCloudExadataInfrastructure =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.configureExascaleCloudExadataInfrastructure(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure,
+              protos.google.cloud.oracledatabase.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .configureExascaleCloudExadataInfrastructure as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .configureExascaleCloudExadataInfrastructure as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes configureExascaleCloudExadataInfrastructure with call error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ConfigureExascaleCloudExadataInfrastructureRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ConfigureExascaleCloudExadataInfrastructureRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.configureExascaleCloudExadataInfrastructure =
+        stubLongRunningCall(undefined, expectedError);
+      await assert.rejects(
+        client.configureExascaleCloudExadataInfrastructure(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls
+          .configureExascaleCloudExadataInfrastructure as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .configureExascaleCloudExadataInfrastructure as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes configureExascaleCloudExadataInfrastructure with LRO error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ConfigureExascaleCloudExadataInfrastructureRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ConfigureExascaleCloudExadataInfrastructureRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.configureExascaleCloudExadataInfrastructure =
+        stubLongRunningCall(undefined, undefined, expectedError);
+      const [operation] =
+        await client.configureExascaleCloudExadataInfrastructure(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls
+          .configureExascaleCloudExadataInfrastructure as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .configureExascaleCloudExadataInfrastructure as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkConfigureExascaleCloudExadataInfrastructureProgress without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkConfigureExascaleCloudExadataInfrastructureProgress(
+          expectedResponse.name,
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkConfigureExascaleCloudExadataInfrastructureProgress with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkConfigureExascaleCloudExadataInfrastructureProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('createCloudVmCluster', () => {
     it('invokes createCloudVmCluster without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({

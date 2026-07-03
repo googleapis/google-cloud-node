@@ -9,7 +9,7 @@
     "*.js",
     "!test/"
   ],
-  "repository": "googleapis/nodejs-googleapis-common",
+  "repository": "googleapis/google-cloud-node",
   "private": true,
   "scripts": {
     "test": "echo \"There are no sample tests 👻\""
