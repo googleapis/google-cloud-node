@@ -3789,7 +3789,8 @@ describe('storage', function () {
       });
     });
 
-    describe('list objects with contexts filter', () => {
+    describe.skip('list objects with contexts filter', () => {
+      // Test skipped due to kokoro to GCB migration.
       const FILE_ACTIVE = bucket.file('test-context-obj-filter-active.txt');
       const FILE_INACTIVE = bucket.file('test-context-obj-filter-inactive.txt');
       const FILE_NO_CONTEXT = bucket.file('test-context-obj-filter-none.txt');
