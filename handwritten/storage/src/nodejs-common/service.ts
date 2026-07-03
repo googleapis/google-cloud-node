@@ -286,6 +286,9 @@ export class Service {
       }-${getModuleFormat()} gccl-invocation-id/${idempotencyToken}`,
     };
     if (!hasValidUserToken) {
+      if (userTokenKey) {
+        delete reqOpts.headers[userTokenKey];
+      }
       reqOpts.headers['x-goog-gcs-idempotency-token'] = idempotencyToken;
     }
 

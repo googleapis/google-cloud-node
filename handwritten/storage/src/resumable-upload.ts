@@ -847,6 +847,9 @@ export class Upload extends Writable {
     };
 
     if (!hasValidUserToken) {
+      if (userTokenKey) {
+        delete reqOpts.headers![userTokenKey];
+      }
       reqOpts.headers!['x-goog-gcs-idempotency-token'] = this.currentInvocationId.uri;
     }
 
@@ -1037,6 +1040,9 @@ export class Upload extends Writable {
     };
 
     if (!hasValidUserToken) {
+      if (userTokenKey) {
+        delete headers[userTokenKey];
+      }
       headers['x-goog-gcs-idempotency-token'] = this.currentInvocationId.chunk;
     }
 
@@ -1270,6 +1276,9 @@ export class Upload extends Writable {
     };
 
     if (!hasValidUserToken) {
+      if (userTokenKey) {
+        delete opts.headers![userTokenKey];
+      }
       opts.headers!['x-goog-gcs-idempotency-token'] = this.currentInvocationId.checkUploadStatus;
     }
 
