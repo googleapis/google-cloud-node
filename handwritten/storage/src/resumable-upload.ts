@@ -810,11 +810,11 @@ export class Upload extends Writable {
       delete metadata.contentType;
     }
 
-    const userTokenKey = Object.keys(this.customRequestOptions.headers || {}).find(
+    const userTokenKey = Object.keys(this.customRequestOptions?.headers || {}).find(
       key => key.toLowerCase() === 'x-goog-gcs-idempotency-token'
     );
     if (userTokenKey) {
-      this.currentInvocationId.uri = this.customRequestOptions.headers![userTokenKey] as string;
+      this.currentInvocationId.uri = this.customRequestOptions?.headers?.[userTokenKey] as string;
     }
 
     let googAPIClient = `${getRuntimeTrackingString()} gccl/${
@@ -1010,11 +1010,11 @@ export class Upload extends Writable {
       },
     });
 
-    const userTokenKey = Object.keys(this.customRequestOptions.headers || {}).find(
+    const userTokenKey = Object.keys(this.customRequestOptions?.headers || {}).find(
       key => key.toLowerCase() === 'x-goog-gcs-idempotency-token'
     );
     if (userTokenKey) {
-      this.currentInvocationId.chunk = this.customRequestOptions.headers![userTokenKey] as string;
+      this.currentInvocationId.chunk = this.customRequestOptions?.headers?.[userTokenKey] as string;
     }
 
     let googAPIClient = `${getRuntimeTrackingString()} gccl/${
@@ -1235,11 +1235,11 @@ export class Upload extends Writable {
   async checkUploadStatus(
     config: CheckUploadStatusConfig = {},
   ): Promise<GaxiosResponse<FileMetadata | void>> {
-    const userTokenKey = Object.keys(this.customRequestOptions.headers || {}).find(
+    const userTokenKey = Object.keys(this.customRequestOptions?.headers || {}).find(
       key => key.toLowerCase() === 'x-goog-gcs-idempotency-token'
     );
     if (userTokenKey) {
-      this.currentInvocationId.checkUploadStatus = this.customRequestOptions.headers![userTokenKey] as string;
+      this.currentInvocationId.checkUploadStatus = this.customRequestOptions?.headers?.[userTokenKey] as string;
     }
 
     let googAPIClient = `${getRuntimeTrackingString()} gccl/${
