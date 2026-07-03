@@ -75,6 +75,16 @@ const replacements = [
     searchPattern: /import \* as v1beta from '\.\/v1beta';/s,
     replacement: ''
   },
+  {
+    files: 'packages/google-cloud-workflows/src/index.ts',
+    searchPattern: /export {v1, v1beta, v1, v1beta, ExecutionsClient};/s,
+    replacement: 'export {v1, v1beta, ExecutionsClient};'
+  },
+  {
+    files: 'packages/google-cloud-workflows/src/index.ts',
+    searchPattern: /export default {v1, v1beta, v1, v1beta, ExecutionsClient};/s,
+    replacement: 'export default {v1, v1beta, ExecutionsClient};'
+  },
 ];
 
 replacements.forEach(r => {
