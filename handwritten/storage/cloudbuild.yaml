@@ -13,7 +13,7 @@ steps:
 #    - GOOGLE_APPLICATION_CREDENTIALS: GCB steps run as a service account
 #      that is typically granted permissions directly. Explicitly setting
 #      GOOGLE_APPLICATION_CREDENTIALS might not be needed if the GCB service
-#      account has the right roles (e.g., Bigtable Admin, Bigtable User).
+#      account has the right roles (e.g., Storage Admin, Storage Object Admin).
 #      If you need to use specific service account key JSON, you'd store it
 #      in Secret Manager and mount it here. For simplicity, we'll rely on
 #      the GCB service account's inherent permissions.
