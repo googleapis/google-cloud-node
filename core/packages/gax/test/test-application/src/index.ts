@@ -35,6 +35,10 @@ import {
 import {RequestType} from 'google-gax/build/src/apitypes';
 import {Duplex, PassThrough, pipeline} from 'stream';
 const pumpify = require('pumpify');
+
+/**
+ * Executes integration tests against the showcase server.
+ */
 async function testShowcase() {
   const grpcClientOpts = {
     grpc,
