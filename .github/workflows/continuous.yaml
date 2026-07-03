@@ -1,3 +1,6 @@
+permissions:
+  contents: read
+
 on:
   push:
     branches:
@@ -10,8 +13,10 @@ jobs:
       matrix:
         node: [18, 22, 24, 26]
     steps:
-      - uses: actions/checkout@v6
-      - uses: pnpm/action-setup@v4
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
         with:
           version: ^7.0.0
       - run: node --version
