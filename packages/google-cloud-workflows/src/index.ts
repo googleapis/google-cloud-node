@@ -24,7 +24,7 @@ import * as v1beta from './v1beta';
 const ExecutionsClient = v1.ExecutionsClient;
 type ExecutionsClient = v1.ExecutionsClient;
 
-export {v1, v1beta, v1, v1beta, ExecutionsClient};
-export default {v1, v1beta, v1, v1beta, ExecutionsClient};
+export {v1, v1beta, ExecutionsClient};
+export default {v1, v1beta, ExecutionsClient};
 import * as protos from '../protos/protos';
 export {protos};
