@@ -338,7 +338,11 @@ export class Upload extends Writable {
   timeOfFirstRequest: number;
   isPartialUpload: boolean;
 
-  private currentInvocationId = {
+  private currentInvocationId: {
+    checkUploadStatus: string;
+    chunk: string;
+    uri: string;
+  } = {
     checkUploadStatus: crypto.randomUUID(),
     chunk: crypto.randomUUID(),
     uri: crypto.randomUUID(),
@@ -806,6 +810,13 @@ export class Upload extends Writable {
       delete metadata.contentType;
     }
 
+    const userTokenKey = Object.keys(this.customRequestOptions.headers || {}).find(
+      key => key.toLowerCase() === 'x-goog-gcs-idempotency-token'
+    );
+    if (userTokenKey) {
+      this.currentInvocationId.uri = this.customRequestOptions.headers![userTokenKey] as string;
+    }
+
     let googAPIClient = `${getRuntimeTrackingString()} gccl/${
       packageJson.version
     }-${getModuleFormat()} gccl-invocation-id/${this.currentInvocationId.uri}`;
@@ -829,10 +840,13 @@ export class Upload extends Writable {
       headers: {
         'User-Agent': getUserAgentString(),
         'x-goog-api-client': googAPIClient,
-        'x-goog-gcs-idempotency-token': this.currentInvocationId.uri,
         ...headers,
       },
     };
+
+    if (!userTokenKey) {
+      reqOpts.headers!['x-goog-gcs-idempotency-token'] = this.currentInvocationId.uri;
+    }
 
     if (metadata.contentLength) {
       reqOpts.headers!['X-Upload-Content-Length'] =
@@ -996,6 +1010,13 @@ export class Upload extends Writable {
       },
     });
 
+    const userTokenKey = Object.keys(this.customRequestOptions.headers || {}).find(
+      key => key.toLowerCase() === 'x-goog-gcs-idempotency-token'
+    );
+    if (userTokenKey) {
+      this.currentInvocationId.chunk = this.customRequestOptions.headers![userTokenKey] as string;
+    }
+
     let googAPIClient = `${getRuntimeTrackingString()} gccl/${
       packageJson.version
     }-${getModuleFormat()} gccl-invocation-id/${
@@ -1009,8 +1030,11 @@ export class Upload extends Writable {
     const headers: GaxiosOptions['headers'] = {
       'User-Agent': getUserAgentString(),
       'x-goog-api-client': googAPIClient,
-      'x-goog-gcs-idempotency-token': this.currentInvocationId.chunk,
     };
+
+    if (!userTokenKey) {
+      headers['x-goog-gcs-idempotency-token'] = this.currentInvocationId.chunk;
+    }
 
     // If using multiple chunk upload, set appropriate header
     if (multiChunkMode) {
@@ -1211,6 +1235,13 @@ export class Upload extends Writable {
   async checkUploadStatus(
     config: CheckUploadStatusConfig = {},
   ): Promise<GaxiosResponse<FileMetadata | void>> {
+    const userTokenKey = Object.keys(this.customRequestOptions.headers || {}).find(
+      key => key.toLowerCase() === 'x-goog-gcs-idempotency-token'
+    );
+    if (userTokenKey) {
+      this.currentInvocationId.checkUploadStatus = this.customRequestOptions.headers![userTokenKey] as string;
+    }
+
     let googAPIClient = `${getRuntimeTrackingString()} gccl/${
       packageJson.version
     }-${getModuleFormat()} gccl-invocation-id/${
@@ -1229,9 +1260,12 @@ export class Upload extends Writable {
         'Content-Range': 'bytes */*',
         'User-Agent': getUserAgentString(),
         'x-goog-api-client': googAPIClient,
-        'x-goog-gcs-idempotency-token': this.currentInvocationId.checkUploadStatus,
       },
     };
+
+    if (!userTokenKey) {
+      opts.headers!['x-goog-gcs-idempotency-token'] = this.currentInvocationId.checkUploadStatus;
+    }
 
     try {
       const resp = await this.makeRequest(opts);

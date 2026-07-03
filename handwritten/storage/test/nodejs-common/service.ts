@@ -506,6 +506,36 @@ describe('Service', () => {
       service.request_(reqOpts, assert.ifError);
     });
 
+    it('should respect user-provided x-goog-gcs-idempotency-token case-insensitively and align it with gccl-invocation-id', done => {
+      const customToken = 'my-custom-token-123';
+      const customReqOpts = {
+        ...reqOpts,
+        headers: {
+          'X-Goog-Gcs-Idempotency-Token': customToken,
+        },
+      };
+
+      service.makeAuthenticatedRequest = (reqOpts: DecorateRequestOptions) => {
+        const pkg = service.packageJson;
+        const r = new RegExp(
+          `^gl-node/${process.versions.node} gccl/${
+            pkg.version
+          }-${getModuleFormat()} gccl-invocation-id/(?<gcclInvocationId>[^W]+)$`
+        );
+        const match = r.exec(reqOpts.headers!['x-goog-api-client']);
+        assert.ok(match);
+        const invocationId = match.groups!.gcclInvocationId;
+        assert.strictEqual(invocationId, customToken);
+
+        // Verify there is no duplicate x-goog-gcs-idempotency-token header
+        assert.strictEqual(reqOpts.headers!['x-goog-gcs-idempotency-token'], undefined);
+        assert.strictEqual(reqOpts.headers!['X-Goog-Gcs-Idempotency-Token'], customToken);
+        done();
+      };
+
+      service.request_(customReqOpts, assert.ifError);
+    });
+
     it('should add the `gccl-gcs-cmd` to the api-client header when provided', done => {
       const expected = 'example.expected/value';
       service.makeAuthenticatedRequest = (reqOpts: DecorateRequestOptions) => {

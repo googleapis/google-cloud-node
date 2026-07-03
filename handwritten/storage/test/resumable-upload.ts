@@ -890,6 +890,31 @@ describe('resumable-upload', () => {
       up.createURI();
     });
 
+    it('should respect user-provided x-goog-gcs-idempotency-token case-insensitively and align it with gccl-invocation-id in createURI', async () => {
+      const customToken = 'my-custom-resumable-token';
+      up.customRequestOptions = {
+        headers: {
+          'X-Goog-Gcs-Idempotency-Token': customToken,
+        },
+      };
+
+      up.authClient.request = async (combinedReqOpts: GaxiosOptions) => {
+        assert(combinedReqOpts.headers);
+        const apiClientHeader = combinedReqOpts.headers['x-goog-api-client'];
+        const match = X_GOOG_API_HEADER_REGEX.exec(apiClientHeader as string);
+        assert.ok(match);
+        const invocationId = match.groups!.gcclInvocationId;
+        assert.strictEqual(invocationId, customToken);
+
+        // Verify there is no duplicate x-goog-gcs-idempotency-token header
+        assert.strictEqual(combinedReqOpts.headers['x-goog-gcs-idempotency-token'], undefined);
+        assert.strictEqual(combinedReqOpts.headers['X-Goog-Gcs-Idempotency-Token'], customToken);
+        return {headers: {location: '/foo'}};
+      };
+
+      await up.createURI();
+    });
+
     it('should reuse the same x-goog-gcs-idempotency-token on retry of createURI', async () => {
       let invocationCount = 0;
       let token1 = '';
