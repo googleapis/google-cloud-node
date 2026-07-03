@@ -64,6 +64,31 @@ function findFiles(baseDir, filePattern) {
   return matches;
 }
 
+const filesToDelete = [
+  'src/v1/workflows_client.ts',
+  'src/v1/workflows_client_config.json',
+  'src/v1/workflows_proto_list.json',
+  'src/v1beta/workflows_client.ts',
+  'src/v1beta/workflows_client_config.json',
+  'src/v1beta/workflows_proto_list.json',
+  'test/gapic_workflows_v1.ts',
+  'test/gapic_workflows_v1beta.ts',
+];
+
+filesToDelete.forEach(file => {
+  try {
+    const fullPath = path.resolve(__dirname, file);
+    fs.unlinkSync(fullPath);
+    console.log(`Successfully deleted: ${fullPath}`);
+  } catch (err) {
+    if (err.code === 'ENOENT') {
+      console.log(`File not found, skipping deletion: ${file}`);
+    } else {
+      console.error(`Error deleting file ${file}:`, err);
+    }
+  }
+});
+
 const replacements = [
   {
     files: 'packages/google-cloud-workflows/src/index.ts',
