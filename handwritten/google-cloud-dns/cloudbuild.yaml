@@ -34,7 +34,7 @@ steps:
   id: 'run-system-tests'
   waitFor: ['install-dependencies', 'get-service-account-key']
 
-# 3. (Optional) Code Coverage Reporting
+# 4. (Optional) Code Coverage Reporting
 - name: 'node:24'
   entrypoint: 'bash'
   args:
