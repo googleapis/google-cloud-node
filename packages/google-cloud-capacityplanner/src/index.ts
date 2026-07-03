@@ -18,12 +18,10 @@
 
 import * as v1beta from './v1beta';
 
-const CapacityPlanningServiceClient = v1beta.CapacityPlanningServiceClient;
-type CapacityPlanningServiceClient = v1beta.CapacityPlanningServiceClient;
 const UsageServiceClient = v1beta.UsageServiceClient;
 type UsageServiceClient = v1beta.UsageServiceClient;
 
-export {v1beta, CapacityPlanningServiceClient, UsageServiceClient};
-export default {v1beta, CapacityPlanningServiceClient, UsageServiceClient};
+export {v1beta, UsageServiceClient};
+export default {v1beta, UsageServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

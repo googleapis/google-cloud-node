@@ -253,6 +253,9 @@ export class DashboardQueryServiceClient {
       ruleDeploymentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/instances/{instance}/rules/{rule}/deployment',
       ),
+      ruleExecutionErrorPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instances/{instance}/ruleExecutionErrors/{rule_execution_error}',
+      ),
       watchlistPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/instances/{instance}/watchlists/{watchlist}',
       ),
@@ -1883,6 +1886,83 @@ export class DashboardQueryServiceClient {
     return this.pathTemplates.ruleDeploymentPathTemplate.match(
       ruleDeploymentName,
     ).rule;
+  }
+
+  /**
+   * Return a fully-qualified ruleExecutionError resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} rule_execution_error
+   * @returns {string} Resource name string.
+   */
+  ruleExecutionErrorPath(
+    project: string,
+    location: string,
+    instance: string,
+    ruleExecutionError: string,
+  ) {
+    return this.pathTemplates.ruleExecutionErrorPathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+      rule_execution_error: ruleExecutionError,
+    });
+  }
+
+  /**
+   * Parse the project from RuleExecutionError resource.
+   *
+   * @param {string} ruleExecutionErrorName
+   *   A fully-qualified path representing RuleExecutionError resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRuleExecutionErrorName(ruleExecutionErrorName: string) {
+    return this.pathTemplates.ruleExecutionErrorPathTemplate.match(
+      ruleExecutionErrorName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from RuleExecutionError resource.
+   *
+   * @param {string} ruleExecutionErrorName
+   *   A fully-qualified path representing RuleExecutionError resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRuleExecutionErrorName(ruleExecutionErrorName: string) {
+    return this.pathTemplates.ruleExecutionErrorPathTemplate.match(
+      ruleExecutionErrorName,
+    ).location;
+  }
+
+  /**
+   * Parse the instance from RuleExecutionError resource.
+   *
+   * @param {string} ruleExecutionErrorName
+   *   A fully-qualified path representing RuleExecutionError resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromRuleExecutionErrorName(ruleExecutionErrorName: string) {
+    return this.pathTemplates.ruleExecutionErrorPathTemplate.match(
+      ruleExecutionErrorName,
+    ).instance;
+  }
+
+  /**
+   * Parse the rule_execution_error from RuleExecutionError resource.
+   *
+   * @param {string} ruleExecutionErrorName
+   *   A fully-qualified path representing RuleExecutionError resource.
+   * @returns {string} A string representing the rule_execution_error.
+   */
+  matchRuleExecutionErrorFromRuleExecutionErrorName(
+    ruleExecutionErrorName: string,
+  ) {
+    return this.pathTemplates.ruleExecutionErrorPathTemplate.match(
+      ruleExecutionErrorName,
+    ).rule_execution_error;
   }
 
   /**

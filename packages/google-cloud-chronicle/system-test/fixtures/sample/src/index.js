@@ -31,6 +31,7 @@ function main() {
   const instanceServiceClient = new chronicle.InstanceServiceClient();
   const nativeDashboardServiceClient = new chronicle.NativeDashboardServiceClient();
   const referenceListServiceClient = new chronicle.ReferenceListServiceClient();
+  const ruleExecutionErrorServiceClient = new chronicle.RuleExecutionErrorServiceClient();
   const ruleServiceClient = new chronicle.RuleServiceClient();
 }
 

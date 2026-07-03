@@ -4431,6 +4431,20 @@ export namespace google {
                     public getReportingIdentitySettings(request: google.analytics.admin.v1alpha.IGetReportingIdentitySettingsRequest): Promise<google.analytics.admin.v1alpha.ReportingIdentitySettings>;
 
                     /**
+                     * Calls UpdateReportingIdentitySettings.
+                     * @param request UpdateReportingIdentitySettingsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ReportingIdentitySettings
+                     */
+                    public updateReportingIdentitySettings(request: google.analytics.admin.v1alpha.IUpdateReportingIdentitySettingsRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateReportingIdentitySettingsCallback): void;
+
+                    /**
+                     * Calls UpdateReportingIdentitySettings.
+                     * @param request UpdateReportingIdentitySettingsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateReportingIdentitySettings(request: google.analytics.admin.v1alpha.IUpdateReportingIdentitySettingsRequest): Promise<google.analytics.admin.v1alpha.ReportingIdentitySettings>;
+
+                    /**
                      * Calls GetUserProvidedDataSettings.
                      * @param request GetUserProvidedDataSettingsRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and UserProvidedDataSettings
@@ -5524,6 +5538,13 @@ export namespace google {
                      * @param [response] ReportingIdentitySettings
                      */
                     type GetReportingIdentitySettingsCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.ReportingIdentitySettings) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|updateReportingIdentitySettings}.
+                     * @param error Error, if any
+                     * @param [response] ReportingIdentitySettings
+                     */
+                    type UpdateReportingIdentitySettingsCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.ReportingIdentitySettings) => void;
 
                     /**
                      * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|getUserProvidedDataSettings}.
@@ -25319,6 +25340,109 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an UpdateReportingIdentitySettingsRequest. */
+                interface IUpdateReportingIdentitySettingsRequest {
+
+                    /** UpdateReportingIdentitySettingsRequest reportingIdentitySettings */
+                    reportingIdentitySettings?: (google.analytics.admin.v1alpha.IReportingIdentitySettings|null);
+
+                    /** UpdateReportingIdentitySettingsRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateReportingIdentitySettingsRequest. */
+                class UpdateReportingIdentitySettingsRequest implements IUpdateReportingIdentitySettingsRequest {
+
+                    /**
+                     * Constructs a new UpdateReportingIdentitySettingsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IUpdateReportingIdentitySettingsRequest);
+
+                    /** UpdateReportingIdentitySettingsRequest reportingIdentitySettings. */
+                    public reportingIdentitySettings?: (google.analytics.admin.v1alpha.IReportingIdentitySettings|null);
+
+                    /** UpdateReportingIdentitySettingsRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateReportingIdentitySettingsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateReportingIdentitySettingsRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IUpdateReportingIdentitySettingsRequest): google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest;
+
+                    /**
+                     * Encodes the specified UpdateReportingIdentitySettingsRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest.verify|verify} messages.
+                     * @param message UpdateReportingIdentitySettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IUpdateReportingIdentitySettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateReportingIdentitySettingsRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest.verify|verify} messages.
+                     * @param message UpdateReportingIdentitySettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IUpdateReportingIdentitySettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateReportingIdentitySettingsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateReportingIdentitySettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest;
+
+                    /**
+                     * Decodes an UpdateReportingIdentitySettingsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateReportingIdentitySettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest;
+
+                    /**
+                     * Verifies an UpdateReportingIdentitySettingsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateReportingIdentitySettingsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateReportingIdentitySettingsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateReportingIdentitySettingsRequest message. Also converts values to other types if specified.
+                     * @param message UpdateReportingIdentitySettingsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateReportingIdentitySettingsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateReportingIdentitySettingsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a GetUserProvidedDataSettingsRequest. */
                 interface IGetUserProvidedDataSettingsRequest {
 
@@ -30598,6 +30722,9 @@ export namespace google {
 
                     /** PropertySummary parent */
                     parent?: (string|null);
+
+                    /** PropertySummary canEdit */
+                    canEdit?: (boolean|null);
                 }
 
                 /** Represents a PropertySummary. */
@@ -30620,6 +30747,9 @@ export namespace google {
 
                     /** PropertySummary parent. */
                     public parent: string;
+
+                    /** PropertySummary canEdit. */
+                    public canEdit: boolean;
 
                     /**
                      * Creates a new PropertySummary instance using the specified properties.
@@ -47551,6 +47681,9 @@ export namespace google {
 
                     /** PropertySummary parent */
                     parent?: (string|null);
+
+                    /** PropertySummary canEdit */
+                    canEdit?: (boolean|null);
                 }
 
                 /** Represents a PropertySummary. */
@@ -47573,6 +47706,9 @@ export namespace google {
 
                     /** PropertySummary parent. */
                     public parent: string;
+
+                    /** PropertySummary canEdit. */
+                    public canEdit: boolean;
 
                     /**
                      * Creates a new PropertySummary instance using the specified properties.
