@@ -814,9 +814,11 @@ export class Upload extends Writable {
       key => key.toLowerCase() === 'x-goog-gcs-idempotency-token'
     );
     const userTokenValue = userTokenKey ? this.customRequestOptions?.headers?.[userTokenKey] : undefined;
-    const hasValidUserToken = typeof userTokenValue === 'string' && userTokenValue;
+    const hasValidUserToken = typeof userTokenValue === 'string' && userTokenValue !== '';
     if (hasValidUserToken) {
       this.currentInvocationId.uri = userTokenValue as string;
+    } else if (userTokenKey && this.customRequestOptions?.headers) {
+      delete this.customRequestOptions.headers[userTokenKey];
     }
 
     let googAPIClient = `${getRuntimeTrackingString()} gccl/${
@@ -847,9 +849,6 @@ export class Upload extends Writable {
     };
 
     if (!hasValidUserToken) {
-      if (userTokenKey) {
-        delete reqOpts.headers![userTokenKey];
-      }
       reqOpts.headers!['x-goog-gcs-idempotency-token'] = this.currentInvocationId.uri;
     }
 
@@ -1019,9 +1018,11 @@ export class Upload extends Writable {
       key => key.toLowerCase() === 'x-goog-gcs-idempotency-token'
     );
     const userTokenValue = userTokenKey ? this.customRequestOptions?.headers?.[userTokenKey] : undefined;
-    const hasValidUserToken = typeof userTokenValue === 'string' && userTokenValue;
+    const hasValidUserToken = typeof userTokenValue === 'string' && userTokenValue !== '';
     if (hasValidUserToken) {
       this.currentInvocationId.chunk = userTokenValue as string;
+    } else if (userTokenKey && this.customRequestOptions?.headers) {
+      delete this.customRequestOptions.headers[userTokenKey];
     }
 
     let googAPIClient = `${getRuntimeTrackingString()} gccl/${
@@ -1040,9 +1041,6 @@ export class Upload extends Writable {
     };
 
     if (!hasValidUserToken) {
-      if (userTokenKey) {
-        delete headers[userTokenKey];
-      }
       headers['x-goog-gcs-idempotency-token'] = this.currentInvocationId.chunk;
     }
 
@@ -1249,9 +1247,11 @@ export class Upload extends Writable {
       key => key.toLowerCase() === 'x-goog-gcs-idempotency-token'
     );
     const userTokenValue = userTokenKey ? this.customRequestOptions?.headers?.[userTokenKey] : undefined;
-    const hasValidUserToken = typeof userTokenValue === 'string' && userTokenValue;
+    const hasValidUserToken = typeof userTokenValue === 'string' && userTokenValue !== '';
     if (hasValidUserToken) {
       this.currentInvocationId.checkUploadStatus = userTokenValue as string;
+    } else if (userTokenKey && this.customRequestOptions?.headers) {
+      delete this.customRequestOptions.headers[userTokenKey];
     }
 
     let googAPIClient = `${getRuntimeTrackingString()} gccl/${
@@ -1276,9 +1276,6 @@ export class Upload extends Writable {
     };
 
     if (!hasValidUserToken) {
-      if (userTokenKey) {
-        delete opts.headers![userTokenKey];
-      }
       opts.headers!['x-goog-gcs-idempotency-token'] = this.currentInvocationId.checkUploadStatus;
     }
 
