@@ -14,17 +14,10 @@ const INSTANCE = 'suvham-testing';
 const DATABASE = 'benchmark_db_async';
 const TABLE    = 'AsyncBenchmarkTable';
 
-const SQL = {
-  sql: `SELECT @id as id, @status as status`,
-  params: { id: '12345', status: 'ACTIVE' },
-  types: { 
-    id: 'string',
-    status: 'string'
-  }
-};
-const WARMUP_MS = process.env.LOCAL_MOCK_TEST ? 100 : 10_000;
-const DURATION_MS = process.env.LOCAL_MOCK_TEST ? 200 : 30_000;
-const CONCURRENCY_LEVELS = process.env.LOCAL_MOCK_TEST ? [1] : [1, 2, 4, 8, 12, 32];
+const SQL = `SELECT REPEAT('a', 1048576) AS big_payload`;
+const WARMUP_MS = 10_000;
+const DURATION_MS = 30_000;
+const CONCURRENCY_LEVELS = [1, 8, 12, 32];
 const CHANNELS_TEST = process.env.LOCAL_MOCK_TEST ? [4] : [1, 4, 8, 10, 12, 16, 20];
 
 class CPUMonitor {
@@ -429,10 +422,6 @@ async function main() {
   console.log('Running JavaScript baseline...');
   const custJs = await runFixedCountBenchmark(() => db.executeSqlJs(SQL), 110, 1000);
 
-  // 2. Rust Multi-Channel (4 Channels) Customer Case
-  console.log('Running Rust (4 Channels) extension...');
-  const custRust4 = await runFixedCountBenchmark(() => rustClients[4].executeSqlNative(SQL), 110, 1000);
-
   // 3. Rust Multi-Channel (16 Channels) Customer Case
   console.log('Running Rust (16 Channels) extension...');
   const custRust16 = await runFixedCountBenchmark(() => rustClients[16].executeSqlNative(SQL), 110, 1000);
@@ -471,7 +460,6 @@ async function main() {
   };
 
   printCustRes('JavaScript Baseline', custJs);
-  printCustRes('Rust 4 Channels', custRust4, custJs);
   printCustRes('Rust 16 Channels', custRust16, custJs);
   printCustRes('Rust 32 Channels', custRust32, custJs);
   printCustRes('Rust 50 Channels', custRust50, custJs);
@@ -482,7 +470,6 @@ async function main() {
     concurrency: 110,
     total: 1000,
     javascript: custJs,
-    rust_4ch: custRust4,
     rust_16ch: custRust16,
     rust_32ch: custRust32,
     rust_50ch: custRust50
