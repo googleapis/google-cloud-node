@@ -138,7 +138,6 @@ export function getTestRoot(settings: Settings = {}): CollectionReference {
   return getTestDb(settings).collection(`node_${version}_${autoId()}`);
 }
 
-// Add a comment to kick kokoro off again
 describe('Firestore class', () => {
   let firestore: Firestore;
   let randomCol: CollectionReference;
@@ -160,8 +159,7 @@ describe('Firestore class', () => {
     expect(ref.id).to.equal('doc');
   });
 
-  it.skip('has getAll() method', () => {
-    // Test skipped due to kokoro to GCB migration.
+  it('has getAll() method', () => {
     const ref1 = randomCol.doc('doc1');
     const ref2 = randomCol.doc('doc2');
     return Promise.all([ref1.set({foo: 'a'}), ref2.set({foo: 'a'})])
@@ -539,8 +537,7 @@ describe('Firestore class', () => {
     expect(explainResults.snapshot!.docs.length).to.equal(5);
   });
 
-  it.skip('getAll() supports array destructuring', () => {
-    // Test skipped due to kokoro to GCB migration.
+  it('getAll() supports array destructuring', () => {
     const ref1 = randomCol.doc('doc1');
     const ref2 = randomCol.doc('doc2');
     return Promise.all([ref1.set({foo: 'a'}), ref2.set({foo: 'a'})])
@@ -552,8 +549,7 @@ describe('Firestore class', () => {
       });
   });
 
-  it.skip('getAll() supports field mask', () => {
-    // Test skipped due to kokoro to GCB migration.
+  it('getAll() supports field mask', () => {
     const ref1 = randomCol.doc('doc1');
     return ref1
       .set({foo: 'a', bar: 'b'})
@@ -565,8 +561,7 @@ describe('Firestore class', () => {
       });
   });
 
-  it.skip('getAll() supports array destructuring with field mask', () => {
-    // Test skipped due to kokoro to GCB migration.
+  it('getAll() supports array destructuring with field mask', () => {
     const ref1 = randomCol.doc('doc1');
     const ref2 = randomCol.doc('doc2');
     return Promise.all([ref1.set({f: 'a', b: 'b'}), ref2.set({f: 'a', b: 'b'})])
@@ -579,7 +574,7 @@ describe('Firestore class', () => {
       });
   });
 
-  it.skip('getAll() supports generics', async () => {
+  it('getAll() supports generics', async () => {
     const ref1 = randomCol.doc('doc1').withConverter(postConverter);
     const ref2 = randomCol.doc('doc2').withConverter(postConverter);
     await ref1.set(new Post('post1', 'author1'));
@@ -784,8 +779,7 @@ describe('CollectionReference class', () => {
     expect(ref.id).to.have.length(20);
   });
 
-  it.skip('has add() method', () => {
-    // Test skipped due to kokoro to GCB migration.
+  it('has add() method', () => {
     return randomCol
       .add({foo: 'a'})
       .then(ref => {
@@ -838,8 +832,7 @@ describe('CollectionReference class', () => {
     },
   );
 
-  it.skip('supports withConverter()', async () => {
-    // Test skipped due to kokoro to GCB migration.
+  it('supports withConverter()', async () => {
     const ref = await firestore
       .collection('col')
       .withConverter(postConverter)
@@ -887,8 +880,7 @@ describe('DocumentReference class', () => {
     expect(ref.id).to.equal('subcol');
   });
 
-  it.skip('has create()/get() method', () => {
-    // Test skipped due to kokoro to GCB migration.
+  it('has create()/get() method', () => {
     const ref = randomCol.doc();
     return ref
       .create({foo: 'a'})
@@ -900,8 +892,7 @@ describe('DocumentReference class', () => {
       });
   });
 
-  it.skip('has set() method', () => {
-    // Test skipped due to kokoro to GCB migration.
+  it('has set() method', () => {
     const allSupportedTypesObject: {[field: string]: unknown} = {
       stringValue: 'a',
       trueValue: true,
@@ -940,8 +931,7 @@ describe('DocumentReference class', () => {
       });
   });
 
-  it.skip('supports NaNs', () => {
-    // Test skipped due to kokoro to GCB migration.
+  it('supports NaNs', () => {
     const nanObject = {
       nanValue: NaN,
     };
@@ -958,8 +948,7 @@ describe('DocumentReference class', () => {
       });
   });
 
-  it.skip('round-trips BigInts', () => {
-    // Test skipped due to kokoro to GCB migration.
+  it('round-trips BigInts', () => {
     const bigIntValue = BigInt(Number.MAX_SAFE_INTEGER) + BigInt(1);
 
     const randomCol = getTestRoot({useBigInt: true});
@@ -976,8 +965,7 @@ describe('DocumentReference class', () => {
       });
   });
 
-  it.skip('supports server timestamps', () => {
-    // Test skipped due to kokoro to GCB migration.
+  it('supports server timestamps', () => {
     const baseObject = {
       a: 'bar',
       b: {remove: 'bar'},
@@ -1024,8 +1012,7 @@ describe('DocumentReference class', () => {
       });
   });
 
-  it.skip('supports increment()', () => {
-    // Test skipped due to kokoro to GCB migration.
+  it('supports increment()', () => {
     const baseData = {sum: 1};
     const updateData = {sum: FieldValue.increment(1)};
     const expectedData = {sum: 2};
@@ -1040,8 +1027,7 @@ describe('DocumentReference class', () => {
       });
   });
 
-  it.skip('supports increment() with set() with merge', () => {
-    // Test skipped due to kokoro to GCB migration.
+  it('supports increment() with set() with merge', () => {
     const baseData = {sum: 1};
     const updateData = {sum: FieldValue.increment(1)};
     const expectedData = {sum: 2};
@@ -1056,8 +1042,7 @@ describe('DocumentReference class', () => {
       });
   });
 
-  it.skip('supports minimum()', () => {
-    // Test skipped due to kokoro to GCB migration.
+  it('supports minimum()', () => {
     const baseData = {min: 2};
     const updateData = {min: FieldValue.minimum(1)};
     const expectedData = {min: 1};
@@ -1072,8 +1057,7 @@ describe('DocumentReference class', () => {
       });
   });
 
-  it.skip('supports minimum() against non-numeric', () => {
-    // Test skipped due to kokoro to GCB migration.
+  it('supports minimum() against non-numeric', () => {
     const baseData = {min: null}; // null sorts less than numeric values
     const updateData = {min: FieldValue.minimum(1)};
     // It is expected that FieldValue.minimum(1, null) results in `1`, because
@@ -1090,8 +1074,7 @@ describe('DocumentReference class', () => {
       });
   });
 
-  it.skip('supports minimum() with set() with merge', () => {
-    // Test skipped due to kokoro to GCB migration.
+  it('supports minimum() with set() with merge', () => {
     const baseData = {min: 2};
     const updateData = {min: FieldValue.minimum(1)};
     const expectedData = {min: 1};
@@ -1106,8 +1089,7 @@ describe('DocumentReference class', () => {
       });
   });
 
-  it.skip('supports maximum() against non-numeric', () => {
-    // Test skipped due to kokoro to GCB migration.
+  it('supports maximum() against non-numeric', () => {
     const baseData = {max: 'any string'}; // a string value sorts greater than numeric values
     const updateData = {max: FieldValue.maximum(2)};
     // It is expected that FieldValue.maximum(2, "any string") results in `2`, because
@@ -1124,8 +1106,7 @@ describe('DocumentReference class', () => {
       });
   });
 
-  it.skip('supports maximum()', () => {
-    // Test skipped due to kokoro to GCB migration.
+  it('supports maximum()', () => {
     const baseData = {max: 1};
     const updateData = {max: FieldValue.maximum(2)};
     const expectedData = {max: 2};
@@ -1140,8 +1121,7 @@ describe('DocumentReference class', () => {
       });
   });
 
-  it.skip('supports maximum() with set() with merge', () => {
-    // Test skipped due to kokoro to GCB migration.
+  it('supports maximum() with set() with merge', () => {
     const baseData = {max: 1};
     const updateData = {max: FieldValue.maximum(2)};
     const expectedData = {max: 2};
@@ -1156,8 +1136,7 @@ describe('DocumentReference class', () => {
       });
   });
 
-  it.skip('supports arrayUnion()', () => {
-    // Test skipped due to kokoro to GCB migration.
+  it('supports arrayUnion()', () => {
     const baseObject = {
       a: [],
       b: ['foo'],
@@ -1185,8 +1164,7 @@ describe('DocumentReference class', () => {
       });
   });
 
-  it.skip('supports arrayRemove()', () => {
-    // Test skipped due to kokoro to GCB migration.
+  it('supports arrayRemove()', () => {
     const baseObject = {
       a: [],
       b: ['foo', 'foo', 'baz'],
@@ -1214,8 +1192,7 @@ describe('DocumentReference class', () => {
       });
   });
 
-  it.skip('supports set() with merge', () => {
-    // Test skipped due to kokoro to GCB migration.
+  it('supports set() with merge', () => {
     const ref = randomCol.doc('doc');
     return ref
       .set({'a.1': 'foo', nested: {'b.1': 'bar'}})
@@ -1236,8 +1213,7 @@ describe('DocumentReference class', () => {
       });
   });
 
-  it.only('supports server timestamps for merge', () => {
-    // Test skipped due to kokoro to GCB migration.
+  it('supports server timestamps for merge', () => {
     const ref = randomCol.doc('doc');
     return ref
       .set({a: 'b'})
@@ -1253,8 +1229,7 @@ describe('DocumentReference class', () => {
       });
   });
 
-  it.skip('has update() method', () => {
-    // Test skipped due to kokoro to GCB migration.
+  it('has update() method', () => {
     const ref = randomCol.doc('doc');
     return ref
       .set({foo: 'a'})
@@ -1284,8 +1259,7 @@ describe('DocumentReference class', () => {
     }
   });
 
-  it.skip('has delete() method', () => {
-    // Test skipped due to kokoro to GCB migration.
+  it('has delete() method', () => {
     let deleted = false;
 
     const ref = randomCol.doc('doc');
@@ -1304,8 +1278,7 @@ describe('DocumentReference class', () => {
       });
   });
 
-  it.skip('can delete() a non-existing document', () => {
-    // Test skipped due to kokoro to GCB migration.
+  it('can delete() a non-existing document', () => {
     const ref = firestore.collection('col').doc();
     return ref.delete();
   });
@@ -1328,8 +1301,7 @@ describe('DocumentReference class', () => {
     }
   });
 
-  it.skip('supports non-alphanumeric field names', () => {
-    // Test skipped due to kokoro to GCB migration.
+  it('supports non-alphanumeric field names', () => {
     const ref = randomCol.doc('doc');
     return ref
       .set({'!.\\`': {'!.\\`': 'value'}})
@@ -1374,8 +1346,7 @@ describe('DocumentReference class', () => {
   });
 
   // tslint:disable-next-line:only-arrow-function
-  it.skip('can add and delete fields sequentially', async function () {
-    // Test skipped due to kokoro to GCB migration.
+  it('can add and delete fields sequentially', async function () {
     this.timeout(30 * 1000);
 
     const ref = randomCol.doc('doc');
@@ -1449,8 +1420,7 @@ describe('DocumentReference class', () => {
   });
 
   // tslint:disable-next-line:only-arrow-function
-  it.skip('can add and delete fields with server timestamps', function () {
-    // Test skipped due to kokoro to GCB migration.
+  it('can add and delete fields with server timestamps', function () {
     this.timeout(10 * 1000);
 
     const ref = randomCol.doc('doc');
@@ -1842,8 +1812,7 @@ describe('DocumentReference class', () => {
     expect(post!.toString()).to.equal('post, by author');
   });
 
-  it.skip('supports primitive types with valid converter', async () => {
-    // Test skipped due to kokoro to GCB migration.
+  it('supports primitive types with valid converter', async () => {
     type Primitive = number;
     const primitiveConverter = {
       toFirestore(value: Primitive): DocumentData {
@@ -6921,8 +6890,7 @@ describe('Transaction class', () => {
       });
   });
 
-  it.skip('has getAll() method', () => {
-    // Test skipped due to kokoro to GCB migration.
+  it('has getAll() method', () => {
     const ref1 = randomCol.doc('doc1');
     const ref2 = randomCol.doc('doc2');
     return Promise.all([ref1.set({}), ref2.set({})])
@@ -6938,8 +6906,7 @@ describe('Transaction class', () => {
       });
   });
 
-  it.skip('getAll() supports array destructuring', () => {
-    // Test skipped due to kokoro to GCB migration.
+  it('getAll() supports array destructuring', () => {
     const ref1 = randomCol.doc('doc1');
     const ref2 = randomCol.doc('doc2');
     return Promise.all([ref1.set({}), ref2.set({})])
