@@ -1751,13 +1751,6 @@ libraries:
     copyright_year: "2026"
     nodejs:
       default_version: v1
-      nodejs_apis:
-        - additional_protos:
-            - google/cloud/workflows/v1/workflows.proto
-          path: google/cloud/workflows/executions/v1
-        - additional_protos:
-            - google/cloud/workflows/v1beta/workflows.proto
-          path: google/cloud/workflows/executions/v1beta
   - name: google-cloud-workloadmanager
     version: 0.1.1
     apis:
