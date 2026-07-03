@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: nodejs
-version: v0.22.0
+version: v0.24.0
 repo: googleapis/google-cloud-node
 sources:
   googleapis:
@@ -924,7 +924,6 @@ libraries:
         nodejs:
           mixins: google.longrunning.Operations;google.cloud.location.Locations;google.iam.v1.IAMPolicy
     copyright_year: "2026"
-
     nodejs:
       default_version: v1
   - name: google-cloud-gdchardwaremanagement
@@ -1531,7 +1530,6 @@ libraries:
       - path: google/cloud/sql/v1
       - path: google/cloud/sql/v1beta4
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-storagebatchoperations

@@ -1,17 +1,14 @@
 {
-  "name": "sql",
-  "name_pretty": "Cloud SQL Admin API",
-  "product_documentation": "",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/sql/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "stable",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/sql",
-  "api_id": "sqladmin.googleapis.com",
-  "default_version": "v1",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "sql"
+    "api_description": "API for Cloud SQL database instance management",
+    "api_id": "sqladmin.googleapis.com",
+    "api_shortname": "sqladmin",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/sql/latest",
+    "default_version": "v1",
+    "distribution_name": "@google-cloud/sql",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "sqladmin",
+    "name_pretty": "Cloud SQL Admin",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-
