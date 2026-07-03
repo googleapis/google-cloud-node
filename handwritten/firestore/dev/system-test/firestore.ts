@@ -1572,7 +1572,7 @@ describe('DocumentReference class', () => {
       .be.true;
   });
 
-  describe.skip('watch', () => {
+  describe('watch', () => {
     const currentDeferred = new DeferredPromise<DocumentSnapshot>();
 
     function resetPromise() {
@@ -1867,7 +1867,7 @@ describe('DocumentReference class', () => {
     expect(result2.data()).to.deep.equal([1, 2, 3]);
   });
 
-  it.skip('can listen to documents with vectors', async () => {
+  it('can listen to documents with vectors', async () => {
     const ref = randomCol.doc();
     const initialDeferred = new Deferred<void>();
     const createDeferred = new Deferred<void>();
@@ -3828,7 +3828,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
     );
   });
 
-  describe.skip('watch', () => {
+  describe('watch', () => {
     interface ExpectedChange {
       type: string;
       doc: DocumentSnapshot;
@@ -7634,7 +7634,6 @@ describe('Client initialization', () => {
         });
         return deferred.promise;
       },
-      true,
     ],
     ['DocumentReference.get()', randomColl => randomColl.doc().get()],
     ['DocumentReference.create()', randomColl => randomColl.doc().create({})],
@@ -7676,7 +7675,6 @@ describe('Client initialization', () => {
         });
         return deferred.promise;
       },
-      true,
     ],
     [
       'CollectionGroup.getPartitions()',

@@ -1502,7 +1502,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
     );
   });
 
-  describe.skip('watch', () => {
+  describe('watch', () => {
     interface ExpectedChange {
       type: string;
       doc: DocumentSnapshot;
