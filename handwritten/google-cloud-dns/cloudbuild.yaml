@@ -57,12 +57,6 @@ steps:
   id: 'coverage-report'
   waitFor: ['run-system-tests']
 
-# If you use Secret Manager for credentials, uncomment and configure:
-# availableSecrets:
-#   secretManager:
-#   - versionName: projects/${PROJECT_ID}/secrets/YOUR_SERVICE_ACCOUNT_KEY_SECRET_NAME/versions/latest
-#     env: 'SA_KEY' # This env var will hold the secret value. Use it as GOOGLE_APPLICATION_CREDENTIALS in step 3 if needed.
-
 # Define a substitution variable for your project ID
 # Replace 'long-door-651' with the actual GCP Project ID your system tests should run against.
 substitutions:
