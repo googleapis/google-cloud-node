@@ -813,8 +813,10 @@ export class Upload extends Writable {
     const userTokenKey = Object.keys(this.customRequestOptions?.headers || {}).find(
       key => key.toLowerCase() === 'x-goog-gcs-idempotency-token'
     );
-    if (userTokenKey) {
-      this.currentInvocationId.uri = this.customRequestOptions?.headers?.[userTokenKey] as string;
+    const userTokenValue = userTokenKey ? this.customRequestOptions?.headers?.[userTokenKey] : undefined;
+    const hasValidUserToken = typeof userTokenValue === 'string' && userTokenValue;
+    if (hasValidUserToken) {
+      this.currentInvocationId.uri = userTokenValue as string;
     }
 
     let googAPIClient = `${getRuntimeTrackingString()} gccl/${
@@ -844,7 +846,7 @@ export class Upload extends Writable {
       },
     };
 
-    if (!userTokenKey) {
+    if (!hasValidUserToken) {
       reqOpts.headers!['x-goog-gcs-idempotency-token'] = this.currentInvocationId.uri;
     }
 
@@ -1013,8 +1015,10 @@ export class Upload extends Writable {
     const userTokenKey = Object.keys(this.customRequestOptions?.headers || {}).find(
       key => key.toLowerCase() === 'x-goog-gcs-idempotency-token'
     );
-    if (userTokenKey) {
-      this.currentInvocationId.chunk = this.customRequestOptions?.headers?.[userTokenKey] as string;
+    const userTokenValue = userTokenKey ? this.customRequestOptions?.headers?.[userTokenKey] : undefined;
+    const hasValidUserToken = typeof userTokenValue === 'string' && userTokenValue;
+    if (hasValidUserToken) {
+      this.currentInvocationId.chunk = userTokenValue as string;
     }
 
     let googAPIClient = `${getRuntimeTrackingString()} gccl/${
@@ -1032,7 +1036,7 @@ export class Upload extends Writable {
       'x-goog-api-client': googAPIClient,
     };
 
-    if (!userTokenKey) {
+    if (!hasValidUserToken) {
       headers['x-goog-gcs-idempotency-token'] = this.currentInvocationId.chunk;
     }
 
@@ -1238,8 +1242,10 @@ export class Upload extends Writable {
     const userTokenKey = Object.keys(this.customRequestOptions?.headers || {}).find(
       key => key.toLowerCase() === 'x-goog-gcs-idempotency-token'
     );
-    if (userTokenKey) {
-      this.currentInvocationId.checkUploadStatus = this.customRequestOptions?.headers?.[userTokenKey] as string;
+    const userTokenValue = userTokenKey ? this.customRequestOptions?.headers?.[userTokenKey] : undefined;
+    const hasValidUserToken = typeof userTokenValue === 'string' && userTokenValue;
+    if (hasValidUserToken) {
+      this.currentInvocationId.checkUploadStatus = userTokenValue as string;
     }
 
     let googAPIClient = `${getRuntimeTrackingString()} gccl/${
@@ -1263,7 +1269,7 @@ export class Upload extends Writable {
       },
     };
 
-    if (!userTokenKey) {
+    if (!hasValidUserToken) {
       opts.headers!['x-goog-gcs-idempotency-token'] = this.currentInvocationId.checkUploadStatus;
     }
 

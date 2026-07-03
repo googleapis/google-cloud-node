@@ -536,6 +536,33 @@ describe('Service', () => {
       service.request_(customReqOpts, assert.ifError);
     });
 
+    it('should ignore invalid user-provided idempotency tokens and fallback to generating a UUID', done => {
+      const customReqOpts = {
+        ...reqOpts,
+        headers: {
+          'X-Goog-Gcs-Idempotency-Token': undefined as unknown as string,
+        },
+      };
+
+      service.makeAuthenticatedRequest = (reqOpts: DecorateRequestOptions) => {
+        const pkg = service.packageJson;
+        const r = new RegExp(
+          `^gl-node/${process.versions.node} gccl/${pkg.version
+          }-${getModuleFormat()} gccl-invocation-id/(?<gcclInvocationId>[^W]+)$`
+        );
+        const match = r.exec(reqOpts.headers!['x-goog-api-client']);
+        assert.ok(match);
+        const invocationId = match.groups!.gcclInvocationId;
+
+        // Verify a fallback token was generated and matches the invocation ID
+        const idempotencyToken = reqOpts.headers!['x-goog-gcs-idempotency-token'];
+        assert.strictEqual(idempotencyToken, invocationId);
+        done();
+      };
+
+      service.request_(customReqOpts, assert.ifError);
+    });
+
     it('should add the `gccl-gcs-cmd` to the api-client header when provided', done => {
       const expected = 'example.expected/value';
       service.makeAuthenticatedRequest = (reqOpts: DecorateRequestOptions) => {

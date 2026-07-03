@@ -915,6 +915,29 @@ describe('resumable-upload', () => {
       await up.createURI();
     });
 
+    it('should ignore invalid user-provided idempotency tokens and fallback to generating a UUID in createURI', async () => {
+      up.customRequestOptions = {
+        headers: {
+          'X-Goog-Gcs-Idempotency-Token': '', // invalid empty string
+        },
+      };
+
+      up.authClient.request = async (combinedReqOpts: GaxiosOptions) => {
+        assert(combinedReqOpts.headers);
+        const apiClientHeader = combinedReqOpts.headers['x-goog-api-client'];
+        const match = X_GOOG_API_HEADER_REGEX.exec(apiClientHeader as string);
+        assert.ok(match);
+        const invocationId = match.groups!.gcclInvocationId;
+        
+        // Verify a fallback token was generated and matches the invocation ID
+        const idempotencyToken = combinedReqOpts.headers['x-goog-gcs-idempotency-token'];
+        assert.strictEqual(idempotencyToken, invocationId);
+        return {headers: {location: '/foo'}};
+      };
+
+      await up.createURI();
+    });
+
     it('should reuse the same x-goog-gcs-idempotency-token on retry of createURI', async () => {
       let invocationCount = 0;
       let token1 = '';

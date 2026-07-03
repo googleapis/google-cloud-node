@@ -273,8 +273,10 @@ export class Service {
     const userTokenKey = Object.keys(headers).find(
       key => key.toLowerCase() === 'x-goog-gcs-idempotency-token'
     );
-    const idempotencyToken = userTokenKey
-      ? (headers[userTokenKey] as string)
+    const userTokenValue = userTokenKey ? headers[userTokenKey] : undefined;
+    const hasValidUserToken = typeof userTokenValue === 'string' && userTokenValue;
+    const idempotencyToken = hasValidUserToken
+      ? (userTokenValue as string)
       : crypto.randomUUID();
     reqOpts.headers = {
       ...headers,
@@ -283,7 +285,7 @@ export class Service {
         pkg.version
       }-${getModuleFormat()} gccl-invocation-id/${idempotencyToken}`,
     };
-    if (!userTokenKey) {
+    if (!hasValidUserToken) {
       reqOpts.headers['x-goog-gcs-idempotency-token'] = idempotencyToken;
     }
 
