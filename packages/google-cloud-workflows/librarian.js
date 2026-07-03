@@ -67,12 +67,12 @@ function findFiles(baseDir, filePattern) {
 const replacements = [
   {
     files: 'packages/google-cloud-workflows/src/index.ts',
-    searchPattern: /import * as v1 from '\.\/v1';/s,
+    searchPattern: /import \* as v1 from '\.\/v1';/s,
     replacement: ''
   },
   {
     files: 'packages/google-cloud-workflows/src/index.ts',
-    searchPattern: /import * as v1beta from '\.\/v1beta';/s,
+    searchPattern: /import \* as v1beta from '\.\/v1beta';/s,
     replacement: ''
   },
 ];
