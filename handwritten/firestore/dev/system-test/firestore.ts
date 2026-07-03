@@ -138,6 +138,7 @@ export function getTestRoot(settings: Settings = {}): CollectionReference {
   return getTestDb(settings).collection(`node_${version}_${autoId()}`);
 }
 
+// Add a comment to kick kokoro off again
 describe('Firestore class', () => {
   let firestore: Firestore;
   let randomCol: CollectionReference;
