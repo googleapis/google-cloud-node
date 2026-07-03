@@ -9,14 +9,17 @@ steps:
   dir: 'handwritten/google-cloud-dns'
   id: 'install-dependencies'
 
-# 2. Configure environment variables for the tests and run system tests
-#    - GOOGLE_APPLICATION_CREDENTIALS: GCB steps run as a service account
-#      that is typically granted permissions directly. Explicitly setting
-#      GOOGLE_APPLICATION_CREDENTIALS might not be needed if the GCB service
-#      account has the right roles (e.g., Bigtable Admin, Bigtable User).
-#      If you need to use specific service account key JSON, you'd store it
-#      in Secret Manager and mount it here. For simplicity, we'll rely on
-#      the GCB service account's inherent permissions.
+# 2. Fetch service account key for system tests
+- name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    gcloud secrets versions access latest --project=cloud-devrel-kokoro-resources --secret=long-door-651-kokoro-system-test-service-account --format='get(payload.data)' | tr '_-' '/+' | base64 -d > /workspace/google_application_credentials.json
+  id: 'get-service-account-key'
+
+# 3. Configure environment variables for the tests and run system tests
+#    - GOOGLE_APPLICATION_CREDENTIALS: Service account key from Secret Manager
 #    - GCLOUD_PROJECT: Can be passed as a build variable.
 - name: 'node:24'
   entrypoint: 'bash'
@@ -27,15 +30,9 @@ steps:
   dir: 'handwritten/google-cloud-dns'
   env:
   - 'GCLOUD_PROJECT=${_GCP_PROJECT_ID}' # Pass project ID via build variable
-  # If you need specific credentials from Secret Manager, uncomment these:
-  # - 'GOOGLE_APPLICATION_CREDENTIALS=/secrets/sa-key.json'
+  - 'GOOGLE_APPLICATION_CREDENTIALS=/workspace/google_application_credentials.json'
   id: 'run-system-tests'
-  waitFor: ['install-dependencies']
-  # For Secret Manager, uncomment these (adjust secret name and volume path as needed):
-  # secretEnv: ['SA_KEY']
-  # volumes:
-  #   - name: 'sa-keys'
-  #     path: '/secrets'
+  waitFor: ['install-dependencies', 'get-service-account-key']
 
 # 3. (Optional) Code Coverage Reporting
 - name: 'node:24'
