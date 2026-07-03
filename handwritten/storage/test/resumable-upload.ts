@@ -877,10 +877,46 @@ describe('resumable-upload', () => {
         delete metadataNoHeaders.contentLength;
         delete metadataNoHeaders.contentType;
         assert.deepStrictEqual(reqOpts.data, metadataNoHeaders);
+        assert(reqOpts.headers);
+        const apiClientHeader = reqOpts.headers['x-goog-api-client'];
+        const match = X_GOOG_API_HEADER_REGEX.exec(apiClientHeader as string);
+        assert.ok(match);
+        const invocationId = match.groups!.gcclInvocationId;
+        const idempotencyToken = reqOpts.headers['x-goog-gcs-idempotency-token'];
+        assert.strictEqual(idempotencyToken, invocationId);
         done();
         return {headers: {location: '/foo'}};
       };
       up.createURI();
+    });
+
+    it('should reuse the same x-goog-gcs-idempotency-token on retry of createURI', async () => {
+      let invocationCount = 0;
+      let token1 = '';
+      let token2 = '';
+
+      up.makeRequest = async (reqOpts: GaxiosOptions) => {
+        invocationCount++;
+        assert(reqOpts.headers);
+        if (invocationCount === 1) {
+          token1 = reqOpts.headers['x-goog-gcs-idempotency-token'] as string;
+          const error = new GaxiosError(
+            'Retriable error',
+            {} as GaxiosOptions,
+            { status: 500 } as GaxiosResponse
+          );
+          throw error;
+        } else if (invocationCount === 2) {
+          token2 = reqOpts.headers['x-goog-gcs-idempotency-token'] as string;
+          return { headers: { location: '/foo' } };
+        }
+        return { headers: { location: '/foo' } };
+      };
+
+      await up.createURI();
+      assert.strictEqual(invocationCount, 2);
+      assert.ok(token1);
+      assert.strictEqual(token1, token2);
     });
 
     it('should pass through the KMS key name', done => {

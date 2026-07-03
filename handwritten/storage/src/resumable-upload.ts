@@ -829,6 +829,7 @@ export class Upload extends Writable {
       headers: {
         'User-Agent': getUserAgentString(),
         'x-goog-api-client': googAPIClient,
+        'x-goog-gcs-idempotency-token': this.currentInvocationId.uri,
         ...headers,
       },
     };
@@ -1008,6 +1009,7 @@ export class Upload extends Writable {
     const headers: GaxiosOptions['headers'] = {
       'User-Agent': getUserAgentString(),
       'x-goog-api-client': googAPIClient,
+      'x-goog-gcs-idempotency-token': this.currentInvocationId.chunk,
     };
 
     // If using multiple chunk upload, set appropriate header
@@ -1227,6 +1229,7 @@ export class Upload extends Writable {
         'Content-Range': 'bytes */*',
         'User-Agent': getUserAgentString(),
         'x-goog-api-client': googAPIClient,
+        'x-goog-gcs-idempotency-token': this.currentInvocationId.checkUploadStatus,
       },
     };
 

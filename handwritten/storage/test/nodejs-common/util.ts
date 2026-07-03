@@ -77,10 +77,15 @@ function fakeRequest() {
 }
 
 fakeRequest.defaults = (defaults: r.CoreOptions) => {
-  assert.ok(
-    /^gl-node\/(?<nodeVersion>[^W]+) gccl\/(?<gccl>[^W]+) gccl-invocation-id\/(?<gcclInvocationId>[^W]+)$/.test(
-      defaults.headers!['x-goog-api-client']
-    )
+  const match =
+    /^gl-node\/(?<nodeVersion>[^W]+) gccl\/(?<gccl>[^W]+) gccl-invocation-id\/(?<gcclInvocationId>[^W]+)$/.exec(
+      defaults.headers!['x-goog-api-client'] as string
+    );
+  assert.ok(match);
+  const invocationId = match.groups!.gcclInvocationId;
+  assert.strictEqual(
+    defaults.headers!['x-goog-gcs-idempotency-token'],
+    invocationId
   );
   return fakeRequest;
 };

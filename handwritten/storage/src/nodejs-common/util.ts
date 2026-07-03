@@ -1042,11 +1042,13 @@ export class Util {
   }
 
   _getDefaultHeaders(gcclGcsCmd?: string) {
+    const idempotencyToken = crypto.randomUUID();
     const headers = {
       'User-Agent': getUserAgentString(),
       'x-goog-api-client': `${getRuntimeTrackingString()} gccl/${
         packageJson.version
-      }-${getModuleFormat()} gccl-invocation-id/${crypto.randomUUID()}`,
+      }-${getModuleFormat()} gccl-invocation-id/${idempotencyToken}`,
+      'x-goog-gcs-idempotency-token': idempotencyToken,
     };
 
     if (gcclGcsCmd) {

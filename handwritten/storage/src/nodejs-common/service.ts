@@ -269,12 +269,14 @@ export class Service {
     if (this.providedUserAgent) {
       userAgent = `${this.providedUserAgent} ${userAgent}`;
     }
+    const idempotencyToken = crypto.randomUUID();
     reqOpts.headers = {
       ...reqOpts.headers,
       'User-Agent': userAgent,
       'x-goog-api-client': `${getRuntimeTrackingString()} gccl/${
         pkg.version
-      }-${getModuleFormat()} gccl-invocation-id/${crypto.randomUUID()}`,
+      }-${getModuleFormat()} gccl-invocation-id/${idempotencyToken}`,
+      'x-goog-gcs-idempotency-token': idempotencyToken,
     };
 
     if (reqOpts[GCCL_GCS_CMD_KEY]) {

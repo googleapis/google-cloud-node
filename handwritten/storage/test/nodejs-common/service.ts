@@ -487,6 +487,25 @@ describe('Service', () => {
       service.request_(reqOpts, assert.ifError);
     });
 
+    it('should add the x-goog-gcs-idempotency-token header matching the gccl-invocation-id', done => {
+      service.makeAuthenticatedRequest = (reqOpts: DecorateRequestOptions) => {
+        const pkg = service.packageJson;
+        const r = new RegExp(
+          `^gl-node/${process.versions.node} gccl/${
+            pkg.version
+          }-${getModuleFormat()} gccl-invocation-id/(?<gcclInvocationId>[^W]+)$`
+        );
+        const match = r.exec(reqOpts.headers!['x-goog-api-client']);
+        assert.ok(match);
+        const invocationId = match.groups!.gcclInvocationId;
+        const idempotencyToken = reqOpts.headers!['x-goog-gcs-idempotency-token'];
+        assert.strictEqual(idempotencyToken, invocationId);
+        done();
+      };
+
+      service.request_(reqOpts, assert.ifError);
+    });
+
     it('should add the `gccl-gcs-cmd` to the api-client header when provided', done => {
       const expected = 'example.expected/value';
       service.makeAuthenticatedRequest = (reqOpts: DecorateRequestOptions) => {
