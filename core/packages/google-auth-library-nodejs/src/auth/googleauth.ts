@@ -571,7 +571,7 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
       return null;
     }
     try {
-      return this._getApplicationCredentialsFromFilePath(
+      return await this._getApplicationCredentialsFromFilePath(
         credentialsPath,
         options,
       );

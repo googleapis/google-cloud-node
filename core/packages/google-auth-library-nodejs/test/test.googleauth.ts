@@ -782,12 +782,10 @@ describe('googleauth', () => {
     it('tryGetApplicationCredentialsFromEnvironmentVariable should handle invalid environment variable', async () => {
       // Set up a mock to return a path to an invalid file.
       mockEnvVar('GOOGLE_APPLICATION_CREDENTIALS', './nonexistantfile.json');
-      try {
-        await auth._tryGetApplicationCredentialsFromEnvironmentVariable();
-      } catch (e) {
-        return;
-      }
-      assert.fail('failed to throw');
+      await assert.rejects(
+        auth._tryGetApplicationCredentialsFromEnvironmentVariable(),
+        /Unable to read the credential file specified by the GOOGLE_APPLICATION_CREDENTIALS environment variable/,
+      );
     });
 
     it('tryGetApplicationCredentialsFromEnvironmentVariable should handle valid environment variable', async () => {
