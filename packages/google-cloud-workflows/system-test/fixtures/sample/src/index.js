@@ -18,10 +18,10 @@
 
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const workflows = require('@google-cloud/workflows');
+const executions = require('@google-cloud/workflows');
 
 function main() {
-  const workflowsClient = new workflows.WorkflowsClient();
+  const executionsClient = new executions.ExecutionsClient();
 }
 
 main();

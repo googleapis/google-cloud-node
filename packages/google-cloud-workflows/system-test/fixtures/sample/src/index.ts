@@ -25,8 +25,8 @@ function doStuffWithExecutionsClient(client: ExecutionsClient) {
 
 function main() {
   // check that the client instance can be created
-  const workflowsClient = new ExecutionsClient();
-  doStuffWithExecutionsClient(workflowsClient);
+  const executionsClient = new ExecutionsClient();
+  doStuffWithExecutionsClient(executionsClient);
 }
 
 main();
