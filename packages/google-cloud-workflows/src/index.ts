@@ -19,10 +19,10 @@
 import * as v1 from './v1';
 import * as v1beta from './v1beta';
 
-const WorkflowsClient = v1.WorkflowsClient;
-type WorkflowsClient = v1.WorkflowsClient;
+const ExecutionsClient = v1.ExecutionsClient;
+type ExecutionsClient = v1.ExecutionsClient;
 
-export {v1, v1beta, WorkflowsClient};
-export default {v1, v1beta, WorkflowsClient};
+export {v1, v1beta, ExecutionsClient};
+export default {v1, v1beta, ExecutionsClient};
 import * as protos from '../protos/protos';
 export {protos};
