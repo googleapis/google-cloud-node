@@ -92,13 +92,8 @@ filesToDelete.forEach(file => {
 const replacements = [
   {
     files: 'packages/google-cloud-workflows/src/index.ts',
-    searchPattern: /export {v1, v1beta, v1, v1beta, ExecutionsClient};/s,
-    replacement: 'export {v1, v1beta, ExecutionsClient};'
-  },
-  {
-    files: 'packages/google-cloud-workflows/src/index.ts',
-    searchPattern: /export default {v1, v1beta, v1, v1beta, ExecutionsClient};/s,
-    replacement: 'export default {v1, v1beta, ExecutionsClient};'
+    searchPattern: /WorkflowsClient/gs,
+    replacement: 'ExecutionsClient'
   },
 ];
 
