@@ -89,28 +89,28 @@ filesToDelete.forEach(file => {
   }
 });
 
-const replacements = [
-  {
-    files: 'packages/google-cloud-workflows/src/*/index.ts',
-    searchPattern: /WorkflowsClient/gs,
-    replacement: 'ExecutionsClient'
-  },
-  {
-    files: 'packages/google-cloud-workflows/src/*/index.ts',
-    searchPattern: /workflows_client/gs,
-    replacement: 'executions_client'
-  },
-  {
-    files: 'packages/google-cloud-workflows/src/index.ts',
-    searchPattern: /WorkflowsClient/gs,
-    replacement: 'ExecutionsClient'
-  },
-];
+// const replacements = [
+//   {
+//     files: 'packages/google-cloud-workflows/src/*/index.ts',
+//     searchPattern: /WorkflowsClient/gs,
+//     replacement: 'ExecutionsClient'
+//   },
+//   {
+//     files: 'packages/google-cloud-workflows/src/*/index.ts',
+//     searchPattern: /workflows_client/gs,
+//     replacement: 'executions_client'
+//   },
+//   {
+//     files: 'packages/google-cloud-workflows/src/index.ts',
+//     searchPattern: /WorkflowsClient/gs,
+//     replacement: 'ExecutionsClient'
+//   },
+// ];
 
-replacements.forEach(r => {
-  const relativePattern = r.files.replace(/^packages\/google-cloud-workflows\//, '');
-  const files = findFiles(__dirname, relativePattern);
-  files.forEach(file => {
-    replaceInFile(path.resolve(file), r.searchPattern, r.replacement);
-  });
-});
+// replacements.forEach(r => {
+//   const relativePattern = r.files.replace(/^packages\/google-cloud-workflows\//, '');
+//   const files = findFiles(__dirname, relativePattern);
+//   files.forEach(file => {
+//     replaceInFile(path.resolve(file), r.searchPattern, r.replacement);
+//   });
+// });
