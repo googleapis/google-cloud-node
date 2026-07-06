@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-spanner?activeTab=versions
 
+## [8.8.1](https://github.com/googleapis/google-cloud-node/compare/spanner-v8.8.0...spanner-v8.8.1) (2026-07-06)
+
+
+### Bug Fixes
+
+* **spanner:** Kokoro pipeline for system test ([#8751](https://github.com/googleapis/google-cloud-node/issues/8751)) ([e132e80](https://github.com/googleapis/google-cloud-node/commit/e132e80349d8531c1cb9193255ad55ace1db5329))
+
 ## [8.8.0](https://github.com/googleapis/google-cloud-node/compare/spanner-v8.7.1...spanner-v8.8.0) (2026-06-24)
 
 
