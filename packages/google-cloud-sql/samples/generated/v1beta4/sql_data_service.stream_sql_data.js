@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(endpoint, model, instances, contents) {
-  // [START aiplatform_v1beta1_generated_LlmUtilityService_CountTokens_async]
+function main() {
+  // [START sqladmin_v1beta4_generated_SqlDataService_StreamSqlData_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,49 +29,50 @@ function main(endpoint, model, instances, contents) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the Endpoint requested to perform token counting.
-   *  Format:
-   *  `projects/{project}/locations/{location}/endpoints/{endpoint}`
+   *  Optional. Acknowledges data received by the client.
    */
-  // const endpoint = 'abc123'
+  // const ack = {}
   /**
-   *  Required. The name of the publisher model requested to serve the
-   *  prediction. Format:
-   *  `projects/{project}/locations/{location}/publishers/* /models/*`
+   *  Starts a new session. When starting a new session, this is the first
+   *  message the client sends.
    */
-  // const model = 'abc123'
+  // const startSession = {}
   /**
-   *  Required. The instances that are the input to token counting call.
-   *  Schema is identical to the prediction schema of the underlying model.
+   *  Continues an existing session. When continuing an existing session, this
+   *  is the first message the client sends.
    */
-  // const instances = [1,2,3,4]
+  // const continueSession = {}
   /**
-   *  Required. Input content.
+   *  Database data.
    */
-  // const contents = [1,2,3,4]
+  // const data = {}
+  /**
+   *  Terminates the session. This closes the connection to the database.
+   */
+  // const terminateSession = {}
 
-  // Imports the Aiplatform library
-  const {LlmUtilityServiceClient} = require('@google-cloud/aiplatform').v1beta1;
+  // Imports the Sql library
+  const {SqlDataServiceClient} = require('@google-cloud/sql').v1beta4;
 
   // Instantiates a client
-  const aiplatformClient = new LlmUtilityServiceClient();
+  const sqlClient = new SqlDataServiceClient();
 
-  async function callCountTokens() {
+  async function callStreamSqlData() {
     // Construct request
     const request = {
-      endpoint,
-      model,
-      instances,
-      contents,
     };
 
     // Run request
-    const response = await aiplatformClient.countTokens(request);
-    console.log(response);
+    const stream = await sqlClient.streamSqlData();
+    stream.on('data', (response) => { console.log(response) });
+    stream.on('error', (err) => { throw(err) });
+    stream.on('end', () => { /* API call completed */ });
+    stream.write(request);
+    stream.end();
   }
 
-  callCountTokens();
-  // [END aiplatform_v1beta1_generated_LlmUtilityService_CountTokens_async]
+  callStreamSqlData();
+  // [END sqladmin_v1beta4_generated_SqlDataService_StreamSqlData_async]
 }
 
 process.on('unhandledRejection', err => {

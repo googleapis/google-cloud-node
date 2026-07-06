@@ -24,7 +24,6 @@ import {IdTokenProvider} from './idtokenclient';
 import {GaxiosError} from 'gaxios';
 import {SignBlobResponse} from './googleauth';
 import {originalOrCamelOptions} from '../util';
-import {SERVICE_ACCOUNT_LOOKUP_ENDPOINT} from './regionalaccessboundary';
 
 export interface ImpersonatedOptions extends OAuth2ClientOptions {
   /**
@@ -203,7 +202,6 @@ export class Impersonated extends OAuth2Client implements IdTokenProvider {
       const tokenResponse = res.data;
       this.credentials.access_token = tokenResponse.accessToken;
       this.credentials.expiry_date = Date.parse(tokenResponse.expireTime);
-
       return {
         tokens: this.credentials,
         res,
@@ -261,28 +259,5 @@ export class Impersonated extends OAuth2Client implements IdTokenProvider {
     });
 
     return res.data.token;
-  }
-
-  /**
-   * Returns the regional access boundary lookup URL for the impersonated
-   * service account.
-   * This implementation uses the target principal (service account email)
-   * to construct the lookup endpoint.
-   *
-   * @return The regional access boundary URL string.
-   * @internal
-   */
-  public async getRegionalAccessBoundaryUrl(): Promise<string> {
-    const targetPrincipal = this.getTargetPrincipal();
-    if (!targetPrincipal) {
-      throw new Error(
-        'RegionalAccessBoundary: A targetPrincipal is required for regional access boundary lookups but was not provided in the ImpersonatedClient options.',
-      );
-    }
-    const regionalAccessBoundaryUrl = SERVICE_ACCOUNT_LOOKUP_ENDPOINT.replace(
-      '{service_account_email}',
-      encodeURIComponent(targetPrincipal),
-    );
-    return regionalAccessBoundaryUrl;
   }
 }

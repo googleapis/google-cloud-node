@@ -1267,6 +1267,16 @@
                           "oneof": [
                             "pscEnabled"
                           ]
+                        },
+                        "_pscAutoDnsEnabled": {
+                          "oneof": [
+                            "pscAutoDnsEnabled"
+                          ]
+                        },
+                        "_pscWriteEndpointDnsEnabled": {
+                          "oneof": [
+                            "pscWriteEndpointDnsEnabled"
+                          ]
                         }
                       },
                       "fields": {
@@ -1298,6 +1308,22 @@
                           "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pscAutoDnsEnabled": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "pscWriteEndpointDnsEnabled": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -1727,7 +1753,8 @@
                             "MANAGE_BACKUP": 50,
                             "ENHANCED_BACKUP": 51,
                             "REPAIR_READ_POOL": 52,
-                            "CREATE_READ_POOL": 53
+                            "CREATE_READ_POOL": 53,
+                            "PRE_CHECK_MAJOR_VERSION_UPGRADE": 54
                           }
                         },
                         "SqlOperationStatus": {
@@ -2099,6 +2126,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
+                          }
+                        },
+                        "acceleratedReplicaMode": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 49,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "autoUpgradeEnabled": {
@@ -2667,6 +2701,7 @@
                         "POSTGRES_16": 272,
                         "POSTGRES_17": 408,
                         "POSTGRES_18": 557,
+                        "POSTGRES_19": 684,
                         "SQLSERVER_2019_STANDARD": 26,
                         "SQLSERVER_2019_ENTERPRISE": 27,
                         "SQLSERVER_2019_EXPRESS": 28,
@@ -2674,7 +2709,10 @@
                         "SQLSERVER_2022_STANDARD": 199,
                         "SQLSERVER_2022_ENTERPRISE": 200,
                         "SQLSERVER_2022_EXPRESS": 201,
-                        "SQLSERVER_2022_WEB": 202
+                        "SQLSERVER_2022_WEB": 202,
+                        "SQLSERVER_2025_STANDARD": 549,
+                        "SQLSERVER_2025_ENTERPRISE": 550,
+                        "SQLSERVER_2025_EXPRESS": 551
                       }
                     },
                     "SqlPricingPlan": {
@@ -5191,6 +5229,11 @@
                           "oneof": [
                             "preferredSecondaryZone"
                           ]
+                        },
+                        "_region": {
+                          "oneof": [
+                            "region"
+                          ]
                         }
                       },
                       "fields": {
@@ -5242,6 +5285,29 @@
                         "preferredSecondaryZone": {
                           "type": "string",
                           "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "targetInstanceSettings": {
+                          "type": "DatabaseInstance",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "targetInstanceClearSettingsFieldNames": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 13,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
@@ -6608,7 +6674,8 @@
                         "BILLING_ISSUE": 2,
                         "LEGAL_ISSUE": 3,
                         "OPERATIONAL_ISSUE": 4,
-                        "KMS_KEY_ISSUE": 5
+                        "KMS_KEY_ISSUE": 5,
+                        "PROJECT_ABUSE": 8
                       }
                     },
                     "SqlConnectService": {
@@ -7989,8 +8056,8 @@
                     "java_multiple_files": true,
                     "java_outer_classname": "CloudSqlUsersProto",
                     "java_package": "com.google.cloud.sql.v1beta4",
-                    "(google.api.resource_definition).type": "compute.googleapis.com/Network",
-                    "(google.api.resource_definition).pattern": "projects/{project}/global/networks/{network}"
+                    "(google.api.resource_definition).type": "cloudsql.googleapis.com/Instance",
+                    "(google.api.resource_definition).pattern": "projects/{project}/instances/{instance}"
                   },
                   "nested": {
                     "SqlBackupRunsService": {
@@ -9624,6 +9691,18 @@
                       }
                     },
                     "SqlInstancesPatchRequest": {
+                      "oneofs": {
+                        "_reconcilePscNetworking": {
+                          "oneof": [
+                            "reconcilePscNetworking"
+                          ]
+                        },
+                        "_reconcilePscNetworkingForce": {
+                          "oneof": [
+                            "reconcilePscNetworkingForce"
+                          ]
+                        }
+                      },
                       "fields": {
                         "instance": {
                           "type": "string",
@@ -9632,6 +9711,22 @@
                         "project": {
                           "type": "string",
                           "id": 2
+                        },
+                        "reconcilePscNetworking": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "reconcilePscNetworkingForce": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
                         },
                         "body": {
                           "type": "DatabaseInstance",
@@ -12976,6 +13071,11 @@
                           "oneof": [
                             "preferredSecondaryZone"
                           ]
+                        },
+                        "_region": {
+                          "oneof": [
+                            "region"
+                          ]
                         }
                       },
                       "fields": {
@@ -13027,6 +13127,29 @@
                         "preferredSecondaryZone": {
                           "type": "string",
                           "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "targetInstanceSettings": {
+                          "type": "DatabaseInstance",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "targetInstanceClearSettingsFieldNames": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 13,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
@@ -13352,6 +13475,21 @@
                           "oneof": [
                             "pscEnabled"
                           ]
+                        },
+                        "_pscAutoDnsEnabled": {
+                          "oneof": [
+                            "pscAutoDnsEnabled"
+                          ]
+                        },
+                        "_pscWriteEndpointDnsEnabled": {
+                          "oneof": [
+                            "pscWriteEndpointDnsEnabled"
+                          ]
+                        },
+                        "_pscAutoConnectionPolicyEnabled": {
+                          "oneof": [
+                            "pscAutoConnectionPolicyEnabled"
+                          ]
                         }
                       },
                       "fields": {
@@ -13384,7 +13522,39 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "pscAutoDnsEnabled": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "pscWriteEndpointDnsEnabled": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "pscAutoConnectionPolicyEnabled": {
+                          "type": "bool",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
                         }
+                      }
+                    },
+                    "AutoDnsStatus": {
+                      "values": {
+                        "AUTO_DNS_STATUS_UNSPECIFIED": 0,
+                        "AUTO_DNS_OK": 1,
+                        "AUTO_DNS_FAILED": 2,
+                        "AUTO_DNS_UNKNOWN": 3
                       }
                     },
                     "PscAutoConnectionConfig": {
@@ -13402,6 +13572,26 @@
                         "_consumerNetworkStatus": {
                           "oneof": [
                             "consumerNetworkStatus"
+                          ]
+                        },
+                        "_serviceConnectionPolicy": {
+                          "oneof": [
+                            "serviceConnectionPolicy"
+                          ]
+                        },
+                        "_serviceConnectionPolicyCreationResult": {
+                          "oneof": [
+                            "serviceConnectionPolicyCreationResult"
+                          ]
+                        },
+                        "_instanceAutoDnsStatus": {
+                          "oneof": [
+                            "instanceAutoDnsStatus"
+                          ]
+                        },
+                        "_writeEndpointAutoDnsStatus": {
+                          "oneof": [
+                            "writeEndpointAutoDnsStatus"
                           ]
                         }
                       },
@@ -13439,6 +13629,39 @@
                           "type": "string",
                           "id": 5,
                           "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "serviceConnectionPolicy": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/ServiceConnectionPolicy",
+                            "proto3_optional": true
+                          }
+                        },
+                        "serviceConnectionPolicyCreationResult": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "instanceAutoDnsStatus": {
+                          "type": "AutoDnsStatus",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "writeEndpointAutoDnsStatus": {
+                          "type": "AutoDnsStatus",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true
                           }
                         }
@@ -13888,7 +14111,10 @@
                             "MANAGE_BACKUP": 50,
                             "ENHANCED_BACKUP": 51,
                             "REPAIR_READ_POOL": 52,
-                            "CREATE_READ_POOL": 53
+                            "CREATE_READ_POOL": 53,
+                            "PRE_CHECK_MAJOR_VERSION_UPGRADE": 54,
+                            "SETUP_MIGRATION": 58,
+                            "AGENT_SEND_MESSAGE": 59
                           }
                         },
                         "SqlOperationStatus": {
@@ -14370,6 +14596,13 @@
                             "proto3_optional": true
                           }
                         },
+                        "acceleratedReplicaMode": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 49,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "autoUpgradeEnabled": {
                           "type": "bool",
                           "id": 50,
@@ -14418,7 +14651,8 @@
                           "values": {
                             "EDITION_UNSPECIFIED": 0,
                             "ENTERPRISE": 2,
-                            "ENTERPRISE_PLUS": 3
+                            "ENTERPRISE_PLUS": 3,
+                            "DEVELOPER": 5
                           }
                         },
                         "ConnectorEnforcement": {
@@ -14467,6 +14701,41 @@
                         "_transactionDurationThreshold": {
                           "oneof": [
                             "transactionDurationThreshold"
+                          ]
+                        },
+                        "_cpuUtilizationThresholdPercent": {
+                          "oneof": [
+                            "cpuUtilizationThresholdPercent"
+                          ]
+                        },
+                        "_memoryUsageThresholdPercent": {
+                          "oneof": [
+                            "memoryUsageThresholdPercent"
+                          ]
+                        },
+                        "_transactionLockWaitThresholdCount": {
+                          "oneof": [
+                            "transactionLockWaitThresholdCount"
+                          ]
+                        },
+                        "_semaphoreWaitThresholdCount": {
+                          "oneof": [
+                            "semaphoreWaitThresholdCount"
+                          ]
+                        },
+                        "_historyListLengthThresholdCount": {
+                          "oneof": [
+                            "historyListLengthThresholdCount"
+                          ]
+                        },
+                        "_transactionKillThresholdSeconds": {
+                          "oneof": [
+                            "transactionKillThresholdSeconds"
+                          ]
+                        },
+                        "_transactionKillType": {
+                          "oneof": [
+                            "transactionKillType"
                           ]
                         }
                       },
@@ -14517,6 +14786,79 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
+                          }
+                        },
+                        "cpuUtilizationThresholdPercent": {
+                          "type": "int32",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "memoryUsageThresholdPercent": {
+                          "type": "int32",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "transactionLockWaitThresholdCount": {
+                          "type": "int32",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "semaphoreWaitThresholdCount": {
+                          "type": "int32",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "historyListLengthThresholdCount": {
+                          "type": "int32",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "transactionKillThresholdSeconds": {
+                          "type": "int32",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "transactionKillExcludedUserHosts": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "transactionKillType": {
+                          "type": "TransactionKillType",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "TransactionKillType": {
+                          "values": {
+                            "TRANSACTION_KILL_TYPE_UNSPECIFIED": 0,
+                            "READ_ONLY_TRANSACTIONS": 1,
+                            "ALL_TRANSACTIONS": 2
                           }
                         }
                       }
@@ -15077,6 +15419,8 @@
                         "POSTGRES_16": 272,
                         "POSTGRES_17": 408,
                         "POSTGRES_18": 557,
+                        "POSTGRES_19": 684,
+                        "POSTGRES_20": 781,
                         "SQLSERVER_2019_STANDARD": 26,
                         "SQLSERVER_2019_ENTERPRISE": 27,
                         "SQLSERVER_2019_EXPRESS": 28,
@@ -15084,7 +15428,10 @@
                         "SQLSERVER_2022_STANDARD": 199,
                         "SQLSERVER_2022_ENTERPRISE": 200,
                         "SQLSERVER_2022_EXPRESS": 201,
-                        "SQLSERVER_2022_WEB": 202
+                        "SQLSERVER_2022_WEB": 202,
+                        "SQLSERVER_2025_STANDARD": 549,
+                        "SQLSERVER_2025_ENTERPRISE": 550,
+                        "SQLSERVER_2025_EXPRESS": 551
                       }
                     },
                     "SqlSuspensionReason": {
@@ -15093,7 +15440,8 @@
                         "BILLING_ISSUE": 2,
                         "LEGAL_ISSUE": 3,
                         "OPERATIONAL_ISSUE": 4,
-                        "KMS_KEY_ISSUE": 5
+                        "KMS_KEY_ISSUE": 5,
+                        "PROJECT_ABUSE": 8
                       }
                     },
                     "SqlPricingPlan": {
@@ -15232,6 +15580,20 @@
                             }
                           ]
                         },
+                        "ResolveConnectSettings": {
+                          "requestType": "ResolveConnectSettingsRequest",
+                          "responseType": "ConnectSettings",
+                          "options": {
+                            "(google.api.http).get": "/sql/v1beta4/locations/{location}/dns/{dns_name}:resolveConnectSettings"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/sql/v1beta4/locations/{location}/dns/{dns_name}:resolveConnectSettings"
+                              }
+                            }
+                          ]
+                        },
                         "GenerateEphemeralCert": {
                           "requestType": "GenerateEphemeralCertRequest",
                           "responseType": "GenerateEphemeralCertResponse",
@@ -15265,6 +15627,24 @@
                           "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ResolveConnectSettingsRequest": {
+                      "fields": {
+                        "dnsName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
@@ -15347,6 +15727,13 @@
                           "rule": "repeated",
                           "type": "MdxProtocolSupport",
                           "id": 39,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "connectionName": {
+                          "type": "string",
+                          "id": 40,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -15464,6 +15851,201 @@
                           "type": "SslCert",
                           "id": 1
                         }
+                      }
+                    },
+                    "SqlDataService": {
+                      "options": {
+                        "(google.api.default_host)": "sqladmin.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/sqlservice.admin"
+                      },
+                      "methods": {
+                        "StreamSqlData": {
+                          "requestType": "StreamSqlDataRequest",
+                          "requestStream": true,
+                          "responseType": "StreamSqlDataResponse",
+                          "responseStream": true
+                        }
+                      }
+                    },
+                    "StreamSqlDataRequest": {
+                      "oneofs": {
+                        "message": {
+                          "oneof": [
+                            "startSession",
+                            "continueSession",
+                            "data",
+                            "terminateSession"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "ack": {
+                          "type": "Ack",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "startSession": {
+                          "type": "StartSession",
+                          "id": 5
+                        },
+                        "continueSession": {
+                          "type": "ContinueSession",
+                          "id": 6
+                        },
+                        "data": {
+                          "type": "DataPacket",
+                          "id": 7
+                        },
+                        "terminateSession": {
+                          "type": "TerminateSession",
+                          "id": 8
+                        },
+                        "instanceId": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "cloudsql.googleapis.com/Instance"
+                          }
+                        }
+                      }
+                    },
+                    "StartSession": {
+                      "fields": {
+                        "locationId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "instanceId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudsql.googleapis.com/Instance"
+                          }
+                        },
+                        "sessionId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ContinueSession": {
+                      "fields": {
+                        "locationId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "instanceId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudsql.googleapis.com/Instance"
+                          }
+                        },
+                        "sessionId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "StreamSqlDataResponse": {
+                      "oneofs": {
+                        "message": {
+                          "oneof": [
+                            "sessionMetadata",
+                            "data",
+                            "terminateSession"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "ack": {
+                          "type": "Ack",
+                          "id": 2
+                        },
+                        "sessionMetadata": {
+                          "type": "SessionMetadata",
+                          "id": 3
+                        },
+                        "data": {
+                          "type": "DataPacket",
+                          "id": 4
+                        },
+                        "terminateSession": {
+                          "type": "TerminateSession",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "SessionMetadata": {
+                      "fields": {
+                        "supportedFeatures": {
+                          "rule": "repeated",
+                          "type": "SqlDataFeature",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "DataPacket": {
+                      "fields": {
+                        "firstByteOffset": {
+                          "type": "int64",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "data": {
+                          "type": "bytes",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "Ack": {
+                      "fields": {
+                        "receivedOffset": {
+                          "type": "int64",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "TerminateSession": {
+                      "fields": {
+                        "status": {
+                          "type": "google.rpc.Status",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "SqlDataFeature": {
+                      "values": {
+                        "SQL_DATA_FEATURE_UNSPECIFIED": 0,
+                        "SQL_DATA_FEATURE_RECONNECT": 1
                       }
                     },
                     "SqlIamPoliciesService": {
@@ -15886,6 +16468,7 @@
                             "CLOUD_IAM_GROUP": 3,
                             "CLOUD_IAM_GROUP_USER": 4,
                             "CLOUD_IAM_GROUP_SERVICE_ACCOUNT": 5,
+                            "CLOUD_IAM_WORKFORCE_IDENTITY": 6,
                             "ENTRAID_USER": 7
                           }
                         },
@@ -15951,8 +16534,7 @@
             "java_multiple_files": true,
             "java_outer_classname": "FieldInfoProto",
             "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI",
-            "cc_enable_arenas": true
+            "objc_class_prefix": "GAPI"
           },
           "nested": {
             "http": {
@@ -16076,6 +16658,10 @@
                   "rule": "repeated",
                   "type": "ClientLibraryDestination",
                   "id": 2
+                },
+                "selectiveGapicGeneration": {
+                  "type": "SelectiveGapicGeneration",
+                  "id": 3
                 }
               }
             },
@@ -16216,6 +16802,28 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "experimentalFeatures": {
+                  "type": "ExperimentalFeatures",
+                  "id": 2
+                }
+              },
+              "nested": {
+                "ExperimentalFeatures": {
+                  "fields": {
+                    "restAsyncIoEnabled": {
+                      "type": "bool",
+                      "id": 1
+                    },
+                    "protobufPythonicTypesEnabled": {
+                      "type": "bool",
+                      "id": 2
+                    },
+                    "unversionedPackageDisabled": {
+                      "type": "bool",
+                      "id": 3
+                    }
+                  }
                 }
               }
             },
@@ -16273,6 +16881,11 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "renamedServices": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 2
                 }
               }
             },
@@ -16332,6 +16945,19 @@
                 "CLIENT_LIBRARY_DESTINATION_UNSPECIFIED": 0,
                 "GITHUB": 10,
                 "PACKAGE_MANAGER": 20
+              }
+            },
+            "SelectiveGapicGeneration": {
+              "fields": {
+                "methods": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                },
+                "generateOmittedAsInternal": {
+                  "type": "bool",
+                  "id": 2
+                }
               }
             },
             "LaunchStage": {
@@ -16455,6 +17081,11 @@
                 "format": {
                   "type": "Format",
                   "id": 1
+                },
+                "referencedTypes": {
+                  "rule": "repeated",
+                  "type": "TypeReference",
+                  "id": 2
                 }
               },
               "nested": {
@@ -16466,6 +17097,14 @@
                     "IPV6": 3,
                     "IPV4_OR_IPV6": 4
                   }
+                }
+              }
+            },
+            "TypeReference": {
+              "fields": {
+                "typeName": {
+                  "type": "string",
+                  "id": 1
                 }
               }
             }
@@ -16490,12 +17129,19 @@
                   "type": "FileDescriptorProto",
                   "id": 1
                 }
-              }
+              },
+              "extensions": [
+                [
+                  536000000,
+                  536000000
+                ]
+              ]
             },
             "Edition": {
               "edition": "proto2",
               "values": {
                 "EDITION_UNKNOWN": 0,
+                "EDITION_LEGACY": 900,
                 "EDITION_PROTO2": 998,
                 "EDITION_PROTO3": 999,
                 "EDITION_2023": 1000,
@@ -16533,6 +17179,11 @@
                   "rule": "repeated",
                   "type": "int32",
                   "id": 11
+                },
+                "optionDependency": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 15
                 },
                 "messageType": {
                   "rule": "repeated",
@@ -16622,6 +17273,10 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 10
+                },
+                "visibility": {
+                  "type": "SymbolVisibility",
+                  "id": 11
                 }
               },
               "nested": {
@@ -16847,6 +17502,10 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 5
+                },
+                "visibility": {
+                  "type": "SymbolVisibility",
+                  "id": 6
                 }
               },
               "nested": {
@@ -16897,7 +17556,14 @@
                   "type": "ServiceOptions",
                   "id": 3
                 }
-              }
+              },
+              "reserved": [
+                [
+                  4,
+                  4
+                ],
+                "stream"
+              ]
             },
             "MethodDescriptorProto": {
               "edition": "proto2",
@@ -17061,6 +17727,7 @@
                   42,
                   42
                 ],
+                "php_generic_services",
                 [
                   38,
                   38
@@ -17196,7 +17863,8 @@
                   "type": "bool",
                   "id": 10,
                   "options": {
-                    "default": false
+                    "default": false,
+                    "deprecated": true
                   }
                 },
                 "debugRedact": {
@@ -17223,6 +17891,10 @@
                 "features": {
                   "type": "FeatureSet",
                   "id": 21
+                },
+                "featureSupport": {
+                  "type": "FeatureSupport",
+                  "id": 22
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -17291,6 +17963,26 @@
                     "value": {
                       "type": "string",
                       "id": 2
+                    }
+                  }
+                },
+                "FeatureSupport": {
+                  "fields": {
+                    "editionIntroduced": {
+                      "type": "Edition",
+                      "id": 1
+                    },
+                    "editionDeprecated": {
+                      "type": "Edition",
+                      "id": 2
+                    },
+                    "deprecationWarning": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "editionRemoved": {
+                      "type": "Edition",
+                      "id": 4
                     }
                   }
                 }
@@ -17380,6 +18072,10 @@
                   "options": {
                     "default": false
                   }
+                },
+                "featureSupport": {
+                  "type": "FieldOptions.FeatureSupport",
+                  "id": 4
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -17523,6 +18219,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_2023",
                     "edition_defaults.value": "EXPLICIT"
                   }
@@ -17533,6 +18230,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "OPEN"
                   }
@@ -17543,6 +18241,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "PACKED"
                   }
@@ -17553,6 +18252,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "VERIFY"
                   }
@@ -17563,7 +18263,8 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "edition_defaults.edition": "EDITION_PROTO2",
+                    "feature_support.edition_introduced": "EDITION_2023",
+                    "edition_defaults.edition": "EDITION_LEGACY",
                     "edition_defaults.value": "LENGTH_PREFIXED"
                   }
                 },
@@ -17573,27 +18274,38 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "ALLOW"
+                  }
+                },
+                "enforceNamingStyle": {
+                  "type": "EnforceNamingStyle",
+                  "id": 7,
+                  "options": {
+                    "retention": "RETENTION_SOURCE",
+                    "targets": "TARGET_TYPE_METHOD",
+                    "feature_support.edition_introduced": "EDITION_2024",
+                    "edition_defaults.edition": "EDITION_2024",
+                    "edition_defaults.value": "STYLE2024"
+                  }
+                },
+                "defaultSymbolVisibility": {
+                  "type": "VisibilityFeature.DefaultSymbolVisibility",
+                  "id": 8,
+                  "options": {
+                    "retention": "RETENTION_SOURCE",
+                    "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2024",
+                    "edition_defaults.edition": "EDITION_2024",
+                    "edition_defaults.value": "EXPORT_TOP_LEVEL"
                   }
                 }
               },
               "extensions": [
                 [
                   1000,
-                  1000
-                ],
-                [
-                  1001,
-                  1001
-                ],
-                [
-                  1002,
-                  1002
-                ],
-                [
-                  9990,
-                  9990
+                  9994
                 ],
                 [
                   9995,
@@ -17638,7 +18350,13 @@
                     "UTF8_VALIDATION_UNKNOWN": 0,
                     "VERIFY": 2,
                     "NONE": 3
-                  }
+                  },
+                  "reserved": [
+                    [
+                      1,
+                      1
+                    ]
+                  ]
                 },
                 "MessageEncoding": {
                   "values": {
@@ -17652,6 +18370,33 @@
                     "JSON_FORMAT_UNKNOWN": 0,
                     "ALLOW": 1,
                     "LEGACY_BEST_EFFORT": 2
+                  }
+                },
+                "EnforceNamingStyle": {
+                  "values": {
+                    "ENFORCE_NAMING_STYLE_UNKNOWN": 0,
+                    "STYLE2024": 1,
+                    "STYLE_LEGACY": 2
+                  }
+                },
+                "VisibilityFeature": {
+                  "fields": {},
+                  "reserved": [
+                    [
+                      1,
+                      536870911
+                    ]
+                  ],
+                  "nested": {
+                    "DefaultSymbolVisibility": {
+                      "values": {
+                        "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN": 0,
+                        "EXPORT_ALL": 1,
+                        "EXPORT_TOP_LEVEL": 2,
+                        "LOCAL_ALL": 3,
+                        "STRICT": 4
+                      }
+                    }
                   }
                 }
               }
@@ -17680,11 +18425,26 @@
                       "type": "Edition",
                       "id": 3
                     },
-                    "features": {
+                    "overridableFeatures": {
                       "type": "FeatureSet",
-                      "id": 2
+                      "id": 4
+                    },
+                    "fixedFeatures": {
+                      "type": "FeatureSet",
+                      "id": 5
                     }
-                  }
+                  },
+                  "reserved": [
+                    [
+                      1,
+                      1
+                    ],
+                    [
+                      2,
+                      2
+                    ],
+                    "features"
+                  ]
                 }
               }
             },
@@ -17697,6 +18457,12 @@
                   "id": 1
                 }
               },
+              "extensions": [
+                [
+                  536000000,
+                  536000000
+                ]
+              ],
               "nested": {
                 "Location": {
                   "fields": {
@@ -17780,6 +18546,14 @@
                     }
                   }
                 }
+              }
+            },
+            "SymbolVisibility": {
+              "edition": "proto2",
+              "values": {
+                "VISIBILITY_UNSET": 0,
+                "VISIBILITY_LOCAL": 1,
+                "VISIBILITY_EXPORT": 2
               }
             },
             "Duration": {
