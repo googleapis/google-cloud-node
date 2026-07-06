@@ -646,6 +646,7 @@ libraries:
           path: google/cloud/compute/v1
         - diregapic: true
           path: google/cloud/compute/v1beta
+    skip_generate: true
   - name: google-cloud-confidentialcomputing
     version: 2.3.0
     apis:
