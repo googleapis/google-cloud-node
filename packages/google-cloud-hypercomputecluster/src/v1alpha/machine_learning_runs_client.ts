@@ -18,11 +18,22 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +55,7 @@ export class MachineLearningRunsClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('hypercomputecluster');
@@ -57,11 +68,11 @@ export class MachineLearningRunsClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  machineLearningRunsStub?: Promise<{[name: string]: Function}>;
+  machineLearningRunsStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of MachineLearningRunsClient.
@@ -102,21 +113,42 @@ export class MachineLearningRunsClient {
    *     const client = new MachineLearningRunsClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof MachineLearningRunsClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'hypercomputecluster.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -141,7 +173,7 @@ export class MachineLearningRunsClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -155,15 +187,11 @@ export class MachineLearningRunsClient {
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -185,31 +213,31 @@ export class MachineLearningRunsClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       clusterPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/clusters/{cluster}'
+        'projects/{project}/locations/{location}/clusters/{cluster}',
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
       machineLearningRunPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}'
+        'projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}',
       ),
       monitoredEventPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}/monitoredEvents/{monitored_event}'
+        'projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}/monitoredEvents/{monitored_event}',
       ),
       nodePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/clusters/{cluster}/nodes/{node}'
+        'projects/{project}/locations/{location}/clusters/{cluster}/nodes/{node}',
       ),
       profileSessionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}/profileSessions/{profile_session}'
+        'projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}/profileSessions/{profile_session}',
       ),
       profilerSessionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}/profilerSessions/{profiler_session}'
+        'projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}/profilerSessions/{profiler_session}',
       ),
       profilerTargetPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}/profilerTargets/{profiler_target}'
+        'projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}/profilerTargets/{profiler_target}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
     };
 
@@ -217,16 +245,31 @@ export class MachineLearningRunsClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listMachineLearningRuns:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'machineLearningRuns'),
-      listProfilerTargets:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'profilerTargets'),
-      listProfilerSessions:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'profilerSessions'),
-      listProfileSessions:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'profileSessions'),
-      listMonitoredEvents:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'monitoredEvents')
+      listMachineLearningRuns: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'machineLearningRuns',
+      ),
+      listProfilerTargets: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'profilerTargets',
+      ),
+      listProfilerSessions: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'profilerSessions',
+      ),
+      listProfileSessions: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'profileSessions',
+      ),
+      listMonitoredEvents: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'monitoredEvents',
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -235,85 +278,156 @@ export class MachineLearningRunsClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1alpha/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1alpha/{name=projects/*}/locations',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1alpha/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1alpha/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1alpha/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1alpha/{name=projects/*/locations/*}/operations',}];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.cloud.location.Locations.GetLocation',
+          get: '/v1alpha/{name=projects/*/locations/*}',
+        },
+        {
+          selector: 'google.cloud.location.Locations.ListLocations',
+          get: '/v1alpha/{name=projects/*}/locations',
+        },
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1alpha/{name=projects/*/locations/*/operations/*}:cancel',
+          body: '*',
+        },
+        {
+          selector: 'google.longrunning.Operations.DeleteOperation',
+          delete: '/v1alpha/{name=projects/*/locations/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1alpha/{name=projects/*/locations/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v1alpha/{name=projects/*/locations/*}/operations',
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
     const createMachineLearningRunResponse = protoFilesRoot.lookup(
-      '.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun') as gax.protobuf.Type;
+      '.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun',
+    ) as gax.protobuf.Type;
     const createMachineLearningRunMetadata = protoFilesRoot.lookup(
-      '.google.cloud.hypercomputecluster.v1alpha.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.hypercomputecluster.v1alpha.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateMachineLearningRunResponse = protoFilesRoot.lookup(
-      '.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun') as gax.protobuf.Type;
+      '.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun',
+    ) as gax.protobuf.Type;
     const updateMachineLearningRunMetadata = protoFilesRoot.lookup(
-      '.google.cloud.hypercomputecluster.v1alpha.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.hypercomputecluster.v1alpha.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteMachineLearningRunResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteMachineLearningRunMetadata = protoFilesRoot.lookup(
-      '.google.cloud.hypercomputecluster.v1alpha.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.hypercomputecluster.v1alpha.OperationMetadata',
+    ) as gax.protobuf.Type;
     const createProfilerTargetResponse = protoFilesRoot.lookup(
-      '.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget') as gax.protobuf.Type;
+      '.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget',
+    ) as gax.protobuf.Type;
     const createProfilerTargetMetadata = protoFilesRoot.lookup(
-      '.google.cloud.hypercomputecluster.v1alpha.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.hypercomputecluster.v1alpha.OperationMetadata',
+    ) as gax.protobuf.Type;
     const createProfilerSessionResponse = protoFilesRoot.lookup(
-      '.google.cloud.hypercomputecluster.v1alpha.ProfilerSession') as gax.protobuf.Type;
+      '.google.cloud.hypercomputecluster.v1alpha.ProfilerSession',
+    ) as gax.protobuf.Type;
     const createProfilerSessionMetadata = protoFilesRoot.lookup(
-      '.google.cloud.hypercomputecluster.v1alpha.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.hypercomputecluster.v1alpha.OperationMetadata',
+    ) as gax.protobuf.Type;
     const createMonitoredEventResponse = protoFilesRoot.lookup(
-      '.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent') as gax.protobuf.Type;
+      '.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent',
+    ) as gax.protobuf.Type;
     const createMonitoredEventMetadata = protoFilesRoot.lookup(
-      '.google.cloud.hypercomputecluster.v1alpha.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.hypercomputecluster.v1alpha.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateMonitoredEventResponse = protoFilesRoot.lookup(
-      '.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent') as gax.protobuf.Type;
+      '.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent',
+    ) as gax.protobuf.Type;
     const updateMonitoredEventMetadata = protoFilesRoot.lookup(
-      '.google.cloud.hypercomputecluster.v1alpha.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.hypercomputecluster.v1alpha.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteMonitoredEventResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteMonitoredEventMetadata = protoFilesRoot.lookup(
-      '.google.cloud.hypercomputecluster.v1alpha.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.hypercomputecluster.v1alpha.OperationMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createMachineLearningRun: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createMachineLearningRunResponse.decode.bind(createMachineLearningRunResponse),
-        createMachineLearningRunMetadata.decode.bind(createMachineLearningRunMetadata)),
+        createMachineLearningRunResponse.decode.bind(
+          createMachineLearningRunResponse,
+        ),
+        createMachineLearningRunMetadata.decode.bind(
+          createMachineLearningRunMetadata,
+        ),
+      ),
       updateMachineLearningRun: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        updateMachineLearningRunResponse.decode.bind(updateMachineLearningRunResponse),
-        updateMachineLearningRunMetadata.decode.bind(updateMachineLearningRunMetadata)),
+        updateMachineLearningRunResponse.decode.bind(
+          updateMachineLearningRunResponse,
+        ),
+        updateMachineLearningRunMetadata.decode.bind(
+          updateMachineLearningRunMetadata,
+        ),
+      ),
       deleteMachineLearningRun: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deleteMachineLearningRunResponse.decode.bind(deleteMachineLearningRunResponse),
-        deleteMachineLearningRunMetadata.decode.bind(deleteMachineLearningRunMetadata)),
+        deleteMachineLearningRunResponse.decode.bind(
+          deleteMachineLearningRunResponse,
+        ),
+        deleteMachineLearningRunMetadata.decode.bind(
+          deleteMachineLearningRunMetadata,
+        ),
+      ),
       createProfilerTarget: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createProfilerTargetResponse.decode.bind(createProfilerTargetResponse),
-        createProfilerTargetMetadata.decode.bind(createProfilerTargetMetadata)),
+        createProfilerTargetMetadata.decode.bind(createProfilerTargetMetadata),
+      ),
       createProfilerSession: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createProfilerSessionResponse.decode.bind(createProfilerSessionResponse),
-        createProfilerSessionMetadata.decode.bind(createProfilerSessionMetadata)),
+        createProfilerSessionResponse.decode.bind(
+          createProfilerSessionResponse,
+        ),
+        createProfilerSessionMetadata.decode.bind(
+          createProfilerSessionMetadata,
+        ),
+      ),
       createMonitoredEvent: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createMonitoredEventResponse.decode.bind(createMonitoredEventResponse),
-        createMonitoredEventMetadata.decode.bind(createMonitoredEventMetadata)),
+        createMonitoredEventMetadata.decode.bind(createMonitoredEventMetadata),
+      ),
       updateMonitoredEvent: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateMonitoredEventResponse.decode.bind(updateMonitoredEventResponse),
-        updateMonitoredEventMetadata.decode.bind(updateMonitoredEventMetadata)),
+        updateMonitoredEventMetadata.decode.bind(updateMonitoredEventMetadata),
+      ),
       deleteMonitoredEvent: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteMonitoredEventResponse.decode.bind(deleteMonitoredEventResponse),
-        deleteMonitoredEventMetadata.decode.bind(deleteMonitoredEventMetadata))
+        deleteMonitoredEventMetadata.decode.bind(deleteMonitoredEventMetadata),
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.hypercomputecluster.v1alpha.MachineLearningRuns', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.hypercomputecluster.v1alpha.MachineLearningRuns',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -344,28 +458,55 @@ export class MachineLearningRunsClient {
     // Put together the "service stub" for
     // google.cloud.hypercomputecluster.v1alpha.MachineLearningRuns.
     this.machineLearningRunsStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.hypercomputecluster.v1alpha.MachineLearningRuns') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.hypercomputecluster.v1alpha.MachineLearningRuns,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.hypercomputecluster.v1alpha.MachineLearningRuns',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.hypercomputecluster.v1alpha
+            .MachineLearningRuns,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const machineLearningRunsStubMethods =
-        ['createMachineLearningRun', 'updateMachineLearningRun', 'deleteMachineLearningRun', 'getMachineLearningRun', 'listMachineLearningRuns', 'createProfilerTarget', 'getProfilerTarget', 'listProfilerTargets', 'deleteProfilerTarget', 'createProfilerSession', 'getProfilerSession', 'listProfilerSessions', 'deleteProfilerSession', 'getProfileSession', 'listProfileSessions', 'createMonitoredEvent', 'getMonitoredEvent', 'listMonitoredEvents', 'updateMonitoredEvent', 'deleteMonitoredEvent'];
+    const machineLearningRunsStubMethods = [
+      'createMachineLearningRun',
+      'updateMachineLearningRun',
+      'deleteMachineLearningRun',
+      'getMachineLearningRun',
+      'listMachineLearningRuns',
+      'createProfilerTarget',
+      'getProfilerTarget',
+      'listProfilerTargets',
+      'deleteProfilerTarget',
+      'createProfilerSession',
+      'getProfilerSession',
+      'listProfilerSessions',
+      'deleteProfilerSession',
+      'getProfileSession',
+      'listProfileSessions',
+      'createMonitoredEvent',
+      'getMonitoredEvent',
+      'listMonitoredEvents',
+      'updateMonitoredEvent',
+      'deleteMonitoredEvent',
+    ];
     for (const methodName of machineLearningRunsStubMethods) {
       const callPromise = this.machineLearningRunsStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -375,7 +516,7 @@ export class MachineLearningRunsClient {
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -390,8 +531,14 @@ export class MachineLearningRunsClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'hypercomputecluster.googleapis.com';
   }
@@ -402,8 +549,14 @@ export class MachineLearningRunsClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'hypercomputecluster.googleapis.com';
   }
@@ -434,9 +587,7 @@ export class MachineLearningRunsClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -445,8 +596,9 @@ export class MachineLearningRunsClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -457,1706 +609,2574 @@ export class MachineLearningRunsClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Gets a Machine Learning Run.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required.
- *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun|MachineLearningRun}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.get_machine_learning_run.js</caption>
- * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_GetMachineLearningRun_async
- */
+  /**
+   * Gets a Machine Learning Run.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required.
+   *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun|MachineLearningRun}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.get_machine_learning_run.js</caption>
+   * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_GetMachineLearningRun_async
+   */
   getMachineLearningRun(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IGetMachineLearningRunRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun,
-        protos.google.cloud.hypercomputecluster.v1alpha.IGetMachineLearningRunRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IGetMachineLearningRunRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun,
+      (
+        | protos.google.cloud.hypercomputecluster.v1alpha.IGetMachineLearningRunRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getMachineLearningRun(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IGetMachineLearningRunRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun,
-          protos.google.cloud.hypercomputecluster.v1alpha.IGetMachineLearningRunRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IGetMachineLearningRunRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IGetMachineLearningRunRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getMachineLearningRun(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IGetMachineLearningRunRequest,
-      callback: Callback<
-          protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun,
-          protos.google.cloud.hypercomputecluster.v1alpha.IGetMachineLearningRunRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IGetMachineLearningRunRequest,
+    callback: Callback<
+      protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IGetMachineLearningRunRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getMachineLearningRun(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IGetMachineLearningRunRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IGetMachineLearningRunRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun,
-          protos.google.cloud.hypercomputecluster.v1alpha.IGetMachineLearningRunRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun,
-          protos.google.cloud.hypercomputecluster.v1alpha.IGetMachineLearningRunRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun,
-        protos.google.cloud.hypercomputecluster.v1alpha.IGetMachineLearningRunRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.hypercomputecluster.v1alpha.IGetMachineLearningRunRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IGetMachineLearningRunRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun,
+      (
+        | protos.google.cloud.hypercomputecluster.v1alpha.IGetMachineLearningRunRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getMachineLearningRun request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun,
-        protos.google.cloud.hypercomputecluster.v1alpha.IGetMachineLearningRunRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun,
+          | protos.google.cloud.hypercomputecluster.v1alpha.IGetMachineLearningRunRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getMachineLearningRun response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getMachineLearningRun(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun,
-        protos.google.cloud.hypercomputecluster.v1alpha.IGetMachineLearningRunRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getMachineLearningRun response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getMachineLearningRun(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun,
+          (
+            | protos.google.cloud.hypercomputecluster.v1alpha.IGetMachineLearningRunRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getMachineLearningRun response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets a Profiler Target.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required.
- *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}/profilerTargets/{profiler_target}
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget|ProfilerTarget}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.get_profiler_target.js</caption>
- * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_GetProfilerTarget_async
- */
+  /**
+   * Gets a Profiler Target.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required.
+   *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}/profilerTargets/{profiler_target}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget|ProfilerTarget}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.get_profiler_target.js</caption>
+   * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_GetProfilerTarget_async
+   */
   getProfilerTarget(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerTargetRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget,
-        protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerTargetRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerTargetRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget,
+      (
+        | protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerTargetRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getProfilerTarget(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerTargetRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget,
-          protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerTargetRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerTargetRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerTargetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getProfilerTarget(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerTargetRequest,
-      callback: Callback<
-          protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget,
-          protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerTargetRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerTargetRequest,
+    callback: Callback<
+      protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerTargetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getProfilerTarget(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerTargetRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerTargetRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget,
-          protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerTargetRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget,
-          protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerTargetRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget,
-        protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerTargetRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerTargetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerTargetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget,
+      (
+        | protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerTargetRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getProfilerTarget request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget,
-        protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerTargetRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget,
+          | protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerTargetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getProfilerTarget response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getProfilerTarget(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget,
-        protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerTargetRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getProfilerTarget response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getProfilerTarget(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget,
+          (
+            | protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerTargetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getProfilerTarget response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Delete a Profiler Target.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the profiler target to delete.
- *   Format:
- *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}/profilerTargets/{profiler_target}
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.delete_profiler_target.js</caption>
- * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_DeleteProfilerTarget_async
- */
+  /**
+   * Delete a Profiler Target.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the profiler target to delete.
+   *   Format:
+   *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}/profilerTargets/{profiler_target}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.delete_profiler_target.js</caption>
+   * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_DeleteProfilerTarget_async
+   */
   deleteProfilerTarget(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerTargetRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerTargetRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerTargetRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerTargetRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   deleteProfilerTarget(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerTargetRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerTargetRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerTargetRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerTargetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteProfilerTarget(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerTargetRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerTargetRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerTargetRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerTargetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteProfilerTarget(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerTargetRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerTargetRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerTargetRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerTargetRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerTargetRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerTargetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerTargetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerTargetRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteProfilerTarget request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerTargetRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerTargetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteProfilerTarget response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteProfilerTarget(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerTargetRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteProfilerTarget response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteProfilerTarget(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerTargetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteProfilerTarget response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Get Profiler Session.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required.
- *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}/profilerSessions/{profiler_session}
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession|ProfilerSession}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.get_profiler_session.js</caption>
- * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_GetProfilerSession_async
- */
+  /**
+   * Get Profiler Session.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required.
+   *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}/profilerSessions/{profiler_session}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession|ProfilerSession}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.get_profiler_session.js</caption>
+   * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_GetProfilerSession_async
+   */
   getProfilerSession(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerSessionRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession,
-        protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerSessionRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerSessionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession,
+      (
+        | protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerSessionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getProfilerSession(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerSessionRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession,
-          protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerSessionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerSessionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerSessionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getProfilerSession(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerSessionRequest,
-      callback: Callback<
-          protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession,
-          protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerSessionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerSessionRequest,
+    callback: Callback<
+      protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerSessionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getProfilerSession(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerSessionRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerSessionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession,
-          protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerSessionRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession,
-          protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerSessionRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession,
-        protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerSessionRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerSessionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerSessionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession,
+      (
+        | protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerSessionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getProfilerSession request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession,
-        protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerSessionRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession,
+          | protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerSessionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getProfilerSession response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getProfilerSession(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession,
-        protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerSessionRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getProfilerSession response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getProfilerSession(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession,
+          (
+            | protos.google.cloud.hypercomputecluster.v1alpha.IGetProfilerSessionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getProfilerSession response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Delete a Profiler Session.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the profiler session to delete.
- *   Format:
- *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}/profilerSessions/{profiler_session}
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.delete_profiler_session.js</caption>
- * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_DeleteProfilerSession_async
- */
+  /**
+   * Delete a Profiler Session.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the profiler session to delete.
+   *   Format:
+   *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}/profilerSessions/{profiler_session}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.delete_profiler_session.js</caption>
+   * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_DeleteProfilerSession_async
+   */
   deleteProfilerSession(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerSessionRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerSessionRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerSessionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerSessionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   deleteProfilerSession(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerSessionRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerSessionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerSessionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerSessionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteProfilerSession(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerSessionRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerSessionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerSessionRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerSessionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteProfilerSession(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerSessionRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerSessionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerSessionRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerSessionRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerSessionRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerSessionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerSessionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerSessionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteProfilerSession request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerSessionRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerSessionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteProfilerSession response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteProfilerSession(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerSessionRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteProfilerSession response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteProfilerSession(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerSessionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteProfilerSession response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Deprecated: Use `GetProfilerSession` instead.
- * Gets a Profile Session.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required.
- *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}/profileSessions/{profileSession}
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession|ProfileSession}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.get_profile_session.js</caption>
- * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_GetProfileSession_async
- * @deprecated GetProfileSession is deprecated and may be removed in a future version.
- */
+  /**
+   * Deprecated: Use `GetProfilerSession` instead.
+   * Gets a Profile Session.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required.
+   *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}/profileSessions/{profileSession}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession|ProfileSession}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.get_profile_session.js</caption>
+   * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_GetProfileSession_async
+   * @deprecated GetProfileSession is deprecated and may be removed in a future version.
+   */
   getProfileSession(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IGetProfileSessionRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession,
-        protos.google.cloud.hypercomputecluster.v1alpha.IGetProfileSessionRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IGetProfileSessionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession,
+      (
+        | protos.google.cloud.hypercomputecluster.v1alpha.IGetProfileSessionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getProfileSession(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IGetProfileSessionRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession,
-          protos.google.cloud.hypercomputecluster.v1alpha.IGetProfileSessionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IGetProfileSessionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IGetProfileSessionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getProfileSession(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IGetProfileSessionRequest,
-      callback: Callback<
-          protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession,
-          protos.google.cloud.hypercomputecluster.v1alpha.IGetProfileSessionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IGetProfileSessionRequest,
+    callback: Callback<
+      protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IGetProfileSessionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getProfileSession(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IGetProfileSessionRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IGetProfileSessionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession,
-          protos.google.cloud.hypercomputecluster.v1alpha.IGetProfileSessionRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession,
-          protos.google.cloud.hypercomputecluster.v1alpha.IGetProfileSessionRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession,
-        protos.google.cloud.hypercomputecluster.v1alpha.IGetProfileSessionRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.hypercomputecluster.v1alpha.IGetProfileSessionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IGetProfileSessionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession,
+      (
+        | protos.google.cloud.hypercomputecluster.v1alpha.IGetProfileSessionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    this.warn('DEP$MachineLearningRuns-$GetProfileSession','GetProfileSession is deprecated and may be removed in a future version.', 'DeprecationWarning');
+    this.warn(
+      'DEP$MachineLearningRuns-$GetProfileSession',
+      'GetProfileSession is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     this._log.info('getProfileSession request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession,
-        protos.google.cloud.hypercomputecluster.v1alpha.IGetProfileSessionRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession,
+          | protos.google.cloud.hypercomputecluster.v1alpha.IGetProfileSessionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getProfileSession response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getProfileSession(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession,
-        protos.google.cloud.hypercomputecluster.v1alpha.IGetProfileSessionRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getProfileSession response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getProfileSession(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession,
+          (
+            | protos.google.cloud.hypercomputecluster.v1alpha.IGetProfileSessionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getProfileSession response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets a specific Monitored Event.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the monitored event to retrieve.
- *   Format:
- *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}/monitoredEvents/{monitored_event}
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent|MonitoredEvent}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.get_monitored_event.js</caption>
- * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_GetMonitoredEvent_async
- */
+  /**
+   * Gets a specific Monitored Event.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the monitored event to retrieve.
+   *   Format:
+   *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}/monitoredEvents/{monitored_event}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent|MonitoredEvent}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.get_monitored_event.js</caption>
+   * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_GetMonitoredEvent_async
+   */
   getMonitoredEvent(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IGetMonitoredEventRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent,
-        protos.google.cloud.hypercomputecluster.v1alpha.IGetMonitoredEventRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IGetMonitoredEventRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent,
+      (
+        | protos.google.cloud.hypercomputecluster.v1alpha.IGetMonitoredEventRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getMonitoredEvent(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IGetMonitoredEventRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent,
-          protos.google.cloud.hypercomputecluster.v1alpha.IGetMonitoredEventRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IGetMonitoredEventRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IGetMonitoredEventRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getMonitoredEvent(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IGetMonitoredEventRequest,
-      callback: Callback<
-          protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent,
-          protos.google.cloud.hypercomputecluster.v1alpha.IGetMonitoredEventRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IGetMonitoredEventRequest,
+    callback: Callback<
+      protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IGetMonitoredEventRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getMonitoredEvent(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IGetMonitoredEventRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IGetMonitoredEventRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent,
-          protos.google.cloud.hypercomputecluster.v1alpha.IGetMonitoredEventRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent,
-          protos.google.cloud.hypercomputecluster.v1alpha.IGetMonitoredEventRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent,
-        protos.google.cloud.hypercomputecluster.v1alpha.IGetMonitoredEventRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.hypercomputecluster.v1alpha.IGetMonitoredEventRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IGetMonitoredEventRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent,
+      (
+        | protos.google.cloud.hypercomputecluster.v1alpha.IGetMonitoredEventRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getMonitoredEvent request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent,
-        protos.google.cloud.hypercomputecluster.v1alpha.IGetMonitoredEventRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent,
+          | protos.google.cloud.hypercomputecluster.v1alpha.IGetMonitoredEventRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getMonitoredEvent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getMonitoredEvent(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent,
-        protos.google.cloud.hypercomputecluster.v1alpha.IGetMonitoredEventRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getMonitoredEvent response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getMonitoredEvent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent,
+          (
+            | protos.google.cloud.hypercomputecluster.v1alpha.IGetMonitoredEventRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getMonitoredEvent response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
- * Creates a Machine Learning Run.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent format: projects/{project}/locations/{location}
- * @param {google.cloud.hypercomputecluster.v1alpha.MachineLearningRun} request.machineLearningRun
- *   Required. The Machine Learning Run to create.
- * @param {string} [request.machineLearningRunId]
- *   Optional. The ID of the Machine Learning Run to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.create_machine_learning_run.js</caption>
- * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_CreateMachineLearningRun_async
- */
+  /**
+   * Creates a Machine Learning Run.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent format: projects/{project}/locations/{location}
+   * @param {google.cloud.hypercomputecluster.v1alpha.MachineLearningRun} request.machineLearningRun
+   *   Required. The Machine Learning Run to create.
+   * @param {string} [request.machineLearningRunId]
+   *   Optional. The ID of the Machine Learning Run to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.create_machine_learning_run.js</caption>
+   * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_CreateMachineLearningRun_async
+   */
   createMachineLearningRun(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.ICreateMachineLearningRunRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.ICreateMachineLearningRunRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createMachineLearningRun(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.ICreateMachineLearningRunRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.ICreateMachineLearningRunRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createMachineLearningRun(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.ICreateMachineLearningRunRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.ICreateMachineLearningRunRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createMachineLearningRun(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.ICreateMachineLearningRunRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.ICreateMachineLearningRunRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun,
+            protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun,
+            protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createMachineLearningRun response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createMachineLearningRun request %j', request);
-    return this.innerApiCalls.createMachineLearningRun(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createMachineLearningRun response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createMachineLearningRun(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun,
+            protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createMachineLearningRun response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createMachineLearningRun()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.create_machine_learning_run.js</caption>
- * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_CreateMachineLearningRun_async
- */
-  async checkCreateMachineLearningRunProgress(name: string): Promise<LROperation<protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun, protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createMachineLearningRun()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.create_machine_learning_run.js</caption>
+   * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_CreateMachineLearningRun_async
+   */
+  async checkCreateMachineLearningRunProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun,
+      protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata
+    >
+  > {
     this._log.info('createMachineLearningRun long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createMachineLearningRun, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun, protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createMachineLearningRun,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun,
+      protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata
+    >;
   }
-/**
- * Updates an Machine Learning Run.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.hypercomputecluster.v1alpha.MachineLearningRun} request.machineLearningRun
- *   Required. The Machine Learning Run to update.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. Used to identify fields to be updated. Allowed fields is *, we
- *   don't support partial updates.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.update_machine_learning_run.js</caption>
- * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_UpdateMachineLearningRun_async
- */
+  /**
+   * Updates an Machine Learning Run.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.hypercomputecluster.v1alpha.MachineLearningRun} request.machineLearningRun
+   *   Required. The Machine Learning Run to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Used to identify fields to be updated. Allowed fields is *, we
+   *   don't support partial updates.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.update_machine_learning_run.js</caption>
+   * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_UpdateMachineLearningRun_async
+   */
   updateMachineLearningRun(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IUpdateMachineLearningRunRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IUpdateMachineLearningRunRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateMachineLearningRun(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IUpdateMachineLearningRunRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IUpdateMachineLearningRunRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateMachineLearningRun(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IUpdateMachineLearningRunRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IUpdateMachineLearningRunRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateMachineLearningRun(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IUpdateMachineLearningRunRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IUpdateMachineLearningRunRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun,
+            protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'machine_learning_run.name': request.machineLearningRun!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'machine_learning_run.name': request.machineLearningRun!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun,
+            protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateMachineLearningRun response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateMachineLearningRun request %j', request);
-    return this.innerApiCalls.updateMachineLearningRun(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateMachineLearningRun response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateMachineLearningRun(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun,
+            protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateMachineLearningRun response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateMachineLearningRun()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.update_machine_learning_run.js</caption>
- * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_UpdateMachineLearningRun_async
- */
-  async checkUpdateMachineLearningRunProgress(name: string): Promise<LROperation<protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun, protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateMachineLearningRun()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.update_machine_learning_run.js</caption>
+   * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_UpdateMachineLearningRun_async
+   */
+  async checkUpdateMachineLearningRunProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun,
+      protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata
+    >
+  > {
     this._log.info('updateMachineLearningRun long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateMachineLearningRun, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun, protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateMachineLearningRun,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun,
+      protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata
+    >;
   }
-/**
- * Deletes a Machine Learning Run.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required.
- *   projects/{project}/locations/{location}/machineLearningRuns/{machineLearningRun}
- * @param {boolean} [request.force]
- *   Optional. If force=false and if a user tries to delete an ml run resource
- *   that still has child resources (e.g., ProfilerTarget), the request should
- *   fail with a FAILED_PRECONDITION error. If force=true, the delete request
- *   should delete both parent and child resources that exist.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.delete_machine_learning_run.js</caption>
- * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_DeleteMachineLearningRun_async
- */
+  /**
+   * Deletes a Machine Learning Run.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required.
+   *   projects/{project}/locations/{location}/machineLearningRuns/{machineLearningRun}
+   * @param {boolean} [request.force]
+   *   Optional. If force=false and if a user tries to delete an ml run resource
+   *   that still has child resources (e.g., ProfilerTarget), the request should
+   *   fail with a FAILED_PRECONDITION error. If force=true, the delete request
+   *   should delete both parent and child resources that exist.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.delete_machine_learning_run.js</caption>
+   * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_DeleteMachineLearningRun_async
+   */
   deleteMachineLearningRun(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteMachineLearningRunRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteMachineLearningRunRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteMachineLearningRun(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteMachineLearningRunRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteMachineLearningRunRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteMachineLearningRun(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteMachineLearningRunRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteMachineLearningRunRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteMachineLearningRun(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteMachineLearningRunRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteMachineLearningRunRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteMachineLearningRun response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteMachineLearningRun request %j', request);
-    return this.innerApiCalls.deleteMachineLearningRun(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteMachineLearningRun response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteMachineLearningRun(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteMachineLearningRun response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteMachineLearningRun()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.delete_machine_learning_run.js</caption>
- * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_DeleteMachineLearningRun_async
- */
-  async checkDeleteMachineLearningRunProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteMachineLearningRun()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.delete_machine_learning_run.js</caption>
+   * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_DeleteMachineLearningRun_async
+   */
+  async checkDeleteMachineLearningRunProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata
+    >
+  > {
     this._log.info('deleteMachineLearningRun long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteMachineLearningRun, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteMachineLearningRun,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata
+    >;
   }
-/**
- * Creates a Profiler Target.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required.
- *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}
- * @param {google.cloud.hypercomputecluster.v1alpha.ProfilerTarget} request.profilerTarget
- *   Required. The Profiler Target to create.
- * @param {string} [request.profilerTargetId]
- *   Optional. If not provided, the server will generate an ID based on hostname
- *   and node_index. Example: "myhost-0"
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.create_profiler_target.js</caption>
- * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_CreateProfilerTarget_async
- */
+  /**
+   * Creates a Profiler Target.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required.
+   *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}
+   * @param {google.cloud.hypercomputecluster.v1alpha.ProfilerTarget} request.profilerTarget
+   *   Required. The Profiler Target to create.
+   * @param {string} [request.profilerTargetId]
+   *   Optional. If not provided, the server will generate an ID based on hostname
+   *   and node_index. Example: "myhost-0"
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.create_profiler_target.js</caption>
+   * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_CreateProfilerTarget_async
+   */
   createProfilerTarget(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.ICreateProfilerTargetRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.ICreateProfilerTargetRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createProfilerTarget(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.ICreateProfilerTargetRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.ICreateProfilerTargetRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createProfilerTarget(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.ICreateProfilerTargetRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.ICreateProfilerTargetRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createProfilerTarget(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.ICreateProfilerTargetRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.ICreateProfilerTargetRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget,
+            protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget,
+            protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createProfilerTarget response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createProfilerTarget request %j', request);
-    return this.innerApiCalls.createProfilerTarget(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createProfilerTarget response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createProfilerTarget(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget,
+            protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createProfilerTarget response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createProfilerTarget()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.create_profiler_target.js</caption>
- * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_CreateProfilerTarget_async
- */
-  async checkCreateProfilerTargetProgress(name: string): Promise<LROperation<protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget, protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createProfilerTarget()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.create_profiler_target.js</caption>
+   * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_CreateProfilerTarget_async
+   */
+  async checkCreateProfilerTargetProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget,
+      protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata
+    >
+  > {
     this._log.info('createProfilerTarget long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createProfilerTarget, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget, protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createProfilerTarget,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget,
+      protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata
+    >;
   }
-/**
- * Create a Profiler Session.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required.
- *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}
- * @param {string} [request.profilerSessionId]
- *   Optional. ID for the profiler session.
- * @param {google.cloud.hypercomputecluster.v1alpha.ProfilerSession} request.profilerSession
- *   Required. The Profiler Session to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.create_profiler_session.js</caption>
- * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_CreateProfilerSession_async
- */
+  /**
+   * Create a Profiler Session.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required.
+   *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}
+   * @param {string} [request.profilerSessionId]
+   *   Optional. ID for the profiler session.
+   * @param {google.cloud.hypercomputecluster.v1alpha.ProfilerSession} request.profilerSession
+   *   Required. The Profiler Session to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.create_profiler_session.js</caption>
+   * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_CreateProfilerSession_async
+   */
   createProfilerSession(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.ICreateProfilerSessionRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.ICreateProfilerSessionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createProfilerSession(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.ICreateProfilerSessionRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.ICreateProfilerSessionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createProfilerSession(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.ICreateProfilerSessionRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.ICreateProfilerSessionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createProfilerSession(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.ICreateProfilerSessionRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.ICreateProfilerSessionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession,
+            protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession,
+            protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createProfilerSession response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createProfilerSession request %j', request);
-    return this.innerApiCalls.createProfilerSession(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createProfilerSession response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createProfilerSession(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession,
+            protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createProfilerSession response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createProfilerSession()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.create_profiler_session.js</caption>
- * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_CreateProfilerSession_async
- */
-  async checkCreateProfilerSessionProgress(name: string): Promise<LROperation<protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession, protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createProfilerSession()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.create_profiler_session.js</caption>
+   * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_CreateProfilerSession_async
+   */
+  async checkCreateProfilerSessionProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession,
+      protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata
+    >
+  > {
     this._log.info('createProfilerSession long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createProfilerSession, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession, protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createProfilerSession,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession,
+      protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata
+    >;
   }
-/**
- * Creates a Monitored Event.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent resource where the event will be created.
- *   Format:
- *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}
- * @param {google.cloud.hypercomputecluster.v1alpha.MonitoredEvent} request.monitoredEvent
- *   Required. The event resource to create.
- * @param {string} [request.monitoredEventId]
- *   Optional. Optional ID for the event.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.create_monitored_event.js</caption>
- * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_CreateMonitoredEvent_async
- */
+  /**
+   * Creates a Monitored Event.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent resource where the event will be created.
+   *   Format:
+   *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}
+   * @param {google.cloud.hypercomputecluster.v1alpha.MonitoredEvent} request.monitoredEvent
+   *   Required. The event resource to create.
+   * @param {string} [request.monitoredEventId]
+   *   Optional. Optional ID for the event.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.create_monitored_event.js</caption>
+   * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_CreateMonitoredEvent_async
+   */
   createMonitoredEvent(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.ICreateMonitoredEventRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.ICreateMonitoredEventRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createMonitoredEvent(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.ICreateMonitoredEventRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.ICreateMonitoredEventRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createMonitoredEvent(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.ICreateMonitoredEventRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.ICreateMonitoredEventRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createMonitoredEvent(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.ICreateMonitoredEventRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.ICreateMonitoredEventRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent,
+            protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent,
+            protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createMonitoredEvent response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createMonitoredEvent request %j', request);
-    return this.innerApiCalls.createMonitoredEvent(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createMonitoredEvent response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createMonitoredEvent(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent,
+            protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createMonitoredEvent response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createMonitoredEvent()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.create_monitored_event.js</caption>
- * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_CreateMonitoredEvent_async
- */
-  async checkCreateMonitoredEventProgress(name: string): Promise<LROperation<protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent, protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createMonitoredEvent()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.create_monitored_event.js</caption>
+   * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_CreateMonitoredEvent_async
+   */
+  async checkCreateMonitoredEventProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent,
+      protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata
+    >
+  > {
     this._log.info('createMonitoredEvent long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createMonitoredEvent, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent, protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createMonitoredEvent,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent,
+      protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata
+    >;
   }
-/**
- * Updates a Monitored Event.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.hypercomputecluster.v1alpha.MonitoredEvent} request.monitoredEvent
- *   Required. The monitored event to update.
- *
- *   The event's `name` field is used to identify the event to be updated.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. The list of fields to be updated.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.update_monitored_event.js</caption>
- * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_UpdateMonitoredEvent_async
- */
+  /**
+   * Updates a Monitored Event.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.hypercomputecluster.v1alpha.MonitoredEvent} request.monitoredEvent
+   *   Required. The monitored event to update.
+   *
+   *   The event's `name` field is used to identify the event to be updated.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The list of fields to be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.update_monitored_event.js</caption>
+   * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_UpdateMonitoredEvent_async
+   */
   updateMonitoredEvent(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IUpdateMonitoredEventRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IUpdateMonitoredEventRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateMonitoredEvent(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IUpdateMonitoredEventRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IUpdateMonitoredEventRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateMonitoredEvent(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IUpdateMonitoredEventRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IUpdateMonitoredEventRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateMonitoredEvent(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IUpdateMonitoredEventRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IUpdateMonitoredEventRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent,
+            protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'monitored_event.name': request.monitoredEvent!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'monitored_event.name': request.monitoredEvent!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent,
+            protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateMonitoredEvent response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateMonitoredEvent request %j', request);
-    return this.innerApiCalls.updateMonitoredEvent(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateMonitoredEvent response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateMonitoredEvent(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent,
+            protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateMonitoredEvent response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateMonitoredEvent()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.update_monitored_event.js</caption>
- * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_UpdateMonitoredEvent_async
- */
-  async checkUpdateMonitoredEventProgress(name: string): Promise<LROperation<protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent, protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateMonitoredEvent()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.update_monitored_event.js</caption>
+   * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_UpdateMonitoredEvent_async
+   */
+  async checkUpdateMonitoredEventProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent,
+      protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata
+    >
+  > {
     this._log.info('updateMonitoredEvent long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateMonitoredEvent, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent, protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateMonitoredEvent,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent,
+      protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata
+    >;
   }
-/**
- * Deletes a Monitored Event.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the monitored event to delete.
- *   Format:
- *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}/monitoredEvents/{monitored_event}
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.delete_monitored_event.js</caption>
- * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_DeleteMonitoredEvent_async
- */
+  /**
+   * Deletes a Monitored Event.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the monitored event to delete.
+   *   Format:
+   *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}/monitoredEvents/{monitored_event}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.delete_monitored_event.js</caption>
+   * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_DeleteMonitoredEvent_async
+   */
   deleteMonitoredEvent(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteMonitoredEventRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteMonitoredEventRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteMonitoredEvent(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteMonitoredEventRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteMonitoredEventRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteMonitoredEvent(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteMonitoredEventRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteMonitoredEventRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteMonitoredEvent(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteMonitoredEventRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteMonitoredEventRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteMonitoredEvent response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteMonitoredEvent request %j', request);
-    return this.innerApiCalls.deleteMonitoredEvent(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteMonitoredEvent response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteMonitoredEvent(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteMonitoredEvent response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteMonitoredEvent()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.delete_monitored_event.js</caption>
- * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_DeleteMonitoredEvent_async
- */
-  async checkDeleteMonitoredEventProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteMonitoredEvent()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.delete_monitored_event.js</caption>
+   * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_DeleteMonitoredEvent_async
+   */
+  async checkDeleteMonitoredEventProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata
+    >
+  > {
     this._log.info('deleteMonitoredEvent long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteMonitoredEvent, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteMonitoredEvent,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata
+    >;
   }
- /**
- * Lists Machine Learning Runs.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. projects/{project}/locations/{location}
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of Machine Learning Runs to return. The
- *   service may return fewer than this value. If unspecified, at most 10
- *   Machine Learning Runs will be returned. The maximum value is 1000; values
- *   above 1000 will be coerced to 1000. Please refer to
- *   https://google.aip.dev/158 for more details.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListMachineLearningRuns`
- *   call. Provide this to retrieve the subsequent page. Please refer to
- *   https://google.aip.dev/158 for more details.
- * @param {string} [request.filter]
- *   Optional. An expression for filtering the results of the request.
- *
- *   Supported filter fields are:
- *   - run_id (string): The ID of the run (e.g., "run-1").
- *   - run_set (string): The run set (e.g., "run-set-1").
- *   - display_name (string): The display name of the run (e.g.,
- *   "display-name-1").
- *   - state (enum): The state of the run (e.g., "STATE_COMPLETED").
- *   - region (string): The region of the run (e.g., "us-central1").
- *   - orchestrator (enum): The orchestrator used for the run (e.g.,
- *   "ORCHESTRATOR_GKE").
- *   - create_time (timestamp): The creation timestamp of the run.
- *   - update_time (timestamp): The last update timestamp of the run.
- *   - etag (string): The ETag of the run.
- *
- *   Filter expressions can be combined using "AND" and "OR" operators.
- *
- *   Examples:
- *
- *   To filter by a single field:
- *
- *     `run_set = "run-set-1"`
- *     `state = "STATE_ACTIVE"`
- *
- *   To filter by multiple fields:
- *
- *     `run_set = "run-set-1" AND state = "STATE_ACTIVE"`
- *     `region = "us-central1" AND orchestrator = "ORCHESTRATOR_GKE"`
- *
- *   To filter by timestamp:
- *
- *     `create_time > "2025-05-26T10:00:00Z"`
- * @param {string} [request.orderBy]
- *   Optional. A comma-separated list of fields to order by, sorted in ascending
- *   order. Use "desc" after a field name for descending.
- *
- *   Supported fields:
- *
- *     * `run_id`
- *     * `run_set`
- *     * `display_name`
- *     * `region`
- *     * `orchestrator`
- *     * `state`
- *     * `create_time`
- *     * `update_time`
- *
- *   Example: `update_time desc, create_time`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun|MachineLearningRun}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listMachineLearningRunsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists Machine Learning Runs.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. projects/{project}/locations/{location}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of Machine Learning Runs to return. The
+   *   service may return fewer than this value. If unspecified, at most 10
+   *   Machine Learning Runs will be returned. The maximum value is 1000; values
+   *   above 1000 will be coerced to 1000. Please refer to
+   *   https://google.aip.dev/158 for more details.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListMachineLearningRuns`
+   *   call. Provide this to retrieve the subsequent page. Please refer to
+   *   https://google.aip.dev/158 for more details.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request.
+   *
+   *   Supported filter fields are:
+   *   - run_id (string): The ID of the run (e.g., "run-1").
+   *   - run_set (string): The run set (e.g., "run-set-1").
+   *   - display_name (string): The display name of the run (e.g.,
+   *   "display-name-1").
+   *   - state (enum): The state of the run (e.g., "STATE_COMPLETED").
+   *   - region (string): The region of the run (e.g., "us-central1").
+   *   - orchestrator (enum): The orchestrator used for the run (e.g.,
+   *   "ORCHESTRATOR_GKE").
+   *   - create_time (timestamp): The creation timestamp of the run.
+   *   - update_time (timestamp): The last update timestamp of the run.
+   *   - etag (string): The ETag of the run.
+   *
+   *   Filter expressions can be combined using "AND" and "OR" operators.
+   *
+   *   Examples:
+   *
+   *   To filter by a single field:
+   *
+   *     `run_set = "run-set-1"`
+   *     `state = "STATE_ACTIVE"`
+   *
+   *   To filter by multiple fields:
+   *
+   *     `run_set = "run-set-1" AND state = "STATE_ACTIVE"`
+   *     `region = "us-central1" AND orchestrator = "ORCHESTRATOR_GKE"`
+   *
+   *   To filter by timestamp:
+   *
+   *     `create_time > "2025-05-26T10:00:00Z"`
+   * @param {string} [request.orderBy]
+   *   Optional. A comma-separated list of fields to order by, sorted in ascending
+   *   order. Use "desc" after a field name for descending.
+   *
+   *   Supported fields:
+   *
+   *     * `run_id`
+   *     * `run_set`
+   *     * `display_name`
+   *     * `region`
+   *     * `orchestrator`
+   *     * `state`
+   *     * `create_time`
+   *     * `update_time`
+   *
+   *   Example: `update_time desc, create_time`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun|MachineLearningRun}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listMachineLearningRunsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listMachineLearningRuns(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun[],
-        protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsRequest|null,
-        protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsResponse
-      ]>;
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun[],
+      protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsRequest | null,
+      protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsResponse,
+    ]
+  >;
   listMachineLearningRuns(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsRequest,
-          protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsResponse|null|undefined,
-          protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsRequest,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsResponse
+      | null
+      | undefined,
+      protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun
+    >,
+  ): void;
   listMachineLearningRuns(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsRequest,
-          protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsResponse|null|undefined,
-          protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsRequest,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsResponse
+      | null
+      | undefined,
+      protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun
+    >,
+  ): void;
   listMachineLearningRuns(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsRequest,
-          protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsResponse|null|undefined,
-          protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun>,
-      callback?: PaginationCallback<
-          protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsRequest,
-          protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsResponse|null|undefined,
-          protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun>):
-      Promise<[
-        protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun[],
-        protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsRequest|null,
-        protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsResponse
-      ]>|void {
+          | protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsResponse
+          | null
+          | undefined,
+          protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsRequest,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsResponse
+      | null
+      | undefined,
+      protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun[],
+      protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsRequest | null,
+      protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsRequest,
-      protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsResponse|null|undefined,
-      protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsRequest,
+          | protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsResponse
+          | null
+          | undefined,
+          protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listMachineLearningRuns values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2165,306 +3185,335 @@ export class MachineLearningRunsClient {
     this._log.info('listMachineLearningRuns request %j', request);
     return this.innerApiCalls
       .listMachineLearningRuns(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun[],
-        protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsRequest|null,
-        protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsResponse
-      ]) => {
-        this._log.info('listMachineLearningRuns values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun[],
+          protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsRequest | null,
+          protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsResponse,
+        ]) => {
+          this._log.info('listMachineLearningRuns values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listMachineLearningRuns`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. projects/{project}/locations/{location}
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of Machine Learning Runs to return. The
- *   service may return fewer than this value. If unspecified, at most 10
- *   Machine Learning Runs will be returned. The maximum value is 1000; values
- *   above 1000 will be coerced to 1000. Please refer to
- *   https://google.aip.dev/158 for more details.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListMachineLearningRuns`
- *   call. Provide this to retrieve the subsequent page. Please refer to
- *   https://google.aip.dev/158 for more details.
- * @param {string} [request.filter]
- *   Optional. An expression for filtering the results of the request.
- *
- *   Supported filter fields are:
- *   - run_id (string): The ID of the run (e.g., "run-1").
- *   - run_set (string): The run set (e.g., "run-set-1").
- *   - display_name (string): The display name of the run (e.g.,
- *   "display-name-1").
- *   - state (enum): The state of the run (e.g., "STATE_COMPLETED").
- *   - region (string): The region of the run (e.g., "us-central1").
- *   - orchestrator (enum): The orchestrator used for the run (e.g.,
- *   "ORCHESTRATOR_GKE").
- *   - create_time (timestamp): The creation timestamp of the run.
- *   - update_time (timestamp): The last update timestamp of the run.
- *   - etag (string): The ETag of the run.
- *
- *   Filter expressions can be combined using "AND" and "OR" operators.
- *
- *   Examples:
- *
- *   To filter by a single field:
- *
- *     `run_set = "run-set-1"`
- *     `state = "STATE_ACTIVE"`
- *
- *   To filter by multiple fields:
- *
- *     `run_set = "run-set-1" AND state = "STATE_ACTIVE"`
- *     `region = "us-central1" AND orchestrator = "ORCHESTRATOR_GKE"`
- *
- *   To filter by timestamp:
- *
- *     `create_time > "2025-05-26T10:00:00Z"`
- * @param {string} [request.orderBy]
- *   Optional. A comma-separated list of fields to order by, sorted in ascending
- *   order. Use "desc" after a field name for descending.
- *
- *   Supported fields:
- *
- *     * `run_id`
- *     * `run_set`
- *     * `display_name`
- *     * `region`
- *     * `orchestrator`
- *     * `state`
- *     * `create_time`
- *     * `update_time`
- *
- *   Example: `update_time desc, create_time`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun|MachineLearningRun} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listMachineLearningRunsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listMachineLearningRuns`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. projects/{project}/locations/{location}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of Machine Learning Runs to return. The
+   *   service may return fewer than this value. If unspecified, at most 10
+   *   Machine Learning Runs will be returned. The maximum value is 1000; values
+   *   above 1000 will be coerced to 1000. Please refer to
+   *   https://google.aip.dev/158 for more details.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListMachineLearningRuns`
+   *   call. Provide this to retrieve the subsequent page. Please refer to
+   *   https://google.aip.dev/158 for more details.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request.
+   *
+   *   Supported filter fields are:
+   *   - run_id (string): The ID of the run (e.g., "run-1").
+   *   - run_set (string): The run set (e.g., "run-set-1").
+   *   - display_name (string): The display name of the run (e.g.,
+   *   "display-name-1").
+   *   - state (enum): The state of the run (e.g., "STATE_COMPLETED").
+   *   - region (string): The region of the run (e.g., "us-central1").
+   *   - orchestrator (enum): The orchestrator used for the run (e.g.,
+   *   "ORCHESTRATOR_GKE").
+   *   - create_time (timestamp): The creation timestamp of the run.
+   *   - update_time (timestamp): The last update timestamp of the run.
+   *   - etag (string): The ETag of the run.
+   *
+   *   Filter expressions can be combined using "AND" and "OR" operators.
+   *
+   *   Examples:
+   *
+   *   To filter by a single field:
+   *
+   *     `run_set = "run-set-1"`
+   *     `state = "STATE_ACTIVE"`
+   *
+   *   To filter by multiple fields:
+   *
+   *     `run_set = "run-set-1" AND state = "STATE_ACTIVE"`
+   *     `region = "us-central1" AND orchestrator = "ORCHESTRATOR_GKE"`
+   *
+   *   To filter by timestamp:
+   *
+   *     `create_time > "2025-05-26T10:00:00Z"`
+   * @param {string} [request.orderBy]
+   *   Optional. A comma-separated list of fields to order by, sorted in ascending
+   *   order. Use "desc" after a field name for descending.
+   *
+   *   Supported fields:
+   *
+   *     * `run_id`
+   *     * `run_set`
+   *     * `display_name`
+   *     * `region`
+   *     * `orchestrator`
+   *     * `state`
+   *     * `create_time`
+   *     * `update_time`
+   *
+   *   Example: `update_time desc, create_time`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun|MachineLearningRun} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listMachineLearningRunsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listMachineLearningRunsStream(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listMachineLearningRuns'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listMachineLearningRuns stream %j', request);
     return this.descriptors.page.listMachineLearningRuns.createStream(
       this.innerApiCalls.listMachineLearningRuns as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listMachineLearningRuns`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. projects/{project}/locations/{location}
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of Machine Learning Runs to return. The
- *   service may return fewer than this value. If unspecified, at most 10
- *   Machine Learning Runs will be returned. The maximum value is 1000; values
- *   above 1000 will be coerced to 1000. Please refer to
- *   https://google.aip.dev/158 for more details.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListMachineLearningRuns`
- *   call. Provide this to retrieve the subsequent page. Please refer to
- *   https://google.aip.dev/158 for more details.
- * @param {string} [request.filter]
- *   Optional. An expression for filtering the results of the request.
- *
- *   Supported filter fields are:
- *   - run_id (string): The ID of the run (e.g., "run-1").
- *   - run_set (string): The run set (e.g., "run-set-1").
- *   - display_name (string): The display name of the run (e.g.,
- *   "display-name-1").
- *   - state (enum): The state of the run (e.g., "STATE_COMPLETED").
- *   - region (string): The region of the run (e.g., "us-central1").
- *   - orchestrator (enum): The orchestrator used for the run (e.g.,
- *   "ORCHESTRATOR_GKE").
- *   - create_time (timestamp): The creation timestamp of the run.
- *   - update_time (timestamp): The last update timestamp of the run.
- *   - etag (string): The ETag of the run.
- *
- *   Filter expressions can be combined using "AND" and "OR" operators.
- *
- *   Examples:
- *
- *   To filter by a single field:
- *
- *     `run_set = "run-set-1"`
- *     `state = "STATE_ACTIVE"`
- *
- *   To filter by multiple fields:
- *
- *     `run_set = "run-set-1" AND state = "STATE_ACTIVE"`
- *     `region = "us-central1" AND orchestrator = "ORCHESTRATOR_GKE"`
- *
- *   To filter by timestamp:
- *
- *     `create_time > "2025-05-26T10:00:00Z"`
- * @param {string} [request.orderBy]
- *   Optional. A comma-separated list of fields to order by, sorted in ascending
- *   order. Use "desc" after a field name for descending.
- *
- *   Supported fields:
- *
- *     * `run_id`
- *     * `run_set`
- *     * `display_name`
- *     * `region`
- *     * `orchestrator`
- *     * `state`
- *     * `create_time`
- *     * `update_time`
- *
- *   Example: `update_time desc, create_time`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun|MachineLearningRun}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.list_machine_learning_runs.js</caption>
- * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_ListMachineLearningRuns_async
- */
+  /**
+   * Equivalent to `listMachineLearningRuns`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. projects/{project}/locations/{location}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of Machine Learning Runs to return. The
+   *   service may return fewer than this value. If unspecified, at most 10
+   *   Machine Learning Runs will be returned. The maximum value is 1000; values
+   *   above 1000 will be coerced to 1000. Please refer to
+   *   https://google.aip.dev/158 for more details.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListMachineLearningRuns`
+   *   call. Provide this to retrieve the subsequent page. Please refer to
+   *   https://google.aip.dev/158 for more details.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request.
+   *
+   *   Supported filter fields are:
+   *   - run_id (string): The ID of the run (e.g., "run-1").
+   *   - run_set (string): The run set (e.g., "run-set-1").
+   *   - display_name (string): The display name of the run (e.g.,
+   *   "display-name-1").
+   *   - state (enum): The state of the run (e.g., "STATE_COMPLETED").
+   *   - region (string): The region of the run (e.g., "us-central1").
+   *   - orchestrator (enum): The orchestrator used for the run (e.g.,
+   *   "ORCHESTRATOR_GKE").
+   *   - create_time (timestamp): The creation timestamp of the run.
+   *   - update_time (timestamp): The last update timestamp of the run.
+   *   - etag (string): The ETag of the run.
+   *
+   *   Filter expressions can be combined using "AND" and "OR" operators.
+   *
+   *   Examples:
+   *
+   *   To filter by a single field:
+   *
+   *     `run_set = "run-set-1"`
+   *     `state = "STATE_ACTIVE"`
+   *
+   *   To filter by multiple fields:
+   *
+   *     `run_set = "run-set-1" AND state = "STATE_ACTIVE"`
+   *     `region = "us-central1" AND orchestrator = "ORCHESTRATOR_GKE"`
+   *
+   *   To filter by timestamp:
+   *
+   *     `create_time > "2025-05-26T10:00:00Z"`
+   * @param {string} [request.orderBy]
+   *   Optional. A comma-separated list of fields to order by, sorted in ascending
+   *   order. Use "desc" after a field name for descending.
+   *
+   *   Supported fields:
+   *
+   *     * `run_id`
+   *     * `run_set`
+   *     * `display_name`
+   *     * `region`
+   *     * `orchestrator`
+   *     * `state`
+   *     * `create_time`
+   *     * `update_time`
+   *
+   *   Example: `update_time desc, create_time`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun|MachineLearningRun}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.list_machine_learning_runs.js</caption>
+   * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_ListMachineLearningRuns_async
+   */
   listMachineLearningRunsAsync(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun>{
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listMachineLearningRuns'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listMachineLearningRuns iterate %j', request);
     return this.descriptors.page.listMachineLearningRuns.asyncIterate(
       this.innerApiCalls['listMachineLearningRuns'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun>;
   }
- /**
- * List Profiler Targets for a Machine Learning Run.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required.
- *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of profiler targets to return. The service may
- *   return fewer than this value. If unspecified, at most 10 profiler targets
- *   will be returned. The maximum value is 1000; values above 1000 will be
- *   coerced to 1000. Please refer to https://google.aip.dev/158 for more
- *   details.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListProfilerTargets`
- *   call. Provide this to retrieve the subsequent page. Please refer to
- *   https://google.aip.dev/158 for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget|ProfilerTarget}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listProfilerTargetsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * List Profiler Targets for a Machine Learning Run.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required.
+   *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of profiler targets to return. The service may
+   *   return fewer than this value. If unspecified, at most 10 profiler targets
+   *   will be returned. The maximum value is 1000; values above 1000 will be
+   *   coerced to 1000. Please refer to https://google.aip.dev/158 for more
+   *   details.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListProfilerTargets`
+   *   call. Provide this to retrieve the subsequent page. Please refer to
+   *   https://google.aip.dev/158 for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget|ProfilerTarget}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listProfilerTargetsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listProfilerTargets(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget[],
-        protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsRequest|null,
-        protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsResponse
-      ]>;
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget[],
+      protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsRequest | null,
+      protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsResponse,
+    ]
+  >;
   listProfilerTargets(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsRequest,
-          protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsResponse|null|undefined,
-          protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsRequest,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsResponse
+      | null
+      | undefined,
+      protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget
+    >,
+  ): void;
   listProfilerTargets(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsRequest,
-          protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsResponse|null|undefined,
-          protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsRequest,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsResponse
+      | null
+      | undefined,
+      protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget
+    >,
+  ): void;
   listProfilerTargets(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsRequest,
-          protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsResponse|null|undefined,
-          protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget>,
-      callback?: PaginationCallback<
-          protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsRequest,
-          protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsResponse|null|undefined,
-          protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget>):
-      Promise<[
-        protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget[],
-        protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsRequest|null,
-        protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsResponse
-      ]>|void {
+          | protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsResponse
+          | null
+          | undefined,
+          protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsRequest,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsResponse
+      | null
+      | undefined,
+      protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget[],
+      protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsRequest | null,
+      protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsRequest,
-      protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsResponse|null|undefined,
-      protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsRequest,
+          | protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsResponse
+          | null
+          | undefined,
+          protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listProfilerTargets values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2473,210 +3522,239 @@ export class MachineLearningRunsClient {
     this._log.info('listProfilerTargets request %j', request);
     return this.innerApiCalls
       .listProfilerTargets(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget[],
-        protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsRequest|null,
-        protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsResponse
-      ]) => {
-        this._log.info('listProfilerTargets values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget[],
+          protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsRequest | null,
+          protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsResponse,
+        ]) => {
+          this._log.info('listProfilerTargets values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listProfilerTargets`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required.
- *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of profiler targets to return. The service may
- *   return fewer than this value. If unspecified, at most 10 profiler targets
- *   will be returned. The maximum value is 1000; values above 1000 will be
- *   coerced to 1000. Please refer to https://google.aip.dev/158 for more
- *   details.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListProfilerTargets`
- *   call. Provide this to retrieve the subsequent page. Please refer to
- *   https://google.aip.dev/158 for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget|ProfilerTarget} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listProfilerTargetsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listProfilerTargets`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required.
+   *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of profiler targets to return. The service may
+   *   return fewer than this value. If unspecified, at most 10 profiler targets
+   *   will be returned. The maximum value is 1000; values above 1000 will be
+   *   coerced to 1000. Please refer to https://google.aip.dev/158 for more
+   *   details.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListProfilerTargets`
+   *   call. Provide this to retrieve the subsequent page. Please refer to
+   *   https://google.aip.dev/158 for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget|ProfilerTarget} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listProfilerTargetsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listProfilerTargetsStream(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listProfilerTargets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listProfilerTargets stream %j', request);
     return this.descriptors.page.listProfilerTargets.createStream(
       this.innerApiCalls.listProfilerTargets as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listProfilerTargets`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required.
- *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of profiler targets to return. The service may
- *   return fewer than this value. If unspecified, at most 10 profiler targets
- *   will be returned. The maximum value is 1000; values above 1000 will be
- *   coerced to 1000. Please refer to https://google.aip.dev/158 for more
- *   details.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListProfilerTargets`
- *   call. Provide this to retrieve the subsequent page. Please refer to
- *   https://google.aip.dev/158 for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget|ProfilerTarget}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.list_profiler_targets.js</caption>
- * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_ListProfilerTargets_async
- */
+  /**
+   * Equivalent to `listProfilerTargets`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required.
+   *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of profiler targets to return. The service may
+   *   return fewer than this value. If unspecified, at most 10 profiler targets
+   *   will be returned. The maximum value is 1000; values above 1000 will be
+   *   coerced to 1000. Please refer to https://google.aip.dev/158 for more
+   *   details.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListProfilerTargets`
+   *   call. Provide this to retrieve the subsequent page. Please refer to
+   *   https://google.aip.dev/158 for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget|ProfilerTarget}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.list_profiler_targets.js</caption>
+   * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_ListProfilerTargets_async
+   */
   listProfilerTargetsAsync(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget>{
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listProfilerTargets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listProfilerTargets iterate %j', request);
     return this.descriptors.page.listProfilerTargets.asyncIterate(
       this.innerApiCalls['listProfilerTargets'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget>;
   }
- /**
- * Lists Profiler Sessions for a Machine Learning Run.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required.
- *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of profiler sessions to return. The service
- *   may return fewer than this value. If unspecified, at most 10 profiler
- *   sessions will be returned. The maximum value is 1000; values above 1000
- *   will be coerced to 1000. Please refer to https://google.aip.dev/158 for
- *   more details.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListProfilerSessions`
- *   call. Provide this to retrieve the subsequent page. Please refer to
- *   https://google.aip.dev/158 for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession|ProfilerSession}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listProfilerSessionsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists Profiler Sessions for a Machine Learning Run.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required.
+   *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of profiler sessions to return. The service
+   *   may return fewer than this value. If unspecified, at most 10 profiler
+   *   sessions will be returned. The maximum value is 1000; values above 1000
+   *   will be coerced to 1000. Please refer to https://google.aip.dev/158 for
+   *   more details.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListProfilerSessions`
+   *   call. Provide this to retrieve the subsequent page. Please refer to
+   *   https://google.aip.dev/158 for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession|ProfilerSession}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listProfilerSessionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listProfilerSessions(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession[],
-        protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsRequest|null,
-        protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsResponse
-      ]>;
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession[],
+      protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsRequest | null,
+      protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsResponse,
+    ]
+  >;
   listProfilerSessions(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsRequest,
-          protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsResponse|null|undefined,
-          protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsRequest,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession
+    >,
+  ): void;
   listProfilerSessions(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsRequest,
-          protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsResponse|null|undefined,
-          protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsRequest,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession
+    >,
+  ): void;
   listProfilerSessions(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsRequest,
-          protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsResponse|null|undefined,
-          protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession>,
-      callback?: PaginationCallback<
-          protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsRequest,
-          protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsResponse|null|undefined,
-          protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession>):
-      Promise<[
-        protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession[],
-        protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsRequest|null,
-        protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsResponse
-      ]>|void {
+          | protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsRequest,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession[],
+      protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsRequest | null,
+      protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsRequest,
-      protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsResponse|null|undefined,
-      protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsRequest,
+          | protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listProfilerSessions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2685,211 +3763,244 @@ export class MachineLearningRunsClient {
     this._log.info('listProfilerSessions request %j', request);
     return this.innerApiCalls
       .listProfilerSessions(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession[],
-        protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsRequest|null,
-        protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsResponse
-      ]) => {
-        this._log.info('listProfilerSessions values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession[],
+          protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsRequest | null,
+          protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsResponse,
+        ]) => {
+          this._log.info('listProfilerSessions values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listProfilerSessions`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required.
- *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of profiler sessions to return. The service
- *   may return fewer than this value. If unspecified, at most 10 profiler
- *   sessions will be returned. The maximum value is 1000; values above 1000
- *   will be coerced to 1000. Please refer to https://google.aip.dev/158 for
- *   more details.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListProfilerSessions`
- *   call. Provide this to retrieve the subsequent page. Please refer to
- *   https://google.aip.dev/158 for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession|ProfilerSession} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listProfilerSessionsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listProfilerSessions`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required.
+   *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of profiler sessions to return. The service
+   *   may return fewer than this value. If unspecified, at most 10 profiler
+   *   sessions will be returned. The maximum value is 1000; values above 1000
+   *   will be coerced to 1000. Please refer to https://google.aip.dev/158 for
+   *   more details.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListProfilerSessions`
+   *   call. Provide this to retrieve the subsequent page. Please refer to
+   *   https://google.aip.dev/158 for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession|ProfilerSession} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listProfilerSessionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listProfilerSessionsStream(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listProfilerSessions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listProfilerSessions stream %j', request);
     return this.descriptors.page.listProfilerSessions.createStream(
       this.innerApiCalls.listProfilerSessions as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listProfilerSessions`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required.
- *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of profiler sessions to return. The service
- *   may return fewer than this value. If unspecified, at most 10 profiler
- *   sessions will be returned. The maximum value is 1000; values above 1000
- *   will be coerced to 1000. Please refer to https://google.aip.dev/158 for
- *   more details.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListProfilerSessions`
- *   call. Provide this to retrieve the subsequent page. Please refer to
- *   https://google.aip.dev/158 for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession|ProfilerSession}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.list_profiler_sessions.js</caption>
- * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_ListProfilerSessions_async
- */
+  /**
+   * Equivalent to `listProfilerSessions`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required.
+   *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of profiler sessions to return. The service
+   *   may return fewer than this value. If unspecified, at most 10 profiler
+   *   sessions will be returned. The maximum value is 1000; values above 1000
+   *   will be coerced to 1000. Please refer to https://google.aip.dev/158 for
+   *   more details.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListProfilerSessions`
+   *   call. Provide this to retrieve the subsequent page. Please refer to
+   *   https://google.aip.dev/158 for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession|ProfilerSession}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.list_profiler_sessions.js</caption>
+   * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_ListProfilerSessions_async
+   */
   listProfilerSessionsAsync(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession>{
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listProfilerSessions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listProfilerSessions iterate %j', request);
     return this.descriptors.page.listProfilerSessions.asyncIterate(
       this.innerApiCalls['listProfilerSessions'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession>;
   }
- /**
- * Deprecated: Use `ListProfilerSessions` instead.
- * Lists Profile Sessions for a Machine Learning Run.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent format:
- *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of Profile Sessions to return. The service may
- *   return fewer than this value.
- *   If unspecified, at most 50 Profile Sessions will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListProfileSessions`
- *   call. Provide this to retrieve the subsequent page.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession|ProfileSession}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listProfileSessionsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @deprecated ListProfileSessions is deprecated and may be removed in a future version.
- */
+  /**
+   * Deprecated: Use `ListProfilerSessions` instead.
+   * Lists Profile Sessions for a Machine Learning Run.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent format:
+   *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of Profile Sessions to return. The service may
+   *   return fewer than this value.
+   *   If unspecified, at most 50 Profile Sessions will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListProfileSessions`
+   *   call. Provide this to retrieve the subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession|ProfileSession}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listProfileSessionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @deprecated ListProfileSessions is deprecated and may be removed in a future version.
+   */
   listProfileSessions(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession[],
-        protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsRequest|null,
-        protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsResponse
-      ]>;
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession[],
+      protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsRequest | null,
+      protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsResponse,
+    ]
+  >;
   listProfileSessions(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsRequest,
-          protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsResponse|null|undefined,
-          protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsRequest,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession
+    >,
+  ): void;
   listProfileSessions(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsRequest,
-          protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsResponse|null|undefined,
-          protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsRequest,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession
+    >,
+  ): void;
   listProfileSessions(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsRequest,
-          protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsResponse|null|undefined,
-          protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession>,
-      callback?: PaginationCallback<
-          protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsRequest,
-          protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsResponse|null|undefined,
-          protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession>):
-      Promise<[
-        protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession[],
-        protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsRequest|null,
-        protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsResponse
-      ]>|void {
+          | protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsRequest,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession[],
+      protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsRequest | null,
+      protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    this.warn('DEP$MachineLearningRuns-$ListProfileSessions','ListProfileSessions is deprecated and may be removed in a future version.', 'DeprecationWarning');
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsRequest,
-      protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsResponse|null|undefined,
-      protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession>|undefined = callback
+    this.warn(
+      'DEP$MachineLearningRuns-$ListProfileSessions',
+      'ListProfileSessions is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsRequest,
+          | protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listProfileSessions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2898,215 +4009,252 @@ export class MachineLearningRunsClient {
     this._log.info('listProfileSessions request %j', request);
     return this.innerApiCalls
       .listProfileSessions(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession[],
-        protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsRequest|null,
-        protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsResponse
-      ]) => {
-        this._log.info('listProfileSessions values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession[],
+          protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsRequest | null,
+          protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsResponse,
+        ]) => {
+          this._log.info('listProfileSessions values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listProfileSessions`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent format:
- *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of Profile Sessions to return. The service may
- *   return fewer than this value.
- *   If unspecified, at most 50 Profile Sessions will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListProfileSessions`
- *   call. Provide this to retrieve the subsequent page.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession|ProfileSession} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listProfileSessionsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @deprecated ListProfileSessions is deprecated and may be removed in a future version.
- */
+  /**
+   * Equivalent to `listProfileSessions`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent format:
+   *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of Profile Sessions to return. The service may
+   *   return fewer than this value.
+   *   If unspecified, at most 50 Profile Sessions will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListProfileSessions`
+   *   call. Provide this to retrieve the subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession|ProfileSession} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listProfileSessionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @deprecated ListProfileSessions is deprecated and may be removed in a future version.
+   */
   listProfileSessionsStream(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listProfileSessions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
-    this.warn('DEP$MachineLearningRuns-$ListProfileSessions','ListProfileSessions is deprecated and may be removed in a future version.', 'DeprecationWarning');
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this.warn(
+      'DEP$MachineLearningRuns-$ListProfileSessions',
+      'ListProfileSessions is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     this._log.info('listProfileSessions stream %j', request);
     return this.descriptors.page.listProfileSessions.createStream(
       this.innerApiCalls.listProfileSessions as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listProfileSessions`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent format:
- *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of Profile Sessions to return. The service may
- *   return fewer than this value.
- *   If unspecified, at most 50 Profile Sessions will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListProfileSessions`
- *   call. Provide this to retrieve the subsequent page.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession|ProfileSession}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.list_profile_sessions.js</caption>
- * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_ListProfileSessions_async
- * @deprecated ListProfileSessions is deprecated and may be removed in a future version.
- */
+  /**
+   * Equivalent to `listProfileSessions`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent format:
+   *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of Profile Sessions to return. The service may
+   *   return fewer than this value.
+   *   If unspecified, at most 50 Profile Sessions will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListProfileSessions`
+   *   call. Provide this to retrieve the subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession|ProfileSession}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.list_profile_sessions.js</caption>
+   * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_ListProfileSessions_async
+   * @deprecated ListProfileSessions is deprecated and may be removed in a future version.
+   */
   listProfileSessionsAsync(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession>{
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listProfileSessions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
-    this.warn('DEP$MachineLearningRuns-$ListProfileSessions','ListProfileSessions is deprecated and may be removed in a future version.', 'DeprecationWarning');
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this.warn(
+      'DEP$MachineLearningRuns-$ListProfileSessions',
+      'ListProfileSessions is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     this._log.info('listProfileSessions iterate %j', request);
     return this.descriptors.page.listProfileSessions.asyncIterate(
       this.innerApiCalls['listProfileSessions'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession>;
   }
- /**
- * Lists Monitored Events for a run.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent resource to list events from.
- *   Format:
- *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of events to return. The service may return
- *   fewer than this value. If unspecified, at most 50 events will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListMonitoredEvents`
- *   call. Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListMonitoredEvents`
- *   must match the call that provided the page token.
- * @param {string} [request.filter]
- *   Optional. A filter expression for filtering results.
- * @param {string} [request.orderBy]
- *   Optional. Order by field for sorting results.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent|MonitoredEvent}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listMonitoredEventsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists Monitored Events for a run.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent resource to list events from.
+   *   Format:
+   *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of events to return. The service may return
+   *   fewer than this value. If unspecified, at most 50 events will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListMonitoredEvents`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListMonitoredEvents`
+   *   must match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. A filter expression for filtering results.
+   * @param {string} [request.orderBy]
+   *   Optional. Order by field for sorting results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent|MonitoredEvent}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listMonitoredEventsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listMonitoredEvents(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent[],
-        protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsRequest|null,
-        protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsResponse
-      ]>;
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent[],
+      protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsRequest | null,
+      protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsResponse,
+    ]
+  >;
   listMonitoredEvents(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsRequest,
-          protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsResponse|null|undefined,
-          protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsRequest,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsResponse
+      | null
+      | undefined,
+      protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent
+    >,
+  ): void;
   listMonitoredEvents(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsRequest,
-          protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsResponse|null|undefined,
-          protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsRequest,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsResponse
+      | null
+      | undefined,
+      protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent
+    >,
+  ): void;
   listMonitoredEvents(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsRequest,
-          protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsResponse|null|undefined,
-          protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent>,
-      callback?: PaginationCallback<
-          protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsRequest,
-          protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsResponse|null|undefined,
-          protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent>):
-      Promise<[
-        protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent[],
-        protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsRequest|null,
-        protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsResponse
-      ]>|void {
+          | protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsResponse
+          | null
+          | undefined,
+          protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsRequest,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsResponse
+      | null
+      | undefined,
+      protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent[],
+      protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsRequest | null,
+      protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsRequest,
-      protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsResponse|null|undefined,
-      protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsRequest,
+          | protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsResponse
+          | null
+          | undefined,
+          protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listMonitoredEvents values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3115,133 +4263,138 @@ export class MachineLearningRunsClient {
     this._log.info('listMonitoredEvents request %j', request);
     return this.innerApiCalls
       .listMonitoredEvents(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent[],
-        protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsRequest|null,
-        protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsResponse
-      ]) => {
-        this._log.info('listMonitoredEvents values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent[],
+          protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsRequest | null,
+          protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsResponse,
+        ]) => {
+          this._log.info('listMonitoredEvents values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listMonitoredEvents`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent resource to list events from.
- *   Format:
- *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of events to return. The service may return
- *   fewer than this value. If unspecified, at most 50 events will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListMonitoredEvents`
- *   call. Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListMonitoredEvents`
- *   must match the call that provided the page token.
- * @param {string} [request.filter]
- *   Optional. A filter expression for filtering results.
- * @param {string} [request.orderBy]
- *   Optional. Order by field for sorting results.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent|MonitoredEvent} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listMonitoredEventsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listMonitoredEvents`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent resource to list events from.
+   *   Format:
+   *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of events to return. The service may return
+   *   fewer than this value. If unspecified, at most 50 events will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListMonitoredEvents`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListMonitoredEvents`
+   *   must match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. A filter expression for filtering results.
+   * @param {string} [request.orderBy]
+   *   Optional. Order by field for sorting results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent|MonitoredEvent} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listMonitoredEventsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listMonitoredEventsStream(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listMonitoredEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listMonitoredEvents stream %j', request);
     return this.descriptors.page.listMonitoredEvents.createStream(
       this.innerApiCalls.listMonitoredEvents as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listMonitoredEvents`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent resource to list events from.
- *   Format:
- *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of events to return. The service may return
- *   fewer than this value. If unspecified, at most 50 events will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListMonitoredEvents`
- *   call. Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListMonitoredEvents`
- *   must match the call that provided the page token.
- * @param {string} [request.filter]
- *   Optional. A filter expression for filtering results.
- * @param {string} [request.orderBy]
- *   Optional. Order by field for sorting results.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent|MonitoredEvent}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.list_monitored_events.js</caption>
- * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_ListMonitoredEvents_async
- */
+  /**
+   * Equivalent to `listMonitoredEvents`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent resource to list events from.
+   *   Format:
+   *   projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of events to return. The service may return
+   *   fewer than this value. If unspecified, at most 50 events will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListMonitoredEvents`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListMonitoredEvents`
+   *   must match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. A filter expression for filtering results.
+   * @param {string} [request.orderBy]
+   *   Optional. Order by field for sorting results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent|MonitoredEvent}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/machine_learning_runs.list_monitored_events.js</caption>
+   * region_tag:hypercomputecluster_v1alpha_generated_MachineLearningRuns_ListMonitoredEvents_async
+   */
   listMonitoredEventsAsync(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent>{
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listMonitoredEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listMonitoredEvents iterate %j', request);
     return this.descriptors.page.listMonitoredEvents.asyncIterate(
       this.innerApiCalls['listMonitoredEvents'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent>;
   }
-/**
+
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -3276,12 +4429,11 @@ export class MachineLearningRunsClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -3314,12 +4466,12 @@ export class MachineLearningRunsClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-/**
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -3362,22 +4514,22 @@ export class MachineLearningRunsClient {
       protos.google.longrunning.Operation,
       protos.google.longrunning.GetOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<[protos.google.longrunning.Operation]> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -3412,15 +4564,15 @@ export class MachineLearningRunsClient {
    */
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
+    options?: gax.CallOptions,
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -3454,7 +4606,7 @@ export class MachineLearningRunsClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-   cancelOperation(
+  cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -3467,25 +4619,24 @@ export class MachineLearningRunsClient {
       protos.google.longrunning.CancelOperationRequest,
       protos.google.protobuf.Empty,
       {} | undefined | null
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
-
   /**
    * Deletes a long-running operation. This method indicates that the client is
    * no longer interested in the operation result. It does not cancel the
@@ -3524,22 +4675,22 @@ export class MachineLearningRunsClient {
       protos.google.protobuf.Empty,
       protos.google.longrunning.DeleteOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -3555,7 +4706,7 @@ export class MachineLearningRunsClient {
    * @param {string} cluster
    * @returns {string} Resource name string.
    */
-  clusterPath(project:string,location:string,cluster:string) {
+  clusterPath(project: string, location: string, cluster: string) {
     return this.pathTemplates.clusterPathTemplate.render({
       project: project,
       location: location,
@@ -3603,7 +4754,7 @@ export class MachineLearningRunsClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -3640,7 +4791,11 @@ export class MachineLearningRunsClient {
    * @param {string} machine_learning_run
    * @returns {string} Resource name string.
    */
-  machineLearningRunPath(project:string,location:string,machineLearningRun:string) {
+  machineLearningRunPath(
+    project: string,
+    location: string,
+    machineLearningRun: string,
+  ) {
     return this.pathTemplates.machineLearningRunPathTemplate.render({
       project: project,
       location: location,
@@ -3656,7 +4811,9 @@ export class MachineLearningRunsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromMachineLearningRunName(machineLearningRunName: string) {
-    return this.pathTemplates.machineLearningRunPathTemplate.match(machineLearningRunName).project;
+    return this.pathTemplates.machineLearningRunPathTemplate.match(
+      machineLearningRunName,
+    ).project;
   }
 
   /**
@@ -3667,7 +4824,9 @@ export class MachineLearningRunsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromMachineLearningRunName(machineLearningRunName: string) {
-    return this.pathTemplates.machineLearningRunPathTemplate.match(machineLearningRunName).location;
+    return this.pathTemplates.machineLearningRunPathTemplate.match(
+      machineLearningRunName,
+    ).location;
   }
 
   /**
@@ -3677,8 +4836,12 @@ export class MachineLearningRunsClient {
    *   A fully-qualified path representing MachineLearningRun resource.
    * @returns {string} A string representing the machine_learning_run.
    */
-  matchMachineLearningRunFromMachineLearningRunName(machineLearningRunName: string) {
-    return this.pathTemplates.machineLearningRunPathTemplate.match(machineLearningRunName).machine_learning_run;
+  matchMachineLearningRunFromMachineLearningRunName(
+    machineLearningRunName: string,
+  ) {
+    return this.pathTemplates.machineLearningRunPathTemplate.match(
+      machineLearningRunName,
+    ).machine_learning_run;
   }
 
   /**
@@ -3690,7 +4853,12 @@ export class MachineLearningRunsClient {
    * @param {string} monitored_event
    * @returns {string} Resource name string.
    */
-  monitoredEventPath(project:string,location:string,machineLearningRun:string,monitoredEvent:string) {
+  monitoredEventPath(
+    project: string,
+    location: string,
+    machineLearningRun: string,
+    monitoredEvent: string,
+  ) {
     return this.pathTemplates.monitoredEventPathTemplate.render({
       project: project,
       location: location,
@@ -3707,7 +4875,9 @@ export class MachineLearningRunsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromMonitoredEventName(monitoredEventName: string) {
-    return this.pathTemplates.monitoredEventPathTemplate.match(monitoredEventName).project;
+    return this.pathTemplates.monitoredEventPathTemplate.match(
+      monitoredEventName,
+    ).project;
   }
 
   /**
@@ -3718,7 +4888,9 @@ export class MachineLearningRunsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromMonitoredEventName(monitoredEventName: string) {
-    return this.pathTemplates.monitoredEventPathTemplate.match(monitoredEventName).location;
+    return this.pathTemplates.monitoredEventPathTemplate.match(
+      monitoredEventName,
+    ).location;
   }
 
   /**
@@ -3729,7 +4901,9 @@ export class MachineLearningRunsClient {
    * @returns {string} A string representing the machine_learning_run.
    */
   matchMachineLearningRunFromMonitoredEventName(monitoredEventName: string) {
-    return this.pathTemplates.monitoredEventPathTemplate.match(monitoredEventName).machine_learning_run;
+    return this.pathTemplates.monitoredEventPathTemplate.match(
+      monitoredEventName,
+    ).machine_learning_run;
   }
 
   /**
@@ -3740,7 +4914,9 @@ export class MachineLearningRunsClient {
    * @returns {string} A string representing the monitored_event.
    */
   matchMonitoredEventFromMonitoredEventName(monitoredEventName: string) {
-    return this.pathTemplates.monitoredEventPathTemplate.match(monitoredEventName).monitored_event;
+    return this.pathTemplates.monitoredEventPathTemplate.match(
+      monitoredEventName,
+    ).monitored_event;
   }
 
   /**
@@ -3752,7 +4928,7 @@ export class MachineLearningRunsClient {
    * @param {string} node
    * @returns {string} Resource name string.
    */
-  nodePath(project:string,location:string,cluster:string,node:string) {
+  nodePath(project: string, location: string, cluster: string, node: string) {
     return this.pathTemplates.nodePathTemplate.render({
       project: project,
       location: location,
@@ -3814,7 +4990,12 @@ export class MachineLearningRunsClient {
    * @param {string} profile_session
    * @returns {string} Resource name string.
    */
-  profileSessionPath(project:string,location:string,machineLearningRun:string,profileSession:string) {
+  profileSessionPath(
+    project: string,
+    location: string,
+    machineLearningRun: string,
+    profileSession: string,
+  ) {
     return this.pathTemplates.profileSessionPathTemplate.render({
       project: project,
       location: location,
@@ -3831,7 +5012,9 @@ export class MachineLearningRunsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProfileSessionName(profileSessionName: string) {
-    return this.pathTemplates.profileSessionPathTemplate.match(profileSessionName).project;
+    return this.pathTemplates.profileSessionPathTemplate.match(
+      profileSessionName,
+    ).project;
   }
 
   /**
@@ -3842,7 +5025,9 @@ export class MachineLearningRunsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromProfileSessionName(profileSessionName: string) {
-    return this.pathTemplates.profileSessionPathTemplate.match(profileSessionName).location;
+    return this.pathTemplates.profileSessionPathTemplate.match(
+      profileSessionName,
+    ).location;
   }
 
   /**
@@ -3853,7 +5038,9 @@ export class MachineLearningRunsClient {
    * @returns {string} A string representing the machine_learning_run.
    */
   matchMachineLearningRunFromProfileSessionName(profileSessionName: string) {
-    return this.pathTemplates.profileSessionPathTemplate.match(profileSessionName).machine_learning_run;
+    return this.pathTemplates.profileSessionPathTemplate.match(
+      profileSessionName,
+    ).machine_learning_run;
   }
 
   /**
@@ -3864,7 +5051,9 @@ export class MachineLearningRunsClient {
    * @returns {string} A string representing the profile_session.
    */
   matchProfileSessionFromProfileSessionName(profileSessionName: string) {
-    return this.pathTemplates.profileSessionPathTemplate.match(profileSessionName).profile_session;
+    return this.pathTemplates.profileSessionPathTemplate.match(
+      profileSessionName,
+    ).profile_session;
   }
 
   /**
@@ -3876,7 +5065,12 @@ export class MachineLearningRunsClient {
    * @param {string} profiler_session
    * @returns {string} Resource name string.
    */
-  profilerSessionPath(project:string,location:string,machineLearningRun:string,profilerSession:string) {
+  profilerSessionPath(
+    project: string,
+    location: string,
+    machineLearningRun: string,
+    profilerSession: string,
+  ) {
     return this.pathTemplates.profilerSessionPathTemplate.render({
       project: project,
       location: location,
@@ -3893,7 +5087,9 @@ export class MachineLearningRunsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProfilerSessionName(profilerSessionName: string) {
-    return this.pathTemplates.profilerSessionPathTemplate.match(profilerSessionName).project;
+    return this.pathTemplates.profilerSessionPathTemplate.match(
+      profilerSessionName,
+    ).project;
   }
 
   /**
@@ -3904,7 +5100,9 @@ export class MachineLearningRunsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromProfilerSessionName(profilerSessionName: string) {
-    return this.pathTemplates.profilerSessionPathTemplate.match(profilerSessionName).location;
+    return this.pathTemplates.profilerSessionPathTemplate.match(
+      profilerSessionName,
+    ).location;
   }
 
   /**
@@ -3915,7 +5113,9 @@ export class MachineLearningRunsClient {
    * @returns {string} A string representing the machine_learning_run.
    */
   matchMachineLearningRunFromProfilerSessionName(profilerSessionName: string) {
-    return this.pathTemplates.profilerSessionPathTemplate.match(profilerSessionName).machine_learning_run;
+    return this.pathTemplates.profilerSessionPathTemplate.match(
+      profilerSessionName,
+    ).machine_learning_run;
   }
 
   /**
@@ -3926,7 +5126,9 @@ export class MachineLearningRunsClient {
    * @returns {string} A string representing the profiler_session.
    */
   matchProfilerSessionFromProfilerSessionName(profilerSessionName: string) {
-    return this.pathTemplates.profilerSessionPathTemplate.match(profilerSessionName).profiler_session;
+    return this.pathTemplates.profilerSessionPathTemplate.match(
+      profilerSessionName,
+    ).profiler_session;
   }
 
   /**
@@ -3938,7 +5140,12 @@ export class MachineLearningRunsClient {
    * @param {string} profiler_target
    * @returns {string} Resource name string.
    */
-  profilerTargetPath(project:string,location:string,machineLearningRun:string,profilerTarget:string) {
+  profilerTargetPath(
+    project: string,
+    location: string,
+    machineLearningRun: string,
+    profilerTarget: string,
+  ) {
     return this.pathTemplates.profilerTargetPathTemplate.render({
       project: project,
       location: location,
@@ -3955,7 +5162,9 @@ export class MachineLearningRunsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProfilerTargetName(profilerTargetName: string) {
-    return this.pathTemplates.profilerTargetPathTemplate.match(profilerTargetName).project;
+    return this.pathTemplates.profilerTargetPathTemplate.match(
+      profilerTargetName,
+    ).project;
   }
 
   /**
@@ -3966,7 +5175,9 @@ export class MachineLearningRunsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromProfilerTargetName(profilerTargetName: string) {
-    return this.pathTemplates.profilerTargetPathTemplate.match(profilerTargetName).location;
+    return this.pathTemplates.profilerTargetPathTemplate.match(
+      profilerTargetName,
+    ).location;
   }
 
   /**
@@ -3977,7 +5188,9 @@ export class MachineLearningRunsClient {
    * @returns {string} A string representing the machine_learning_run.
    */
   matchMachineLearningRunFromProfilerTargetName(profilerTargetName: string) {
-    return this.pathTemplates.profilerTargetPathTemplate.match(profilerTargetName).machine_learning_run;
+    return this.pathTemplates.profilerTargetPathTemplate.match(
+      profilerTargetName,
+    ).machine_learning_run;
   }
 
   /**
@@ -3988,7 +5201,9 @@ export class MachineLearningRunsClient {
    * @returns {string} A string representing the profiler_target.
    */
   matchProfilerTargetFromProfilerTargetName(profilerTargetName: string) {
-    return this.pathTemplates.profilerTargetPathTemplate.match(profilerTargetName).profiler_target;
+    return this.pathTemplates.profilerTargetPathTemplate.match(
+      profilerTargetName,
+    ).profiler_target;
   }
 
   /**
@@ -3997,7 +5212,7 @@ export class MachineLearningRunsClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -4022,11 +5237,13 @@ export class MachineLearningRunsClient {
    */
   close(): Promise<void> {
     if (this.machineLearningRunsStub && !this._terminated) {
-      return this.machineLearningRunsStub.then(stub => {
+      return this.machineLearningRunsStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
         void this.operationsClient.close();
       });
     }

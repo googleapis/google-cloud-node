@@ -18,11 +18,22 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -45,7 +56,7 @@ export class WorkloadManagerClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('workloadmanager');
@@ -58,11 +69,11 @@ export class WorkloadManagerClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  workloadManagerStub?: Promise<{[name: string]: Function}>;
+  workloadManagerStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of WorkloadManagerClient.
@@ -103,21 +114,42 @@ export class WorkloadManagerClient {
    *     const client = new WorkloadManagerClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof WorkloadManagerClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'workloadmanager.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -142,7 +174,7 @@ export class WorkloadManagerClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -156,15 +188,11 @@ export class WorkloadManagerClient {
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -186,22 +214,22 @@ export class WorkloadManagerClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       cryptoKeyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}'
+        'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}',
       ),
       evaluationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/evaluations/{evaluation}'
+        'projects/{project}/locations/{location}/evaluations/{evaluation}',
       ),
       executionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/evaluations/{evaluation}/executions/{execution}'
+        'projects/{project}/locations/{location}/evaluations/{evaluation}/executions/{execution}',
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
       rulePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/rules/{rule}'
+        'projects/{project}/locations/{location}/rules/{rule}',
       ),
     };
 
@@ -209,14 +237,26 @@ export class WorkloadManagerClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listEvaluations:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'evaluations'),
-      listExecutions:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'executions'),
-      listExecutionResults:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'executionResults'),
-      listScannedResources:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'scannedResources')
+      listEvaluations: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'evaluations',
+      ),
+      listExecutions: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'executions',
+      ),
+      listExecutionResults: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'executionResults',
+      ),
+      listScannedResources: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'scannedResources',
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -225,61 +265,107 @@ export class WorkloadManagerClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',}];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.cloud.location.Locations.GetLocation',
+          get: '/v1/{name=projects/*/locations/*}',
+        },
+        {
+          selector: 'google.cloud.location.Locations.ListLocations',
+          get: '/v1/{name=projects/*}/locations',
+        },
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
+          body: '*',
+        },
+        {
+          selector: 'google.longrunning.Operations.DeleteOperation',
+          delete: '/v1/{name=projects/*/locations/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1/{name=projects/*/locations/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v1/{name=projects/*/locations/*}/operations',
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
     const createEvaluationResponse = protoFilesRoot.lookup(
-      '.google.cloud.workloadmanager.v1.Evaluation') as gax.protobuf.Type;
+      '.google.cloud.workloadmanager.v1.Evaluation',
+    ) as gax.protobuf.Type;
     const createEvaluationMetadata = protoFilesRoot.lookup(
-      '.google.cloud.workloadmanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.workloadmanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateEvaluationResponse = protoFilesRoot.lookup(
-      '.google.cloud.workloadmanager.v1.Evaluation') as gax.protobuf.Type;
+      '.google.cloud.workloadmanager.v1.Evaluation',
+    ) as gax.protobuf.Type;
     const updateEvaluationMetadata = protoFilesRoot.lookup(
-      '.google.cloud.workloadmanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.workloadmanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteEvaluationResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteEvaluationMetadata = protoFilesRoot.lookup(
-      '.google.cloud.workloadmanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.workloadmanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const runEvaluationResponse = protoFilesRoot.lookup(
-      '.google.cloud.workloadmanager.v1.Execution') as gax.protobuf.Type;
+      '.google.cloud.workloadmanager.v1.Execution',
+    ) as gax.protobuf.Type;
     const runEvaluationMetadata = protoFilesRoot.lookup(
-      '.google.cloud.workloadmanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.workloadmanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteExecutionResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteExecutionMetadata = protoFilesRoot.lookup(
-      '.google.cloud.workloadmanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.workloadmanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createEvaluation: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createEvaluationResponse.decode.bind(createEvaluationResponse),
-        createEvaluationMetadata.decode.bind(createEvaluationMetadata)),
+        createEvaluationMetadata.decode.bind(createEvaluationMetadata),
+      ),
       updateEvaluation: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateEvaluationResponse.decode.bind(updateEvaluationResponse),
-        updateEvaluationMetadata.decode.bind(updateEvaluationMetadata)),
+        updateEvaluationMetadata.decode.bind(updateEvaluationMetadata),
+      ),
       deleteEvaluation: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteEvaluationResponse.decode.bind(deleteEvaluationResponse),
-        deleteEvaluationMetadata.decode.bind(deleteEvaluationMetadata)),
+        deleteEvaluationMetadata.decode.bind(deleteEvaluationMetadata),
+      ),
       runEvaluation: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         runEvaluationResponse.decode.bind(runEvaluationResponse),
-        runEvaluationMetadata.decode.bind(runEvaluationMetadata)),
+        runEvaluationMetadata.decode.bind(runEvaluationMetadata),
+      ),
       deleteExecution: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteExecutionResponse.decode.bind(deleteExecutionResponse),
-        deleteExecutionMetadata.decode.bind(deleteExecutionMetadata))
+        deleteExecutionMetadata.decode.bind(deleteExecutionMetadata),
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.workloadmanager.v1.WorkloadManager', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.workloadmanager.v1.WorkloadManager',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -310,28 +396,46 @@ export class WorkloadManagerClient {
     // Put together the "service stub" for
     // google.cloud.workloadmanager.v1.WorkloadManager.
     this.workloadManagerStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.workloadmanager.v1.WorkloadManager') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.workloadmanager.v1.WorkloadManager',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.workloadmanager.v1.WorkloadManager,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const workloadManagerStubMethods =
-        ['listEvaluations', 'getEvaluation', 'createEvaluation', 'updateEvaluation', 'deleteEvaluation', 'listExecutions', 'getExecution', 'runEvaluation', 'deleteExecution', 'listExecutionResults', 'listRules', 'listScannedResources'];
+    const workloadManagerStubMethods = [
+      'listEvaluations',
+      'getEvaluation',
+      'createEvaluation',
+      'updateEvaluation',
+      'deleteEvaluation',
+      'listExecutions',
+      'getExecution',
+      'runEvaluation',
+      'deleteExecution',
+      'listExecutionResults',
+      'listRules',
+      'listScannedResources',
+    ];
     for (const methodName of workloadManagerStubMethods) {
       const callPromise = this.workloadManagerStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -341,7 +445,7 @@ export class WorkloadManagerClient {
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -356,8 +460,14 @@ export class WorkloadManagerClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'workloadmanager.googleapis.com';
   }
@@ -368,8 +478,14 @@ export class WorkloadManagerClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'workloadmanager.googleapis.com';
   }
@@ -400,9 +516,7 @@ export class WorkloadManagerClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -411,8 +525,9 @@ export class WorkloadManagerClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -423,1013 +538,1474 @@ export class WorkloadManagerClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Gets details of a single Evaluation.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.workloadmanager.v1.Evaluation|Evaluation}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/workload_manager.get_evaluation.js</caption>
- * region_tag:workloadmanager_v1_generated_WorkloadManager_GetEvaluation_async
- */
+  /**
+   * Gets details of a single Evaluation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.workloadmanager.v1.Evaluation|Evaluation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/workload_manager.get_evaluation.js</caption>
+   * region_tag:workloadmanager_v1_generated_WorkloadManager_GetEvaluation_async
+   */
   getEvaluation(
-      request?: protos.google.cloud.workloadmanager.v1.IGetEvaluationRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.workloadmanager.v1.IEvaluation,
-        protos.google.cloud.workloadmanager.v1.IGetEvaluationRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.workloadmanager.v1.IGetEvaluationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.workloadmanager.v1.IEvaluation,
+      protos.google.cloud.workloadmanager.v1.IGetEvaluationRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getEvaluation(
-      request: protos.google.cloud.workloadmanager.v1.IGetEvaluationRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.workloadmanager.v1.IEvaluation,
-          protos.google.cloud.workloadmanager.v1.IGetEvaluationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.workloadmanager.v1.IGetEvaluationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.workloadmanager.v1.IEvaluation,
+      | protos.google.cloud.workloadmanager.v1.IGetEvaluationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getEvaluation(
-      request: protos.google.cloud.workloadmanager.v1.IGetEvaluationRequest,
-      callback: Callback<
-          protos.google.cloud.workloadmanager.v1.IEvaluation,
-          protos.google.cloud.workloadmanager.v1.IGetEvaluationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.workloadmanager.v1.IGetEvaluationRequest,
+    callback: Callback<
+      protos.google.cloud.workloadmanager.v1.IEvaluation,
+      | protos.google.cloud.workloadmanager.v1.IGetEvaluationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getEvaluation(
-      request?: protos.google.cloud.workloadmanager.v1.IGetEvaluationRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.workloadmanager.v1.IGetEvaluationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.workloadmanager.v1.IEvaluation,
-          protos.google.cloud.workloadmanager.v1.IGetEvaluationRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.workloadmanager.v1.IEvaluation,
-          protos.google.cloud.workloadmanager.v1.IGetEvaluationRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.workloadmanager.v1.IEvaluation,
-        protos.google.cloud.workloadmanager.v1.IGetEvaluationRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.workloadmanager.v1.IGetEvaluationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.workloadmanager.v1.IEvaluation,
+      | protos.google.cloud.workloadmanager.v1.IGetEvaluationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.workloadmanager.v1.IEvaluation,
+      protos.google.cloud.workloadmanager.v1.IGetEvaluationRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getEvaluation request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.workloadmanager.v1.IEvaluation,
-        protos.google.cloud.workloadmanager.v1.IGetEvaluationRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.workloadmanager.v1.IEvaluation,
+          | protos.google.cloud.workloadmanager.v1.IGetEvaluationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getEvaluation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getEvaluation(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.workloadmanager.v1.IEvaluation,
-        protos.google.cloud.workloadmanager.v1.IGetEvaluationRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getEvaluation response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getEvaluation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.workloadmanager.v1.IEvaluation,
+          (
+            | protos.google.cloud.workloadmanager.v1.IGetEvaluationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getEvaluation response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets details of a single Execution.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.workloadmanager.v1.Execution|Execution}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/workload_manager.get_execution.js</caption>
- * region_tag:workloadmanager_v1_generated_WorkloadManager_GetExecution_async
- */
+  /**
+   * Gets details of a single Execution.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.workloadmanager.v1.Execution|Execution}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/workload_manager.get_execution.js</caption>
+   * region_tag:workloadmanager_v1_generated_WorkloadManager_GetExecution_async
+   */
   getExecution(
-      request?: protos.google.cloud.workloadmanager.v1.IGetExecutionRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.workloadmanager.v1.IExecution,
-        protos.google.cloud.workloadmanager.v1.IGetExecutionRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.workloadmanager.v1.IGetExecutionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.workloadmanager.v1.IExecution,
+      protos.google.cloud.workloadmanager.v1.IGetExecutionRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getExecution(
-      request: protos.google.cloud.workloadmanager.v1.IGetExecutionRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.workloadmanager.v1.IExecution,
-          protos.google.cloud.workloadmanager.v1.IGetExecutionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.workloadmanager.v1.IGetExecutionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.workloadmanager.v1.IExecution,
+      | protos.google.cloud.workloadmanager.v1.IGetExecutionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getExecution(
-      request: protos.google.cloud.workloadmanager.v1.IGetExecutionRequest,
-      callback: Callback<
-          protos.google.cloud.workloadmanager.v1.IExecution,
-          protos.google.cloud.workloadmanager.v1.IGetExecutionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.workloadmanager.v1.IGetExecutionRequest,
+    callback: Callback<
+      protos.google.cloud.workloadmanager.v1.IExecution,
+      | protos.google.cloud.workloadmanager.v1.IGetExecutionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getExecution(
-      request?: protos.google.cloud.workloadmanager.v1.IGetExecutionRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.workloadmanager.v1.IGetExecutionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.workloadmanager.v1.IExecution,
-          protos.google.cloud.workloadmanager.v1.IGetExecutionRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.workloadmanager.v1.IExecution,
-          protos.google.cloud.workloadmanager.v1.IGetExecutionRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.workloadmanager.v1.IExecution,
-        protos.google.cloud.workloadmanager.v1.IGetExecutionRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.workloadmanager.v1.IGetExecutionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.workloadmanager.v1.IExecution,
+      | protos.google.cloud.workloadmanager.v1.IGetExecutionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.workloadmanager.v1.IExecution,
+      protos.google.cloud.workloadmanager.v1.IGetExecutionRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getExecution request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.workloadmanager.v1.IExecution,
-        protos.google.cloud.workloadmanager.v1.IGetExecutionRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.workloadmanager.v1.IExecution,
+          | protos.google.cloud.workloadmanager.v1.IGetExecutionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getExecution response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getExecution(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.workloadmanager.v1.IExecution,
-        protos.google.cloud.workloadmanager.v1.IGetExecutionRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getExecution response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getExecution(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.workloadmanager.v1.IExecution,
+          (
+            | protos.google.cloud.workloadmanager.v1.IGetExecutionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getExecution response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Lists rules in a given project.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The [project] on which to execute the request. The format is:
- *       projects/{project_id}/locations/{location}
- *   Currently, the pre-defined rules are global available to all projects and
- *   all regions.
- * @param {number} request.pageSize
- *   Requested page size. Server may return fewer items than requested.
- *   If unspecified, server will pick an appropriate default.
- * @param {string} request.pageToken
- *   A token identifying a page of results the server should return.
- * @param {string} request.filter
- *   Filter based on primary_category, secondary_category.
- * @param {string} request.customRulesBucket
- *   The Cloud Storage bucket name for custom rules.
- * @param {google.cloud.workloadmanager.v1.Evaluation.EvaluationType} [request.evaluationType]
- *   Optional. The evaluation type of the rules will be applied to.
- *   The Cloud Storage bucket name for custom rules.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.workloadmanager.v1.ListRulesResponse|ListRulesResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/workload_manager.list_rules.js</caption>
- * region_tag:workloadmanager_v1_generated_WorkloadManager_ListRules_async
- */
+  /**
+   * Lists rules in a given project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The [project] on which to execute the request. The format is:
+   *       projects/{project_id}/locations/{location}
+   *   Currently, the pre-defined rules are global available to all projects and
+   *   all regions.
+   * @param {number} request.pageSize
+   *   Requested page size. Server may return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results the server should return.
+   * @param {string} request.filter
+   *   Filter based on primary_category, secondary_category.
+   * @param {string} request.customRulesBucket
+   *   The Cloud Storage bucket name for custom rules.
+   * @param {google.cloud.workloadmanager.v1.Evaluation.EvaluationType} [request.evaluationType]
+   *   Optional. The evaluation type of the rules will be applied to.
+   *   The Cloud Storage bucket name for custom rules.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.workloadmanager.v1.ListRulesResponse|ListRulesResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/workload_manager.list_rules.js</caption>
+   * region_tag:workloadmanager_v1_generated_WorkloadManager_ListRules_async
+   */
   listRules(
-      request?: protos.google.cloud.workloadmanager.v1.IListRulesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.workloadmanager.v1.IListRulesResponse,
-        protos.google.cloud.workloadmanager.v1.IListRulesRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.workloadmanager.v1.IListRulesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.workloadmanager.v1.IListRulesResponse,
+      protos.google.cloud.workloadmanager.v1.IListRulesRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   listRules(
-      request: protos.google.cloud.workloadmanager.v1.IListRulesRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.workloadmanager.v1.IListRulesResponse,
-          protos.google.cloud.workloadmanager.v1.IListRulesRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.workloadmanager.v1.IListRulesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.workloadmanager.v1.IListRulesResponse,
+      | protos.google.cloud.workloadmanager.v1.IListRulesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   listRules(
-      request: protos.google.cloud.workloadmanager.v1.IListRulesRequest,
-      callback: Callback<
-          protos.google.cloud.workloadmanager.v1.IListRulesResponse,
-          protos.google.cloud.workloadmanager.v1.IListRulesRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.workloadmanager.v1.IListRulesRequest,
+    callback: Callback<
+      protos.google.cloud.workloadmanager.v1.IListRulesResponse,
+      | protos.google.cloud.workloadmanager.v1.IListRulesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   listRules(
-      request?: protos.google.cloud.workloadmanager.v1.IListRulesRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.workloadmanager.v1.IListRulesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.workloadmanager.v1.IListRulesResponse,
-          protos.google.cloud.workloadmanager.v1.IListRulesRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.workloadmanager.v1.IListRulesResponse,
-          protos.google.cloud.workloadmanager.v1.IListRulesRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.workloadmanager.v1.IListRulesResponse,
-        protos.google.cloud.workloadmanager.v1.IListRulesRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.workloadmanager.v1.IListRulesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.workloadmanager.v1.IListRulesResponse,
+      | protos.google.cloud.workloadmanager.v1.IListRulesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.workloadmanager.v1.IListRulesResponse,
+      protos.google.cloud.workloadmanager.v1.IListRulesRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('listRules request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.workloadmanager.v1.IListRulesResponse,
-        protos.google.cloud.workloadmanager.v1.IListRulesRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.workloadmanager.v1.IListRulesResponse,
+          | protos.google.cloud.workloadmanager.v1.IListRulesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('listRules response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.listRules(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.workloadmanager.v1.IListRulesResponse,
-        protos.google.cloud.workloadmanager.v1.IListRulesRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('listRules response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .listRules(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.workloadmanager.v1.IListRulesResponse,
+          protos.google.cloud.workloadmanager.v1.IListRulesRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('listRules response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
- * Creates a new Evaluation in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource prefix of the evaluation location using the form:
- *   `projects/{project_id}/locations/{location_id}`.
- * @param {string} request.evaluationId
- *   Required. Id of the requesting object.
- * @param {google.cloud.workloadmanager.v1.Evaluation} request.evaluation
- *   Required. The resource being created.
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and
- *   the request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/workload_manager.create_evaluation.js</caption>
- * region_tag:workloadmanager_v1_generated_WorkloadManager_CreateEvaluation_async
- */
+  /**
+   * Creates a new Evaluation in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource prefix of the evaluation location using the form:
+   *   `projects/{project_id}/locations/{location_id}`.
+   * @param {string} request.evaluationId
+   *   Required. Id of the requesting object.
+   * @param {google.cloud.workloadmanager.v1.Evaluation} request.evaluation
+   *   Required. The resource being created.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/workload_manager.create_evaluation.js</caption>
+   * region_tag:workloadmanager_v1_generated_WorkloadManager_CreateEvaluation_async
+   */
   createEvaluation(
-      request?: protos.google.cloud.workloadmanager.v1.ICreateEvaluationRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.workloadmanager.v1.IEvaluation, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.workloadmanager.v1.ICreateEvaluationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.workloadmanager.v1.IEvaluation,
+        protos.google.cloud.workloadmanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createEvaluation(
-      request: protos.google.cloud.workloadmanager.v1.ICreateEvaluationRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.workloadmanager.v1.IEvaluation, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.workloadmanager.v1.ICreateEvaluationRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.workloadmanager.v1.IEvaluation,
+        protos.google.cloud.workloadmanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createEvaluation(
-      request: protos.google.cloud.workloadmanager.v1.ICreateEvaluationRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.workloadmanager.v1.IEvaluation, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.workloadmanager.v1.ICreateEvaluationRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.workloadmanager.v1.IEvaluation,
+        protos.google.cloud.workloadmanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createEvaluation(
-      request?: protos.google.cloud.workloadmanager.v1.ICreateEvaluationRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.workloadmanager.v1.IEvaluation, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.workloadmanager.v1.IEvaluation, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.workloadmanager.v1.IEvaluation, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.workloadmanager.v1.ICreateEvaluationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.workloadmanager.v1.IEvaluation,
+            protos.google.cloud.workloadmanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.workloadmanager.v1.IEvaluation,
+        protos.google.cloud.workloadmanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.workloadmanager.v1.IEvaluation,
+        protos.google.cloud.workloadmanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.workloadmanager.v1.IEvaluation, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.workloadmanager.v1.IEvaluation,
+            protos.google.cloud.workloadmanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createEvaluation response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createEvaluation request %j', request);
-    return this.innerApiCalls.createEvaluation(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.workloadmanager.v1.IEvaluation, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createEvaluation response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createEvaluation(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.workloadmanager.v1.IEvaluation,
+            protos.google.cloud.workloadmanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createEvaluation response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createEvaluation()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/workload_manager.create_evaluation.js</caption>
- * region_tag:workloadmanager_v1_generated_WorkloadManager_CreateEvaluation_async
- */
-  async checkCreateEvaluationProgress(name: string): Promise<LROperation<protos.google.cloud.workloadmanager.v1.Evaluation, protos.google.cloud.workloadmanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createEvaluation()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/workload_manager.create_evaluation.js</caption>
+   * region_tag:workloadmanager_v1_generated_WorkloadManager_CreateEvaluation_async
+   */
+  async checkCreateEvaluationProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.workloadmanager.v1.Evaluation,
+      protos.google.cloud.workloadmanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('createEvaluation long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createEvaluation, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.workloadmanager.v1.Evaluation, protos.google.cloud.workloadmanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createEvaluation,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.workloadmanager.v1.Evaluation,
+      protos.google.cloud.workloadmanager.v1.OperationMetadata
+    >;
   }
-/**
- * Updates the parameters of a single Evaluation.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. Field mask is used to specify the fields to be overwritten in the
- *   Evaluation resource by the update.
- *   The fields specified in the update_mask are relative to the resource, not
- *   the full request. A field will be overwritten if it is in the mask.
- * @param {google.cloud.workloadmanager.v1.Evaluation} request.evaluation
- *   Required. The resource being updated.
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and
- *   the request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/workload_manager.update_evaluation.js</caption>
- * region_tag:workloadmanager_v1_generated_WorkloadManager_UpdateEvaluation_async
- */
+  /**
+   * Updates the parameters of a single Evaluation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Field mask is used to specify the fields to be overwritten in the
+   *   Evaluation resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask.
+   * @param {google.cloud.workloadmanager.v1.Evaluation} request.evaluation
+   *   Required. The resource being updated.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/workload_manager.update_evaluation.js</caption>
+   * region_tag:workloadmanager_v1_generated_WorkloadManager_UpdateEvaluation_async
+   */
   updateEvaluation(
-      request?: protos.google.cloud.workloadmanager.v1.IUpdateEvaluationRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.workloadmanager.v1.IEvaluation, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.workloadmanager.v1.IUpdateEvaluationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.workloadmanager.v1.IEvaluation,
+        protos.google.cloud.workloadmanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateEvaluation(
-      request: protos.google.cloud.workloadmanager.v1.IUpdateEvaluationRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.workloadmanager.v1.IEvaluation, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.workloadmanager.v1.IUpdateEvaluationRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.workloadmanager.v1.IEvaluation,
+        protos.google.cloud.workloadmanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateEvaluation(
-      request: protos.google.cloud.workloadmanager.v1.IUpdateEvaluationRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.workloadmanager.v1.IEvaluation, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.workloadmanager.v1.IUpdateEvaluationRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.workloadmanager.v1.IEvaluation,
+        protos.google.cloud.workloadmanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateEvaluation(
-      request?: protos.google.cloud.workloadmanager.v1.IUpdateEvaluationRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.workloadmanager.v1.IEvaluation, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.workloadmanager.v1.IEvaluation, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.workloadmanager.v1.IEvaluation, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.workloadmanager.v1.IUpdateEvaluationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.workloadmanager.v1.IEvaluation,
+            protos.google.cloud.workloadmanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.workloadmanager.v1.IEvaluation,
+        protos.google.cloud.workloadmanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.workloadmanager.v1.IEvaluation,
+        protos.google.cloud.workloadmanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'evaluation.name': request.evaluation!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'evaluation.name': request.evaluation!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.workloadmanager.v1.IEvaluation, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.workloadmanager.v1.IEvaluation,
+            protos.google.cloud.workloadmanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateEvaluation response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateEvaluation request %j', request);
-    return this.innerApiCalls.updateEvaluation(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.workloadmanager.v1.IEvaluation, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateEvaluation response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateEvaluation(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.workloadmanager.v1.IEvaluation,
+            protos.google.cloud.workloadmanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateEvaluation response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateEvaluation()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/workload_manager.update_evaluation.js</caption>
- * region_tag:workloadmanager_v1_generated_WorkloadManager_UpdateEvaluation_async
- */
-  async checkUpdateEvaluationProgress(name: string): Promise<LROperation<protos.google.cloud.workloadmanager.v1.Evaluation, protos.google.cloud.workloadmanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateEvaluation()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/workload_manager.update_evaluation.js</caption>
+   * region_tag:workloadmanager_v1_generated_WorkloadManager_UpdateEvaluation_async
+   */
+  async checkUpdateEvaluationProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.workloadmanager.v1.Evaluation,
+      protos.google.cloud.workloadmanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('updateEvaluation long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateEvaluation, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.workloadmanager.v1.Evaluation, protos.google.cloud.workloadmanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateEvaluation,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.workloadmanager.v1.Evaluation,
+      protos.google.cloud.workloadmanager.v1.OperationMetadata
+    >;
   }
-/**
- * Deletes a single Evaluation.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource.
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes after the first request.
- *
- *   For example, consider a situation where you make an initial request and
- *   the request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {boolean} [request.force]
- *   Optional. Followed the best practice from
- *   https://aip.dev/135#cascading-delete.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/workload_manager.delete_evaluation.js</caption>
- * region_tag:workloadmanager_v1_generated_WorkloadManager_DeleteEvaluation_async
- */
+  /**
+   * Deletes a single Evaluation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {boolean} [request.force]
+   *   Optional. Followed the best practice from
+   *   https://aip.dev/135#cascading-delete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/workload_manager.delete_evaluation.js</caption>
+   * region_tag:workloadmanager_v1_generated_WorkloadManager_DeleteEvaluation_async
+   */
   deleteEvaluation(
-      request?: protos.google.cloud.workloadmanager.v1.IDeleteEvaluationRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.workloadmanager.v1.IDeleteEvaluationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.workloadmanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteEvaluation(
-      request: protos.google.cloud.workloadmanager.v1.IDeleteEvaluationRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.workloadmanager.v1.IDeleteEvaluationRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.workloadmanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteEvaluation(
-      request: protos.google.cloud.workloadmanager.v1.IDeleteEvaluationRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.workloadmanager.v1.IDeleteEvaluationRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.workloadmanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteEvaluation(
-      request?: protos.google.cloud.workloadmanager.v1.IDeleteEvaluationRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.workloadmanager.v1.IDeleteEvaluationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.workloadmanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.workloadmanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.workloadmanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.workloadmanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteEvaluation response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteEvaluation request %j', request);
-    return this.innerApiCalls.deleteEvaluation(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteEvaluation response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteEvaluation(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.workloadmanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteEvaluation response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteEvaluation()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/workload_manager.delete_evaluation.js</caption>
- * region_tag:workloadmanager_v1_generated_WorkloadManager_DeleteEvaluation_async
- */
-  async checkDeleteEvaluationProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.workloadmanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteEvaluation()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/workload_manager.delete_evaluation.js</caption>
+   * region_tag:workloadmanager_v1_generated_WorkloadManager_DeleteEvaluation_async
+   */
+  async checkDeleteEvaluationProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.workloadmanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('deleteEvaluation long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteEvaluation, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.workloadmanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteEvaluation,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.workloadmanager.v1.OperationMetadata
+    >;
   }
-/**
- * Creates a new Execution in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the Evaluation using the form:
- *   `projects/{project}/locations/{location}/evaluations/{evaluation}`.
- * @param {string} request.executionId
- *   Required. ID of the execution which will be created.
- * @param {google.cloud.workloadmanager.v1.Execution} request.execution
- *   Required. The resource being created.
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and
- *   the request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/workload_manager.run_evaluation.js</caption>
- * region_tag:workloadmanager_v1_generated_WorkloadManager_RunEvaluation_async
- */
+  /**
+   * Creates a new Execution in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the Evaluation using the form:
+   *   `projects/{project}/locations/{location}/evaluations/{evaluation}`.
+   * @param {string} request.executionId
+   *   Required. ID of the execution which will be created.
+   * @param {google.cloud.workloadmanager.v1.Execution} request.execution
+   *   Required. The resource being created.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/workload_manager.run_evaluation.js</caption>
+   * region_tag:workloadmanager_v1_generated_WorkloadManager_RunEvaluation_async
+   */
   runEvaluation(
-      request?: protos.google.cloud.workloadmanager.v1.IRunEvaluationRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.workloadmanager.v1.IExecution, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.workloadmanager.v1.IRunEvaluationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.workloadmanager.v1.IExecution,
+        protos.google.cloud.workloadmanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   runEvaluation(
-      request: protos.google.cloud.workloadmanager.v1.IRunEvaluationRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.workloadmanager.v1.IExecution, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.workloadmanager.v1.IRunEvaluationRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.workloadmanager.v1.IExecution,
+        protos.google.cloud.workloadmanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   runEvaluation(
-      request: protos.google.cloud.workloadmanager.v1.IRunEvaluationRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.workloadmanager.v1.IExecution, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.workloadmanager.v1.IRunEvaluationRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.workloadmanager.v1.IExecution,
+        protos.google.cloud.workloadmanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   runEvaluation(
-      request?: protos.google.cloud.workloadmanager.v1.IRunEvaluationRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.workloadmanager.v1.IExecution, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.workloadmanager.v1.IExecution, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.workloadmanager.v1.IExecution, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.workloadmanager.v1.IRunEvaluationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.workloadmanager.v1.IExecution,
+            protos.google.cloud.workloadmanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.workloadmanager.v1.IExecution,
+        protos.google.cloud.workloadmanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.workloadmanager.v1.IExecution,
+        protos.google.cloud.workloadmanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.workloadmanager.v1.IExecution, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.workloadmanager.v1.IExecution,
+            protos.google.cloud.workloadmanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('runEvaluation response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('runEvaluation request %j', request);
-    return this.innerApiCalls.runEvaluation(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.workloadmanager.v1.IExecution, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('runEvaluation response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .runEvaluation(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.workloadmanager.v1.IExecution,
+            protos.google.cloud.workloadmanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('runEvaluation response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `runEvaluation()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/workload_manager.run_evaluation.js</caption>
- * region_tag:workloadmanager_v1_generated_WorkloadManager_RunEvaluation_async
- */
-  async checkRunEvaluationProgress(name: string): Promise<LROperation<protos.google.cloud.workloadmanager.v1.Execution, protos.google.cloud.workloadmanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `runEvaluation()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/workload_manager.run_evaluation.js</caption>
+   * region_tag:workloadmanager_v1_generated_WorkloadManager_RunEvaluation_async
+   */
+  async checkRunEvaluationProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.workloadmanager.v1.Execution,
+      protos.google.cloud.workloadmanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('runEvaluation long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.runEvaluation, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.workloadmanager.v1.Execution, protos.google.cloud.workloadmanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.runEvaluation,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.workloadmanager.v1.Execution,
+      protos.google.cloud.workloadmanager.v1.OperationMetadata
+    >;
   }
-/**
- * Deletes a single Execution.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource.
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes after the first request.
- *
- *   For example, consider a situation where you make an initial request and
- *   the request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/workload_manager.delete_execution.js</caption>
- * region_tag:workloadmanager_v1_generated_WorkloadManager_DeleteExecution_async
- */
+  /**
+   * Deletes a single Execution.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/workload_manager.delete_execution.js</caption>
+   * region_tag:workloadmanager_v1_generated_WorkloadManager_DeleteExecution_async
+   */
   deleteExecution(
-      request?: protos.google.cloud.workloadmanager.v1.IDeleteExecutionRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.workloadmanager.v1.IDeleteExecutionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.workloadmanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteExecution(
-      request: protos.google.cloud.workloadmanager.v1.IDeleteExecutionRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.workloadmanager.v1.IDeleteExecutionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.workloadmanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteExecution(
-      request: protos.google.cloud.workloadmanager.v1.IDeleteExecutionRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.workloadmanager.v1.IDeleteExecutionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.workloadmanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteExecution(
-      request?: protos.google.cloud.workloadmanager.v1.IDeleteExecutionRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.workloadmanager.v1.IDeleteExecutionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.workloadmanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.workloadmanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.workloadmanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.workloadmanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteExecution response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteExecution request %j', request);
-    return this.innerApiCalls.deleteExecution(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.workloadmanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteExecution response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteExecution(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.workloadmanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteExecution response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteExecution()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/workload_manager.delete_execution.js</caption>
- * region_tag:workloadmanager_v1_generated_WorkloadManager_DeleteExecution_async
- */
-  async checkDeleteExecutionProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.workloadmanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteExecution()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/workload_manager.delete_execution.js</caption>
+   * region_tag:workloadmanager_v1_generated_WorkloadManager_DeleteExecution_async
+   */
+  async checkDeleteExecutionProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.workloadmanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('deleteExecution long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteExecution, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.workloadmanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteExecution,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.workloadmanager.v1.OperationMetadata
+    >;
   }
- /**
- * Lists Evaluations in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListEvaluationsRequest.
- * @param {number} request.pageSize
- *   Requested page size. Server may return fewer items than requested.
- *   If unspecified, server will pick an appropriate default.
- * @param {string} request.pageToken
- *   A token identifying a page of results the server should return.
- * @param {string} request.filter
- *   Filter to be applied when listing the evaluation results.
- * @param {string} request.orderBy
- *   Hint for how to order the results.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.workloadmanager.v1.Evaluation|Evaluation}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listEvaluationsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists Evaluations in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListEvaluationsRequest.
+   * @param {number} request.pageSize
+   *   Requested page size. Server may return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results the server should return.
+   * @param {string} request.filter
+   *   Filter to be applied when listing the evaluation results.
+   * @param {string} request.orderBy
+   *   Hint for how to order the results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.workloadmanager.v1.Evaluation|Evaluation}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listEvaluationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listEvaluations(
-      request?: protos.google.cloud.workloadmanager.v1.IListEvaluationsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.workloadmanager.v1.IEvaluation[],
-        protos.google.cloud.workloadmanager.v1.IListEvaluationsRequest|null,
-        protos.google.cloud.workloadmanager.v1.IListEvaluationsResponse
-      ]>;
+    request?: protos.google.cloud.workloadmanager.v1.IListEvaluationsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.workloadmanager.v1.IEvaluation[],
+      protos.google.cloud.workloadmanager.v1.IListEvaluationsRequest | null,
+      protos.google.cloud.workloadmanager.v1.IListEvaluationsResponse,
+    ]
+  >;
   listEvaluations(
-      request: protos.google.cloud.workloadmanager.v1.IListEvaluationsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.workloadmanager.v1.IListEvaluationsRequest,
-          protos.google.cloud.workloadmanager.v1.IListEvaluationsResponse|null|undefined,
-          protos.google.cloud.workloadmanager.v1.IEvaluation>): void;
+    request: protos.google.cloud.workloadmanager.v1.IListEvaluationsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.workloadmanager.v1.IListEvaluationsRequest,
+      | protos.google.cloud.workloadmanager.v1.IListEvaluationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.workloadmanager.v1.IEvaluation
+    >,
+  ): void;
   listEvaluations(
-      request: protos.google.cloud.workloadmanager.v1.IListEvaluationsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.workloadmanager.v1.IListEvaluationsRequest,
-          protos.google.cloud.workloadmanager.v1.IListEvaluationsResponse|null|undefined,
-          protos.google.cloud.workloadmanager.v1.IEvaluation>): void;
+    request: protos.google.cloud.workloadmanager.v1.IListEvaluationsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.workloadmanager.v1.IListEvaluationsRequest,
+      | protos.google.cloud.workloadmanager.v1.IListEvaluationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.workloadmanager.v1.IEvaluation
+    >,
+  ): void;
   listEvaluations(
-      request?: protos.google.cloud.workloadmanager.v1.IListEvaluationsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.workloadmanager.v1.IListEvaluationsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.workloadmanager.v1.IListEvaluationsRequest,
-          protos.google.cloud.workloadmanager.v1.IListEvaluationsResponse|null|undefined,
-          protos.google.cloud.workloadmanager.v1.IEvaluation>,
-      callback?: PaginationCallback<
-          protos.google.cloud.workloadmanager.v1.IListEvaluationsRequest,
-          protos.google.cloud.workloadmanager.v1.IListEvaluationsResponse|null|undefined,
-          protos.google.cloud.workloadmanager.v1.IEvaluation>):
-      Promise<[
-        protos.google.cloud.workloadmanager.v1.IEvaluation[],
-        protos.google.cloud.workloadmanager.v1.IListEvaluationsRequest|null,
-        protos.google.cloud.workloadmanager.v1.IListEvaluationsResponse
-      ]>|void {
+          | protos.google.cloud.workloadmanager.v1.IListEvaluationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.workloadmanager.v1.IEvaluation
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.workloadmanager.v1.IListEvaluationsRequest,
+      | protos.google.cloud.workloadmanager.v1.IListEvaluationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.workloadmanager.v1.IEvaluation
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.workloadmanager.v1.IEvaluation[],
+      protos.google.cloud.workloadmanager.v1.IListEvaluationsRequest | null,
+      protos.google.cloud.workloadmanager.v1.IListEvaluationsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.workloadmanager.v1.IListEvaluationsRequest,
-      protos.google.cloud.workloadmanager.v1.IListEvaluationsResponse|null|undefined,
-      protos.google.cloud.workloadmanager.v1.IEvaluation>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.workloadmanager.v1.IListEvaluationsRequest,
+          | protos.google.cloud.workloadmanager.v1.IListEvaluationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.workloadmanager.v1.IEvaluation
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listEvaluations values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1438,205 +2014,234 @@ export class WorkloadManagerClient {
     this._log.info('listEvaluations request %j', request);
     return this.innerApiCalls
       .listEvaluations(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.workloadmanager.v1.IEvaluation[],
-        protos.google.cloud.workloadmanager.v1.IListEvaluationsRequest|null,
-        protos.google.cloud.workloadmanager.v1.IListEvaluationsResponse
-      ]) => {
-        this._log.info('listEvaluations values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.workloadmanager.v1.IEvaluation[],
+          protos.google.cloud.workloadmanager.v1.IListEvaluationsRequest | null,
+          protos.google.cloud.workloadmanager.v1.IListEvaluationsResponse,
+        ]) => {
+          this._log.info('listEvaluations values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listEvaluations`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListEvaluationsRequest.
- * @param {number} request.pageSize
- *   Requested page size. Server may return fewer items than requested.
- *   If unspecified, server will pick an appropriate default.
- * @param {string} request.pageToken
- *   A token identifying a page of results the server should return.
- * @param {string} request.filter
- *   Filter to be applied when listing the evaluation results.
- * @param {string} request.orderBy
- *   Hint for how to order the results.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.workloadmanager.v1.Evaluation|Evaluation} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listEvaluationsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listEvaluations`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListEvaluationsRequest.
+   * @param {number} request.pageSize
+   *   Requested page size. Server may return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results the server should return.
+   * @param {string} request.filter
+   *   Filter to be applied when listing the evaluation results.
+   * @param {string} request.orderBy
+   *   Hint for how to order the results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.workloadmanager.v1.Evaluation|Evaluation} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listEvaluationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listEvaluationsStream(
-      request?: protos.google.cloud.workloadmanager.v1.IListEvaluationsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.workloadmanager.v1.IListEvaluationsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listEvaluations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listEvaluations stream %j', request);
     return this.descriptors.page.listEvaluations.createStream(
       this.innerApiCalls.listEvaluations as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listEvaluations`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListEvaluationsRequest.
- * @param {number} request.pageSize
- *   Requested page size. Server may return fewer items than requested.
- *   If unspecified, server will pick an appropriate default.
- * @param {string} request.pageToken
- *   A token identifying a page of results the server should return.
- * @param {string} request.filter
- *   Filter to be applied when listing the evaluation results.
- * @param {string} request.orderBy
- *   Hint for how to order the results.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.workloadmanager.v1.Evaluation|Evaluation}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/workload_manager.list_evaluations.js</caption>
- * region_tag:workloadmanager_v1_generated_WorkloadManager_ListEvaluations_async
- */
+  /**
+   * Equivalent to `listEvaluations`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListEvaluationsRequest.
+   * @param {number} request.pageSize
+   *   Requested page size. Server may return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results the server should return.
+   * @param {string} request.filter
+   *   Filter to be applied when listing the evaluation results.
+   * @param {string} request.orderBy
+   *   Hint for how to order the results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.workloadmanager.v1.Evaluation|Evaluation}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/workload_manager.list_evaluations.js</caption>
+   * region_tag:workloadmanager_v1_generated_WorkloadManager_ListEvaluations_async
+   */
   listEvaluationsAsync(
-      request?: protos.google.cloud.workloadmanager.v1.IListEvaluationsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.workloadmanager.v1.IEvaluation>{
+    request?: protos.google.cloud.workloadmanager.v1.IListEvaluationsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.workloadmanager.v1.IEvaluation> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listEvaluations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listEvaluations iterate %j', request);
     return this.descriptors.page.listEvaluations.asyncIterate(
       this.innerApiCalls['listEvaluations'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.workloadmanager.v1.IEvaluation>;
   }
- /**
- * Lists Executions in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource prefix of the Execution using the form:
- *   `projects/{project}/locations/{location}/evaluations/{evaluation}`.
- * @param {number} request.pageSize
- *   Requested page size. Server may return fewer items than requested.
- *   If unspecified, server will pick an appropriate default.
- * @param {string} request.pageToken
- *   A token identifying a page of results the server should return.
- * @param {string} request.filter
- *   Filtering results.
- * @param {string} request.orderBy
- *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.workloadmanager.v1.Execution|Execution}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listExecutionsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists Executions in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource prefix of the Execution using the form:
+   *   `projects/{project}/locations/{location}/evaluations/{evaluation}`.
+   * @param {number} request.pageSize
+   *   Requested page size. Server may return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results the server should return.
+   * @param {string} request.filter
+   *   Filtering results.
+   * @param {string} request.orderBy
+   *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.workloadmanager.v1.Execution|Execution}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listExecutionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listExecutions(
-      request?: protos.google.cloud.workloadmanager.v1.IListExecutionsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.workloadmanager.v1.IExecution[],
-        protos.google.cloud.workloadmanager.v1.IListExecutionsRequest|null,
-        protos.google.cloud.workloadmanager.v1.IListExecutionsResponse
-      ]>;
+    request?: protos.google.cloud.workloadmanager.v1.IListExecutionsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.workloadmanager.v1.IExecution[],
+      protos.google.cloud.workloadmanager.v1.IListExecutionsRequest | null,
+      protos.google.cloud.workloadmanager.v1.IListExecutionsResponse,
+    ]
+  >;
   listExecutions(
-      request: protos.google.cloud.workloadmanager.v1.IListExecutionsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.workloadmanager.v1.IListExecutionsRequest,
-          protos.google.cloud.workloadmanager.v1.IListExecutionsResponse|null|undefined,
-          protos.google.cloud.workloadmanager.v1.IExecution>): void;
+    request: protos.google.cloud.workloadmanager.v1.IListExecutionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.workloadmanager.v1.IListExecutionsRequest,
+      | protos.google.cloud.workloadmanager.v1.IListExecutionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.workloadmanager.v1.IExecution
+    >,
+  ): void;
   listExecutions(
-      request: protos.google.cloud.workloadmanager.v1.IListExecutionsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.workloadmanager.v1.IListExecutionsRequest,
-          protos.google.cloud.workloadmanager.v1.IListExecutionsResponse|null|undefined,
-          protos.google.cloud.workloadmanager.v1.IExecution>): void;
+    request: protos.google.cloud.workloadmanager.v1.IListExecutionsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.workloadmanager.v1.IListExecutionsRequest,
+      | protos.google.cloud.workloadmanager.v1.IListExecutionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.workloadmanager.v1.IExecution
+    >,
+  ): void;
   listExecutions(
-      request?: protos.google.cloud.workloadmanager.v1.IListExecutionsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.workloadmanager.v1.IListExecutionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.workloadmanager.v1.IListExecutionsRequest,
-          protos.google.cloud.workloadmanager.v1.IListExecutionsResponse|null|undefined,
-          protos.google.cloud.workloadmanager.v1.IExecution>,
-      callback?: PaginationCallback<
-          protos.google.cloud.workloadmanager.v1.IListExecutionsRequest,
-          protos.google.cloud.workloadmanager.v1.IListExecutionsResponse|null|undefined,
-          protos.google.cloud.workloadmanager.v1.IExecution>):
-      Promise<[
-        protos.google.cloud.workloadmanager.v1.IExecution[],
-        protos.google.cloud.workloadmanager.v1.IListExecutionsRequest|null,
-        protos.google.cloud.workloadmanager.v1.IListExecutionsResponse
-      ]>|void {
+          | protos.google.cloud.workloadmanager.v1.IListExecutionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.workloadmanager.v1.IExecution
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.workloadmanager.v1.IListExecutionsRequest,
+      | protos.google.cloud.workloadmanager.v1.IListExecutionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.workloadmanager.v1.IExecution
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.workloadmanager.v1.IExecution[],
+      protos.google.cloud.workloadmanager.v1.IListExecutionsRequest | null,
+      protos.google.cloud.workloadmanager.v1.IListExecutionsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.workloadmanager.v1.IListExecutionsRequest,
-      protos.google.cloud.workloadmanager.v1.IListExecutionsResponse|null|undefined,
-      protos.google.cloud.workloadmanager.v1.IExecution>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.workloadmanager.v1.IListExecutionsRequest,
+          | protos.google.cloud.workloadmanager.v1.IListExecutionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.workloadmanager.v1.IExecution
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listExecutions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1645,205 +2250,234 @@ export class WorkloadManagerClient {
     this._log.info('listExecutions request %j', request);
     return this.innerApiCalls
       .listExecutions(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.workloadmanager.v1.IExecution[],
-        protos.google.cloud.workloadmanager.v1.IListExecutionsRequest|null,
-        protos.google.cloud.workloadmanager.v1.IListExecutionsResponse
-      ]) => {
-        this._log.info('listExecutions values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.workloadmanager.v1.IExecution[],
+          protos.google.cloud.workloadmanager.v1.IListExecutionsRequest | null,
+          protos.google.cloud.workloadmanager.v1.IListExecutionsResponse,
+        ]) => {
+          this._log.info('listExecutions values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listExecutions`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource prefix of the Execution using the form:
- *   `projects/{project}/locations/{location}/evaluations/{evaluation}`.
- * @param {number} request.pageSize
- *   Requested page size. Server may return fewer items than requested.
- *   If unspecified, server will pick an appropriate default.
- * @param {string} request.pageToken
- *   A token identifying a page of results the server should return.
- * @param {string} request.filter
- *   Filtering results.
- * @param {string} request.orderBy
- *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.workloadmanager.v1.Execution|Execution} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listExecutionsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listExecutions`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource prefix of the Execution using the form:
+   *   `projects/{project}/locations/{location}/evaluations/{evaluation}`.
+   * @param {number} request.pageSize
+   *   Requested page size. Server may return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results the server should return.
+   * @param {string} request.filter
+   *   Filtering results.
+   * @param {string} request.orderBy
+   *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.workloadmanager.v1.Execution|Execution} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listExecutionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listExecutionsStream(
-      request?: protos.google.cloud.workloadmanager.v1.IListExecutionsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.workloadmanager.v1.IListExecutionsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listExecutions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listExecutions stream %j', request);
     return this.descriptors.page.listExecutions.createStream(
       this.innerApiCalls.listExecutions as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listExecutions`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource prefix of the Execution using the form:
- *   `projects/{project}/locations/{location}/evaluations/{evaluation}`.
- * @param {number} request.pageSize
- *   Requested page size. Server may return fewer items than requested.
- *   If unspecified, server will pick an appropriate default.
- * @param {string} request.pageToken
- *   A token identifying a page of results the server should return.
- * @param {string} request.filter
- *   Filtering results.
- * @param {string} request.orderBy
- *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.workloadmanager.v1.Execution|Execution}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/workload_manager.list_executions.js</caption>
- * region_tag:workloadmanager_v1_generated_WorkloadManager_ListExecutions_async
- */
+  /**
+   * Equivalent to `listExecutions`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource prefix of the Execution using the form:
+   *   `projects/{project}/locations/{location}/evaluations/{evaluation}`.
+   * @param {number} request.pageSize
+   *   Requested page size. Server may return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results the server should return.
+   * @param {string} request.filter
+   *   Filtering results.
+   * @param {string} request.orderBy
+   *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.workloadmanager.v1.Execution|Execution}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/workload_manager.list_executions.js</caption>
+   * region_tag:workloadmanager_v1_generated_WorkloadManager_ListExecutions_async
+   */
   listExecutionsAsync(
-      request?: protos.google.cloud.workloadmanager.v1.IListExecutionsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.workloadmanager.v1.IExecution>{
+    request?: protos.google.cloud.workloadmanager.v1.IListExecutionsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.workloadmanager.v1.IExecution> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listExecutions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listExecutions iterate %j', request);
     return this.descriptors.page.listExecutions.asyncIterate(
       this.innerApiCalls['listExecutions'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.workloadmanager.v1.IExecution>;
   }
- /**
- * Lists the result of a single evaluation.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The execution results.
- *   Format: {parent}/evaluations/* /executions/* /results.
- * @param {number} request.pageSize
- *   Requested page size. Server may return fewer items than requested.
- *   If unspecified, server will pick an appropriate default.
- * @param {string} request.pageToken
- *   A token identifying a page of results the server should return.
- * @param {string} request.filter
- *   Filtering results.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.workloadmanager.v1.ExecutionResult|ExecutionResult}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listExecutionResultsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists the result of a single evaluation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The execution results.
+   *   Format: {parent}/evaluations/* /executions/* /results.
+   * @param {number} request.pageSize
+   *   Requested page size. Server may return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results the server should return.
+   * @param {string} request.filter
+   *   Filtering results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.workloadmanager.v1.ExecutionResult|ExecutionResult}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listExecutionResultsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listExecutionResults(
-      request?: protos.google.cloud.workloadmanager.v1.IListExecutionResultsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.workloadmanager.v1.IExecutionResult[],
-        protos.google.cloud.workloadmanager.v1.IListExecutionResultsRequest|null,
-        protos.google.cloud.workloadmanager.v1.IListExecutionResultsResponse
-      ]>;
+    request?: protos.google.cloud.workloadmanager.v1.IListExecutionResultsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.workloadmanager.v1.IExecutionResult[],
+      protos.google.cloud.workloadmanager.v1.IListExecutionResultsRequest | null,
+      protos.google.cloud.workloadmanager.v1.IListExecutionResultsResponse,
+    ]
+  >;
   listExecutionResults(
-      request: protos.google.cloud.workloadmanager.v1.IListExecutionResultsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.workloadmanager.v1.IListExecutionResultsRequest,
-          protos.google.cloud.workloadmanager.v1.IListExecutionResultsResponse|null|undefined,
-          protos.google.cloud.workloadmanager.v1.IExecutionResult>): void;
+    request: protos.google.cloud.workloadmanager.v1.IListExecutionResultsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.workloadmanager.v1.IListExecutionResultsRequest,
+      | protos.google.cloud.workloadmanager.v1.IListExecutionResultsResponse
+      | null
+      | undefined,
+      protos.google.cloud.workloadmanager.v1.IExecutionResult
+    >,
+  ): void;
   listExecutionResults(
-      request: protos.google.cloud.workloadmanager.v1.IListExecutionResultsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.workloadmanager.v1.IListExecutionResultsRequest,
-          protos.google.cloud.workloadmanager.v1.IListExecutionResultsResponse|null|undefined,
-          protos.google.cloud.workloadmanager.v1.IExecutionResult>): void;
+    request: protos.google.cloud.workloadmanager.v1.IListExecutionResultsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.workloadmanager.v1.IListExecutionResultsRequest,
+      | protos.google.cloud.workloadmanager.v1.IListExecutionResultsResponse
+      | null
+      | undefined,
+      protos.google.cloud.workloadmanager.v1.IExecutionResult
+    >,
+  ): void;
   listExecutionResults(
-      request?: protos.google.cloud.workloadmanager.v1.IListExecutionResultsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.workloadmanager.v1.IListExecutionResultsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.workloadmanager.v1.IListExecutionResultsRequest,
-          protos.google.cloud.workloadmanager.v1.IListExecutionResultsResponse|null|undefined,
-          protos.google.cloud.workloadmanager.v1.IExecutionResult>,
-      callback?: PaginationCallback<
-          protos.google.cloud.workloadmanager.v1.IListExecutionResultsRequest,
-          protos.google.cloud.workloadmanager.v1.IListExecutionResultsResponse|null|undefined,
-          protos.google.cloud.workloadmanager.v1.IExecutionResult>):
-      Promise<[
-        protos.google.cloud.workloadmanager.v1.IExecutionResult[],
-        protos.google.cloud.workloadmanager.v1.IListExecutionResultsRequest|null,
-        protos.google.cloud.workloadmanager.v1.IListExecutionResultsResponse
-      ]>|void {
+          | protos.google.cloud.workloadmanager.v1.IListExecutionResultsResponse
+          | null
+          | undefined,
+          protos.google.cloud.workloadmanager.v1.IExecutionResult
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.workloadmanager.v1.IListExecutionResultsRequest,
+      | protos.google.cloud.workloadmanager.v1.IListExecutionResultsResponse
+      | null
+      | undefined,
+      protos.google.cloud.workloadmanager.v1.IExecutionResult
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.workloadmanager.v1.IExecutionResult[],
+      protos.google.cloud.workloadmanager.v1.IListExecutionResultsRequest | null,
+      protos.google.cloud.workloadmanager.v1.IListExecutionResultsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.workloadmanager.v1.IListExecutionResultsRequest,
-      protos.google.cloud.workloadmanager.v1.IListExecutionResultsResponse|null|undefined,
-      protos.google.cloud.workloadmanager.v1.IExecutionResult>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.workloadmanager.v1.IListExecutionResultsRequest,
+          | protos.google.cloud.workloadmanager.v1.IListExecutionResultsResponse
+          | null
+          | undefined,
+          protos.google.cloud.workloadmanager.v1.IExecutionResult
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listExecutionResults values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1852,204 +2486,233 @@ export class WorkloadManagerClient {
     this._log.info('listExecutionResults request %j', request);
     return this.innerApiCalls
       .listExecutionResults(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.workloadmanager.v1.IExecutionResult[],
-        protos.google.cloud.workloadmanager.v1.IListExecutionResultsRequest|null,
-        protos.google.cloud.workloadmanager.v1.IListExecutionResultsResponse
-      ]) => {
-        this._log.info('listExecutionResults values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.workloadmanager.v1.IExecutionResult[],
+          protos.google.cloud.workloadmanager.v1.IListExecutionResultsRequest | null,
+          protos.google.cloud.workloadmanager.v1.IListExecutionResultsResponse,
+        ]) => {
+          this._log.info('listExecutionResults values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listExecutionResults`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The execution results.
- *   Format: {parent}/evaluations/* /executions/* /results.
- * @param {number} request.pageSize
- *   Requested page size. Server may return fewer items than requested.
- *   If unspecified, server will pick an appropriate default.
- * @param {string} request.pageToken
- *   A token identifying a page of results the server should return.
- * @param {string} request.filter
- *   Filtering results.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.workloadmanager.v1.ExecutionResult|ExecutionResult} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listExecutionResultsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listExecutionResults`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The execution results.
+   *   Format: {parent}/evaluations/* /executions/* /results.
+   * @param {number} request.pageSize
+   *   Requested page size. Server may return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results the server should return.
+   * @param {string} request.filter
+   *   Filtering results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.workloadmanager.v1.ExecutionResult|ExecutionResult} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listExecutionResultsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listExecutionResultsStream(
-      request?: protos.google.cloud.workloadmanager.v1.IListExecutionResultsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.workloadmanager.v1.IListExecutionResultsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listExecutionResults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listExecutionResults stream %j', request);
     return this.descriptors.page.listExecutionResults.createStream(
       this.innerApiCalls.listExecutionResults as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listExecutionResults`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The execution results.
- *   Format: {parent}/evaluations/* /executions/* /results.
- * @param {number} request.pageSize
- *   Requested page size. Server may return fewer items than requested.
- *   If unspecified, server will pick an appropriate default.
- * @param {string} request.pageToken
- *   A token identifying a page of results the server should return.
- * @param {string} request.filter
- *   Filtering results.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.workloadmanager.v1.ExecutionResult|ExecutionResult}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/workload_manager.list_execution_results.js</caption>
- * region_tag:workloadmanager_v1_generated_WorkloadManager_ListExecutionResults_async
- */
+  /**
+   * Equivalent to `listExecutionResults`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The execution results.
+   *   Format: {parent}/evaluations/* /executions/* /results.
+   * @param {number} request.pageSize
+   *   Requested page size. Server may return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results the server should return.
+   * @param {string} request.filter
+   *   Filtering results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.workloadmanager.v1.ExecutionResult|ExecutionResult}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/workload_manager.list_execution_results.js</caption>
+   * region_tag:workloadmanager_v1_generated_WorkloadManager_ListExecutionResults_async
+   */
   listExecutionResultsAsync(
-      request?: protos.google.cloud.workloadmanager.v1.IListExecutionResultsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.workloadmanager.v1.IExecutionResult>{
+    request?: protos.google.cloud.workloadmanager.v1.IListExecutionResultsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.workloadmanager.v1.IExecutionResult> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listExecutionResults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listExecutionResults iterate %j', request);
     return this.descriptors.page.listExecutionResults.asyncIterate(
       this.innerApiCalls['listExecutionResults'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.workloadmanager.v1.IExecutionResult>;
   }
- /**
- * List all scanned resources for a single Execution.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent for ListScannedResourcesRequest.
- * @param {string} request.rule
- *   Rule name.
- * @param {number} request.pageSize
- *   Requested page size. Server may return fewer items than requested.
- *   If unspecified, server will pick an appropriate default.
- * @param {string} request.pageToken
- *   A token identifying a page of results the server should return.
- * @param {string} request.filter
- *   Filtering results.
- * @param {string} request.orderBy
- *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.workloadmanager.v1.ScannedResource|ScannedResource}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listScannedResourcesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * List all scanned resources for a single Execution.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent for ListScannedResourcesRequest.
+   * @param {string} request.rule
+   *   Rule name.
+   * @param {number} request.pageSize
+   *   Requested page size. Server may return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results the server should return.
+   * @param {string} request.filter
+   *   Filtering results.
+   * @param {string} request.orderBy
+   *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.workloadmanager.v1.ScannedResource|ScannedResource}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listScannedResourcesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listScannedResources(
-      request?: protos.google.cloud.workloadmanager.v1.IListScannedResourcesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.workloadmanager.v1.IScannedResource[],
-        protos.google.cloud.workloadmanager.v1.IListScannedResourcesRequest|null,
-        protos.google.cloud.workloadmanager.v1.IListScannedResourcesResponse
-      ]>;
+    request?: protos.google.cloud.workloadmanager.v1.IListScannedResourcesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.workloadmanager.v1.IScannedResource[],
+      protos.google.cloud.workloadmanager.v1.IListScannedResourcesRequest | null,
+      protos.google.cloud.workloadmanager.v1.IListScannedResourcesResponse,
+    ]
+  >;
   listScannedResources(
-      request: protos.google.cloud.workloadmanager.v1.IListScannedResourcesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.workloadmanager.v1.IListScannedResourcesRequest,
-          protos.google.cloud.workloadmanager.v1.IListScannedResourcesResponse|null|undefined,
-          protos.google.cloud.workloadmanager.v1.IScannedResource>): void;
+    request: protos.google.cloud.workloadmanager.v1.IListScannedResourcesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.workloadmanager.v1.IListScannedResourcesRequest,
+      | protos.google.cloud.workloadmanager.v1.IListScannedResourcesResponse
+      | null
+      | undefined,
+      protos.google.cloud.workloadmanager.v1.IScannedResource
+    >,
+  ): void;
   listScannedResources(
-      request: protos.google.cloud.workloadmanager.v1.IListScannedResourcesRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.workloadmanager.v1.IListScannedResourcesRequest,
-          protos.google.cloud.workloadmanager.v1.IListScannedResourcesResponse|null|undefined,
-          protos.google.cloud.workloadmanager.v1.IScannedResource>): void;
+    request: protos.google.cloud.workloadmanager.v1.IListScannedResourcesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.workloadmanager.v1.IListScannedResourcesRequest,
+      | protos.google.cloud.workloadmanager.v1.IListScannedResourcesResponse
+      | null
+      | undefined,
+      protos.google.cloud.workloadmanager.v1.IScannedResource
+    >,
+  ): void;
   listScannedResources(
-      request?: protos.google.cloud.workloadmanager.v1.IListScannedResourcesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.workloadmanager.v1.IListScannedResourcesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.workloadmanager.v1.IListScannedResourcesRequest,
-          protos.google.cloud.workloadmanager.v1.IListScannedResourcesResponse|null|undefined,
-          protos.google.cloud.workloadmanager.v1.IScannedResource>,
-      callback?: PaginationCallback<
-          protos.google.cloud.workloadmanager.v1.IListScannedResourcesRequest,
-          protos.google.cloud.workloadmanager.v1.IListScannedResourcesResponse|null|undefined,
-          protos.google.cloud.workloadmanager.v1.IScannedResource>):
-      Promise<[
-        protos.google.cloud.workloadmanager.v1.IScannedResource[],
-        protos.google.cloud.workloadmanager.v1.IListScannedResourcesRequest|null,
-        protos.google.cloud.workloadmanager.v1.IListScannedResourcesResponse
-      ]>|void {
+          | protos.google.cloud.workloadmanager.v1.IListScannedResourcesResponse
+          | null
+          | undefined,
+          protos.google.cloud.workloadmanager.v1.IScannedResource
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.workloadmanager.v1.IListScannedResourcesRequest,
+      | protos.google.cloud.workloadmanager.v1.IListScannedResourcesResponse
+      | null
+      | undefined,
+      protos.google.cloud.workloadmanager.v1.IScannedResource
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.workloadmanager.v1.IScannedResource[],
+      protos.google.cloud.workloadmanager.v1.IListScannedResourcesRequest | null,
+      protos.google.cloud.workloadmanager.v1.IListScannedResourcesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.workloadmanager.v1.IListScannedResourcesRequest,
-      protos.google.cloud.workloadmanager.v1.IListScannedResourcesResponse|null|undefined,
-      protos.google.cloud.workloadmanager.v1.IScannedResource>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.workloadmanager.v1.IListScannedResourcesRequest,
+          | protos.google.cloud.workloadmanager.v1.IListScannedResourcesResponse
+          | null
+          | undefined,
+          protos.google.cloud.workloadmanager.v1.IScannedResource
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listScannedResources values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2058,123 +2721,128 @@ export class WorkloadManagerClient {
     this._log.info('listScannedResources request %j', request);
     return this.innerApiCalls
       .listScannedResources(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.workloadmanager.v1.IScannedResource[],
-        protos.google.cloud.workloadmanager.v1.IListScannedResourcesRequest|null,
-        protos.google.cloud.workloadmanager.v1.IListScannedResourcesResponse
-      ]) => {
-        this._log.info('listScannedResources values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.workloadmanager.v1.IScannedResource[],
+          protos.google.cloud.workloadmanager.v1.IListScannedResourcesRequest | null,
+          protos.google.cloud.workloadmanager.v1.IListScannedResourcesResponse,
+        ]) => {
+          this._log.info('listScannedResources values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listScannedResources`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent for ListScannedResourcesRequest.
- * @param {string} request.rule
- *   Rule name.
- * @param {number} request.pageSize
- *   Requested page size. Server may return fewer items than requested.
- *   If unspecified, server will pick an appropriate default.
- * @param {string} request.pageToken
- *   A token identifying a page of results the server should return.
- * @param {string} request.filter
- *   Filtering results.
- * @param {string} request.orderBy
- *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.workloadmanager.v1.ScannedResource|ScannedResource} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listScannedResourcesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listScannedResources`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent for ListScannedResourcesRequest.
+   * @param {string} request.rule
+   *   Rule name.
+   * @param {number} request.pageSize
+   *   Requested page size. Server may return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results the server should return.
+   * @param {string} request.filter
+   *   Filtering results.
+   * @param {string} request.orderBy
+   *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.workloadmanager.v1.ScannedResource|ScannedResource} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listScannedResourcesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listScannedResourcesStream(
-      request?: protos.google.cloud.workloadmanager.v1.IListScannedResourcesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.workloadmanager.v1.IListScannedResourcesRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listScannedResources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listScannedResources stream %j', request);
     return this.descriptors.page.listScannedResources.createStream(
       this.innerApiCalls.listScannedResources as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listScannedResources`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent for ListScannedResourcesRequest.
- * @param {string} request.rule
- *   Rule name.
- * @param {number} request.pageSize
- *   Requested page size. Server may return fewer items than requested.
- *   If unspecified, server will pick an appropriate default.
- * @param {string} request.pageToken
- *   A token identifying a page of results the server should return.
- * @param {string} request.filter
- *   Filtering results.
- * @param {string} request.orderBy
- *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.workloadmanager.v1.ScannedResource|ScannedResource}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/workload_manager.list_scanned_resources.js</caption>
- * region_tag:workloadmanager_v1_generated_WorkloadManager_ListScannedResources_async
- */
+  /**
+   * Equivalent to `listScannedResources`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent for ListScannedResourcesRequest.
+   * @param {string} request.rule
+   *   Rule name.
+   * @param {number} request.pageSize
+   *   Requested page size. Server may return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results the server should return.
+   * @param {string} request.filter
+   *   Filtering results.
+   * @param {string} request.orderBy
+   *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.workloadmanager.v1.ScannedResource|ScannedResource}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/workload_manager.list_scanned_resources.js</caption>
+   * region_tag:workloadmanager_v1_generated_WorkloadManager_ListScannedResources_async
+   */
   listScannedResourcesAsync(
-      request?: protos.google.cloud.workloadmanager.v1.IListScannedResourcesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.workloadmanager.v1.IScannedResource>{
+    request?: protos.google.cloud.workloadmanager.v1.IListScannedResourcesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.workloadmanager.v1.IScannedResource> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listScannedResources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listScannedResources iterate %j', request);
     return this.descriptors.page.listScannedResources.asyncIterate(
       this.innerApiCalls['listScannedResources'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.workloadmanager.v1.IScannedResource>;
   }
-/**
+
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -2209,12 +2877,11 @@ export class WorkloadManagerClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -2247,12 +2914,12 @@ export class WorkloadManagerClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-/**
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -2295,22 +2962,22 @@ export class WorkloadManagerClient {
       protos.google.longrunning.Operation,
       protos.google.longrunning.GetOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<[protos.google.longrunning.Operation]> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -2345,15 +3012,15 @@ export class WorkloadManagerClient {
    */
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
+    options?: gax.CallOptions,
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -2387,7 +3054,7 @@ export class WorkloadManagerClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-   cancelOperation(
+  cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -2400,25 +3067,24 @@ export class WorkloadManagerClient {
       protos.google.longrunning.CancelOperationRequest,
       protos.google.protobuf.Empty,
       {} | undefined | null
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
-
   /**
    * Deletes a long-running operation. This method indicates that the client is
    * no longer interested in the operation result. It does not cancel the
@@ -2457,22 +3123,22 @@ export class WorkloadManagerClient {
       protos.google.protobuf.Empty,
       protos.google.longrunning.DeleteOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -2489,7 +3155,12 @@ export class WorkloadManagerClient {
    * @param {string} crypto_key
    * @returns {string} Resource name string.
    */
-  cryptoKeyPath(project:string,location:string,keyRing:string,cryptoKey:string) {
+  cryptoKeyPath(
+    project: string,
+    location: string,
+    keyRing: string,
+    cryptoKey: string,
+  ) {
     return this.pathTemplates.cryptoKeyPathTemplate.render({
       project: project,
       location: location,
@@ -2506,7 +3177,8 @@ export class WorkloadManagerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).project;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .project;
   }
 
   /**
@@ -2517,7 +3189,8 @@ export class WorkloadManagerClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).location;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .location;
   }
 
   /**
@@ -2528,7 +3201,8 @@ export class WorkloadManagerClient {
    * @returns {string} A string representing the key_ring.
    */
   matchKeyRingFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).key_ring;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .key_ring;
   }
 
   /**
@@ -2539,7 +3213,8 @@ export class WorkloadManagerClient {
    * @returns {string} A string representing the crypto_key.
    */
   matchCryptoKeyFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).crypto_key;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .crypto_key;
   }
 
   /**
@@ -2550,7 +3225,7 @@ export class WorkloadManagerClient {
    * @param {string} evaluation
    * @returns {string} Resource name string.
    */
-  evaluationPath(project:string,location:string,evaluation:string) {
+  evaluationPath(project: string, location: string, evaluation: string) {
     return this.pathTemplates.evaluationPathTemplate.render({
       project: project,
       location: location,
@@ -2566,7 +3241,8 @@ export class WorkloadManagerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEvaluationName(evaluationName: string) {
-    return this.pathTemplates.evaluationPathTemplate.match(evaluationName).project;
+    return this.pathTemplates.evaluationPathTemplate.match(evaluationName)
+      .project;
   }
 
   /**
@@ -2577,7 +3253,8 @@ export class WorkloadManagerClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEvaluationName(evaluationName: string) {
-    return this.pathTemplates.evaluationPathTemplate.match(evaluationName).location;
+    return this.pathTemplates.evaluationPathTemplate.match(evaluationName)
+      .location;
   }
 
   /**
@@ -2588,7 +3265,8 @@ export class WorkloadManagerClient {
    * @returns {string} A string representing the evaluation.
    */
   matchEvaluationFromEvaluationName(evaluationName: string) {
-    return this.pathTemplates.evaluationPathTemplate.match(evaluationName).evaluation;
+    return this.pathTemplates.evaluationPathTemplate.match(evaluationName)
+      .evaluation;
   }
 
   /**
@@ -2600,7 +3278,12 @@ export class WorkloadManagerClient {
    * @param {string} execution
    * @returns {string} Resource name string.
    */
-  executionPath(project:string,location:string,evaluation:string,execution:string) {
+  executionPath(
+    project: string,
+    location: string,
+    evaluation: string,
+    execution: string,
+  ) {
     return this.pathTemplates.executionPathTemplate.render({
       project: project,
       location: location,
@@ -2617,7 +3300,8 @@ export class WorkloadManagerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromExecutionName(executionName: string) {
-    return this.pathTemplates.executionPathTemplate.match(executionName).project;
+    return this.pathTemplates.executionPathTemplate.match(executionName)
+      .project;
   }
 
   /**
@@ -2628,7 +3312,8 @@ export class WorkloadManagerClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromExecutionName(executionName: string) {
-    return this.pathTemplates.executionPathTemplate.match(executionName).location;
+    return this.pathTemplates.executionPathTemplate.match(executionName)
+      .location;
   }
 
   /**
@@ -2639,7 +3324,8 @@ export class WorkloadManagerClient {
    * @returns {string} A string representing the evaluation.
    */
   matchEvaluationFromExecutionName(executionName: string) {
-    return this.pathTemplates.executionPathTemplate.match(executionName).evaluation;
+    return this.pathTemplates.executionPathTemplate.match(executionName)
+      .evaluation;
   }
 
   /**
@@ -2650,7 +3336,8 @@ export class WorkloadManagerClient {
    * @returns {string} A string representing the execution.
    */
   matchExecutionFromExecutionName(executionName: string) {
-    return this.pathTemplates.executionPathTemplate.match(executionName).execution;
+    return this.pathTemplates.executionPathTemplate.match(executionName)
+      .execution;
   }
 
   /**
@@ -2660,7 +3347,7 @@ export class WorkloadManagerClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -2695,7 +3382,7 @@ export class WorkloadManagerClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -2720,7 +3407,7 @@ export class WorkloadManagerClient {
    * @param {string} rule
    * @returns {string} Resource name string.
    */
-  rulePath(project:string,location:string,rule:string) {
+  rulePath(project: string, location: string, rule: string) {
     return this.pathTemplates.rulePathTemplate.render({
       project: project,
       location: location,
@@ -2769,11 +3456,13 @@ export class WorkloadManagerClient {
    */
   close(): Promise<void> {
     if (this.workloadManagerStub && !this._terminated) {
-      return this.workloadManagerStub.then(stub => {
+      return this.workloadManagerStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
         void this.operationsClient.close();
       });
     }

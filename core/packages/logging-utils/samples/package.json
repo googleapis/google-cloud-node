@@ -19,8 +19,8 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/googleapis/gax-nodejs.git",
-    "directory": "logging-utils/samples"
+    "url": "https://github.com/googleapis/google-cloud-node.git",
+    "directory": "core/packages/logging-utils/samples"
   },
   "engines": {
     "node": ">=14"
@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "@google-cloud/typeless-sample-bot": "^2.1.0",
+    "@types/node": "^25.6.0",
     "gts": "^5.0.0",
     "mocha": "^10.0.0"
   }

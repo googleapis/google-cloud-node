@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/run",
-  "version": "3.2.1",
+  "version": "3.3.0",
   "description": "Cloud Run Admin API",
   "repository": {
     "type": "git",
@@ -35,8 +35,8 @@
     "prelint": "cd samples; npm link ../; npm i",
     "postpack": "minifyProtoJson",
     "samples-test": "cd samples/ && npm link ../ && npm i && npm test",
-    "system-test": "c8 mocha build/system-test",
-    "test": "c8 mocha build/test"
+    "system-test": "c8 mocha --config ../../.mocharc.cjs --no-parallel build/system-test",
+    "test": "c8 mocha --config ../../.mocharc.cjs build/test"
   },
   "dependencies": {
     "google-gax": "^5.0.0"

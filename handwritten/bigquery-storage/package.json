@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/bigquery-storage",
-  "version": "5.1.1",
+  "version": "5.1.2",
   "description": "Client for the BigQuery Storage API",
   "repository": {
     "type": "git",

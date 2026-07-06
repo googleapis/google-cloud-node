@@ -709,6 +709,11 @@
                 "updateReferenceList"
               ]
             },
+            "VerifyReferenceList": {
+              "methods": [
+                "verifyReferenceList"
+              ]
+            },
             "ListReferenceLists": {
               "methods": [
                 "listReferenceLists",
@@ -736,11 +741,44 @@
                 "updateReferenceList"
               ]
             },
+            "VerifyReferenceList": {
+              "methods": [
+                "verifyReferenceList"
+              ]
+            },
             "ListReferenceLists": {
               "methods": [
                 "listReferenceLists",
                 "listReferenceListsStream",
                 "listReferenceListsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RuleExecutionErrorService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RuleExecutionErrorServiceClient",
+          "rpcs": {
+            "ListRuleExecutionErrors": {
+              "methods": [
+                "listRuleExecutionErrors",
+                "listRuleExecutionErrorsStream",
+                "listRuleExecutionErrorsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RuleExecutionErrorServiceClient",
+          "rpcs": {
+            "ListRuleExecutionErrors": {
+              "methods": [
+                "listRuleExecutionErrors",
+                "listRuleExecutionErrorsStream",
+                "listRuleExecutionErrorsAsync"
               ]
             }
           }
@@ -770,6 +808,11 @@
             "DeleteRule": {
               "methods": [
                 "deleteRule"
+              ]
+            },
+            "VerifyRuleText": {
+              "methods": [
+                "verifyRuleText"
               ]
             },
             "GetRetrohunt": {
@@ -843,6 +886,11 @@
             "DeleteRule": {
               "methods": [
                 "deleteRule"
+              ]
+            },
+            "VerifyRuleText": {
+              "methods": [
+                "verifyRuleText"
               ]
             },
             "GetRetrohunt": {

@@ -57,7 +57,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
-| storagetransfer | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storagetransfer/samples/generated/v1/snippet_metadata_google.storagetransfer.v1.json) |
 | create agent pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.create_agent_pool.js) |
 | create transfer job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.create_transfer_job.js) |
 | delete agent pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.delete_agent_pool.js) |

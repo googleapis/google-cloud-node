@@ -18,11 +18,16 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -49,7 +54,7 @@ export class QuotaAdjusterSettingsManagerClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('cloudquotas');
@@ -62,9 +67,9 @@ export class QuotaAdjusterSettingsManagerClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  quotaAdjusterSettingsManagerStub?: Promise<{[name: string]: Function}>;
+  innerApiCalls: { [name: string]: Function };
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  quotaAdjusterSettingsManagerStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of QuotaAdjusterSettingsManagerClient.
@@ -105,21 +110,43 @@ export class QuotaAdjusterSettingsManagerClient {
    *     const client = new QuotaAdjusterSettingsManagerClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof QuotaAdjusterSettingsManagerClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    const staticMembers = this
+      .constructor as typeof QuotaAdjusterSettingsManagerClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'cloudquotas.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -144,7 +171,7 @@ export class QuotaAdjusterSettingsManagerClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -158,10 +185,7 @@ export class QuotaAdjusterSettingsManagerClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -182,39 +206,51 @@ export class QuotaAdjusterSettingsManagerClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      folderLocationQuotaAdjusterSettingsPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/locations/{location}/quotaAdjusterSettings'
-      ),
-      folderLocationQuotaPreferencePathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/locations/{location}/quotaPreferences/{quota_preference}'
-      ),
-      folderLocationServiceQuotaInfoPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/locations/{location}/services/{service}/quotaInfos/{quota_info}'
-      ),
-      organizationLocationQuotaAdjusterSettingsPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/quotaAdjusterSettings'
-      ),
-      organizationLocationQuotaPreferencePathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/quotaPreferences/{quota_preference}'
-      ),
-      organizationLocationServiceQuotaInfoPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/services/{service}/quotaInfos/{quota_info}'
-      ),
-      projectLocationQuotaAdjusterSettingsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/quotaAdjusterSettings'
-      ),
-      projectLocationQuotaPreferencePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/quotaPreferences/{quota_preference}'
-      ),
-      projectLocationServiceQuotaInfoPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/services/{service}/quotaInfos/{quota_info}'
-      ),
+      folderLocationQuotaAdjusterSettingsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'folders/{folder}/locations/{location}/quotaAdjusterSettings',
+        ),
+      folderLocationQuotaPreferencePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'folders/{folder}/locations/{location}/quotaPreferences/{quota_preference}',
+        ),
+      folderLocationServiceQuotaInfoPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'folders/{folder}/locations/{location}/services/{service}/quotaInfos/{quota_info}',
+        ),
+      organizationLocationQuotaAdjusterSettingsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/quotaAdjusterSettings',
+        ),
+      organizationLocationQuotaPreferencePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/quotaPreferences/{quota_preference}',
+        ),
+      organizationLocationServiceQuotaInfoPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/services/{service}/quotaInfos/{quota_info}',
+        ),
+      projectLocationQuotaAdjusterSettingsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/quotaAdjusterSettings',
+        ),
+      projectLocationQuotaPreferencePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/quotaPreferences/{quota_preference}',
+        ),
+      projectLocationServiceQuotaInfoPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/services/{service}/quotaInfos/{quota_info}',
+        ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.api.cloudquotas.v1beta.QuotaAdjusterSettingsManager', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.api.cloudquotas.v1beta.QuotaAdjusterSettingsManager',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -245,36 +281,44 @@ export class QuotaAdjusterSettingsManagerClient {
     // Put together the "service stub" for
     // google.api.cloudquotas.v1beta.QuotaAdjusterSettingsManager.
     this.quotaAdjusterSettingsManagerStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.api.cloudquotas.v1beta.QuotaAdjusterSettingsManager') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.api.cloudquotas.v1beta.QuotaAdjusterSettingsManager,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.api.cloudquotas.v1beta.QuotaAdjusterSettingsManager',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.api.cloudquotas.v1beta
+            .QuotaAdjusterSettingsManager,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const quotaAdjusterSettingsManagerStubMethods =
-        ['updateQuotaAdjusterSettings', 'getQuotaAdjusterSettings'];
+    const quotaAdjusterSettingsManagerStubMethods = [
+      'updateQuotaAdjusterSettings',
+      'getQuotaAdjusterSettings',
+    ];
     for (const methodName of quotaAdjusterSettingsManagerStubMethods) {
       const callPromise = this.quotaAdjusterSettingsManagerStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        undefined;
+      const descriptor = undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -289,8 +333,14 @@ export class QuotaAdjusterSettingsManagerClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'cloudquotas.googleapis.com';
   }
@@ -301,8 +351,14 @@ export class QuotaAdjusterSettingsManagerClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'cloudquotas.googleapis.com';
   }
@@ -333,9 +389,7 @@ export class QuotaAdjusterSettingsManagerClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -344,8 +398,9 @@ export class QuotaAdjusterSettingsManagerClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -356,197 +411,296 @@ export class QuotaAdjusterSettingsManagerClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Updates the QuotaAdjusterSettings for the specified resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.api.cloudquotas.v1beta.QuotaAdjusterSettings} request.quotaAdjusterSettings
- *   Required. The QuotaAdjusterSettings to update.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. The list of fields to update.
- * @param {boolean} [request.validateOnly]
- *   Optional. If set to true, checks the syntax of the request but doesn't
- *   update the quota adjuster settings value. Note that although a request can
- *   be valid, that doesn't guarantee that the request will be fulfilled.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.api.cloudquotas.v1beta.QuotaAdjusterSettings|QuotaAdjusterSettings}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/quota_adjuster_settings_manager.update_quota_adjuster_settings.js</caption>
- * region_tag:cloudquotas_v1beta_generated_QuotaAdjusterSettingsManager_UpdateQuotaAdjusterSettings_async
- */
+  /**
+   * Updates the QuotaAdjusterSettings for the specified resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.api.cloudquotas.v1beta.QuotaAdjusterSettings} request.quotaAdjusterSettings
+   *   Required. The QuotaAdjusterSettings to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The list of fields to update.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set to true, checks the syntax of the request but doesn't
+   *   update the quota adjuster settings value. Note that although a request can
+   *   be valid, that doesn't guarantee that the request will be fulfilled.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.api.cloudquotas.v1beta.QuotaAdjusterSettings|QuotaAdjusterSettings}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/quota_adjuster_settings_manager.update_quota_adjuster_settings.js</caption>
+   * region_tag:cloudquotas_v1beta_generated_QuotaAdjusterSettingsManager_UpdateQuotaAdjusterSettings_async
+   */
   updateQuotaAdjusterSettings(
-      request?: protos.google.api.cloudquotas.v1beta.IUpdateQuotaAdjusterSettingsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.api.cloudquotas.v1beta.IQuotaAdjusterSettings,
-        protos.google.api.cloudquotas.v1beta.IUpdateQuotaAdjusterSettingsRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.api.cloudquotas.v1beta.IUpdateQuotaAdjusterSettingsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.api.cloudquotas.v1beta.IQuotaAdjusterSettings,
+      (
+        | protos.google.api.cloudquotas.v1beta.IUpdateQuotaAdjusterSettingsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   updateQuotaAdjusterSettings(
-      request: protos.google.api.cloudquotas.v1beta.IUpdateQuotaAdjusterSettingsRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.api.cloudquotas.v1beta.IQuotaAdjusterSettings,
-          protos.google.api.cloudquotas.v1beta.IUpdateQuotaAdjusterSettingsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.api.cloudquotas.v1beta.IUpdateQuotaAdjusterSettingsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.api.cloudquotas.v1beta.IQuotaAdjusterSettings,
+      | protos.google.api.cloudquotas.v1beta.IUpdateQuotaAdjusterSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateQuotaAdjusterSettings(
-      request: protos.google.api.cloudquotas.v1beta.IUpdateQuotaAdjusterSettingsRequest,
-      callback: Callback<
-          protos.google.api.cloudquotas.v1beta.IQuotaAdjusterSettings,
-          protos.google.api.cloudquotas.v1beta.IUpdateQuotaAdjusterSettingsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.api.cloudquotas.v1beta.IUpdateQuotaAdjusterSettingsRequest,
+    callback: Callback<
+      protos.google.api.cloudquotas.v1beta.IQuotaAdjusterSettings,
+      | protos.google.api.cloudquotas.v1beta.IUpdateQuotaAdjusterSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateQuotaAdjusterSettings(
-      request?: protos.google.api.cloudquotas.v1beta.IUpdateQuotaAdjusterSettingsRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.api.cloudquotas.v1beta.IUpdateQuotaAdjusterSettingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.api.cloudquotas.v1beta.IQuotaAdjusterSettings,
-          protos.google.api.cloudquotas.v1beta.IUpdateQuotaAdjusterSettingsRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.api.cloudquotas.v1beta.IQuotaAdjusterSettings,
-          protos.google.api.cloudquotas.v1beta.IUpdateQuotaAdjusterSettingsRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.api.cloudquotas.v1beta.IQuotaAdjusterSettings,
-        protos.google.api.cloudquotas.v1beta.IUpdateQuotaAdjusterSettingsRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.api.cloudquotas.v1beta.IUpdateQuotaAdjusterSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.api.cloudquotas.v1beta.IQuotaAdjusterSettings,
+      | protos.google.api.cloudquotas.v1beta.IUpdateQuotaAdjusterSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.api.cloudquotas.v1beta.IQuotaAdjusterSettings,
+      (
+        | protos.google.api.cloudquotas.v1beta.IUpdateQuotaAdjusterSettingsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'quota_adjuster_settings.name': request.quotaAdjusterSettings!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'quota_adjuster_settings.name':
+          request.quotaAdjusterSettings!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateQuotaAdjusterSettings request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.api.cloudquotas.v1beta.IQuotaAdjusterSettings,
-        protos.google.api.cloudquotas.v1beta.IUpdateQuotaAdjusterSettingsRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.cloudquotas.v1beta.IQuotaAdjusterSettings,
+          | protos.google.api.cloudquotas.v1beta.IUpdateQuotaAdjusterSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateQuotaAdjusterSettings response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateQuotaAdjusterSettings(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.api.cloudquotas.v1beta.IQuotaAdjusterSettings,
-        protos.google.api.cloudquotas.v1beta.IUpdateQuotaAdjusterSettingsRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateQuotaAdjusterSettings response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateQuotaAdjusterSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.cloudquotas.v1beta.IQuotaAdjusterSettings,
+          (
+            | protos.google.api.cloudquotas.v1beta.IUpdateQuotaAdjusterSettingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateQuotaAdjusterSettings response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets the QuotaAdjusterSettings for the specified resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the `quotaAdjusterSettings` configuration. Only a single
- *   setting per project is supported.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.api.cloudquotas.v1beta.QuotaAdjusterSettings|QuotaAdjusterSettings}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/quota_adjuster_settings_manager.get_quota_adjuster_settings.js</caption>
- * region_tag:cloudquotas_v1beta_generated_QuotaAdjusterSettingsManager_GetQuotaAdjusterSettings_async
- */
+  /**
+   * Gets the QuotaAdjusterSettings for the specified resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the `quotaAdjusterSettings` configuration. Only a single
+   *   setting per project is supported.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.api.cloudquotas.v1beta.QuotaAdjusterSettings|QuotaAdjusterSettings}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/quota_adjuster_settings_manager.get_quota_adjuster_settings.js</caption>
+   * region_tag:cloudquotas_v1beta_generated_QuotaAdjusterSettingsManager_GetQuotaAdjusterSettings_async
+   */
   getQuotaAdjusterSettings(
-      request?: protos.google.api.cloudquotas.v1beta.IGetQuotaAdjusterSettingsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.api.cloudquotas.v1beta.IQuotaAdjusterSettings,
-        protos.google.api.cloudquotas.v1beta.IGetQuotaAdjusterSettingsRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.api.cloudquotas.v1beta.IGetQuotaAdjusterSettingsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.api.cloudquotas.v1beta.IQuotaAdjusterSettings,
+      (
+        | protos.google.api.cloudquotas.v1beta.IGetQuotaAdjusterSettingsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getQuotaAdjusterSettings(
-      request: protos.google.api.cloudquotas.v1beta.IGetQuotaAdjusterSettingsRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.api.cloudquotas.v1beta.IQuotaAdjusterSettings,
-          protos.google.api.cloudquotas.v1beta.IGetQuotaAdjusterSettingsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.api.cloudquotas.v1beta.IGetQuotaAdjusterSettingsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.api.cloudquotas.v1beta.IQuotaAdjusterSettings,
+      | protos.google.api.cloudquotas.v1beta.IGetQuotaAdjusterSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getQuotaAdjusterSettings(
-      request: protos.google.api.cloudquotas.v1beta.IGetQuotaAdjusterSettingsRequest,
-      callback: Callback<
-          protos.google.api.cloudquotas.v1beta.IQuotaAdjusterSettings,
-          protos.google.api.cloudquotas.v1beta.IGetQuotaAdjusterSettingsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.api.cloudquotas.v1beta.IGetQuotaAdjusterSettingsRequest,
+    callback: Callback<
+      protos.google.api.cloudquotas.v1beta.IQuotaAdjusterSettings,
+      | protos.google.api.cloudquotas.v1beta.IGetQuotaAdjusterSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getQuotaAdjusterSettings(
-      request?: protos.google.api.cloudquotas.v1beta.IGetQuotaAdjusterSettingsRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.api.cloudquotas.v1beta.IGetQuotaAdjusterSettingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.api.cloudquotas.v1beta.IQuotaAdjusterSettings,
-          protos.google.api.cloudquotas.v1beta.IGetQuotaAdjusterSettingsRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.api.cloudquotas.v1beta.IQuotaAdjusterSettings,
-          protos.google.api.cloudquotas.v1beta.IGetQuotaAdjusterSettingsRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.api.cloudquotas.v1beta.IQuotaAdjusterSettings,
-        protos.google.api.cloudquotas.v1beta.IGetQuotaAdjusterSettingsRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.api.cloudquotas.v1beta.IGetQuotaAdjusterSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.api.cloudquotas.v1beta.IQuotaAdjusterSettings,
+      | protos.google.api.cloudquotas.v1beta.IGetQuotaAdjusterSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.api.cloudquotas.v1beta.IQuotaAdjusterSettings,
+      (
+        | protos.google.api.cloudquotas.v1beta.IGetQuotaAdjusterSettingsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getQuotaAdjusterSettings request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.api.cloudquotas.v1beta.IQuotaAdjusterSettings,
-        protos.google.api.cloudquotas.v1beta.IGetQuotaAdjusterSettingsRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.cloudquotas.v1beta.IQuotaAdjusterSettings,
+          | protos.google.api.cloudquotas.v1beta.IGetQuotaAdjusterSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getQuotaAdjusterSettings response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getQuotaAdjusterSettings(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.api.cloudquotas.v1beta.IQuotaAdjusterSettings,
-        protos.google.api.cloudquotas.v1beta.IGetQuotaAdjusterSettingsRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getQuotaAdjusterSettings response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getQuotaAdjusterSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.cloudquotas.v1beta.IQuotaAdjusterSettings,
+          (
+            | protos.google.api.cloudquotas.v1beta.IGetQuotaAdjusterSettingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getQuotaAdjusterSettings response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
@@ -563,11 +717,13 @@ export class QuotaAdjusterSettingsManagerClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  folderLocationQuotaAdjusterSettingsPath(folder:string,location:string) {
-    return this.pathTemplates.folderLocationQuotaAdjusterSettingsPathTemplate.render({
-      folder: folder,
-      location: location,
-    });
+  folderLocationQuotaAdjusterSettingsPath(folder: string, location: string) {
+    return this.pathTemplates.folderLocationQuotaAdjusterSettingsPathTemplate.render(
+      {
+        folder: folder,
+        location: location,
+      },
+    );
   }
 
   /**
@@ -577,8 +733,12 @@ export class QuotaAdjusterSettingsManagerClient {
    *   A fully-qualified path representing folder_location_quotaAdjusterSettings resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderLocationQuotaAdjusterSettingsName(folderLocationQuotaAdjusterSettingsName: string) {
-    return this.pathTemplates.folderLocationQuotaAdjusterSettingsPathTemplate.match(folderLocationQuotaAdjusterSettingsName).folder;
+  matchFolderFromFolderLocationQuotaAdjusterSettingsName(
+    folderLocationQuotaAdjusterSettingsName: string,
+  ) {
+    return this.pathTemplates.folderLocationQuotaAdjusterSettingsPathTemplate.match(
+      folderLocationQuotaAdjusterSettingsName,
+    ).folder;
   }
 
   /**
@@ -588,8 +748,12 @@ export class QuotaAdjusterSettingsManagerClient {
    *   A fully-qualified path representing folder_location_quotaAdjusterSettings resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromFolderLocationQuotaAdjusterSettingsName(folderLocationQuotaAdjusterSettingsName: string) {
-    return this.pathTemplates.folderLocationQuotaAdjusterSettingsPathTemplate.match(folderLocationQuotaAdjusterSettingsName).location;
+  matchLocationFromFolderLocationQuotaAdjusterSettingsName(
+    folderLocationQuotaAdjusterSettingsName: string,
+  ) {
+    return this.pathTemplates.folderLocationQuotaAdjusterSettingsPathTemplate.match(
+      folderLocationQuotaAdjusterSettingsName,
+    ).location;
   }
 
   /**
@@ -600,7 +764,11 @@ export class QuotaAdjusterSettingsManagerClient {
    * @param {string} quota_preference
    * @returns {string} Resource name string.
    */
-  folderLocationQuotaPreferencePath(folder:string,location:string,quotaPreference:string) {
+  folderLocationQuotaPreferencePath(
+    folder: string,
+    location: string,
+    quotaPreference: string,
+  ) {
     return this.pathTemplates.folderLocationQuotaPreferencePathTemplate.render({
       folder: folder,
       location: location,
@@ -615,8 +783,12 @@ export class QuotaAdjusterSettingsManagerClient {
    *   A fully-qualified path representing folder_location_quota_preference resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderLocationQuotaPreferenceName(folderLocationQuotaPreferenceName: string) {
-    return this.pathTemplates.folderLocationQuotaPreferencePathTemplate.match(folderLocationQuotaPreferenceName).folder;
+  matchFolderFromFolderLocationQuotaPreferenceName(
+    folderLocationQuotaPreferenceName: string,
+  ) {
+    return this.pathTemplates.folderLocationQuotaPreferencePathTemplate.match(
+      folderLocationQuotaPreferenceName,
+    ).folder;
   }
 
   /**
@@ -626,8 +798,12 @@ export class QuotaAdjusterSettingsManagerClient {
    *   A fully-qualified path representing folder_location_quota_preference resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromFolderLocationQuotaPreferenceName(folderLocationQuotaPreferenceName: string) {
-    return this.pathTemplates.folderLocationQuotaPreferencePathTemplate.match(folderLocationQuotaPreferenceName).location;
+  matchLocationFromFolderLocationQuotaPreferenceName(
+    folderLocationQuotaPreferenceName: string,
+  ) {
+    return this.pathTemplates.folderLocationQuotaPreferencePathTemplate.match(
+      folderLocationQuotaPreferenceName,
+    ).location;
   }
 
   /**
@@ -637,8 +813,12 @@ export class QuotaAdjusterSettingsManagerClient {
    *   A fully-qualified path representing folder_location_quota_preference resource.
    * @returns {string} A string representing the quota_preference.
    */
-  matchQuotaPreferenceFromFolderLocationQuotaPreferenceName(folderLocationQuotaPreferenceName: string) {
-    return this.pathTemplates.folderLocationQuotaPreferencePathTemplate.match(folderLocationQuotaPreferenceName).quota_preference;
+  matchQuotaPreferenceFromFolderLocationQuotaPreferenceName(
+    folderLocationQuotaPreferenceName: string,
+  ) {
+    return this.pathTemplates.folderLocationQuotaPreferencePathTemplate.match(
+      folderLocationQuotaPreferenceName,
+    ).quota_preference;
   }
 
   /**
@@ -650,13 +830,20 @@ export class QuotaAdjusterSettingsManagerClient {
    * @param {string} quota_info
    * @returns {string} Resource name string.
    */
-  folderLocationServiceQuotaInfoPath(folder:string,location:string,service:string,quotaInfo:string) {
-    return this.pathTemplates.folderLocationServiceQuotaInfoPathTemplate.render({
-      folder: folder,
-      location: location,
-      service: service,
-      quota_info: quotaInfo,
-    });
+  folderLocationServiceQuotaInfoPath(
+    folder: string,
+    location: string,
+    service: string,
+    quotaInfo: string,
+  ) {
+    return this.pathTemplates.folderLocationServiceQuotaInfoPathTemplate.render(
+      {
+        folder: folder,
+        location: location,
+        service: service,
+        quota_info: quotaInfo,
+      },
+    );
   }
 
   /**
@@ -666,8 +853,12 @@ export class QuotaAdjusterSettingsManagerClient {
    *   A fully-qualified path representing folder_location_service_quota_info resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderLocationServiceQuotaInfoName(folderLocationServiceQuotaInfoName: string) {
-    return this.pathTemplates.folderLocationServiceQuotaInfoPathTemplate.match(folderLocationServiceQuotaInfoName).folder;
+  matchFolderFromFolderLocationServiceQuotaInfoName(
+    folderLocationServiceQuotaInfoName: string,
+  ) {
+    return this.pathTemplates.folderLocationServiceQuotaInfoPathTemplate.match(
+      folderLocationServiceQuotaInfoName,
+    ).folder;
   }
 
   /**
@@ -677,8 +868,12 @@ export class QuotaAdjusterSettingsManagerClient {
    *   A fully-qualified path representing folder_location_service_quota_info resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromFolderLocationServiceQuotaInfoName(folderLocationServiceQuotaInfoName: string) {
-    return this.pathTemplates.folderLocationServiceQuotaInfoPathTemplate.match(folderLocationServiceQuotaInfoName).location;
+  matchLocationFromFolderLocationServiceQuotaInfoName(
+    folderLocationServiceQuotaInfoName: string,
+  ) {
+    return this.pathTemplates.folderLocationServiceQuotaInfoPathTemplate.match(
+      folderLocationServiceQuotaInfoName,
+    ).location;
   }
 
   /**
@@ -688,8 +883,12 @@ export class QuotaAdjusterSettingsManagerClient {
    *   A fully-qualified path representing folder_location_service_quota_info resource.
    * @returns {string} A string representing the service.
    */
-  matchServiceFromFolderLocationServiceQuotaInfoName(folderLocationServiceQuotaInfoName: string) {
-    return this.pathTemplates.folderLocationServiceQuotaInfoPathTemplate.match(folderLocationServiceQuotaInfoName).service;
+  matchServiceFromFolderLocationServiceQuotaInfoName(
+    folderLocationServiceQuotaInfoName: string,
+  ) {
+    return this.pathTemplates.folderLocationServiceQuotaInfoPathTemplate.match(
+      folderLocationServiceQuotaInfoName,
+    ).service;
   }
 
   /**
@@ -699,8 +898,12 @@ export class QuotaAdjusterSettingsManagerClient {
    *   A fully-qualified path representing folder_location_service_quota_info resource.
    * @returns {string} A string representing the quota_info.
    */
-  matchQuotaInfoFromFolderLocationServiceQuotaInfoName(folderLocationServiceQuotaInfoName: string) {
-    return this.pathTemplates.folderLocationServiceQuotaInfoPathTemplate.match(folderLocationServiceQuotaInfoName).quota_info;
+  matchQuotaInfoFromFolderLocationServiceQuotaInfoName(
+    folderLocationServiceQuotaInfoName: string,
+  ) {
+    return this.pathTemplates.folderLocationServiceQuotaInfoPathTemplate.match(
+      folderLocationServiceQuotaInfoName,
+    ).quota_info;
   }
 
   /**
@@ -710,11 +913,16 @@ export class QuotaAdjusterSettingsManagerClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  organizationLocationQuotaAdjusterSettingsPath(organization:string,location:string) {
-    return this.pathTemplates.organizationLocationQuotaAdjusterSettingsPathTemplate.render({
-      organization: organization,
-      location: location,
-    });
+  organizationLocationQuotaAdjusterSettingsPath(
+    organization: string,
+    location: string,
+  ) {
+    return this.pathTemplates.organizationLocationQuotaAdjusterSettingsPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+      },
+    );
   }
 
   /**
@@ -724,8 +932,12 @@ export class QuotaAdjusterSettingsManagerClient {
    *   A fully-qualified path representing organization_location_quotaAdjusterSettings resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationQuotaAdjusterSettingsName(organizationLocationQuotaAdjusterSettingsName: string) {
-    return this.pathTemplates.organizationLocationQuotaAdjusterSettingsPathTemplate.match(organizationLocationQuotaAdjusterSettingsName).organization;
+  matchOrganizationFromOrganizationLocationQuotaAdjusterSettingsName(
+    organizationLocationQuotaAdjusterSettingsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationQuotaAdjusterSettingsPathTemplate.match(
+      organizationLocationQuotaAdjusterSettingsName,
+    ).organization;
   }
 
   /**
@@ -735,8 +947,12 @@ export class QuotaAdjusterSettingsManagerClient {
    *   A fully-qualified path representing organization_location_quotaAdjusterSettings resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationQuotaAdjusterSettingsName(organizationLocationQuotaAdjusterSettingsName: string) {
-    return this.pathTemplates.organizationLocationQuotaAdjusterSettingsPathTemplate.match(organizationLocationQuotaAdjusterSettingsName).location;
+  matchLocationFromOrganizationLocationQuotaAdjusterSettingsName(
+    organizationLocationQuotaAdjusterSettingsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationQuotaAdjusterSettingsPathTemplate.match(
+      organizationLocationQuotaAdjusterSettingsName,
+    ).location;
   }
 
   /**
@@ -747,12 +963,18 @@ export class QuotaAdjusterSettingsManagerClient {
    * @param {string} quota_preference
    * @returns {string} Resource name string.
    */
-  organizationLocationQuotaPreferencePath(organization:string,location:string,quotaPreference:string) {
-    return this.pathTemplates.organizationLocationQuotaPreferencePathTemplate.render({
-      organization: organization,
-      location: location,
-      quota_preference: quotaPreference,
-    });
+  organizationLocationQuotaPreferencePath(
+    organization: string,
+    location: string,
+    quotaPreference: string,
+  ) {
+    return this.pathTemplates.organizationLocationQuotaPreferencePathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        quota_preference: quotaPreference,
+      },
+    );
   }
 
   /**
@@ -762,8 +984,12 @@ export class QuotaAdjusterSettingsManagerClient {
    *   A fully-qualified path representing organization_location_quota_preference resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationQuotaPreferenceName(organizationLocationQuotaPreferenceName: string) {
-    return this.pathTemplates.organizationLocationQuotaPreferencePathTemplate.match(organizationLocationQuotaPreferenceName).organization;
+  matchOrganizationFromOrganizationLocationQuotaPreferenceName(
+    organizationLocationQuotaPreferenceName: string,
+  ) {
+    return this.pathTemplates.organizationLocationQuotaPreferencePathTemplate.match(
+      organizationLocationQuotaPreferenceName,
+    ).organization;
   }
 
   /**
@@ -773,8 +999,12 @@ export class QuotaAdjusterSettingsManagerClient {
    *   A fully-qualified path representing organization_location_quota_preference resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationQuotaPreferenceName(organizationLocationQuotaPreferenceName: string) {
-    return this.pathTemplates.organizationLocationQuotaPreferencePathTemplate.match(organizationLocationQuotaPreferenceName).location;
+  matchLocationFromOrganizationLocationQuotaPreferenceName(
+    organizationLocationQuotaPreferenceName: string,
+  ) {
+    return this.pathTemplates.organizationLocationQuotaPreferencePathTemplate.match(
+      organizationLocationQuotaPreferenceName,
+    ).location;
   }
 
   /**
@@ -784,8 +1014,12 @@ export class QuotaAdjusterSettingsManagerClient {
    *   A fully-qualified path representing organization_location_quota_preference resource.
    * @returns {string} A string representing the quota_preference.
    */
-  matchQuotaPreferenceFromOrganizationLocationQuotaPreferenceName(organizationLocationQuotaPreferenceName: string) {
-    return this.pathTemplates.organizationLocationQuotaPreferencePathTemplate.match(organizationLocationQuotaPreferenceName).quota_preference;
+  matchQuotaPreferenceFromOrganizationLocationQuotaPreferenceName(
+    organizationLocationQuotaPreferenceName: string,
+  ) {
+    return this.pathTemplates.organizationLocationQuotaPreferencePathTemplate.match(
+      organizationLocationQuotaPreferenceName,
+    ).quota_preference;
   }
 
   /**
@@ -797,13 +1031,20 @@ export class QuotaAdjusterSettingsManagerClient {
    * @param {string} quota_info
    * @returns {string} Resource name string.
    */
-  organizationLocationServiceQuotaInfoPath(organization:string,location:string,service:string,quotaInfo:string) {
-    return this.pathTemplates.organizationLocationServiceQuotaInfoPathTemplate.render({
-      organization: organization,
-      location: location,
-      service: service,
-      quota_info: quotaInfo,
-    });
+  organizationLocationServiceQuotaInfoPath(
+    organization: string,
+    location: string,
+    service: string,
+    quotaInfo: string,
+  ) {
+    return this.pathTemplates.organizationLocationServiceQuotaInfoPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        service: service,
+        quota_info: quotaInfo,
+      },
+    );
   }
 
   /**
@@ -813,8 +1054,12 @@ export class QuotaAdjusterSettingsManagerClient {
    *   A fully-qualified path representing organization_location_service_quota_info resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationServiceQuotaInfoName(organizationLocationServiceQuotaInfoName: string) {
-    return this.pathTemplates.organizationLocationServiceQuotaInfoPathTemplate.match(organizationLocationServiceQuotaInfoName).organization;
+  matchOrganizationFromOrganizationLocationServiceQuotaInfoName(
+    organizationLocationServiceQuotaInfoName: string,
+  ) {
+    return this.pathTemplates.organizationLocationServiceQuotaInfoPathTemplate.match(
+      organizationLocationServiceQuotaInfoName,
+    ).organization;
   }
 
   /**
@@ -824,8 +1069,12 @@ export class QuotaAdjusterSettingsManagerClient {
    *   A fully-qualified path representing organization_location_service_quota_info resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationServiceQuotaInfoName(organizationLocationServiceQuotaInfoName: string) {
-    return this.pathTemplates.organizationLocationServiceQuotaInfoPathTemplate.match(organizationLocationServiceQuotaInfoName).location;
+  matchLocationFromOrganizationLocationServiceQuotaInfoName(
+    organizationLocationServiceQuotaInfoName: string,
+  ) {
+    return this.pathTemplates.organizationLocationServiceQuotaInfoPathTemplate.match(
+      organizationLocationServiceQuotaInfoName,
+    ).location;
   }
 
   /**
@@ -835,8 +1084,12 @@ export class QuotaAdjusterSettingsManagerClient {
    *   A fully-qualified path representing organization_location_service_quota_info resource.
    * @returns {string} A string representing the service.
    */
-  matchServiceFromOrganizationLocationServiceQuotaInfoName(organizationLocationServiceQuotaInfoName: string) {
-    return this.pathTemplates.organizationLocationServiceQuotaInfoPathTemplate.match(organizationLocationServiceQuotaInfoName).service;
+  matchServiceFromOrganizationLocationServiceQuotaInfoName(
+    organizationLocationServiceQuotaInfoName: string,
+  ) {
+    return this.pathTemplates.organizationLocationServiceQuotaInfoPathTemplate.match(
+      organizationLocationServiceQuotaInfoName,
+    ).service;
   }
 
   /**
@@ -846,8 +1099,12 @@ export class QuotaAdjusterSettingsManagerClient {
    *   A fully-qualified path representing organization_location_service_quota_info resource.
    * @returns {string} A string representing the quota_info.
    */
-  matchQuotaInfoFromOrganizationLocationServiceQuotaInfoName(organizationLocationServiceQuotaInfoName: string) {
-    return this.pathTemplates.organizationLocationServiceQuotaInfoPathTemplate.match(organizationLocationServiceQuotaInfoName).quota_info;
+  matchQuotaInfoFromOrganizationLocationServiceQuotaInfoName(
+    organizationLocationServiceQuotaInfoName: string,
+  ) {
+    return this.pathTemplates.organizationLocationServiceQuotaInfoPathTemplate.match(
+      organizationLocationServiceQuotaInfoName,
+    ).quota_info;
   }
 
   /**
@@ -857,11 +1114,13 @@ export class QuotaAdjusterSettingsManagerClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  projectLocationQuotaAdjusterSettingsPath(project:string,location:string) {
-    return this.pathTemplates.projectLocationQuotaAdjusterSettingsPathTemplate.render({
-      project: project,
-      location: location,
-    });
+  projectLocationQuotaAdjusterSettingsPath(project: string, location: string) {
+    return this.pathTemplates.projectLocationQuotaAdjusterSettingsPathTemplate.render(
+      {
+        project: project,
+        location: location,
+      },
+    );
   }
 
   /**
@@ -871,8 +1130,12 @@ export class QuotaAdjusterSettingsManagerClient {
    *   A fully-qualified path representing project_location_quotaAdjusterSettings resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationQuotaAdjusterSettingsName(projectLocationQuotaAdjusterSettingsName: string) {
-    return this.pathTemplates.projectLocationQuotaAdjusterSettingsPathTemplate.match(projectLocationQuotaAdjusterSettingsName).project;
+  matchProjectFromProjectLocationQuotaAdjusterSettingsName(
+    projectLocationQuotaAdjusterSettingsName: string,
+  ) {
+    return this.pathTemplates.projectLocationQuotaAdjusterSettingsPathTemplate.match(
+      projectLocationQuotaAdjusterSettingsName,
+    ).project;
   }
 
   /**
@@ -882,8 +1145,12 @@ export class QuotaAdjusterSettingsManagerClient {
    *   A fully-qualified path representing project_location_quotaAdjusterSettings resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationQuotaAdjusterSettingsName(projectLocationQuotaAdjusterSettingsName: string) {
-    return this.pathTemplates.projectLocationQuotaAdjusterSettingsPathTemplate.match(projectLocationQuotaAdjusterSettingsName).location;
+  matchLocationFromProjectLocationQuotaAdjusterSettingsName(
+    projectLocationQuotaAdjusterSettingsName: string,
+  ) {
+    return this.pathTemplates.projectLocationQuotaAdjusterSettingsPathTemplate.match(
+      projectLocationQuotaAdjusterSettingsName,
+    ).location;
   }
 
   /**
@@ -894,12 +1161,18 @@ export class QuotaAdjusterSettingsManagerClient {
    * @param {string} quota_preference
    * @returns {string} Resource name string.
    */
-  projectLocationQuotaPreferencePath(project:string,location:string,quotaPreference:string) {
-    return this.pathTemplates.projectLocationQuotaPreferencePathTemplate.render({
-      project: project,
-      location: location,
-      quota_preference: quotaPreference,
-    });
+  projectLocationQuotaPreferencePath(
+    project: string,
+    location: string,
+    quotaPreference: string,
+  ) {
+    return this.pathTemplates.projectLocationQuotaPreferencePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        quota_preference: quotaPreference,
+      },
+    );
   }
 
   /**
@@ -909,8 +1182,12 @@ export class QuotaAdjusterSettingsManagerClient {
    *   A fully-qualified path representing project_location_quota_preference resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationQuotaPreferenceName(projectLocationQuotaPreferenceName: string) {
-    return this.pathTemplates.projectLocationQuotaPreferencePathTemplate.match(projectLocationQuotaPreferenceName).project;
+  matchProjectFromProjectLocationQuotaPreferenceName(
+    projectLocationQuotaPreferenceName: string,
+  ) {
+    return this.pathTemplates.projectLocationQuotaPreferencePathTemplate.match(
+      projectLocationQuotaPreferenceName,
+    ).project;
   }
 
   /**
@@ -920,8 +1197,12 @@ export class QuotaAdjusterSettingsManagerClient {
    *   A fully-qualified path representing project_location_quota_preference resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationQuotaPreferenceName(projectLocationQuotaPreferenceName: string) {
-    return this.pathTemplates.projectLocationQuotaPreferencePathTemplate.match(projectLocationQuotaPreferenceName).location;
+  matchLocationFromProjectLocationQuotaPreferenceName(
+    projectLocationQuotaPreferenceName: string,
+  ) {
+    return this.pathTemplates.projectLocationQuotaPreferencePathTemplate.match(
+      projectLocationQuotaPreferenceName,
+    ).location;
   }
 
   /**
@@ -931,8 +1212,12 @@ export class QuotaAdjusterSettingsManagerClient {
    *   A fully-qualified path representing project_location_quota_preference resource.
    * @returns {string} A string representing the quota_preference.
    */
-  matchQuotaPreferenceFromProjectLocationQuotaPreferenceName(projectLocationQuotaPreferenceName: string) {
-    return this.pathTemplates.projectLocationQuotaPreferencePathTemplate.match(projectLocationQuotaPreferenceName).quota_preference;
+  matchQuotaPreferenceFromProjectLocationQuotaPreferenceName(
+    projectLocationQuotaPreferenceName: string,
+  ) {
+    return this.pathTemplates.projectLocationQuotaPreferencePathTemplate.match(
+      projectLocationQuotaPreferenceName,
+    ).quota_preference;
   }
 
   /**
@@ -944,13 +1229,20 @@ export class QuotaAdjusterSettingsManagerClient {
    * @param {string} quota_info
    * @returns {string} Resource name string.
    */
-  projectLocationServiceQuotaInfoPath(project:string,location:string,service:string,quotaInfo:string) {
-    return this.pathTemplates.projectLocationServiceQuotaInfoPathTemplate.render({
-      project: project,
-      location: location,
-      service: service,
-      quota_info: quotaInfo,
-    });
+  projectLocationServiceQuotaInfoPath(
+    project: string,
+    location: string,
+    service: string,
+    quotaInfo: string,
+  ) {
+    return this.pathTemplates.projectLocationServiceQuotaInfoPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        service: service,
+        quota_info: quotaInfo,
+      },
+    );
   }
 
   /**
@@ -960,8 +1252,12 @@ export class QuotaAdjusterSettingsManagerClient {
    *   A fully-qualified path representing project_location_service_quota_info resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationServiceQuotaInfoName(projectLocationServiceQuotaInfoName: string) {
-    return this.pathTemplates.projectLocationServiceQuotaInfoPathTemplate.match(projectLocationServiceQuotaInfoName).project;
+  matchProjectFromProjectLocationServiceQuotaInfoName(
+    projectLocationServiceQuotaInfoName: string,
+  ) {
+    return this.pathTemplates.projectLocationServiceQuotaInfoPathTemplate.match(
+      projectLocationServiceQuotaInfoName,
+    ).project;
   }
 
   /**
@@ -971,8 +1267,12 @@ export class QuotaAdjusterSettingsManagerClient {
    *   A fully-qualified path representing project_location_service_quota_info resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationServiceQuotaInfoName(projectLocationServiceQuotaInfoName: string) {
-    return this.pathTemplates.projectLocationServiceQuotaInfoPathTemplate.match(projectLocationServiceQuotaInfoName).location;
+  matchLocationFromProjectLocationServiceQuotaInfoName(
+    projectLocationServiceQuotaInfoName: string,
+  ) {
+    return this.pathTemplates.projectLocationServiceQuotaInfoPathTemplate.match(
+      projectLocationServiceQuotaInfoName,
+    ).location;
   }
 
   /**
@@ -982,8 +1282,12 @@ export class QuotaAdjusterSettingsManagerClient {
    *   A fully-qualified path representing project_location_service_quota_info resource.
    * @returns {string} A string representing the service.
    */
-  matchServiceFromProjectLocationServiceQuotaInfoName(projectLocationServiceQuotaInfoName: string) {
-    return this.pathTemplates.projectLocationServiceQuotaInfoPathTemplate.match(projectLocationServiceQuotaInfoName).service;
+  matchServiceFromProjectLocationServiceQuotaInfoName(
+    projectLocationServiceQuotaInfoName: string,
+  ) {
+    return this.pathTemplates.projectLocationServiceQuotaInfoPathTemplate.match(
+      projectLocationServiceQuotaInfoName,
+    ).service;
   }
 
   /**
@@ -993,8 +1297,12 @@ export class QuotaAdjusterSettingsManagerClient {
    *   A fully-qualified path representing project_location_service_quota_info resource.
    * @returns {string} A string representing the quota_info.
    */
-  matchQuotaInfoFromProjectLocationServiceQuotaInfoName(projectLocationServiceQuotaInfoName: string) {
-    return this.pathTemplates.projectLocationServiceQuotaInfoPathTemplate.match(projectLocationServiceQuotaInfoName).quota_info;
+  matchQuotaInfoFromProjectLocationServiceQuotaInfoName(
+    projectLocationServiceQuotaInfoName: string,
+  ) {
+    return this.pathTemplates.projectLocationServiceQuotaInfoPathTemplate.match(
+      projectLocationServiceQuotaInfoName,
+    ).quota_info;
   }
 
   /**
@@ -1005,7 +1313,7 @@ export class QuotaAdjusterSettingsManagerClient {
    */
   close(): Promise<void> {
     if (this.quotaAdjusterSettingsManagerStub && !this._terminated) {
-      return this.quotaAdjusterSettingsManagerStub.then(stub => {
+      return this.quotaAdjusterSettingsManagerStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {WebSecurityScannerClient} from './web_security_scanner_client';
+export { WebSecurityScannerClient } from './web_security_scanner_client';

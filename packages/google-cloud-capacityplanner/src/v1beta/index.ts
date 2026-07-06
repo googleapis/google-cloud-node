@@ -16,5 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {CapacityPlanningServiceClient} from './capacity_planning_service_client';
-export {UsageServiceClient} from './usage_service_client';
+export { UsageServiceClient } from './usage_service_client';

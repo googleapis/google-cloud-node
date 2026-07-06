@@ -52,9 +52,9 @@ function main(parent, messages) {
    */
   // const clientManagedResourceContext = {}
   /**
-   *  Optional. The Google Cloud project to be used for quota and billing.
+   *  Optional. Looker specific settings.
    */
-  // const project = 'abc123'
+  // const lookerSettings = {}
   /**
    *  Required. The parent value for chat request.
    *  Pattern: `projects/{project}/locations/{location}`
@@ -65,10 +65,25 @@ function main(parent, messages) {
    */
   // const messages = [1,2,3,4]
   /**
+   *  Optional. The credentials to use when calling the data source(s) specified
+   *  in the context.
+   *  This field can be used to provide credentials for various data sources.
+   *  For example, when connecting to Looker, it currently supports both OAuth
+   *  token and API key-based credentials, as described in
+   *  Authentication with an
+   *  SDK (https://cloud.google.com/looker/docs/api-auth#authentication_with_an_sdk).
+   */
+  // const credentials = {}
+  /**
    *  Optional. The thinking mode to use for the agent loop.
    *  Defaults to THINKING_MODE_UNSPECIFIED if not specified.
    */
   // const thinkingMode = {}
+  /**
+   *  Optional. The model to use for the agent loop when processing the request.
+   *  This setting only has an effect when context.options.model is not set.
+   */
+  // const model = {}
 
   // Imports the Geminidataanalytics library
   const {DataChatServiceClient} = require('@google-cloud/geminidataanalytics').v1beta;

@@ -78,7 +78,7 @@
                     function Viewport(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -153,9 +153,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Viewport.decode = function decode(reader, length, error) {
+                    Viewport.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.geo.type.Viewport();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -163,15 +167,15 @@
                                 break;
                             switch (tag >>> 3) {
                             case 1: {
-                                    message.low = $root.google.type.LatLng.decode(reader, reader.uint32());
+                                    message.low = $root.google.type.LatLng.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 2: {
-                                    message.high = $root.google.type.LatLng.decode(reader, reader.uint32());
+                                    message.high = $root.google.type.LatLng.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -202,16 +206,20 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    Viewport.verify = function verify(message) {
+                    Viewport.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.low != null && message.hasOwnProperty("low")) {
-                            var error = $root.google.type.LatLng.verify(message.low);
+                            var error = $root.google.type.LatLng.verify(message.low, long + 1);
                             if (error)
                                 return "low." + error;
                         }
                         if (message.high != null && message.hasOwnProperty("high")) {
-                            var error = $root.google.type.LatLng.verify(message.high);
+                            var error = $root.google.type.LatLng.verify(message.high, long + 1);
                             if (error)
                                 return "high." + error;
                         }
@@ -226,19 +234,23 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.geo.type.Viewport} Viewport
                      */
-                    Viewport.fromObject = function fromObject(object) {
+                    Viewport.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.geo.type.Viewport)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.geo.type.Viewport();
                         if (object.low != null) {
                             if (typeof object.low !== "object")
                                 throw TypeError(".google.geo.type.Viewport.low: object expected");
-                            message.low = $root.google.type.LatLng.fromObject(object.low);
+                            message.low = $root.google.type.LatLng.fromObject(object.low, long + 1);
                         }
                         if (object.high != null) {
                             if (typeof object.high !== "object")
                                 throw TypeError(".google.geo.type.Viewport.high: object expected");
-                            message.high = $root.google.type.LatLng.fromObject(object.high);
+                            message.high = $root.google.type.LatLng.fromObject(object.high, long + 1);
                         }
                         return message;
                     };
@@ -332,7 +344,7 @@
                 function LatLng(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -407,9 +419,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                LatLng.decode = function decode(reader, length, error) {
+                LatLng.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.LatLng();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -425,7 +441,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -456,9 +472,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                LatLng.verify = function verify(message) {
+                LatLng.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.latitude != null && message.hasOwnProperty("latitude"))
                         if (typeof message.latitude !== "number")
                             return "latitude: number expected";
@@ -476,9 +496,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.type.LatLng} LatLng
                  */
-                LatLng.fromObject = function fromObject(object) {
+                LatLng.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.type.LatLng)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.type.LatLng();
                     if (object.latitude != null)
                         message.latitude = Number(object.latitude);
@@ -561,7 +585,7 @@
                 function LocalizedText(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -636,9 +660,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                LocalizedText.decode = function decode(reader, length, error) {
+                LocalizedText.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.LocalizedText();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -654,7 +682,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -685,9 +713,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                LocalizedText.verify = function verify(message) {
+                LocalizedText.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.text != null && message.hasOwnProperty("text"))
                         if (!$util.isString(message.text))
                             return "text: string expected";
@@ -705,9 +737,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.type.LocalizedText} LocalizedText
                  */
-                LocalizedText.fromObject = function fromObject(object) {
+                LocalizedText.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.type.LocalizedText)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.type.LocalizedText();
                     if (object.text != null)
                         message.text = String(object.text);
@@ -791,7 +827,7 @@
                 function Date(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -876,9 +912,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Date.decode = function decode(reader, length, error) {
+                Date.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.Date();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -898,7 +938,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -929,9 +969,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                Date.verify = function verify(message) {
+                Date.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.year != null && message.hasOwnProperty("year"))
                         if (!$util.isInteger(message.year))
                             return "year: integer expected";
@@ -952,9 +996,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.type.Date} Date
                  */
-                Date.fromObject = function fromObject(object) {
+                Date.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.type.Date)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.type.Date();
                     if (object.year != null)
                         message.year = object.year | 0;
@@ -1043,7 +1091,7 @@
                 function Money(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -1128,9 +1176,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Money.decode = function decode(reader, length, error) {
+                Money.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.Money();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -1150,7 +1202,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -1181,9 +1233,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                Money.verify = function verify(message) {
+                Money.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.currencyCode != null && message.hasOwnProperty("currencyCode"))
                         if (!$util.isString(message.currencyCode))
                             return "currencyCode: string expected";
@@ -1204,9 +1260,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.type.Money} Money
                  */
-                Money.fromObject = function fromObject(object) {
+                Money.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.type.Money)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.type.Money();
                     if (object.currencyCode != null)
                         message.currencyCode = String(object.currencyCode);
@@ -1315,7 +1375,7 @@
                 function DateTime(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -1474,9 +1534,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DateTime.decode = function decode(reader, length, error) {
+                DateTime.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.DateTime();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -1512,15 +1576,15 @@
                                 break;
                             }
                         case 8: {
-                                message.utcOffset = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                message.utcOffset = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 9: {
-                                message.timeZone = $root.google.type.TimeZone.decode(reader, reader.uint32());
+                                message.timeZone = $root.google.type.TimeZone.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -1551,9 +1615,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                DateTime.verify = function verify(message) {
+                DateTime.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     var properties = {};
                     if (message.year != null && message.hasOwnProperty("year"))
                         if (!$util.isInteger(message.year))
@@ -1579,7 +1647,7 @@
                     if (message.utcOffset != null && message.hasOwnProperty("utcOffset")) {
                         properties.timeOffset = 1;
                         {
-                            var error = $root.google.protobuf.Duration.verify(message.utcOffset);
+                            var error = $root.google.protobuf.Duration.verify(message.utcOffset, long + 1);
                             if (error)
                                 return "utcOffset." + error;
                         }
@@ -1589,7 +1657,7 @@
                             return "timeOffset: multiple values";
                         properties.timeOffset = 1;
                         {
-                            var error = $root.google.type.TimeZone.verify(message.timeZone);
+                            var error = $root.google.type.TimeZone.verify(message.timeZone, long + 1);
                             if (error)
                                 return "timeZone." + error;
                         }
@@ -1605,9 +1673,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.type.DateTime} DateTime
                  */
-                DateTime.fromObject = function fromObject(object) {
+                DateTime.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.type.DateTime)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.type.DateTime();
                     if (object.year != null)
                         message.year = object.year | 0;
@@ -1626,12 +1698,12 @@
                     if (object.utcOffset != null) {
                         if (typeof object.utcOffset !== "object")
                             throw TypeError(".google.type.DateTime.utcOffset: object expected");
-                        message.utcOffset = $root.google.protobuf.Duration.fromObject(object.utcOffset);
+                        message.utcOffset = $root.google.protobuf.Duration.fromObject(object.utcOffset, long + 1);
                     }
                     if (object.timeZone != null) {
                         if (typeof object.timeZone !== "object")
                             throw TypeError(".google.type.DateTime.timeZone: object expected");
-                        message.timeZone = $root.google.type.TimeZone.fromObject(object.timeZone);
+                        message.timeZone = $root.google.type.TimeZone.fromObject(object.timeZone, long + 1);
                     }
                     return message;
                 };
@@ -1735,7 +1807,7 @@
                 function TimeZone(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -1810,9 +1882,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                TimeZone.decode = function decode(reader, length, error) {
+                TimeZone.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.TimeZone();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -1828,7 +1904,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -1859,9 +1935,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                TimeZone.verify = function verify(message) {
+                TimeZone.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.id != null && message.hasOwnProperty("id"))
                         if (!$util.isString(message.id))
                             return "id: string expected";
@@ -1879,9 +1959,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.type.TimeZone} TimeZone
                  */
-                TimeZone.fromObject = function fromObject(object) {
+                TimeZone.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.type.TimeZone)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.type.TimeZone();
                     if (object.id != null)
                         message.id = String(object.id);
@@ -1975,7 +2059,7 @@
                     this.recipients = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -2142,9 +2226,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PostalAddress.decode = function decode(reader, length, error) {
+                PostalAddress.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.PostalAddress();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -2200,7 +2288,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -2231,9 +2319,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                PostalAddress.verify = function verify(message) {
+                PostalAddress.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.revision != null && message.hasOwnProperty("revision"))
                         if (!$util.isInteger(message.revision))
                             return "revision: integer expected";
@@ -2286,9 +2378,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.type.PostalAddress} PostalAddress
                  */
-                PostalAddress.fromObject = function fromObject(object) {
+                PostalAddress.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.type.PostalAddress)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.type.PostalAddress();
                     if (object.revision != null)
                         message.revision = object.revision | 0;
@@ -2466,7 +2562,7 @@
                             this.areas = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -2543,9 +2639,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AddressDescriptor.decode = function decode(reader, length, error) {
+                        AddressDescriptor.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.AddressDescriptor();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -2555,17 +2655,17 @@
                                 case 1: {
                                         if (!(message.landmarks && message.landmarks.length))
                                             message.landmarks = [];
-                                        message.landmarks.push($root.google.maps.places.v1.AddressDescriptor.Landmark.decode(reader, reader.uint32()));
+                                        message.landmarks.push($root.google.maps.places.v1.AddressDescriptor.Landmark.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 case 2: {
                                         if (!(message.areas && message.areas.length))
                                             message.areas = [];
-                                        message.areas.push($root.google.maps.places.v1.AddressDescriptor.Area.decode(reader, reader.uint32()));
+                                        message.areas.push($root.google.maps.places.v1.AddressDescriptor.Area.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -2596,14 +2696,18 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        AddressDescriptor.verify = function verify(message) {
+                        AddressDescriptor.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.landmarks != null && message.hasOwnProperty("landmarks")) {
                                 if (!Array.isArray(message.landmarks))
                                     return "landmarks: array expected";
                                 for (var i = 0; i < message.landmarks.length; ++i) {
-                                    var error = $root.google.maps.places.v1.AddressDescriptor.Landmark.verify(message.landmarks[i]);
+                                    var error = $root.google.maps.places.v1.AddressDescriptor.Landmark.verify(message.landmarks[i], long + 1);
                                     if (error)
                                         return "landmarks." + error;
                                 }
@@ -2612,7 +2716,7 @@
                                 if (!Array.isArray(message.areas))
                                     return "areas: array expected";
                                 for (var i = 0; i < message.areas.length; ++i) {
-                                    var error = $root.google.maps.places.v1.AddressDescriptor.Area.verify(message.areas[i]);
+                                    var error = $root.google.maps.places.v1.AddressDescriptor.Area.verify(message.areas[i], long + 1);
                                     if (error)
                                         return "areas." + error;
                                 }
@@ -2628,9 +2732,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.maps.places.v1.AddressDescriptor} AddressDescriptor
                          */
-                        AddressDescriptor.fromObject = function fromObject(object) {
+                        AddressDescriptor.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.maps.places.v1.AddressDescriptor)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.maps.places.v1.AddressDescriptor();
                             if (object.landmarks) {
                                 if (!Array.isArray(object.landmarks))
@@ -2639,7 +2747,7 @@
                                 for (var i = 0; i < object.landmarks.length; ++i) {
                                     if (typeof object.landmarks[i] !== "object")
                                         throw TypeError(".google.maps.places.v1.AddressDescriptor.landmarks: object expected");
-                                    message.landmarks[i] = $root.google.maps.places.v1.AddressDescriptor.Landmark.fromObject(object.landmarks[i]);
+                                    message.landmarks[i] = $root.google.maps.places.v1.AddressDescriptor.Landmark.fromObject(object.landmarks[i], long + 1);
                                 }
                             }
                             if (object.areas) {
@@ -2649,7 +2757,7 @@
                                 for (var i = 0; i < object.areas.length; ++i) {
                                     if (typeof object.areas[i] !== "object")
                                         throw TypeError(".google.maps.places.v1.AddressDescriptor.areas: object expected");
-                                    message.areas[i] = $root.google.maps.places.v1.AddressDescriptor.Area.fromObject(object.areas[i]);
+                                    message.areas[i] = $root.google.maps.places.v1.AddressDescriptor.Area.fromObject(object.areas[i], long + 1);
                                 }
                             }
                             return message;
@@ -2738,7 +2846,7 @@
                                 this.types = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                             this[keys[i]] = properties[keys[i]];
                             }
     
@@ -2873,9 +2981,13 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Landmark.decode = function decode(reader, length, error) {
+                            Landmark.decode = function decode(reader, length, error, long) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.AddressDescriptor.Landmark();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
@@ -2891,7 +3003,7 @@
                                             break;
                                         }
                                     case 3: {
-                                            message.displayName = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                            message.displayName = $root.google.type.LocalizedText.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     case 4: {
@@ -2913,7 +3025,7 @@
                                             break;
                                         }
                                     default:
-                                        reader.skipType(tag & 7);
+                                        reader.skipType(tag & 7, long);
                                         break;
                                     }
                                 }
@@ -2944,9 +3056,13 @@
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            Landmark.verify = function verify(message) {
+                            Landmark.verify = function verify(message, long) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
                                 var properties = {};
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     if (!$util.isString(message.name))
@@ -2955,7 +3071,7 @@
                                     if (!$util.isString(message.placeId))
                                         return "placeId: string expected";
                                 if (message.displayName != null && message.hasOwnProperty("displayName")) {
-                                    var error = $root.google.type.LocalizedText.verify(message.displayName);
+                                    var error = $root.google.type.LocalizedText.verify(message.displayName, long + 1);
                                     if (error)
                                         return "displayName." + error;
                                 }
@@ -2998,9 +3114,13 @@
                              * @param {Object.<string,*>} object Plain object
                              * @returns {google.maps.places.v1.AddressDescriptor.Landmark} Landmark
                              */
-                            Landmark.fromObject = function fromObject(object) {
+                            Landmark.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.maps.places.v1.AddressDescriptor.Landmark)
                                     return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.maps.places.v1.AddressDescriptor.Landmark();
                                 if (object.name != null)
                                     message.name = String(object.name);
@@ -3009,7 +3129,7 @@
                                 if (object.displayName != null) {
                                     if (typeof object.displayName !== "object")
                                         throw TypeError(".google.maps.places.v1.AddressDescriptor.Landmark.displayName: object expected");
-                                    message.displayName = $root.google.type.LocalizedText.fromObject(object.displayName);
+                                    message.displayName = $root.google.type.LocalizedText.fromObject(object.displayName, long + 1);
                                 }
                                 if (object.types) {
                                     if (!Array.isArray(object.types))
@@ -3182,7 +3302,7 @@
                             function Area(properties) {
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                             this[keys[i]] = properties[keys[i]];
                             }
     
@@ -3277,9 +3397,13 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Area.decode = function decode(reader, length, error) {
+                            Area.decode = function decode(reader, length, error, long) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.AddressDescriptor.Area();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
@@ -3295,7 +3419,7 @@
                                             break;
                                         }
                                     case 3: {
-                                            message.displayName = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                            message.displayName = $root.google.type.LocalizedText.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     case 4: {
@@ -3303,7 +3427,7 @@
                                             break;
                                         }
                                     default:
-                                        reader.skipType(tag & 7);
+                                        reader.skipType(tag & 7, long);
                                         break;
                                     }
                                 }
@@ -3334,9 +3458,13 @@
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            Area.verify = function verify(message) {
+                            Area.verify = function verify(message, long) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
@@ -3344,7 +3472,7 @@
                                     if (!$util.isString(message.placeId))
                                         return "placeId: string expected";
                                 if (message.displayName != null && message.hasOwnProperty("displayName")) {
-                                    var error = $root.google.type.LocalizedText.verify(message.displayName);
+                                    var error = $root.google.type.LocalizedText.verify(message.displayName, long + 1);
                                     if (error)
                                         return "displayName." + error;
                                 }
@@ -3369,9 +3497,13 @@
                              * @param {Object.<string,*>} object Plain object
                              * @returns {google.maps.places.v1.AddressDescriptor.Area} Area
                              */
-                            Area.fromObject = function fromObject(object) {
+                            Area.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.maps.places.v1.AddressDescriptor.Area)
                                     return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.maps.places.v1.AddressDescriptor.Area();
                                 if (object.name != null)
                                     message.name = String(object.name);
@@ -3380,7 +3512,7 @@
                                 if (object.displayName != null) {
                                     if (typeof object.displayName !== "object")
                                         throw TypeError(".google.maps.places.v1.AddressDescriptor.Area.displayName: object expected");
-                                    message.displayName = $root.google.type.LocalizedText.fromObject(object.displayName);
+                                    message.displayName = $root.google.type.LocalizedText.fromObject(object.displayName, long + 1);
                                 }
                                 switch (object.containment) {
                                 default:
@@ -3511,7 +3643,7 @@
                         function AuthorAttribution(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -3596,9 +3728,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AuthorAttribution.decode = function decode(reader, length, error) {
+                        AuthorAttribution.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.AuthorAttribution();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -3618,7 +3754,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -3649,9 +3785,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        AuthorAttribution.verify = function verify(message) {
+                        AuthorAttribution.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
                                 if (!$util.isString(message.displayName))
                                     return "displayName: string expected";
@@ -3672,9 +3812,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.maps.places.v1.AuthorAttribution} AuthorAttribution
                          */
-                        AuthorAttribution.fromObject = function fromObject(object) {
+                        AuthorAttribution.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.maps.places.v1.AuthorAttribution)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.maps.places.v1.AuthorAttribution();
                             if (object.displayName != null)
                                 message.displayName = String(object.displayName);
@@ -3763,7 +3907,7 @@
                             this.referencedPlaces = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -3839,9 +3983,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ContentBlock.decode = function decode(reader, length, error) {
+                        ContentBlock.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.ContentBlock();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -3849,7 +3997,7 @@
                                     break;
                                 switch (tag >>> 3) {
                                 case 2: {
-                                        message.content = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                        message.content = $root.google.type.LocalizedText.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 4: {
@@ -3859,7 +4007,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -3890,11 +4038,15 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ContentBlock.verify = function verify(message) {
+                        ContentBlock.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.content != null && message.hasOwnProperty("content")) {
-                                var error = $root.google.type.LocalizedText.verify(message.content);
+                                var error = $root.google.type.LocalizedText.verify(message.content, long + 1);
                                 if (error)
                                     return "content." + error;
                             }
@@ -3916,14 +4068,18 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.maps.places.v1.ContentBlock} ContentBlock
                          */
-                        ContentBlock.fromObject = function fromObject(object) {
+                        ContentBlock.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.maps.places.v1.ContentBlock)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.maps.places.v1.ContentBlock();
                             if (object.content != null) {
                                 if (typeof object.content !== "object")
                                     throw TypeError(".google.maps.places.v1.ContentBlock.content: object expected");
-                                message.content = $root.google.type.LocalizedText.fromObject(object.content);
+                                message.content = $root.google.type.LocalizedText.fromObject(object.content, long + 1);
                             }
                             if (object.referencedPlaces) {
                                 if (!Array.isArray(object.referencedPlaces))
@@ -4016,7 +4172,7 @@
                             this.justifications = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -4104,9 +4260,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ContextualContent.decode = function decode(reader, length, error) {
+                        ContextualContent.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.ContextualContent();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -4116,23 +4276,23 @@
                                 case 1: {
                                         if (!(message.reviews && message.reviews.length))
                                             message.reviews = [];
-                                        message.reviews.push($root.google.maps.places.v1.Review.decode(reader, reader.uint32()));
+                                        message.reviews.push($root.google.maps.places.v1.Review.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 case 2: {
                                         if (!(message.photos && message.photos.length))
                                             message.photos = [];
-                                        message.photos.push($root.google.maps.places.v1.Photo.decode(reader, reader.uint32()));
+                                        message.photos.push($root.google.maps.places.v1.Photo.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 case 3: {
                                         if (!(message.justifications && message.justifications.length))
                                             message.justifications = [];
-                                        message.justifications.push($root.google.maps.places.v1.ContextualContent.Justification.decode(reader, reader.uint32()));
+                                        message.justifications.push($root.google.maps.places.v1.ContextualContent.Justification.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -4163,14 +4323,18 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ContextualContent.verify = function verify(message) {
+                        ContextualContent.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.reviews != null && message.hasOwnProperty("reviews")) {
                                 if (!Array.isArray(message.reviews))
                                     return "reviews: array expected";
                                 for (var i = 0; i < message.reviews.length; ++i) {
-                                    var error = $root.google.maps.places.v1.Review.verify(message.reviews[i]);
+                                    var error = $root.google.maps.places.v1.Review.verify(message.reviews[i], long + 1);
                                     if (error)
                                         return "reviews." + error;
                                 }
@@ -4179,7 +4343,7 @@
                                 if (!Array.isArray(message.photos))
                                     return "photos: array expected";
                                 for (var i = 0; i < message.photos.length; ++i) {
-                                    var error = $root.google.maps.places.v1.Photo.verify(message.photos[i]);
+                                    var error = $root.google.maps.places.v1.Photo.verify(message.photos[i], long + 1);
                                     if (error)
                                         return "photos." + error;
                                 }
@@ -4188,7 +4352,7 @@
                                 if (!Array.isArray(message.justifications))
                                     return "justifications: array expected";
                                 for (var i = 0; i < message.justifications.length; ++i) {
-                                    var error = $root.google.maps.places.v1.ContextualContent.Justification.verify(message.justifications[i]);
+                                    var error = $root.google.maps.places.v1.ContextualContent.Justification.verify(message.justifications[i], long + 1);
                                     if (error)
                                         return "justifications." + error;
                                 }
@@ -4204,9 +4368,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.maps.places.v1.ContextualContent} ContextualContent
                          */
-                        ContextualContent.fromObject = function fromObject(object) {
+                        ContextualContent.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.maps.places.v1.ContextualContent)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.maps.places.v1.ContextualContent();
                             if (object.reviews) {
                                 if (!Array.isArray(object.reviews))
@@ -4215,7 +4383,7 @@
                                 for (var i = 0; i < object.reviews.length; ++i) {
                                     if (typeof object.reviews[i] !== "object")
                                         throw TypeError(".google.maps.places.v1.ContextualContent.reviews: object expected");
-                                    message.reviews[i] = $root.google.maps.places.v1.Review.fromObject(object.reviews[i]);
+                                    message.reviews[i] = $root.google.maps.places.v1.Review.fromObject(object.reviews[i], long + 1);
                                 }
                             }
                             if (object.photos) {
@@ -4225,7 +4393,7 @@
                                 for (var i = 0; i < object.photos.length; ++i) {
                                     if (typeof object.photos[i] !== "object")
                                         throw TypeError(".google.maps.places.v1.ContextualContent.photos: object expected");
-                                    message.photos[i] = $root.google.maps.places.v1.Photo.fromObject(object.photos[i]);
+                                    message.photos[i] = $root.google.maps.places.v1.Photo.fromObject(object.photos[i], long + 1);
                                 }
                             }
                             if (object.justifications) {
@@ -4235,7 +4403,7 @@
                                 for (var i = 0; i < object.justifications.length; ++i) {
                                     if (typeof object.justifications[i] !== "object")
                                         throw TypeError(".google.maps.places.v1.ContextualContent.justifications: object expected");
-                                    message.justifications[i] = $root.google.maps.places.v1.ContextualContent.Justification.fromObject(object.justifications[i]);
+                                    message.justifications[i] = $root.google.maps.places.v1.ContextualContent.Justification.fromObject(object.justifications[i], long + 1);
                                 }
                             }
                             return message;
@@ -4324,7 +4492,7 @@
                             function Justification(properties) {
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                             this[keys[i]] = properties[keys[i]];
                             }
     
@@ -4413,9 +4581,13 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Justification.decode = function decode(reader, length, error) {
+                            Justification.decode = function decode(reader, length, error, long) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.ContextualContent.Justification();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
@@ -4423,15 +4595,15 @@
                                         break;
                                     switch (tag >>> 3) {
                                     case 1: {
-                                            message.reviewJustification = $root.google.maps.places.v1.ContextualContent.Justification.ReviewJustification.decode(reader, reader.uint32());
+                                            message.reviewJustification = $root.google.maps.places.v1.ContextualContent.Justification.ReviewJustification.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     case 2: {
-                                            message.businessAvailabilityAttributesJustification = $root.google.maps.places.v1.ContextualContent.Justification.BusinessAvailabilityAttributesJustification.decode(reader, reader.uint32());
+                                            message.businessAvailabilityAttributesJustification = $root.google.maps.places.v1.ContextualContent.Justification.BusinessAvailabilityAttributesJustification.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     default:
-                                        reader.skipType(tag & 7);
+                                        reader.skipType(tag & 7, long);
                                         break;
                                     }
                                 }
@@ -4462,14 +4634,18 @@
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            Justification.verify = function verify(message) {
+                            Justification.verify = function verify(message, long) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
                                 var properties = {};
                                 if (message.reviewJustification != null && message.hasOwnProperty("reviewJustification")) {
                                     properties.justification = 1;
                                     {
-                                        var error = $root.google.maps.places.v1.ContextualContent.Justification.ReviewJustification.verify(message.reviewJustification);
+                                        var error = $root.google.maps.places.v1.ContextualContent.Justification.ReviewJustification.verify(message.reviewJustification, long + 1);
                                         if (error)
                                             return "reviewJustification." + error;
                                     }
@@ -4479,7 +4655,7 @@
                                         return "justification: multiple values";
                                     properties.justification = 1;
                                     {
-                                        var error = $root.google.maps.places.v1.ContextualContent.Justification.BusinessAvailabilityAttributesJustification.verify(message.businessAvailabilityAttributesJustification);
+                                        var error = $root.google.maps.places.v1.ContextualContent.Justification.BusinessAvailabilityAttributesJustification.verify(message.businessAvailabilityAttributesJustification, long + 1);
                                         if (error)
                                             return "businessAvailabilityAttributesJustification." + error;
                                     }
@@ -4495,19 +4671,23 @@
                              * @param {Object.<string,*>} object Plain object
                              * @returns {google.maps.places.v1.ContextualContent.Justification} Justification
                              */
-                            Justification.fromObject = function fromObject(object) {
+                            Justification.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.maps.places.v1.ContextualContent.Justification)
                                     return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.maps.places.v1.ContextualContent.Justification();
                                 if (object.reviewJustification != null) {
                                     if (typeof object.reviewJustification !== "object")
                                         throw TypeError(".google.maps.places.v1.ContextualContent.Justification.reviewJustification: object expected");
-                                    message.reviewJustification = $root.google.maps.places.v1.ContextualContent.Justification.ReviewJustification.fromObject(object.reviewJustification);
+                                    message.reviewJustification = $root.google.maps.places.v1.ContextualContent.Justification.ReviewJustification.fromObject(object.reviewJustification, long + 1);
                                 }
                                 if (object.businessAvailabilityAttributesJustification != null) {
                                     if (typeof object.businessAvailabilityAttributesJustification !== "object")
                                         throw TypeError(".google.maps.places.v1.ContextualContent.Justification.businessAvailabilityAttributesJustification: object expected");
-                                    message.businessAvailabilityAttributesJustification = $root.google.maps.places.v1.ContextualContent.Justification.BusinessAvailabilityAttributesJustification.fromObject(object.businessAvailabilityAttributesJustification);
+                                    message.businessAvailabilityAttributesJustification = $root.google.maps.places.v1.ContextualContent.Justification.BusinessAvailabilityAttributesJustification.fromObject(object.businessAvailabilityAttributesJustification, long + 1);
                                 }
                                 return message;
                             };
@@ -4585,7 +4765,7 @@
                                 function ReviewJustification(properties) {
                                     if (properties)
                                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                            if (properties[keys[i]] != null)
+                                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                                 this[keys[i]] = properties[keys[i]];
                                 }
     
@@ -4660,9 +4840,13 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                ReviewJustification.decode = function decode(reader, length, error) {
+                                ReviewJustification.decode = function decode(reader, length, error, long) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $Reader.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.ContextualContent.Justification.ReviewJustification();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
@@ -4670,15 +4854,15 @@
                                             break;
                                         switch (tag >>> 3) {
                                         case 1: {
-                                                message.highlightedText = $root.google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText.decode(reader, reader.uint32());
+                                                message.highlightedText = $root.google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText.decode(reader, reader.uint32(), undefined, long + 1);
                                                 break;
                                             }
                                         case 2: {
-                                                message.review = $root.google.maps.places.v1.Review.decode(reader, reader.uint32());
+                                                message.review = $root.google.maps.places.v1.Review.decode(reader, reader.uint32(), undefined, long + 1);
                                                 break;
                                             }
                                         default:
-                                            reader.skipType(tag & 7);
+                                            reader.skipType(tag & 7, long);
                                             break;
                                         }
                                     }
@@ -4709,16 +4893,20 @@
                                  * @param {Object.<string,*>} message Plain object to verify
                                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                                  */
-                                ReviewJustification.verify = function verify(message) {
+                                ReviewJustification.verify = function verify(message, long) {
                                     if (typeof message !== "object" || message === null)
                                         return "object expected";
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        return "maximum nesting depth exceeded";
                                     if (message.highlightedText != null && message.hasOwnProperty("highlightedText")) {
-                                        var error = $root.google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText.verify(message.highlightedText);
+                                        var error = $root.google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText.verify(message.highlightedText, long + 1);
                                         if (error)
                                             return "highlightedText." + error;
                                     }
                                     if (message.review != null && message.hasOwnProperty("review")) {
-                                        var error = $root.google.maps.places.v1.Review.verify(message.review);
+                                        var error = $root.google.maps.places.v1.Review.verify(message.review, long + 1);
                                         if (error)
                                             return "review." + error;
                                     }
@@ -4733,19 +4921,23 @@
                                  * @param {Object.<string,*>} object Plain object
                                  * @returns {google.maps.places.v1.ContextualContent.Justification.ReviewJustification} ReviewJustification
                                  */
-                                ReviewJustification.fromObject = function fromObject(object) {
+                                ReviewJustification.fromObject = function fromObject(object, long) {
                                     if (object instanceof $root.google.maps.places.v1.ContextualContent.Justification.ReviewJustification)
                                         return object;
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
                                     var message = new $root.google.maps.places.v1.ContextualContent.Justification.ReviewJustification();
                                     if (object.highlightedText != null) {
                                         if (typeof object.highlightedText !== "object")
                                             throw TypeError(".google.maps.places.v1.ContextualContent.Justification.ReviewJustification.highlightedText: object expected");
-                                        message.highlightedText = $root.google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText.fromObject(object.highlightedText);
+                                        message.highlightedText = $root.google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText.fromObject(object.highlightedText, long + 1);
                                     }
                                     if (object.review != null) {
                                         if (typeof object.review !== "object")
                                             throw TypeError(".google.maps.places.v1.ContextualContent.Justification.ReviewJustification.review: object expected");
-                                        message.review = $root.google.maps.places.v1.Review.fromObject(object.review);
+                                        message.review = $root.google.maps.places.v1.Review.fromObject(object.review, long + 1);
                                     }
                                     return message;
                                 };
@@ -4822,7 +5014,7 @@
                                         this.highlightedTextRanges = [];
                                         if (properties)
                                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                                if (properties[keys[i]] != null)
+                                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                                     this[keys[i]] = properties[keys[i]];
                                     }
     
@@ -4898,9 +5090,13 @@
                                      * @throws {Error} If the payload is not a reader or valid buffer
                                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                      */
-                                    HighlightedText.decode = function decode(reader, length, error) {
+                                    HighlightedText.decode = function decode(reader, length, error, long) {
                                         if (!(reader instanceof $Reader))
                                             reader = $Reader.create(reader);
+                                        if (long === undefined)
+                                            long = 0;
+                                        if (long > $Reader.recursionLimit)
+                                            throw Error("maximum nesting depth exceeded");
                                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText();
                                         while (reader.pos < end) {
                                             var tag = reader.uint32();
@@ -4914,11 +5110,11 @@
                                             case 2: {
                                                     if (!(message.highlightedTextRanges && message.highlightedTextRanges.length))
                                                         message.highlightedTextRanges = [];
-                                                    message.highlightedTextRanges.push($root.google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText.HighlightedTextRange.decode(reader, reader.uint32()));
+                                                    message.highlightedTextRanges.push($root.google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText.HighlightedTextRange.decode(reader, reader.uint32(), undefined, long + 1));
                                                     break;
                                                 }
                                             default:
-                                                reader.skipType(tag & 7);
+                                                reader.skipType(tag & 7, long);
                                                 break;
                                             }
                                         }
@@ -4949,9 +5145,13 @@
                                      * @param {Object.<string,*>} message Plain object to verify
                                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                                      */
-                                    HighlightedText.verify = function verify(message) {
+                                    HighlightedText.verify = function verify(message, long) {
                                         if (typeof message !== "object" || message === null)
                                             return "object expected";
+                                        if (long === undefined)
+                                            long = 0;
+                                        if (long > $util.recursionLimit)
+                                            return "maximum nesting depth exceeded";
                                         if (message.text != null && message.hasOwnProperty("text"))
                                             if (!$util.isString(message.text))
                                                 return "text: string expected";
@@ -4959,7 +5159,7 @@
                                             if (!Array.isArray(message.highlightedTextRanges))
                                                 return "highlightedTextRanges: array expected";
                                             for (var i = 0; i < message.highlightedTextRanges.length; ++i) {
-                                                var error = $root.google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText.HighlightedTextRange.verify(message.highlightedTextRanges[i]);
+                                                var error = $root.google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText.HighlightedTextRange.verify(message.highlightedTextRanges[i], long + 1);
                                                 if (error)
                                                     return "highlightedTextRanges." + error;
                                             }
@@ -4975,9 +5175,13 @@
                                      * @param {Object.<string,*>} object Plain object
                                      * @returns {google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText} HighlightedText
                                      */
-                                    HighlightedText.fromObject = function fromObject(object) {
+                                    HighlightedText.fromObject = function fromObject(object, long) {
                                         if (object instanceof $root.google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText)
                                             return object;
+                                        if (long === undefined)
+                                            long = 0;
+                                        if (long > $util.recursionLimit)
+                                            throw Error("maximum nesting depth exceeded");
                                         var message = new $root.google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText();
                                         if (object.text != null)
                                             message.text = String(object.text);
@@ -4988,7 +5192,7 @@
                                             for (var i = 0; i < object.highlightedTextRanges.length; ++i) {
                                                 if (typeof object.highlightedTextRanges[i] !== "object")
                                                     throw TypeError(".google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText.highlightedTextRanges: object expected");
-                                                message.highlightedTextRanges[i] = $root.google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText.HighlightedTextRange.fromObject(object.highlightedTextRanges[i]);
+                                                message.highlightedTextRanges[i] = $root.google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText.HighlightedTextRange.fromObject(object.highlightedTextRanges[i], long + 1);
                                             }
                                         }
                                         return message;
@@ -5068,7 +5272,7 @@
                                         function HighlightedTextRange(properties) {
                                             if (properties)
                                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                                    if (properties[keys[i]] != null)
+                                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                                         this[keys[i]] = properties[keys[i]];
                                         }
     
@@ -5143,9 +5347,13 @@
                                          * @throws {Error} If the payload is not a reader or valid buffer
                                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                          */
-                                        HighlightedTextRange.decode = function decode(reader, length, error) {
+                                        HighlightedTextRange.decode = function decode(reader, length, error, long) {
                                             if (!(reader instanceof $Reader))
                                                 reader = $Reader.create(reader);
+                                            if (long === undefined)
+                                                long = 0;
+                                            if (long > $Reader.recursionLimit)
+                                                throw Error("maximum nesting depth exceeded");
                                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText.HighlightedTextRange();
                                             while (reader.pos < end) {
                                                 var tag = reader.uint32();
@@ -5161,7 +5369,7 @@
                                                         break;
                                                     }
                                                 default:
-                                                    reader.skipType(tag & 7);
+                                                    reader.skipType(tag & 7, long);
                                                     break;
                                                 }
                                             }
@@ -5192,9 +5400,13 @@
                                          * @param {Object.<string,*>} message Plain object to verify
                                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                                          */
-                                        HighlightedTextRange.verify = function verify(message) {
+                                        HighlightedTextRange.verify = function verify(message, long) {
                                             if (typeof message !== "object" || message === null)
                                                 return "object expected";
+                                            if (long === undefined)
+                                                long = 0;
+                                            if (long > $util.recursionLimit)
+                                                return "maximum nesting depth exceeded";
                                             if (message.startIndex != null && message.hasOwnProperty("startIndex"))
                                                 if (!$util.isInteger(message.startIndex))
                                                     return "startIndex: integer expected";
@@ -5212,9 +5424,13 @@
                                          * @param {Object.<string,*>} object Plain object
                                          * @returns {google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText.HighlightedTextRange} HighlightedTextRange
                                          */
-                                        HighlightedTextRange.fromObject = function fromObject(object) {
+                                        HighlightedTextRange.fromObject = function fromObject(object, long) {
                                             if (object instanceof $root.google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText.HighlightedTextRange)
                                                 return object;
+                                            if (long === undefined)
+                                                long = 0;
+                                            if (long > $util.recursionLimit)
+                                                throw Error("maximum nesting depth exceeded");
                                             var message = new $root.google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText.HighlightedTextRange();
                                             if (object.startIndex != null)
                                                 message.startIndex = object.startIndex | 0;
@@ -5304,7 +5520,7 @@
                                 function BusinessAvailabilityAttributesJustification(properties) {
                                     if (properties)
                                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                            if (properties[keys[i]] != null)
+                                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                                 this[keys[i]] = properties[keys[i]];
                                 }
     
@@ -5389,9 +5605,13 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                BusinessAvailabilityAttributesJustification.decode = function decode(reader, length, error) {
+                                BusinessAvailabilityAttributesJustification.decode = function decode(reader, length, error, long) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $Reader.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.ContextualContent.Justification.BusinessAvailabilityAttributesJustification();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
@@ -5411,7 +5631,7 @@
                                                 break;
                                             }
                                         default:
-                                            reader.skipType(tag & 7);
+                                            reader.skipType(tag & 7, long);
                                             break;
                                         }
                                     }
@@ -5442,9 +5662,13 @@
                                  * @param {Object.<string,*>} message Plain object to verify
                                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                                  */
-                                BusinessAvailabilityAttributesJustification.verify = function verify(message) {
+                                BusinessAvailabilityAttributesJustification.verify = function verify(message, long) {
                                     if (typeof message !== "object" || message === null)
                                         return "object expected";
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        return "maximum nesting depth exceeded";
                                     if (message.takeout != null && message.hasOwnProperty("takeout"))
                                         if (typeof message.takeout !== "boolean")
                                             return "takeout: boolean expected";
@@ -5465,9 +5689,13 @@
                                  * @param {Object.<string,*>} object Plain object
                                  * @returns {google.maps.places.v1.ContextualContent.Justification.BusinessAvailabilityAttributesJustification} BusinessAvailabilityAttributesJustification
                                  */
-                                BusinessAvailabilityAttributesJustification.fromObject = function fromObject(object) {
+                                BusinessAvailabilityAttributesJustification.fromObject = function fromObject(object, long) {
                                     if (object instanceof $root.google.maps.places.v1.ContextualContent.Justification.BusinessAvailabilityAttributesJustification)
                                         return object;
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
                                     var message = new $root.google.maps.places.v1.ContextualContent.Justification.BusinessAvailabilityAttributesJustification();
                                     if (object.takeout != null)
                                         message.takeout = Boolean(object.takeout);
@@ -5566,7 +5794,7 @@
                             this.authorAttributions = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -5682,9 +5910,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Photo.decode = function decode(reader, length, error) {
+                        Photo.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Photo();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -5706,7 +5938,7 @@
                                 case 4: {
                                         if (!(message.authorAttributions && message.authorAttributions.length))
                                             message.authorAttributions = [];
-                                        message.authorAttributions.push($root.google.maps.places.v1.AuthorAttribution.decode(reader, reader.uint32()));
+                                        message.authorAttributions.push($root.google.maps.places.v1.AuthorAttribution.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 case 5: {
@@ -5718,7 +5950,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -5749,9 +5981,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        Photo.verify = function verify(message) {
+                        Photo.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -5765,7 +6001,7 @@
                                 if (!Array.isArray(message.authorAttributions))
                                     return "authorAttributions: array expected";
                                 for (var i = 0; i < message.authorAttributions.length; ++i) {
-                                    var error = $root.google.maps.places.v1.AuthorAttribution.verify(message.authorAttributions[i]);
+                                    var error = $root.google.maps.places.v1.AuthorAttribution.verify(message.authorAttributions[i], long + 1);
                                     if (error)
                                         return "authorAttributions." + error;
                                 }
@@ -5787,9 +6023,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.maps.places.v1.Photo} Photo
                          */
-                        Photo.fromObject = function fromObject(object) {
+                        Photo.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.maps.places.v1.Photo)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.maps.places.v1.Photo();
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -5804,7 +6044,7 @@
                                 for (var i = 0; i < object.authorAttributions.length; ++i) {
                                     if (typeof object.authorAttributions[i] !== "object")
                                         throw TypeError(".google.maps.places.v1.Photo.authorAttributions: object expected");
-                                    message.authorAttributions[i] = $root.google.maps.places.v1.AuthorAttribution.fromObject(object.authorAttributions[i]);
+                                    message.authorAttributions[i] = $root.google.maps.places.v1.AuthorAttribution.fromObject(object.authorAttributions[i], long + 1);
                                 }
                             }
                             if (object.flagContentUri != null)
@@ -5912,7 +6152,7 @@
                         function Review(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -6067,9 +6307,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Review.decode = function decode(reader, length, error) {
+                        Review.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Review();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -6085,11 +6329,11 @@
                                         break;
                                     }
                                 case 9: {
-                                        message.text = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                        message.text = $root.google.type.LocalizedText.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 12: {
-                                        message.originalText = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                        message.originalText = $root.google.type.LocalizedText.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 7: {
@@ -6097,11 +6341,11 @@
                                         break;
                                     }
                                 case 13: {
-                                        message.authorAttribution = $root.google.maps.places.v1.AuthorAttribution.decode(reader, reader.uint32());
+                                        message.authorAttribution = $root.google.maps.places.v1.AuthorAttribution.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 14: {
-                                        message.publishTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        message.publishTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 15: {
@@ -6113,11 +6357,11 @@
                                         break;
                                     }
                                 case 17: {
-                                        message.visitDate = $root.google.type.Date.decode(reader, reader.uint32());
+                                        message.visitDate = $root.google.type.Date.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -6148,9 +6392,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        Review.verify = function verify(message) {
+                        Review.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -6158,12 +6406,12 @@
                                 if (!$util.isString(message.relativePublishTimeDescription))
                                     return "relativePublishTimeDescription: string expected";
                             if (message.text != null && message.hasOwnProperty("text")) {
-                                var error = $root.google.type.LocalizedText.verify(message.text);
+                                var error = $root.google.type.LocalizedText.verify(message.text, long + 1);
                                 if (error)
                                     return "text." + error;
                             }
                             if (message.originalText != null && message.hasOwnProperty("originalText")) {
-                                var error = $root.google.type.LocalizedText.verify(message.originalText);
+                                var error = $root.google.type.LocalizedText.verify(message.originalText, long + 1);
                                 if (error)
                                     return "originalText." + error;
                             }
@@ -6171,12 +6419,12 @@
                                 if (typeof message.rating !== "number")
                                     return "rating: number expected";
                             if (message.authorAttribution != null && message.hasOwnProperty("authorAttribution")) {
-                                var error = $root.google.maps.places.v1.AuthorAttribution.verify(message.authorAttribution);
+                                var error = $root.google.maps.places.v1.AuthorAttribution.verify(message.authorAttribution, long + 1);
                                 if (error)
                                     return "authorAttribution." + error;
                             }
                             if (message.publishTime != null && message.hasOwnProperty("publishTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.publishTime);
+                                var error = $root.google.protobuf.Timestamp.verify(message.publishTime, long + 1);
                                 if (error)
                                     return "publishTime." + error;
                             }
@@ -6187,7 +6435,7 @@
                                 if (!$util.isString(message.googleMapsUri))
                                     return "googleMapsUri: string expected";
                             if (message.visitDate != null && message.hasOwnProperty("visitDate")) {
-                                var error = $root.google.type.Date.verify(message.visitDate);
+                                var error = $root.google.type.Date.verify(message.visitDate, long + 1);
                                 if (error)
                                     return "visitDate." + error;
                             }
@@ -6202,9 +6450,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.maps.places.v1.Review} Review
                          */
-                        Review.fromObject = function fromObject(object) {
+                        Review.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.maps.places.v1.Review)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.maps.places.v1.Review();
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -6213,24 +6465,24 @@
                             if (object.text != null) {
                                 if (typeof object.text !== "object")
                                     throw TypeError(".google.maps.places.v1.Review.text: object expected");
-                                message.text = $root.google.type.LocalizedText.fromObject(object.text);
+                                message.text = $root.google.type.LocalizedText.fromObject(object.text, long + 1);
                             }
                             if (object.originalText != null) {
                                 if (typeof object.originalText !== "object")
                                     throw TypeError(".google.maps.places.v1.Review.originalText: object expected");
-                                message.originalText = $root.google.type.LocalizedText.fromObject(object.originalText);
+                                message.originalText = $root.google.type.LocalizedText.fromObject(object.originalText, long + 1);
                             }
                             if (object.rating != null)
                                 message.rating = Number(object.rating);
                             if (object.authorAttribution != null) {
                                 if (typeof object.authorAttribution !== "object")
                                     throw TypeError(".google.maps.places.v1.Review.authorAttribution: object expected");
-                                message.authorAttribution = $root.google.maps.places.v1.AuthorAttribution.fromObject(object.authorAttribution);
+                                message.authorAttribution = $root.google.maps.places.v1.AuthorAttribution.fromObject(object.authorAttribution, long + 1);
                             }
                             if (object.publishTime != null) {
                                 if (typeof object.publishTime !== "object")
                                     throw TypeError(".google.maps.places.v1.Review.publishTime: object expected");
-                                message.publishTime = $root.google.protobuf.Timestamp.fromObject(object.publishTime);
+                                message.publishTime = $root.google.protobuf.Timestamp.fromObject(object.publishTime, long + 1);
                             }
                             if (object.flagContentUri != null)
                                 message.flagContentUri = String(object.flagContentUri);
@@ -6239,7 +6491,7 @@
                             if (object.visitDate != null) {
                                 if (typeof object.visitDate !== "object")
                                     throw TypeError(".google.maps.places.v1.Review.visitDate: object expected");
-                                message.visitDate = $root.google.type.Date.fromObject(object.visitDate);
+                                message.visitDate = $root.google.type.Date.fromObject(object.visitDate, long + 1);
                             }
                             return message;
                         };
@@ -6343,7 +6595,7 @@
                             this.connectorAggregation = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -6419,9 +6671,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        EVChargeOptions.decode = function decode(reader, length, error) {
+                        EVChargeOptions.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.EVChargeOptions();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -6435,11 +6691,11 @@
                                 case 2: {
                                         if (!(message.connectorAggregation && message.connectorAggregation.length))
                                             message.connectorAggregation = [];
-                                        message.connectorAggregation.push($root.google.maps.places.v1.EVChargeOptions.ConnectorAggregation.decode(reader, reader.uint32()));
+                                        message.connectorAggregation.push($root.google.maps.places.v1.EVChargeOptions.ConnectorAggregation.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -6470,9 +6726,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        EVChargeOptions.verify = function verify(message) {
+                        EVChargeOptions.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.connectorCount != null && message.hasOwnProperty("connectorCount"))
                                 if (!$util.isInteger(message.connectorCount))
                                     return "connectorCount: integer expected";
@@ -6480,7 +6740,7 @@
                                 if (!Array.isArray(message.connectorAggregation))
                                     return "connectorAggregation: array expected";
                                 for (var i = 0; i < message.connectorAggregation.length; ++i) {
-                                    var error = $root.google.maps.places.v1.EVChargeOptions.ConnectorAggregation.verify(message.connectorAggregation[i]);
+                                    var error = $root.google.maps.places.v1.EVChargeOptions.ConnectorAggregation.verify(message.connectorAggregation[i], long + 1);
                                     if (error)
                                         return "connectorAggregation." + error;
                                 }
@@ -6496,9 +6756,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.maps.places.v1.EVChargeOptions} EVChargeOptions
                          */
-                        EVChargeOptions.fromObject = function fromObject(object) {
+                        EVChargeOptions.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.maps.places.v1.EVChargeOptions)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.maps.places.v1.EVChargeOptions();
                             if (object.connectorCount != null)
                                 message.connectorCount = object.connectorCount | 0;
@@ -6509,7 +6773,7 @@
                                 for (var i = 0; i < object.connectorAggregation.length; ++i) {
                                     if (typeof object.connectorAggregation[i] !== "object")
                                         throw TypeError(".google.maps.places.v1.EVChargeOptions.connectorAggregation: object expected");
-                                    message.connectorAggregation[i] = $root.google.maps.places.v1.EVChargeOptions.ConnectorAggregation.fromObject(object.connectorAggregation[i]);
+                                    message.connectorAggregation[i] = $root.google.maps.places.v1.EVChargeOptions.ConnectorAggregation.fromObject(object.connectorAggregation[i], long + 1);
                                 }
                             }
                             return message;
@@ -6593,7 +6857,7 @@
                             function ConnectorAggregation(properties) {
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                             this[keys[i]] = properties[keys[i]];
                             }
     
@@ -6723,9 +6987,13 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ConnectorAggregation.decode = function decode(reader, length, error) {
+                            ConnectorAggregation.decode = function decode(reader, length, error, long) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.EVChargeOptions.ConnectorAggregation();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
@@ -6753,11 +7021,11 @@
                                             break;
                                         }
                                     case 6: {
-                                            message.availabilityLastUpdateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            message.availabilityLastUpdateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     default:
-                                        reader.skipType(tag & 7);
+                                        reader.skipType(tag & 7, long);
                                         break;
                                     }
                                 }
@@ -6788,9 +7056,13 @@
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            ConnectorAggregation.verify = function verify(message) {
+                            ConnectorAggregation.verify = function verify(message, long) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
                                 var properties = {};
                                 if (message.type != null && message.hasOwnProperty("type"))
                                     switch (message.type) {
@@ -6826,7 +7098,7 @@
                                         return "outOfServiceCount: integer expected";
                                 }
                                 if (message.availabilityLastUpdateTime != null && message.hasOwnProperty("availabilityLastUpdateTime")) {
-                                    var error = $root.google.protobuf.Timestamp.verify(message.availabilityLastUpdateTime);
+                                    var error = $root.google.protobuf.Timestamp.verify(message.availabilityLastUpdateTime, long + 1);
                                     if (error)
                                         return "availabilityLastUpdateTime." + error;
                                 }
@@ -6841,9 +7113,13 @@
                              * @param {Object.<string,*>} object Plain object
                              * @returns {google.maps.places.v1.EVChargeOptions.ConnectorAggregation} ConnectorAggregation
                              */
-                            ConnectorAggregation.fromObject = function fromObject(object) {
+                            ConnectorAggregation.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.maps.places.v1.EVChargeOptions.ConnectorAggregation)
                                     return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.maps.places.v1.EVChargeOptions.ConnectorAggregation();
                                 switch (object.type) {
                                 default:
@@ -6908,7 +7184,7 @@
                                 if (object.availabilityLastUpdateTime != null) {
                                     if (typeof object.availabilityLastUpdateTime !== "object")
                                         throw TypeError(".google.maps.places.v1.EVChargeOptions.ConnectorAggregation.availabilityLastUpdateTime: object expected");
-                                    message.availabilityLastUpdateTime = $root.google.protobuf.Timestamp.fromObject(object.availabilityLastUpdateTime);
+                                    message.availabilityLastUpdateTime = $root.google.protobuf.Timestamp.fromObject(object.availabilityLastUpdateTime, long + 1);
                                 }
                                 return message;
                             };
@@ -7038,7 +7314,7 @@
                             this.fuelPrices = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -7104,9 +7380,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FuelOptions.decode = function decode(reader, length, error) {
+                        FuelOptions.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.FuelOptions();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -7116,11 +7396,11 @@
                                 case 1: {
                                         if (!(message.fuelPrices && message.fuelPrices.length))
                                             message.fuelPrices = [];
-                                        message.fuelPrices.push($root.google.maps.places.v1.FuelOptions.FuelPrice.decode(reader, reader.uint32()));
+                                        message.fuelPrices.push($root.google.maps.places.v1.FuelOptions.FuelPrice.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -7151,14 +7431,18 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        FuelOptions.verify = function verify(message) {
+                        FuelOptions.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.fuelPrices != null && message.hasOwnProperty("fuelPrices")) {
                                 if (!Array.isArray(message.fuelPrices))
                                     return "fuelPrices: array expected";
                                 for (var i = 0; i < message.fuelPrices.length; ++i) {
-                                    var error = $root.google.maps.places.v1.FuelOptions.FuelPrice.verify(message.fuelPrices[i]);
+                                    var error = $root.google.maps.places.v1.FuelOptions.FuelPrice.verify(message.fuelPrices[i], long + 1);
                                     if (error)
                                         return "fuelPrices." + error;
                                 }
@@ -7174,9 +7458,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.maps.places.v1.FuelOptions} FuelOptions
                          */
-                        FuelOptions.fromObject = function fromObject(object) {
+                        FuelOptions.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.maps.places.v1.FuelOptions)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.maps.places.v1.FuelOptions();
                             if (object.fuelPrices) {
                                 if (!Array.isArray(object.fuelPrices))
@@ -7185,7 +7473,7 @@
                                 for (var i = 0; i < object.fuelPrices.length; ++i) {
                                     if (typeof object.fuelPrices[i] !== "object")
                                         throw TypeError(".google.maps.places.v1.FuelOptions.fuelPrices: object expected");
-                                    message.fuelPrices[i] = $root.google.maps.places.v1.FuelOptions.FuelPrice.fromObject(object.fuelPrices[i]);
+                                    message.fuelPrices[i] = $root.google.maps.places.v1.FuelOptions.FuelPrice.fromObject(object.fuelPrices[i], long + 1);
                                 }
                             }
                             return message;
@@ -7262,7 +7550,7 @@
                             function FuelPrice(properties) {
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                             this[keys[i]] = properties[keys[i]];
                             }
     
@@ -7347,9 +7635,13 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            FuelPrice.decode = function decode(reader, length, error) {
+                            FuelPrice.decode = function decode(reader, length, error, long) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.FuelOptions.FuelPrice();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
@@ -7361,15 +7653,15 @@
                                             break;
                                         }
                                     case 2: {
-                                            message.price = $root.google.type.Money.decode(reader, reader.uint32());
+                                            message.price = $root.google.type.Money.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     case 3: {
-                                            message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     default:
-                                        reader.skipType(tag & 7);
+                                        reader.skipType(tag & 7, long);
                                         break;
                                     }
                                 }
@@ -7400,9 +7692,13 @@
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            FuelPrice.verify = function verify(message) {
+                            FuelPrice.verify = function verify(message, long) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
                                 if (message.type != null && message.hasOwnProperty("type"))
                                     switch (message.type) {
                                     default:
@@ -7431,12 +7727,12 @@
                                         break;
                                     }
                                 if (message.price != null && message.hasOwnProperty("price")) {
-                                    var error = $root.google.type.Money.verify(message.price);
+                                    var error = $root.google.type.Money.verify(message.price, long + 1);
                                     if (error)
                                         return "price." + error;
                                 }
                                 if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
-                                    var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                    var error = $root.google.protobuf.Timestamp.verify(message.updateTime, long + 1);
                                     if (error)
                                         return "updateTime." + error;
                                 }
@@ -7451,9 +7747,13 @@
                              * @param {Object.<string,*>} object Plain object
                              * @returns {google.maps.places.v1.FuelOptions.FuelPrice} FuelPrice
                              */
-                            FuelPrice.fromObject = function fromObject(object) {
+                            FuelPrice.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.maps.places.v1.FuelOptions.FuelPrice)
                                     return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.maps.places.v1.FuelOptions.FuelPrice();
                                 switch (object.type) {
                                 default:
@@ -7550,12 +7850,12 @@
                                 if (object.price != null) {
                                     if (typeof object.price !== "object")
                                         throw TypeError(".google.maps.places.v1.FuelOptions.FuelPrice.price: object expected");
-                                    message.price = $root.google.type.Money.fromObject(object.price);
+                                    message.price = $root.google.type.Money.fromObject(object.price, long + 1);
                                 }
                                 if (object.updateTime != null) {
                                     if (typeof object.updateTime !== "object")
                                         throw TypeError(".google.maps.places.v1.FuelOptions.FuelPrice.updateTime: object expected");
-                                    message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                                    message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime, long + 1);
                                 }
                                 return message;
                             };
@@ -7692,7 +7992,7 @@
                         function Circle(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -7767,9 +8067,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Circle.decode = function decode(reader, length, error) {
+                        Circle.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Circle();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -7777,7 +8081,7 @@
                                     break;
                                 switch (tag >>> 3) {
                                 case 1: {
-                                        message.center = $root.google.type.LatLng.decode(reader, reader.uint32());
+                                        message.center = $root.google.type.LatLng.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 2: {
@@ -7785,7 +8089,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -7816,11 +8120,15 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        Circle.verify = function verify(message) {
+                        Circle.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.center != null && message.hasOwnProperty("center")) {
-                                var error = $root.google.type.LatLng.verify(message.center);
+                                var error = $root.google.type.LatLng.verify(message.center, long + 1);
                                 if (error)
                                     return "center." + error;
                             }
@@ -7838,14 +8146,18 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.maps.places.v1.Circle} Circle
                          */
-                        Circle.fromObject = function fromObject(object) {
+                        Circle.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.maps.places.v1.Circle)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.maps.places.v1.Circle();
                             if (object.center != null) {
                                 if (typeof object.center !== "object")
                                     throw TypeError(".google.maps.places.v1.Circle.center: object expected");
-                                message.center = $root.google.type.LatLng.fromObject(object.center);
+                                message.center = $root.google.type.LatLng.fromObject(object.center, long + 1);
                             }
                             if (object.radius != null)
                                 message.radius = Number(object.radius);
@@ -8011,7 +8323,7 @@
                             this.containingPlaces = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -9020,9 +9332,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Place.decode = function decode(reader, length, error) {
+                        Place.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Place();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -9038,7 +9354,7 @@
                                         break;
                                     }
                                 case 31: {
-                                        message.displayName = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                        message.displayName = $root.google.type.LocalizedText.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 5: {
@@ -9052,11 +9368,11 @@
                                         break;
                                     }
                                 case 32: {
-                                        message.primaryTypeDisplayName = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                        message.primaryTypeDisplayName = $root.google.type.LocalizedText.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 96: {
-                                        message.googleMapsTypeLabel = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                        message.googleMapsTypeLabel = $root.google.type.LocalizedText.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 7: {
@@ -9076,25 +9392,25 @@
                                         break;
                                     }
                                 case 90: {
-                                        message.postalAddress = $root.google.type.PostalAddress.decode(reader, reader.uint32());
+                                        message.postalAddress = $root.google.type.PostalAddress.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 10: {
                                         if (!(message.addressComponents && message.addressComponents.length))
                                             message.addressComponents = [];
-                                        message.addressComponents.push($root.google.maps.places.v1.Place.AddressComponent.decode(reader, reader.uint32()));
+                                        message.addressComponents.push($root.google.maps.places.v1.Place.AddressComponent.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 case 11: {
-                                        message.plusCode = $root.google.maps.places.v1.Place.PlusCode.decode(reader, reader.uint32());
+                                        message.plusCode = $root.google.maps.places.v1.Place.PlusCode.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 12: {
-                                        message.location = $root.google.type.LatLng.decode(reader, reader.uint32());
+                                        message.location = $root.google.type.LatLng.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 13: {
-                                        message.viewport = $root.google.geo.type.Viewport.decode(reader, reader.uint32());
+                                        message.viewport = $root.google.geo.type.Viewport.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 14: {
@@ -9112,11 +9428,11 @@
                                 case 53: {
                                         if (!(message.reviews && message.reviews.length))
                                             message.reviews = [];
-                                        message.reviews.push($root.google.maps.places.v1.Review.decode(reader, reader.uint32()));
+                                        message.reviews.push($root.google.maps.places.v1.Review.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 case 21: {
-                                        message.regularOpeningHours = $root.google.maps.places.v1.Place.OpeningHours.decode(reader, reader.uint32());
+                                        message.regularOpeningHours = $root.google.maps.places.v1.Place.OpeningHours.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 22: {
@@ -9124,13 +9440,13 @@
                                         break;
                                     }
                                 case 88: {
-                                        message.timeZone = $root.google.type.TimeZone.decode(reader, reader.uint32());
+                                        message.timeZone = $root.google.type.TimeZone.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 54: {
                                         if (!(message.photos && message.photos.length))
                                             message.photos = [];
-                                        message.photos.push($root.google.maps.places.v1.Photo.decode(reader, reader.uint32()));
+                                        message.photos.push($root.google.maps.places.v1.Photo.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 case 24: {
@@ -9142,7 +9458,7 @@
                                         break;
                                     }
                                 case 95: {
-                                        message.openingDate = $root.google.type.Date.decode(reader, reader.uint32());
+                                        message.openingDate = $root.google.type.Date.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 26: {
@@ -9152,7 +9468,7 @@
                                 case 27: {
                                         if (!(message.attributions && message.attributions.length))
                                             message.attributions = [];
-                                        message.attributions.push($root.google.maps.places.v1.Place.Attribution.decode(reader, reader.uint32()));
+                                        message.attributions.push($root.google.maps.places.v1.Place.Attribution.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 case 28: {
@@ -9216,23 +9532,23 @@
                                         break;
                                     }
                                 case 46: {
-                                        message.currentOpeningHours = $root.google.maps.places.v1.Place.OpeningHours.decode(reader, reader.uint32());
+                                        message.currentOpeningHours = $root.google.maps.places.v1.Place.OpeningHours.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 47: {
                                         if (!(message.currentSecondaryOpeningHours && message.currentSecondaryOpeningHours.length))
                                             message.currentSecondaryOpeningHours = [];
-                                        message.currentSecondaryOpeningHours.push($root.google.maps.places.v1.Place.OpeningHours.decode(reader, reader.uint32()));
+                                        message.currentSecondaryOpeningHours.push($root.google.maps.places.v1.Place.OpeningHours.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 case 49: {
                                         if (!(message.regularSecondaryOpeningHours && message.regularSecondaryOpeningHours.length))
                                             message.regularSecondaryOpeningHours = [];
-                                        message.regularSecondaryOpeningHours.push($root.google.maps.places.v1.Place.OpeningHours.decode(reader, reader.uint32()));
+                                        message.regularSecondaryOpeningHours.push($root.google.maps.places.v1.Place.OpeningHours.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 case 52: {
-                                        message.editorialSummary = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                        message.editorialSummary = $root.google.type.LocalizedText.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 55: {
@@ -9280,39 +9596,39 @@
                                         break;
                                     }
                                 case 67: {
-                                        message.paymentOptions = $root.google.maps.places.v1.Place.PaymentOptions.decode(reader, reader.uint32());
+                                        message.paymentOptions = $root.google.maps.places.v1.Place.PaymentOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 70: {
-                                        message.parkingOptions = $root.google.maps.places.v1.Place.ParkingOptions.decode(reader, reader.uint32());
+                                        message.parkingOptions = $root.google.maps.places.v1.Place.ParkingOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 71: {
                                         if (!(message.subDestinations && message.subDestinations.length))
                                             message.subDestinations = [];
-                                        message.subDestinations.push($root.google.maps.places.v1.Place.SubDestination.decode(reader, reader.uint32()));
+                                        message.subDestinations.push($root.google.maps.places.v1.Place.SubDestination.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 case 72: {
-                                        message.accessibilityOptions = $root.google.maps.places.v1.Place.AccessibilityOptions.decode(reader, reader.uint32());
+                                        message.accessibilityOptions = $root.google.maps.places.v1.Place.AccessibilityOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 78: {
-                                        message.fuelOptions = $root.google.maps.places.v1.FuelOptions.decode(reader, reader.uint32());
+                                        message.fuelOptions = $root.google.maps.places.v1.FuelOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 79: {
-                                        message.evChargeOptions = $root.google.maps.places.v1.EVChargeOptions.decode(reader, reader.uint32());
+                                        message.evChargeOptions = $root.google.maps.places.v1.EVChargeOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 80: {
-                                        message.generativeSummary = $root.google.maps.places.v1.Place.GenerativeSummary.decode(reader, reader.uint32());
+                                        message.generativeSummary = $root.google.maps.places.v1.Place.GenerativeSummary.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 82: {
                                         if (!(message.containingPlaces && message.containingPlaces.length))
                                             message.containingPlaces = [];
-                                        message.containingPlaces.push($root.google.maps.places.v1.Place.ContainingPlace.decode(reader, reader.uint32()));
+                                        message.containingPlaces.push($root.google.maps.places.v1.Place.ContainingPlace.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 case 83: {
@@ -9320,31 +9636,31 @@
                                         break;
                                     }
                                 case 84: {
-                                        message.addressDescriptor = $root.google.maps.places.v1.AddressDescriptor.decode(reader, reader.uint32());
+                                        message.addressDescriptor = $root.google.maps.places.v1.AddressDescriptor.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 85: {
-                                        message.googleMapsLinks = $root.google.maps.places.v1.Place.GoogleMapsLinks.decode(reader, reader.uint32());
+                                        message.googleMapsLinks = $root.google.maps.places.v1.Place.GoogleMapsLinks.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 86: {
-                                        message.priceRange = $root.google.maps.places.v1.PriceRange.decode(reader, reader.uint32());
+                                        message.priceRange = $root.google.maps.places.v1.PriceRange.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 87: {
-                                        message.reviewSummary = $root.google.maps.places.v1.Place.ReviewSummary.decode(reader, reader.uint32());
+                                        message.reviewSummary = $root.google.maps.places.v1.Place.ReviewSummary.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 89: {
-                                        message.evChargeAmenitySummary = $root.google.maps.places.v1.Place.EvChargeAmenitySummary.decode(reader, reader.uint32());
+                                        message.evChargeAmenitySummary = $root.google.maps.places.v1.Place.EvChargeAmenitySummary.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 91: {
-                                        message.neighborhoodSummary = $root.google.maps.places.v1.Place.NeighborhoodSummary.decode(reader, reader.uint32());
+                                        message.neighborhoodSummary = $root.google.maps.places.v1.Place.NeighborhoodSummary.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 92: {
-                                        message.consumerAlert = $root.google.maps.places.v1.Place.ConsumerAlert.decode(reader, reader.uint32());
+                                        message.consumerAlert = $root.google.maps.places.v1.Place.ConsumerAlert.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 93: {
@@ -9356,11 +9672,11 @@
                                         break;
                                     }
                                 case 98: {
-                                        message.transitStation = $root.google.maps.places.v1.TransitStation.decode(reader, reader.uint32());
+                                        message.transitStation = $root.google.maps.places.v1.TransitStation.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -9391,9 +9707,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        Place.verify = function verify(message) {
+                        Place.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             var properties = {};
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
@@ -9402,7 +9722,7 @@
                                 if (!$util.isString(message.id))
                                     return "id: string expected";
                             if (message.displayName != null && message.hasOwnProperty("displayName")) {
-                                var error = $root.google.type.LocalizedText.verify(message.displayName);
+                                var error = $root.google.type.LocalizedText.verify(message.displayName, long + 1);
                                 if (error)
                                     return "displayName." + error;
                             }
@@ -9417,12 +9737,12 @@
                                 if (!$util.isString(message.primaryType))
                                     return "primaryType: string expected";
                             if (message.primaryTypeDisplayName != null && message.hasOwnProperty("primaryTypeDisplayName")) {
-                                var error = $root.google.type.LocalizedText.verify(message.primaryTypeDisplayName);
+                                var error = $root.google.type.LocalizedText.verify(message.primaryTypeDisplayName, long + 1);
                                 if (error)
                                     return "primaryTypeDisplayName." + error;
                             }
                             if (message.googleMapsTypeLabel != null && message.hasOwnProperty("googleMapsTypeLabel")) {
-                                var error = $root.google.type.LocalizedText.verify(message.googleMapsTypeLabel);
+                                var error = $root.google.type.LocalizedText.verify(message.googleMapsTypeLabel, long + 1);
                                 if (error)
                                     return "googleMapsTypeLabel." + error;
                             }
@@ -9439,7 +9759,7 @@
                                 if (!$util.isString(message.shortFormattedAddress))
                                     return "shortFormattedAddress: string expected";
                             if (message.postalAddress != null && message.hasOwnProperty("postalAddress")) {
-                                var error = $root.google.type.PostalAddress.verify(message.postalAddress);
+                                var error = $root.google.type.PostalAddress.verify(message.postalAddress, long + 1);
                                 if (error)
                                     return "postalAddress." + error;
                             }
@@ -9447,23 +9767,23 @@
                                 if (!Array.isArray(message.addressComponents))
                                     return "addressComponents: array expected";
                                 for (var i = 0; i < message.addressComponents.length; ++i) {
-                                    var error = $root.google.maps.places.v1.Place.AddressComponent.verify(message.addressComponents[i]);
+                                    var error = $root.google.maps.places.v1.Place.AddressComponent.verify(message.addressComponents[i], long + 1);
                                     if (error)
                                         return "addressComponents." + error;
                                 }
                             }
                             if (message.plusCode != null && message.hasOwnProperty("plusCode")) {
-                                var error = $root.google.maps.places.v1.Place.PlusCode.verify(message.plusCode);
+                                var error = $root.google.maps.places.v1.Place.PlusCode.verify(message.plusCode, long + 1);
                                 if (error)
                                     return "plusCode." + error;
                             }
                             if (message.location != null && message.hasOwnProperty("location")) {
-                                var error = $root.google.type.LatLng.verify(message.location);
+                                var error = $root.google.type.LatLng.verify(message.location, long + 1);
                                 if (error)
                                     return "location." + error;
                             }
                             if (message.viewport != null && message.hasOwnProperty("viewport")) {
-                                var error = $root.google.geo.type.Viewport.verify(message.viewport);
+                                var error = $root.google.geo.type.Viewport.verify(message.viewport, long + 1);
                                 if (error)
                                     return "viewport." + error;
                             }
@@ -9480,13 +9800,13 @@
                                 if (!Array.isArray(message.reviews))
                                     return "reviews: array expected";
                                 for (var i = 0; i < message.reviews.length; ++i) {
-                                    var error = $root.google.maps.places.v1.Review.verify(message.reviews[i]);
+                                    var error = $root.google.maps.places.v1.Review.verify(message.reviews[i], long + 1);
                                     if (error)
                                         return "reviews." + error;
                                 }
                             }
                             if (message.regularOpeningHours != null && message.hasOwnProperty("regularOpeningHours")) {
-                                var error = $root.google.maps.places.v1.Place.OpeningHours.verify(message.regularOpeningHours);
+                                var error = $root.google.maps.places.v1.Place.OpeningHours.verify(message.regularOpeningHours, long + 1);
                                 if (error)
                                     return "regularOpeningHours." + error;
                             }
@@ -9496,7 +9816,7 @@
                                     return "utcOffsetMinutes: integer expected";
                             }
                             if (message.timeZone != null && message.hasOwnProperty("timeZone")) {
-                                var error = $root.google.type.TimeZone.verify(message.timeZone);
+                                var error = $root.google.type.TimeZone.verify(message.timeZone, long + 1);
                                 if (error)
                                     return "timeZone." + error;
                             }
@@ -9504,7 +9824,7 @@
                                 if (!Array.isArray(message.photos))
                                     return "photos: array expected";
                                 for (var i = 0; i < message.photos.length; ++i) {
-                                    var error = $root.google.maps.places.v1.Photo.verify(message.photos[i]);
+                                    var error = $root.google.maps.places.v1.Photo.verify(message.photos[i], long + 1);
                                     if (error)
                                         return "photos." + error;
                                 }
@@ -9524,7 +9844,7 @@
                                     break;
                                 }
                             if (message.openingDate != null && message.hasOwnProperty("openingDate")) {
-                                var error = $root.google.type.Date.verify(message.openingDate);
+                                var error = $root.google.type.Date.verify(message.openingDate, long + 1);
                                 if (error)
                                     return "openingDate." + error;
                             }
@@ -9544,7 +9864,7 @@
                                 if (!Array.isArray(message.attributions))
                                     return "attributions: array expected";
                                 for (var i = 0; i < message.attributions.length; ++i) {
-                                    var error = $root.google.maps.places.v1.Place.Attribution.verify(message.attributions[i]);
+                                    var error = $root.google.maps.places.v1.Place.Attribution.verify(message.attributions[i], long + 1);
                                     if (error)
                                         return "attributions." + error;
                                 }
@@ -9621,7 +9941,7 @@
                                     return "servesVegetarianFood: boolean expected";
                             }
                             if (message.currentOpeningHours != null && message.hasOwnProperty("currentOpeningHours")) {
-                                var error = $root.google.maps.places.v1.Place.OpeningHours.verify(message.currentOpeningHours);
+                                var error = $root.google.maps.places.v1.Place.OpeningHours.verify(message.currentOpeningHours, long + 1);
                                 if (error)
                                     return "currentOpeningHours." + error;
                             }
@@ -9629,7 +9949,7 @@
                                 if (!Array.isArray(message.currentSecondaryOpeningHours))
                                     return "currentSecondaryOpeningHours: array expected";
                                 for (var i = 0; i < message.currentSecondaryOpeningHours.length; ++i) {
-                                    var error = $root.google.maps.places.v1.Place.OpeningHours.verify(message.currentSecondaryOpeningHours[i]);
+                                    var error = $root.google.maps.places.v1.Place.OpeningHours.verify(message.currentSecondaryOpeningHours[i], long + 1);
                                     if (error)
                                         return "currentSecondaryOpeningHours." + error;
                                 }
@@ -9638,13 +9958,13 @@
                                 if (!Array.isArray(message.regularSecondaryOpeningHours))
                                     return "regularSecondaryOpeningHours: array expected";
                                 for (var i = 0; i < message.regularSecondaryOpeningHours.length; ++i) {
-                                    var error = $root.google.maps.places.v1.Place.OpeningHours.verify(message.regularSecondaryOpeningHours[i]);
+                                    var error = $root.google.maps.places.v1.Place.OpeningHours.verify(message.regularSecondaryOpeningHours[i], long + 1);
                                     if (error)
                                         return "regularSecondaryOpeningHours." + error;
                                 }
                             }
                             if (message.editorialSummary != null && message.hasOwnProperty("editorialSummary")) {
-                                var error = $root.google.type.LocalizedText.verify(message.editorialSummary);
+                                var error = $root.google.type.LocalizedText.verify(message.editorialSummary, long + 1);
                                 if (error)
                                     return "editorialSummary." + error;
                             }
@@ -9704,12 +10024,12 @@
                                     return "goodForWatchingSports: boolean expected";
                             }
                             if (message.paymentOptions != null && message.hasOwnProperty("paymentOptions")) {
-                                var error = $root.google.maps.places.v1.Place.PaymentOptions.verify(message.paymentOptions);
+                                var error = $root.google.maps.places.v1.Place.PaymentOptions.verify(message.paymentOptions, long + 1);
                                 if (error)
                                     return "paymentOptions." + error;
                             }
                             if (message.parkingOptions != null && message.hasOwnProperty("parkingOptions")) {
-                                var error = $root.google.maps.places.v1.Place.ParkingOptions.verify(message.parkingOptions);
+                                var error = $root.google.maps.places.v1.Place.ParkingOptions.verify(message.parkingOptions, long + 1);
                                 if (error)
                                     return "parkingOptions." + error;
                             }
@@ -9717,7 +10037,7 @@
                                 if (!Array.isArray(message.subDestinations))
                                     return "subDestinations: array expected";
                                 for (var i = 0; i < message.subDestinations.length; ++i) {
-                                    var error = $root.google.maps.places.v1.Place.SubDestination.verify(message.subDestinations[i]);
+                                    var error = $root.google.maps.places.v1.Place.SubDestination.verify(message.subDestinations[i], long + 1);
                                     if (error)
                                         return "subDestinations." + error;
                                 }
@@ -9725,23 +10045,23 @@
                             if (message.accessibilityOptions != null && message.hasOwnProperty("accessibilityOptions")) {
                                 properties._accessibilityOptions = 1;
                                 {
-                                    var error = $root.google.maps.places.v1.Place.AccessibilityOptions.verify(message.accessibilityOptions);
+                                    var error = $root.google.maps.places.v1.Place.AccessibilityOptions.verify(message.accessibilityOptions, long + 1);
                                     if (error)
                                         return "accessibilityOptions." + error;
                                 }
                             }
                             if (message.fuelOptions != null && message.hasOwnProperty("fuelOptions")) {
-                                var error = $root.google.maps.places.v1.FuelOptions.verify(message.fuelOptions);
+                                var error = $root.google.maps.places.v1.FuelOptions.verify(message.fuelOptions, long + 1);
                                 if (error)
                                     return "fuelOptions." + error;
                             }
                             if (message.evChargeOptions != null && message.hasOwnProperty("evChargeOptions")) {
-                                var error = $root.google.maps.places.v1.EVChargeOptions.verify(message.evChargeOptions);
+                                var error = $root.google.maps.places.v1.EVChargeOptions.verify(message.evChargeOptions, long + 1);
                                 if (error)
                                     return "evChargeOptions." + error;
                             }
                             if (message.generativeSummary != null && message.hasOwnProperty("generativeSummary")) {
-                                var error = $root.google.maps.places.v1.Place.GenerativeSummary.verify(message.generativeSummary);
+                                var error = $root.google.maps.places.v1.Place.GenerativeSummary.verify(message.generativeSummary, long + 1);
                                 if (error)
                                     return "generativeSummary." + error;
                             }
@@ -9749,7 +10069,7 @@
                                 if (!Array.isArray(message.containingPlaces))
                                     return "containingPlaces: array expected";
                                 for (var i = 0; i < message.containingPlaces.length; ++i) {
-                                    var error = $root.google.maps.places.v1.Place.ContainingPlace.verify(message.containingPlaces[i]);
+                                    var error = $root.google.maps.places.v1.Place.ContainingPlace.verify(message.containingPlaces[i], long + 1);
                                     if (error)
                                         return "containingPlaces." + error;
                                 }
@@ -9760,37 +10080,37 @@
                                     return "pureServiceAreaBusiness: boolean expected";
                             }
                             if (message.addressDescriptor != null && message.hasOwnProperty("addressDescriptor")) {
-                                var error = $root.google.maps.places.v1.AddressDescriptor.verify(message.addressDescriptor);
+                                var error = $root.google.maps.places.v1.AddressDescriptor.verify(message.addressDescriptor, long + 1);
                                 if (error)
                                     return "addressDescriptor." + error;
                             }
                             if (message.googleMapsLinks != null && message.hasOwnProperty("googleMapsLinks")) {
-                                var error = $root.google.maps.places.v1.Place.GoogleMapsLinks.verify(message.googleMapsLinks);
+                                var error = $root.google.maps.places.v1.Place.GoogleMapsLinks.verify(message.googleMapsLinks, long + 1);
                                 if (error)
                                     return "googleMapsLinks." + error;
                             }
                             if (message.priceRange != null && message.hasOwnProperty("priceRange")) {
-                                var error = $root.google.maps.places.v1.PriceRange.verify(message.priceRange);
+                                var error = $root.google.maps.places.v1.PriceRange.verify(message.priceRange, long + 1);
                                 if (error)
                                     return "priceRange." + error;
                             }
                             if (message.reviewSummary != null && message.hasOwnProperty("reviewSummary")) {
-                                var error = $root.google.maps.places.v1.Place.ReviewSummary.verify(message.reviewSummary);
+                                var error = $root.google.maps.places.v1.Place.ReviewSummary.verify(message.reviewSummary, long + 1);
                                 if (error)
                                     return "reviewSummary." + error;
                             }
                             if (message.evChargeAmenitySummary != null && message.hasOwnProperty("evChargeAmenitySummary")) {
-                                var error = $root.google.maps.places.v1.Place.EvChargeAmenitySummary.verify(message.evChargeAmenitySummary);
+                                var error = $root.google.maps.places.v1.Place.EvChargeAmenitySummary.verify(message.evChargeAmenitySummary, long + 1);
                                 if (error)
                                     return "evChargeAmenitySummary." + error;
                             }
                             if (message.neighborhoodSummary != null && message.hasOwnProperty("neighborhoodSummary")) {
-                                var error = $root.google.maps.places.v1.Place.NeighborhoodSummary.verify(message.neighborhoodSummary);
+                                var error = $root.google.maps.places.v1.Place.NeighborhoodSummary.verify(message.neighborhoodSummary, long + 1);
                                 if (error)
                                     return "neighborhoodSummary." + error;
                             }
                             if (message.consumerAlert != null && message.hasOwnProperty("consumerAlert")) {
-                                var error = $root.google.maps.places.v1.Place.ConsumerAlert.verify(message.consumerAlert);
+                                var error = $root.google.maps.places.v1.Place.ConsumerAlert.verify(message.consumerAlert, long + 1);
                                 if (error)
                                     return "consumerAlert." + error;
                             }
@@ -9801,7 +10121,7 @@
                                 if (!$util.isString(message.movedPlaceId))
                                     return "movedPlaceId: string expected";
                             if (message.transitStation != null && message.hasOwnProperty("transitStation")) {
-                                var error = $root.google.maps.places.v1.TransitStation.verify(message.transitStation);
+                                var error = $root.google.maps.places.v1.TransitStation.verify(message.transitStation, long + 1);
                                 if (error)
                                     return "transitStation." + error;
                             }
@@ -9816,9 +10136,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.maps.places.v1.Place} Place
                          */
-                        Place.fromObject = function fromObject(object) {
+                        Place.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.maps.places.v1.Place)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.maps.places.v1.Place();
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -9827,7 +10151,7 @@
                             if (object.displayName != null) {
                                 if (typeof object.displayName !== "object")
                                     throw TypeError(".google.maps.places.v1.Place.displayName: object expected");
-                                message.displayName = $root.google.type.LocalizedText.fromObject(object.displayName);
+                                message.displayName = $root.google.type.LocalizedText.fromObject(object.displayName, long + 1);
                             }
                             if (object.types) {
                                 if (!Array.isArray(object.types))
@@ -9841,12 +10165,12 @@
                             if (object.primaryTypeDisplayName != null) {
                                 if (typeof object.primaryTypeDisplayName !== "object")
                                     throw TypeError(".google.maps.places.v1.Place.primaryTypeDisplayName: object expected");
-                                message.primaryTypeDisplayName = $root.google.type.LocalizedText.fromObject(object.primaryTypeDisplayName);
+                                message.primaryTypeDisplayName = $root.google.type.LocalizedText.fromObject(object.primaryTypeDisplayName, long + 1);
                             }
                             if (object.googleMapsTypeLabel != null) {
                                 if (typeof object.googleMapsTypeLabel !== "object")
                                     throw TypeError(".google.maps.places.v1.Place.googleMapsTypeLabel: object expected");
-                                message.googleMapsTypeLabel = $root.google.type.LocalizedText.fromObject(object.googleMapsTypeLabel);
+                                message.googleMapsTypeLabel = $root.google.type.LocalizedText.fromObject(object.googleMapsTypeLabel, long + 1);
                             }
                             if (object.nationalPhoneNumber != null)
                                 message.nationalPhoneNumber = String(object.nationalPhoneNumber);
@@ -9859,7 +10183,7 @@
                             if (object.postalAddress != null) {
                                 if (typeof object.postalAddress !== "object")
                                     throw TypeError(".google.maps.places.v1.Place.postalAddress: object expected");
-                                message.postalAddress = $root.google.type.PostalAddress.fromObject(object.postalAddress);
+                                message.postalAddress = $root.google.type.PostalAddress.fromObject(object.postalAddress, long + 1);
                             }
                             if (object.addressComponents) {
                                 if (!Array.isArray(object.addressComponents))
@@ -9868,23 +10192,23 @@
                                 for (var i = 0; i < object.addressComponents.length; ++i) {
                                     if (typeof object.addressComponents[i] !== "object")
                                         throw TypeError(".google.maps.places.v1.Place.addressComponents: object expected");
-                                    message.addressComponents[i] = $root.google.maps.places.v1.Place.AddressComponent.fromObject(object.addressComponents[i]);
+                                    message.addressComponents[i] = $root.google.maps.places.v1.Place.AddressComponent.fromObject(object.addressComponents[i], long + 1);
                                 }
                             }
                             if (object.plusCode != null) {
                                 if (typeof object.plusCode !== "object")
                                     throw TypeError(".google.maps.places.v1.Place.plusCode: object expected");
-                                message.plusCode = $root.google.maps.places.v1.Place.PlusCode.fromObject(object.plusCode);
+                                message.plusCode = $root.google.maps.places.v1.Place.PlusCode.fromObject(object.plusCode, long + 1);
                             }
                             if (object.location != null) {
                                 if (typeof object.location !== "object")
                                     throw TypeError(".google.maps.places.v1.Place.location: object expected");
-                                message.location = $root.google.type.LatLng.fromObject(object.location);
+                                message.location = $root.google.type.LatLng.fromObject(object.location, long + 1);
                             }
                             if (object.viewport != null) {
                                 if (typeof object.viewport !== "object")
                                     throw TypeError(".google.maps.places.v1.Place.viewport: object expected");
-                                message.viewport = $root.google.geo.type.Viewport.fromObject(object.viewport);
+                                message.viewport = $root.google.geo.type.Viewport.fromObject(object.viewport, long + 1);
                             }
                             if (object.rating != null)
                                 message.rating = Number(object.rating);
@@ -9899,20 +10223,20 @@
                                 for (var i = 0; i < object.reviews.length; ++i) {
                                     if (typeof object.reviews[i] !== "object")
                                         throw TypeError(".google.maps.places.v1.Place.reviews: object expected");
-                                    message.reviews[i] = $root.google.maps.places.v1.Review.fromObject(object.reviews[i]);
+                                    message.reviews[i] = $root.google.maps.places.v1.Review.fromObject(object.reviews[i], long + 1);
                                 }
                             }
                             if (object.regularOpeningHours != null) {
                                 if (typeof object.regularOpeningHours !== "object")
                                     throw TypeError(".google.maps.places.v1.Place.regularOpeningHours: object expected");
-                                message.regularOpeningHours = $root.google.maps.places.v1.Place.OpeningHours.fromObject(object.regularOpeningHours);
+                                message.regularOpeningHours = $root.google.maps.places.v1.Place.OpeningHours.fromObject(object.regularOpeningHours, long + 1);
                             }
                             if (object.utcOffsetMinutes != null)
                                 message.utcOffsetMinutes = object.utcOffsetMinutes | 0;
                             if (object.timeZone != null) {
                                 if (typeof object.timeZone !== "object")
                                     throw TypeError(".google.maps.places.v1.Place.timeZone: object expected");
-                                message.timeZone = $root.google.type.TimeZone.fromObject(object.timeZone);
+                                message.timeZone = $root.google.type.TimeZone.fromObject(object.timeZone, long + 1);
                             }
                             if (object.photos) {
                                 if (!Array.isArray(object.photos))
@@ -9921,7 +10245,7 @@
                                 for (var i = 0; i < object.photos.length; ++i) {
                                     if (typeof object.photos[i] !== "object")
                                         throw TypeError(".google.maps.places.v1.Place.photos: object expected");
-                                    message.photos[i] = $root.google.maps.places.v1.Photo.fromObject(object.photos[i]);
+                                    message.photos[i] = $root.google.maps.places.v1.Photo.fromObject(object.photos[i], long + 1);
                                 }
                             }
                             if (object.adrFormatAddress != null)
@@ -9957,7 +10281,7 @@
                             if (object.openingDate != null) {
                                 if (typeof object.openingDate !== "object")
                                     throw TypeError(".google.maps.places.v1.Place.openingDate: object expected");
-                                message.openingDate = $root.google.type.Date.fromObject(object.openingDate);
+                                message.openingDate = $root.google.type.Date.fromObject(object.openingDate, long + 1);
                             }
                             switch (object.priceLevel) {
                             default:
@@ -9998,7 +10322,7 @@
                                 for (var i = 0; i < object.attributions.length; ++i) {
                                     if (typeof object.attributions[i] !== "object")
                                         throw TypeError(".google.maps.places.v1.Place.attributions: object expected");
-                                    message.attributions[i] = $root.google.maps.places.v1.Place.Attribution.fromObject(object.attributions[i]);
+                                    message.attributions[i] = $root.google.maps.places.v1.Place.Attribution.fromObject(object.attributions[i], long + 1);
                                 }
                             }
                             if (object.userRatingCount != null)
@@ -10034,7 +10358,7 @@
                             if (object.currentOpeningHours != null) {
                                 if (typeof object.currentOpeningHours !== "object")
                                     throw TypeError(".google.maps.places.v1.Place.currentOpeningHours: object expected");
-                                message.currentOpeningHours = $root.google.maps.places.v1.Place.OpeningHours.fromObject(object.currentOpeningHours);
+                                message.currentOpeningHours = $root.google.maps.places.v1.Place.OpeningHours.fromObject(object.currentOpeningHours, long + 1);
                             }
                             if (object.currentSecondaryOpeningHours) {
                                 if (!Array.isArray(object.currentSecondaryOpeningHours))
@@ -10043,7 +10367,7 @@
                                 for (var i = 0; i < object.currentSecondaryOpeningHours.length; ++i) {
                                     if (typeof object.currentSecondaryOpeningHours[i] !== "object")
                                         throw TypeError(".google.maps.places.v1.Place.currentSecondaryOpeningHours: object expected");
-                                    message.currentSecondaryOpeningHours[i] = $root.google.maps.places.v1.Place.OpeningHours.fromObject(object.currentSecondaryOpeningHours[i]);
+                                    message.currentSecondaryOpeningHours[i] = $root.google.maps.places.v1.Place.OpeningHours.fromObject(object.currentSecondaryOpeningHours[i], long + 1);
                                 }
                             }
                             if (object.regularSecondaryOpeningHours) {
@@ -10053,13 +10377,13 @@
                                 for (var i = 0; i < object.regularSecondaryOpeningHours.length; ++i) {
                                     if (typeof object.regularSecondaryOpeningHours[i] !== "object")
                                         throw TypeError(".google.maps.places.v1.Place.regularSecondaryOpeningHours: object expected");
-                                    message.regularSecondaryOpeningHours[i] = $root.google.maps.places.v1.Place.OpeningHours.fromObject(object.regularSecondaryOpeningHours[i]);
+                                    message.regularSecondaryOpeningHours[i] = $root.google.maps.places.v1.Place.OpeningHours.fromObject(object.regularSecondaryOpeningHours[i], long + 1);
                                 }
                             }
                             if (object.editorialSummary != null) {
                                 if (typeof object.editorialSummary !== "object")
                                     throw TypeError(".google.maps.places.v1.Place.editorialSummary: object expected");
-                                message.editorialSummary = $root.google.type.LocalizedText.fromObject(object.editorialSummary);
+                                message.editorialSummary = $root.google.type.LocalizedText.fromObject(object.editorialSummary, long + 1);
                             }
                             if (object.outdoorSeating != null)
                                 message.outdoorSeating = Boolean(object.outdoorSeating);
@@ -10086,12 +10410,12 @@
                             if (object.paymentOptions != null) {
                                 if (typeof object.paymentOptions !== "object")
                                     throw TypeError(".google.maps.places.v1.Place.paymentOptions: object expected");
-                                message.paymentOptions = $root.google.maps.places.v1.Place.PaymentOptions.fromObject(object.paymentOptions);
+                                message.paymentOptions = $root.google.maps.places.v1.Place.PaymentOptions.fromObject(object.paymentOptions, long + 1);
                             }
                             if (object.parkingOptions != null) {
                                 if (typeof object.parkingOptions !== "object")
                                     throw TypeError(".google.maps.places.v1.Place.parkingOptions: object expected");
-                                message.parkingOptions = $root.google.maps.places.v1.Place.ParkingOptions.fromObject(object.parkingOptions);
+                                message.parkingOptions = $root.google.maps.places.v1.Place.ParkingOptions.fromObject(object.parkingOptions, long + 1);
                             }
                             if (object.subDestinations) {
                                 if (!Array.isArray(object.subDestinations))
@@ -10100,28 +10424,28 @@
                                 for (var i = 0; i < object.subDestinations.length; ++i) {
                                     if (typeof object.subDestinations[i] !== "object")
                                         throw TypeError(".google.maps.places.v1.Place.subDestinations: object expected");
-                                    message.subDestinations[i] = $root.google.maps.places.v1.Place.SubDestination.fromObject(object.subDestinations[i]);
+                                    message.subDestinations[i] = $root.google.maps.places.v1.Place.SubDestination.fromObject(object.subDestinations[i], long + 1);
                                 }
                             }
                             if (object.accessibilityOptions != null) {
                                 if (typeof object.accessibilityOptions !== "object")
                                     throw TypeError(".google.maps.places.v1.Place.accessibilityOptions: object expected");
-                                message.accessibilityOptions = $root.google.maps.places.v1.Place.AccessibilityOptions.fromObject(object.accessibilityOptions);
+                                message.accessibilityOptions = $root.google.maps.places.v1.Place.AccessibilityOptions.fromObject(object.accessibilityOptions, long + 1);
                             }
                             if (object.fuelOptions != null) {
                                 if (typeof object.fuelOptions !== "object")
                                     throw TypeError(".google.maps.places.v1.Place.fuelOptions: object expected");
-                                message.fuelOptions = $root.google.maps.places.v1.FuelOptions.fromObject(object.fuelOptions);
+                                message.fuelOptions = $root.google.maps.places.v1.FuelOptions.fromObject(object.fuelOptions, long + 1);
                             }
                             if (object.evChargeOptions != null) {
                                 if (typeof object.evChargeOptions !== "object")
                                     throw TypeError(".google.maps.places.v1.Place.evChargeOptions: object expected");
-                                message.evChargeOptions = $root.google.maps.places.v1.EVChargeOptions.fromObject(object.evChargeOptions);
+                                message.evChargeOptions = $root.google.maps.places.v1.EVChargeOptions.fromObject(object.evChargeOptions, long + 1);
                             }
                             if (object.generativeSummary != null) {
                                 if (typeof object.generativeSummary !== "object")
                                     throw TypeError(".google.maps.places.v1.Place.generativeSummary: object expected");
-                                message.generativeSummary = $root.google.maps.places.v1.Place.GenerativeSummary.fromObject(object.generativeSummary);
+                                message.generativeSummary = $root.google.maps.places.v1.Place.GenerativeSummary.fromObject(object.generativeSummary, long + 1);
                             }
                             if (object.containingPlaces) {
                                 if (!Array.isArray(object.containingPlaces))
@@ -10130,7 +10454,7 @@
                                 for (var i = 0; i < object.containingPlaces.length; ++i) {
                                     if (typeof object.containingPlaces[i] !== "object")
                                         throw TypeError(".google.maps.places.v1.Place.containingPlaces: object expected");
-                                    message.containingPlaces[i] = $root.google.maps.places.v1.Place.ContainingPlace.fromObject(object.containingPlaces[i]);
+                                    message.containingPlaces[i] = $root.google.maps.places.v1.Place.ContainingPlace.fromObject(object.containingPlaces[i], long + 1);
                                 }
                             }
                             if (object.pureServiceAreaBusiness != null)
@@ -10138,37 +10462,37 @@
                             if (object.addressDescriptor != null) {
                                 if (typeof object.addressDescriptor !== "object")
                                     throw TypeError(".google.maps.places.v1.Place.addressDescriptor: object expected");
-                                message.addressDescriptor = $root.google.maps.places.v1.AddressDescriptor.fromObject(object.addressDescriptor);
+                                message.addressDescriptor = $root.google.maps.places.v1.AddressDescriptor.fromObject(object.addressDescriptor, long + 1);
                             }
                             if (object.googleMapsLinks != null) {
                                 if (typeof object.googleMapsLinks !== "object")
                                     throw TypeError(".google.maps.places.v1.Place.googleMapsLinks: object expected");
-                                message.googleMapsLinks = $root.google.maps.places.v1.Place.GoogleMapsLinks.fromObject(object.googleMapsLinks);
+                                message.googleMapsLinks = $root.google.maps.places.v1.Place.GoogleMapsLinks.fromObject(object.googleMapsLinks, long + 1);
                             }
                             if (object.priceRange != null) {
                                 if (typeof object.priceRange !== "object")
                                     throw TypeError(".google.maps.places.v1.Place.priceRange: object expected");
-                                message.priceRange = $root.google.maps.places.v1.PriceRange.fromObject(object.priceRange);
+                                message.priceRange = $root.google.maps.places.v1.PriceRange.fromObject(object.priceRange, long + 1);
                             }
                             if (object.reviewSummary != null) {
                                 if (typeof object.reviewSummary !== "object")
                                     throw TypeError(".google.maps.places.v1.Place.reviewSummary: object expected");
-                                message.reviewSummary = $root.google.maps.places.v1.Place.ReviewSummary.fromObject(object.reviewSummary);
+                                message.reviewSummary = $root.google.maps.places.v1.Place.ReviewSummary.fromObject(object.reviewSummary, long + 1);
                             }
                             if (object.evChargeAmenitySummary != null) {
                                 if (typeof object.evChargeAmenitySummary !== "object")
                                     throw TypeError(".google.maps.places.v1.Place.evChargeAmenitySummary: object expected");
-                                message.evChargeAmenitySummary = $root.google.maps.places.v1.Place.EvChargeAmenitySummary.fromObject(object.evChargeAmenitySummary);
+                                message.evChargeAmenitySummary = $root.google.maps.places.v1.Place.EvChargeAmenitySummary.fromObject(object.evChargeAmenitySummary, long + 1);
                             }
                             if (object.neighborhoodSummary != null) {
                                 if (typeof object.neighborhoodSummary !== "object")
                                     throw TypeError(".google.maps.places.v1.Place.neighborhoodSummary: object expected");
-                                message.neighborhoodSummary = $root.google.maps.places.v1.Place.NeighborhoodSummary.fromObject(object.neighborhoodSummary);
+                                message.neighborhoodSummary = $root.google.maps.places.v1.Place.NeighborhoodSummary.fromObject(object.neighborhoodSummary, long + 1);
                             }
                             if (object.consumerAlert != null) {
                                 if (typeof object.consumerAlert !== "object")
                                     throw TypeError(".google.maps.places.v1.Place.consumerAlert: object expected");
-                                message.consumerAlert = $root.google.maps.places.v1.Place.ConsumerAlert.fromObject(object.consumerAlert);
+                                message.consumerAlert = $root.google.maps.places.v1.Place.ConsumerAlert.fromObject(object.consumerAlert, long + 1);
                             }
                             if (object.movedPlace != null)
                                 message.movedPlace = String(object.movedPlace);
@@ -10177,7 +10501,7 @@
                             if (object.transitStation != null) {
                                 if (typeof object.transitStation !== "object")
                                     throw TypeError(".google.maps.places.v1.Place.transitStation: object expected");
-                                message.transitStation = $root.google.maps.places.v1.TransitStation.fromObject(object.transitStation);
+                                message.transitStation = $root.google.maps.places.v1.TransitStation.fromObject(object.transitStation, long + 1);
                             }
                             return message;
                         };
@@ -10567,7 +10891,7 @@
                                 this.types = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                             this[keys[i]] = properties[keys[i]];
                             }
     
@@ -10663,9 +10987,13 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            AddressComponent.decode = function decode(reader, length, error) {
+                            AddressComponent.decode = function decode(reader, length, error, long) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Place.AddressComponent();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
@@ -10691,7 +11019,7 @@
                                             break;
                                         }
                                     default:
-                                        reader.skipType(tag & 7);
+                                        reader.skipType(tag & 7, long);
                                         break;
                                     }
                                 }
@@ -10722,9 +11050,13 @@
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            AddressComponent.verify = function verify(message) {
+                            AddressComponent.verify = function verify(message, long) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
                                 if (message.longText != null && message.hasOwnProperty("longText"))
                                     if (!$util.isString(message.longText))
                                         return "longText: string expected";
@@ -10752,9 +11084,13 @@
                              * @param {Object.<string,*>} object Plain object
                              * @returns {google.maps.places.v1.Place.AddressComponent} AddressComponent
                              */
-                            AddressComponent.fromObject = function fromObject(object) {
+                            AddressComponent.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.maps.places.v1.Place.AddressComponent)
                                     return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.maps.places.v1.Place.AddressComponent();
                                 if (object.longText != null)
                                     message.longText = String(object.longText);
@@ -10856,7 +11192,7 @@
                             function PlusCode(properties) {
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                             this[keys[i]] = properties[keys[i]];
                             }
     
@@ -10931,9 +11267,13 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            PlusCode.decode = function decode(reader, length, error) {
+                            PlusCode.decode = function decode(reader, length, error, long) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Place.PlusCode();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
@@ -10949,7 +11289,7 @@
                                             break;
                                         }
                                     default:
-                                        reader.skipType(tag & 7);
+                                        reader.skipType(tag & 7, long);
                                         break;
                                     }
                                 }
@@ -10980,9 +11320,13 @@
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            PlusCode.verify = function verify(message) {
+                            PlusCode.verify = function verify(message, long) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
                                 if (message.globalCode != null && message.hasOwnProperty("globalCode"))
                                     if (!$util.isString(message.globalCode))
                                         return "globalCode: string expected";
@@ -11000,9 +11344,13 @@
                              * @param {Object.<string,*>} object Plain object
                              * @returns {google.maps.places.v1.Place.PlusCode} PlusCode
                              */
-                            PlusCode.fromObject = function fromObject(object) {
+                            PlusCode.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.maps.places.v1.Place.PlusCode)
                                     return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.maps.places.v1.Place.PlusCode();
                                 if (object.globalCode != null)
                                     message.globalCode = String(object.globalCode);
@@ -11093,7 +11441,7 @@
                                 this.specialDays = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                             this[keys[i]] = properties[keys[i]];
                             }
     
@@ -11230,9 +11578,13 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            OpeningHours.decode = function decode(reader, length, error) {
+                            OpeningHours.decode = function decode(reader, length, error, long) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Place.OpeningHours();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
@@ -11246,7 +11598,7 @@
                                     case 2: {
                                             if (!(message.periods && message.periods.length))
                                                 message.periods = [];
-                                            message.periods.push($root.google.maps.places.v1.Place.OpeningHours.Period.decode(reader, reader.uint32()));
+                                            message.periods.push($root.google.maps.places.v1.Place.OpeningHours.Period.decode(reader, reader.uint32(), undefined, long + 1));
                                             break;
                                         }
                                     case 3: {
@@ -11262,19 +11614,19 @@
                                     case 5: {
                                             if (!(message.specialDays && message.specialDays.length))
                                                 message.specialDays = [];
-                                            message.specialDays.push($root.google.maps.places.v1.Place.OpeningHours.SpecialDay.decode(reader, reader.uint32()));
+                                            message.specialDays.push($root.google.maps.places.v1.Place.OpeningHours.SpecialDay.decode(reader, reader.uint32(), undefined, long + 1));
                                             break;
                                         }
                                     case 6: {
-                                            message.nextOpenTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            message.nextOpenTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     case 7: {
-                                            message.nextCloseTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            message.nextCloseTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     default:
-                                        reader.skipType(tag & 7);
+                                        reader.skipType(tag & 7, long);
                                         break;
                                     }
                                 }
@@ -11305,9 +11657,13 @@
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            OpeningHours.verify = function verify(message) {
+                            OpeningHours.verify = function verify(message, long) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
                                 var properties = {};
                                 if (message.openNow != null && message.hasOwnProperty("openNow")) {
                                     properties._openNow = 1;
@@ -11318,7 +11674,7 @@
                                     if (!Array.isArray(message.periods))
                                         return "periods: array expected";
                                     for (var i = 0; i < message.periods.length; ++i) {
-                                        var error = $root.google.maps.places.v1.Place.OpeningHours.Period.verify(message.periods[i]);
+                                        var error = $root.google.maps.places.v1.Place.OpeningHours.Period.verify(message.periods[i], long + 1);
                                         if (error)
                                             return "periods." + error;
                                     }
@@ -11354,18 +11710,18 @@
                                     if (!Array.isArray(message.specialDays))
                                         return "specialDays: array expected";
                                     for (var i = 0; i < message.specialDays.length; ++i) {
-                                        var error = $root.google.maps.places.v1.Place.OpeningHours.SpecialDay.verify(message.specialDays[i]);
+                                        var error = $root.google.maps.places.v1.Place.OpeningHours.SpecialDay.verify(message.specialDays[i], long + 1);
                                         if (error)
                                             return "specialDays." + error;
                                     }
                                 }
                                 if (message.nextOpenTime != null && message.hasOwnProperty("nextOpenTime")) {
-                                    var error = $root.google.protobuf.Timestamp.verify(message.nextOpenTime);
+                                    var error = $root.google.protobuf.Timestamp.verify(message.nextOpenTime, long + 1);
                                     if (error)
                                         return "nextOpenTime." + error;
                                 }
                                 if (message.nextCloseTime != null && message.hasOwnProperty("nextCloseTime")) {
-                                    var error = $root.google.protobuf.Timestamp.verify(message.nextCloseTime);
+                                    var error = $root.google.protobuf.Timestamp.verify(message.nextCloseTime, long + 1);
                                     if (error)
                                         return "nextCloseTime." + error;
                                 }
@@ -11380,9 +11736,13 @@
                              * @param {Object.<string,*>} object Plain object
                              * @returns {google.maps.places.v1.Place.OpeningHours} OpeningHours
                              */
-                            OpeningHours.fromObject = function fromObject(object) {
+                            OpeningHours.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.maps.places.v1.Place.OpeningHours)
                                     return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.maps.places.v1.Place.OpeningHours();
                                 if (object.openNow != null)
                                     message.openNow = Boolean(object.openNow);
@@ -11393,7 +11753,7 @@
                                     for (var i = 0; i < object.periods.length; ++i) {
                                         if (typeof object.periods[i] !== "object")
                                             throw TypeError(".google.maps.places.v1.Place.OpeningHours.periods: object expected");
-                                        message.periods[i] = $root.google.maps.places.v1.Place.OpeningHours.Period.fromObject(object.periods[i]);
+                                        message.periods[i] = $root.google.maps.places.v1.Place.OpeningHours.Period.fromObject(object.periods[i], long + 1);
                                     }
                                 }
                                 if (object.weekdayDescriptions) {
@@ -11474,18 +11834,18 @@
                                     for (var i = 0; i < object.specialDays.length; ++i) {
                                         if (typeof object.specialDays[i] !== "object")
                                             throw TypeError(".google.maps.places.v1.Place.OpeningHours.specialDays: object expected");
-                                        message.specialDays[i] = $root.google.maps.places.v1.Place.OpeningHours.SpecialDay.fromObject(object.specialDays[i]);
+                                        message.specialDays[i] = $root.google.maps.places.v1.Place.OpeningHours.SpecialDay.fromObject(object.specialDays[i], long + 1);
                                     }
                                 }
                                 if (object.nextOpenTime != null) {
                                     if (typeof object.nextOpenTime !== "object")
                                         throw TypeError(".google.maps.places.v1.Place.OpeningHours.nextOpenTime: object expected");
-                                    message.nextOpenTime = $root.google.protobuf.Timestamp.fromObject(object.nextOpenTime);
+                                    message.nextOpenTime = $root.google.protobuf.Timestamp.fromObject(object.nextOpenTime, long + 1);
                                 }
                                 if (object.nextCloseTime != null) {
                                     if (typeof object.nextCloseTime !== "object")
                                         throw TypeError(".google.maps.places.v1.Place.OpeningHours.nextCloseTime: object expected");
-                                    message.nextCloseTime = $root.google.protobuf.Timestamp.fromObject(object.nextCloseTime);
+                                    message.nextCloseTime = $root.google.protobuf.Timestamp.fromObject(object.nextCloseTime, long + 1);
                                 }
                                 return message;
                             };
@@ -11589,7 +11949,7 @@
                                 function Period(properties) {
                                     if (properties)
                                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                            if (properties[keys[i]] != null)
+                                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                                 this[keys[i]] = properties[keys[i]];
                                 }
     
@@ -11664,9 +12024,13 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                Period.decode = function decode(reader, length, error) {
+                                Period.decode = function decode(reader, length, error, long) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $Reader.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Place.OpeningHours.Period();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
@@ -11674,15 +12038,15 @@
                                             break;
                                         switch (tag >>> 3) {
                                         case 1: {
-                                                message.open = $root.google.maps.places.v1.Place.OpeningHours.Period.Point.decode(reader, reader.uint32());
+                                                message.open = $root.google.maps.places.v1.Place.OpeningHours.Period.Point.decode(reader, reader.uint32(), undefined, long + 1);
                                                 break;
                                             }
                                         case 2: {
-                                                message.close = $root.google.maps.places.v1.Place.OpeningHours.Period.Point.decode(reader, reader.uint32());
+                                                message.close = $root.google.maps.places.v1.Place.OpeningHours.Period.Point.decode(reader, reader.uint32(), undefined, long + 1);
                                                 break;
                                             }
                                         default:
-                                            reader.skipType(tag & 7);
+                                            reader.skipType(tag & 7, long);
                                             break;
                                         }
                                     }
@@ -11713,16 +12077,20 @@
                                  * @param {Object.<string,*>} message Plain object to verify
                                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                                  */
-                                Period.verify = function verify(message) {
+                                Period.verify = function verify(message, long) {
                                     if (typeof message !== "object" || message === null)
                                         return "object expected";
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        return "maximum nesting depth exceeded";
                                     if (message.open != null && message.hasOwnProperty("open")) {
-                                        var error = $root.google.maps.places.v1.Place.OpeningHours.Period.Point.verify(message.open);
+                                        var error = $root.google.maps.places.v1.Place.OpeningHours.Period.Point.verify(message.open, long + 1);
                                         if (error)
                                             return "open." + error;
                                     }
                                     if (message.close != null && message.hasOwnProperty("close")) {
-                                        var error = $root.google.maps.places.v1.Place.OpeningHours.Period.Point.verify(message.close);
+                                        var error = $root.google.maps.places.v1.Place.OpeningHours.Period.Point.verify(message.close, long + 1);
                                         if (error)
                                             return "close." + error;
                                     }
@@ -11737,19 +12105,23 @@
                                  * @param {Object.<string,*>} object Plain object
                                  * @returns {google.maps.places.v1.Place.OpeningHours.Period} Period
                                  */
-                                Period.fromObject = function fromObject(object) {
+                                Period.fromObject = function fromObject(object, long) {
                                     if (object instanceof $root.google.maps.places.v1.Place.OpeningHours.Period)
                                         return object;
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
                                     var message = new $root.google.maps.places.v1.Place.OpeningHours.Period();
                                     if (object.open != null) {
                                         if (typeof object.open !== "object")
                                             throw TypeError(".google.maps.places.v1.Place.OpeningHours.Period.open: object expected");
-                                        message.open = $root.google.maps.places.v1.Place.OpeningHours.Period.Point.fromObject(object.open);
+                                        message.open = $root.google.maps.places.v1.Place.OpeningHours.Period.Point.fromObject(object.open, long + 1);
                                     }
                                     if (object.close != null) {
                                         if (typeof object.close !== "object")
                                             throw TypeError(".google.maps.places.v1.Place.OpeningHours.Period.close: object expected");
-                                        message.close = $root.google.maps.places.v1.Place.OpeningHours.Period.Point.fromObject(object.close);
+                                        message.close = $root.google.maps.places.v1.Place.OpeningHours.Period.Point.fromObject(object.close, long + 1);
                                     }
                                     return message;
                                 };
@@ -11828,7 +12200,7 @@
                                     function Point(properties) {
                                         if (properties)
                                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                                if (properties[keys[i]] != null)
+                                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                                     this[keys[i]] = properties[keys[i]];
                                     }
     
@@ -11954,9 +12326,13 @@
                                      * @throws {Error} If the payload is not a reader or valid buffer
                                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                      */
-                                    Point.decode = function decode(reader, length, error) {
+                                    Point.decode = function decode(reader, length, error, long) {
                                         if (!(reader instanceof $Reader))
                                             reader = $Reader.create(reader);
+                                        if (long === undefined)
+                                            long = 0;
+                                        if (long > $Reader.recursionLimit)
+                                            throw Error("maximum nesting depth exceeded");
                                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Place.OpeningHours.Period.Point();
                                         while (reader.pos < end) {
                                             var tag = reader.uint32();
@@ -11976,7 +12352,7 @@
                                                     break;
                                                 }
                                             case 6: {
-                                                    message.date = $root.google.type.Date.decode(reader, reader.uint32());
+                                                    message.date = $root.google.type.Date.decode(reader, reader.uint32(), undefined, long + 1);
                                                     break;
                                                 }
                                             case 5: {
@@ -11984,7 +12360,7 @@
                                                     break;
                                                 }
                                             default:
-                                                reader.skipType(tag & 7);
+                                                reader.skipType(tag & 7, long);
                                                 break;
                                             }
                                         }
@@ -12015,9 +12391,13 @@
                                      * @param {Object.<string,*>} message Plain object to verify
                                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                                      */
-                                    Point.verify = function verify(message) {
+                                    Point.verify = function verify(message, long) {
                                         if (typeof message !== "object" || message === null)
                                             return "object expected";
+                                        if (long === undefined)
+                                            long = 0;
+                                        if (long > $util.recursionLimit)
+                                            return "maximum nesting depth exceeded";
                                         var properties = {};
                                         if (message.day != null && message.hasOwnProperty("day")) {
                                             properties._day = 1;
@@ -12035,7 +12415,7 @@
                                                 return "minute: integer expected";
                                         }
                                         if (message.date != null && message.hasOwnProperty("date")) {
-                                            var error = $root.google.type.Date.verify(message.date);
+                                            var error = $root.google.type.Date.verify(message.date, long + 1);
                                             if (error)
                                                 return "date." + error;
                                         }
@@ -12053,9 +12433,13 @@
                                      * @param {Object.<string,*>} object Plain object
                                      * @returns {google.maps.places.v1.Place.OpeningHours.Period.Point} Point
                                      */
-                                    Point.fromObject = function fromObject(object) {
+                                    Point.fromObject = function fromObject(object, long) {
                                         if (object instanceof $root.google.maps.places.v1.Place.OpeningHours.Period.Point)
                                             return object;
+                                        if (long === undefined)
+                                            long = 0;
+                                        if (long > $util.recursionLimit)
+                                            throw Error("maximum nesting depth exceeded");
                                         var message = new $root.google.maps.places.v1.Place.OpeningHours.Period.Point();
                                         if (object.day != null)
                                             message.day = object.day | 0;
@@ -12066,7 +12450,7 @@
                                         if (object.date != null) {
                                             if (typeof object.date !== "object")
                                                 throw TypeError(".google.maps.places.v1.Place.OpeningHours.Period.Point.date: object expected");
-                                            message.date = $root.google.type.Date.fromObject(object.date);
+                                            message.date = $root.google.type.Date.fromObject(object.date, long + 1);
                                         }
                                         if (object.truncated != null)
                                             message.truncated = Boolean(object.truncated);
@@ -12202,7 +12586,7 @@
                                 function SpecialDay(properties) {
                                     if (properties)
                                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                            if (properties[keys[i]] != null)
+                                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                                 this[keys[i]] = properties[keys[i]];
                                 }
     
@@ -12267,9 +12651,13 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                SpecialDay.decode = function decode(reader, length, error) {
+                                SpecialDay.decode = function decode(reader, length, error, long) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $Reader.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Place.OpeningHours.SpecialDay();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
@@ -12277,11 +12665,11 @@
                                             break;
                                         switch (tag >>> 3) {
                                         case 1: {
-                                                message.date = $root.google.type.Date.decode(reader, reader.uint32());
+                                                message.date = $root.google.type.Date.decode(reader, reader.uint32(), undefined, long + 1);
                                                 break;
                                             }
                                         default:
-                                            reader.skipType(tag & 7);
+                                            reader.skipType(tag & 7, long);
                                             break;
                                         }
                                     }
@@ -12312,11 +12700,15 @@
                                  * @param {Object.<string,*>} message Plain object to verify
                                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                                  */
-                                SpecialDay.verify = function verify(message) {
+                                SpecialDay.verify = function verify(message, long) {
                                     if (typeof message !== "object" || message === null)
                                         return "object expected";
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        return "maximum nesting depth exceeded";
                                     if (message.date != null && message.hasOwnProperty("date")) {
-                                        var error = $root.google.type.Date.verify(message.date);
+                                        var error = $root.google.type.Date.verify(message.date, long + 1);
                                         if (error)
                                             return "date." + error;
                                     }
@@ -12331,14 +12723,18 @@
                                  * @param {Object.<string,*>} object Plain object
                                  * @returns {google.maps.places.v1.Place.OpeningHours.SpecialDay} SpecialDay
                                  */
-                                SpecialDay.fromObject = function fromObject(object) {
+                                SpecialDay.fromObject = function fromObject(object, long) {
                                     if (object instanceof $root.google.maps.places.v1.Place.OpeningHours.SpecialDay)
                                         return object;
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
                                     var message = new $root.google.maps.places.v1.Place.OpeningHours.SpecialDay();
                                     if (object.date != null) {
                                         if (typeof object.date !== "object")
                                             throw TypeError(".google.maps.places.v1.Place.OpeningHours.SpecialDay.date: object expected");
-                                        message.date = $root.google.type.Date.fromObject(object.date);
+                                        message.date = $root.google.type.Date.fromObject(object.date, long + 1);
                                     }
                                     return message;
                                 };
@@ -12436,7 +12832,7 @@
                             function Attribution(properties) {
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                             this[keys[i]] = properties[keys[i]];
                             }
     
@@ -12511,9 +12907,13 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Attribution.decode = function decode(reader, length, error) {
+                            Attribution.decode = function decode(reader, length, error, long) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Place.Attribution();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
@@ -12529,7 +12929,7 @@
                                             break;
                                         }
                                     default:
-                                        reader.skipType(tag & 7);
+                                        reader.skipType(tag & 7, long);
                                         break;
                                     }
                                 }
@@ -12560,9 +12960,13 @@
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            Attribution.verify = function verify(message) {
+                            Attribution.verify = function verify(message, long) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
                                 if (message.provider != null && message.hasOwnProperty("provider"))
                                     if (!$util.isString(message.provider))
                                         return "provider: string expected";
@@ -12580,9 +12984,13 @@
                              * @param {Object.<string,*>} object Plain object
                              * @returns {google.maps.places.v1.Place.Attribution} Attribution
                              */
-                            Attribution.fromObject = function fromObject(object) {
+                            Attribution.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.maps.places.v1.Place.Attribution)
                                     return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.maps.places.v1.Place.Attribution();
                                 if (object.provider != null)
                                     message.provider = String(object.provider);
@@ -12667,7 +13075,7 @@
                             function PaymentOptions(properties) {
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                             this[keys[i]] = properties[keys[i]];
                             }
     
@@ -12789,9 +13197,13 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            PaymentOptions.decode = function decode(reader, length, error) {
+                            PaymentOptions.decode = function decode(reader, length, error, long) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Place.PaymentOptions();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
@@ -12815,7 +13227,7 @@
                                             break;
                                         }
                                     default:
-                                        reader.skipType(tag & 7);
+                                        reader.skipType(tag & 7, long);
                                         break;
                                     }
                                 }
@@ -12846,9 +13258,13 @@
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            PaymentOptions.verify = function verify(message) {
+                            PaymentOptions.verify = function verify(message, long) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
                                 var properties = {};
                                 if (message.acceptsCreditCards != null && message.hasOwnProperty("acceptsCreditCards")) {
                                     properties._acceptsCreditCards = 1;
@@ -12881,9 +13297,13 @@
                              * @param {Object.<string,*>} object Plain object
                              * @returns {google.maps.places.v1.Place.PaymentOptions} PaymentOptions
                              */
-                            PaymentOptions.fromObject = function fromObject(object) {
+                            PaymentOptions.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.maps.places.v1.Place.PaymentOptions)
                                     return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.maps.places.v1.Place.PaymentOptions();
                                 if (object.acceptsCreditCards != null)
                                     message.acceptsCreditCards = Boolean(object.acceptsCreditCards);
@@ -12987,7 +13407,7 @@
                             function ParkingOptions(properties) {
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                             this[keys[i]] = properties[keys[i]];
                             }
     
@@ -13157,9 +13577,13 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ParkingOptions.decode = function decode(reader, length, error) {
+                            ParkingOptions.decode = function decode(reader, length, error, long) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Place.ParkingOptions();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
@@ -13195,7 +13619,7 @@
                                             break;
                                         }
                                     default:
-                                        reader.skipType(tag & 7);
+                                        reader.skipType(tag & 7, long);
                                         break;
                                     }
                                 }
@@ -13226,9 +13650,13 @@
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            ParkingOptions.verify = function verify(message) {
+                            ParkingOptions.verify = function verify(message, long) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
                                 var properties = {};
                                 if (message.freeParkingLot != null && message.hasOwnProperty("freeParkingLot")) {
                                     properties._freeParkingLot = 1;
@@ -13276,9 +13704,13 @@
                              * @param {Object.<string,*>} object Plain object
                              * @returns {google.maps.places.v1.Place.ParkingOptions} ParkingOptions
                              */
-                            ParkingOptions.fromObject = function fromObject(object) {
+                            ParkingOptions.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.maps.places.v1.Place.ParkingOptions)
                                     return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.maps.places.v1.Place.ParkingOptions();
                                 if (object.freeParkingLot != null)
                                     message.freeParkingLot = Boolean(object.freeParkingLot);
@@ -13398,7 +13830,7 @@
                             function SubDestination(properties) {
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                             this[keys[i]] = properties[keys[i]];
                             }
     
@@ -13473,9 +13905,13 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            SubDestination.decode = function decode(reader, length, error) {
+                            SubDestination.decode = function decode(reader, length, error, long) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Place.SubDestination();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
@@ -13491,7 +13927,7 @@
                                             break;
                                         }
                                     default:
-                                        reader.skipType(tag & 7);
+                                        reader.skipType(tag & 7, long);
                                         break;
                                     }
                                 }
@@ -13522,9 +13958,13 @@
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            SubDestination.verify = function verify(message) {
+                            SubDestination.verify = function verify(message, long) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
@@ -13542,9 +13982,13 @@
                              * @param {Object.<string,*>} object Plain object
                              * @returns {google.maps.places.v1.Place.SubDestination} SubDestination
                              */
-                            SubDestination.fromObject = function fromObject(object) {
+                            SubDestination.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.maps.places.v1.Place.SubDestination)
                                     return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.maps.places.v1.Place.SubDestination();
                                 if (object.name != null)
                                     message.name = String(object.name);
@@ -13629,7 +14073,7 @@
                             function AccessibilityOptions(properties) {
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                             this[keys[i]] = properties[keys[i]];
                             }
     
@@ -13751,9 +14195,13 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            AccessibilityOptions.decode = function decode(reader, length, error) {
+                            AccessibilityOptions.decode = function decode(reader, length, error, long) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Place.AccessibilityOptions();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
@@ -13777,7 +14225,7 @@
                                             break;
                                         }
                                     default:
-                                        reader.skipType(tag & 7);
+                                        reader.skipType(tag & 7, long);
                                         break;
                                     }
                                 }
@@ -13808,9 +14256,13 @@
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            AccessibilityOptions.verify = function verify(message) {
+                            AccessibilityOptions.verify = function verify(message, long) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
                                 var properties = {};
                                 if (message.wheelchairAccessibleParking != null && message.hasOwnProperty("wheelchairAccessibleParking")) {
                                     properties._wheelchairAccessibleParking = 1;
@@ -13843,9 +14295,13 @@
                              * @param {Object.<string,*>} object Plain object
                              * @returns {google.maps.places.v1.Place.AccessibilityOptions} AccessibilityOptions
                              */
-                            AccessibilityOptions.fromObject = function fromObject(object) {
+                            AccessibilityOptions.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.maps.places.v1.Place.AccessibilityOptions)
                                     return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.maps.places.v1.Place.AccessibilityOptions();
                                 if (object.wheelchairAccessibleParking != null)
                                     message.wheelchairAccessibleParking = Boolean(object.wheelchairAccessibleParking);
@@ -13945,7 +14401,7 @@
                             function GenerativeSummary(properties) {
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                             this[keys[i]] = properties[keys[i]];
                             }
     
@@ -14030,9 +14486,13 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            GenerativeSummary.decode = function decode(reader, length, error) {
+                            GenerativeSummary.decode = function decode(reader, length, error, long) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Place.GenerativeSummary();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
@@ -14040,7 +14500,7 @@
                                         break;
                                     switch (tag >>> 3) {
                                     case 1: {
-                                            message.overview = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                            message.overview = $root.google.type.LocalizedText.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     case 4: {
@@ -14048,11 +14508,11 @@
                                             break;
                                         }
                                     case 6: {
-                                            message.disclosureText = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                            message.disclosureText = $root.google.type.LocalizedText.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     default:
-                                        reader.skipType(tag & 7);
+                                        reader.skipType(tag & 7, long);
                                         break;
                                     }
                                 }
@@ -14083,11 +14543,15 @@
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            GenerativeSummary.verify = function verify(message) {
+                            GenerativeSummary.verify = function verify(message, long) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
                                 if (message.overview != null && message.hasOwnProperty("overview")) {
-                                    var error = $root.google.type.LocalizedText.verify(message.overview);
+                                    var error = $root.google.type.LocalizedText.verify(message.overview, long + 1);
                                     if (error)
                                         return "overview." + error;
                                 }
@@ -14095,7 +14559,7 @@
                                     if (!$util.isString(message.overviewFlagContentUri))
                                         return "overviewFlagContentUri: string expected";
                                 if (message.disclosureText != null && message.hasOwnProperty("disclosureText")) {
-                                    var error = $root.google.type.LocalizedText.verify(message.disclosureText);
+                                    var error = $root.google.type.LocalizedText.verify(message.disclosureText, long + 1);
                                     if (error)
                                         return "disclosureText." + error;
                                 }
@@ -14110,21 +14574,25 @@
                              * @param {Object.<string,*>} object Plain object
                              * @returns {google.maps.places.v1.Place.GenerativeSummary} GenerativeSummary
                              */
-                            GenerativeSummary.fromObject = function fromObject(object) {
+                            GenerativeSummary.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.maps.places.v1.Place.GenerativeSummary)
                                     return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.maps.places.v1.Place.GenerativeSummary();
                                 if (object.overview != null) {
                                     if (typeof object.overview !== "object")
                                         throw TypeError(".google.maps.places.v1.Place.GenerativeSummary.overview: object expected");
-                                    message.overview = $root.google.type.LocalizedText.fromObject(object.overview);
+                                    message.overview = $root.google.type.LocalizedText.fromObject(object.overview, long + 1);
                                 }
                                 if (object.overviewFlagContentUri != null)
                                     message.overviewFlagContentUri = String(object.overviewFlagContentUri);
                                 if (object.disclosureText != null) {
                                     if (typeof object.disclosureText !== "object")
                                         throw TypeError(".google.maps.places.v1.Place.GenerativeSummary.disclosureText: object expected");
-                                    message.disclosureText = $root.google.type.LocalizedText.fromObject(object.disclosureText);
+                                    message.disclosureText = $root.google.type.LocalizedText.fromObject(object.disclosureText, long + 1);
                                 }
                                 return message;
                             };
@@ -14206,7 +14674,7 @@
                             function ContainingPlace(properties) {
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                             this[keys[i]] = properties[keys[i]];
                             }
     
@@ -14281,9 +14749,13 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ContainingPlace.decode = function decode(reader, length, error) {
+                            ContainingPlace.decode = function decode(reader, length, error, long) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Place.ContainingPlace();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
@@ -14299,7 +14771,7 @@
                                             break;
                                         }
                                     default:
-                                        reader.skipType(tag & 7);
+                                        reader.skipType(tag & 7, long);
                                         break;
                                     }
                                 }
@@ -14330,9 +14802,13 @@
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            ContainingPlace.verify = function verify(message) {
+                            ContainingPlace.verify = function verify(message, long) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
@@ -14350,9 +14826,13 @@
                              * @param {Object.<string,*>} object Plain object
                              * @returns {google.maps.places.v1.Place.ContainingPlace} ContainingPlace
                              */
-                            ContainingPlace.fromObject = function fromObject(object) {
+                            ContainingPlace.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.maps.places.v1.Place.ContainingPlace)
                                     return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.maps.places.v1.Place.ContainingPlace();
                                 if (object.name != null)
                                     message.name = String(object.name);
@@ -14438,7 +14918,7 @@
                             function GoogleMapsLinks(properties) {
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                             this[keys[i]] = properties[keys[i]];
                             }
     
@@ -14543,9 +15023,13 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            GoogleMapsLinks.decode = function decode(reader, length, error) {
+                            GoogleMapsLinks.decode = function decode(reader, length, error, long) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Place.GoogleMapsLinks();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
@@ -14573,7 +15057,7 @@
                                             break;
                                         }
                                     default:
-                                        reader.skipType(tag & 7);
+                                        reader.skipType(tag & 7, long);
                                         break;
                                     }
                                 }
@@ -14604,9 +15088,13 @@
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            GoogleMapsLinks.verify = function verify(message) {
+                            GoogleMapsLinks.verify = function verify(message, long) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
                                 if (message.directionsUri != null && message.hasOwnProperty("directionsUri"))
                                     if (!$util.isString(message.directionsUri))
                                         return "directionsUri: string expected";
@@ -14633,9 +15121,13 @@
                              * @param {Object.<string,*>} object Plain object
                              * @returns {google.maps.places.v1.Place.GoogleMapsLinks} GoogleMapsLinks
                              */
-                            GoogleMapsLinks.fromObject = function fromObject(object) {
+                            GoogleMapsLinks.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.maps.places.v1.Place.GoogleMapsLinks)
                                     return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.maps.places.v1.Place.GoogleMapsLinks();
                                 if (object.directionsUri != null)
                                     message.directionsUri = String(object.directionsUri);
@@ -14735,7 +15227,7 @@
                             function ReviewSummary(properties) {
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                             this[keys[i]] = properties[keys[i]];
                             }
     
@@ -14830,9 +15322,13 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ReviewSummary.decode = function decode(reader, length, error) {
+                            ReviewSummary.decode = function decode(reader, length, error, long) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Place.ReviewSummary();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
@@ -14840,7 +15336,7 @@
                                         break;
                                     switch (tag >>> 3) {
                                     case 1: {
-                                            message.text = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                            message.text = $root.google.type.LocalizedText.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     case 2: {
@@ -14848,7 +15344,7 @@
                                             break;
                                         }
                                     case 3: {
-                                            message.disclosureText = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                            message.disclosureText = $root.google.type.LocalizedText.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     case 4: {
@@ -14856,7 +15352,7 @@
                                             break;
                                         }
                                     default:
-                                        reader.skipType(tag & 7);
+                                        reader.skipType(tag & 7, long);
                                         break;
                                     }
                                 }
@@ -14887,11 +15383,15 @@
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            ReviewSummary.verify = function verify(message) {
+                            ReviewSummary.verify = function verify(message, long) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
                                 if (message.text != null && message.hasOwnProperty("text")) {
-                                    var error = $root.google.type.LocalizedText.verify(message.text);
+                                    var error = $root.google.type.LocalizedText.verify(message.text, long + 1);
                                     if (error)
                                         return "text." + error;
                                 }
@@ -14899,7 +15399,7 @@
                                     if (!$util.isString(message.flagContentUri))
                                         return "flagContentUri: string expected";
                                 if (message.disclosureText != null && message.hasOwnProperty("disclosureText")) {
-                                    var error = $root.google.type.LocalizedText.verify(message.disclosureText);
+                                    var error = $root.google.type.LocalizedText.verify(message.disclosureText, long + 1);
                                     if (error)
                                         return "disclosureText." + error;
                                 }
@@ -14917,21 +15417,25 @@
                              * @param {Object.<string,*>} object Plain object
                              * @returns {google.maps.places.v1.Place.ReviewSummary} ReviewSummary
                              */
-                            ReviewSummary.fromObject = function fromObject(object) {
+                            ReviewSummary.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.maps.places.v1.Place.ReviewSummary)
                                     return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.maps.places.v1.Place.ReviewSummary();
                                 if (object.text != null) {
                                     if (typeof object.text !== "object")
                                         throw TypeError(".google.maps.places.v1.Place.ReviewSummary.text: object expected");
-                                    message.text = $root.google.type.LocalizedText.fromObject(object.text);
+                                    message.text = $root.google.type.LocalizedText.fromObject(object.text, long + 1);
                                 }
                                 if (object.flagContentUri != null)
                                     message.flagContentUri = String(object.flagContentUri);
                                 if (object.disclosureText != null) {
                                     if (typeof object.disclosureText !== "object")
                                         throw TypeError(".google.maps.places.v1.Place.ReviewSummary.disclosureText: object expected");
-                                    message.disclosureText = $root.google.type.LocalizedText.fromObject(object.disclosureText);
+                                    message.disclosureText = $root.google.type.LocalizedText.fromObject(object.disclosureText, long + 1);
                                 }
                                 if (object.reviewsUri != null)
                                     message.reviewsUri = String(object.reviewsUri);
@@ -15022,7 +15526,7 @@
                             function EvChargeAmenitySummary(properties) {
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                             this[keys[i]] = properties[keys[i]];
                             }
     
@@ -15137,9 +15641,13 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            EvChargeAmenitySummary.decode = function decode(reader, length, error) {
+                            EvChargeAmenitySummary.decode = function decode(reader, length, error, long) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Place.EvChargeAmenitySummary();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
@@ -15147,19 +15655,19 @@
                                         break;
                                     switch (tag >>> 3) {
                                     case 1: {
-                                            message.overview = $root.google.maps.places.v1.ContentBlock.decode(reader, reader.uint32());
+                                            message.overview = $root.google.maps.places.v1.ContentBlock.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     case 2: {
-                                            message.coffee = $root.google.maps.places.v1.ContentBlock.decode(reader, reader.uint32());
+                                            message.coffee = $root.google.maps.places.v1.ContentBlock.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     case 3: {
-                                            message.restaurant = $root.google.maps.places.v1.ContentBlock.decode(reader, reader.uint32());
+                                            message.restaurant = $root.google.maps.places.v1.ContentBlock.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     case 4: {
-                                            message.store = $root.google.maps.places.v1.ContentBlock.decode(reader, reader.uint32());
+                                            message.store = $root.google.maps.places.v1.ContentBlock.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     case 5: {
@@ -15167,11 +15675,11 @@
                                             break;
                                         }
                                     case 6: {
-                                            message.disclosureText = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                            message.disclosureText = $root.google.type.LocalizedText.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     default:
-                                        reader.skipType(tag & 7);
+                                        reader.skipType(tag & 7, long);
                                         break;
                                     }
                                 }
@@ -15202,26 +15710,30 @@
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            EvChargeAmenitySummary.verify = function verify(message) {
+                            EvChargeAmenitySummary.verify = function verify(message, long) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
                                 if (message.overview != null && message.hasOwnProperty("overview")) {
-                                    var error = $root.google.maps.places.v1.ContentBlock.verify(message.overview);
+                                    var error = $root.google.maps.places.v1.ContentBlock.verify(message.overview, long + 1);
                                     if (error)
                                         return "overview." + error;
                                 }
                                 if (message.coffee != null && message.hasOwnProperty("coffee")) {
-                                    var error = $root.google.maps.places.v1.ContentBlock.verify(message.coffee);
+                                    var error = $root.google.maps.places.v1.ContentBlock.verify(message.coffee, long + 1);
                                     if (error)
                                         return "coffee." + error;
                                 }
                                 if (message.restaurant != null && message.hasOwnProperty("restaurant")) {
-                                    var error = $root.google.maps.places.v1.ContentBlock.verify(message.restaurant);
+                                    var error = $root.google.maps.places.v1.ContentBlock.verify(message.restaurant, long + 1);
                                     if (error)
                                         return "restaurant." + error;
                                 }
                                 if (message.store != null && message.hasOwnProperty("store")) {
-                                    var error = $root.google.maps.places.v1.ContentBlock.verify(message.store);
+                                    var error = $root.google.maps.places.v1.ContentBlock.verify(message.store, long + 1);
                                     if (error)
                                         return "store." + error;
                                 }
@@ -15229,7 +15741,7 @@
                                     if (!$util.isString(message.flagContentUri))
                                         return "flagContentUri: string expected";
                                 if (message.disclosureText != null && message.hasOwnProperty("disclosureText")) {
-                                    var error = $root.google.type.LocalizedText.verify(message.disclosureText);
+                                    var error = $root.google.type.LocalizedText.verify(message.disclosureText, long + 1);
                                     if (error)
                                         return "disclosureText." + error;
                                 }
@@ -15244,36 +15756,40 @@
                              * @param {Object.<string,*>} object Plain object
                              * @returns {google.maps.places.v1.Place.EvChargeAmenitySummary} EvChargeAmenitySummary
                              */
-                            EvChargeAmenitySummary.fromObject = function fromObject(object) {
+                            EvChargeAmenitySummary.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.maps.places.v1.Place.EvChargeAmenitySummary)
                                     return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.maps.places.v1.Place.EvChargeAmenitySummary();
                                 if (object.overview != null) {
                                     if (typeof object.overview !== "object")
                                         throw TypeError(".google.maps.places.v1.Place.EvChargeAmenitySummary.overview: object expected");
-                                    message.overview = $root.google.maps.places.v1.ContentBlock.fromObject(object.overview);
+                                    message.overview = $root.google.maps.places.v1.ContentBlock.fromObject(object.overview, long + 1);
                                 }
                                 if (object.coffee != null) {
                                     if (typeof object.coffee !== "object")
                                         throw TypeError(".google.maps.places.v1.Place.EvChargeAmenitySummary.coffee: object expected");
-                                    message.coffee = $root.google.maps.places.v1.ContentBlock.fromObject(object.coffee);
+                                    message.coffee = $root.google.maps.places.v1.ContentBlock.fromObject(object.coffee, long + 1);
                                 }
                                 if (object.restaurant != null) {
                                     if (typeof object.restaurant !== "object")
                                         throw TypeError(".google.maps.places.v1.Place.EvChargeAmenitySummary.restaurant: object expected");
-                                    message.restaurant = $root.google.maps.places.v1.ContentBlock.fromObject(object.restaurant);
+                                    message.restaurant = $root.google.maps.places.v1.ContentBlock.fromObject(object.restaurant, long + 1);
                                 }
                                 if (object.store != null) {
                                     if (typeof object.store !== "object")
                                         throw TypeError(".google.maps.places.v1.Place.EvChargeAmenitySummary.store: object expected");
-                                    message.store = $root.google.maps.places.v1.ContentBlock.fromObject(object.store);
+                                    message.store = $root.google.maps.places.v1.ContentBlock.fromObject(object.store, long + 1);
                                 }
                                 if (object.flagContentUri != null)
                                     message.flagContentUri = String(object.flagContentUri);
                                 if (object.disclosureText != null) {
                                     if (typeof object.disclosureText !== "object")
                                         throw TypeError(".google.maps.places.v1.Place.EvChargeAmenitySummary.disclosureText: object expected");
-                                    message.disclosureText = $root.google.type.LocalizedText.fromObject(object.disclosureText);
+                                    message.disclosureText = $root.google.type.LocalizedText.fromObject(object.disclosureText, long + 1);
                                 }
                                 return message;
                             };
@@ -15366,7 +15882,7 @@
                             function NeighborhoodSummary(properties) {
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                             this[keys[i]] = properties[keys[i]];
                             }
     
@@ -15461,9 +15977,13 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            NeighborhoodSummary.decode = function decode(reader, length, error) {
+                            NeighborhoodSummary.decode = function decode(reader, length, error, long) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Place.NeighborhoodSummary();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
@@ -15471,11 +15991,11 @@
                                         break;
                                     switch (tag >>> 3) {
                                     case 1: {
-                                            message.overview = $root.google.maps.places.v1.ContentBlock.decode(reader, reader.uint32());
+                                            message.overview = $root.google.maps.places.v1.ContentBlock.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     case 2: {
-                                            message.description = $root.google.maps.places.v1.ContentBlock.decode(reader, reader.uint32());
+                                            message.description = $root.google.maps.places.v1.ContentBlock.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     case 3: {
@@ -15483,11 +16003,11 @@
                                             break;
                                         }
                                     case 4: {
-                                            message.disclosureText = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                            message.disclosureText = $root.google.type.LocalizedText.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     default:
-                                        reader.skipType(tag & 7);
+                                        reader.skipType(tag & 7, long);
                                         break;
                                     }
                                 }
@@ -15518,16 +16038,20 @@
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            NeighborhoodSummary.verify = function verify(message) {
+                            NeighborhoodSummary.verify = function verify(message, long) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
                                 if (message.overview != null && message.hasOwnProperty("overview")) {
-                                    var error = $root.google.maps.places.v1.ContentBlock.verify(message.overview);
+                                    var error = $root.google.maps.places.v1.ContentBlock.verify(message.overview, long + 1);
                                     if (error)
                                         return "overview." + error;
                                 }
                                 if (message.description != null && message.hasOwnProperty("description")) {
-                                    var error = $root.google.maps.places.v1.ContentBlock.verify(message.description);
+                                    var error = $root.google.maps.places.v1.ContentBlock.verify(message.description, long + 1);
                                     if (error)
                                         return "description." + error;
                                 }
@@ -15535,7 +16059,7 @@
                                     if (!$util.isString(message.flagContentUri))
                                         return "flagContentUri: string expected";
                                 if (message.disclosureText != null && message.hasOwnProperty("disclosureText")) {
-                                    var error = $root.google.type.LocalizedText.verify(message.disclosureText);
+                                    var error = $root.google.type.LocalizedText.verify(message.disclosureText, long + 1);
                                     if (error)
                                         return "disclosureText." + error;
                                 }
@@ -15550,26 +16074,30 @@
                              * @param {Object.<string,*>} object Plain object
                              * @returns {google.maps.places.v1.Place.NeighborhoodSummary} NeighborhoodSummary
                              */
-                            NeighborhoodSummary.fromObject = function fromObject(object) {
+                            NeighborhoodSummary.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.maps.places.v1.Place.NeighborhoodSummary)
                                     return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.maps.places.v1.Place.NeighborhoodSummary();
                                 if (object.overview != null) {
                                     if (typeof object.overview !== "object")
                                         throw TypeError(".google.maps.places.v1.Place.NeighborhoodSummary.overview: object expected");
-                                    message.overview = $root.google.maps.places.v1.ContentBlock.fromObject(object.overview);
+                                    message.overview = $root.google.maps.places.v1.ContentBlock.fromObject(object.overview, long + 1);
                                 }
                                 if (object.description != null) {
                                     if (typeof object.description !== "object")
                                         throw TypeError(".google.maps.places.v1.Place.NeighborhoodSummary.description: object expected");
-                                    message.description = $root.google.maps.places.v1.ContentBlock.fromObject(object.description);
+                                    message.description = $root.google.maps.places.v1.ContentBlock.fromObject(object.description, long + 1);
                                 }
                                 if (object.flagContentUri != null)
                                     message.flagContentUri = String(object.flagContentUri);
                                 if (object.disclosureText != null) {
                                     if (typeof object.disclosureText !== "object")
                                         throw TypeError(".google.maps.places.v1.Place.NeighborhoodSummary.disclosureText: object expected");
-                                    message.disclosureText = $root.google.type.LocalizedText.fromObject(object.disclosureText);
+                                    message.disclosureText = $root.google.type.LocalizedText.fromObject(object.disclosureText, long + 1);
                                 }
                                 return message;
                             };
@@ -15655,7 +16183,7 @@
                             function ConsumerAlert(properties) {
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                             this[keys[i]] = properties[keys[i]];
                             }
     
@@ -15740,9 +16268,13 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ConsumerAlert.decode = function decode(reader, length, error) {
+                            ConsumerAlert.decode = function decode(reader, length, error, long) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Place.ConsumerAlert();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
@@ -15754,7 +16286,7 @@
                                             break;
                                         }
                                     case 2: {
-                                            message.details = $root.google.maps.places.v1.Place.ConsumerAlert.Details.decode(reader, reader.uint32());
+                                            message.details = $root.google.maps.places.v1.Place.ConsumerAlert.Details.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     case 3: {
@@ -15762,7 +16294,7 @@
                                             break;
                                         }
                                     default:
-                                        reader.skipType(tag & 7);
+                                        reader.skipType(tag & 7, long);
                                         break;
                                     }
                                 }
@@ -15793,14 +16325,18 @@
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            ConsumerAlert.verify = function verify(message) {
+                            ConsumerAlert.verify = function verify(message, long) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
                                 if (message.overview != null && message.hasOwnProperty("overview"))
                                     if (!$util.isString(message.overview))
                                         return "overview: string expected";
                                 if (message.details != null && message.hasOwnProperty("details")) {
-                                    var error = $root.google.maps.places.v1.Place.ConsumerAlert.Details.verify(message.details);
+                                    var error = $root.google.maps.places.v1.Place.ConsumerAlert.Details.verify(message.details, long + 1);
                                     if (error)
                                         return "details." + error;
                                 }
@@ -15818,16 +16354,20 @@
                              * @param {Object.<string,*>} object Plain object
                              * @returns {google.maps.places.v1.Place.ConsumerAlert} ConsumerAlert
                              */
-                            ConsumerAlert.fromObject = function fromObject(object) {
+                            ConsumerAlert.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.maps.places.v1.Place.ConsumerAlert)
                                     return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.maps.places.v1.Place.ConsumerAlert();
                                 if (object.overview != null)
                                     message.overview = String(object.overview);
                                 if (object.details != null) {
                                     if (typeof object.details !== "object")
                                         throw TypeError(".google.maps.places.v1.Place.ConsumerAlert.details: object expected");
-                                    message.details = $root.google.maps.places.v1.Place.ConsumerAlert.Details.fromObject(object.details);
+                                    message.details = $root.google.maps.places.v1.Place.ConsumerAlert.Details.fromObject(object.details, long + 1);
                                 }
                                 if (object.languageCode != null)
                                     message.languageCode = String(object.languageCode);
@@ -15909,7 +16449,7 @@
                                 function Details(properties) {
                                     if (properties)
                                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                            if (properties[keys[i]] != null)
+                                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                                 this[keys[i]] = properties[keys[i]];
                                 }
     
@@ -15994,9 +16534,13 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                Details.decode = function decode(reader, length, error) {
+                                Details.decode = function decode(reader, length, error, long) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $Reader.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Place.ConsumerAlert.Details();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
@@ -16012,11 +16556,11 @@
                                                 break;
                                             }
                                         case 3: {
-                                                message.aboutLink = $root.google.maps.places.v1.Place.ConsumerAlert.Details.Link.decode(reader, reader.uint32());
+                                                message.aboutLink = $root.google.maps.places.v1.Place.ConsumerAlert.Details.Link.decode(reader, reader.uint32(), undefined, long + 1);
                                                 break;
                                             }
                                         default:
-                                            reader.skipType(tag & 7);
+                                            reader.skipType(tag & 7, long);
                                             break;
                                         }
                                     }
@@ -16047,9 +16591,13 @@
                                  * @param {Object.<string,*>} message Plain object to verify
                                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                                  */
-                                Details.verify = function verify(message) {
+                                Details.verify = function verify(message, long) {
                                     if (typeof message !== "object" || message === null)
                                         return "object expected";
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        return "maximum nesting depth exceeded";
                                     if (message.title != null && message.hasOwnProperty("title"))
                                         if (!$util.isString(message.title))
                                             return "title: string expected";
@@ -16057,7 +16605,7 @@
                                         if (!$util.isString(message.description))
                                             return "description: string expected";
                                     if (message.aboutLink != null && message.hasOwnProperty("aboutLink")) {
-                                        var error = $root.google.maps.places.v1.Place.ConsumerAlert.Details.Link.verify(message.aboutLink);
+                                        var error = $root.google.maps.places.v1.Place.ConsumerAlert.Details.Link.verify(message.aboutLink, long + 1);
                                         if (error)
                                             return "aboutLink." + error;
                                     }
@@ -16072,9 +16620,13 @@
                                  * @param {Object.<string,*>} object Plain object
                                  * @returns {google.maps.places.v1.Place.ConsumerAlert.Details} Details
                                  */
-                                Details.fromObject = function fromObject(object) {
+                                Details.fromObject = function fromObject(object, long) {
                                     if (object instanceof $root.google.maps.places.v1.Place.ConsumerAlert.Details)
                                         return object;
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
                                     var message = new $root.google.maps.places.v1.Place.ConsumerAlert.Details();
                                     if (object.title != null)
                                         message.title = String(object.title);
@@ -16083,7 +16635,7 @@
                                     if (object.aboutLink != null) {
                                         if (typeof object.aboutLink !== "object")
                                             throw TypeError(".google.maps.places.v1.Place.ConsumerAlert.Details.aboutLink: object expected");
-                                        message.aboutLink = $root.google.maps.places.v1.Place.ConsumerAlert.Details.Link.fromObject(object.aboutLink);
+                                        message.aboutLink = $root.google.maps.places.v1.Place.ConsumerAlert.Details.Link.fromObject(object.aboutLink, long + 1);
                                     }
                                     return message;
                                 };
@@ -16162,7 +16714,7 @@
                                     function Link(properties) {
                                         if (properties)
                                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                                if (properties[keys[i]] != null)
+                                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                                     this[keys[i]] = properties[keys[i]];
                                     }
     
@@ -16237,9 +16789,13 @@
                                      * @throws {Error} If the payload is not a reader or valid buffer
                                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                      */
-                                    Link.decode = function decode(reader, length, error) {
+                                    Link.decode = function decode(reader, length, error, long) {
                                         if (!(reader instanceof $Reader))
                                             reader = $Reader.create(reader);
+                                        if (long === undefined)
+                                            long = 0;
+                                        if (long > $Reader.recursionLimit)
+                                            throw Error("maximum nesting depth exceeded");
                                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Place.ConsumerAlert.Details.Link();
                                         while (reader.pos < end) {
                                             var tag = reader.uint32();
@@ -16255,7 +16811,7 @@
                                                     break;
                                                 }
                                             default:
-                                                reader.skipType(tag & 7);
+                                                reader.skipType(tag & 7, long);
                                                 break;
                                             }
                                         }
@@ -16286,9 +16842,13 @@
                                      * @param {Object.<string,*>} message Plain object to verify
                                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                                      */
-                                    Link.verify = function verify(message) {
+                                    Link.verify = function verify(message, long) {
                                         if (typeof message !== "object" || message === null)
                                             return "object expected";
+                                        if (long === undefined)
+                                            long = 0;
+                                        if (long > $util.recursionLimit)
+                                            return "maximum nesting depth exceeded";
                                         if (message.title != null && message.hasOwnProperty("title"))
                                             if (!$util.isString(message.title))
                                                 return "title: string expected";
@@ -16306,9 +16866,13 @@
                                      * @param {Object.<string,*>} object Plain object
                                      * @returns {google.maps.places.v1.Place.ConsumerAlert.Details.Link} Link
                                      */
-                                    Link.fromObject = function fromObject(object) {
+                                    Link.fromObject = function fromObject(object, long) {
                                         if (object instanceof $root.google.maps.places.v1.Place.ConsumerAlert.Details.Link)
                                             return object;
+                                        if (long === undefined)
+                                            long = 0;
+                                        if (long > $util.recursionLimit)
+                                            throw Error("maximum nesting depth exceeded");
                                         var message = new $root.google.maps.places.v1.Place.ConsumerAlert.Details.Link();
                                         if (object.title != null)
                                             message.title = String(object.title);
@@ -16422,7 +16986,7 @@
                         function PriceRange(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -16497,9 +17061,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PriceRange.decode = function decode(reader, length, error) {
+                        PriceRange.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.PriceRange();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -16507,15 +17075,15 @@
                                     break;
                                 switch (tag >>> 3) {
                                 case 1: {
-                                        message.startPrice = $root.google.type.Money.decode(reader, reader.uint32());
+                                        message.startPrice = $root.google.type.Money.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 2: {
-                                        message.endPrice = $root.google.type.Money.decode(reader, reader.uint32());
+                                        message.endPrice = $root.google.type.Money.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -16546,16 +17114,20 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        PriceRange.verify = function verify(message) {
+                        PriceRange.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.startPrice != null && message.hasOwnProperty("startPrice")) {
-                                var error = $root.google.type.Money.verify(message.startPrice);
+                                var error = $root.google.type.Money.verify(message.startPrice, long + 1);
                                 if (error)
                                     return "startPrice." + error;
                             }
                             if (message.endPrice != null && message.hasOwnProperty("endPrice")) {
-                                var error = $root.google.type.Money.verify(message.endPrice);
+                                var error = $root.google.type.Money.verify(message.endPrice, long + 1);
                                 if (error)
                                     return "endPrice." + error;
                             }
@@ -16570,19 +17142,23 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.maps.places.v1.PriceRange} PriceRange
                          */
-                        PriceRange.fromObject = function fromObject(object) {
+                        PriceRange.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.maps.places.v1.PriceRange)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.maps.places.v1.PriceRange();
                             if (object.startPrice != null) {
                                 if (typeof object.startPrice !== "object")
                                     throw TypeError(".google.maps.places.v1.PriceRange.startPrice: object expected");
-                                message.startPrice = $root.google.type.Money.fromObject(object.startPrice);
+                                message.startPrice = $root.google.type.Money.fromObject(object.startPrice, long + 1);
                             }
                             if (object.endPrice != null) {
                                 if (typeof object.endPrice !== "object")
                                     throw TypeError(".google.maps.places.v1.PriceRange.endPrice: object expected");
-                                message.endPrice = $root.google.type.Money.fromObject(object.endPrice);
+                                message.endPrice = $root.google.type.Money.fromObject(object.endPrice, long + 1);
                             }
                             return message;
                         };
@@ -16664,7 +17240,7 @@
                             this.stops = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -16751,9 +17327,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TransitStation.decode = function decode(reader, length, error) {
+                        TransitStation.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.TransitStation();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -16761,23 +17341,23 @@
                                     break;
                                 switch (tag >>> 3) {
                                 case 1: {
-                                        message.displayName = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                        message.displayName = $root.google.type.LocalizedText.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 2: {
                                         if (!(message.agencies && message.agencies.length))
                                             message.agencies = [];
-                                        message.agencies.push($root.google.maps.places.v1.TransitAgency.decode(reader, reader.uint32()));
+                                        message.agencies.push($root.google.maps.places.v1.TransitAgency.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 case 3: {
                                         if (!(message.stops && message.stops.length))
                                             message.stops = [];
-                                        message.stops.push($root.google.maps.places.v1.TransitStop.decode(reader, reader.uint32()));
+                                        message.stops.push($root.google.maps.places.v1.TransitStop.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -16808,11 +17388,15 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        TransitStation.verify = function verify(message) {
+                        TransitStation.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.displayName != null && message.hasOwnProperty("displayName")) {
-                                var error = $root.google.type.LocalizedText.verify(message.displayName);
+                                var error = $root.google.type.LocalizedText.verify(message.displayName, long + 1);
                                 if (error)
                                     return "displayName." + error;
                             }
@@ -16820,7 +17404,7 @@
                                 if (!Array.isArray(message.agencies))
                                     return "agencies: array expected";
                                 for (var i = 0; i < message.agencies.length; ++i) {
-                                    var error = $root.google.maps.places.v1.TransitAgency.verify(message.agencies[i]);
+                                    var error = $root.google.maps.places.v1.TransitAgency.verify(message.agencies[i], long + 1);
                                     if (error)
                                         return "agencies." + error;
                                 }
@@ -16829,7 +17413,7 @@
                                 if (!Array.isArray(message.stops))
                                     return "stops: array expected";
                                 for (var i = 0; i < message.stops.length; ++i) {
-                                    var error = $root.google.maps.places.v1.TransitStop.verify(message.stops[i]);
+                                    var error = $root.google.maps.places.v1.TransitStop.verify(message.stops[i], long + 1);
                                     if (error)
                                         return "stops." + error;
                                 }
@@ -16845,14 +17429,18 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.maps.places.v1.TransitStation} TransitStation
                          */
-                        TransitStation.fromObject = function fromObject(object) {
+                        TransitStation.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.maps.places.v1.TransitStation)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.maps.places.v1.TransitStation();
                             if (object.displayName != null) {
                                 if (typeof object.displayName !== "object")
                                     throw TypeError(".google.maps.places.v1.TransitStation.displayName: object expected");
-                                message.displayName = $root.google.type.LocalizedText.fromObject(object.displayName);
+                                message.displayName = $root.google.type.LocalizedText.fromObject(object.displayName, long + 1);
                             }
                             if (object.agencies) {
                                 if (!Array.isArray(object.agencies))
@@ -16861,7 +17449,7 @@
                                 for (var i = 0; i < object.agencies.length; ++i) {
                                     if (typeof object.agencies[i] !== "object")
                                         throw TypeError(".google.maps.places.v1.TransitStation.agencies: object expected");
-                                    message.agencies[i] = $root.google.maps.places.v1.TransitAgency.fromObject(object.agencies[i]);
+                                    message.agencies[i] = $root.google.maps.places.v1.TransitAgency.fromObject(object.agencies[i], long + 1);
                                 }
                             }
                             if (object.stops) {
@@ -16871,7 +17459,7 @@
                                 for (var i = 0; i < object.stops.length; ++i) {
                                     if (typeof object.stops[i] !== "object")
                                         throw TypeError(".google.maps.places.v1.TransitStation.stops: object expected");
-                                    message.stops[i] = $root.google.maps.places.v1.TransitStop.fromObject(object.stops[i]);
+                                    message.stops[i] = $root.google.maps.places.v1.TransitStop.fromObject(object.stops[i], long + 1);
                                 }
                             }
                             return message;
@@ -16965,7 +17553,7 @@
                             this.lines = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -17071,9 +17659,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TransitAgency.decode = function decode(reader, length, error) {
+                        TransitAgency.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.TransitAgency();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -17081,7 +17673,7 @@
                                     break;
                                 switch (tag >>> 3) {
                                 case 1: {
-                                        message.displayName = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                        message.displayName = $root.google.type.LocalizedText.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 2: {
@@ -17093,17 +17685,17 @@
                                         break;
                                     }
                                 case 4: {
-                                        message.icon = $root.google.maps.places.v1.TransitIcon.decode(reader, reader.uint32());
+                                        message.icon = $root.google.maps.places.v1.TransitIcon.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 5: {
                                         if (!(message.lines && message.lines.length))
                                             message.lines = [];
-                                        message.lines.push($root.google.maps.places.v1.TransitLine.decode(reader, reader.uint32()));
+                                        message.lines.push($root.google.maps.places.v1.TransitLine.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -17134,11 +17726,15 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        TransitAgency.verify = function verify(message) {
+                        TransitAgency.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.displayName != null && message.hasOwnProperty("displayName")) {
-                                var error = $root.google.type.LocalizedText.verify(message.displayName);
+                                var error = $root.google.type.LocalizedText.verify(message.displayName, long + 1);
                                 if (error)
                                     return "displayName." + error;
                             }
@@ -17149,7 +17745,7 @@
                                 if (!$util.isString(message.fareUrl))
                                     return "fareUrl: string expected";
                             if (message.icon != null && message.hasOwnProperty("icon")) {
-                                var error = $root.google.maps.places.v1.TransitIcon.verify(message.icon);
+                                var error = $root.google.maps.places.v1.TransitIcon.verify(message.icon, long + 1);
                                 if (error)
                                     return "icon." + error;
                             }
@@ -17157,7 +17753,7 @@
                                 if (!Array.isArray(message.lines))
                                     return "lines: array expected";
                                 for (var i = 0; i < message.lines.length; ++i) {
-                                    var error = $root.google.maps.places.v1.TransitLine.verify(message.lines[i]);
+                                    var error = $root.google.maps.places.v1.TransitLine.verify(message.lines[i], long + 1);
                                     if (error)
                                         return "lines." + error;
                                 }
@@ -17173,14 +17769,18 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.maps.places.v1.TransitAgency} TransitAgency
                          */
-                        TransitAgency.fromObject = function fromObject(object) {
+                        TransitAgency.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.maps.places.v1.TransitAgency)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.maps.places.v1.TransitAgency();
                             if (object.displayName != null) {
                                 if (typeof object.displayName !== "object")
                                     throw TypeError(".google.maps.places.v1.TransitAgency.displayName: object expected");
-                                message.displayName = $root.google.type.LocalizedText.fromObject(object.displayName);
+                                message.displayName = $root.google.type.LocalizedText.fromObject(object.displayName, long + 1);
                             }
                             if (object.url != null)
                                 message.url = String(object.url);
@@ -17189,7 +17789,7 @@
                             if (object.icon != null) {
                                 if (typeof object.icon !== "object")
                                     throw TypeError(".google.maps.places.v1.TransitAgency.icon: object expected");
-                                message.icon = $root.google.maps.places.v1.TransitIcon.fromObject(object.icon);
+                                message.icon = $root.google.maps.places.v1.TransitIcon.fromObject(object.icon, long + 1);
                             }
                             if (object.lines) {
                                 if (!Array.isArray(object.lines))
@@ -17198,7 +17798,7 @@
                                 for (var i = 0; i < object.lines.length; ++i) {
                                     if (typeof object.lines[i] !== "object")
                                         throw TypeError(".google.maps.places.v1.TransitAgency.lines: object expected");
-                                    message.lines[i] = $root.google.maps.places.v1.TransitLine.fromObject(object.lines[i]);
+                                    message.lines[i] = $root.google.maps.places.v1.TransitLine.fromObject(object.lines[i], long + 1);
                                 }
                             }
                             return message;
@@ -17298,7 +17898,7 @@
                         function TransitLine(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -17443,9 +18043,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TransitLine.decode = function decode(reader, length, error) {
+                        TransitLine.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.TransitLine();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -17461,11 +18065,11 @@
                                         break;
                                     }
                                 case 3: {
-                                        message.displayName = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                        message.displayName = $root.google.type.LocalizedText.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 4: {
-                                        message.shortDisplayName = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                        message.shortDisplayName = $root.google.type.LocalizedText.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 5: {
@@ -17481,15 +18085,15 @@
                                         break;
                                     }
                                 case 8: {
-                                        message.icon = $root.google.maps.places.v1.TransitIcon.decode(reader, reader.uint32());
+                                        message.icon = $root.google.maps.places.v1.TransitIcon.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 9: {
-                                        message.vehicleIcon = $root.google.maps.places.v1.TransitIcon.decode(reader, reader.uint32());
+                                        message.vehicleIcon = $root.google.maps.places.v1.TransitIcon.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -17520,9 +18124,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        TransitLine.verify = function verify(message) {
+                        TransitLine.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.id != null && message.hasOwnProperty("id"))
                                 if (!$util.isString(message.id))
                                     return "id: string expected";
@@ -17555,12 +18163,12 @@
                                     break;
                                 }
                             if (message.displayName != null && message.hasOwnProperty("displayName")) {
-                                var error = $root.google.type.LocalizedText.verify(message.displayName);
+                                var error = $root.google.type.LocalizedText.verify(message.displayName, long + 1);
                                 if (error)
                                     return "displayName." + error;
                             }
                             if (message.shortDisplayName != null && message.hasOwnProperty("shortDisplayName")) {
-                                var error = $root.google.type.LocalizedText.verify(message.shortDisplayName);
+                                var error = $root.google.type.LocalizedText.verify(message.shortDisplayName, long + 1);
                                 if (error)
                                     return "shortDisplayName." + error;
                             }
@@ -17574,12 +18182,12 @@
                                 if (!$util.isString(message.url))
                                     return "url: string expected";
                             if (message.icon != null && message.hasOwnProperty("icon")) {
-                                var error = $root.google.maps.places.v1.TransitIcon.verify(message.icon);
+                                var error = $root.google.maps.places.v1.TransitIcon.verify(message.icon, long + 1);
                                 if (error)
                                     return "icon." + error;
                             }
                             if (message.vehicleIcon != null && message.hasOwnProperty("vehicleIcon")) {
-                                var error = $root.google.maps.places.v1.TransitIcon.verify(message.vehicleIcon);
+                                var error = $root.google.maps.places.v1.TransitIcon.verify(message.vehicleIcon, long + 1);
                                 if (error)
                                     return "vehicleIcon." + error;
                             }
@@ -17594,9 +18202,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.maps.places.v1.TransitLine} TransitLine
                          */
-                        TransitLine.fromObject = function fromObject(object) {
+                        TransitLine.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.maps.places.v1.TransitLine)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.maps.places.v1.TransitLine();
                             if (object.id != null)
                                 message.id = String(object.id);
@@ -17699,12 +18311,12 @@
                             if (object.displayName != null) {
                                 if (typeof object.displayName !== "object")
                                     throw TypeError(".google.maps.places.v1.TransitLine.displayName: object expected");
-                                message.displayName = $root.google.type.LocalizedText.fromObject(object.displayName);
+                                message.displayName = $root.google.type.LocalizedText.fromObject(object.displayName, long + 1);
                             }
                             if (object.shortDisplayName != null) {
                                 if (typeof object.shortDisplayName !== "object")
                                     throw TypeError(".google.maps.places.v1.TransitLine.shortDisplayName: object expected");
-                                message.shortDisplayName = $root.google.type.LocalizedText.fromObject(object.shortDisplayName);
+                                message.shortDisplayName = $root.google.type.LocalizedText.fromObject(object.shortDisplayName, long + 1);
                             }
                             if (object.textColor != null)
                                 message.textColor = String(object.textColor);
@@ -17715,12 +18327,12 @@
                             if (object.icon != null) {
                                 if (typeof object.icon !== "object")
                                     throw TypeError(".google.maps.places.v1.TransitLine.icon: object expected");
-                                message.icon = $root.google.maps.places.v1.TransitIcon.fromObject(object.icon);
+                                message.icon = $root.google.maps.places.v1.TransitIcon.fromObject(object.icon, long + 1);
                             }
                             if (object.vehicleIcon != null) {
                                 if (typeof object.vehicleIcon !== "object")
                                     throw TypeError(".google.maps.places.v1.TransitLine.vehicleIcon: object expected");
-                                message.vehicleIcon = $root.google.maps.places.v1.TransitIcon.fromObject(object.vehicleIcon);
+                                message.vehicleIcon = $root.google.maps.places.v1.TransitIcon.fromObject(object.vehicleIcon, long + 1);
                             }
                             return message;
                         };
@@ -17879,7 +18491,7 @@
                         function TransitStop(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -18013,9 +18625,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TransitStop.decode = function decode(reader, length, error) {
+                        TransitStop.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.TransitStop();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -18027,23 +18643,23 @@
                                         break;
                                     }
                                 case 2: {
-                                        message.displayName = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                        message.displayName = $root.google.type.LocalizedText.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 3: {
-                                        message.platformCode = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                        message.platformCode = $root.google.type.LocalizedText.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 4: {
-                                        message.signageText = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                        message.signageText = $root.google.type.LocalizedText.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 5: {
-                                        message.stopCode = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                        message.stopCode = $root.google.type.LocalizedText.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 6: {
-                                        message.location = $root.google.type.LatLng.decode(reader, reader.uint32());
+                                        message.location = $root.google.type.LatLng.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 7: {
@@ -18051,7 +18667,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -18082,35 +18698,39 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        TransitStop.verify = function verify(message) {
+                        TransitStop.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             var properties = {};
                             if (message.id != null && message.hasOwnProperty("id"))
                                 if (!$util.isString(message.id))
                                     return "id: string expected";
                             if (message.displayName != null && message.hasOwnProperty("displayName")) {
-                                var error = $root.google.type.LocalizedText.verify(message.displayName);
+                                var error = $root.google.type.LocalizedText.verify(message.displayName, long + 1);
                                 if (error)
                                     return "displayName." + error;
                             }
                             if (message.platformCode != null && message.hasOwnProperty("platformCode")) {
-                                var error = $root.google.type.LocalizedText.verify(message.platformCode);
+                                var error = $root.google.type.LocalizedText.verify(message.platformCode, long + 1);
                                 if (error)
                                     return "platformCode." + error;
                             }
                             if (message.signageText != null && message.hasOwnProperty("signageText")) {
-                                var error = $root.google.type.LocalizedText.verify(message.signageText);
+                                var error = $root.google.type.LocalizedText.verify(message.signageText, long + 1);
                                 if (error)
                                     return "signageText." + error;
                             }
                             if (message.stopCode != null && message.hasOwnProperty("stopCode")) {
-                                var error = $root.google.type.LocalizedText.verify(message.stopCode);
+                                var error = $root.google.type.LocalizedText.verify(message.stopCode, long + 1);
                                 if (error)
                                     return "stopCode." + error;
                             }
                             if (message.location != null && message.hasOwnProperty("location")) {
-                                var error = $root.google.type.LatLng.verify(message.location);
+                                var error = $root.google.type.LatLng.verify(message.location, long + 1);
                                 if (error)
                                     return "location." + error;
                             }
@@ -18130,36 +18750,40 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.maps.places.v1.TransitStop} TransitStop
                          */
-                        TransitStop.fromObject = function fromObject(object) {
+                        TransitStop.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.maps.places.v1.TransitStop)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.maps.places.v1.TransitStop();
                             if (object.id != null)
                                 message.id = String(object.id);
                             if (object.displayName != null) {
                                 if (typeof object.displayName !== "object")
                                     throw TypeError(".google.maps.places.v1.TransitStop.displayName: object expected");
-                                message.displayName = $root.google.type.LocalizedText.fromObject(object.displayName);
+                                message.displayName = $root.google.type.LocalizedText.fromObject(object.displayName, long + 1);
                             }
                             if (object.platformCode != null) {
                                 if (typeof object.platformCode !== "object")
                                     throw TypeError(".google.maps.places.v1.TransitStop.platformCode: object expected");
-                                message.platformCode = $root.google.type.LocalizedText.fromObject(object.platformCode);
+                                message.platformCode = $root.google.type.LocalizedText.fromObject(object.platformCode, long + 1);
                             }
                             if (object.signageText != null) {
                                 if (typeof object.signageText !== "object")
                                     throw TypeError(".google.maps.places.v1.TransitStop.signageText: object expected");
-                                message.signageText = $root.google.type.LocalizedText.fromObject(object.signageText);
+                                message.signageText = $root.google.type.LocalizedText.fromObject(object.signageText, long + 1);
                             }
                             if (object.stopCode != null) {
                                 if (typeof object.stopCode !== "object")
                                     throw TypeError(".google.maps.places.v1.TransitStop.stopCode: object expected");
-                                message.stopCode = $root.google.type.LocalizedText.fromObject(object.stopCode);
+                                message.stopCode = $root.google.type.LocalizedText.fromObject(object.stopCode, long + 1);
                             }
                             if (object.location != null) {
                                 if (typeof object.location !== "object")
                                     throw TypeError(".google.maps.places.v1.TransitStop.location: object expected");
-                                message.location = $root.google.type.LatLng.fromObject(object.location);
+                                message.location = $root.google.type.LatLng.fromObject(object.location, long + 1);
                             }
                             if (object.wheelchairAccessibleEntrance != null)
                                 message.wheelchairAccessibleEntrance = Boolean(object.wheelchairAccessibleEntrance);
@@ -18257,7 +18881,7 @@
                         function TransitIcon(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -18332,9 +18956,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TransitIcon.decode = function decode(reader, length, error) {
+                        TransitIcon.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.TransitIcon();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -18350,7 +18978,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -18381,9 +19009,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        TransitIcon.verify = function verify(message) {
+                        TransitIcon.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.url != null && message.hasOwnProperty("url"))
                                 if (!$util.isString(message.url))
                                     return "url: string expected";
@@ -18401,9 +19033,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.maps.places.v1.TransitIcon} TransitIcon
                          */
-                        TransitIcon.fromObject = function fromObject(object) {
+                        TransitIcon.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.maps.places.v1.TransitIcon)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.maps.places.v1.TransitIcon();
                             if (object.url != null)
                                 message.url = String(object.url);
@@ -18688,7 +19324,7 @@
                         function RoutingParameters(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -18783,9 +19419,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RoutingParameters.decode = function decode(reader, length, error) {
+                        RoutingParameters.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.RoutingParameters();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -18793,7 +19433,7 @@
                                     break;
                                 switch (tag >>> 3) {
                                 case 1: {
-                                        message.origin = $root.google.type.LatLng.decode(reader, reader.uint32());
+                                        message.origin = $root.google.type.LatLng.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 2: {
@@ -18801,7 +19441,7 @@
                                         break;
                                     }
                                 case 3: {
-                                        message.routeModifiers = $root.google.maps.places.v1.RouteModifiers.decode(reader, reader.uint32());
+                                        message.routeModifiers = $root.google.maps.places.v1.RouteModifiers.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 4: {
@@ -18809,7 +19449,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -18840,11 +19480,15 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        RoutingParameters.verify = function verify(message) {
+                        RoutingParameters.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.origin != null && message.hasOwnProperty("origin")) {
-                                var error = $root.google.type.LatLng.verify(message.origin);
+                                var error = $root.google.type.LatLng.verify(message.origin, long + 1);
                                 if (error)
                                     return "origin." + error;
                             }
@@ -18860,7 +19504,7 @@
                                     break;
                                 }
                             if (message.routeModifiers != null && message.hasOwnProperty("routeModifiers")) {
-                                var error = $root.google.maps.places.v1.RouteModifiers.verify(message.routeModifiers);
+                                var error = $root.google.maps.places.v1.RouteModifiers.verify(message.routeModifiers, long + 1);
                                 if (error)
                                     return "routeModifiers." + error;
                             }
@@ -18885,14 +19529,18 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.maps.places.v1.RoutingParameters} RoutingParameters
                          */
-                        RoutingParameters.fromObject = function fromObject(object) {
+                        RoutingParameters.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.maps.places.v1.RoutingParameters)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.maps.places.v1.RoutingParameters();
                             if (object.origin != null) {
                                 if (typeof object.origin !== "object")
                                     throw TypeError(".google.maps.places.v1.RoutingParameters.origin: object expected");
-                                message.origin = $root.google.type.LatLng.fromObject(object.origin);
+                                message.origin = $root.google.type.LatLng.fromObject(object.origin, long + 1);
                             }
                             switch (object.travelMode) {
                             default:
@@ -18925,7 +19573,7 @@
                             if (object.routeModifiers != null) {
                                 if (typeof object.routeModifiers !== "object")
                                     throw TypeError(".google.maps.places.v1.RoutingParameters.routeModifiers: object expected");
-                                message.routeModifiers = $root.google.maps.places.v1.RouteModifiers.fromObject(object.routeModifiers);
+                                message.routeModifiers = $root.google.maps.places.v1.RouteModifiers.fromObject(object.routeModifiers, long + 1);
                             }
                             switch (object.routingPreference) {
                             default:
@@ -19047,7 +19695,7 @@
                             this.excludedPrimaryTypes = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -19216,9 +19864,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SearchNearbyRequest.decode = function decode(reader, length, error) {
+                        SearchNearbyRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.SearchNearbyRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -19262,7 +19914,7 @@
                                         break;
                                     }
                                 case 8: {
-                                        message.locationRestriction = $root.google.maps.places.v1.SearchNearbyRequest.LocationRestriction.decode(reader, reader.uint32());
+                                        message.locationRestriction = $root.google.maps.places.v1.SearchNearbyRequest.LocationRestriction.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 9: {
@@ -19270,7 +19922,7 @@
                                         break;
                                     }
                                 case 10: {
-                                        message.routingParameters = $root.google.maps.places.v1.RoutingParameters.decode(reader, reader.uint32());
+                                        message.routingParameters = $root.google.maps.places.v1.RoutingParameters.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 15: {
@@ -19278,7 +19930,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -19309,9 +19961,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        SearchNearbyRequest.verify = function verify(message) {
+                        SearchNearbyRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.languageCode != null && message.hasOwnProperty("languageCode"))
                                 if (!$util.isString(message.languageCode))
                                     return "languageCode: string expected";
@@ -19350,7 +20006,7 @@
                                 if (!$util.isInteger(message.maxResultCount))
                                     return "maxResultCount: integer expected";
                             if (message.locationRestriction != null && message.hasOwnProperty("locationRestriction")) {
-                                var error = $root.google.maps.places.v1.SearchNearbyRequest.LocationRestriction.verify(message.locationRestriction);
+                                var error = $root.google.maps.places.v1.SearchNearbyRequest.LocationRestriction.verify(message.locationRestriction, long + 1);
                                 if (error)
                                     return "locationRestriction." + error;
                             }
@@ -19364,7 +20020,7 @@
                                     break;
                                 }
                             if (message.routingParameters != null && message.hasOwnProperty("routingParameters")) {
-                                var error = $root.google.maps.places.v1.RoutingParameters.verify(message.routingParameters);
+                                var error = $root.google.maps.places.v1.RoutingParameters.verify(message.routingParameters, long + 1);
                                 if (error)
                                     return "routingParameters." + error;
                             }
@@ -19382,9 +20038,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.maps.places.v1.SearchNearbyRequest} SearchNearbyRequest
                          */
-                        SearchNearbyRequest.fromObject = function fromObject(object) {
+                        SearchNearbyRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.maps.places.v1.SearchNearbyRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.maps.places.v1.SearchNearbyRequest();
                             if (object.languageCode != null)
                                 message.languageCode = String(object.languageCode);
@@ -19423,7 +20083,7 @@
                             if (object.locationRestriction != null) {
                                 if (typeof object.locationRestriction !== "object")
                                     throw TypeError(".google.maps.places.v1.SearchNearbyRequest.locationRestriction: object expected");
-                                message.locationRestriction = $root.google.maps.places.v1.SearchNearbyRequest.LocationRestriction.fromObject(object.locationRestriction);
+                                message.locationRestriction = $root.google.maps.places.v1.SearchNearbyRequest.LocationRestriction.fromObject(object.locationRestriction, long + 1);
                             }
                             switch (object.rankPreference) {
                             default:
@@ -19448,7 +20108,7 @@
                             if (object.routingParameters != null) {
                                 if (typeof object.routingParameters !== "object")
                                     throw TypeError(".google.maps.places.v1.SearchNearbyRequest.routingParameters: object expected");
-                                message.routingParameters = $root.google.maps.places.v1.RoutingParameters.fromObject(object.routingParameters);
+                                message.routingParameters = $root.google.maps.places.v1.RoutingParameters.fromObject(object.routingParameters, long + 1);
                             }
                             if (object.includeFutureOpeningBusinesses != null)
                                 message.includeFutureOpeningBusinesses = Boolean(object.includeFutureOpeningBusinesses);
@@ -19566,7 +20226,7 @@
                             function LocationRestriction(properties) {
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                             this[keys[i]] = properties[keys[i]];
                             }
     
@@ -19645,9 +20305,13 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            LocationRestriction.decode = function decode(reader, length, error) {
+                            LocationRestriction.decode = function decode(reader, length, error, long) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.SearchNearbyRequest.LocationRestriction();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
@@ -19655,11 +20319,11 @@
                                         break;
                                     switch (tag >>> 3) {
                                     case 2: {
-                                            message.circle = $root.google.maps.places.v1.Circle.decode(reader, reader.uint32());
+                                            message.circle = $root.google.maps.places.v1.Circle.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     default:
-                                        reader.skipType(tag & 7);
+                                        reader.skipType(tag & 7, long);
                                         break;
                                     }
                                 }
@@ -19690,14 +20354,18 @@
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            LocationRestriction.verify = function verify(message) {
+                            LocationRestriction.verify = function verify(message, long) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
                                 var properties = {};
                                 if (message.circle != null && message.hasOwnProperty("circle")) {
                                     properties.type = 1;
                                     {
-                                        var error = $root.google.maps.places.v1.Circle.verify(message.circle);
+                                        var error = $root.google.maps.places.v1.Circle.verify(message.circle, long + 1);
                                         if (error)
                                             return "circle." + error;
                                     }
@@ -19713,14 +20381,18 @@
                              * @param {Object.<string,*>} object Plain object
                              * @returns {google.maps.places.v1.SearchNearbyRequest.LocationRestriction} LocationRestriction
                              */
-                            LocationRestriction.fromObject = function fromObject(object) {
+                            LocationRestriction.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.maps.places.v1.SearchNearbyRequest.LocationRestriction)
                                     return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.maps.places.v1.SearchNearbyRequest.LocationRestriction();
                                 if (object.circle != null) {
                                     if (typeof object.circle !== "object")
                                         throw TypeError(".google.maps.places.v1.SearchNearbyRequest.LocationRestriction.circle: object expected");
-                                    message.circle = $root.google.maps.places.v1.Circle.fromObject(object.circle);
+                                    message.circle = $root.google.maps.places.v1.Circle.fromObject(object.circle, long + 1);
                                 }
                                 return message;
                             };
@@ -19817,7 +20489,7 @@
                             this.routingSummaries = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -19894,9 +20566,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SearchNearbyResponse.decode = function decode(reader, length, error) {
+                        SearchNearbyResponse.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.SearchNearbyResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -19906,17 +20582,17 @@
                                 case 1: {
                                         if (!(message.places && message.places.length))
                                             message.places = [];
-                                        message.places.push($root.google.maps.places.v1.Place.decode(reader, reader.uint32()));
+                                        message.places.push($root.google.maps.places.v1.Place.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 case 2: {
                                         if (!(message.routingSummaries && message.routingSummaries.length))
                                             message.routingSummaries = [];
-                                        message.routingSummaries.push($root.google.maps.places.v1.RoutingSummary.decode(reader, reader.uint32()));
+                                        message.routingSummaries.push($root.google.maps.places.v1.RoutingSummary.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -19947,14 +20623,18 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        SearchNearbyResponse.verify = function verify(message) {
+                        SearchNearbyResponse.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.places != null && message.hasOwnProperty("places")) {
                                 if (!Array.isArray(message.places))
                                     return "places: array expected";
                                 for (var i = 0; i < message.places.length; ++i) {
-                                    var error = $root.google.maps.places.v1.Place.verify(message.places[i]);
+                                    var error = $root.google.maps.places.v1.Place.verify(message.places[i], long + 1);
                                     if (error)
                                         return "places." + error;
                                 }
@@ -19963,7 +20643,7 @@
                                 if (!Array.isArray(message.routingSummaries))
                                     return "routingSummaries: array expected";
                                 for (var i = 0; i < message.routingSummaries.length; ++i) {
-                                    var error = $root.google.maps.places.v1.RoutingSummary.verify(message.routingSummaries[i]);
+                                    var error = $root.google.maps.places.v1.RoutingSummary.verify(message.routingSummaries[i], long + 1);
                                     if (error)
                                         return "routingSummaries." + error;
                                 }
@@ -19979,9 +20659,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.maps.places.v1.SearchNearbyResponse} SearchNearbyResponse
                          */
-                        SearchNearbyResponse.fromObject = function fromObject(object) {
+                        SearchNearbyResponse.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.maps.places.v1.SearchNearbyResponse)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.maps.places.v1.SearchNearbyResponse();
                             if (object.places) {
                                 if (!Array.isArray(object.places))
@@ -19990,7 +20674,7 @@
                                 for (var i = 0; i < object.places.length; ++i) {
                                     if (typeof object.places[i] !== "object")
                                         throw TypeError(".google.maps.places.v1.SearchNearbyResponse.places: object expected");
-                                    message.places[i] = $root.google.maps.places.v1.Place.fromObject(object.places[i]);
+                                    message.places[i] = $root.google.maps.places.v1.Place.fromObject(object.places[i], long + 1);
                                 }
                             }
                             if (object.routingSummaries) {
@@ -20000,7 +20684,7 @@
                                 for (var i = 0; i < object.routingSummaries.length; ++i) {
                                     if (typeof object.routingSummaries[i] !== "object")
                                         throw TypeError(".google.maps.places.v1.SearchNearbyResponse.routingSummaries: object expected");
-                                    message.routingSummaries[i] = $root.google.maps.places.v1.RoutingSummary.fromObject(object.routingSummaries[i]);
+                                    message.routingSummaries[i] = $root.google.maps.places.v1.RoutingSummary.fromObject(object.routingSummaries[i], long + 1);
                                 }
                             }
                             return message;
@@ -20102,7 +20786,7 @@
                             this.priceLevels = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -20331,9 +21015,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SearchTextRequest.decode = function decode(reader, length, error) {
+                        SearchTextRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.SearchTextRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -20388,23 +21076,23 @@
                                         break;
                                     }
                                 case 13: {
-                                        message.locationBias = $root.google.maps.places.v1.SearchTextRequest.LocationBias.decode(reader, reader.uint32());
+                                        message.locationBias = $root.google.maps.places.v1.SearchTextRequest.LocationBias.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 14: {
-                                        message.locationRestriction = $root.google.maps.places.v1.SearchTextRequest.LocationRestriction.decode(reader, reader.uint32());
+                                        message.locationRestriction = $root.google.maps.places.v1.SearchTextRequest.LocationRestriction.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 15: {
-                                        message.evOptions = $root.google.maps.places.v1.SearchTextRequest.EVOptions.decode(reader, reader.uint32());
+                                        message.evOptions = $root.google.maps.places.v1.SearchTextRequest.EVOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 16: {
-                                        message.routingParameters = $root.google.maps.places.v1.RoutingParameters.decode(reader, reader.uint32());
+                                        message.routingParameters = $root.google.maps.places.v1.RoutingParameters.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 17: {
-                                        message.searchAlongRouteParameters = $root.google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters.decode(reader, reader.uint32());
+                                        message.searchAlongRouteParameters = $root.google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 20: {
@@ -20416,7 +21104,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -20447,9 +21135,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        SearchTextRequest.verify = function verify(message) {
+                        SearchTextRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.textQuery != null && message.hasOwnProperty("textQuery"))
                                 if (!$util.isString(message.textQuery))
                                     return "textQuery: string expected";
@@ -20500,27 +21192,27 @@
                                 if (typeof message.strictTypeFiltering !== "boolean")
                                     return "strictTypeFiltering: boolean expected";
                             if (message.locationBias != null && message.hasOwnProperty("locationBias")) {
-                                var error = $root.google.maps.places.v1.SearchTextRequest.LocationBias.verify(message.locationBias);
+                                var error = $root.google.maps.places.v1.SearchTextRequest.LocationBias.verify(message.locationBias, long + 1);
                                 if (error)
                                     return "locationBias." + error;
                             }
                             if (message.locationRestriction != null && message.hasOwnProperty("locationRestriction")) {
-                                var error = $root.google.maps.places.v1.SearchTextRequest.LocationRestriction.verify(message.locationRestriction);
+                                var error = $root.google.maps.places.v1.SearchTextRequest.LocationRestriction.verify(message.locationRestriction, long + 1);
                                 if (error)
                                     return "locationRestriction." + error;
                             }
                             if (message.evOptions != null && message.hasOwnProperty("evOptions")) {
-                                var error = $root.google.maps.places.v1.SearchTextRequest.EVOptions.verify(message.evOptions);
+                                var error = $root.google.maps.places.v1.SearchTextRequest.EVOptions.verify(message.evOptions, long + 1);
                                 if (error)
                                     return "evOptions." + error;
                             }
                             if (message.routingParameters != null && message.hasOwnProperty("routingParameters")) {
-                                var error = $root.google.maps.places.v1.RoutingParameters.verify(message.routingParameters);
+                                var error = $root.google.maps.places.v1.RoutingParameters.verify(message.routingParameters, long + 1);
                                 if (error)
                                     return "routingParameters." + error;
                             }
                             if (message.searchAlongRouteParameters != null && message.hasOwnProperty("searchAlongRouteParameters")) {
-                                var error = $root.google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters.verify(message.searchAlongRouteParameters);
+                                var error = $root.google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters.verify(message.searchAlongRouteParameters, long + 1);
                                 if (error)
                                     return "searchAlongRouteParameters." + error;
                             }
@@ -20541,9 +21233,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.maps.places.v1.SearchTextRequest} SearchTextRequest
                          */
-                        SearchTextRequest.fromObject = function fromObject(object) {
+                        SearchTextRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.maps.places.v1.SearchTextRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.maps.places.v1.SearchTextRequest();
                             if (object.textQuery != null)
                                 message.textQuery = String(object.textQuery);
@@ -20621,27 +21317,27 @@
                             if (object.locationBias != null) {
                                 if (typeof object.locationBias !== "object")
                                     throw TypeError(".google.maps.places.v1.SearchTextRequest.locationBias: object expected");
-                                message.locationBias = $root.google.maps.places.v1.SearchTextRequest.LocationBias.fromObject(object.locationBias);
+                                message.locationBias = $root.google.maps.places.v1.SearchTextRequest.LocationBias.fromObject(object.locationBias, long + 1);
                             }
                             if (object.locationRestriction != null) {
                                 if (typeof object.locationRestriction !== "object")
                                     throw TypeError(".google.maps.places.v1.SearchTextRequest.locationRestriction: object expected");
-                                message.locationRestriction = $root.google.maps.places.v1.SearchTextRequest.LocationRestriction.fromObject(object.locationRestriction);
+                                message.locationRestriction = $root.google.maps.places.v1.SearchTextRequest.LocationRestriction.fromObject(object.locationRestriction, long + 1);
                             }
                             if (object.evOptions != null) {
                                 if (typeof object.evOptions !== "object")
                                     throw TypeError(".google.maps.places.v1.SearchTextRequest.evOptions: object expected");
-                                message.evOptions = $root.google.maps.places.v1.SearchTextRequest.EVOptions.fromObject(object.evOptions);
+                                message.evOptions = $root.google.maps.places.v1.SearchTextRequest.EVOptions.fromObject(object.evOptions, long + 1);
                             }
                             if (object.routingParameters != null) {
                                 if (typeof object.routingParameters !== "object")
                                     throw TypeError(".google.maps.places.v1.SearchTextRequest.routingParameters: object expected");
-                                message.routingParameters = $root.google.maps.places.v1.RoutingParameters.fromObject(object.routingParameters);
+                                message.routingParameters = $root.google.maps.places.v1.RoutingParameters.fromObject(object.routingParameters, long + 1);
                             }
                             if (object.searchAlongRouteParameters != null) {
                                 if (typeof object.searchAlongRouteParameters !== "object")
                                     throw TypeError(".google.maps.places.v1.SearchTextRequest.searchAlongRouteParameters: object expected");
-                                message.searchAlongRouteParameters = $root.google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters.fromObject(object.searchAlongRouteParameters);
+                                message.searchAlongRouteParameters = $root.google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters.fromObject(object.searchAlongRouteParameters, long + 1);
                             }
                             if (object.includePureServiceAreaBusinesses != null)
                                 message.includePureServiceAreaBusinesses = Boolean(object.includePureServiceAreaBusinesses);
@@ -20786,7 +21482,7 @@
                             function LocationBias(properties) {
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                             this[keys[i]] = properties[keys[i]];
                             }
     
@@ -20875,9 +21571,13 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            LocationBias.decode = function decode(reader, length, error) {
+                            LocationBias.decode = function decode(reader, length, error, long) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.SearchTextRequest.LocationBias();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
@@ -20885,15 +21585,15 @@
                                         break;
                                     switch (tag >>> 3) {
                                     case 1: {
-                                            message.rectangle = $root.google.geo.type.Viewport.decode(reader, reader.uint32());
+                                            message.rectangle = $root.google.geo.type.Viewport.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     case 2: {
-                                            message.circle = $root.google.maps.places.v1.Circle.decode(reader, reader.uint32());
+                                            message.circle = $root.google.maps.places.v1.Circle.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     default:
-                                        reader.skipType(tag & 7);
+                                        reader.skipType(tag & 7, long);
                                         break;
                                     }
                                 }
@@ -20924,14 +21624,18 @@
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            LocationBias.verify = function verify(message) {
+                            LocationBias.verify = function verify(message, long) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
                                 var properties = {};
                                 if (message.rectangle != null && message.hasOwnProperty("rectangle")) {
                                     properties.type = 1;
                                     {
-                                        var error = $root.google.geo.type.Viewport.verify(message.rectangle);
+                                        var error = $root.google.geo.type.Viewport.verify(message.rectangle, long + 1);
                                         if (error)
                                             return "rectangle." + error;
                                     }
@@ -20941,7 +21645,7 @@
                                         return "type: multiple values";
                                     properties.type = 1;
                                     {
-                                        var error = $root.google.maps.places.v1.Circle.verify(message.circle);
+                                        var error = $root.google.maps.places.v1.Circle.verify(message.circle, long + 1);
                                         if (error)
                                             return "circle." + error;
                                     }
@@ -20957,19 +21661,23 @@
                              * @param {Object.<string,*>} object Plain object
                              * @returns {google.maps.places.v1.SearchTextRequest.LocationBias} LocationBias
                              */
-                            LocationBias.fromObject = function fromObject(object) {
+                            LocationBias.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.maps.places.v1.SearchTextRequest.LocationBias)
                                     return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.maps.places.v1.SearchTextRequest.LocationBias();
                                 if (object.rectangle != null) {
                                     if (typeof object.rectangle !== "object")
                                         throw TypeError(".google.maps.places.v1.SearchTextRequest.LocationBias.rectangle: object expected");
-                                    message.rectangle = $root.google.geo.type.Viewport.fromObject(object.rectangle);
+                                    message.rectangle = $root.google.geo.type.Viewport.fromObject(object.rectangle, long + 1);
                                 }
                                 if (object.circle != null) {
                                     if (typeof object.circle !== "object")
                                         throw TypeError(".google.maps.places.v1.SearchTextRequest.LocationBias.circle: object expected");
-                                    message.circle = $root.google.maps.places.v1.Circle.fromObject(object.circle);
+                                    message.circle = $root.google.maps.places.v1.Circle.fromObject(object.circle, long + 1);
                                 }
                                 return message;
                             };
@@ -21049,7 +21757,7 @@
                             function LocationRestriction(properties) {
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                             this[keys[i]] = properties[keys[i]];
                             }
     
@@ -21128,9 +21836,13 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            LocationRestriction.decode = function decode(reader, length, error) {
+                            LocationRestriction.decode = function decode(reader, length, error, long) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.SearchTextRequest.LocationRestriction();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
@@ -21138,11 +21850,11 @@
                                         break;
                                     switch (tag >>> 3) {
                                     case 1: {
-                                            message.rectangle = $root.google.geo.type.Viewport.decode(reader, reader.uint32());
+                                            message.rectangle = $root.google.geo.type.Viewport.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     default:
-                                        reader.skipType(tag & 7);
+                                        reader.skipType(tag & 7, long);
                                         break;
                                     }
                                 }
@@ -21173,14 +21885,18 @@
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            LocationRestriction.verify = function verify(message) {
+                            LocationRestriction.verify = function verify(message, long) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
                                 var properties = {};
                                 if (message.rectangle != null && message.hasOwnProperty("rectangle")) {
                                     properties.type = 1;
                                     {
-                                        var error = $root.google.geo.type.Viewport.verify(message.rectangle);
+                                        var error = $root.google.geo.type.Viewport.verify(message.rectangle, long + 1);
                                         if (error)
                                             return "rectangle." + error;
                                     }
@@ -21196,14 +21912,18 @@
                              * @param {Object.<string,*>} object Plain object
                              * @returns {google.maps.places.v1.SearchTextRequest.LocationRestriction} LocationRestriction
                              */
-                            LocationRestriction.fromObject = function fromObject(object) {
+                            LocationRestriction.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.maps.places.v1.SearchTextRequest.LocationRestriction)
                                     return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.maps.places.v1.SearchTextRequest.LocationRestriction();
                                 if (object.rectangle != null) {
                                     if (typeof object.rectangle !== "object")
                                         throw TypeError(".google.maps.places.v1.SearchTextRequest.LocationRestriction.rectangle: object expected");
-                                    message.rectangle = $root.google.geo.type.Viewport.fromObject(object.rectangle);
+                                    message.rectangle = $root.google.geo.type.Viewport.fromObject(object.rectangle, long + 1);
                                 }
                                 return message;
                             };
@@ -21280,7 +22000,7 @@
                                 this.connectorTypes = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                             this[keys[i]] = properties[keys[i]];
                             }
     
@@ -21359,9 +22079,13 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            EVOptions.decode = function decode(reader, length, error) {
+                            EVOptions.decode = function decode(reader, length, error, long) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.SearchTextRequest.EVOptions();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
@@ -21384,7 +22108,7 @@
                                             break;
                                         }
                                     default:
-                                        reader.skipType(tag & 7);
+                                        reader.skipType(tag & 7, long);
                                         break;
                                     }
                                 }
@@ -21415,9 +22139,13 @@
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            EVOptions.verify = function verify(message) {
+                            EVOptions.verify = function verify(message, long) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
                                 if (message.minimumChargingRateKw != null && message.hasOwnProperty("minimumChargingRateKw"))
                                     if (typeof message.minimumChargingRateKw !== "number")
                                         return "minimumChargingRateKw: number expected";
@@ -21453,9 +22181,13 @@
                              * @param {Object.<string,*>} object Plain object
                              * @returns {google.maps.places.v1.SearchTextRequest.EVOptions} EVOptions
                              */
-                            EVOptions.fromObject = function fromObject(object) {
+                            EVOptions.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.maps.places.v1.SearchTextRequest.EVOptions)
                                     return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.maps.places.v1.SearchTextRequest.EVOptions();
                                 if (object.minimumChargingRateKw != null)
                                     message.minimumChargingRateKw = Number(object.minimumChargingRateKw);
@@ -21595,7 +22327,7 @@
                             function SearchAlongRouteParameters(properties) {
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                             this[keys[i]] = properties[keys[i]];
                             }
     
@@ -21660,9 +22392,13 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            SearchAlongRouteParameters.decode = function decode(reader, length, error) {
+                            SearchAlongRouteParameters.decode = function decode(reader, length, error, long) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
@@ -21670,11 +22406,11 @@
                                         break;
                                     switch (tag >>> 3) {
                                     case 1: {
-                                            message.polyline = $root.google.maps.places.v1.Polyline.decode(reader, reader.uint32());
+                                            message.polyline = $root.google.maps.places.v1.Polyline.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     default:
-                                        reader.skipType(tag & 7);
+                                        reader.skipType(tag & 7, long);
                                         break;
                                     }
                                 }
@@ -21705,11 +22441,15 @@
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            SearchAlongRouteParameters.verify = function verify(message) {
+                            SearchAlongRouteParameters.verify = function verify(message, long) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
                                 if (message.polyline != null && message.hasOwnProperty("polyline")) {
-                                    var error = $root.google.maps.places.v1.Polyline.verify(message.polyline);
+                                    var error = $root.google.maps.places.v1.Polyline.verify(message.polyline, long + 1);
                                     if (error)
                                         return "polyline." + error;
                                 }
@@ -21724,14 +22464,18 @@
                              * @param {Object.<string,*>} object Plain object
                              * @returns {google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters} SearchAlongRouteParameters
                              */
-                            SearchAlongRouteParameters.fromObject = function fromObject(object) {
+                            SearchAlongRouteParameters.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters)
                                     return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters();
                                 if (object.polyline != null) {
                                     if (typeof object.polyline !== "object")
                                         throw TypeError(".google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters.polyline: object expected");
-                                    message.polyline = $root.google.maps.places.v1.Polyline.fromObject(object.polyline);
+                                    message.polyline = $root.google.maps.places.v1.Polyline.fromObject(object.polyline, long + 1);
                                 }
                                 return message;
                             };
@@ -21813,7 +22557,7 @@
                             this.contextualContents = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -21901,9 +22645,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SearchTextResponse.decode = function decode(reader, length, error) {
+                        SearchTextResponse.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.SearchTextResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -21913,23 +22661,23 @@
                                 case 1: {
                                         if (!(message.places && message.places.length))
                                             message.places = [];
-                                        message.places.push($root.google.maps.places.v1.Place.decode(reader, reader.uint32()));
+                                        message.places.push($root.google.maps.places.v1.Place.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 case 2: {
                                         if (!(message.routingSummaries && message.routingSummaries.length))
                                             message.routingSummaries = [];
-                                        message.routingSummaries.push($root.google.maps.places.v1.RoutingSummary.decode(reader, reader.uint32()));
+                                        message.routingSummaries.push($root.google.maps.places.v1.RoutingSummary.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 case 3: {
                                         if (!(message.contextualContents && message.contextualContents.length))
                                             message.contextualContents = [];
-                                        message.contextualContents.push($root.google.maps.places.v1.ContextualContent.decode(reader, reader.uint32()));
+                                        message.contextualContents.push($root.google.maps.places.v1.ContextualContent.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -21960,14 +22708,18 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        SearchTextResponse.verify = function verify(message) {
+                        SearchTextResponse.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.places != null && message.hasOwnProperty("places")) {
                                 if (!Array.isArray(message.places))
                                     return "places: array expected";
                                 for (var i = 0; i < message.places.length; ++i) {
-                                    var error = $root.google.maps.places.v1.Place.verify(message.places[i]);
+                                    var error = $root.google.maps.places.v1.Place.verify(message.places[i], long + 1);
                                     if (error)
                                         return "places." + error;
                                 }
@@ -21976,7 +22728,7 @@
                                 if (!Array.isArray(message.routingSummaries))
                                     return "routingSummaries: array expected";
                                 for (var i = 0; i < message.routingSummaries.length; ++i) {
-                                    var error = $root.google.maps.places.v1.RoutingSummary.verify(message.routingSummaries[i]);
+                                    var error = $root.google.maps.places.v1.RoutingSummary.verify(message.routingSummaries[i], long + 1);
                                     if (error)
                                         return "routingSummaries." + error;
                                 }
@@ -21985,7 +22737,7 @@
                                 if (!Array.isArray(message.contextualContents))
                                     return "contextualContents: array expected";
                                 for (var i = 0; i < message.contextualContents.length; ++i) {
-                                    var error = $root.google.maps.places.v1.ContextualContent.verify(message.contextualContents[i]);
+                                    var error = $root.google.maps.places.v1.ContextualContent.verify(message.contextualContents[i], long + 1);
                                     if (error)
                                         return "contextualContents." + error;
                                 }
@@ -22001,9 +22753,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.maps.places.v1.SearchTextResponse} SearchTextResponse
                          */
-                        SearchTextResponse.fromObject = function fromObject(object) {
+                        SearchTextResponse.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.maps.places.v1.SearchTextResponse)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.maps.places.v1.SearchTextResponse();
                             if (object.places) {
                                 if (!Array.isArray(object.places))
@@ -22012,7 +22768,7 @@
                                 for (var i = 0; i < object.places.length; ++i) {
                                     if (typeof object.places[i] !== "object")
                                         throw TypeError(".google.maps.places.v1.SearchTextResponse.places: object expected");
-                                    message.places[i] = $root.google.maps.places.v1.Place.fromObject(object.places[i]);
+                                    message.places[i] = $root.google.maps.places.v1.Place.fromObject(object.places[i], long + 1);
                                 }
                             }
                             if (object.routingSummaries) {
@@ -22022,7 +22778,7 @@
                                 for (var i = 0; i < object.routingSummaries.length; ++i) {
                                     if (typeof object.routingSummaries[i] !== "object")
                                         throw TypeError(".google.maps.places.v1.SearchTextResponse.routingSummaries: object expected");
-                                    message.routingSummaries[i] = $root.google.maps.places.v1.RoutingSummary.fromObject(object.routingSummaries[i]);
+                                    message.routingSummaries[i] = $root.google.maps.places.v1.RoutingSummary.fromObject(object.routingSummaries[i], long + 1);
                                 }
                             }
                             if (object.contextualContents) {
@@ -22032,7 +22788,7 @@
                                 for (var i = 0; i < object.contextualContents.length; ++i) {
                                     if (typeof object.contextualContents[i] !== "object")
                                         throw TypeError(".google.maps.places.v1.SearchTextResponse.contextualContents: object expected");
-                                    message.contextualContents[i] = $root.google.maps.places.v1.ContextualContent.fromObject(object.contextualContents[i]);
+                                    message.contextualContents[i] = $root.google.maps.places.v1.ContextualContent.fromObject(object.contextualContents[i], long + 1);
                                 }
                             }
                             return message;
@@ -22126,7 +22882,7 @@
                         function GetPhotoMediaRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -22221,9 +22977,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetPhotoMediaRequest.decode = function decode(reader, length, error) {
+                        GetPhotoMediaRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.GetPhotoMediaRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -22247,7 +23007,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -22278,9 +23038,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        GetPhotoMediaRequest.verify = function verify(message) {
+                        GetPhotoMediaRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -22304,9 +23068,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.maps.places.v1.GetPhotoMediaRequest} GetPhotoMediaRequest
                          */
-                        GetPhotoMediaRequest.fromObject = function fromObject(object) {
+                        GetPhotoMediaRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.maps.places.v1.GetPhotoMediaRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.maps.places.v1.GetPhotoMediaRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -22399,7 +23167,7 @@
                         function PhotoMedia(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -22474,9 +23242,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PhotoMedia.decode = function decode(reader, length, error) {
+                        PhotoMedia.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.PhotoMedia();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -22492,7 +23264,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -22523,9 +23295,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        PhotoMedia.verify = function verify(message) {
+                        PhotoMedia.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -22543,9 +23319,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.maps.places.v1.PhotoMedia} PhotoMedia
                          */
-                        PhotoMedia.fromObject = function fromObject(object) {
+                        PhotoMedia.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.maps.places.v1.PhotoMedia)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.maps.places.v1.PhotoMedia();
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -22630,7 +23410,7 @@
                         function GetPlaceRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -22725,9 +23505,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetPlaceRequest.decode = function decode(reader, length, error) {
+                        GetPlaceRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.GetPlaceRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -22751,7 +23535,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -22782,9 +23566,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        GetPlaceRequest.verify = function verify(message) {
+                        GetPlaceRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -22808,9 +23596,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.maps.places.v1.GetPlaceRequest} GetPlaceRequest
                          */
-                        GetPlaceRequest.fromObject = function fromObject(object) {
+                        GetPlaceRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.maps.places.v1.GetPlaceRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.maps.places.v1.GetPlaceRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -22916,7 +23708,7 @@
                             this.includedRegionCodes = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -23103,9 +23895,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AutocompletePlacesRequest.decode = function decode(reader, length, error) {
+                        AutocompletePlacesRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.AutocompletePlacesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -23117,11 +23913,11 @@
                                         break;
                                     }
                                 case 2: {
-                                        message.locationBias = $root.google.maps.places.v1.AutocompletePlacesRequest.LocationBias.decode(reader, reader.uint32());
+                                        message.locationBias = $root.google.maps.places.v1.AutocompletePlacesRequest.LocationBias.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 3: {
-                                        message.locationRestriction = $root.google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction.decode(reader, reader.uint32());
+                                        message.locationRestriction = $root.google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 4: {
@@ -23145,7 +23941,7 @@
                                         break;
                                     }
                                 case 8: {
-                                        message.origin = $root.google.type.LatLng.decode(reader, reader.uint32());
+                                        message.origin = $root.google.type.LatLng.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 9: {
@@ -23169,7 +23965,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -23200,19 +23996,23 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        AutocompletePlacesRequest.verify = function verify(message) {
+                        AutocompletePlacesRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.input != null && message.hasOwnProperty("input"))
                                 if (!$util.isString(message.input))
                                     return "input: string expected";
                             if (message.locationBias != null && message.hasOwnProperty("locationBias")) {
-                                var error = $root.google.maps.places.v1.AutocompletePlacesRequest.LocationBias.verify(message.locationBias);
+                                var error = $root.google.maps.places.v1.AutocompletePlacesRequest.LocationBias.verify(message.locationBias, long + 1);
                                 if (error)
                                     return "locationBias." + error;
                             }
                             if (message.locationRestriction != null && message.hasOwnProperty("locationRestriction")) {
-                                var error = $root.google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction.verify(message.locationRestriction);
+                                var error = $root.google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction.verify(message.locationRestriction, long + 1);
                                 if (error)
                                     return "locationRestriction." + error;
                             }
@@ -23237,7 +24037,7 @@
                                 if (!$util.isString(message.regionCode))
                                     return "regionCode: string expected";
                             if (message.origin != null && message.hasOwnProperty("origin")) {
-                                var error = $root.google.type.LatLng.verify(message.origin);
+                                var error = $root.google.type.LatLng.verify(message.origin, long + 1);
                                 if (error)
                                     return "origin." + error;
                             }
@@ -23267,21 +24067,25 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.maps.places.v1.AutocompletePlacesRequest} AutocompletePlacesRequest
                          */
-                        AutocompletePlacesRequest.fromObject = function fromObject(object) {
+                        AutocompletePlacesRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.maps.places.v1.AutocompletePlacesRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.maps.places.v1.AutocompletePlacesRequest();
                             if (object.input != null)
                                 message.input = String(object.input);
                             if (object.locationBias != null) {
                                 if (typeof object.locationBias !== "object")
                                     throw TypeError(".google.maps.places.v1.AutocompletePlacesRequest.locationBias: object expected");
-                                message.locationBias = $root.google.maps.places.v1.AutocompletePlacesRequest.LocationBias.fromObject(object.locationBias);
+                                message.locationBias = $root.google.maps.places.v1.AutocompletePlacesRequest.LocationBias.fromObject(object.locationBias, long + 1);
                             }
                             if (object.locationRestriction != null) {
                                 if (typeof object.locationRestriction !== "object")
                                     throw TypeError(".google.maps.places.v1.AutocompletePlacesRequest.locationRestriction: object expected");
-                                message.locationRestriction = $root.google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction.fromObject(object.locationRestriction);
+                                message.locationRestriction = $root.google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction.fromObject(object.locationRestriction, long + 1);
                             }
                             if (object.includedPrimaryTypes) {
                                 if (!Array.isArray(object.includedPrimaryTypes))
@@ -23304,7 +24108,7 @@
                             if (object.origin != null) {
                                 if (typeof object.origin !== "object")
                                     throw TypeError(".google.maps.places.v1.AutocompletePlacesRequest.origin: object expected");
-                                message.origin = $root.google.type.LatLng.fromObject(object.origin);
+                                message.origin = $root.google.type.LatLng.fromObject(object.origin, long + 1);
                             }
                             if (object.inputOffset != null)
                                 message.inputOffset = object.inputOffset | 0;
@@ -23431,7 +24235,7 @@
                             function LocationBias(properties) {
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                             this[keys[i]] = properties[keys[i]];
                             }
     
@@ -23520,9 +24324,13 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            LocationBias.decode = function decode(reader, length, error) {
+                            LocationBias.decode = function decode(reader, length, error, long) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.AutocompletePlacesRequest.LocationBias();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
@@ -23530,15 +24338,15 @@
                                         break;
                                     switch (tag >>> 3) {
                                     case 1: {
-                                            message.rectangle = $root.google.geo.type.Viewport.decode(reader, reader.uint32());
+                                            message.rectangle = $root.google.geo.type.Viewport.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     case 2: {
-                                            message.circle = $root.google.maps.places.v1.Circle.decode(reader, reader.uint32());
+                                            message.circle = $root.google.maps.places.v1.Circle.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     default:
-                                        reader.skipType(tag & 7);
+                                        reader.skipType(tag & 7, long);
                                         break;
                                     }
                                 }
@@ -23569,14 +24377,18 @@
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            LocationBias.verify = function verify(message) {
+                            LocationBias.verify = function verify(message, long) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
                                 var properties = {};
                                 if (message.rectangle != null && message.hasOwnProperty("rectangle")) {
                                     properties.type = 1;
                                     {
-                                        var error = $root.google.geo.type.Viewport.verify(message.rectangle);
+                                        var error = $root.google.geo.type.Viewport.verify(message.rectangle, long + 1);
                                         if (error)
                                             return "rectangle." + error;
                                     }
@@ -23586,7 +24398,7 @@
                                         return "type: multiple values";
                                     properties.type = 1;
                                     {
-                                        var error = $root.google.maps.places.v1.Circle.verify(message.circle);
+                                        var error = $root.google.maps.places.v1.Circle.verify(message.circle, long + 1);
                                         if (error)
                                             return "circle." + error;
                                     }
@@ -23602,19 +24414,23 @@
                              * @param {Object.<string,*>} object Plain object
                              * @returns {google.maps.places.v1.AutocompletePlacesRequest.LocationBias} LocationBias
                              */
-                            LocationBias.fromObject = function fromObject(object) {
+                            LocationBias.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.maps.places.v1.AutocompletePlacesRequest.LocationBias)
                                     return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.maps.places.v1.AutocompletePlacesRequest.LocationBias();
                                 if (object.rectangle != null) {
                                     if (typeof object.rectangle !== "object")
                                         throw TypeError(".google.maps.places.v1.AutocompletePlacesRequest.LocationBias.rectangle: object expected");
-                                    message.rectangle = $root.google.geo.type.Viewport.fromObject(object.rectangle);
+                                    message.rectangle = $root.google.geo.type.Viewport.fromObject(object.rectangle, long + 1);
                                 }
                                 if (object.circle != null) {
                                     if (typeof object.circle !== "object")
                                         throw TypeError(".google.maps.places.v1.AutocompletePlacesRequest.LocationBias.circle: object expected");
-                                    message.circle = $root.google.maps.places.v1.Circle.fromObject(object.circle);
+                                    message.circle = $root.google.maps.places.v1.Circle.fromObject(object.circle, long + 1);
                                 }
                                 return message;
                             };
@@ -23695,7 +24511,7 @@
                             function LocationRestriction(properties) {
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                             this[keys[i]] = properties[keys[i]];
                             }
     
@@ -23784,9 +24600,13 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            LocationRestriction.decode = function decode(reader, length, error) {
+                            LocationRestriction.decode = function decode(reader, length, error, long) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
@@ -23794,15 +24614,15 @@
                                         break;
                                     switch (tag >>> 3) {
                                     case 1: {
-                                            message.rectangle = $root.google.geo.type.Viewport.decode(reader, reader.uint32());
+                                            message.rectangle = $root.google.geo.type.Viewport.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     case 2: {
-                                            message.circle = $root.google.maps.places.v1.Circle.decode(reader, reader.uint32());
+                                            message.circle = $root.google.maps.places.v1.Circle.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     default:
-                                        reader.skipType(tag & 7);
+                                        reader.skipType(tag & 7, long);
                                         break;
                                     }
                                 }
@@ -23833,14 +24653,18 @@
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            LocationRestriction.verify = function verify(message) {
+                            LocationRestriction.verify = function verify(message, long) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
                                 var properties = {};
                                 if (message.rectangle != null && message.hasOwnProperty("rectangle")) {
                                     properties.type = 1;
                                     {
-                                        var error = $root.google.geo.type.Viewport.verify(message.rectangle);
+                                        var error = $root.google.geo.type.Viewport.verify(message.rectangle, long + 1);
                                         if (error)
                                             return "rectangle." + error;
                                     }
@@ -23850,7 +24674,7 @@
                                         return "type: multiple values";
                                     properties.type = 1;
                                     {
-                                        var error = $root.google.maps.places.v1.Circle.verify(message.circle);
+                                        var error = $root.google.maps.places.v1.Circle.verify(message.circle, long + 1);
                                         if (error)
                                             return "circle." + error;
                                     }
@@ -23866,19 +24690,23 @@
                              * @param {Object.<string,*>} object Plain object
                              * @returns {google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction} LocationRestriction
                              */
-                            LocationRestriction.fromObject = function fromObject(object) {
+                            LocationRestriction.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction)
                                     return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction();
                                 if (object.rectangle != null) {
                                     if (typeof object.rectangle !== "object")
                                         throw TypeError(".google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction.rectangle: object expected");
-                                    message.rectangle = $root.google.geo.type.Viewport.fromObject(object.rectangle);
+                                    message.rectangle = $root.google.geo.type.Viewport.fromObject(object.rectangle, long + 1);
                                 }
                                 if (object.circle != null) {
                                     if (typeof object.circle !== "object")
                                         throw TypeError(".google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction.circle: object expected");
-                                    message.circle = $root.google.maps.places.v1.Circle.fromObject(object.circle);
+                                    message.circle = $root.google.maps.places.v1.Circle.fromObject(object.circle, long + 1);
                                 }
                                 return message;
                             };
@@ -23962,7 +24790,7 @@
                             this.suggestions = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -24028,9 +24856,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AutocompletePlacesResponse.decode = function decode(reader, length, error) {
+                        AutocompletePlacesResponse.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.AutocompletePlacesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -24040,11 +24872,11 @@
                                 case 1: {
                                         if (!(message.suggestions && message.suggestions.length))
                                             message.suggestions = [];
-                                        message.suggestions.push($root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.decode(reader, reader.uint32()));
+                                        message.suggestions.push($root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -24075,14 +24907,18 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        AutocompletePlacesResponse.verify = function verify(message) {
+                        AutocompletePlacesResponse.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.suggestions != null && message.hasOwnProperty("suggestions")) {
                                 if (!Array.isArray(message.suggestions))
                                     return "suggestions: array expected";
                                 for (var i = 0; i < message.suggestions.length; ++i) {
-                                    var error = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.verify(message.suggestions[i]);
+                                    var error = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.verify(message.suggestions[i], long + 1);
                                     if (error)
                                         return "suggestions." + error;
                                 }
@@ -24098,9 +24934,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.maps.places.v1.AutocompletePlacesResponse} AutocompletePlacesResponse
                          */
-                        AutocompletePlacesResponse.fromObject = function fromObject(object) {
+                        AutocompletePlacesResponse.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.maps.places.v1.AutocompletePlacesResponse)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.maps.places.v1.AutocompletePlacesResponse();
                             if (object.suggestions) {
                                 if (!Array.isArray(object.suggestions))
@@ -24109,7 +24949,7 @@
                                 for (var i = 0; i < object.suggestions.length; ++i) {
                                     if (typeof object.suggestions[i] !== "object")
                                         throw TypeError(".google.maps.places.v1.AutocompletePlacesResponse.suggestions: object expected");
-                                    message.suggestions[i] = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.fromObject(object.suggestions[i]);
+                                    message.suggestions[i] = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.fromObject(object.suggestions[i], long + 1);
                                 }
                             }
                             return message;
@@ -24185,7 +25025,7 @@
                             function Suggestion(properties) {
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                             this[keys[i]] = properties[keys[i]];
                             }
     
@@ -24274,9 +25114,13 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Suggestion.decode = function decode(reader, length, error) {
+                            Suggestion.decode = function decode(reader, length, error, long) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
@@ -24284,15 +25128,15 @@
                                         break;
                                     switch (tag >>> 3) {
                                     case 1: {
-                                            message.placePrediction = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction.decode(reader, reader.uint32());
+                                            message.placePrediction = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     case 2: {
-                                            message.queryPrediction = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction.decode(reader, reader.uint32());
+                                            message.queryPrediction = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     default:
-                                        reader.skipType(tag & 7);
+                                        reader.skipType(tag & 7, long);
                                         break;
                                     }
                                 }
@@ -24323,14 +25167,18 @@
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            Suggestion.verify = function verify(message) {
+                            Suggestion.verify = function verify(message, long) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
                                 var properties = {};
                                 if (message.placePrediction != null && message.hasOwnProperty("placePrediction")) {
                                     properties.kind = 1;
                                     {
-                                        var error = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction.verify(message.placePrediction);
+                                        var error = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction.verify(message.placePrediction, long + 1);
                                         if (error)
                                             return "placePrediction." + error;
                                     }
@@ -24340,7 +25188,7 @@
                                         return "kind: multiple values";
                                     properties.kind = 1;
                                     {
-                                        var error = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction.verify(message.queryPrediction);
+                                        var error = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction.verify(message.queryPrediction, long + 1);
                                         if (error)
                                             return "queryPrediction." + error;
                                     }
@@ -24356,19 +25204,23 @@
                              * @param {Object.<string,*>} object Plain object
                              * @returns {google.maps.places.v1.AutocompletePlacesResponse.Suggestion} Suggestion
                              */
-                            Suggestion.fromObject = function fromObject(object) {
+                            Suggestion.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion)
                                     return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion();
                                 if (object.placePrediction != null) {
                                     if (typeof object.placePrediction !== "object")
                                         throw TypeError(".google.maps.places.v1.AutocompletePlacesResponse.Suggestion.placePrediction: object expected");
-                                    message.placePrediction = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction.fromObject(object.placePrediction);
+                                    message.placePrediction = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction.fromObject(object.placePrediction, long + 1);
                                 }
                                 if (object.queryPrediction != null) {
                                     if (typeof object.queryPrediction !== "object")
                                         throw TypeError(".google.maps.places.v1.AutocompletePlacesResponse.Suggestion.queryPrediction: object expected");
-                                    message.queryPrediction = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction.fromObject(object.queryPrediction);
+                                    message.queryPrediction = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction.fromObject(object.queryPrediction, long + 1);
                                 }
                                 return message;
                             };
@@ -24446,7 +25298,7 @@
                                 function StringRange(properties) {
                                     if (properties)
                                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                            if (properties[keys[i]] != null)
+                                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                                 this[keys[i]] = properties[keys[i]];
                                 }
     
@@ -24521,9 +25373,13 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                StringRange.decode = function decode(reader, length, error) {
+                                StringRange.decode = function decode(reader, length, error, long) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $Reader.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
@@ -24539,7 +25395,7 @@
                                                 break;
                                             }
                                         default:
-                                            reader.skipType(tag & 7);
+                                            reader.skipType(tag & 7, long);
                                             break;
                                         }
                                     }
@@ -24570,9 +25426,13 @@
                                  * @param {Object.<string,*>} message Plain object to verify
                                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                                  */
-                                StringRange.verify = function verify(message) {
+                                StringRange.verify = function verify(message, long) {
                                     if (typeof message !== "object" || message === null)
                                         return "object expected";
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        return "maximum nesting depth exceeded";
                                     if (message.startOffset != null && message.hasOwnProperty("startOffset"))
                                         if (!$util.isInteger(message.startOffset))
                                             return "startOffset: integer expected";
@@ -24590,9 +25450,13 @@
                                  * @param {Object.<string,*>} object Plain object
                                  * @returns {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange} StringRange
                                  */
-                                StringRange.fromObject = function fromObject(object) {
+                                StringRange.fromObject = function fromObject(object, long) {
                                     if (object instanceof $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange)
                                         return object;
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
                                     var message = new $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange();
                                     if (object.startOffset != null)
                                         message.startOffset = object.startOffset | 0;
@@ -24676,7 +25540,7 @@
                                     this.matches = [];
                                     if (properties)
                                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                            if (properties[keys[i]] != null)
+                                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                                 this[keys[i]] = properties[keys[i]];
                                 }
     
@@ -24752,9 +25616,13 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                FormattableText.decode = function decode(reader, length, error) {
+                                FormattableText.decode = function decode(reader, length, error, long) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $Reader.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
@@ -24768,11 +25636,11 @@
                                         case 2: {
                                                 if (!(message.matches && message.matches.length))
                                                     message.matches = [];
-                                                message.matches.push($root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange.decode(reader, reader.uint32()));
+                                                message.matches.push($root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange.decode(reader, reader.uint32(), undefined, long + 1));
                                                 break;
                                             }
                                         default:
-                                            reader.skipType(tag & 7);
+                                            reader.skipType(tag & 7, long);
                                             break;
                                         }
                                     }
@@ -24803,9 +25671,13 @@
                                  * @param {Object.<string,*>} message Plain object to verify
                                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                                  */
-                                FormattableText.verify = function verify(message) {
+                                FormattableText.verify = function verify(message, long) {
                                     if (typeof message !== "object" || message === null)
                                         return "object expected";
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        return "maximum nesting depth exceeded";
                                     if (message.text != null && message.hasOwnProperty("text"))
                                         if (!$util.isString(message.text))
                                             return "text: string expected";
@@ -24813,7 +25685,7 @@
                                         if (!Array.isArray(message.matches))
                                             return "matches: array expected";
                                         for (var i = 0; i < message.matches.length; ++i) {
-                                            var error = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange.verify(message.matches[i]);
+                                            var error = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange.verify(message.matches[i], long + 1);
                                             if (error)
                                                 return "matches." + error;
                                         }
@@ -24829,9 +25701,13 @@
                                  * @param {Object.<string,*>} object Plain object
                                  * @returns {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText} FormattableText
                                  */
-                                FormattableText.fromObject = function fromObject(object) {
+                                FormattableText.fromObject = function fromObject(object, long) {
                                     if (object instanceof $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText)
                                         return object;
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
                                     var message = new $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText();
                                     if (object.text != null)
                                         message.text = String(object.text);
@@ -24842,7 +25718,7 @@
                                         for (var i = 0; i < object.matches.length; ++i) {
                                             if (typeof object.matches[i] !== "object")
                                                 throw TypeError(".google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.matches: object expected");
-                                            message.matches[i] = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange.fromObject(object.matches[i]);
+                                            message.matches[i] = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange.fromObject(object.matches[i], long + 1);
                                         }
                                     }
                                     return message;
@@ -24925,7 +25801,7 @@
                                 function StructuredFormat(properties) {
                                     if (properties)
                                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                            if (properties[keys[i]] != null)
+                                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                                 this[keys[i]] = properties[keys[i]];
                                 }
     
@@ -25000,9 +25876,13 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                StructuredFormat.decode = function decode(reader, length, error) {
+                                StructuredFormat.decode = function decode(reader, length, error, long) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $Reader.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
@@ -25010,15 +25890,15 @@
                                             break;
                                         switch (tag >>> 3) {
                                         case 1: {
-                                                message.mainText = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.decode(reader, reader.uint32());
+                                                message.mainText = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.decode(reader, reader.uint32(), undefined, long + 1);
                                                 break;
                                             }
                                         case 2: {
-                                                message.secondaryText = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.decode(reader, reader.uint32());
+                                                message.secondaryText = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.decode(reader, reader.uint32(), undefined, long + 1);
                                                 break;
                                             }
                                         default:
-                                            reader.skipType(tag & 7);
+                                            reader.skipType(tag & 7, long);
                                             break;
                                         }
                                     }
@@ -25049,16 +25929,20 @@
                                  * @param {Object.<string,*>} message Plain object to verify
                                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                                  */
-                                StructuredFormat.verify = function verify(message) {
+                                StructuredFormat.verify = function verify(message, long) {
                                     if (typeof message !== "object" || message === null)
                                         return "object expected";
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        return "maximum nesting depth exceeded";
                                     if (message.mainText != null && message.hasOwnProperty("mainText")) {
-                                        var error = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.verify(message.mainText);
+                                        var error = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.verify(message.mainText, long + 1);
                                         if (error)
                                             return "mainText." + error;
                                     }
                                     if (message.secondaryText != null && message.hasOwnProperty("secondaryText")) {
-                                        var error = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.verify(message.secondaryText);
+                                        var error = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.verify(message.secondaryText, long + 1);
                                         if (error)
                                             return "secondaryText." + error;
                                     }
@@ -25073,19 +25957,23 @@
                                  * @param {Object.<string,*>} object Plain object
                                  * @returns {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat} StructuredFormat
                                  */
-                                StructuredFormat.fromObject = function fromObject(object) {
+                                StructuredFormat.fromObject = function fromObject(object, long) {
                                     if (object instanceof $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat)
                                         return object;
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
                                     var message = new $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat();
                                     if (object.mainText != null) {
                                         if (typeof object.mainText !== "object")
                                             throw TypeError(".google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat.mainText: object expected");
-                                        message.mainText = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.fromObject(object.mainText);
+                                        message.mainText = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.fromObject(object.mainText, long + 1);
                                     }
                                     if (object.secondaryText != null) {
                                         if (typeof object.secondaryText !== "object")
                                             throw TypeError(".google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat.secondaryText: object expected");
-                                        message.secondaryText = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.fromObject(object.secondaryText);
+                                        message.secondaryText = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.fromObject(object.secondaryText, long + 1);
                                     }
                                     return message;
                                 };
@@ -25169,7 +26057,7 @@
                                     this.types = [];
                                     if (properties)
                                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                            if (properties[keys[i]] != null)
+                                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                                 this[keys[i]] = properties[keys[i]];
                                 }
     
@@ -25285,9 +26173,13 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                PlacePrediction.decode = function decode(reader, length, error) {
+                                PlacePrediction.decode = function decode(reader, length, error, long) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $Reader.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
@@ -25303,11 +26195,11 @@
                                                 break;
                                             }
                                         case 3: {
-                                                message.text = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.decode(reader, reader.uint32());
+                                                message.text = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.decode(reader, reader.uint32(), undefined, long + 1);
                                                 break;
                                             }
                                         case 4: {
-                                                message.structuredFormat = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat.decode(reader, reader.uint32());
+                                                message.structuredFormat = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat.decode(reader, reader.uint32(), undefined, long + 1);
                                                 break;
                                             }
                                         case 5: {
@@ -25321,7 +26213,7 @@
                                                 break;
                                             }
                                         default:
-                                            reader.skipType(tag & 7);
+                                            reader.skipType(tag & 7, long);
                                             break;
                                         }
                                     }
@@ -25352,9 +26244,13 @@
                                  * @param {Object.<string,*>} message Plain object to verify
                                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                                  */
-                                PlacePrediction.verify = function verify(message) {
+                                PlacePrediction.verify = function verify(message, long) {
                                     if (typeof message !== "object" || message === null)
                                         return "object expected";
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        return "maximum nesting depth exceeded";
                                     if (message.place != null && message.hasOwnProperty("place"))
                                         if (!$util.isString(message.place))
                                             return "place: string expected";
@@ -25362,12 +26258,12 @@
                                         if (!$util.isString(message.placeId))
                                             return "placeId: string expected";
                                     if (message.text != null && message.hasOwnProperty("text")) {
-                                        var error = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.verify(message.text);
+                                        var error = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.verify(message.text, long + 1);
                                         if (error)
                                             return "text." + error;
                                     }
                                     if (message.structuredFormat != null && message.hasOwnProperty("structuredFormat")) {
-                                        var error = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat.verify(message.structuredFormat);
+                                        var error = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat.verify(message.structuredFormat, long + 1);
                                         if (error)
                                             return "structuredFormat." + error;
                                     }
@@ -25392,9 +26288,13 @@
                                  * @param {Object.<string,*>} object Plain object
                                  * @returns {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction} PlacePrediction
                                  */
-                                PlacePrediction.fromObject = function fromObject(object) {
+                                PlacePrediction.fromObject = function fromObject(object, long) {
                                     if (object instanceof $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction)
                                         return object;
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
                                     var message = new $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction();
                                     if (object.place != null)
                                         message.place = String(object.place);
@@ -25403,12 +26303,12 @@
                                     if (object.text != null) {
                                         if (typeof object.text !== "object")
                                             throw TypeError(".google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction.text: object expected");
-                                        message.text = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.fromObject(object.text);
+                                        message.text = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.fromObject(object.text, long + 1);
                                     }
                                     if (object.structuredFormat != null) {
                                         if (typeof object.structuredFormat !== "object")
                                             throw TypeError(".google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction.structuredFormat: object expected");
-                                        message.structuredFormat = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat.fromObject(object.structuredFormat);
+                                        message.structuredFormat = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat.fromObject(object.structuredFormat, long + 1);
                                     }
                                     if (object.types) {
                                         if (!Array.isArray(object.types))
@@ -25512,7 +26412,7 @@
                                 function QueryPrediction(properties) {
                                     if (properties)
                                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                            if (properties[keys[i]] != null)
+                                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                                 this[keys[i]] = properties[keys[i]];
                                 }
     
@@ -25587,9 +26487,13 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                QueryPrediction.decode = function decode(reader, length, error) {
+                                QueryPrediction.decode = function decode(reader, length, error, long) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $Reader.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
@@ -25597,15 +26501,15 @@
                                             break;
                                         switch (tag >>> 3) {
                                         case 1: {
-                                                message.text = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.decode(reader, reader.uint32());
+                                                message.text = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.decode(reader, reader.uint32(), undefined, long + 1);
                                                 break;
                                             }
                                         case 2: {
-                                                message.structuredFormat = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat.decode(reader, reader.uint32());
+                                                message.structuredFormat = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat.decode(reader, reader.uint32(), undefined, long + 1);
                                                 break;
                                             }
                                         default:
-                                            reader.skipType(tag & 7);
+                                            reader.skipType(tag & 7, long);
                                             break;
                                         }
                                     }
@@ -25636,16 +26540,20 @@
                                  * @param {Object.<string,*>} message Plain object to verify
                                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                                  */
-                                QueryPrediction.verify = function verify(message) {
+                                QueryPrediction.verify = function verify(message, long) {
                                     if (typeof message !== "object" || message === null)
                                         return "object expected";
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        return "maximum nesting depth exceeded";
                                     if (message.text != null && message.hasOwnProperty("text")) {
-                                        var error = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.verify(message.text);
+                                        var error = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.verify(message.text, long + 1);
                                         if (error)
                                             return "text." + error;
                                     }
                                     if (message.structuredFormat != null && message.hasOwnProperty("structuredFormat")) {
-                                        var error = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat.verify(message.structuredFormat);
+                                        var error = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat.verify(message.structuredFormat, long + 1);
                                         if (error)
                                             return "structuredFormat." + error;
                                     }
@@ -25660,19 +26568,23 @@
                                  * @param {Object.<string,*>} object Plain object
                                  * @returns {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction} QueryPrediction
                                  */
-                                QueryPrediction.fromObject = function fromObject(object) {
+                                QueryPrediction.fromObject = function fromObject(object, long) {
                                     if (object instanceof $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction)
                                         return object;
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
                                     var message = new $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction();
                                     if (object.text != null) {
                                         if (typeof object.text !== "object")
                                             throw TypeError(".google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction.text: object expected");
-                                        message.text = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.fromObject(object.text);
+                                        message.text = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.fromObject(object.text, long + 1);
                                     }
                                     if (object.structuredFormat != null) {
                                         if (typeof object.structuredFormat !== "object")
                                             throw TypeError(".google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction.structuredFormat: object expected");
-                                        message.structuredFormat = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat.fromObject(object.structuredFormat);
+                                        message.structuredFormat = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat.fromObject(object.structuredFormat, long + 1);
                                     }
                                     return message;
                                 };
@@ -25756,7 +26668,7 @@
                         function Polyline(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -25835,9 +26747,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Polyline.decode = function decode(reader, length, error) {
+                        Polyline.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Polyline();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -25849,7 +26765,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -25880,9 +26796,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        Polyline.verify = function verify(message) {
+                        Polyline.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             var properties = {};
                             if (message.encodedPolyline != null && message.hasOwnProperty("encodedPolyline")) {
                                 properties.polylineType = 1;
@@ -25900,9 +26820,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.maps.places.v1.Polyline} Polyline
                          */
-                        Polyline.fromObject = function fromObject(object) {
+                        Polyline.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.maps.places.v1.Polyline)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.maps.places.v1.Polyline();
                             if (object.encodedPolyline != null)
                                 message.encodedPolyline = String(object.encodedPolyline);
@@ -25982,7 +26906,7 @@
                         function RouteModifiers(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -26077,9 +27001,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RouteModifiers.decode = function decode(reader, length, error) {
+                        RouteModifiers.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.RouteModifiers();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -26103,7 +27031,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -26134,9 +27062,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        RouteModifiers.verify = function verify(message) {
+                        RouteModifiers.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.avoidTolls != null && message.hasOwnProperty("avoidTolls"))
                                 if (typeof message.avoidTolls !== "boolean")
                                     return "avoidTolls: boolean expected";
@@ -26160,9 +27092,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.maps.places.v1.RouteModifiers} RouteModifiers
                          */
-                        RouteModifiers.fromObject = function fromObject(object) {
+                        RouteModifiers.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.maps.places.v1.RouteModifiers)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.maps.places.v1.RouteModifiers();
                             if (object.avoidTolls != null)
                                 message.avoidTolls = Boolean(object.avoidTolls);
@@ -26274,7 +27210,7 @@
                             this.legs = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -26350,9 +27286,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RoutingSummary.decode = function decode(reader, length, error) {
+                        RoutingSummary.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.RoutingSummary();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -26362,7 +27302,7 @@
                                 case 1: {
                                         if (!(message.legs && message.legs.length))
                                             message.legs = [];
-                                        message.legs.push($root.google.maps.places.v1.RoutingSummary.Leg.decode(reader, reader.uint32()));
+                                        message.legs.push($root.google.maps.places.v1.RoutingSummary.Leg.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 case 2: {
@@ -26370,7 +27310,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -26401,14 +27341,18 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        RoutingSummary.verify = function verify(message) {
+                        RoutingSummary.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.legs != null && message.hasOwnProperty("legs")) {
                                 if (!Array.isArray(message.legs))
                                     return "legs: array expected";
                                 for (var i = 0; i < message.legs.length; ++i) {
-                                    var error = $root.google.maps.places.v1.RoutingSummary.Leg.verify(message.legs[i]);
+                                    var error = $root.google.maps.places.v1.RoutingSummary.Leg.verify(message.legs[i], long + 1);
                                     if (error)
                                         return "legs." + error;
                                 }
@@ -26427,9 +27371,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.maps.places.v1.RoutingSummary} RoutingSummary
                          */
-                        RoutingSummary.fromObject = function fromObject(object) {
+                        RoutingSummary.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.maps.places.v1.RoutingSummary)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.maps.places.v1.RoutingSummary();
                             if (object.legs) {
                                 if (!Array.isArray(object.legs))
@@ -26438,7 +27386,7 @@
                                 for (var i = 0; i < object.legs.length; ++i) {
                                     if (typeof object.legs[i] !== "object")
                                         throw TypeError(".google.maps.places.v1.RoutingSummary.legs: object expected");
-                                    message.legs[i] = $root.google.maps.places.v1.RoutingSummary.Leg.fromObject(object.legs[i]);
+                                    message.legs[i] = $root.google.maps.places.v1.RoutingSummary.Leg.fromObject(object.legs[i], long + 1);
                                 }
                             }
                             if (object.directionsUri != null)
@@ -26520,7 +27468,7 @@
                             function Leg(properties) {
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                             this[keys[i]] = properties[keys[i]];
                             }
     
@@ -26595,9 +27543,13 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Leg.decode = function decode(reader, length, error) {
+                            Leg.decode = function decode(reader, length, error, long) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.RoutingSummary.Leg();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
@@ -26605,7 +27557,7 @@
                                         break;
                                     switch (tag >>> 3) {
                                     case 1: {
-                                            message.duration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                            message.duration = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     case 2: {
@@ -26613,7 +27565,7 @@
                                             break;
                                         }
                                     default:
-                                        reader.skipType(tag & 7);
+                                        reader.skipType(tag & 7, long);
                                         break;
                                     }
                                 }
@@ -26644,11 +27596,15 @@
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            Leg.verify = function verify(message) {
+                            Leg.verify = function verify(message, long) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
                                 if (message.duration != null && message.hasOwnProperty("duration")) {
-                                    var error = $root.google.protobuf.Duration.verify(message.duration);
+                                    var error = $root.google.protobuf.Duration.verify(message.duration, long + 1);
                                     if (error)
                                         return "duration." + error;
                                 }
@@ -26666,14 +27622,18 @@
                              * @param {Object.<string,*>} object Plain object
                              * @returns {google.maps.places.v1.RoutingSummary.Leg} Leg
                              */
-                            Leg.fromObject = function fromObject(object) {
+                            Leg.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.maps.places.v1.RoutingSummary.Leg)
                                     return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.maps.places.v1.RoutingSummary.Leg();
                                 if (object.duration != null) {
                                     if (typeof object.duration !== "object")
                                         throw TypeError(".google.maps.places.v1.RoutingSummary.Leg.duration: object expected");
-                                    message.duration = $root.google.protobuf.Duration.fromObject(object.duration);
+                                    message.duration = $root.google.protobuf.Duration.fromObject(object.duration, long + 1);
                                 }
                                 if (object.distanceMeters != null)
                                     message.distanceMeters = object.distanceMeters | 0;
@@ -26779,7 +27739,7 @@
                             this.places = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -26856,9 +27816,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        References.decode = function decode(reader, length, error) {
+                        References.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.References();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -26868,7 +27832,7 @@
                                 case 1: {
                                         if (!(message.reviews && message.reviews.length))
                                             message.reviews = [];
-                                        message.reviews.push($root.google.maps.places.v1.Review.decode(reader, reader.uint32()));
+                                        message.reviews.push($root.google.maps.places.v1.Review.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 case 2: {
@@ -26878,7 +27842,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -26909,14 +27873,18 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        References.verify = function verify(message) {
+                        References.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.reviews != null && message.hasOwnProperty("reviews")) {
                                 if (!Array.isArray(message.reviews))
                                     return "reviews: array expected";
                                 for (var i = 0; i < message.reviews.length; ++i) {
-                                    var error = $root.google.maps.places.v1.Review.verify(message.reviews[i]);
+                                    var error = $root.google.maps.places.v1.Review.verify(message.reviews[i], long + 1);
                                     if (error)
                                         return "reviews." + error;
                                 }
@@ -26939,9 +27907,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.maps.places.v1.References} References
                          */
-                        References.fromObject = function fromObject(object) {
+                        References.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.maps.places.v1.References)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.maps.places.v1.References();
                             if (object.reviews) {
                                 if (!Array.isArray(object.reviews))
@@ -26950,7 +27922,7 @@
                                 for (var i = 0; i < object.reviews.length; ++i) {
                                     if (typeof object.reviews[i] !== "object")
                                         throw TypeError(".google.maps.places.v1.References.reviews: object expected");
-                                    message.reviews[i] = $root.google.maps.places.v1.Review.fromObject(object.reviews[i]);
+                                    message.reviews[i] = $root.google.maps.places.v1.Review.fromObject(object.reviews[i], long + 1);
                                 }
                             }
                             if (object.places) {
@@ -27068,7 +28040,7 @@
                     this.style = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -27198,9 +28170,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceDescriptor.decode = function decode(reader, length, error) {
+                ResourceDescriptor.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -27245,7 +28221,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -27276,9 +28252,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                ResourceDescriptor.verify = function verify(message) {
+                ResourceDescriptor.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.type != null && message.hasOwnProperty("type"))
                         if (!$util.isString(message.type))
                             return "type: string expected";
@@ -27330,9 +28310,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.ResourceDescriptor} ResourceDescriptor
                  */
-                ResourceDescriptor.fromObject = function fromObject(object) {
+                ResourceDescriptor.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.ResourceDescriptor)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.ResourceDescriptor();
                     if (object.type != null)
                         message.type = String(object.type);
@@ -27520,7 +28504,7 @@
                 function ResourceReference(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -27595,9 +28579,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceReference.decode = function decode(reader, length, error) {
+                ResourceReference.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -27613,7 +28601,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -27644,9 +28632,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                ResourceReference.verify = function verify(message) {
+                ResourceReference.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.type != null && message.hasOwnProperty("type"))
                         if (!$util.isString(message.type))
                             return "type: string expected";
@@ -27664,9 +28656,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.ResourceReference} ResourceReference
                  */
-                ResourceReference.fromObject = function fromObject(object) {
+                ResourceReference.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.ResourceReference)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.ResourceReference();
                     if (object.type != null)
                         message.type = String(object.type);
@@ -27778,7 +28774,7 @@
                     this.rules = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -27854,9 +28850,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Http.decode = function decode(reader, length, error) {
+                Http.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Http();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -27866,7 +28866,7 @@
                         case 1: {
                                 if (!(message.rules && message.rules.length))
                                     message.rules = [];
-                                message.rules.push($root.google.api.HttpRule.decode(reader, reader.uint32()));
+                                message.rules.push($root.google.api.HttpRule.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 2: {
@@ -27874,7 +28874,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -27905,14 +28905,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                Http.verify = function verify(message) {
+                Http.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.rules != null && message.hasOwnProperty("rules")) {
                         if (!Array.isArray(message.rules))
                             return "rules: array expected";
                         for (var i = 0; i < message.rules.length; ++i) {
-                            var error = $root.google.api.HttpRule.verify(message.rules[i]);
+                            var error = $root.google.api.HttpRule.verify(message.rules[i], long + 1);
                             if (error)
                                 return "rules." + error;
                         }
@@ -27931,9 +28935,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.Http} Http
                  */
-                Http.fromObject = function fromObject(object) {
+                Http.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.Http)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.Http();
                     if (object.rules) {
                         if (!Array.isArray(object.rules))
@@ -27942,7 +28950,7 @@
                         for (var i = 0; i < object.rules.length; ++i) {
                             if (typeof object.rules[i] !== "object")
                                 throw TypeError(".google.api.Http.rules: object expected");
-                            message.rules[i] = $root.google.api.HttpRule.fromObject(object.rules[i]);
+                            message.rules[i] = $root.google.api.HttpRule.fromObject(object.rules[i], long + 1);
                         }
                     }
                     if (object.fullyDecodeReservedExpansion != null)
@@ -28036,7 +29044,7 @@
                     this.additionalBindings = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -28206,9 +29214,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                HttpRule.decode = function decode(reader, length, error) {
+                HttpRule.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.HttpRule();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -28240,7 +29252,7 @@
                                 break;
                             }
                         case 8: {
-                                message.custom = $root.google.api.CustomHttpPattern.decode(reader, reader.uint32());
+                                message.custom = $root.google.api.CustomHttpPattern.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 7: {
@@ -28254,11 +29266,11 @@
                         case 11: {
                                 if (!(message.additionalBindings && message.additionalBindings.length))
                                     message.additionalBindings = [];
-                                message.additionalBindings.push($root.google.api.HttpRule.decode(reader, reader.uint32()));
+                                message.additionalBindings.push($root.google.api.HttpRule.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -28289,9 +29301,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                HttpRule.verify = function verify(message) {
+                HttpRule.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     var properties = {};
                     if (message.selector != null && message.hasOwnProperty("selector"))
                         if (!$util.isString(message.selector))
@@ -28334,7 +29350,7 @@
                             return "pattern: multiple values";
                         properties.pattern = 1;
                         {
-                            var error = $root.google.api.CustomHttpPattern.verify(message.custom);
+                            var error = $root.google.api.CustomHttpPattern.verify(message.custom, long + 1);
                             if (error)
                                 return "custom." + error;
                         }
@@ -28349,7 +29365,7 @@
                         if (!Array.isArray(message.additionalBindings))
                             return "additionalBindings: array expected";
                         for (var i = 0; i < message.additionalBindings.length; ++i) {
-                            var error = $root.google.api.HttpRule.verify(message.additionalBindings[i]);
+                            var error = $root.google.api.HttpRule.verify(message.additionalBindings[i], long + 1);
                             if (error)
                                 return "additionalBindings." + error;
                         }
@@ -28365,9 +29381,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.HttpRule} HttpRule
                  */
-                HttpRule.fromObject = function fromObject(object) {
+                HttpRule.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.HttpRule)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.HttpRule();
                     if (object.selector != null)
                         message.selector = String(object.selector);
@@ -28384,7 +29404,7 @@
                     if (object.custom != null) {
                         if (typeof object.custom !== "object")
                             throw TypeError(".google.api.HttpRule.custom: object expected");
-                        message.custom = $root.google.api.CustomHttpPattern.fromObject(object.custom);
+                        message.custom = $root.google.api.CustomHttpPattern.fromObject(object.custom, long + 1);
                     }
                     if (object.body != null)
                         message.body = String(object.body);
@@ -28397,7 +29417,7 @@
                         for (var i = 0; i < object.additionalBindings.length; ++i) {
                             if (typeof object.additionalBindings[i] !== "object")
                                 throw TypeError(".google.api.HttpRule.additionalBindings: object expected");
-                            message.additionalBindings[i] = $root.google.api.HttpRule.fromObject(object.additionalBindings[i]);
+                            message.additionalBindings[i] = $root.google.api.HttpRule.fromObject(object.additionalBindings[i], long + 1);
                         }
                     }
                     return message;
@@ -28517,7 +29537,7 @@
                 function CustomHttpPattern(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -28592,9 +29612,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CustomHttpPattern.decode = function decode(reader, length, error) {
+                CustomHttpPattern.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CustomHttpPattern();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -28610,7 +29634,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -28641,9 +29665,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                CustomHttpPattern.verify = function verify(message) {
+                CustomHttpPattern.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.kind != null && message.hasOwnProperty("kind"))
                         if (!$util.isString(message.kind))
                             return "kind: string expected";
@@ -28661,9 +29689,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.CustomHttpPattern} CustomHttpPattern
                  */
-                CustomHttpPattern.fromObject = function fromObject(object) {
+                CustomHttpPattern.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.CustomHttpPattern)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.CustomHttpPattern();
                     if (object.kind != null)
                         message.kind = String(object.kind);
@@ -28748,7 +29780,7 @@
                     this.destinations = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -28837,9 +29869,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CommonLanguageSettings.decode = function decode(reader, length, error) {
+                CommonLanguageSettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CommonLanguageSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -28862,11 +29898,11 @@
                                 break;
                             }
                         case 3: {
-                                message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.decode(reader, reader.uint32());
+                                message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -28897,9 +29933,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                CommonLanguageSettings.verify = function verify(message) {
+                CommonLanguageSettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.referenceDocsUri != null && message.hasOwnProperty("referenceDocsUri"))
                         if (!$util.isString(message.referenceDocsUri))
                             return "referenceDocsUri: string expected";
@@ -28917,7 +29957,7 @@
                             }
                     }
                     if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration")) {
-                        var error = $root.google.api.SelectiveGapicGeneration.verify(message.selectiveGapicGeneration);
+                        var error = $root.google.api.SelectiveGapicGeneration.verify(message.selectiveGapicGeneration, long + 1);
                         if (error)
                             return "selectiveGapicGeneration." + error;
                     }
@@ -28932,9 +29972,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.CommonLanguageSettings} CommonLanguageSettings
                  */
-                CommonLanguageSettings.fromObject = function fromObject(object) {
+                CommonLanguageSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.CommonLanguageSettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.CommonLanguageSettings();
                     if (object.referenceDocsUri != null)
                         message.referenceDocsUri = String(object.referenceDocsUri);
@@ -28966,7 +30010,7 @@
                     if (object.selectiveGapicGeneration != null) {
                         if (typeof object.selectiveGapicGeneration !== "object")
                             throw TypeError(".google.api.CommonLanguageSettings.selectiveGapicGeneration: object expected");
-                        message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.fromObject(object.selectiveGapicGeneration);
+                        message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.fromObject(object.selectiveGapicGeneration, long + 1);
                     }
                     return message;
                 };
@@ -29061,7 +30105,7 @@
                 function ClientLibrarySettings(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -29226,9 +30270,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ClientLibrarySettings.decode = function decode(reader, length, error) {
+                ClientLibrarySettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ClientLibrarySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -29248,39 +30296,39 @@
                                 break;
                             }
                         case 21: {
-                                message.javaSettings = $root.google.api.JavaSettings.decode(reader, reader.uint32());
+                                message.javaSettings = $root.google.api.JavaSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 22: {
-                                message.cppSettings = $root.google.api.CppSettings.decode(reader, reader.uint32());
+                                message.cppSettings = $root.google.api.CppSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 23: {
-                                message.phpSettings = $root.google.api.PhpSettings.decode(reader, reader.uint32());
+                                message.phpSettings = $root.google.api.PhpSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 24: {
-                                message.pythonSettings = $root.google.api.PythonSettings.decode(reader, reader.uint32());
+                                message.pythonSettings = $root.google.api.PythonSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 25: {
-                                message.nodeSettings = $root.google.api.NodeSettings.decode(reader, reader.uint32());
+                                message.nodeSettings = $root.google.api.NodeSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 26: {
-                                message.dotnetSettings = $root.google.api.DotnetSettings.decode(reader, reader.uint32());
+                                message.dotnetSettings = $root.google.api.DotnetSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 27: {
-                                message.rubySettings = $root.google.api.RubySettings.decode(reader, reader.uint32());
+                                message.rubySettings = $root.google.api.RubySettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 28: {
-                                message.goSettings = $root.google.api.GoSettings.decode(reader, reader.uint32());
+                                message.goSettings = $root.google.api.GoSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -29311,9 +30359,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                ClientLibrarySettings.verify = function verify(message) {
+                ClientLibrarySettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.version != null && message.hasOwnProperty("version"))
                         if (!$util.isString(message.version))
                             return "version: string expected";
@@ -29335,42 +30387,42 @@
                         if (typeof message.restNumericEnums !== "boolean")
                             return "restNumericEnums: boolean expected";
                     if (message.javaSettings != null && message.hasOwnProperty("javaSettings")) {
-                        var error = $root.google.api.JavaSettings.verify(message.javaSettings);
+                        var error = $root.google.api.JavaSettings.verify(message.javaSettings, long + 1);
                         if (error)
                             return "javaSettings." + error;
                     }
                     if (message.cppSettings != null && message.hasOwnProperty("cppSettings")) {
-                        var error = $root.google.api.CppSettings.verify(message.cppSettings);
+                        var error = $root.google.api.CppSettings.verify(message.cppSettings, long + 1);
                         if (error)
                             return "cppSettings." + error;
                     }
                     if (message.phpSettings != null && message.hasOwnProperty("phpSettings")) {
-                        var error = $root.google.api.PhpSettings.verify(message.phpSettings);
+                        var error = $root.google.api.PhpSettings.verify(message.phpSettings, long + 1);
                         if (error)
                             return "phpSettings." + error;
                     }
                     if (message.pythonSettings != null && message.hasOwnProperty("pythonSettings")) {
-                        var error = $root.google.api.PythonSettings.verify(message.pythonSettings);
+                        var error = $root.google.api.PythonSettings.verify(message.pythonSettings, long + 1);
                         if (error)
                             return "pythonSettings." + error;
                     }
                     if (message.nodeSettings != null && message.hasOwnProperty("nodeSettings")) {
-                        var error = $root.google.api.NodeSettings.verify(message.nodeSettings);
+                        var error = $root.google.api.NodeSettings.verify(message.nodeSettings, long + 1);
                         if (error)
                             return "nodeSettings." + error;
                     }
                     if (message.dotnetSettings != null && message.hasOwnProperty("dotnetSettings")) {
-                        var error = $root.google.api.DotnetSettings.verify(message.dotnetSettings);
+                        var error = $root.google.api.DotnetSettings.verify(message.dotnetSettings, long + 1);
                         if (error)
                             return "dotnetSettings." + error;
                     }
                     if (message.rubySettings != null && message.hasOwnProperty("rubySettings")) {
-                        var error = $root.google.api.RubySettings.verify(message.rubySettings);
+                        var error = $root.google.api.RubySettings.verify(message.rubySettings, long + 1);
                         if (error)
                             return "rubySettings." + error;
                     }
                     if (message.goSettings != null && message.hasOwnProperty("goSettings")) {
-                        var error = $root.google.api.GoSettings.verify(message.goSettings);
+                        var error = $root.google.api.GoSettings.verify(message.goSettings, long + 1);
                         if (error)
                             return "goSettings." + error;
                     }
@@ -29385,9 +30437,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.ClientLibrarySettings} ClientLibrarySettings
                  */
-                ClientLibrarySettings.fromObject = function fromObject(object) {
+                ClientLibrarySettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.ClientLibrarySettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.ClientLibrarySettings();
                     if (object.version != null)
                         message.version = String(object.version);
@@ -29436,42 +30492,42 @@
                     if (object.javaSettings != null) {
                         if (typeof object.javaSettings !== "object")
                             throw TypeError(".google.api.ClientLibrarySettings.javaSettings: object expected");
-                        message.javaSettings = $root.google.api.JavaSettings.fromObject(object.javaSettings);
+                        message.javaSettings = $root.google.api.JavaSettings.fromObject(object.javaSettings, long + 1);
                     }
                     if (object.cppSettings != null) {
                         if (typeof object.cppSettings !== "object")
                             throw TypeError(".google.api.ClientLibrarySettings.cppSettings: object expected");
-                        message.cppSettings = $root.google.api.CppSettings.fromObject(object.cppSettings);
+                        message.cppSettings = $root.google.api.CppSettings.fromObject(object.cppSettings, long + 1);
                     }
                     if (object.phpSettings != null) {
                         if (typeof object.phpSettings !== "object")
                             throw TypeError(".google.api.ClientLibrarySettings.phpSettings: object expected");
-                        message.phpSettings = $root.google.api.PhpSettings.fromObject(object.phpSettings);
+                        message.phpSettings = $root.google.api.PhpSettings.fromObject(object.phpSettings, long + 1);
                     }
                     if (object.pythonSettings != null) {
                         if (typeof object.pythonSettings !== "object")
                             throw TypeError(".google.api.ClientLibrarySettings.pythonSettings: object expected");
-                        message.pythonSettings = $root.google.api.PythonSettings.fromObject(object.pythonSettings);
+                        message.pythonSettings = $root.google.api.PythonSettings.fromObject(object.pythonSettings, long + 1);
                     }
                     if (object.nodeSettings != null) {
                         if (typeof object.nodeSettings !== "object")
                             throw TypeError(".google.api.ClientLibrarySettings.nodeSettings: object expected");
-                        message.nodeSettings = $root.google.api.NodeSettings.fromObject(object.nodeSettings);
+                        message.nodeSettings = $root.google.api.NodeSettings.fromObject(object.nodeSettings, long + 1);
                     }
                     if (object.dotnetSettings != null) {
                         if (typeof object.dotnetSettings !== "object")
                             throw TypeError(".google.api.ClientLibrarySettings.dotnetSettings: object expected");
-                        message.dotnetSettings = $root.google.api.DotnetSettings.fromObject(object.dotnetSettings);
+                        message.dotnetSettings = $root.google.api.DotnetSettings.fromObject(object.dotnetSettings, long + 1);
                     }
                     if (object.rubySettings != null) {
                         if (typeof object.rubySettings !== "object")
                             throw TypeError(".google.api.ClientLibrarySettings.rubySettings: object expected");
-                        message.rubySettings = $root.google.api.RubySettings.fromObject(object.rubySettings);
+                        message.rubySettings = $root.google.api.RubySettings.fromObject(object.rubySettings, long + 1);
                     }
                     if (object.goSettings != null) {
                         if (typeof object.goSettings !== "object")
                             throw TypeError(".google.api.ClientLibrarySettings.goSettings: object expected");
-                        message.goSettings = $root.google.api.GoSettings.fromObject(object.goSettings);
+                        message.goSettings = $root.google.api.GoSettings.fromObject(object.goSettings, long + 1);
                     }
                     return message;
                 };
@@ -29589,7 +30645,7 @@
                     this.librarySettings = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -29757,9 +30813,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Publishing.decode = function decode(reader, length, error) {
+                Publishing.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Publishing();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -29769,7 +30829,7 @@
                         case 2: {
                                 if (!(message.methodSettings && message.methodSettings.length))
                                     message.methodSettings = [];
-                                message.methodSettings.push($root.google.api.MethodSettings.decode(reader, reader.uint32()));
+                                message.methodSettings.push($root.google.api.MethodSettings.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 101: {
@@ -29805,7 +30865,7 @@
                         case 109: {
                                 if (!(message.librarySettings && message.librarySettings.length))
                                     message.librarySettings = [];
-                                message.librarySettings.push($root.google.api.ClientLibrarySettings.decode(reader, reader.uint32()));
+                                message.librarySettings.push($root.google.api.ClientLibrarySettings.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 110: {
@@ -29817,7 +30877,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -29848,14 +30908,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                Publishing.verify = function verify(message) {
+                Publishing.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.methodSettings != null && message.hasOwnProperty("methodSettings")) {
                         if (!Array.isArray(message.methodSettings))
                             return "methodSettings: array expected";
                         for (var i = 0; i < message.methodSettings.length; ++i) {
-                            var error = $root.google.api.MethodSettings.verify(message.methodSettings[i]);
+                            var error = $root.google.api.MethodSettings.verify(message.methodSettings[i], long + 1);
                             if (error)
                                 return "methodSettings." + error;
                         }
@@ -29900,7 +30964,7 @@
                         if (!Array.isArray(message.librarySettings))
                             return "librarySettings: array expected";
                         for (var i = 0; i < message.librarySettings.length; ++i) {
-                            var error = $root.google.api.ClientLibrarySettings.verify(message.librarySettings[i]);
+                            var error = $root.google.api.ClientLibrarySettings.verify(message.librarySettings[i], long + 1);
                             if (error)
                                 return "librarySettings." + error;
                         }
@@ -29922,9 +30986,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.Publishing} Publishing
                  */
-                Publishing.fromObject = function fromObject(object) {
+                Publishing.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.Publishing)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.Publishing();
                     if (object.methodSettings) {
                         if (!Array.isArray(object.methodSettings))
@@ -29933,7 +31001,7 @@
                         for (var i = 0; i < object.methodSettings.length; ++i) {
                             if (typeof object.methodSettings[i] !== "object")
                                 throw TypeError(".google.api.Publishing.methodSettings: object expected");
-                            message.methodSettings[i] = $root.google.api.MethodSettings.fromObject(object.methodSettings[i]);
+                            message.methodSettings[i] = $root.google.api.MethodSettings.fromObject(object.methodSettings[i], long + 1);
                         }
                     }
                     if (object.newIssueUri != null)
@@ -30000,7 +31068,7 @@
                         for (var i = 0; i < object.librarySettings.length; ++i) {
                             if (typeof object.librarySettings[i] !== "object")
                                 throw TypeError(".google.api.Publishing.librarySettings: object expected");
-                            message.librarySettings[i] = $root.google.api.ClientLibrarySettings.fromObject(object.librarySettings[i]);
+                            message.librarySettings[i] = $root.google.api.ClientLibrarySettings.fromObject(object.librarySettings[i], long + 1);
                         }
                     }
                     if (object.protoReferenceDocumentationUri != null)
@@ -30124,7 +31192,7 @@
                     this.serviceClassNames = {};
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -30210,9 +31278,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                JavaSettings.decode = function decode(reader, length, error) {
+                JavaSettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.JavaSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -30239,19 +31311,21 @@
                                         value = reader.string();
                                         break;
                                     default:
-                                        reader.skipType(tag2 & 7);
+                                        reader.skipType(tag2 & 7, long);
                                         break;
                                     }
                                 }
+                                if (key === "__proto__")
+                                    $util.makeProp(message.serviceClassNames, key);
                                 message.serviceClassNames[key] = value;
                                 break;
                             }
                         case 3: {
-                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -30282,9 +31356,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                JavaSettings.verify = function verify(message) {
+                JavaSettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.libraryPackage != null && message.hasOwnProperty("libraryPackage"))
                         if (!$util.isString(message.libraryPackage))
                             return "libraryPackage: string expected";
@@ -30297,7 +31375,7 @@
                                 return "serviceClassNames: string{k:string} expected";
                     }
                     if (message.common != null && message.hasOwnProperty("common")) {
-                        var error = $root.google.api.CommonLanguageSettings.verify(message.common);
+                        var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
                     }
@@ -30312,9 +31390,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.JavaSettings} JavaSettings
                  */
-                JavaSettings.fromObject = function fromObject(object) {
+                JavaSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.JavaSettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.JavaSettings();
                     if (object.libraryPackage != null)
                         message.libraryPackage = String(object.libraryPackage);
@@ -30322,13 +31404,16 @@
                         if (typeof object.serviceClassNames !== "object")
                             throw TypeError(".google.api.JavaSettings.serviceClassNames: object expected");
                         message.serviceClassNames = {};
-                        for (var keys = Object.keys(object.serviceClassNames), i = 0; i < keys.length; ++i)
+                        for (var keys = Object.keys(object.serviceClassNames), i = 0; i < keys.length; ++i) {
+                            if (keys[i] === "__proto__")
+                                $util.makeProp(message.serviceClassNames, keys[i]);
                             message.serviceClassNames[keys[i]] = String(object.serviceClassNames[keys[i]]);
+                        }
                     }
                     if (object.common != null) {
                         if (typeof object.common !== "object")
                             throw TypeError(".google.api.JavaSettings.common: object expected");
-                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
+                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
                     return message;
                 };
@@ -30357,8 +31442,11 @@
                     var keys2;
                     if (message.serviceClassNames && (keys2 = Object.keys(message.serviceClassNames)).length) {
                         object.serviceClassNames = {};
-                        for (var j = 0; j < keys2.length; ++j)
+                        for (var j = 0; j < keys2.length; ++j) {
+                            if (keys2[j] === "__proto__")
+                                $util.makeProp(object.serviceClassNames, keys2[j]);
                             object.serviceClassNames[keys2[j]] = message.serviceClassNames[keys2[j]];
+                        }
                     }
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
@@ -30414,7 +31502,7 @@
                 function CppSettings(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -30479,9 +31567,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CppSettings.decode = function decode(reader, length, error) {
+                CppSettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CppSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -30489,11 +31581,11 @@
                             break;
                         switch (tag >>> 3) {
                         case 1: {
-                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -30524,11 +31616,15 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                CppSettings.verify = function verify(message) {
+                CppSettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.common != null && message.hasOwnProperty("common")) {
-                        var error = $root.google.api.CommonLanguageSettings.verify(message.common);
+                        var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
                     }
@@ -30543,14 +31639,18 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.CppSettings} CppSettings
                  */
-                CppSettings.fromObject = function fromObject(object) {
+                CppSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.CppSettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.CppSettings();
                     if (object.common != null) {
                         if (typeof object.common !== "object")
                             throw TypeError(".google.api.CppSettings.common: object expected");
-                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
+                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
                     return message;
                 };
@@ -30624,7 +31724,7 @@
                 function PhpSettings(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -30689,9 +31789,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PhpSettings.decode = function decode(reader, length, error) {
+                PhpSettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PhpSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -30699,11 +31803,11 @@
                             break;
                         switch (tag >>> 3) {
                         case 1: {
-                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -30734,11 +31838,15 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                PhpSettings.verify = function verify(message) {
+                PhpSettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.common != null && message.hasOwnProperty("common")) {
-                        var error = $root.google.api.CommonLanguageSettings.verify(message.common);
+                        var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
                     }
@@ -30753,14 +31861,18 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.PhpSettings} PhpSettings
                  */
-                PhpSettings.fromObject = function fromObject(object) {
+                PhpSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.PhpSettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.PhpSettings();
                     if (object.common != null) {
                         if (typeof object.common !== "object")
                             throw TypeError(".google.api.PhpSettings.common: object expected");
-                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
+                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
                     return message;
                 };
@@ -30835,7 +31947,7 @@
                 function PythonSettings(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -30910,9 +32022,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PythonSettings.decode = function decode(reader, length, error) {
+                PythonSettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -30920,15 +32036,15 @@
                             break;
                         switch (tag >>> 3) {
                         case 1: {
-                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 2: {
-                                message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.decode(reader, reader.uint32());
+                                message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -30959,16 +32075,20 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                PythonSettings.verify = function verify(message) {
+                PythonSettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.common != null && message.hasOwnProperty("common")) {
-                        var error = $root.google.api.CommonLanguageSettings.verify(message.common);
+                        var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
                     }
                     if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures")) {
-                        var error = $root.google.api.PythonSettings.ExperimentalFeatures.verify(message.experimentalFeatures);
+                        var error = $root.google.api.PythonSettings.ExperimentalFeatures.verify(message.experimentalFeatures, long + 1);
                         if (error)
                             return "experimentalFeatures." + error;
                     }
@@ -30983,19 +32103,23 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.PythonSettings} PythonSettings
                  */
-                PythonSettings.fromObject = function fromObject(object) {
+                PythonSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.PythonSettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.PythonSettings();
                     if (object.common != null) {
                         if (typeof object.common !== "object")
                             throw TypeError(".google.api.PythonSettings.common: object expected");
-                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
+                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
                     if (object.experimentalFeatures != null) {
                         if (typeof object.experimentalFeatures !== "object")
                             throw TypeError(".google.api.PythonSettings.experimentalFeatures: object expected");
-                        message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.fromObject(object.experimentalFeatures);
+                        message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.fromObject(object.experimentalFeatures, long + 1);
                     }
                     return message;
                 };
@@ -31072,7 +32196,7 @@
                     function ExperimentalFeatures(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -31157,9 +32281,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ExperimentalFeatures.decode = function decode(reader, length, error) {
+                    ExperimentalFeatures.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings.ExperimentalFeatures();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -31179,7 +32307,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -31210,9 +32338,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ExperimentalFeatures.verify = function verify(message) {
+                    ExperimentalFeatures.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
                             if (typeof message.restAsyncIoEnabled !== "boolean")
                                 return "restAsyncIoEnabled: boolean expected";
@@ -31233,9 +32365,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
                      */
-                    ExperimentalFeatures.fromObject = function fromObject(object) {
+                    ExperimentalFeatures.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.api.PythonSettings.ExperimentalFeatures)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.api.PythonSettings.ExperimentalFeatures();
                         if (object.restAsyncIoEnabled != null)
                             message.restAsyncIoEnabled = Boolean(object.restAsyncIoEnabled);
@@ -31325,7 +32461,7 @@
                 function NodeSettings(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -31390,9 +32526,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                NodeSettings.decode = function decode(reader, length, error) {
+                NodeSettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.NodeSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -31400,11 +32540,11 @@
                             break;
                         switch (tag >>> 3) {
                         case 1: {
-                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -31435,11 +32575,15 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                NodeSettings.verify = function verify(message) {
+                NodeSettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.common != null && message.hasOwnProperty("common")) {
-                        var error = $root.google.api.CommonLanguageSettings.verify(message.common);
+                        var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
                     }
@@ -31454,14 +32598,18 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.NodeSettings} NodeSettings
                  */
-                NodeSettings.fromObject = function fromObject(object) {
+                NodeSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.NodeSettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.NodeSettings();
                     if (object.common != null) {
                         if (typeof object.common !== "object")
                             throw TypeError(".google.api.NodeSettings.common: object expected");
-                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
+                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
                     return message;
                 };
@@ -31545,7 +32693,7 @@
                     this.handwrittenSignatures = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -31665,9 +32813,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DotnetSettings.decode = function decode(reader, length, error) {
+                DotnetSettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.DotnetSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -31675,7 +32827,7 @@
                             break;
                         switch (tag >>> 3) {
                         case 1: {
-                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 2: {
@@ -31694,10 +32846,12 @@
                                         value = reader.string();
                                         break;
                                     default:
-                                        reader.skipType(tag2 & 7);
+                                        reader.skipType(tag2 & 7, long);
                                         break;
                                     }
                                 }
+                                if (key === "__proto__")
+                                    $util.makeProp(message.renamedServices, key);
                                 message.renamedServices[key] = value;
                                 break;
                             }
@@ -31717,10 +32871,12 @@
                                         value = reader.string();
                                         break;
                                     default:
-                                        reader.skipType(tag2 & 7);
+                                        reader.skipType(tag2 & 7, long);
                                         break;
                                     }
                                 }
+                                if (key === "__proto__")
+                                    $util.makeProp(message.renamedResources, key);
                                 message.renamedResources[key] = value;
                                 break;
                             }
@@ -31743,7 +32899,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -31774,11 +32930,15 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                DotnetSettings.verify = function verify(message) {
+                DotnetSettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.common != null && message.hasOwnProperty("common")) {
-                        var error = $root.google.api.CommonLanguageSettings.verify(message.common);
+                        var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
                     }
@@ -31830,28 +32990,38 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.DotnetSettings} DotnetSettings
                  */
-                DotnetSettings.fromObject = function fromObject(object) {
+                DotnetSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.DotnetSettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.DotnetSettings();
                     if (object.common != null) {
                         if (typeof object.common !== "object")
                             throw TypeError(".google.api.DotnetSettings.common: object expected");
-                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
+                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
                     if (object.renamedServices) {
                         if (typeof object.renamedServices !== "object")
                             throw TypeError(".google.api.DotnetSettings.renamedServices: object expected");
                         message.renamedServices = {};
-                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i)
+                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i) {
+                            if (keys[i] === "__proto__")
+                                $util.makeProp(message.renamedServices, keys[i]);
                             message.renamedServices[keys[i]] = String(object.renamedServices[keys[i]]);
+                        }
                     }
                     if (object.renamedResources) {
                         if (typeof object.renamedResources !== "object")
                             throw TypeError(".google.api.DotnetSettings.renamedResources: object expected");
                         message.renamedResources = {};
-                        for (var keys = Object.keys(object.renamedResources), i = 0; i < keys.length; ++i)
+                        for (var keys = Object.keys(object.renamedResources), i = 0; i < keys.length; ++i) {
+                            if (keys[i] === "__proto__")
+                                $util.makeProp(message.renamedResources, keys[i]);
                             message.renamedResources[keys[i]] = String(object.renamedResources[keys[i]]);
+                        }
                     }
                     if (object.ignoredResources) {
                         if (!Array.isArray(object.ignoredResources))
@@ -31906,13 +33076,19 @@
                     var keys2;
                     if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
                         object.renamedServices = {};
-                        for (var j = 0; j < keys2.length; ++j)
+                        for (var j = 0; j < keys2.length; ++j) {
+                            if (keys2[j] === "__proto__")
+                                $util.makeProp(object.renamedServices, keys2[j]);
                             object.renamedServices[keys2[j]] = message.renamedServices[keys2[j]];
+                        }
                     }
                     if (message.renamedResources && (keys2 = Object.keys(message.renamedResources)).length) {
                         object.renamedResources = {};
-                        for (var j = 0; j < keys2.length; ++j)
+                        for (var j = 0; j < keys2.length; ++j) {
+                            if (keys2[j] === "__proto__")
+                                $util.makeProp(object.renamedResources, keys2[j]);
                             object.renamedResources[keys2[j]] = message.renamedResources[keys2[j]];
+                        }
                     }
                     if (message.ignoredResources && message.ignoredResources.length) {
                         object.ignoredResources = [];
@@ -31981,7 +33157,7 @@
                 function RubySettings(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -32046,9 +33222,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                RubySettings.decode = function decode(reader, length, error) {
+                RubySettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.RubySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -32056,11 +33236,11 @@
                             break;
                         switch (tag >>> 3) {
                         case 1: {
-                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -32091,11 +33271,15 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                RubySettings.verify = function verify(message) {
+                RubySettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.common != null && message.hasOwnProperty("common")) {
-                        var error = $root.google.api.CommonLanguageSettings.verify(message.common);
+                        var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
                     }
@@ -32110,14 +33294,18 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.RubySettings} RubySettings
                  */
-                RubySettings.fromObject = function fromObject(object) {
+                RubySettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.RubySettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.RubySettings();
                     if (object.common != null) {
                         if (typeof object.common !== "object")
                             throw TypeError(".google.api.RubySettings.common: object expected");
-                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
+                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
                     return message;
                 };
@@ -32193,7 +33381,7 @@
                     this.renamedServices = {};
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -32269,9 +33457,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GoSettings.decode = function decode(reader, length, error) {
+                GoSettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -32279,7 +33471,7 @@
                             break;
                         switch (tag >>> 3) {
                         case 1: {
-                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 2: {
@@ -32298,15 +33490,17 @@
                                         value = reader.string();
                                         break;
                                     default:
-                                        reader.skipType(tag2 & 7);
+                                        reader.skipType(tag2 & 7, long);
                                         break;
                                     }
                                 }
+                                if (key === "__proto__")
+                                    $util.makeProp(message.renamedServices, key);
                                 message.renamedServices[key] = value;
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -32337,11 +33531,15 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                GoSettings.verify = function verify(message) {
+                GoSettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.common != null && message.hasOwnProperty("common")) {
-                        var error = $root.google.api.CommonLanguageSettings.verify(message.common);
+                        var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
                     }
@@ -32364,21 +33562,28 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.GoSettings} GoSettings
                  */
-                GoSettings.fromObject = function fromObject(object) {
+                GoSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.GoSettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.GoSettings();
                     if (object.common != null) {
                         if (typeof object.common !== "object")
                             throw TypeError(".google.api.GoSettings.common: object expected");
-                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
+                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
                     if (object.renamedServices) {
                         if (typeof object.renamedServices !== "object")
                             throw TypeError(".google.api.GoSettings.renamedServices: object expected");
                         message.renamedServices = {};
-                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i)
+                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i) {
+                            if (keys[i] === "__proto__")
+                                $util.makeProp(message.renamedServices, keys[i]);
                             message.renamedServices[keys[i]] = String(object.renamedServices[keys[i]]);
+                        }
                     }
                     return message;
                 };
@@ -32405,8 +33610,11 @@
                     var keys2;
                     if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
                         object.renamedServices = {};
-                        for (var j = 0; j < keys2.length; ++j)
+                        for (var j = 0; j < keys2.length; ++j) {
+                            if (keys2[j] === "__proto__")
+                                $util.makeProp(object.renamedServices, keys2[j]);
                             object.renamedServices[keys2[j]] = message.renamedServices[keys2[j]];
+                        }
                     }
                     return object;
                 };
@@ -32463,7 +33671,7 @@
                     this.autoPopulatedFields = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -32549,9 +33757,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodSettings.decode = function decode(reader, length, error) {
+                MethodSettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -32563,7 +33775,7 @@
                                 break;
                             }
                         case 2: {
-                                message.longRunning = $root.google.api.MethodSettings.LongRunning.decode(reader, reader.uint32());
+                                message.longRunning = $root.google.api.MethodSettings.LongRunning.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 3: {
@@ -32573,7 +33785,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -32604,14 +33816,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                MethodSettings.verify = function verify(message) {
+                MethodSettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.selector != null && message.hasOwnProperty("selector"))
                         if (!$util.isString(message.selector))
                             return "selector: string expected";
                     if (message.longRunning != null && message.hasOwnProperty("longRunning")) {
-                        var error = $root.google.api.MethodSettings.LongRunning.verify(message.longRunning);
+                        var error = $root.google.api.MethodSettings.LongRunning.verify(message.longRunning, long + 1);
                         if (error)
                             return "longRunning." + error;
                     }
@@ -32633,16 +33849,20 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.MethodSettings} MethodSettings
                  */
-                MethodSettings.fromObject = function fromObject(object) {
+                MethodSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.MethodSettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.MethodSettings();
                     if (object.selector != null)
                         message.selector = String(object.selector);
                     if (object.longRunning != null) {
                         if (typeof object.longRunning !== "object")
                             throw TypeError(".google.api.MethodSettings.longRunning: object expected");
-                        message.longRunning = $root.google.api.MethodSettings.LongRunning.fromObject(object.longRunning);
+                        message.longRunning = $root.google.api.MethodSettings.LongRunning.fromObject(object.longRunning, long + 1);
                     }
                     if (object.autoPopulatedFields) {
                         if (!Array.isArray(object.autoPopulatedFields))
@@ -32734,7 +33954,7 @@
                     function LongRunning(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -32829,9 +34049,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    LongRunning.decode = function decode(reader, length, error) {
+                    LongRunning.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings.LongRunning();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -32839,7 +34063,7 @@
                                 break;
                             switch (tag >>> 3) {
                             case 1: {
-                                    message.initialPollDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    message.initialPollDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 2: {
@@ -32847,15 +34071,15 @@
                                     break;
                                 }
                             case 3: {
-                                    message.maxPollDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    message.maxPollDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 4: {
-                                    message.totalPollTimeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    message.totalPollTimeout = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -32886,11 +34110,15 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    LongRunning.verify = function verify(message) {
+                    LongRunning.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.initialPollDelay != null && message.hasOwnProperty("initialPollDelay")) {
-                            var error = $root.google.protobuf.Duration.verify(message.initialPollDelay);
+                            var error = $root.google.protobuf.Duration.verify(message.initialPollDelay, long + 1);
                             if (error)
                                 return "initialPollDelay." + error;
                         }
@@ -32898,12 +34126,12 @@
                             if (typeof message.pollDelayMultiplier !== "number")
                                 return "pollDelayMultiplier: number expected";
                         if (message.maxPollDelay != null && message.hasOwnProperty("maxPollDelay")) {
-                            var error = $root.google.protobuf.Duration.verify(message.maxPollDelay);
+                            var error = $root.google.protobuf.Duration.verify(message.maxPollDelay, long + 1);
                             if (error)
                                 return "maxPollDelay." + error;
                         }
                         if (message.totalPollTimeout != null && message.hasOwnProperty("totalPollTimeout")) {
-                            var error = $root.google.protobuf.Duration.verify(message.totalPollTimeout);
+                            var error = $root.google.protobuf.Duration.verify(message.totalPollTimeout, long + 1);
                             if (error)
                                 return "totalPollTimeout." + error;
                         }
@@ -32918,26 +34146,30 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.api.MethodSettings.LongRunning} LongRunning
                      */
-                    LongRunning.fromObject = function fromObject(object) {
+                    LongRunning.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.api.MethodSettings.LongRunning)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.api.MethodSettings.LongRunning();
                         if (object.initialPollDelay != null) {
                             if (typeof object.initialPollDelay !== "object")
                                 throw TypeError(".google.api.MethodSettings.LongRunning.initialPollDelay: object expected");
-                            message.initialPollDelay = $root.google.protobuf.Duration.fromObject(object.initialPollDelay);
+                            message.initialPollDelay = $root.google.protobuf.Duration.fromObject(object.initialPollDelay, long + 1);
                         }
                         if (object.pollDelayMultiplier != null)
                             message.pollDelayMultiplier = Number(object.pollDelayMultiplier);
                         if (object.maxPollDelay != null) {
                             if (typeof object.maxPollDelay !== "object")
                                 throw TypeError(".google.api.MethodSettings.LongRunning.maxPollDelay: object expected");
-                            message.maxPollDelay = $root.google.protobuf.Duration.fromObject(object.maxPollDelay);
+                            message.maxPollDelay = $root.google.protobuf.Duration.fromObject(object.maxPollDelay, long + 1);
                         }
                         if (object.totalPollTimeout != null) {
                             if (typeof object.totalPollTimeout !== "object")
                                 throw TypeError(".google.api.MethodSettings.LongRunning.totalPollTimeout: object expected");
-                            message.totalPollTimeout = $root.google.protobuf.Duration.fromObject(object.totalPollTimeout);
+                            message.totalPollTimeout = $root.google.protobuf.Duration.fromObject(object.totalPollTimeout, long + 1);
                         }
                         return message;
                     };
@@ -33068,7 +34300,7 @@
                     this.methods = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -33144,9 +34376,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                SelectiveGapicGeneration.decode = function decode(reader, length, error) {
+                SelectiveGapicGeneration.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.SelectiveGapicGeneration();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -33164,7 +34400,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -33195,9 +34431,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                SelectiveGapicGeneration.verify = function verify(message) {
+                SelectiveGapicGeneration.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.methods != null && message.hasOwnProperty("methods")) {
                         if (!Array.isArray(message.methods))
                             return "methods: array expected";
@@ -33219,9 +34459,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
                  */
-                SelectiveGapicGeneration.fromObject = function fromObject(object) {
+                SelectiveGapicGeneration.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.SelectiveGapicGeneration)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.SelectiveGapicGeneration();
                     if (object.methods) {
                         if (!Array.isArray(object.methods))
@@ -33350,7 +34594,7 @@
                     this.file = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -33416,9 +34660,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorSet.decode = function decode(reader, length, error) {
+                FileDescriptorSet.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -33428,11 +34676,11 @@
                         case 1: {
                                 if (!(message.file && message.file.length))
                                     message.file = [];
-                                message.file.push($root.google.protobuf.FileDescriptorProto.decode(reader, reader.uint32()));
+                                message.file.push($root.google.protobuf.FileDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -33463,14 +34711,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                FileDescriptorSet.verify = function verify(message) {
+                FileDescriptorSet.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.file != null && message.hasOwnProperty("file")) {
                         if (!Array.isArray(message.file))
                             return "file: array expected";
                         for (var i = 0; i < message.file.length; ++i) {
-                            var error = $root.google.protobuf.FileDescriptorProto.verify(message.file[i]);
+                            var error = $root.google.protobuf.FileDescriptorProto.verify(message.file[i], long + 1);
                             if (error)
                                 return "file." + error;
                         }
@@ -33486,9 +34738,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.FileDescriptorSet} FileDescriptorSet
                  */
-                FileDescriptorSet.fromObject = function fromObject(object) {
+                FileDescriptorSet.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FileDescriptorSet)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.FileDescriptorSet();
                     if (object.file) {
                         if (!Array.isArray(object.file))
@@ -33497,7 +34753,7 @@
                         for (var i = 0; i < object.file.length; ++i) {
                             if (typeof object.file[i] !== "object")
                                 throw TypeError(".google.protobuf.FileDescriptorSet.file: object expected");
-                            message.file[i] = $root.google.protobuf.FileDescriptorProto.fromObject(object.file[i]);
+                            message.file[i] = $root.google.protobuf.FileDescriptorProto.fromObject(object.file[i], long + 1);
                         }
                     }
                     return message;
@@ -33630,7 +34886,7 @@
                     this.extension = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -33833,9 +35089,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorProto.decode = function decode(reader, length, error) {
+                FileDescriptorProto.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -33887,33 +35147,33 @@
                         case 4: {
                                 if (!(message.messageType && message.messageType.length))
                                     message.messageType = [];
-                                message.messageType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32()));
+                                message.messageType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 5: {
                                 if (!(message.enumType && message.enumType.length))
                                     message.enumType = [];
-                                message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32()));
+                                message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 6: {
                                 if (!(message.service && message.service.length))
                                     message.service = [];
-                                message.service.push($root.google.protobuf.ServiceDescriptorProto.decode(reader, reader.uint32()));
+                                message.service.push($root.google.protobuf.ServiceDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 7: {
                                 if (!(message.extension && message.extension.length))
                                     message.extension = [];
-                                message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
+                                message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 8: {
-                                message.options = $root.google.protobuf.FileOptions.decode(reader, reader.uint32());
+                                message.options = $root.google.protobuf.FileOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 9: {
-                                message.sourceCodeInfo = $root.google.protobuf.SourceCodeInfo.decode(reader, reader.uint32());
+                                message.sourceCodeInfo = $root.google.protobuf.SourceCodeInfo.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 12: {
@@ -33925,7 +35185,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -33956,9 +35216,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                FileDescriptorProto.verify = function verify(message) {
+                FileDescriptorProto.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
@@ -33997,7 +35261,7 @@
                         if (!Array.isArray(message.messageType))
                             return "messageType: array expected";
                         for (var i = 0; i < message.messageType.length; ++i) {
-                            var error = $root.google.protobuf.DescriptorProto.verify(message.messageType[i]);
+                            var error = $root.google.protobuf.DescriptorProto.verify(message.messageType[i], long + 1);
                             if (error)
                                 return "messageType." + error;
                         }
@@ -34006,7 +35270,7 @@
                         if (!Array.isArray(message.enumType))
                             return "enumType: array expected";
                         for (var i = 0; i < message.enumType.length; ++i) {
-                            var error = $root.google.protobuf.EnumDescriptorProto.verify(message.enumType[i]);
+                            var error = $root.google.protobuf.EnumDescriptorProto.verify(message.enumType[i], long + 1);
                             if (error)
                                 return "enumType." + error;
                         }
@@ -34015,7 +35279,7 @@
                         if (!Array.isArray(message.service))
                             return "service: array expected";
                         for (var i = 0; i < message.service.length; ++i) {
-                            var error = $root.google.protobuf.ServiceDescriptorProto.verify(message.service[i]);
+                            var error = $root.google.protobuf.ServiceDescriptorProto.verify(message.service[i], long + 1);
                             if (error)
                                 return "service." + error;
                         }
@@ -34024,18 +35288,18 @@
                         if (!Array.isArray(message.extension))
                             return "extension: array expected";
                         for (var i = 0; i < message.extension.length; ++i) {
-                            var error = $root.google.protobuf.FieldDescriptorProto.verify(message.extension[i]);
+                            var error = $root.google.protobuf.FieldDescriptorProto.verify(message.extension[i], long + 1);
                             if (error)
                                 return "extension." + error;
                         }
                     }
                     if (message.options != null && message.hasOwnProperty("options")) {
-                        var error = $root.google.protobuf.FileOptions.verify(message.options);
+                        var error = $root.google.protobuf.FileOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
                     if (message.sourceCodeInfo != null && message.hasOwnProperty("sourceCodeInfo")) {
-                        var error = $root.google.protobuf.SourceCodeInfo.verify(message.sourceCodeInfo);
+                        var error = $root.google.protobuf.SourceCodeInfo.verify(message.sourceCodeInfo, long + 1);
                         if (error)
                             return "sourceCodeInfo." + error;
                     }
@@ -34071,9 +35335,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.FileDescriptorProto} FileDescriptorProto
                  */
-                FileDescriptorProto.fromObject = function fromObject(object) {
+                FileDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FileDescriptorProto)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.FileDescriptorProto();
                     if (object.name != null)
                         message.name = String(object.name);
@@ -34114,7 +35382,7 @@
                         for (var i = 0; i < object.messageType.length; ++i) {
                             if (typeof object.messageType[i] !== "object")
                                 throw TypeError(".google.protobuf.FileDescriptorProto.messageType: object expected");
-                            message.messageType[i] = $root.google.protobuf.DescriptorProto.fromObject(object.messageType[i]);
+                            message.messageType[i] = $root.google.protobuf.DescriptorProto.fromObject(object.messageType[i], long + 1);
                         }
                     }
                     if (object.enumType) {
@@ -34124,7 +35392,7 @@
                         for (var i = 0; i < object.enumType.length; ++i) {
                             if (typeof object.enumType[i] !== "object")
                                 throw TypeError(".google.protobuf.FileDescriptorProto.enumType: object expected");
-                            message.enumType[i] = $root.google.protobuf.EnumDescriptorProto.fromObject(object.enumType[i]);
+                            message.enumType[i] = $root.google.protobuf.EnumDescriptorProto.fromObject(object.enumType[i], long + 1);
                         }
                     }
                     if (object.service) {
@@ -34134,7 +35402,7 @@
                         for (var i = 0; i < object.service.length; ++i) {
                             if (typeof object.service[i] !== "object")
                                 throw TypeError(".google.protobuf.FileDescriptorProto.service: object expected");
-                            message.service[i] = $root.google.protobuf.ServiceDescriptorProto.fromObject(object.service[i]);
+                            message.service[i] = $root.google.protobuf.ServiceDescriptorProto.fromObject(object.service[i], long + 1);
                         }
                     }
                     if (object.extension) {
@@ -34144,18 +35412,18 @@
                         for (var i = 0; i < object.extension.length; ++i) {
                             if (typeof object.extension[i] !== "object")
                                 throw TypeError(".google.protobuf.FileDescriptorProto.extension: object expected");
-                            message.extension[i] = $root.google.protobuf.FieldDescriptorProto.fromObject(object.extension[i]);
+                            message.extension[i] = $root.google.protobuf.FieldDescriptorProto.fromObject(object.extension[i], long + 1);
                         }
                     }
                     if (object.options != null) {
                         if (typeof object.options !== "object")
                             throw TypeError(".google.protobuf.FileDescriptorProto.options: object expected");
-                        message.options = $root.google.protobuf.FileOptions.fromObject(object.options);
+                        message.options = $root.google.protobuf.FileOptions.fromObject(object.options, long + 1);
                     }
                     if (object.sourceCodeInfo != null) {
                         if (typeof object.sourceCodeInfo !== "object")
                             throw TypeError(".google.protobuf.FileDescriptorProto.sourceCodeInfo: object expected");
-                        message.sourceCodeInfo = $root.google.protobuf.SourceCodeInfo.fromObject(object.sourceCodeInfo);
+                        message.sourceCodeInfo = $root.google.protobuf.SourceCodeInfo.fromObject(object.sourceCodeInfo, long + 1);
                     }
                     if (object.syntax != null)
                         message.syntax = String(object.syntax);
@@ -34371,7 +35639,7 @@
                     this.reservedName = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -34544,9 +35812,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DescriptorProto.decode = function decode(reader, length, error) {
+                DescriptorProto.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -34560,47 +35832,47 @@
                         case 2: {
                                 if (!(message.field && message.field.length))
                                     message.field = [];
-                                message.field.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
+                                message.field.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 6: {
                                 if (!(message.extension && message.extension.length))
                                     message.extension = [];
-                                message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
+                                message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 3: {
                                 if (!(message.nestedType && message.nestedType.length))
                                     message.nestedType = [];
-                                message.nestedType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32()));
+                                message.nestedType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 4: {
                                 if (!(message.enumType && message.enumType.length))
                                     message.enumType = [];
-                                message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32()));
+                                message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 5: {
                                 if (!(message.extensionRange && message.extensionRange.length))
                                     message.extensionRange = [];
-                                message.extensionRange.push($root.google.protobuf.DescriptorProto.ExtensionRange.decode(reader, reader.uint32()));
+                                message.extensionRange.push($root.google.protobuf.DescriptorProto.ExtensionRange.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 8: {
                                 if (!(message.oneofDecl && message.oneofDecl.length))
                                     message.oneofDecl = [];
-                                message.oneofDecl.push($root.google.protobuf.OneofDescriptorProto.decode(reader, reader.uint32()));
+                                message.oneofDecl.push($root.google.protobuf.OneofDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 7: {
-                                message.options = $root.google.protobuf.MessageOptions.decode(reader, reader.uint32());
+                                message.options = $root.google.protobuf.MessageOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 9: {
                                 if (!(message.reservedRange && message.reservedRange.length))
                                     message.reservedRange = [];
-                                message.reservedRange.push($root.google.protobuf.DescriptorProto.ReservedRange.decode(reader, reader.uint32()));
+                                message.reservedRange.push($root.google.protobuf.DescriptorProto.ReservedRange.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 10: {
@@ -34614,7 +35886,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -34645,9 +35917,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                DescriptorProto.verify = function verify(message) {
+                DescriptorProto.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
@@ -34655,7 +35931,7 @@
                         if (!Array.isArray(message.field))
                             return "field: array expected";
                         for (var i = 0; i < message.field.length; ++i) {
-                            var error = $root.google.protobuf.FieldDescriptorProto.verify(message.field[i]);
+                            var error = $root.google.protobuf.FieldDescriptorProto.verify(message.field[i], long + 1);
                             if (error)
                                 return "field." + error;
                         }
@@ -34664,7 +35940,7 @@
                         if (!Array.isArray(message.extension))
                             return "extension: array expected";
                         for (var i = 0; i < message.extension.length; ++i) {
-                            var error = $root.google.protobuf.FieldDescriptorProto.verify(message.extension[i]);
+                            var error = $root.google.protobuf.FieldDescriptorProto.verify(message.extension[i], long + 1);
                             if (error)
                                 return "extension." + error;
                         }
@@ -34673,7 +35949,7 @@
                         if (!Array.isArray(message.nestedType))
                             return "nestedType: array expected";
                         for (var i = 0; i < message.nestedType.length; ++i) {
-                            var error = $root.google.protobuf.DescriptorProto.verify(message.nestedType[i]);
+                            var error = $root.google.protobuf.DescriptorProto.verify(message.nestedType[i], long + 1);
                             if (error)
                                 return "nestedType." + error;
                         }
@@ -34682,7 +35958,7 @@
                         if (!Array.isArray(message.enumType))
                             return "enumType: array expected";
                         for (var i = 0; i < message.enumType.length; ++i) {
-                            var error = $root.google.protobuf.EnumDescriptorProto.verify(message.enumType[i]);
+                            var error = $root.google.protobuf.EnumDescriptorProto.verify(message.enumType[i], long + 1);
                             if (error)
                                 return "enumType." + error;
                         }
@@ -34691,7 +35967,7 @@
                         if (!Array.isArray(message.extensionRange))
                             return "extensionRange: array expected";
                         for (var i = 0; i < message.extensionRange.length; ++i) {
-                            var error = $root.google.protobuf.DescriptorProto.ExtensionRange.verify(message.extensionRange[i]);
+                            var error = $root.google.protobuf.DescriptorProto.ExtensionRange.verify(message.extensionRange[i], long + 1);
                             if (error)
                                 return "extensionRange." + error;
                         }
@@ -34700,13 +35976,13 @@
                         if (!Array.isArray(message.oneofDecl))
                             return "oneofDecl: array expected";
                         for (var i = 0; i < message.oneofDecl.length; ++i) {
-                            var error = $root.google.protobuf.OneofDescriptorProto.verify(message.oneofDecl[i]);
+                            var error = $root.google.protobuf.OneofDescriptorProto.verify(message.oneofDecl[i], long + 1);
                             if (error)
                                 return "oneofDecl." + error;
                         }
                     }
                     if (message.options != null && message.hasOwnProperty("options")) {
-                        var error = $root.google.protobuf.MessageOptions.verify(message.options);
+                        var error = $root.google.protobuf.MessageOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
@@ -34714,7 +35990,7 @@
                         if (!Array.isArray(message.reservedRange))
                             return "reservedRange: array expected";
                         for (var i = 0; i < message.reservedRange.length; ++i) {
-                            var error = $root.google.protobuf.DescriptorProto.ReservedRange.verify(message.reservedRange[i]);
+                            var error = $root.google.protobuf.DescriptorProto.ReservedRange.verify(message.reservedRange[i], long + 1);
                             if (error)
                                 return "reservedRange." + error;
                         }
@@ -34746,9 +36022,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.DescriptorProto} DescriptorProto
                  */
-                DescriptorProto.fromObject = function fromObject(object) {
+                DescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.DescriptorProto)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.DescriptorProto();
                     if (object.name != null)
                         message.name = String(object.name);
@@ -34759,7 +36039,7 @@
                         for (var i = 0; i < object.field.length; ++i) {
                             if (typeof object.field[i] !== "object")
                                 throw TypeError(".google.protobuf.DescriptorProto.field: object expected");
-                            message.field[i] = $root.google.protobuf.FieldDescriptorProto.fromObject(object.field[i]);
+                            message.field[i] = $root.google.protobuf.FieldDescriptorProto.fromObject(object.field[i], long + 1);
                         }
                     }
                     if (object.extension) {
@@ -34769,7 +36049,7 @@
                         for (var i = 0; i < object.extension.length; ++i) {
                             if (typeof object.extension[i] !== "object")
                                 throw TypeError(".google.protobuf.DescriptorProto.extension: object expected");
-                            message.extension[i] = $root.google.protobuf.FieldDescriptorProto.fromObject(object.extension[i]);
+                            message.extension[i] = $root.google.protobuf.FieldDescriptorProto.fromObject(object.extension[i], long + 1);
                         }
                     }
                     if (object.nestedType) {
@@ -34779,7 +36059,7 @@
                         for (var i = 0; i < object.nestedType.length; ++i) {
                             if (typeof object.nestedType[i] !== "object")
                                 throw TypeError(".google.protobuf.DescriptorProto.nestedType: object expected");
-                            message.nestedType[i] = $root.google.protobuf.DescriptorProto.fromObject(object.nestedType[i]);
+                            message.nestedType[i] = $root.google.protobuf.DescriptorProto.fromObject(object.nestedType[i], long + 1);
                         }
                     }
                     if (object.enumType) {
@@ -34789,7 +36069,7 @@
                         for (var i = 0; i < object.enumType.length; ++i) {
                             if (typeof object.enumType[i] !== "object")
                                 throw TypeError(".google.protobuf.DescriptorProto.enumType: object expected");
-                            message.enumType[i] = $root.google.protobuf.EnumDescriptorProto.fromObject(object.enumType[i]);
+                            message.enumType[i] = $root.google.protobuf.EnumDescriptorProto.fromObject(object.enumType[i], long + 1);
                         }
                     }
                     if (object.extensionRange) {
@@ -34799,7 +36079,7 @@
                         for (var i = 0; i < object.extensionRange.length; ++i) {
                             if (typeof object.extensionRange[i] !== "object")
                                 throw TypeError(".google.protobuf.DescriptorProto.extensionRange: object expected");
-                            message.extensionRange[i] = $root.google.protobuf.DescriptorProto.ExtensionRange.fromObject(object.extensionRange[i]);
+                            message.extensionRange[i] = $root.google.protobuf.DescriptorProto.ExtensionRange.fromObject(object.extensionRange[i], long + 1);
                         }
                     }
                     if (object.oneofDecl) {
@@ -34809,13 +36089,13 @@
                         for (var i = 0; i < object.oneofDecl.length; ++i) {
                             if (typeof object.oneofDecl[i] !== "object")
                                 throw TypeError(".google.protobuf.DescriptorProto.oneofDecl: object expected");
-                            message.oneofDecl[i] = $root.google.protobuf.OneofDescriptorProto.fromObject(object.oneofDecl[i]);
+                            message.oneofDecl[i] = $root.google.protobuf.OneofDescriptorProto.fromObject(object.oneofDecl[i], long + 1);
                         }
                     }
                     if (object.options != null) {
                         if (typeof object.options !== "object")
                             throw TypeError(".google.protobuf.DescriptorProto.options: object expected");
-                        message.options = $root.google.protobuf.MessageOptions.fromObject(object.options);
+                        message.options = $root.google.protobuf.MessageOptions.fromObject(object.options, long + 1);
                     }
                     if (object.reservedRange) {
                         if (!Array.isArray(object.reservedRange))
@@ -34824,7 +36104,7 @@
                         for (var i = 0; i < object.reservedRange.length; ++i) {
                             if (typeof object.reservedRange[i] !== "object")
                                 throw TypeError(".google.protobuf.DescriptorProto.reservedRange: object expected");
-                            message.reservedRange[i] = $root.google.protobuf.DescriptorProto.ReservedRange.fromObject(object.reservedRange[i]);
+                            message.reservedRange[i] = $root.google.protobuf.DescriptorProto.ReservedRange.fromObject(object.reservedRange[i], long + 1);
                         }
                     }
                     if (object.reservedName) {
@@ -34982,7 +36262,7 @@
                     function ExtensionRange(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -35067,9 +36347,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ExtensionRange.decode = function decode(reader, length, error) {
+                    ExtensionRange.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ExtensionRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -35085,11 +36369,11 @@
                                     break;
                                 }
                             case 3: {
-                                    message.options = $root.google.protobuf.ExtensionRangeOptions.decode(reader, reader.uint32());
+                                    message.options = $root.google.protobuf.ExtensionRangeOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -35120,9 +36404,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ExtensionRange.verify = function verify(message) {
+                    ExtensionRange.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.start != null && message.hasOwnProperty("start"))
                             if (!$util.isInteger(message.start))
                                 return "start: integer expected";
@@ -35130,7 +36418,7 @@
                             if (!$util.isInteger(message.end))
                                 return "end: integer expected";
                         if (message.options != null && message.hasOwnProperty("options")) {
-                            var error = $root.google.protobuf.ExtensionRangeOptions.verify(message.options);
+                            var error = $root.google.protobuf.ExtensionRangeOptions.verify(message.options, long + 1);
                             if (error)
                                 return "options." + error;
                         }
@@ -35145,9 +36433,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.DescriptorProto.ExtensionRange} ExtensionRange
                      */
-                    ExtensionRange.fromObject = function fromObject(object) {
+                    ExtensionRange.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.DescriptorProto.ExtensionRange)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.DescriptorProto.ExtensionRange();
                         if (object.start != null)
                             message.start = object.start | 0;
@@ -35156,7 +36448,7 @@
                         if (object.options != null) {
                             if (typeof object.options !== "object")
                                 throw TypeError(".google.protobuf.DescriptorProto.ExtensionRange.options: object expected");
-                            message.options = $root.google.protobuf.ExtensionRangeOptions.fromObject(object.options);
+                            message.options = $root.google.protobuf.ExtensionRangeOptions.fromObject(object.options, long + 1);
                         }
                         return message;
                     };
@@ -35238,7 +36530,7 @@
                     function ReservedRange(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -35313,9 +36605,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ReservedRange.decode = function decode(reader, length, error) {
+                    ReservedRange.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -35331,7 +36627,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -35362,9 +36658,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ReservedRange.verify = function verify(message) {
+                    ReservedRange.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.start != null && message.hasOwnProperty("start"))
                             if (!$util.isInteger(message.start))
                                 return "start: integer expected";
@@ -35382,9 +36682,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.DescriptorProto.ReservedRange} ReservedRange
                      */
-                    ReservedRange.fromObject = function fromObject(object) {
+                    ReservedRange.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.DescriptorProto.ReservedRange)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.DescriptorProto.ReservedRange();
                         if (object.start != null)
                             message.start = object.start | 0;
@@ -35474,7 +36778,7 @@
                     this.declaration = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -35571,9 +36875,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ExtensionRangeOptions.decode = function decode(reader, length, error) {
+                ExtensionRangeOptions.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -35583,17 +36891,17 @@
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
-                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 2: {
                                 if (!(message.declaration && message.declaration.length))
                                     message.declaration = [];
-                                message.declaration.push($root.google.protobuf.ExtensionRangeOptions.Declaration.decode(reader, reader.uint32()));
+                                message.declaration.push($root.google.protobuf.ExtensionRangeOptions.Declaration.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 50: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 3: {
@@ -35601,7 +36909,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -35632,14 +36940,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                ExtensionRangeOptions.verify = function verify(message) {
+                ExtensionRangeOptions.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i], long + 1);
                             if (error)
                                 return "uninterpretedOption." + error;
                         }
@@ -35648,13 +36960,13 @@
                         if (!Array.isArray(message.declaration))
                             return "declaration: array expected";
                         for (var i = 0; i < message.declaration.length; ++i) {
-                            var error = $root.google.protobuf.ExtensionRangeOptions.Declaration.verify(message.declaration[i]);
+                            var error = $root.google.protobuf.ExtensionRangeOptions.Declaration.verify(message.declaration[i], long + 1);
                             if (error)
                                 return "declaration." + error;
                         }
                     }
                     if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
@@ -35677,9 +36989,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.ExtensionRangeOptions} ExtensionRangeOptions
                  */
-                ExtensionRangeOptions.fromObject = function fromObject(object) {
+                ExtensionRangeOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.ExtensionRangeOptions)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.ExtensionRangeOptions();
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
@@ -35688,7 +37004,7 @@
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
                             if (typeof object.uninterpretedOption[i] !== "object")
                                 throw TypeError(".google.protobuf.ExtensionRangeOptions.uninterpretedOption: object expected");
-                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
+                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     if (object.declaration) {
@@ -35698,13 +37014,13 @@
                         for (var i = 0; i < object.declaration.length; ++i) {
                             if (typeof object.declaration[i] !== "object")
                                 throw TypeError(".google.protobuf.ExtensionRangeOptions.declaration: object expected");
-                            message.declaration[i] = $root.google.protobuf.ExtensionRangeOptions.Declaration.fromObject(object.declaration[i]);
+                            message.declaration[i] = $root.google.protobuf.ExtensionRangeOptions.Declaration.fromObject(object.declaration[i], long + 1);
                         }
                     }
                     if (object.features != null) {
                         if (typeof object.features !== "object")
                             throw TypeError(".google.protobuf.ExtensionRangeOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     switch (object.verification) {
                     case "DECLARATION":
@@ -35813,7 +37129,7 @@
                     function Declaration(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -35918,9 +37234,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Declaration.decode = function decode(reader, length, error) {
+                    Declaration.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -35948,7 +37268,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -35979,9 +37299,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    Declaration.verify = function verify(message) {
+                    Declaration.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.number != null && message.hasOwnProperty("number"))
                             if (!$util.isInteger(message.number))
                                 return "number: integer expected";
@@ -36008,9 +37332,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.ExtensionRangeOptions.Declaration} Declaration
                      */
-                    Declaration.fromObject = function fromObject(object) {
+                    Declaration.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.ExtensionRangeOptions.Declaration)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
                         if (object.number != null)
                             message.number = object.number | 0;
@@ -36134,7 +37462,7 @@
                 function FieldDescriptorProto(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -36299,9 +37627,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldDescriptorProto.decode = function decode(reader, length, error) {
+                FieldDescriptorProto.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -36345,7 +37677,7 @@
                                 break;
                             }
                         case 8: {
-                                message.options = $root.google.protobuf.FieldOptions.decode(reader, reader.uint32());
+                                message.options = $root.google.protobuf.FieldOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 17: {
@@ -36353,7 +37685,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -36384,9 +37716,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                FieldDescriptorProto.verify = function verify(message) {
+                FieldDescriptorProto.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
@@ -36442,7 +37778,7 @@
                         if (!$util.isString(message.jsonName))
                             return "jsonName: string expected";
                     if (message.options != null && message.hasOwnProperty("options")) {
-                        var error = $root.google.protobuf.FieldOptions.verify(message.options);
+                        var error = $root.google.protobuf.FieldOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
@@ -36460,9 +37796,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.FieldDescriptorProto} FieldDescriptorProto
                  */
-                FieldDescriptorProto.fromObject = function fromObject(object) {
+                FieldDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FieldDescriptorProto)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.FieldDescriptorProto();
                     if (object.name != null)
                         message.name = String(object.name);
@@ -36581,7 +37921,7 @@
                     if (object.options != null) {
                         if (typeof object.options !== "object")
                             throw TypeError(".google.protobuf.FieldDescriptorProto.options: object expected");
-                        message.options = $root.google.protobuf.FieldOptions.fromObject(object.options);
+                        message.options = $root.google.protobuf.FieldOptions.fromObject(object.options, long + 1);
                     }
                     if (object.proto3Optional != null)
                         message.proto3Optional = Boolean(object.proto3Optional);
@@ -36751,7 +38091,7 @@
                 function OneofDescriptorProto(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -36826,9 +38166,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofDescriptorProto.decode = function decode(reader, length, error) {
+                OneofDescriptorProto.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -36840,11 +38184,11 @@
                                 break;
                             }
                         case 2: {
-                                message.options = $root.google.protobuf.OneofOptions.decode(reader, reader.uint32());
+                                message.options = $root.google.protobuf.OneofOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -36875,14 +38219,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                OneofDescriptorProto.verify = function verify(message) {
+                OneofDescriptorProto.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
                     if (message.options != null && message.hasOwnProperty("options")) {
-                        var error = $root.google.protobuf.OneofOptions.verify(message.options);
+                        var error = $root.google.protobuf.OneofOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
@@ -36897,16 +38245,20 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.OneofDescriptorProto} OneofDescriptorProto
                  */
-                OneofDescriptorProto.fromObject = function fromObject(object) {
+                OneofDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.OneofDescriptorProto)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.OneofDescriptorProto();
                     if (object.name != null)
                         message.name = String(object.name);
                     if (object.options != null) {
                         if (typeof object.options !== "object")
                             throw TypeError(".google.protobuf.OneofDescriptorProto.options: object expected");
-                        message.options = $root.google.protobuf.OneofOptions.fromObject(object.options);
+                        message.options = $root.google.protobuf.OneofOptions.fromObject(object.options, long + 1);
                     }
                     return message;
                 };
@@ -36992,7 +38344,7 @@
                     this.reservedName = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -37110,9 +38462,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumDescriptorProto.decode = function decode(reader, length, error) {
+                EnumDescriptorProto.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -37126,17 +38482,17 @@
                         case 2: {
                                 if (!(message.value && message.value.length))
                                     message.value = [];
-                                message.value.push($root.google.protobuf.EnumValueDescriptorProto.decode(reader, reader.uint32()));
+                                message.value.push($root.google.protobuf.EnumValueDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 3: {
-                                message.options = $root.google.protobuf.EnumOptions.decode(reader, reader.uint32());
+                                message.options = $root.google.protobuf.EnumOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 4: {
                                 if (!(message.reservedRange && message.reservedRange.length))
                                     message.reservedRange = [];
-                                message.reservedRange.push($root.google.protobuf.EnumDescriptorProto.EnumReservedRange.decode(reader, reader.uint32()));
+                                message.reservedRange.push($root.google.protobuf.EnumDescriptorProto.EnumReservedRange.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 5: {
@@ -37150,7 +38506,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -37181,9 +38537,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                EnumDescriptorProto.verify = function verify(message) {
+                EnumDescriptorProto.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
@@ -37191,13 +38551,13 @@
                         if (!Array.isArray(message.value))
                             return "value: array expected";
                         for (var i = 0; i < message.value.length; ++i) {
-                            var error = $root.google.protobuf.EnumValueDescriptorProto.verify(message.value[i]);
+                            var error = $root.google.protobuf.EnumValueDescriptorProto.verify(message.value[i], long + 1);
                             if (error)
                                 return "value." + error;
                         }
                     }
                     if (message.options != null && message.hasOwnProperty("options")) {
-                        var error = $root.google.protobuf.EnumOptions.verify(message.options);
+                        var error = $root.google.protobuf.EnumOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
@@ -37205,7 +38565,7 @@
                         if (!Array.isArray(message.reservedRange))
                             return "reservedRange: array expected";
                         for (var i = 0; i < message.reservedRange.length; ++i) {
-                            var error = $root.google.protobuf.EnumDescriptorProto.EnumReservedRange.verify(message.reservedRange[i]);
+                            var error = $root.google.protobuf.EnumDescriptorProto.EnumReservedRange.verify(message.reservedRange[i], long + 1);
                             if (error)
                                 return "reservedRange." + error;
                         }
@@ -37237,9 +38597,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.EnumDescriptorProto} EnumDescriptorProto
                  */
-                EnumDescriptorProto.fromObject = function fromObject(object) {
+                EnumDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.EnumDescriptorProto)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.EnumDescriptorProto();
                     if (object.name != null)
                         message.name = String(object.name);
@@ -37250,13 +38614,13 @@
                         for (var i = 0; i < object.value.length; ++i) {
                             if (typeof object.value[i] !== "object")
                                 throw TypeError(".google.protobuf.EnumDescriptorProto.value: object expected");
-                            message.value[i] = $root.google.protobuf.EnumValueDescriptorProto.fromObject(object.value[i]);
+                            message.value[i] = $root.google.protobuf.EnumValueDescriptorProto.fromObject(object.value[i], long + 1);
                         }
                     }
                     if (object.options != null) {
                         if (typeof object.options !== "object")
                             throw TypeError(".google.protobuf.EnumDescriptorProto.options: object expected");
-                        message.options = $root.google.protobuf.EnumOptions.fromObject(object.options);
+                        message.options = $root.google.protobuf.EnumOptions.fromObject(object.options, long + 1);
                     }
                     if (object.reservedRange) {
                         if (!Array.isArray(object.reservedRange))
@@ -37265,7 +38629,7 @@
                         for (var i = 0; i < object.reservedRange.length; ++i) {
                             if (typeof object.reservedRange[i] !== "object")
                                 throw TypeError(".google.protobuf.EnumDescriptorProto.reservedRange: object expected");
-                            message.reservedRange[i] = $root.google.protobuf.EnumDescriptorProto.EnumReservedRange.fromObject(object.reservedRange[i]);
+                            message.reservedRange[i] = $root.google.protobuf.EnumDescriptorProto.EnumReservedRange.fromObject(object.reservedRange[i], long + 1);
                         }
                     }
                     if (object.reservedName) {
@@ -37392,7 +38756,7 @@
                     function EnumReservedRange(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -37467,9 +38831,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EnumReservedRange.decode = function decode(reader, length, error) {
+                    EnumReservedRange.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto.EnumReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -37485,7 +38853,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -37516,9 +38884,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    EnumReservedRange.verify = function verify(message) {
+                    EnumReservedRange.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.start != null && message.hasOwnProperty("start"))
                             if (!$util.isInteger(message.start))
                                 return "start: integer expected";
@@ -37536,9 +38908,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.EnumDescriptorProto.EnumReservedRange} EnumReservedRange
                      */
-                    EnumReservedRange.fromObject = function fromObject(object) {
+                    EnumReservedRange.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.EnumDescriptorProto.EnumReservedRange)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.EnumDescriptorProto.EnumReservedRange();
                         if (object.start != null)
                             message.start = object.start | 0;
@@ -37625,7 +39001,7 @@
                 function EnumValueDescriptorProto(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -37710,9 +39086,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueDescriptorProto.decode = function decode(reader, length, error) {
+                EnumValueDescriptorProto.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -37728,11 +39108,11 @@
                                 break;
                             }
                         case 3: {
-                                message.options = $root.google.protobuf.EnumValueOptions.decode(reader, reader.uint32());
+                                message.options = $root.google.protobuf.EnumValueOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -37763,9 +39143,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                EnumValueDescriptorProto.verify = function verify(message) {
+                EnumValueDescriptorProto.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
@@ -37773,7 +39157,7 @@
                         if (!$util.isInteger(message.number))
                             return "number: integer expected";
                     if (message.options != null && message.hasOwnProperty("options")) {
-                        var error = $root.google.protobuf.EnumValueOptions.verify(message.options);
+                        var error = $root.google.protobuf.EnumValueOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
@@ -37788,9 +39172,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.EnumValueDescriptorProto} EnumValueDescriptorProto
                  */
-                EnumValueDescriptorProto.fromObject = function fromObject(object) {
+                EnumValueDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.EnumValueDescriptorProto)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.EnumValueDescriptorProto();
                     if (object.name != null)
                         message.name = String(object.name);
@@ -37799,7 +39187,7 @@
                     if (object.options != null) {
                         if (typeof object.options !== "object")
                             throw TypeError(".google.protobuf.EnumValueDescriptorProto.options: object expected");
-                        message.options = $root.google.protobuf.EnumValueOptions.fromObject(object.options);
+                        message.options = $root.google.protobuf.EnumValueOptions.fromObject(object.options, long + 1);
                     }
                     return message;
                 };
@@ -37883,7 +39271,7 @@
                     this.method = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -37969,9 +39357,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceDescriptorProto.decode = function decode(reader, length, error) {
+                ServiceDescriptorProto.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -37985,15 +39377,15 @@
                         case 2: {
                                 if (!(message.method && message.method.length))
                                     message.method = [];
-                                message.method.push($root.google.protobuf.MethodDescriptorProto.decode(reader, reader.uint32()));
+                                message.method.push($root.google.protobuf.MethodDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 3: {
-                                message.options = $root.google.protobuf.ServiceOptions.decode(reader, reader.uint32());
+                                message.options = $root.google.protobuf.ServiceOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -38024,9 +39416,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                ServiceDescriptorProto.verify = function verify(message) {
+                ServiceDescriptorProto.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
@@ -38034,13 +39430,13 @@
                         if (!Array.isArray(message.method))
                             return "method: array expected";
                         for (var i = 0; i < message.method.length; ++i) {
-                            var error = $root.google.protobuf.MethodDescriptorProto.verify(message.method[i]);
+                            var error = $root.google.protobuf.MethodDescriptorProto.verify(message.method[i], long + 1);
                             if (error)
                                 return "method." + error;
                         }
                     }
                     if (message.options != null && message.hasOwnProperty("options")) {
-                        var error = $root.google.protobuf.ServiceOptions.verify(message.options);
+                        var error = $root.google.protobuf.ServiceOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
@@ -38055,9 +39451,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.ServiceDescriptorProto} ServiceDescriptorProto
                  */
-                ServiceDescriptorProto.fromObject = function fromObject(object) {
+                ServiceDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.ServiceDescriptorProto)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.ServiceDescriptorProto();
                     if (object.name != null)
                         message.name = String(object.name);
@@ -38068,13 +39468,13 @@
                         for (var i = 0; i < object.method.length; ++i) {
                             if (typeof object.method[i] !== "object")
                                 throw TypeError(".google.protobuf.ServiceDescriptorProto.method: object expected");
-                            message.method[i] = $root.google.protobuf.MethodDescriptorProto.fromObject(object.method[i]);
+                            message.method[i] = $root.google.protobuf.MethodDescriptorProto.fromObject(object.method[i], long + 1);
                         }
                     }
                     if (object.options != null) {
                         if (typeof object.options !== "object")
                             throw TypeError(".google.protobuf.ServiceDescriptorProto.options: object expected");
-                        message.options = $root.google.protobuf.ServiceOptions.fromObject(object.options);
+                        message.options = $root.google.protobuf.ServiceOptions.fromObject(object.options, long + 1);
                     }
                     return message;
                 };
@@ -38164,7 +39564,7 @@
                 function MethodDescriptorProto(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -38279,9 +39679,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodDescriptorProto.decode = function decode(reader, length, error) {
+                MethodDescriptorProto.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -38301,7 +39705,7 @@
                                 break;
                             }
                         case 4: {
-                                message.options = $root.google.protobuf.MethodOptions.decode(reader, reader.uint32());
+                                message.options = $root.google.protobuf.MethodOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 5: {
@@ -38313,7 +39717,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -38344,9 +39748,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                MethodDescriptorProto.verify = function verify(message) {
+                MethodDescriptorProto.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
@@ -38357,7 +39765,7 @@
                         if (!$util.isString(message.outputType))
                             return "outputType: string expected";
                     if (message.options != null && message.hasOwnProperty("options")) {
-                        var error = $root.google.protobuf.MethodOptions.verify(message.options);
+                        var error = $root.google.protobuf.MethodOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
@@ -38378,9 +39786,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.MethodDescriptorProto} MethodDescriptorProto
                  */
-                MethodDescriptorProto.fromObject = function fromObject(object) {
+                MethodDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.MethodDescriptorProto)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.MethodDescriptorProto();
                     if (object.name != null)
                         message.name = String(object.name);
@@ -38391,7 +39803,7 @@
                     if (object.options != null) {
                         if (typeof object.options !== "object")
                             throw TypeError(".google.protobuf.MethodDescriptorProto.options: object expected");
-                        message.options = $root.google.protobuf.MethodOptions.fromObject(object.options);
+                        message.options = $root.google.protobuf.MethodOptions.fromObject(object.options, long + 1);
                     }
                     if (object.clientStreaming != null)
                         message.clientStreaming = Boolean(object.clientStreaming);
@@ -38508,7 +39920,7 @@
                     this[".google.api.resourceDefinition"] = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -38785,9 +40197,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileOptions.decode = function decode(reader, length, error) {
+                FileOptions.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -38871,23 +40287,23 @@
                                 break;
                             }
                         case 50: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
-                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 1053: {
                                 if (!(message[".google.api.resourceDefinition"] && message[".google.api.resourceDefinition"].length))
                                     message[".google.api.resourceDefinition"] = [];
-                                message[".google.api.resourceDefinition"].push($root.google.api.ResourceDescriptor.decode(reader, reader.uint32()));
+                                message[".google.api.resourceDefinition"].push($root.google.api.ResourceDescriptor.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -38918,9 +40334,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                FileOptions.verify = function verify(message) {
+                FileOptions.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.javaPackage != null && message.hasOwnProperty("javaPackage"))
                         if (!$util.isString(message.javaPackage))
                             return "javaPackage: string expected";
@@ -38985,7 +40405,7 @@
                         if (!$util.isString(message.rubyPackage))
                             return "rubyPackage: string expected";
                     if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
@@ -38993,7 +40413,7 @@
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i], long + 1);
                             if (error)
                                 return "uninterpretedOption." + error;
                         }
@@ -39002,7 +40422,7 @@
                         if (!Array.isArray(message[".google.api.resourceDefinition"]))
                             return ".google.api.resourceDefinition: array expected";
                         for (var i = 0; i < message[".google.api.resourceDefinition"].length; ++i) {
-                            var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resourceDefinition"][i]);
+                            var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resourceDefinition"][i], long + 1);
                             if (error)
                                 return ".google.api.resourceDefinition." + error;
                         }
@@ -39018,9 +40438,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.FileOptions} FileOptions
                  */
-                FileOptions.fromObject = function fromObject(object) {
+                FileOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FileOptions)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.FileOptions();
                     if (object.javaPackage != null)
                         message.javaPackage = String(object.javaPackage);
@@ -39081,7 +40505,7 @@
                     if (object.features != null) {
                         if (typeof object.features !== "object")
                             throw TypeError(".google.protobuf.FileOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
@@ -39090,7 +40514,7 @@
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
                             if (typeof object.uninterpretedOption[i] !== "object")
                                 throw TypeError(".google.protobuf.FileOptions.uninterpretedOption: object expected");
-                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
+                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     if (object[".google.api.resourceDefinition"]) {
@@ -39100,7 +40524,7 @@
                         for (var i = 0; i < object[".google.api.resourceDefinition"].length; ++i) {
                             if (typeof object[".google.api.resourceDefinition"][i] !== "object")
                                 throw TypeError(".google.protobuf.FileOptions..google.api.resourceDefinition: object expected");
-                            message[".google.api.resourceDefinition"][i] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resourceDefinition"][i]);
+                            message[".google.api.resourceDefinition"][i] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resourceDefinition"][i], long + 1);
                         }
                     }
                     return message;
@@ -39271,7 +40695,7 @@
                     this.uninterpretedOption = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -39407,9 +40831,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MessageOptions.decode = function decode(reader, length, error) {
+                MessageOptions.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MessageOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -39437,21 +40865,21 @@
                                 break;
                             }
                         case 12: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
-                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 1053: {
-                                message[".google.api.resource"] = $root.google.api.ResourceDescriptor.decode(reader, reader.uint32());
+                                message[".google.api.resource"] = $root.google.api.ResourceDescriptor.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -39482,9 +40910,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                MessageOptions.verify = function verify(message) {
+                MessageOptions.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.messageSetWireFormat != null && message.hasOwnProperty("messageSetWireFormat"))
                         if (typeof message.messageSetWireFormat !== "boolean")
                             return "messageSetWireFormat: boolean expected";
@@ -39501,7 +40933,7 @@
                         if (typeof message.deprecatedLegacyJsonFieldConflicts !== "boolean")
                             return "deprecatedLegacyJsonFieldConflicts: boolean expected";
                     if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
@@ -39509,13 +40941,13 @@
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i], long + 1);
                             if (error)
                                 return "uninterpretedOption." + error;
                         }
                     }
                     if (message[".google.api.resource"] != null && message.hasOwnProperty(".google.api.resource")) {
-                        var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resource"]);
+                        var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resource"], long + 1);
                         if (error)
                             return ".google.api.resource." + error;
                     }
@@ -39530,9 +40962,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.MessageOptions} MessageOptions
                  */
-                MessageOptions.fromObject = function fromObject(object) {
+                MessageOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.MessageOptions)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.MessageOptions();
                     if (object.messageSetWireFormat != null)
                         message.messageSetWireFormat = Boolean(object.messageSetWireFormat);
@@ -39547,7 +40983,7 @@
                     if (object.features != null) {
                         if (typeof object.features !== "object")
                             throw TypeError(".google.protobuf.MessageOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
@@ -39556,13 +40992,13 @@
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
                             if (typeof object.uninterpretedOption[i] !== "object")
                                 throw TypeError(".google.protobuf.MessageOptions.uninterpretedOption: object expected");
-                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
+                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     if (object[".google.api.resource"] != null) {
                         if (typeof object[".google.api.resource"] !== "object")
                             throw TypeError(".google.protobuf.MessageOptions..google.api.resource: object expected");
-                        message[".google.api.resource"] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resource"]);
+                        message[".google.api.resource"] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resource"], long + 1);
                     }
                     return message;
                 };
@@ -39681,7 +41117,7 @@
                     this[".google.api.fieldBehavior"] = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -39900,9 +41336,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldOptions.decode = function decode(reader, length, error) {
+                FieldOptions.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -39959,25 +41399,25 @@
                         case 20: {
                                 if (!(message.editionDefaults && message.editionDefaults.length))
                                     message.editionDefaults = [];
-                                message.editionDefaults.push($root.google.protobuf.FieldOptions.EditionDefault.decode(reader, reader.uint32()));
+                                message.editionDefaults.push($root.google.protobuf.FieldOptions.EditionDefault.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 21: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 22: {
-                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
+                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
-                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 1055: {
-                                message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
+                                message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 1052: {
@@ -39992,7 +41432,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -40023,9 +41463,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                FieldOptions.verify = function verify(message) {
+                FieldOptions.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
                         switch (message.ctype) {
                         default:
@@ -40095,18 +41539,18 @@
                         if (!Array.isArray(message.editionDefaults))
                             return "editionDefaults: array expected";
                         for (var i = 0; i < message.editionDefaults.length; ++i) {
-                            var error = $root.google.protobuf.FieldOptions.EditionDefault.verify(message.editionDefaults[i]);
+                            var error = $root.google.protobuf.FieldOptions.EditionDefault.verify(message.editionDefaults[i], long + 1);
                             if (error)
                                 return "editionDefaults." + error;
                         }
                     }
                     if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
                     if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
-                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
+                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport, long + 1);
                         if (error)
                             return "featureSupport." + error;
                     }
@@ -40114,13 +41558,13 @@
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i], long + 1);
                             if (error)
                                 return "uninterpretedOption." + error;
                         }
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
-                        var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
+                        var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"], long + 1);
                         if (error)
                             return ".google.api.resourceReference." + error;
                     }
@@ -40154,9 +41598,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.FieldOptions} FieldOptions
                  */
-                FieldOptions.fromObject = function fromObject(object) {
+                FieldOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FieldOptions)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.FieldOptions();
                     switch (object.ctype) {
                     default:
@@ -40290,18 +41738,18 @@
                         for (var i = 0; i < object.editionDefaults.length; ++i) {
                             if (typeof object.editionDefaults[i] !== "object")
                                 throw TypeError(".google.protobuf.FieldOptions.editionDefaults: object expected");
-                            message.editionDefaults[i] = $root.google.protobuf.FieldOptions.EditionDefault.fromObject(object.editionDefaults[i]);
+                            message.editionDefaults[i] = $root.google.protobuf.FieldOptions.EditionDefault.fromObject(object.editionDefaults[i], long + 1);
                         }
                     }
                     if (object.features != null) {
                         if (typeof object.features !== "object")
                             throw TypeError(".google.protobuf.FieldOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     if (object.featureSupport != null) {
                         if (typeof object.featureSupport !== "object")
                             throw TypeError(".google.protobuf.FieldOptions.featureSupport: object expected");
-                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
+                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport, long + 1);
                     }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
@@ -40310,13 +41758,13 @@
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
                             if (typeof object.uninterpretedOption[i] !== "object")
                                 throw TypeError(".google.protobuf.FieldOptions.uninterpretedOption: object expected");
-                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
+                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     if (object[".google.api.resourceReference"] != null) {
                         if (typeof object[".google.api.resourceReference"] !== "object")
                             throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
-                        message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"]);
+                        message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"], long + 1);
                     }
                     if (object[".google.api.fieldBehavior"]) {
                         if (!Array.isArray(object[".google.api.fieldBehavior"]))
@@ -40575,7 +42023,7 @@
                     function EditionDefault(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -40650,9 +42098,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EditionDefault.decode = function decode(reader, length, error) {
+                    EditionDefault.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.EditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -40668,7 +42120,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -40699,9 +42151,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    EditionDefault.verify = function verify(message) {
+                    EditionDefault.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.edition != null && message.hasOwnProperty("edition"))
                             switch (message.edition) {
                             default:
@@ -40734,9 +42190,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.FieldOptions.EditionDefault} EditionDefault
                      */
-                    EditionDefault.fromObject = function fromObject(object) {
+                    EditionDefault.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.FieldOptions.EditionDefault)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.FieldOptions.EditionDefault();
                         switch (object.edition) {
                         default:
@@ -40875,7 +42335,7 @@
                     function FeatureSupport(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -40970,9 +42430,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    FeatureSupport.decode = function decode(reader, length, error) {
+                    FeatureSupport.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.FeatureSupport();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -40996,7 +42460,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -41027,9 +42491,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    FeatureSupport.verify = function verify(message) {
+                    FeatureSupport.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
                             switch (message.editionIntroduced) {
                             default:
@@ -41098,9 +42566,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
                      */
-                    FeatureSupport.fromObject = function fromObject(object) {
+                    FeatureSupport.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.FieldOptions.FeatureSupport)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.FieldOptions.FeatureSupport();
                         switch (object.editionIntroduced) {
                         default:
@@ -41359,7 +42831,7 @@
                     this.uninterpretedOption = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -41435,9 +42907,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofOptions.decode = function decode(reader, length, error) {
+                OneofOptions.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -41445,17 +42921,17 @@
                             break;
                         switch (tag >>> 3) {
                         case 1: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
-                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -41486,11 +42962,15 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                OneofOptions.verify = function verify(message) {
+                OneofOptions.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
@@ -41498,7 +42978,7 @@
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i], long + 1);
                             if (error)
                                 return "uninterpretedOption." + error;
                         }
@@ -41514,14 +42994,18 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.OneofOptions} OneofOptions
                  */
-                OneofOptions.fromObject = function fromObject(object) {
+                OneofOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.OneofOptions)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.OneofOptions();
                     if (object.features != null) {
                         if (typeof object.features !== "object")
                             throw TypeError(".google.protobuf.OneofOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
@@ -41530,7 +43014,7 @@
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
                             if (typeof object.uninterpretedOption[i] !== "object")
                                 throw TypeError(".google.protobuf.OneofOptions.uninterpretedOption: object expected");
-                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
+                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     return message;
@@ -41617,7 +43101,7 @@
                     this.uninterpretedOption = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -41723,9 +43207,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumOptions.decode = function decode(reader, length, error) {
+                EnumOptions.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -41745,17 +43233,17 @@
                                 break;
                             }
                         case 7: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
-                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -41786,9 +43274,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                EnumOptions.verify = function verify(message) {
+                EnumOptions.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.allowAlias != null && message.hasOwnProperty("allowAlias"))
                         if (typeof message.allowAlias !== "boolean")
                             return "allowAlias: boolean expected";
@@ -41799,7 +43291,7 @@
                         if (typeof message.deprecatedLegacyJsonFieldConflicts !== "boolean")
                             return "deprecatedLegacyJsonFieldConflicts: boolean expected";
                     if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
@@ -41807,7 +43299,7 @@
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i], long + 1);
                             if (error)
                                 return "uninterpretedOption." + error;
                         }
@@ -41823,9 +43315,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.EnumOptions} EnumOptions
                  */
-                EnumOptions.fromObject = function fromObject(object) {
+                EnumOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.EnumOptions)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.EnumOptions();
                     if (object.allowAlias != null)
                         message.allowAlias = Boolean(object.allowAlias);
@@ -41836,7 +43332,7 @@
                     if (object.features != null) {
                         if (typeof object.features !== "object")
                             throw TypeError(".google.protobuf.EnumOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
@@ -41845,7 +43341,7 @@
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
                             if (typeof object.uninterpretedOption[i] !== "object")
                                 throw TypeError(".google.protobuf.EnumOptions.uninterpretedOption: object expected");
-                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
+                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     return message;
@@ -41942,7 +43438,7 @@
                     this.uninterpretedOption = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -42048,9 +43544,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueOptions.decode = function decode(reader, length, error) {
+                EnumValueOptions.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -42062,7 +43562,7 @@
                                 break;
                             }
                         case 2: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 3: {
@@ -42070,17 +43570,17 @@
                                 break;
                             }
                         case 4: {
-                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
+                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
-                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -42111,14 +43611,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                EnumValueOptions.verify = function verify(message) {
+                EnumValueOptions.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
                     if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
@@ -42126,7 +43630,7 @@
                         if (typeof message.debugRedact !== "boolean")
                             return "debugRedact: boolean expected";
                     if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
-                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
+                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport, long + 1);
                         if (error)
                             return "featureSupport." + error;
                     }
@@ -42134,7 +43638,7 @@
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i], long + 1);
                             if (error)
                                 return "uninterpretedOption." + error;
                         }
@@ -42150,23 +43654,27 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.EnumValueOptions} EnumValueOptions
                  */
-                EnumValueOptions.fromObject = function fromObject(object) {
+                EnumValueOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.EnumValueOptions)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.EnumValueOptions();
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     if (object.features != null) {
                         if (typeof object.features !== "object")
                             throw TypeError(".google.protobuf.EnumValueOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     if (object.debugRedact != null)
                         message.debugRedact = Boolean(object.debugRedact);
                     if (object.featureSupport != null) {
                         if (typeof object.featureSupport !== "object")
                             throw TypeError(".google.protobuf.EnumValueOptions.featureSupport: object expected");
-                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
+                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport, long + 1);
                     }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
@@ -42175,7 +43683,7 @@
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
                             if (typeof object.uninterpretedOption[i] !== "object")
                                 throw TypeError(".google.protobuf.EnumValueOptions.uninterpretedOption: object expected");
-                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
+                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     return message;
@@ -42273,7 +43781,7 @@
                     this.uninterpretedOption = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -42389,9 +43897,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceOptions.decode = function decode(reader, length, error) {
+                ServiceOptions.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -42399,7 +43911,7 @@
                             break;
                         switch (tag >>> 3) {
                         case 34: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 33: {
@@ -42409,7 +43921,7 @@
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
-                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 1049: {
@@ -42425,7 +43937,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -42456,11 +43968,15 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                ServiceOptions.verify = function verify(message) {
+                ServiceOptions.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
@@ -42471,7 +43987,7 @@
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i], long + 1);
                             if (error)
                                 return "uninterpretedOption." + error;
                         }
@@ -42496,14 +44012,18 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.ServiceOptions} ServiceOptions
                  */
-                ServiceOptions.fromObject = function fromObject(object) {
+                ServiceOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.ServiceOptions)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.ServiceOptions();
                     if (object.features != null) {
                         if (typeof object.features !== "object")
                             throw TypeError(".google.protobuf.ServiceOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
@@ -42514,7 +44034,7 @@
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
                             if (typeof object.uninterpretedOption[i] !== "object")
                                 throw TypeError(".google.protobuf.ServiceOptions.uninterpretedOption: object expected");
-                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
+                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     if (object[".google.api.defaultHost"] != null)
@@ -42622,7 +44142,7 @@
                     this[".google.api.methodSignature"] = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -42739,9 +44259,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodOptions.decode = function decode(reader, length, error) {
+                MethodOptions.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -42757,17 +44281,17 @@
                                 break;
                             }
                         case 35: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
-                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 72295728: {
-                                message[".google.api.http"] = $root.google.api.HttpRule.decode(reader, reader.uint32());
+                                message[".google.api.http"] = $root.google.api.HttpRule.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 1051: {
@@ -42777,7 +44301,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -42808,9 +44332,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                MethodOptions.verify = function verify(message) {
+                MethodOptions.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
@@ -42824,7 +44352,7 @@
                             break;
                         }
                     if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
@@ -42832,13 +44360,13 @@
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i], long + 1);
                             if (error)
                                 return "uninterpretedOption." + error;
                         }
                     }
                     if (message[".google.api.http"] != null && message.hasOwnProperty(".google.api.http")) {
-                        var error = $root.google.api.HttpRule.verify(message[".google.api.http"]);
+                        var error = $root.google.api.HttpRule.verify(message[".google.api.http"], long + 1);
                         if (error)
                             return ".google.api.http." + error;
                     }
@@ -42860,9 +44388,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.MethodOptions} MethodOptions
                  */
-                MethodOptions.fromObject = function fromObject(object) {
+                MethodOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.MethodOptions)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.MethodOptions();
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
@@ -42889,7 +44421,7 @@
                     if (object.features != null) {
                         if (typeof object.features !== "object")
                             throw TypeError(".google.protobuf.MethodOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
@@ -42898,13 +44430,13 @@
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
                             if (typeof object.uninterpretedOption[i] !== "object")
                                 throw TypeError(".google.protobuf.MethodOptions.uninterpretedOption: object expected");
-                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
+                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     if (object[".google.api.http"] != null) {
                         if (typeof object[".google.api.http"] !== "object")
                             throw TypeError(".google.protobuf.MethodOptions..google.api.http: object expected");
-                        message[".google.api.http"] = $root.google.api.HttpRule.fromObject(object[".google.api.http"]);
+                        message[".google.api.http"] = $root.google.api.HttpRule.fromObject(object[".google.api.http"], long + 1);
                     }
                     if (object[".google.api.methodSignature"]) {
                         if (!Array.isArray(object[".google.api.methodSignature"]))
@@ -43032,7 +44564,7 @@
                     this.name = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -43158,9 +44690,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                UninterpretedOption.decode = function decode(reader, length, error) {
+                UninterpretedOption.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -43170,7 +44706,7 @@
                         case 2: {
                                 if (!(message.name && message.name.length))
                                     message.name = [];
-                                message.name.push($root.google.protobuf.UninterpretedOption.NamePart.decode(reader, reader.uint32()));
+                                message.name.push($root.google.protobuf.UninterpretedOption.NamePart.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 3: {
@@ -43198,7 +44734,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -43229,14 +44765,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                UninterpretedOption.verify = function verify(message) {
+                UninterpretedOption.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name")) {
                         if (!Array.isArray(message.name))
                             return "name: array expected";
                         for (var i = 0; i < message.name.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.NamePart.verify(message.name[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.NamePart.verify(message.name[i], long + 1);
                             if (error)
                                 return "name." + error;
                         }
@@ -43270,9 +44810,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.UninterpretedOption} UninterpretedOption
                  */
-                UninterpretedOption.fromObject = function fromObject(object) {
+                UninterpretedOption.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.UninterpretedOption)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.UninterpretedOption();
                     if (object.name) {
                         if (!Array.isArray(object.name))
@@ -43281,7 +44825,7 @@
                         for (var i = 0; i < object.name.length; ++i) {
                             if (typeof object.name[i] !== "object")
                                 throw TypeError(".google.protobuf.UninterpretedOption.name: object expected");
-                            message.name[i] = $root.google.protobuf.UninterpretedOption.NamePart.fromObject(object.name[i]);
+                            message.name[i] = $root.google.protobuf.UninterpretedOption.NamePart.fromObject(object.name[i], long + 1);
                         }
                     }
                     if (object.identifierValue != null)
@@ -43426,7 +44970,7 @@
                     function NamePart(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -43499,9 +45043,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    NamePart.decode = function decode(reader, length, error) {
+                    NamePart.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption.NamePart();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -43517,7 +45065,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -43552,9 +45100,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    NamePart.verify = function verify(message) {
+                    NamePart.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (!$util.isString(message.namePart))
                             return "namePart: string expected";
                         if (typeof message.isExtension !== "boolean")
@@ -43570,9 +45122,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.UninterpretedOption.NamePart} NamePart
                      */
-                    NamePart.fromObject = function fromObject(object) {
+                    NamePart.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.UninterpretedOption.NamePart)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.UninterpretedOption.NamePart();
                         if (object.namePart != null)
                             message.namePart = String(object.namePart);
@@ -43664,7 +45220,7 @@
                 function FeatureSet(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -43799,9 +45355,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSet.decode = function decode(reader, length, error) {
+                FeatureSet.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -43841,7 +45401,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -43872,9 +45432,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                FeatureSet.verify = function verify(message) {
+                FeatureSet.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
                         switch (message.fieldPresence) {
                         default:
@@ -43961,9 +45525,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.FeatureSet} FeatureSet
                  */
-                FeatureSet.fromObject = function fromObject(object) {
+                FeatureSet.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FeatureSet)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.FeatureSet();
                     switch (object.fieldPresence) {
                     default:
@@ -44341,7 +45909,7 @@
                     function VisibilityFeature(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -44396,9 +45964,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    VisibilityFeature.decode = function decode(reader, length, error) {
+                    VisibilityFeature.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet.VisibilityFeature();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -44406,7 +45978,7 @@
                                 break;
                             switch (tag >>> 3) {
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -44437,9 +46009,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    VisibilityFeature.verify = function verify(message) {
+                    VisibilityFeature.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         return null;
                     };
     
@@ -44451,9 +46027,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
                      */
-                    VisibilityFeature.fromObject = function fromObject(object) {
+                    VisibilityFeature.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.FeatureSet.VisibilityFeature)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         return new $root.google.protobuf.FeatureSet.VisibilityFeature();
                     };
     
@@ -44545,7 +46125,7 @@
                     this.defaults = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -44631,9 +46211,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSetDefaults.decode = function decode(reader, length, error) {
+                FeatureSetDefaults.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -44643,7 +46227,7 @@
                         case 1: {
                                 if (!(message.defaults && message.defaults.length))
                                     message.defaults = [];
-                                message.defaults.push($root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.decode(reader, reader.uint32()));
+                                message.defaults.push($root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 4: {
@@ -44655,7 +46239,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -44686,14 +46270,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                FeatureSetDefaults.verify = function verify(message) {
+                FeatureSetDefaults.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.defaults != null && message.hasOwnProperty("defaults")) {
                         if (!Array.isArray(message.defaults))
                             return "defaults: array expected";
                         for (var i = 0; i < message.defaults.length; ++i) {
-                            var error = $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify(message.defaults[i]);
+                            var error = $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify(message.defaults[i], long + 1);
                             if (error)
                                 return "defaults." + error;
                         }
@@ -44745,9 +46333,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.FeatureSetDefaults} FeatureSetDefaults
                  */
-                FeatureSetDefaults.fromObject = function fromObject(object) {
+                FeatureSetDefaults.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FeatureSetDefaults)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.FeatureSetDefaults();
                     if (object.defaults) {
                         if (!Array.isArray(object.defaults))
@@ -44756,7 +46348,7 @@
                         for (var i = 0; i < object.defaults.length; ++i) {
                             if (typeof object.defaults[i] !== "object")
                                 throw TypeError(".google.protobuf.FeatureSetDefaults.defaults: object expected");
-                            message.defaults[i] = $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fromObject(object.defaults[i]);
+                            message.defaults[i] = $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fromObject(object.defaults[i], long + 1);
                         }
                     }
                     switch (object.minimumEdition) {
@@ -44953,7 +46545,7 @@
                     function FeatureSetEditionDefault(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -45038,9 +46630,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    FeatureSetEditionDefault.decode = function decode(reader, length, error) {
+                    FeatureSetEditionDefault.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -45052,15 +46648,15 @@
                                     break;
                                 }
                             case 4: {
-                                    message.overridableFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                    message.overridableFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 5: {
-                                    message.fixedFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                    message.fixedFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -45091,9 +46687,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    FeatureSetEditionDefault.verify = function verify(message) {
+                    FeatureSetEditionDefault.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.edition != null && message.hasOwnProperty("edition"))
                             switch (message.edition) {
                             default:
@@ -45113,12 +46713,12 @@
                                 break;
                             }
                         if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures")) {
-                            var error = $root.google.protobuf.FeatureSet.verify(message.overridableFeatures);
+                            var error = $root.google.protobuf.FeatureSet.verify(message.overridableFeatures, long + 1);
                             if (error)
                                 return "overridableFeatures." + error;
                         }
                         if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures")) {
-                            var error = $root.google.protobuf.FeatureSet.verify(message.fixedFeatures);
+                            var error = $root.google.protobuf.FeatureSet.verify(message.fixedFeatures, long + 1);
                             if (error)
                                 return "fixedFeatures." + error;
                         }
@@ -45133,9 +46733,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault} FeatureSetEditionDefault
                      */
-                    FeatureSetEditionDefault.fromObject = function fromObject(object) {
+                    FeatureSetEditionDefault.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault();
                         switch (object.edition) {
                         default:
@@ -45196,12 +46800,12 @@
                         if (object.overridableFeatures != null) {
                             if (typeof object.overridableFeatures !== "object")
                                 throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.overridableFeatures: object expected");
-                            message.overridableFeatures = $root.google.protobuf.FeatureSet.fromObject(object.overridableFeatures);
+                            message.overridableFeatures = $root.google.protobuf.FeatureSet.fromObject(object.overridableFeatures, long + 1);
                         }
                         if (object.fixedFeatures != null) {
                             if (typeof object.fixedFeatures !== "object")
                                 throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fixedFeatures: object expected");
-                            message.fixedFeatures = $root.google.protobuf.FeatureSet.fromObject(object.fixedFeatures);
+                            message.fixedFeatures = $root.google.protobuf.FeatureSet.fromObject(object.fixedFeatures, long + 1);
                         }
                         return message;
                     };
@@ -45286,7 +46890,7 @@
                     this.location = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -45352,9 +46956,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                SourceCodeInfo.decode = function decode(reader, length, error) {
+                SourceCodeInfo.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -45364,11 +46972,11 @@
                         case 1: {
                                 if (!(message.location && message.location.length))
                                     message.location = [];
-                                message.location.push($root.google.protobuf.SourceCodeInfo.Location.decode(reader, reader.uint32()));
+                                message.location.push($root.google.protobuf.SourceCodeInfo.Location.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -45399,14 +47007,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                SourceCodeInfo.verify = function verify(message) {
+                SourceCodeInfo.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.location != null && message.hasOwnProperty("location")) {
                         if (!Array.isArray(message.location))
                             return "location: array expected";
                         for (var i = 0; i < message.location.length; ++i) {
-                            var error = $root.google.protobuf.SourceCodeInfo.Location.verify(message.location[i]);
+                            var error = $root.google.protobuf.SourceCodeInfo.Location.verify(message.location[i], long + 1);
                             if (error)
                                 return "location." + error;
                         }
@@ -45422,9 +47034,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.SourceCodeInfo} SourceCodeInfo
                  */
-                SourceCodeInfo.fromObject = function fromObject(object) {
+                SourceCodeInfo.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.SourceCodeInfo)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.SourceCodeInfo();
                     if (object.location) {
                         if (!Array.isArray(object.location))
@@ -45433,7 +47049,7 @@
                         for (var i = 0; i < object.location.length; ++i) {
                             if (typeof object.location[i] !== "object")
                                 throw TypeError(".google.protobuf.SourceCodeInfo.location: object expected");
-                            message.location[i] = $root.google.protobuf.SourceCodeInfo.Location.fromObject(object.location[i]);
+                            message.location[i] = $root.google.protobuf.SourceCodeInfo.Location.fromObject(object.location[i], long + 1);
                         }
                     }
                     return message;
@@ -45515,7 +47131,7 @@
                         this.leadingDetachedComments = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -45629,9 +47245,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Location.decode = function decode(reader, length, error) {
+                    Location.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo.Location();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -45675,7 +47295,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -45706,9 +47326,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    Location.verify = function verify(message) {
+                    Location.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.path != null && message.hasOwnProperty("path")) {
                             if (!Array.isArray(message.path))
                                 return "path: array expected";
@@ -45747,9 +47371,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.SourceCodeInfo.Location} Location
                      */
-                    Location.fromObject = function fromObject(object) {
+                    Location.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.SourceCodeInfo.Location)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.SourceCodeInfo.Location();
                         if (object.path) {
                             if (!Array.isArray(object.path))
@@ -45876,7 +47504,7 @@
                     this.annotation = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -45942,9 +47570,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GeneratedCodeInfo.decode = function decode(reader, length, error) {
+                GeneratedCodeInfo.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -45954,11 +47586,11 @@
                         case 1: {
                                 if (!(message.annotation && message.annotation.length))
                                     message.annotation = [];
-                                message.annotation.push($root.google.protobuf.GeneratedCodeInfo.Annotation.decode(reader, reader.uint32()));
+                                message.annotation.push($root.google.protobuf.GeneratedCodeInfo.Annotation.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -45989,14 +47621,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                GeneratedCodeInfo.verify = function verify(message) {
+                GeneratedCodeInfo.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.annotation != null && message.hasOwnProperty("annotation")) {
                         if (!Array.isArray(message.annotation))
                             return "annotation: array expected";
                         for (var i = 0; i < message.annotation.length; ++i) {
-                            var error = $root.google.protobuf.GeneratedCodeInfo.Annotation.verify(message.annotation[i]);
+                            var error = $root.google.protobuf.GeneratedCodeInfo.Annotation.verify(message.annotation[i], long + 1);
                             if (error)
                                 return "annotation." + error;
                         }
@@ -46012,9 +47648,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.GeneratedCodeInfo} GeneratedCodeInfo
                  */
-                GeneratedCodeInfo.fromObject = function fromObject(object) {
+                GeneratedCodeInfo.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.GeneratedCodeInfo)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.GeneratedCodeInfo();
                     if (object.annotation) {
                         if (!Array.isArray(object.annotation))
@@ -46023,7 +47663,7 @@
                         for (var i = 0; i < object.annotation.length; ++i) {
                             if (typeof object.annotation[i] !== "object")
                                 throw TypeError(".google.protobuf.GeneratedCodeInfo.annotation: object expected");
-                            message.annotation[i] = $root.google.protobuf.GeneratedCodeInfo.Annotation.fromObject(object.annotation[i]);
+                            message.annotation[i] = $root.google.protobuf.GeneratedCodeInfo.Annotation.fromObject(object.annotation[i], long + 1);
                         }
                     }
                     return message;
@@ -46103,7 +47743,7 @@
                         this.path = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -46212,9 +47852,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Annotation.decode = function decode(reader, length, error) {
+                    Annotation.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo.Annotation();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -46249,7 +47893,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -46280,9 +47924,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    Annotation.verify = function verify(message) {
+                    Annotation.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.path != null && message.hasOwnProperty("path")) {
                             if (!Array.isArray(message.path))
                                 return "path: array expected";
@@ -46319,9 +47967,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.GeneratedCodeInfo.Annotation} Annotation
                      */
-                    Annotation.fromObject = function fromObject(object) {
+                    Annotation.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.GeneratedCodeInfo.Annotation)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.GeneratedCodeInfo.Annotation();
                         if (object.path) {
                             if (!Array.isArray(object.path))
@@ -46481,7 +48133,7 @@
                 function Timestamp(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -46556,9 +48208,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Timestamp.decode = function decode(reader, length, error) {
+                Timestamp.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -46574,7 +48230,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -46605,9 +48261,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                Timestamp.verify = function verify(message) {
+                Timestamp.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.seconds != null && message.hasOwnProperty("seconds"))
                         if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
                             return "seconds: integer|Long expected";
@@ -46625,9 +48285,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.Timestamp} Timestamp
                  */
-                Timestamp.fromObject = function fromObject(object) {
+                Timestamp.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.Timestamp)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.Timestamp();
                     if (object.seconds != null)
                         if ($util.Long)
@@ -46724,7 +48388,7 @@
                 function Duration(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -46799,9 +48463,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Duration.decode = function decode(reader, length, error) {
+                Duration.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Duration();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -46817,7 +48485,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -46848,9 +48516,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                Duration.verify = function verify(message) {
+                Duration.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.seconds != null && message.hasOwnProperty("seconds"))
                         if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
                             return "seconds: integer|Long expected";
@@ -46868,9 +48540,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.Duration} Duration
                  */
-                Duration.fromObject = function fromObject(object) {
+                Duration.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.Duration)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.Duration();
                     if (object.seconds != null)
                         if ($util.Long)

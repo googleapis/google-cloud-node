@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {AccessContextManagerClient} from './access_context_manager_client';
+export { AccessContextManagerClient } from './access_context_manager_client';

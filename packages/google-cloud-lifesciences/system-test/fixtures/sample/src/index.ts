@@ -16,10 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {WorkflowsServiceV2BetaClient} from '@google-cloud/life-sciences';
+import { WorkflowsServiceV2BetaClient } from '@google-cloud/life-sciences';
 
 // check that the client class type name can be used
-function doStuffWithWorkflowsServiceV2BetaClient(client: WorkflowsServiceV2BetaClient) {
+function doStuffWithWorkflowsServiceV2BetaClient(
+  client: WorkflowsServiceV2BetaClient,
+) {
   client.close();
 }
 

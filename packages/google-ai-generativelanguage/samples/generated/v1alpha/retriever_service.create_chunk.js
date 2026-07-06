@@ -39,7 +39,7 @@ function main(parent, chunk) {
   // const chunk = {}
 
   // Imports the Generativelanguage library
-  const {RetrieverServiceClient} = require('@google-cloud/generativelanguage').v1alpha;
+  const {RetrieverServiceClient} = require('@google-ai/generativelanguage').v1alpha;
 
   // Instantiates a client
   const generativelanguageClient = new RetrieverServiceClient();

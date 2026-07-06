@@ -1,17 +1,16 @@
 {
-  "name": "merchantapi",
-  "name_pretty": "Merchant API",
-  "product_documentation": "https://developers.google.com/merchant/api",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/merchantapi/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "stable",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-shopping/inventories",
-  "api_id": "merchantapi.googleapis.com",
-  "default_version": "v1",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "merchantapi"
+    "api_description": "Programmatically manage your Merchant Center Accounts.",
+    "api_id": "merchantapi.googleapis.com",
+    "api_shortname": "merchantapi",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/merchantapi/latest",
+    "default_version": "v1",
+    "distribution_name": "@google-shopping/inventories",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=171084&template=555201",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "merchantapi",
+    "name_pretty": "Merchant",
+    "product_documentation": "https://developers.google.com/merchant/api",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-

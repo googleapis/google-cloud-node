@@ -418,6 +418,9 @@ export namespace google {
 
                     /** VerifyAttestationRequest attester */
                     attester?: (string|null);
+
+                    /** VerifyAttestationRequest instance */
+                    instance?: (string|null);
                 }
 
                 /** Represents a VerifyAttestationRequest. */
@@ -455,6 +458,9 @@ export namespace google {
 
                     /** VerifyAttestationRequest attester. */
                     public attester: string;
+
+                    /** VerifyAttestationRequest instance. */
+                    public instance: string;
 
                     /** VerifyAttestationRequest teeAttestation. */
                     public teeAttestation?: ("tdCcel"|"sevSnpAttestation");

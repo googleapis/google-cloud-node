@@ -59,11 +59,8 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
 | search | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-reports/samples/generated/v1/report_service.search.js) |
-| shopping | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-reports/samples/generated/v1/snippet_metadata_google.shopping.merchant.reports.v1.json) |
 | search | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-reports/samples/generated/v1alpha/report_service.search.js) |
-| shopping | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-reports/samples/generated/v1alpha/snippet_metadata_google.shopping.merchant.reports.v1alpha.json) |
 | search | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-reports/samples/generated/v1beta/report_service.search.js) |
-| shopping | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-reports/samples/generated/v1beta/snippet_metadata_google.shopping.merchant.reports.v1beta.json) |
 
 
 ## Supported Node.js Versions

@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.cloud.asset.v1p5beta1",
-  "libraryPackage": "asset",
+  "libraryPackage": "@google-cloud/asset",
   "services": {
     "AssetService": {
       "clients": {

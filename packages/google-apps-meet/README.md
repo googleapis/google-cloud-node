@@ -69,7 +69,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list recordings | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2/conference_records_service.list_recordings.js) |
 | list transcript entries | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2/conference_records_service.list_transcript_entries.js) |
 | list transcripts | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2/conference_records_service.list_transcripts.js) |
-| apps | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2/snippet_metadata_google.apps.meet.v2.json) |
 | create space | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2/spaces_service.create_space.js) |
 | end active conference | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2/spaces_service.end_active_conference.js) |
 | get space | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2/spaces_service.get_space.js) |
@@ -86,7 +85,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list recordings | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2beta/conference_records_service.list_recordings.js) |
 | list transcript entries | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2beta/conference_records_service.list_transcript_entries.js) |
 | list transcripts | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2beta/conference_records_service.list_transcripts.js) |
-| apps | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2beta/snippet_metadata_google.apps.meet.v2beta.json) |
 | connect active conference | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2beta/spaces_service.connect_active_conference.js) |
 | create member | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2beta/spaces_service.create_member.js) |
 | create space | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2beta/spaces_service.create_space.js) |
@@ -129,7 +127,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -139,7 +137,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

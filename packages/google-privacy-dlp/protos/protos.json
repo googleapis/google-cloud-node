@@ -1757,7 +1757,8 @@
                             "value",
                             "table",
                             "byteItem",
-                            "conversation"
+                            "conversation",
+                            "batchContentItem"
                           ]
                         }
                       },
@@ -1777,6 +1778,10 @@
                         "conversation": {
                           "type": "Conversation",
                           "id": 7
+                        },
+                        "batchContentItem": {
+                          "type": "BatchContentItem",
+                          "id": 8
                         },
                         "contentMetadata": {
                           "type": "ContentMetadata",
@@ -1823,6 +1828,36 @@
                             "MESSAGE_TYPE_UNSPECIFIED": 0,
                             "CONTENT": 1,
                             "CONTEXT": 2
+                          }
+                        }
+                      }
+                    },
+                    "BatchContentItem": {
+                      "oneofs": {
+                        "batch": {
+                          "oneof": [
+                            "stringValueBatch"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "stringValueBatch": {
+                          "type": "StringValueBatch",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "StringValueBatch": {
+                      "fields": {
+                        "values": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -1976,7 +2011,8 @@
                             "imageLocation",
                             "documentLocation",
                             "metadataLocation",
-                            "conversationLocation"
+                            "conversationLocation",
+                            "batchContentLocation"
                           ]
                         }
                       },
@@ -2004,6 +2040,10 @@
                         "conversationLocation": {
                           "type": "ConversationLocation",
                           "id": 10
+                        },
+                        "batchContentLocation": {
+                          "type": "BatchContentLocation",
+                          "id": 11
                         },
                         "containerTimestamp": {
                           "type": "google.protobuf.Timestamp",
@@ -2037,6 +2077,14 @@
                       "nested": {
                         "AllMessages": {
                           "fields": {}
+                        }
+                      }
+                    },
+                    "BatchContentLocation": {
+                      "fields": {
+                        "itemIndex": {
+                          "type": "int32",
+                          "id": 1
                         }
                       }
                     },

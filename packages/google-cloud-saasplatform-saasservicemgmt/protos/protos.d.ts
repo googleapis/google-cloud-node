@@ -407,7 +407,9 @@ export namespace google {
                             TYPE_READY = 1,
                             TYPE_UPDATING = 2,
                             TYPE_PROVISIONED = 3,
-                            TYPE_OPERATION_ERROR = 4
+                            TYPE_OPERATION_ERROR = 4,
+                            TYPE_APP_CREATED_OR_ALREADY_EXISTS = 5,
+                            TYPE_APP_COMPONENTS_REGISTERED = 6
                         }
                     }
 

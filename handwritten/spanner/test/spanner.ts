@@ -912,6 +912,41 @@ describe('Spanner with mock server', () => {
       }
     });
 
+    it('should support JSON mode with wrapNumbers and wrapStructs options', async () => {
+      const database = newTestDatabase();
+      try {
+        // 1. With wrapNumbers = false, wrapStructs = false
+        const [rowsRaw] = (await database.run({
+          sql: selectAllTypes,
+          json: true,
+          jsonOptions: {wrapNumbers: false, wrapStructs: false},
+        })) as any;
+        assert.strictEqual(rowsRaw.length, 3);
+        const rowRaw = rowsRaw[0];
+        // INT64 / FLOAT64 should be native numbers
+        assert.strictEqual(typeof rowRaw.COLINT64, 'number');
+        assert.strictEqual(rowRaw.COLINT64, 1);
+        assert.strictEqual(typeof rowRaw.COLFLOAT64, 'number');
+        assert.strictEqual(rowRaw.COLFLOAT64, 3.14);
+
+        // 2. With wrapNumbers = true, wrapStructs = true
+        const [rowsWrapped] = (await database.run({
+          sql: selectAllTypes,
+          json: true,
+          jsonOptions: {wrapNumbers: true, wrapStructs: true},
+        })) as any;
+        assert.strictEqual(rowsWrapped.length, 3);
+        const rowWrapped = rowsWrapped[0];
+        // INT64 / FLOAT64 should be wrapped objects
+        assert(rowWrapped.COLINT64 instanceof Int);
+        assert.strictEqual(rowWrapped.COLINT64.value, '1');
+        assert(rowWrapped.COLFLOAT64 instanceof Float);
+        assert.strictEqual(rowWrapped.COLFLOAT64.value, 3.14);
+      } finally {
+        await database.close();
+      }
+    });
+
     it('should pause on slow writer', async () => {
       const largeSelect = 'select * from large_table';
       spannerMock.putStatementResult(

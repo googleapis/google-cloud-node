@@ -21,7 +21,6 @@
 const capacityplanner = require('@google-cloud/capacityplanner');
 
 function main() {
-  const capacityPlanningServiceClient = new capacityplanner.CapacityPlanningServiceClient();
   const usageServiceClient = new capacityplanner.UsageServiceClient();
 }
 

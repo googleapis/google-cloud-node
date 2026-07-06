@@ -14,7 +14,11 @@
                     "java_outer_classname": "ServiceProto",
                     "java_package": "com.google.cloud.confidentialcomputing.v1",
                     "php_namespace": "Google\\Cloud\\ConfidentialComputing\\V1",
-                    "ruby_package": "Google::Cloud::ConfidentialComputing::V1"
+                    "ruby_package": "Google::Cloud::ConfidentialComputing::V1",
+                    "(google.api.resource_definition).type": "compute.googleapis.com/Instance",
+                    "(google.api.resource_definition).pattern": "projects/{project}/zones/{zone}/instances/{instance}",
+                    "(google.api.resource_definition).plural": "instances",
+                    "(google.api.resource_definition).singular": "instance"
                   },
                   "nested": {
                     "ConfidentialComputing": {
@@ -263,6 +267,14 @@
                           "id": 8,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "instance": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/Instance"
                           }
                         }
                       }

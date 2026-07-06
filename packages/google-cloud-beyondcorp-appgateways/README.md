@@ -61,7 +61,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | delete app gateway | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-appgateways/samples/generated/v1/app_gateways_service.delete_app_gateway.js) |
 | get app gateway | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-appgateways/samples/generated/v1/app_gateways_service.get_app_gateway.js) |
 | list app gateways | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-appgateways/samples/generated/v1/app_gateways_service.list_app_gateways.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-appgateways/samples/generated/v1/snippet_metadata_google.cloud.beyondcorp.appgateways.v1.json) |
 
 
 ## Supported Node.js Versions

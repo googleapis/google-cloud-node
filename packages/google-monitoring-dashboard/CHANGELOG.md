@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/monitoring-dashboards-v4.1.2...monitoring-dashboards-v4.2.0) (2026-06-25)
+
+
+### Features
+
+* Regenerated google-monitoring-dashboard ([#8643](https://github.com/googleapis/google-cloud-node/issues/8643)) ([ce4d849](https://github.com/googleapis/google-cloud-node/commit/ce4d8493844e1a95a2b1cc952674dcdbee1bc566))
+
 ## [4.1.2](https://github.com/googleapis/google-cloud-node/compare/monitoring-dashboards-v4.1.1...monitoring-dashboards-v4.1.2) (2026-05-01)
 
 

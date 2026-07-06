@@ -202,7 +202,9 @@ export class Gaxios implements FetchCompliance {
             response.push(chunk);
           }
 
-          translatedResponse.data = response.toString() as T;
+          translatedResponse.data = Buffer.concat(
+            response.map(c => (typeof c === 'string' ? Buffer.from(c) : c)),
+          ).toString('utf8') as T;
         }
 
         const errorInfo = GaxiosError.extractAPIErrorFromResponse(

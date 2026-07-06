@@ -108,7 +108,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | bidi run session | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1/session_service.bidi_run_session.js) |
 | run session | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1/session_service.run_session.js) |
 | stream run session | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1/session_service.stream_run_session.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1/snippet_metadata_google.cloud.ces.v1.json) |
 | execute tool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1/tool_service.execute_tool.js) |
 | retrieve tool schema | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1/tool_service.retrieve_tool_schema.js) |
 | retrieve tools | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1/tool_service.retrieve_tools.js) |
@@ -174,6 +173,8 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | delete evaluation result | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/evaluation_service.delete_evaluation_result.js) |
 | delete evaluation run | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/evaluation_service.delete_evaluation_run.js) |
 | delete scheduled evaluation run | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/evaluation_service.delete_scheduled_evaluation_run.js) |
+| export evaluation results | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/evaluation_service.export_evaluation_results.js) |
+| export evaluation runs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/evaluation_service.export_evaluation_runs.js) |
 | export evaluations | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/evaluation_service.export_evaluations.js) |
 | generate evaluation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/evaluation_service.generate_evaluation.js) |
 | get evaluation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/evaluation_service.get_evaluation.js) |
@@ -190,6 +191,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list evaluations | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/evaluation_service.list_evaluations.js) |
 | list scheduled evaluation runs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/evaluation_service.list_scheduled_evaluation_runs.js) |
 | run evaluation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/evaluation_service.run_evaluation.js) |
+| run evaluation result metrics | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/evaluation_service.run_evaluation_result_metrics.js) |
 | test persona voice | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/evaluation_service.test_persona_voice.js) |
 | update evaluation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/evaluation_service.update_evaluation.js) |
 | update evaluation dataset | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/evaluation_service.update_evaluation_dataset.js) |
@@ -199,7 +201,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | bidi run session | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/session_service.bidi_run_session.js) |
 | run session | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/session_service.run_session.js) |
 | stream run session | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/session_service.stream_run_session.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/snippet_metadata_google.cloud.ces.v1beta.json) |
 | execute tool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/tool_service.execute_tool.js) |
 | retrieve tool schema | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/tool_service.retrieve_tool_schema.js) |
 | retrieve tools | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/tool_service.retrieve_tools.js) |

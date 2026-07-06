@@ -1,5 +1,4 @@
 {
-  // This file is handwritten since this library has a dual-publication setup (ESM and CJS)
   "extends": "./node_modules/gts/tsconfig-google.json",
   "compilerOptions": {
     "rootDir": ".",

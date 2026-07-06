@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {WebRiskServiceClient} from './web_risk_service_client';
+export { WebRiskServiceClient } from './web_risk_service_client';

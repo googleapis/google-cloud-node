@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {CloudQuotasClient} from './cloud_quotas_client';
+export { CloudQuotasClient } from './cloud_quotas_client';

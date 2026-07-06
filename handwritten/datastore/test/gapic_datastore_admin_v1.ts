@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import {SinonStub} from 'sinon';
-import {describe, it} from 'mocha';
+import { SinonStub } from 'sinon';
+import { describe, it } from 'mocha';
 import * as datastoreadminModule from '../src';
 
-import {PassThrough} from 'stream';
+import { PassThrough } from 'stream';
 
-import {protobuf, LROperation, operationsProtos} from 'google-gax';
+import { protobuf, LROperation, operationsProtos } from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
+  ).toObject(instance as protobuf.Message<T>, { defaults: true });
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
+            return Promise.resolve({ done: true, value: undefined });
           }
-          return Promise.resolve({done: false, value: responses![counter++]});
+          return Promise.resolve({ done: false, value: responses![counter++] });
         },
       };
     },
@@ -271,7 +271,7 @@ describe('v1.DatastoreAdminClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       assert.strictEqual(client.datastoreAdminStub, undefined);
@@ -279,35 +279,45 @@ describe('v1.DatastoreAdminClient', () => {
       assert(client.datastoreAdminStub);
     });
 
-    it('has close method for the initialized client', done => {
+    it('has close method for the initialized client', (done) => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
-      client.initialize().catch((err: any) => {
+      client.initialize().catch((err) => {
         throw err;
       });
       assert(client.datastoreAdminStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch((err) => {
+          throw err;
+        });
     });
 
-    it('has close method for the non-initialized client', done => {
+    it('has close method for the non-initialized client', (done) => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       assert.strictEqual(client.datastoreAdminStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch((err) => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -319,7 +329,7 @@ describe('v1.DatastoreAdminClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -342,7 +352,7 @@ describe('v1.DatastoreAdminClient', () => {
   describe('getIndex', () => {
     it('invokes getIndex without error', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -378,7 +388,7 @@ describe('v1.DatastoreAdminClient', () => {
 
     it('invokes getIndex without error using callback', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -430,7 +440,7 @@ describe('v1.DatastoreAdminClient', () => {
 
     it('invokes getIndex with error', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -463,7 +473,7 @@ describe('v1.DatastoreAdminClient', () => {
 
     it('invokes getIndex with closed client', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -481,7 +491,9 @@ describe('v1.DatastoreAdminClient', () => {
       );
       request.indexId = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch((err) => {
+        throw err;
+      });
       await assert.rejects(client.getIndex(request), expectedError);
     });
   });
@@ -489,7 +501,7 @@ describe('v1.DatastoreAdminClient', () => {
   describe('exportEntities', () => {
     it('invokes exportEntities without error', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -522,7 +534,7 @@ describe('v1.DatastoreAdminClient', () => {
 
     it('invokes exportEntities without error using callback', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -576,7 +588,7 @@ describe('v1.DatastoreAdminClient', () => {
 
     it('invokes exportEntities with call error', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -607,7 +619,7 @@ describe('v1.DatastoreAdminClient', () => {
 
     it('invokes exportEntities with LRO error', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -640,7 +652,7 @@ describe('v1.DatastoreAdminClient', () => {
 
     it('invokes checkExportEntitiesProgress without error', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -648,8 +660,8 @@ describe('v1.DatastoreAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkExportEntitiesProgress(
@@ -662,7 +674,7 @@ describe('v1.DatastoreAdminClient', () => {
 
     it('invokes checkExportEntitiesProgress with error', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -683,7 +695,7 @@ describe('v1.DatastoreAdminClient', () => {
   describe('importEntities', () => {
     it('invokes importEntities without error', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -716,7 +728,7 @@ describe('v1.DatastoreAdminClient', () => {
 
     it('invokes importEntities without error using callback', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -770,7 +782,7 @@ describe('v1.DatastoreAdminClient', () => {
 
     it('invokes importEntities with call error', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -801,7 +813,7 @@ describe('v1.DatastoreAdminClient', () => {
 
     it('invokes importEntities with LRO error', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -834,7 +846,7 @@ describe('v1.DatastoreAdminClient', () => {
 
     it('invokes checkImportEntitiesProgress without error', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -842,8 +854,8 @@ describe('v1.DatastoreAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkImportEntitiesProgress(
@@ -856,7 +868,7 @@ describe('v1.DatastoreAdminClient', () => {
 
     it('invokes checkImportEntitiesProgress with error', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -877,7 +889,7 @@ describe('v1.DatastoreAdminClient', () => {
   describe('createIndex', () => {
     it('invokes createIndex without error', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -909,7 +921,7 @@ describe('v1.DatastoreAdminClient', () => {
 
     it('invokes createIndex without error using callback', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -963,7 +975,7 @@ describe('v1.DatastoreAdminClient', () => {
 
     it('invokes createIndex with call error', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -994,7 +1006,7 @@ describe('v1.DatastoreAdminClient', () => {
 
     it('invokes createIndex with LRO error', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1027,7 +1039,7 @@ describe('v1.DatastoreAdminClient', () => {
 
     it('invokes checkCreateIndexProgress without error', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1035,8 +1047,8 @@ describe('v1.DatastoreAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateIndexProgress(
@@ -1049,7 +1061,7 @@ describe('v1.DatastoreAdminClient', () => {
 
     it('invokes checkCreateIndexProgress with error', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1067,7 +1079,7 @@ describe('v1.DatastoreAdminClient', () => {
   describe('deleteIndex', () => {
     it('invokes deleteIndex without error', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1104,7 +1116,7 @@ describe('v1.DatastoreAdminClient', () => {
 
     it('invokes deleteIndex without error using callback', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1163,7 +1175,7 @@ describe('v1.DatastoreAdminClient', () => {
 
     it('invokes deleteIndex with call error', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1199,7 +1211,7 @@ describe('v1.DatastoreAdminClient', () => {
 
     it('invokes deleteIndex with LRO error', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1237,7 +1249,7 @@ describe('v1.DatastoreAdminClient', () => {
 
     it('invokes checkDeleteIndexProgress without error', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1245,8 +1257,8 @@ describe('v1.DatastoreAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteIndexProgress(
@@ -1259,7 +1271,7 @@ describe('v1.DatastoreAdminClient', () => {
 
     it('invokes checkDeleteIndexProgress with error', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1277,7 +1289,7 @@ describe('v1.DatastoreAdminClient', () => {
   describe('listIndexes', () => {
     it('invokes listIndexes without error', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1310,7 +1322,7 @@ describe('v1.DatastoreAdminClient', () => {
 
     it('invokes listIndexes without error using callback', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1359,7 +1371,7 @@ describe('v1.DatastoreAdminClient', () => {
 
     it('invokes listIndexes with error', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1390,7 +1402,7 @@ describe('v1.DatastoreAdminClient', () => {
 
     it('invokes listIndexesStream without error', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1444,7 +1456,7 @@ describe('v1.DatastoreAdminClient', () => {
 
     it('invokes listIndexesStream with error', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1495,7 +1507,7 @@ describe('v1.DatastoreAdminClient', () => {
 
     it('uses async iteration with listIndexes without error', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1538,7 +1550,7 @@ describe('v1.DatastoreAdminClient', () => {
 
     it('uses async iteration with listIndexes with error', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1581,7 +1593,7 @@ describe('v1.DatastoreAdminClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1602,7 +1614,7 @@ describe('v1.DatastoreAdminClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1615,20 +1627,24 @@ describe('v1.DatastoreAdminClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient.getOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: operationsProtos.google.longrunning.Operation | null,
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          },
-        );
+        client.operationsClient
+          .getOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: operationsProtos.google.longrunning.Operation | null,
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
+            },
+          )
+          .catch((err) => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -1636,7 +1652,7 @@ describe('v1.DatastoreAdminClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1660,7 +1676,7 @@ describe('v1.DatastoreAdminClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1682,7 +1698,7 @@ describe('v1.DatastoreAdminClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1695,20 +1711,24 @@ describe('v1.DatastoreAdminClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient.cancelOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null,
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          },
-        );
+        client.operationsClient
+          .cancelOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: protos.google.protobuf.Empty | null,
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
+            },
+          )
+          .catch((err) => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -1716,7 +1736,7 @@ describe('v1.DatastoreAdminClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1740,7 +1760,7 @@ describe('v1.DatastoreAdminClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1762,7 +1782,7 @@ describe('v1.DatastoreAdminClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1775,20 +1795,24 @@ describe('v1.DatastoreAdminClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient.deleteOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null,
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          },
-        );
+        client.operationsClient
+          .deleteOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: protos.google.protobuf.Empty | null,
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
+            },
+          )
+          .catch((err) => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -1796,7 +1820,7 @@ describe('v1.DatastoreAdminClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1820,7 +1844,7 @@ describe('v1.DatastoreAdminClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1855,7 +1879,7 @@ describe('v1.DatastoreAdminClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();

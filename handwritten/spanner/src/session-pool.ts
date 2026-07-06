@@ -689,49 +689,55 @@ export class SessionPool extends EventEmitter implements SessionPoolInterface {
       opts: this._observabilityOptions,
       dbName: this.database.formattedName_,
     };
-    return startTrace('SessionPool.createSessions', traceConfig, async span => {
-      span.addEvent(`Requesting ${amount} sessions`);
+    return context.with(ROOT_CONTEXT, () => {
+      return startTrace(
+        'SessionPool.createSessions',
+        traceConfig,
+        async span => {
+          span.addEvent(`Requesting ${amount} sessions`);
 
-      // while we can request as many sessions be created as we want, the backend
-      // will return at most 100 at a time, hence the need for a while loop.
-      while (amount > 0) {
-        let sessions: Session[] | null = null;
+          // while we can request as many sessions be created as we want, the backend
+          // will return at most 100 at a time, hence the need for a while loop.
+          while (amount > 0) {
+            let sessions: Session[] | null = null;
 
-        span.addEvent(`Creating ${amount} sessions`);
+            span.addEvent(`Creating ${amount} sessions`);
 
-        try {
-          [sessions] = await this.database.batchCreateSessions({
-            count: amount,
-            labels: labels,
-            databaseRole: databaseRole,
-          });
+            try {
+              [sessions] = await this.database.batchCreateSessions({
+                count: amount,
+                labels: labels,
+                databaseRole: databaseRole,
+              });
 
-          amount -= sessions.length;
-          nReturned += sessions.length;
-        } catch (e) {
-          this._pending -= amount;
-          this.emit('createError', e);
+              amount -= sessions.length;
+              nReturned += sessions.length;
+            } catch (e) {
+              this._pending -= amount;
+              this.emit('createError', e);
+              span.addEvent(
+                `Requested for ${nRequested} sessions returned ${nReturned}`,
+              );
+              setSpanErrorAndException(span, e as Error);
+              span.end();
+              throw e;
+            }
+
+            sessions.forEach((session: Session) => {
+              setImmediate(() => {
+                this._inventory.borrowed.add(session);
+                this._pending -= 1;
+                this.release(session);
+              });
+            });
+          }
+
           span.addEvent(
             `Requested for ${nRequested} sessions returned ${nReturned}`,
           );
-          setSpanErrorAndException(span, e as Error);
           span.end();
-          throw e;
-        }
-
-        sessions.forEach((session: Session) => {
-          setImmediate(() => {
-            this._inventory.borrowed.add(session);
-            this._pending -= 1;
-            this.release(session);
-          });
-        });
-      }
-
-      span.addEvent(
-        `Requested for ${nRequested} sessions returned ${nReturned}`,
+        },
       );
-      span.end();
     });
   }
 

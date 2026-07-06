@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {CloudLocationFinderClient} from './cloud_location_finder_client';
+export { CloudLocationFinderClient } from './cloud_location_finder_client';

@@ -1683,6 +1683,10 @@
                       "type": "string",
                       "id": 5
                     },
+                    "nodeImageConfig": {
+                      "type": "CustomImageConfig",
+                      "id": 90
+                    },
                     "labels": {
                       "keyType": "string",
                       "type": "string",
@@ -2144,6 +2148,18 @@
                     "enableIntegrityMonitoring": {
                       "type": "bool",
                       "id": 2
+                    }
+                  }
+                },
+                "CustomImageConfig": {
+                  "fields": {
+                    "image": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "imageProject": {
+                      "type": "string",
+                      "id": 3
                     }
                   }
                 },
@@ -2633,6 +2649,13 @@
                         "(google.api.field_behavior)": "OPTIONAL"
                       }
                     },
+                    "agentSandboxConfig": {
+                      "type": "AgentSandboxConfig",
+                      "id": 28,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
                     "nodeReadinessConfig": {
                       "type": "NodeReadinessConfig",
                       "id": 29,
@@ -2854,6 +2877,17 @@
                     "enabled": {
                       "type": "bool",
                       "id": 1
+                    }
+                  }
+                },
+                "AgentSandboxConfig": {
+                  "fields": {
+                    "enabled": {
+                      "type": "bool",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -4038,6 +4072,14 @@
                       "type": "string",
                       "id": 8
                     },
+                    "desiredImage": {
+                      "type": "string",
+                      "id": 44
+                    },
+                    "desiredImageProject": {
+                      "type": "string",
+                      "id": 45
+                    },
                     "desiredDatabaseEncryption": {
                       "type": "DatabaseEncryption",
                       "id": 46
@@ -4848,6 +4890,14 @@
                     "name": {
                       "type": "string",
                       "id": 8
+                    },
+                    "image": {
+                      "type": "string",
+                      "id": 10
+                    },
+                    "imageProject": {
+                      "type": "string",
+                      "id": 11
                     },
                     "locations": {
                       "rule": "repeated",
@@ -7004,6 +7054,11 @@
                         "defaultEnablePrivateNodes"
                       ]
                     },
+                    "_dataplaneV2Config": {
+                      "oneof": [
+                        "dataplaneV2Config"
+                      ]
+                    },
                     "_disableL4LbFirewallReconciliation": {
                       "oneof": [
                         "disableL4LbFirewallReconciliation"
@@ -7090,6 +7145,14 @@
                       "type": "bool",
                       "id": 22,
                       "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "dataplaneV2Config": {
+                      "type": "DataplaneV2Config",
+                      "id": 23,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL",
                         "proto3_optional": true
                       }
                     },
@@ -8339,6 +8402,34 @@
                     "DATAPATH_PROVIDER_UNSPECIFIED": 0,
                     "LEGACY_DATAPATH": 1,
                     "ADVANCED_DATAPATH": 2
+                  }
+                },
+                "DataplaneV2Config": {
+                  "oneofs": {
+                    "_scalabilityMode": {
+                      "oneof": [
+                        "scalabilityMode"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "scalabilityMode": {
+                      "type": "ScalabilityMode",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL",
+                        "proto3_optional": true
+                      }
+                    }
+                  },
+                  "nested": {
+                    "ScalabilityMode": {
+                      "values": {
+                        "SCALABILITY_MODE_UNSPECIFIED": 0,
+                        "DISABLED": 3,
+                        "SCALE_OPTIMIZED": 4
+                      }
+                    }
                   }
                 },
                 "NodePoolUpdateStrategy": {
@@ -11352,10 +11443,6 @@
                     "image": {
                       "type": "string",
                       "id": 1
-                    },
-                    "imageFamily": {
-                      "type": "string",
-                      "id": 2
                     },
                     "imageProject": {
                       "type": "string",

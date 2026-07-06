@@ -14,7 +14,7 @@
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@google-cloud/storageinsights": "^2.2.2"
+    "@google-cloud/storageinsights": "^2.3.0"
   },
   "devDependencies": {
     "c8": "^10.0.0",

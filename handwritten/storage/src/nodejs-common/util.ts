@@ -970,6 +970,24 @@ export class Util {
       delete reqOpts.json.autoPaginate;
       delete reqOpts.json.autoPaginateVal;
       reqOpts.json = replaceProjectIdToken(reqOpts.json, projectId);
+
+      const headers = reqOpts.headers || {};
+      if (
+        typeof (headers as any).set === 'function' &&
+        typeof (headers as any).has === 'function'
+      ) {
+        if (!(headers as any).has('content-type')) {
+          (headers as any).set('Content-Type', 'application/json');
+        }
+        reqOpts.headers = headers;
+      } else {
+        const hasContentType = Object.keys(headers).some(
+          key => key.toLowerCase() === 'content-type'
+        );
+        reqOpts.headers = hasContentType
+          ? headers
+          : { ...headers, 'Content-Type': 'application/json' };
+      }
     }
 
     reqOpts.uri = replaceProjectIdToken(reqOpts.uri, projectId);

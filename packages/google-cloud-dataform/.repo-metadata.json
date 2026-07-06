@@ -1,17 +1,16 @@
 {
-  "name": "dataform",
-  "name_pretty": "Dataform API",
-  "product_documentation": "https://cloud.google.com/dataform/docs/overview",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/dataform/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "preview",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/dataform",
-  "api_id": "dataform.googleapis.com",
-  "default_version": "v1beta1",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "dataform"
+    "api_description": "Service to develop, version control, and operationalize SQL pipelines in\nBigQuery.",
+    "api_id": "dataform.googleapis.com",
+    "api_shortname": "dataform",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/dataform/latest",
+    "default_version": "v1beta1",
+    "distribution_name": "@google-cloud/dataform",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=994183",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "dataform",
+    "name_pretty": "Dataform",
+    "product_documentation": "https://cloud.google.com/dataform/docs",
+    "release_level": "stable",
+    "repo": "googleapis/google-cloud-node"
 }
-

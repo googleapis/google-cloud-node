@@ -1,17 +1,16 @@
 {
-  "name": "modelarmor",
-  "name_pretty": "Model Armor API",
-  "product_documentation": "https://cloud.google.com/security-command-center/docs/model-armor-overview",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/modelarmor/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "preview",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/modelarmor",
-  "api_id": "modelarmor.googleapis.com",
-  "default_version": "v1",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "modelarmor"
+    "api_description": "Model Armor helps you protect against risks like prompt injection, harmful\ncontent, and data leakage in generative AI applications by letting you\ndefine policies that filter user prompts and model responses.",
+    "api_id": "modelarmor.googleapis.com",
+    "api_shortname": "modelarmor",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/modelarmor/latest",
+    "default_version": "v1",
+    "distribution_name": "@google-cloud/modelarmor",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1514910&template=0",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "modelarmor",
+    "name_pretty": "Model Armor",
+    "product_documentation": "https://cloud.google.com/security-command-center/docs",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-

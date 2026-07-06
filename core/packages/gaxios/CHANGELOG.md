@@ -1,6 +1,14 @@
 # Changelog
 
 
+## [7.1.6](https://github.com/googleapis/google-cloud-node/compare/gaxios-v7.1.5...gaxios-v7.1.6) (2026-06-30)
+
+
+### Bug Fixes
+
+* Correct repository URLs in core package.json files ([#8722](https://github.com/googleapis/google-cloud-node/issues/8722)) ([368f18e](https://github.com/googleapis/google-cloud-node/commit/368f18ecc361310e7bfb323ba0e7836186ea08d1))
+* **gaxios:** Prevent comma corruption when draining stream error responses ([#8779](https://github.com/googleapis/google-cloud-node/issues/8779)) ([07b13a1](https://github.com/googleapis/google-cloud-node/commit/07b13a17e6533184c708dc388c3fa3dc6581f7a9))
+
 ## [7.1.5](https://github.com/googleapis/google-cloud-node/compare/gaxios-v7.1.4...gaxios-v7.1.5) (2026-05-11)
 
 

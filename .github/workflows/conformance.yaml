@@ -13,6 +13,9 @@
 # limitations under the License.
 # Github action job to test core java library features on
 # downstream client libraries before they are released.
+permissions:
+  contents: read
+
 on:
   push:
     branches:
@@ -33,16 +36,19 @@ jobs:
       matrix:
         node: [ 18, 20 ]
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      with:
+        persist-credentials: false
+    - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       with:
         repository: googleapis/cloud-bigtable-clients-test
         ref: main
         path: handwritten/bigtable/cloud-bigtable-clients-test
-    - uses: actions/setup-node@v6
+        persist-credentials: false
+    - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
       with:
         node-version: ${{ matrix.node }}
-    - uses: actions/setup-go@v5
+    - uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5
       with:
         go-version: '>=1.20.2'
     - run: chmod +x .kokoro/conformance.sh

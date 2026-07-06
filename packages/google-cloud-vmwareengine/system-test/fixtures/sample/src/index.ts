@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {VmwareEngineClient} from '@google-cloud/vmwareengine';
+import { VmwareEngineClient } from '@google-cloud/vmwareengine';
 
 // check that the client class type name can be used
 function doStuffWithVmwareEngineClient(client: VmwareEngineClient) {

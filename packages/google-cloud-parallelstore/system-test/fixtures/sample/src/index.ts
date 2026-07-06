@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {ParallelstoreClient} from '@google-cloud/parallelstore';
+import { ParallelstoreClient } from '@google-cloud/parallelstore';
 
 // check that the client class type name can be used
 function doStuffWithParallelstoreClient(client: ParallelstoreClient) {

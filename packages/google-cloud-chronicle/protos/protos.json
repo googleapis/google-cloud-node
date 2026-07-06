@@ -11,12 +11,12 @@
                     "csharp_namespace": "Google.Cloud.Chronicle.V1",
                     "go_package": "cloud.google.com/go/chronicle/apiv1/chroniclepb;chroniclepb",
                     "java_multiple_files": true,
-                    "java_outer_classname": "RuleProto",
+                    "java_outer_classname": "RuleExecutionErrorProto",
                     "java_package": "com.google.cloud.chronicle.v1",
                     "php_namespace": "Google\\Cloud\\Chronicle\\V1",
                     "ruby_package": "Google::Cloud::Chronicle::V1",
-                    "(google.api.resource_definition).type": "chronicle.googleapis.com/ContentHub",
-                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/instances/{instance}/contentHub",
+                    "(google.api.resource_definition).type": "chronicle.googleapis.com/CuratedRule",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/instances/{instance}/curatedRules/{curatedRule}",
                     "(google.api.resource_definition).plural": "contentHub",
                     "(google.api.resource_definition).singular": "contentHub"
                   },
@@ -5481,7 +5481,7 @@
                     "ReferenceListService": {
                       "options": {
                         "(google.api.default_host)": "chronicle.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/chronicle,https://www.googleapis.com/auth/chronicle.readonly,https://www.googleapis.com/auth/cloud-platform"
                       },
                       "methods": {
                         "GetReferenceList": {
@@ -5557,6 +5557,22 @@
                             },
                             {
                               "(google.api.method_signature)": "reference_list,update_mask"
+                            }
+                          ]
+                        },
+                        "VerifyReferenceList": {
+                          "requestType": "VerifyReferenceListRequest",
+                          "responseType": "VerifyReferenceListResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{instance=projects/*/locations/*/instances/*}:verifyReferenceList",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{instance=projects/*/locations/*/instances/*}:verifyReferenceList",
+                                "body": "*"
+                              }
                             }
                           ]
                         }
@@ -5694,6 +5710,46 @@
                         }
                       }
                     },
+                    "VerifyReferenceListRequest": {
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "chronicle.googleapis.com/Instance"
+                          }
+                        },
+                        "syntaxType": {
+                          "type": "ReferenceListSyntaxType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "entries": {
+                          "rule": "repeated",
+                          "type": "ReferenceListEntry",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "VerifyReferenceListResponse": {
+                      "fields": {
+                        "success": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "errors": {
+                          "rule": "repeated",
+                          "type": "ReferenceListError",
+                          "id": 2
+                        }
+                      }
+                    },
                     "ReferenceList": {
                       "options": {
                         "(google.api.resource).type": "chronicle.googleapis.com/ReferenceList",
@@ -5775,10 +5831,22 @@
                         }
                       }
                     },
+                    "ReferenceListError": {
+                      "fields": {
+                        "lineNumber": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "errorMessage": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "RuleService": {
                       "options": {
                         "(google.api.default_host)": "chronicle.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/chronicle,https://www.googleapis.com/auth/chronicle.readonly,https://www.googleapis.com/auth/cloud-platform"
                       },
                       "methods": {
                         "CreateRule": {
@@ -5872,6 +5940,26 @@
                             },
                             {
                               "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "VerifyRuleText": {
+                          "requestType": "VerifyRuleTextRequest",
+                          "responseType": "VerifyRuleTextResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{instance=projects/*/locations/*/instances/*}:verifyRuleText",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "instance,rule_text"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{instance=projects/*/locations/*/instances/*}:verifyRuleText",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "instance,rule_text"
                             }
                           ]
                         },
@@ -6421,6 +6509,38 @@
                         }
                       }
                     },
+                    "VerifyRuleTextRequest": {
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "chronicle.googleapis.com/Instance"
+                          }
+                        },
+                        "ruleText": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "VerifyRuleTextResponse": {
+                      "fields": {
+                        "success": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "compilationDiagnostics": {
+                          "rule": "repeated",
+                          "type": "CompilationDiagnostic",
+                          "id": 3
+                        }
+                      }
+                    },
                     "ListRuleRevisionsRequest": {
                       "fields": {
                         "name": {
@@ -6714,6 +6834,122 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "RuleExecutionErrorService": {
+                      "options": {
+                        "(google.api.default_host)": "chronicle.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/chronicle,https://www.googleapis.com/auth/chronicle.readonly,https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ListRuleExecutionErrors": {
+                          "requestType": "ListRuleExecutionErrorsRequest",
+                          "responseType": "ListRuleExecutionErrorsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/instances/*}/ruleExecutionErrors",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/instances/*}/ruleExecutionErrors"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "ListRuleExecutionErrorsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "chronicle.googleapis.com/RuleExecutionError"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "ListRuleExecutionErrorsResponse": {
+                      "fields": {
+                        "ruleExecutionErrors": {
+                          "rule": "repeated",
+                          "type": "RuleExecutionError",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "RuleExecutionError": {
+                      "options": {
+                        "(google.api.resource).type": "chronicle.googleapis.com/RuleExecutionError",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/instances/{instance}/ruleExecutionErrors/{rule_execution_error}"
+                      },
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "rule",
+                            "curatedRule"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "rule": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "chronicle.googleapis.com/Rule"
+                          }
+                        },
+                        "curatedRule": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "chronicle.googleapis.com/CuratedRule"
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "error": {
+                          "type": "google.rpc.Status",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "timeRange": {
+                          "type": "google.type.Interval",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }

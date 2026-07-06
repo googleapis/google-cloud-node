@@ -27,6 +27,7 @@ import {
   InstanceServiceClient,
   NativeDashboardServiceClient,
   ReferenceListServiceClient,
+  RuleExecutionErrorServiceClient,
   RuleServiceClient,
 } from '@google-cloud/chronicle';
 
@@ -75,6 +76,11 @@ function doStuffWithReferenceListServiceClient(
 ) {
   client.close();
 }
+function doStuffWithRuleExecutionErrorServiceClient(
+  client: RuleExecutionErrorServiceClient,
+) {
+  client.close();
+}
 function doStuffWithRuleServiceClient(client: RuleServiceClient) {
   client.close();
 }
@@ -113,6 +119,9 @@ function main() {
   // check that the client instance can be created
   const referenceListServiceClient = new ReferenceListServiceClient();
   doStuffWithReferenceListServiceClient(referenceListServiceClient);
+  // check that the client instance can be created
+  const ruleExecutionErrorServiceClient = new RuleExecutionErrorServiceClient();
+  doStuffWithRuleExecutionErrorServiceClient(ruleExecutionErrorServiceClient);
   // check that the client instance can be created
   const ruleServiceClient = new RuleServiceClient();
   doStuffWithRuleServiceClient(ruleServiceClient);

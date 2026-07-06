@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {CloudShellServiceClient} from '@google-cloud/shell';
+import { CloudShellServiceClient } from '@google-cloud/shell';
 
 // check that the client class type name can be used
 function doStuffWithCloudShellServiceClient(client: CloudShellServiceClient) {

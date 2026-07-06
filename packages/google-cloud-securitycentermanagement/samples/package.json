@@ -14,7 +14,7 @@
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@google-cloud/securitycentermanagement": "^0.7.2"
+    "@google-cloud/securitycentermanagement": "^0.8.0"
   },
   "devDependencies": {
     "c8": "^10.0.0",
