@@ -203,6 +203,17 @@ export class MultiplexedSession
    *
    */
   getSession(callback: GetSessionCallback): void {
+    if (this._multiplexedSession !== null) {
+      callback(
+        null,
+        this._multiplexedSession,
+        this._multiplexedSession.transaction(
+          (this._multiplexedSession.parent as Database).queryOptions_,
+        ),
+      );
+      return;
+    }
+
     this._getSession().then(
       session =>
         callback(

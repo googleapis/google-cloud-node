@@ -937,18 +937,16 @@ export function getDecoder(
     return val => val;
   }
 
-  let decoder: (val: any) => any;
-
   switch (type.code) {
     case spannerClient.spanner.v1.TypeCode.BYTES:
     case 'BYTES':
-      decoder = val => Buffer.from(val, 'base64');
-      break;
+      return val => (val === null ? null : Buffer.from(val, 'base64'));
 
     case spannerClient.spanner.v1.TypeCode.PROTO:
     case 'PROTO':
       if (jsonMode) {
-        decoder = val => {
+        return val => {
+          if (val === null) return null;
           const decoded = Buffer.from(val, 'base64');
           if (columnMetadata) {
             return (columnMetadata as any)['toObject'](
@@ -957,22 +955,22 @@ export function getDecoder(
           }
           return decoded.toString();
         };
-      } else {
-        decoder = val => {
-          const decoded = Buffer.from(val, 'base64');
-          return new ProtoMessage({
-            value: decoded,
-            fullName: type.protoTypeFqn!,
-            messageFunction: columnMetadata as Function,
-          });
-        };
       }
-      break;
+      return val => {
+        if (val === null) return null;
+        const decoded = Buffer.from(val, 'base64');
+        return new ProtoMessage({
+          value: decoded,
+          fullName: type.protoTypeFqn!,
+          messageFunction: columnMetadata as Function,
+        });
+      };
 
     case spannerClient.spanner.v1.TypeCode.ENUM:
     case 'ENUM':
       if (jsonMode) {
-        decoder = val => {
+        return val => {
+          if (val === null) return null;
           let enumVal: string;
           if (DIGITS_REGEX.test(val.toString())) {
             enumVal = val.toString();
@@ -1001,25 +999,29 @@ export function getDecoder(
           }
           return enumVal;
         };
-      } else {
-        decoder = val =>
-          new ProtoEnum({
-            value: val,
-            fullName: type.protoTypeFqn!,
-            enumObject: columnMetadata as object,
-          });
       }
-      break;
+      return val =>
+        val === null
+          ? null
+          : new ProtoEnum({
+              value: val,
+              fullName: type.protoTypeFqn!,
+              enumObject: columnMetadata as object,
+            });
 
     case spannerClient.spanner.v1.TypeCode.FLOAT32:
     case 'FLOAT32':
-      decoder = wrapNumbers ? val => new Float32(val) : val => Number(val);
-      break;
+      if (wrapNumbers) {
+        return val => (val === null ? null : new Float32(val));
+      }
+      return val => (val === null ? null : Number(val));
 
     case spannerClient.spanner.v1.TypeCode.FLOAT64:
     case 'FLOAT64':
-      decoder = wrapNumbers ? val => new Float(val) : val => Number(val);
-      break;
+      if (wrapNumbers) {
+        return val => (val === null ? null : new Float(val));
+      }
+      return val => (val === null ? null : Number(val));
 
     case spannerClient.spanner.v1.TypeCode.INT64:
     case 'INT64':
@@ -1028,27 +1030,29 @@ export function getDecoder(
           spannerClient.spanner.v1.TypeAnnotationCode.PG_OID ||
         type.typeAnnotation === 'PG_OID'
       ) {
-        decoder = wrapNumbers
-          ? val => new PGOid(val)
-          : val => {
-              const num = Number(val);
-              if (!Number.isSafeInteger(num)) {
-                throw new GoogleError(`PG.OID ${val} is out of bounds.`);
-              }
-              return num;
-            };
-      } else {
-        decoder = wrapNumbers
-          ? val => new Int(val)
-          : val => {
-              const num = Number(val);
-              if (!Number.isSafeInteger(num)) {
-                throw new GoogleError(`Integer ${val} is out of bounds.`);
-              }
-              return num;
-            };
+        if (wrapNumbers) {
+          return val => (val === null ? null : new PGOid(val));
+        }
+        return val => {
+          if (val === null) return null;
+          const num = Number(val);
+          if (!Number.isSafeInteger(num)) {
+            throw new GoogleError(`PG.OID ${val} is out of bounds.`);
+          }
+          return num;
+        };
       }
-      break;
+      if (wrapNumbers) {
+        return val => (val === null ? null : new Int(val));
+      }
+      return val => {
+        if (val === null) return null;
+        const num = Number(val);
+        if (!Number.isSafeInteger(num)) {
+          throw new GoogleError(`Integer ${val} is out of bounds.`);
+        }
+        return num;
+      };
 
     case spannerClient.spanner.v1.TypeCode.NUMERIC:
     case 'NUMERIC':
@@ -1057,21 +1061,17 @@ export function getDecoder(
           spannerClient.spanner.v1.TypeAnnotationCode.PG_NUMERIC ||
         type.typeAnnotation === 'PG_NUMERIC'
       ) {
-        decoder = val => new PGNumeric(val);
-      } else {
-        decoder = val => new Numeric(val);
+        return val => (val === null ? null : new PGNumeric(val));
       }
-      break;
+      return val => (val === null ? null : new Numeric(val));
 
     case spannerClient.spanner.v1.TypeCode.TIMESTAMP:
     case 'TIMESTAMP':
-      decoder = val => parsePreciseDate(val);
-      break;
+      return val => (val === null ? null : parsePreciseDate(val));
 
     case spannerClient.spanner.v1.TypeCode.DATE:
     case 'DATE':
-      decoder = val => new SpannerDate(val);
-      break;
+      return val => (val === null ? null : new SpannerDate(val));
 
     case spannerClient.spanner.v1.TypeCode.JSON:
     case 'JSON':
@@ -1080,16 +1080,13 @@ export function getDecoder(
           spannerClient.spanner.v1.TypeAnnotationCode.PG_JSONB ||
         type.typeAnnotation === 'PG_JSONB'
       ) {
-        decoder = val => new PGJsonb(val);
-      } else {
-        decoder = val => JSON.parse(val);
+        return val => (val === null ? null : new PGJsonb(val));
       }
-      break;
+      return val => (val === null ? null : JSON.parse(val));
 
     case spannerClient.spanner.v1.TypeCode.INTERVAL:
     case 'INTERVAL':
-      decoder = val => Interval.fromISO8601(val);
-      break;
+      return val => (val === null ? null : Interval.fromISO8601(val));
 
     case spannerClient.spanner.v1.TypeCode.ARRAY:
     case 'ARRAY': {
@@ -1098,8 +1095,7 @@ export function getDecoder(
         columnMetadata,
         options,
       );
-      decoder = val => val.map(elementDecoder);
-      break;
+      return val => (val === null ? null : val.map(elementDecoder));
     }
 
     case spannerClient.spanner.v1.TypeCode.STRUCT:
@@ -1137,7 +1133,8 @@ export function getDecoder(
       }
 
       if (wrapStructs) {
-        decoder = val => {
+        return val => {
+          if (val === null) return null;
           const isArr = Array.isArray(val);
           const structFields = fieldDecoders.map(
             ({name, decodedName, decoder, index}) => {
@@ -1155,35 +1152,31 @@ export function getDecoder(
           );
           return Struct.fromArray(structFields as Field[]);
         };
-      } else {
-        decoder = val => {
-          const isArr = Array.isArray(val);
-          const structObj: Json = {};
-          const len = fieldDecoders.length;
-          for (let i = 0; i < len; i++) {
-            const {name, decodedName, decoder, index} = fieldDecoders[i];
-            structObj[decodedName!] = decoder(
-              isArr
-                ? val[index]
-                : name !== null &&
-                    name !== undefined &&
-                    Object.prototype.hasOwnProperty.call(val, name)
-                  ? val[name]
-                  : val[index],
-            );
-          }
-          return structObj;
-        };
       }
-      break;
+      return val => {
+        if (val === null) return null;
+        const isArr = Array.isArray(val);
+        const structObj: Json = {};
+        const len = fieldDecoders.length;
+        for (let i = 0; i < len; i++) {
+          const {name, decodedName, decoder, index} = fieldDecoders[i];
+          structObj[decodedName!] = decoder(
+            isArr
+              ? val[index]
+              : name !== null &&
+                  name !== undefined &&
+                  Object.prototype.hasOwnProperty.call(val, name)
+                ? val[name]
+                : val[index],
+          );
+        }
+        return structObj;
+      };
     }
 
     default:
-      decoder = val => val;
-      break;
+      return val => (val === null ? null : val);
   }
-
-  return val => (val === null || val === undefined ? null : decoder(val));
 }
 
 /**

@@ -192,6 +192,8 @@ export class PartialResultStream extends Transform implements ResultEvents {
   private _pendingValueForResume?: p.IValue;
   private _values: p.IValue[];
   private _numPushFailed = 0;
+  private _chunksProcessedSinceYield = 0;
+  private _jsonRowFactory?: Function;
   constructor(options = {}) {
     super({objectMode: true});
 
@@ -264,6 +266,24 @@ export class PartialResultStream extends Transform implements ResultEvents {
           this._options.json ? this._options.jsonOptions || {} : undefined,
         );
       });
+
+      const isJsonStubbed =
+        codec.convertFieldsToJson !== originalConvertFieldsToJson;
+
+      if (this._options.json && !isJsonStubbed) {
+        const includeNameless = !!this._options.jsonOptions?.includeNameless;
+        let functionBody = 'return {\n';
+        for (let i = 0; i < this._fields.length; i++) {
+          const name = this._fields[i].name;
+          if (!name && !includeNameless) {
+            continue;
+          }
+          const fieldName = name || `_${i}`;
+          functionBody += `  ${JSON.stringify(fieldName)}: decoders[${i}](values[${i}]),\n`;
+        }
+        functionBody += '};\n';
+        this._jsonRowFactory = new Function('decoders', 'values', functionBody);
+      }
     }
 
     let res = true;
@@ -282,7 +302,13 @@ export class PartialResultStream extends Transform implements ResultEvents {
     }
 
     if (res) {
-      next();
+      this._chunksProcessedSinceYield++;
+      if (this._chunksProcessedSinceYield >= 500) {
+        this._chunksProcessedSinceYield = 0;
+        setImmediate(() => next());
+      } else {
+        next();
+      }
     } else {
       // Wait a little before we push any more data into the pipeline as a
       // component downstream has indicated that a break is needed. Pause the
@@ -397,22 +423,27 @@ export class PartialResultStream extends Transform implements ResultEvents {
       return true;
     }
 
-    this._values = [];
+    let pushResult: boolean;
 
     const isJsonStubbed =
       codec.convertFieldsToJson !== originalConvertFieldsToJson;
 
     if (this._options.json && !isJsonStubbed) {
-      return this.push(this._createJsonRow(values));
+      pushResult = this.push(this._createJsonRow(values));
+    } else {
+      const row: Row = this._createRow(values);
+
+      if (this._options.json) {
+        pushResult = this.push(row.toJSON(this._options.jsonOptions));
+      } else {
+        pushResult = this.push(row);
+      }
     }
 
-    const row: Row = this._createRow(values);
+    // Object Pooling: Reset length to 0 to reuse the array allocation for the next row
+    this._values.length = 0;
 
-    if (this._options.json) {
-      return this.push(row.toJSON(this._options.jsonOptions));
-    }
-
-    return this.push(row);
+    return pushResult;
   }
 
   /**
@@ -425,31 +456,37 @@ export class PartialResultStream extends Transform implements ResultEvents {
    * @returns {Json} The plain JavaScript object representing the row.
    */
   private _createJsonRow(values: Value[]): Json {
-    const json: Json = {};
-    const fields = this._fields;
-    const decoders = this._decoders;
-    const len = fields.length;
-    const includeNameless = !!this._options.jsonOptions?.includeNameless;
+    try {
+      return this._jsonRowFactory!(this._decoders, values);
+    } catch (e) {
+      // Fallback to the slow, step-by-step path purely to identify which column failed
+      // and format the exact Spanner error message.
+      const json: Json = {};
+      const fields = this._fields;
+      const decoders = this._decoders;
+      const len = fields.length;
+      const includeNameless = !!this._options.jsonOptions?.includeNameless;
 
-    for (let i = 0; i < len; i++) {
-      const {name} = fields[i];
-      if (!name && !includeNameless) {
-        continue;
+      for (let i = 0; i < len; i++) {
+        const {name} = fields[i];
+        if (!name && !includeNameless) {
+          continue;
+        }
+        const fieldName = name ? name : `_${i}`;
+        try {
+          json[fieldName] = decoders[i](values[i]);
+        } catch (err) {
+          (err as Error).message = [
+            `Serializing column "${fieldName}" encountered an error: ${
+              (err as Error).message
+            }`,
+            'Call row.toJSON({ wrapNumbers: true }) to receive a custom type.',
+          ].join(' ');
+          throw err;
+        }
       }
-      const fieldName = name ? name : `_${i}`;
-      try {
-        json[fieldName] = decoders[i](values[i]);
-      } catch (e) {
-        (e as Error).message = [
-          `Serializing column "${fieldName}" encountered an error: ${
-            (e as Error).message
-          }`,
-          'Call row.toJSON({ wrapNumbers: true }) to receive a custom type.',
-        ].join(' ');
-        throw e;
-      }
+      throw e; // Fallback just in case the loop doesn't throw
     }
-    return json;
   }
   /**
    * Converts an array of values into a row.
