@@ -788,12 +788,7 @@ describe('v1.ExecutionsClient', () => {
           (
             err?: Error | null,
             result?:
-<<<<<<< HEAD
               protos.google.cloud.workflows.executions.v1.IExecution[] | null,
-=======
-              | protos.google.cloud.workflows.executions.v1.IExecution[]
-              | null,
->>>>>>> main
           ) => {
             if (err) {
               reject(err);
@@ -901,15 +896,9 @@ describe('v1.ExecutionsClient', () => {
       assert(
         (client.descriptors.page.listExecutions.createStream as SinonStub)
           .getCall(0)
-<<<<<<< HEAD
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams,
           ),
-=======
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
->>>>>>> main
       );
     });
 
@@ -957,15 +946,9 @@ describe('v1.ExecutionsClient', () => {
       assert(
         (client.descriptors.page.listExecutions.createStream as SinonStub)
           .getCall(0)
-<<<<<<< HEAD
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams,
           ),
-=======
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
->>>>>>> main
       );
     });
 
@@ -1013,15 +996,9 @@ describe('v1.ExecutionsClient', () => {
       assert(
         (client.descriptors.page.listExecutions.asyncIterate as SinonStub)
           .getCall(0)
-<<<<<<< HEAD
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams,
           ),
-=======
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
->>>>>>> main
       );
     });
 
@@ -1060,15 +1037,9 @@ describe('v1.ExecutionsClient', () => {
       assert(
         (client.descriptors.page.listExecutions.asyncIterate as SinonStub)
           .getCall(0)
-<<<<<<< HEAD
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams,
           ),
-=======
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
->>>>>>> main
       );
     });
   });
