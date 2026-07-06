@@ -1073,8 +1073,7 @@ describe('v1beta3.ModelServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.ai.generativelanguage.v1beta3.IModel[]
-              | null,
+              protos.google.ai.generativelanguage.v1beta3.IModel[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1314,8 +1313,7 @@ describe('v1beta3.ModelServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.ai.generativelanguage.v1beta3.ITunedModel[]
-              | null,
+              protos.google.ai.generativelanguage.v1beta3.ITunedModel[] | null,
           ) => {
             if (err) {
               reject(err);

@@ -4362,9 +4362,9 @@ describe('v2.StorageControlClient', () => {
       assert(
         (client.descriptors.page.listFolders.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4410,9 +4410,9 @@ describe('v2.StorageControlClient', () => {
       assert(
         (client.descriptors.page.listFolders.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4450,9 +4450,9 @@ describe('v2.StorageControlClient', () => {
       assert(
         (client.descriptors.page.listFolders.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4489,9 +4489,9 @@ describe('v2.StorageControlClient', () => {
       assert(
         (client.descriptors.page.listFolders.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4680,9 +4680,9 @@ describe('v2.StorageControlClient', () => {
       assert(
         (client.descriptors.page.listManagedFolders.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4726,9 +4726,9 @@ describe('v2.StorageControlClient', () => {
       assert(
         (client.descriptors.page.listManagedFolders.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4772,9 +4772,9 @@ describe('v2.StorageControlClient', () => {
       assert(
         (client.descriptors.page.listManagedFolders.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
       assert.match(
         (
@@ -4815,9 +4815,9 @@ describe('v2.StorageControlClient', () => {
       assert(
         (client.descriptors.page.listManagedFolders.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
       assert.match(
         (
@@ -5012,9 +5012,9 @@ describe('v2.StorageControlClient', () => {
       assert(
         (client.descriptors.page.listAnywhereCaches.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5058,9 +5058,9 @@ describe('v2.StorageControlClient', () => {
       assert(
         (client.descriptors.page.listAnywhereCaches.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5104,9 +5104,9 @@ describe('v2.StorageControlClient', () => {
       assert(
         (client.descriptors.page.listAnywhereCaches.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
       assert.match(
         (
@@ -5147,9 +5147,9 @@ describe('v2.StorageControlClient', () => {
       assert(
         (client.descriptors.page.listAnywhereCaches.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
       assert.match(
         (
@@ -5235,8 +5235,7 @@ describe('v2.StorageControlClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.storage.control.v2.IIntelligenceFinding[]
-              | null,
+              protos.google.storage.control.v2.IIntelligenceFinding[] | null,
           ) => {
             if (err) {
               reject(err);

@@ -2808,9 +2808,9 @@ describe('v1.ManagedNotebookServiceClient', () => {
       assert(
         (client.descriptors.page.listRuntimes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2860,9 +2860,9 @@ describe('v1.ManagedNotebookServiceClient', () => {
       assert(
         (client.descriptors.page.listRuntimes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2904,9 +2904,9 @@ describe('v1.ManagedNotebookServiceClient', () => {
       assert(
         (client.descriptors.page.listRuntimes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2945,9 +2945,9 @@ describe('v1.ManagedNotebookServiceClient', () => {
       assert(
         (client.descriptors.page.listRuntimes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

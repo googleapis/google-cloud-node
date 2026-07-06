@@ -2295,9 +2295,9 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       assert(
         (client.descriptors.page.listSecrets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2348,9 +2348,9 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       assert(
         (client.descriptors.page.listSecrets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2398,9 +2398,9 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       assert(
         (client.descriptors.page.listSecrets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2442,9 +2442,9 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       assert(
         (client.descriptors.page.listSecrets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2526,8 +2526,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.secretmanager.v1beta2.ISecretVersion[]
-              | null,
+              protos.google.cloud.secretmanager.v1beta2.ISecretVersion[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2639,9 +2638,9 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       assert(
         (client.descriptors.page.listSecretVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2692,9 +2691,9 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       assert(
         (client.descriptors.page.listSecretVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2743,9 +2742,9 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       assert(
         (client.descriptors.page.listSecretVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2785,9 +2784,9 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       assert(
         (client.descriptors.page.listSecretVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

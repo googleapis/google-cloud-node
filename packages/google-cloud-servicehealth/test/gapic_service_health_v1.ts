@@ -883,9 +883,9 @@ describe('v1.ServiceHealthClient', () => {
       assert(
         (client.descriptors.page.listEvents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -934,9 +934,9 @@ describe('v1.ServiceHealthClient', () => {
       assert(
         (client.descriptors.page.listEvents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -977,9 +977,9 @@ describe('v1.ServiceHealthClient', () => {
       assert(
         (client.descriptors.page.listEvents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1019,9 +1019,9 @@ describe('v1.ServiceHealthClient', () => {
       assert(
         (client.descriptors.page.listEvents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1101,8 +1101,7 @@ describe('v1.ServiceHealthClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.servicehealth.v1.IOrganizationEvent[]
-              | null,
+              protos.google.cloud.servicehealth.v1.IOrganizationEvent[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1460,8 +1459,7 @@ describe('v1.ServiceHealthClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.servicehealth.v1.IOrganizationImpact[]
-              | null,
+              protos.google.cloud.servicehealth.v1.IOrganizationImpact[] | null,
           ) => {
             if (err) {
               reject(err);

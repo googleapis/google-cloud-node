@@ -2188,9 +2188,9 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       assert(
         (client.descriptors.page.listEntitlements.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2241,9 +2241,9 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       assert(
         (client.descriptors.page.listEntitlements.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2292,9 +2292,9 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       assert(
         (client.descriptors.page.listEntitlements.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2334,9 +2334,9 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       assert(
         (client.descriptors.page.listEntitlements.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2531,9 +2531,9 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       assert(
         (client.descriptors.page.searchEntitlements.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2584,9 +2584,9 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       assert(
         (client.descriptors.page.searchEntitlements.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2635,9 +2635,9 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       assert(
         (client.descriptors.page.searchEntitlements.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2677,9 +2677,9 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       assert(
         (client.descriptors.page.searchEntitlements.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2760,8 +2760,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.privilegedaccessmanager.v1.IGrant[]
-              | null,
+              protos.google.cloud.privilegedaccessmanager.v1.IGrant[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2871,9 +2870,9 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       assert(
         (client.descriptors.page.listGrants.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2924,9 +2923,9 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       assert(
         (client.descriptors.page.listGrants.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2975,9 +2974,9 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       assert(
         (client.descriptors.page.listGrants.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3019,9 +3018,9 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       assert(
         (client.descriptors.page.listGrants.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3102,8 +3101,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.privilegedaccessmanager.v1.IGrant[]
-              | null,
+              protos.google.cloud.privilegedaccessmanager.v1.IGrant[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -3213,9 +3211,9 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       assert(
         (client.descriptors.page.searchGrants.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3266,9 +3264,9 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       assert(
         (client.descriptors.page.searchGrants.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3317,9 +3315,9 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       assert(
         (client.descriptors.page.searchGrants.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3359,9 +3357,9 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       assert(
         (client.descriptors.page.searchGrants.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

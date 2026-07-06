@@ -4632,9 +4632,9 @@ describe('v1beta1.JobServiceClient', () => {
       assert(
         (client.descriptors.page.listCustomJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4682,9 +4682,9 @@ describe('v1beta1.JobServiceClient', () => {
       assert(
         (client.descriptors.page.listCustomJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4731,9 +4731,9 @@ describe('v1beta1.JobServiceClient', () => {
       assert(
         (client.descriptors.page.listCustomJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4772,9 +4772,9 @@ describe('v1beta1.JobServiceClient', () => {
       assert(
         (client.descriptors.page.listCustomJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4854,8 +4854,7 @@ describe('v1beta1.JobServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.aiplatform.v1beta1.IDataLabelingJob[]
-              | null,
+              protos.google.cloud.aiplatform.v1beta1.IDataLabelingJob[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4965,9 +4964,9 @@ describe('v1beta1.JobServiceClient', () => {
       assert(
         (client.descriptors.page.listDataLabelingJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5017,9 +5016,9 @@ describe('v1beta1.JobServiceClient', () => {
       assert(
         (client.descriptors.page.listDataLabelingJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5067,9 +5066,9 @@ describe('v1beta1.JobServiceClient', () => {
       assert(
         (client.descriptors.page.listDataLabelingJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5108,9 +5107,9 @@ describe('v1beta1.JobServiceClient', () => {
       assert(
         (client.descriptors.page.listDataLabelingJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5660,9 +5659,9 @@ describe('v1beta1.JobServiceClient', () => {
       assert(
         (client.descriptors.page.listNasJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5711,9 +5710,9 @@ describe('v1beta1.JobServiceClient', () => {
       assert(
         (client.descriptors.page.listNasJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5760,9 +5759,9 @@ describe('v1beta1.JobServiceClient', () => {
       assert(
         (client.descriptors.page.listNasJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5802,9 +5801,9 @@ describe('v1beta1.JobServiceClient', () => {
       assert(
         (client.descriptors.page.listNasJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5884,8 +5883,7 @@ describe('v1beta1.JobServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.aiplatform.v1beta1.INasTrialDetail[]
-              | null,
+              protos.google.cloud.aiplatform.v1beta1.INasTrialDetail[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -5993,9 +5991,9 @@ describe('v1beta1.JobServiceClient', () => {
       assert(
         (client.descriptors.page.listNasTrialDetails.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6043,9 +6041,9 @@ describe('v1beta1.JobServiceClient', () => {
       assert(
         (client.descriptors.page.listNasTrialDetails.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6093,9 +6091,9 @@ describe('v1beta1.JobServiceClient', () => {
       assert(
         (client.descriptors.page.listNasTrialDetails.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6134,9 +6132,9 @@ describe('v1beta1.JobServiceClient', () => {
       assert(
         (client.descriptors.page.listNasTrialDetails.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

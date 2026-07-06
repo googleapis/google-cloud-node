@@ -2012,8 +2012,7 @@ describe('v2beta.MapManagementClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.maps.mapmanagement.v2beta.IMapConfig[]
-              | null,
+              protos.google.maps.mapmanagement.v2beta.IMapConfig[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2121,9 +2120,9 @@ describe('v2beta.MapManagementClient', () => {
       assert(
         (client.descriptors.page.listMapConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2171,9 +2170,9 @@ describe('v2beta.MapManagementClient', () => {
       assert(
         (client.descriptors.page.listMapConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2221,9 +2220,9 @@ describe('v2beta.MapManagementClient', () => {
       assert(
         (client.descriptors.page.listMapConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2262,9 +2261,9 @@ describe('v2beta.MapManagementClient', () => {
       assert(
         (client.descriptors.page.listMapConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2343,8 +2342,7 @@ describe('v2beta.MapManagementClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.maps.mapmanagement.v2beta.IStyleConfig[]
-              | null,
+              protos.google.maps.mapmanagement.v2beta.IStyleConfig[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2452,9 +2450,9 @@ describe('v2beta.MapManagementClient', () => {
       assert(
         (client.descriptors.page.listStyleConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2502,9 +2500,9 @@ describe('v2beta.MapManagementClient', () => {
       assert(
         (client.descriptors.page.listStyleConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2552,9 +2550,9 @@ describe('v2beta.MapManagementClient', () => {
       assert(
         (client.descriptors.page.listStyleConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2593,9 +2591,9 @@ describe('v2beta.MapManagementClient', () => {
       assert(
         (client.descriptors.page.listStyleConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

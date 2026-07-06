@@ -1619,8 +1619,7 @@ describe('v1.ParameterManagerClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.parametermanager.v1.IParameter[]
-              | null,
+              protos.google.cloud.parametermanager.v1.IParameter[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1728,9 +1727,9 @@ describe('v1.ParameterManagerClient', () => {
       assert(
         (client.descriptors.page.listParameters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1778,9 +1777,9 @@ describe('v1.ParameterManagerClient', () => {
       assert(
         (client.descriptors.page.listParameters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1828,9 +1827,9 @@ describe('v1.ParameterManagerClient', () => {
       assert(
         (client.descriptors.page.listParameters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1869,9 +1868,9 @@ describe('v1.ParameterManagerClient', () => {
       assert(
         (client.descriptors.page.listParameters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

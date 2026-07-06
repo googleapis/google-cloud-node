@@ -736,8 +736,7 @@ describe('v3.TagBindingsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.resourcemanager.v3.ITagBinding[]
-              | null,
+              protos.google.cloud.resourcemanager.v3.ITagBinding[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -973,8 +972,7 @@ describe('v3.TagBindingsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.resourcemanager.v3.IEffectiveTag[]
-              | null,
+              protos.google.cloud.resourcemanager.v3.IEffectiveTag[] | null,
           ) => {
             if (err) {
               reject(err);

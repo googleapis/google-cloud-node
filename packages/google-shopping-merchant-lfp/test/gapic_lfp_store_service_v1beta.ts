@@ -788,8 +788,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.shopping.merchant.lfp.v1beta.ILfpStore[]
-              | null,
+              protos.google.shopping.merchant.lfp.v1beta.ILfpStore[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -897,9 +896,9 @@ describe('v1beta.LfpStoreServiceClient', () => {
       assert(
         (client.descriptors.page.listLfpStores.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -947,9 +946,9 @@ describe('v1beta.LfpStoreServiceClient', () => {
       assert(
         (client.descriptors.page.listLfpStores.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -997,9 +996,9 @@ describe('v1beta.LfpStoreServiceClient', () => {
       assert(
         (client.descriptors.page.listLfpStores.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1038,9 +1037,9 @@ describe('v1beta.LfpStoreServiceClient', () => {
       assert(
         (client.descriptors.page.listLfpStores.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

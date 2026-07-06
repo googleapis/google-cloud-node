@@ -590,8 +590,7 @@ describe('v1.RichMediaAdsCompanyServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.ads.admanager.v1.IRichMediaAdsCompany[]
-              | null,
+              protos.google.ads.admanager.v1.IRichMediaAdsCompany[] | null,
           ) => {
             if (err) {
               reject(err);

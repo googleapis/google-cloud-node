@@ -634,9 +634,9 @@ describe('v2.AnswerRecordsClient', () => {
       assert(
         (client.descriptors.page.listAnswerRecords.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -683,9 +683,9 @@ describe('v2.AnswerRecordsClient', () => {
       assert(
         (client.descriptors.page.listAnswerRecords.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -732,9 +732,9 @@ describe('v2.AnswerRecordsClient', () => {
       assert(
         (client.descriptors.page.listAnswerRecords.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -772,9 +772,9 @@ describe('v2.AnswerRecordsClient', () => {
       assert(
         (client.descriptors.page.listAnswerRecords.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

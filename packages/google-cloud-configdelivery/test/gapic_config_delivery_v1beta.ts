@@ -4125,9 +4125,9 @@ describe('v1beta.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listResourceBundles.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4177,9 +4177,9 @@ describe('v1beta.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listResourceBundles.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4227,9 +4227,9 @@ describe('v1beta.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listResourceBundles.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4268,9 +4268,9 @@ describe('v1beta.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listResourceBundles.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4349,8 +4349,7 @@ describe('v1beta.ConfigDeliveryClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.configdelivery.v1beta.IFleetPackage[]
-              | null,
+              protos.google.cloud.configdelivery.v1beta.IFleetPackage[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4460,9 +4459,9 @@ describe('v1beta.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listFleetPackages.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4512,9 +4511,9 @@ describe('v1beta.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listFleetPackages.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4562,9 +4561,9 @@ describe('v1beta.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listFleetPackages.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4603,9 +4602,9 @@ describe('v1beta.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listFleetPackages.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4684,8 +4683,7 @@ describe('v1beta.ConfigDeliveryClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.configdelivery.v1beta.IRelease[]
-              | null,
+              protos.google.cloud.configdelivery.v1beta.IRelease[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4793,9 +4791,9 @@ describe('v1beta.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listReleases.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4845,9 +4843,9 @@ describe('v1beta.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listReleases.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4895,9 +4893,9 @@ describe('v1beta.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listReleases.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4936,9 +4934,9 @@ describe('v1beta.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listReleases.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5017,8 +5015,7 @@ describe('v1beta.ConfigDeliveryClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.configdelivery.v1beta.IVariant[]
-              | null,
+              protos.google.cloud.configdelivery.v1beta.IVariant[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -5126,9 +5123,9 @@ describe('v1beta.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listVariants.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5178,9 +5175,9 @@ describe('v1beta.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listVariants.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5228,9 +5225,9 @@ describe('v1beta.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listVariants.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5269,9 +5266,9 @@ describe('v1beta.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listVariants.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5350,8 +5347,7 @@ describe('v1beta.ConfigDeliveryClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.configdelivery.v1beta.IRollout[]
-              | null,
+              protos.google.cloud.configdelivery.v1beta.IRollout[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -5459,9 +5455,9 @@ describe('v1beta.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listRollouts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5511,9 +5507,9 @@ describe('v1beta.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listRollouts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5561,9 +5557,9 @@ describe('v1beta.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listRollouts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5602,9 +5598,9 @@ describe('v1beta.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listRollouts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

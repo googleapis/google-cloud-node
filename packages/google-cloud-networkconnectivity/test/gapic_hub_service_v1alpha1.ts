@@ -1832,8 +1832,7 @@ describe('v1alpha1.HubServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.networkconnectivity.v1alpha1.IHub[]
-              | null,
+              protos.google.cloud.networkconnectivity.v1alpha1.IHub[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1938,9 +1937,9 @@ describe('v1alpha1.HubServiceClient', () => {
       assert(
         (client.descriptors.page.listHubs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1990,9 +1989,9 @@ describe('v1alpha1.HubServiceClient', () => {
       assert(
         (client.descriptors.page.listHubs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2039,9 +2038,9 @@ describe('v1alpha1.HubServiceClient', () => {
       assert(
         (client.descriptors.page.listHubs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2081,9 +2080,9 @@ describe('v1alpha1.HubServiceClient', () => {
       assert(
         (client.descriptors.page.listHubs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2162,8 +2161,7 @@ describe('v1alpha1.HubServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.networkconnectivity.v1alpha1.ISpoke[]
-              | null,
+              protos.google.cloud.networkconnectivity.v1alpha1.ISpoke[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2273,9 +2271,9 @@ describe('v1alpha1.HubServiceClient', () => {
       assert(
         (client.descriptors.page.listSpokes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2327,9 +2325,9 @@ describe('v1alpha1.HubServiceClient', () => {
       assert(
         (client.descriptors.page.listSpokes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2377,9 +2375,9 @@ describe('v1alpha1.HubServiceClient', () => {
       assert(
         (client.descriptors.page.listSpokes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2420,9 +2418,9 @@ describe('v1alpha1.HubServiceClient', () => {
       assert(
         (client.descriptors.page.listSpokes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

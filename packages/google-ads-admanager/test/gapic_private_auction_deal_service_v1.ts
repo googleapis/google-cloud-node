@@ -856,8 +856,7 @@ describe('v1.PrivateAuctionDealServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.ads.admanager.v1.IPrivateAuctionDeal[]
-              | null,
+              protos.google.ads.admanager.v1.IPrivateAuctionDeal[] | null,
           ) => {
             if (err) {
               reject(err);

@@ -1659,9 +1659,9 @@ describe('v1.DataAccessControlServiceClient', () => {
       assert(
         (client.descriptors.page.listDataAccessLabels.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1710,9 +1710,9 @@ describe('v1.DataAccessControlServiceClient', () => {
       assert(
         (client.descriptors.page.listDataAccessLabels.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1760,9 +1760,9 @@ describe('v1.DataAccessControlServiceClient', () => {
       assert(
         (client.descriptors.page.listDataAccessLabels.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1802,9 +1802,9 @@ describe('v1.DataAccessControlServiceClient', () => {
       assert(
         (client.descriptors.page.listDataAccessLabels.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1995,9 +1995,9 @@ describe('v1.DataAccessControlServiceClient', () => {
       assert(
         (client.descriptors.page.listDataAccessScopes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2046,9 +2046,9 @@ describe('v1.DataAccessControlServiceClient', () => {
       assert(
         (client.descriptors.page.listDataAccessScopes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2096,9 +2096,9 @@ describe('v1.DataAccessControlServiceClient', () => {
       assert(
         (client.descriptors.page.listDataAccessScopes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2138,9 +2138,9 @@ describe('v1.DataAccessControlServiceClient', () => {
       assert(
         (client.descriptors.page.listDataAccessScopes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

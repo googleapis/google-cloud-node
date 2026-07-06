@@ -1137,9 +1137,9 @@ describe('v2beta.CaseServiceClient', () => {
       assert(
         (client.descriptors.page.listCases.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1188,9 +1188,9 @@ describe('v2beta.CaseServiceClient', () => {
       assert(
         (client.descriptors.page.listCases.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1230,9 +1230,9 @@ describe('v2beta.CaseServiceClient', () => {
       assert(
         (client.descriptors.page.listCases.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1271,9 +1271,9 @@ describe('v2beta.CaseServiceClient', () => {
       assert(
         (client.descriptors.page.listCases.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1440,9 +1440,9 @@ describe('v2beta.CaseServiceClient', () => {
       assert(
         (client.descriptors.page.searchCases.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1491,9 +1491,9 @@ describe('v2beta.CaseServiceClient', () => {
       assert(
         (client.descriptors.page.searchCases.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1534,9 +1534,9 @@ describe('v2beta.CaseServiceClient', () => {
       assert(
         (client.descriptors.page.searchCases.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1576,9 +1576,9 @@ describe('v2beta.CaseServiceClient', () => {
       assert(
         (client.descriptors.page.searchCases.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1638,8 +1638,7 @@ describe('v2beta.CaseServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.support.v2beta.ICaseClassification[]
-              | null,
+              protos.google.cloud.support.v2beta.ICaseClassification[] | null,
           ) => {
             if (err) {
               reject(err);

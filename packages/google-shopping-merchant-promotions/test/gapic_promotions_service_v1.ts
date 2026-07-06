@@ -656,8 +656,7 @@ describe('v1.PromotionsServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.shopping.merchant.promotions.v1.IPromotion[]
-              | null,
+              protos.google.shopping.merchant.promotions.v1.IPromotion[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -767,9 +766,9 @@ describe('v1.PromotionsServiceClient', () => {
       assert(
         (client.descriptors.page.listPromotions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -819,9 +818,9 @@ describe('v1.PromotionsServiceClient', () => {
       assert(
         (client.descriptors.page.listPromotions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -869,9 +868,9 @@ describe('v1.PromotionsServiceClient', () => {
       assert(
         (client.descriptors.page.listPromotions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -910,9 +909,9 @@ describe('v1.PromotionsServiceClient', () => {
       assert(
         (client.descriptors.page.listPromotions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

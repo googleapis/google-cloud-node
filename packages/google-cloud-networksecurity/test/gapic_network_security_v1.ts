@@ -7710,8 +7710,7 @@ describe('v1.NetworkSecurityClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.networksecurity.v1.IServerTlsPolicy[]
-              | null,
+              protos.google.cloud.networksecurity.v1.IServerTlsPolicy[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -8069,8 +8068,7 @@ describe('v1.NetworkSecurityClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.networksecurity.v1.IClientTlsPolicy[]
-              | null,
+              protos.google.cloud.networksecurity.v1.IClientTlsPolicy[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -9263,9 +9261,9 @@ describe('v1.NetworkSecurityClient', () => {
       assert(
         (client.descriptors.page.listUrlLists.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -9314,9 +9312,9 @@ describe('v1.NetworkSecurityClient', () => {
       assert(
         (client.descriptors.page.listUrlLists.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -9363,9 +9361,9 @@ describe('v1.NetworkSecurityClient', () => {
       assert(
         (client.descriptors.page.listUrlLists.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -9403,9 +9401,9 @@ describe('v1.NetworkSecurityClient', () => {
       assert(
         (client.descriptors.page.listUrlLists.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -9843,8 +9841,7 @@ describe('v1.NetworkSecurityClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.networksecurity.v1.IAuthzPolicy[]
-              | null,
+              protos.google.cloud.networksecurity.v1.IAuthzPolicy[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -9952,9 +9949,9 @@ describe('v1.NetworkSecurityClient', () => {
       assert(
         (client.descriptors.page.listAuthzPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10002,9 +9999,9 @@ describe('v1.NetworkSecurityClient', () => {
       assert(
         (client.descriptors.page.listAuthzPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10052,9 +10049,9 @@ describe('v1.NetworkSecurityClient', () => {
       assert(
         (client.descriptors.page.listAuthzPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10093,9 +10090,9 @@ describe('v1.NetworkSecurityClient', () => {
       assert(
         (client.descriptors.page.listAuthzPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

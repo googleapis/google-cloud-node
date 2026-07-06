@@ -18404,8 +18404,7 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.analytics.admin.v1alpha.IAccountSummary[]
-              | null,
+              protos.google.analytics.admin.v1alpha.IAccountSummary[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -18906,8 +18905,7 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.analytics.admin.v1alpha.IFirebaseLink[]
-              | null,
+              protos.google.analytics.admin.v1alpha.IFirebaseLink[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -19017,9 +19015,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listFirebaseLinks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -19068,9 +19066,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listFirebaseLinks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -19119,9 +19117,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listFirebaseLinks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -19161,9 +19159,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listFirebaseLinks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -19245,8 +19243,7 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.analytics.admin.v1alpha.IGoogleAdsLink[]
-              | null,
+              protos.google.analytics.admin.v1alpha.IGoogleAdsLink[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -19356,9 +19353,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listGoogleAdsLinks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -19407,9 +19404,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listGoogleAdsLinks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -19458,9 +19455,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listGoogleAdsLinks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -19500,9 +19497,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listGoogleAdsLinks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -20700,8 +20697,7 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.analytics.admin.v1alpha.IConversionEvent[]
-              | null,
+              protos.google.analytics.admin.v1alpha.IConversionEvent[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -20816,9 +20812,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listConversionEvents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -20869,9 +20865,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listConversionEvents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -20922,9 +20918,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listConversionEvents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -20966,9 +20962,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listConversionEvents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -21157,9 +21153,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listKeyEvents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -21207,9 +21203,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listKeyEvents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -21257,9 +21253,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listKeyEvents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -21298,9 +21294,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listKeyEvents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -22136,8 +22132,7 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.analytics.admin.v1alpha.ICustomDimension[]
-              | null,
+              protos.google.analytics.admin.v1alpha.ICustomDimension[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -22247,9 +22242,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listCustomDimensions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -22298,9 +22293,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listCustomDimensions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -22349,9 +22344,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listCustomDimensions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -22391,9 +22386,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listCustomDimensions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -22474,8 +22469,7 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.analytics.admin.v1alpha.ICustomMetric[]
-              | null,
+              protos.google.analytics.admin.v1alpha.ICustomMetric[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -22585,9 +22579,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listCustomMetrics.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -22636,9 +22630,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listCustomMetrics.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -22687,9 +22681,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listCustomMetrics.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -22729,9 +22723,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listCustomMetrics.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -22921,9 +22915,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listDataStreams.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -22972,9 +22966,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listDataStreams.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -23022,9 +23016,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listDataStreams.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -23064,9 +23058,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listDataStreams.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -23255,9 +23249,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listAudiences.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -23305,9 +23299,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listAudiences.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -23355,9 +23349,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listAudiences.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -23396,9 +23390,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listAudiences.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -23480,8 +23474,7 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.analytics.admin.v1alpha.ISearchAds360Link[]
-              | null,
+              protos.google.analytics.admin.v1alpha.ISearchAds360Link[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -23846,8 +23839,7 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.analytics.admin.v1alpha.IAccessBinding[]
-              | null,
+              protos.google.analytics.admin.v1alpha.IAccessBinding[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -23957,9 +23949,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listAccessBindings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -24008,9 +24000,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listAccessBindings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -24059,9 +24051,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listAccessBindings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -24101,9 +24093,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listAccessBindings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -24185,8 +24177,7 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.analytics.admin.v1alpha.IExpandedDataSet[]
-              | null,
+              protos.google.analytics.admin.v1alpha.IExpandedDataSet[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -24296,9 +24287,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listExpandedDataSets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -24347,9 +24338,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listExpandedDataSets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -24398,9 +24389,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listExpandedDataSets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -24440,9 +24431,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listExpandedDataSets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -24523,8 +24514,7 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.analytics.admin.v1alpha.IChannelGroup[]
-              | null,
+              protos.google.analytics.admin.v1alpha.IChannelGroup[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -24634,9 +24624,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listChannelGroups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -24685,9 +24675,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listChannelGroups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -24736,9 +24726,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listChannelGroups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -24778,9 +24768,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listChannelGroups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -24861,8 +24851,7 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.analytics.admin.v1alpha.IBigQueryLink[]
-              | null,
+              protos.google.analytics.admin.v1alpha.IBigQueryLink[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -24972,9 +24961,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listBigQueryLinks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -25023,9 +25012,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listBigQueryLinks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -25074,9 +25063,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listBigQueryLinks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -25116,9 +25105,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listBigQueryLinks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -25199,8 +25188,7 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.analytics.admin.v1alpha.IAdSenseLink[]
-              | null,
+              protos.google.analytics.admin.v1alpha.IAdSenseLink[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -25310,9 +25298,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listAdSenseLinks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -25361,9 +25349,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listAdSenseLinks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -25412,9 +25400,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listAdSenseLinks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -25454,9 +25442,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listAdSenseLinks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -25538,8 +25526,7 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.analytics.admin.v1alpha.IEventCreateRule[]
-              | null,
+              protos.google.analytics.admin.v1alpha.IEventCreateRule[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -25649,9 +25636,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listEventCreateRules.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -25700,9 +25687,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listEventCreateRules.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -25751,9 +25738,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listEventCreateRules.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -25793,9 +25780,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listEventCreateRules.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -25877,8 +25864,7 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.analytics.admin.v1alpha.IEventEditRule[]
-              | null,
+              protos.google.analytics.admin.v1alpha.IEventEditRule[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -25988,9 +25974,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listEventEditRules.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -26039,9 +26025,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listEventEditRules.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -26090,9 +26076,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listEventEditRules.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -26132,9 +26118,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listEventEditRules.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -26216,8 +26202,7 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.analytics.admin.v1alpha.ICalculatedMetric[]
-              | null,
+              protos.google.analytics.admin.v1alpha.ICalculatedMetric[] | null,
           ) => {
             if (err) {
               reject(err);

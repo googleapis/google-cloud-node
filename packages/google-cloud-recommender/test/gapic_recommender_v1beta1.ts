@@ -1863,9 +1863,9 @@ describe('v1beta1.RecommenderClient', () => {
       assert(
         (client.descriptors.page.listInsights.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1914,9 +1914,9 @@ describe('v1beta1.RecommenderClient', () => {
       assert(
         (client.descriptors.page.listInsights.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1963,9 +1963,9 @@ describe('v1beta1.RecommenderClient', () => {
       assert(
         (client.descriptors.page.listInsights.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2004,9 +2004,9 @@ describe('v1beta1.RecommenderClient', () => {
       assert(
         (client.descriptors.page.listInsights.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2086,8 +2086,7 @@ describe('v1beta1.RecommenderClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.recommender.v1beta1.IRecommendation[]
-              | null,
+              protos.google.cloud.recommender.v1beta1.IRecommendation[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2197,9 +2196,9 @@ describe('v1beta1.RecommenderClient', () => {
       assert(
         (client.descriptors.page.listRecommendations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2249,9 +2248,9 @@ describe('v1beta1.RecommenderClient', () => {
       assert(
         (client.descriptors.page.listRecommendations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2299,9 +2298,9 @@ describe('v1beta1.RecommenderClient', () => {
       assert(
         (client.descriptors.page.listRecommendations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2340,9 +2339,9 @@ describe('v1beta1.RecommenderClient', () => {
       assert(
         (client.descriptors.page.listRecommendations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2401,8 +2400,7 @@ describe('v1beta1.RecommenderClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.recommender.v1beta1.IRecommenderType[]
-              | null,
+              protos.google.cloud.recommender.v1beta1.IRecommenderType[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2642,8 +2640,7 @@ describe('v1beta1.RecommenderClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.recommender.v1beta1.IInsightType[]
-              | null,
+              protos.google.cloud.recommender.v1beta1.IInsightType[] | null,
           ) => {
             if (err) {
               reject(err);

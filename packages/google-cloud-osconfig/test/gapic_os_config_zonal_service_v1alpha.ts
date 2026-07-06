@@ -1774,8 +1774,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignment[]
-              | null,
+              protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignment[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2140,8 +2139,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignment[]
-              | null,
+              protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignment[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -3378,9 +3376,9 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       assert(
         (client.descriptors.page.listInventories.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3428,9 +3426,9 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       assert(
         (client.descriptors.page.listInventories.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3478,9 +3476,9 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       assert(
         (client.descriptors.page.listInventories.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3519,9 +3517,9 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       assert(
         (client.descriptors.page.listInventories.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

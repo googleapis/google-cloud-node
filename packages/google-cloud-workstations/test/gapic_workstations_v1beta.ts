@@ -4416,8 +4416,7 @@ describe('v1beta.WorkstationsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.workstations.v1beta.IWorkstation[]
-              | null,
+              protos.google.cloud.workstations.v1beta.IWorkstation[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4525,9 +4524,9 @@ describe('v1beta.WorkstationsClient', () => {
       assert(
         (client.descriptors.page.listWorkstations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4575,9 +4574,9 @@ describe('v1beta.WorkstationsClient', () => {
       assert(
         (client.descriptors.page.listWorkstations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4625,9 +4624,9 @@ describe('v1beta.WorkstationsClient', () => {
       assert(
         (client.descriptors.page.listWorkstations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4666,9 +4665,9 @@ describe('v1beta.WorkstationsClient', () => {
       assert(
         (client.descriptors.page.listWorkstations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4748,8 +4747,7 @@ describe('v1beta.WorkstationsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.workstations.v1beta.IWorkstation[]
-              | null,
+              protos.google.cloud.workstations.v1beta.IWorkstation[] | null,
           ) => {
             if (err) {
               reject(err);

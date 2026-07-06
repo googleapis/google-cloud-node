@@ -1573,8 +1573,7 @@ describe('v1.HsmManagementClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.kms.v1.ISingleTenantHsmInstance[]
-              | null,
+              protos.google.cloud.kms.v1.ISingleTenantHsmInstance[] | null,
           ) => {
             if (err) {
               reject(err);

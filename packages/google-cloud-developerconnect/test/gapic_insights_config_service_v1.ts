@@ -1327,8 +1327,7 @@ describe('v1.InsightsConfigServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.developerconnect.v1.IInsightsConfig[]
-              | null,
+              protos.google.cloud.developerconnect.v1.IInsightsConfig[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1440,9 +1439,9 @@ describe('v1.InsightsConfigServiceClient', () => {
       assert(
         (client.descriptors.page.listInsightsConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1493,9 +1492,9 @@ describe('v1.InsightsConfigServiceClient', () => {
       assert(
         (client.descriptors.page.listInsightsConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1544,9 +1543,9 @@ describe('v1.InsightsConfigServiceClient', () => {
       assert(
         (client.descriptors.page.listInsightsConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1586,9 +1585,9 @@ describe('v1.InsightsConfigServiceClient', () => {
       assert(
         (client.descriptors.page.listInsightsConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1670,8 +1669,7 @@ describe('v1.InsightsConfigServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.developerconnect.v1.IDeploymentEvent[]
-              | null,
+              protos.google.cloud.developerconnect.v1.IDeploymentEvent[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1783,9 +1781,9 @@ describe('v1.InsightsConfigServiceClient', () => {
       assert(
         (client.descriptors.page.listDeploymentEvents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1836,9 +1834,9 @@ describe('v1.InsightsConfigServiceClient', () => {
       assert(
         (client.descriptors.page.listDeploymentEvents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1887,9 +1885,9 @@ describe('v1.InsightsConfigServiceClient', () => {
       assert(
         (client.descriptors.page.listDeploymentEvents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1929,9 +1927,9 @@ describe('v1.InsightsConfigServiceClient', () => {
       assert(
         (client.descriptors.page.listDeploymentEvents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

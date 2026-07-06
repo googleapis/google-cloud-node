@@ -410,8 +410,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.backupdr.v1.IResourceBackupConfig[]
-              | null,
+              protos.google.cloud.backupdr.v1.IResourceBackupConfig[] | null,
           ) => {
             if (err) {
               reject(err);

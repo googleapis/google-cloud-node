@@ -2713,8 +2713,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.iam.v1beta.IWorkloadIdentityPoolProvider[]
-              | null,
+              protos.google.iam.v1beta.IWorkloadIdentityPoolProvider[] | null,
           ) => {
             if (err) {
               reject(err);

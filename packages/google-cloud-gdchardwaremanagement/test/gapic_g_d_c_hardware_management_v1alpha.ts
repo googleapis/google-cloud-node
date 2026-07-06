@@ -5647,8 +5647,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder[]
-              | null,
+              protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -5760,9 +5759,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listOrders.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5815,9 +5814,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listOrders.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5866,9 +5865,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listOrders.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5910,9 +5909,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listOrders.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5993,8 +5992,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.gdchardwaremanagement.v1alpha.ISite[]
-              | null,
+              protos.google.cloud.gdchardwaremanagement.v1alpha.ISite[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -6103,9 +6101,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listSites.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6158,9 +6156,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listSites.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6208,9 +6206,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listSites.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6251,9 +6249,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listSites.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6448,9 +6446,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listHardwareGroups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6501,9 +6499,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listHardwareGroups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6552,9 +6550,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listHardwareGroups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6594,9 +6592,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listHardwareGroups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6790,9 +6788,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listHardware.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6845,9 +6843,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listHardware.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6896,9 +6894,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listHardware.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6938,9 +6936,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listHardware.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7134,9 +7132,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listComments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -7189,9 +7187,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listComments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -7240,9 +7238,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listComments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -7282,9 +7280,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listComments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7479,9 +7477,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listChangeLogEntries.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -7532,9 +7530,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listChangeLogEntries.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -7583,9 +7581,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listChangeLogEntries.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -7625,9 +7623,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listChangeLogEntries.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7708,8 +7706,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.gdchardwaremanagement.v1alpha.ISku[]
-              | null,
+              protos.google.cloud.gdchardwaremanagement.v1alpha.ISku[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -7816,9 +7813,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listSkus.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -7869,9 +7866,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listSkus.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -7919,9 +7916,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listSkus.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -7962,9 +7959,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listSkus.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -8045,8 +8042,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.gdchardwaremanagement.v1alpha.IZone[]
-              | null,
+              protos.google.cloud.gdchardwaremanagement.v1alpha.IZone[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -8155,9 +8151,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listZones.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -8210,9 +8206,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listZones.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -8260,9 +8256,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listZones.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -8303,9 +8299,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listZones.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

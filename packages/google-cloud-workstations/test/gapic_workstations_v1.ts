@@ -3140,8 +3140,7 @@ describe('v1.WorkstationsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.workstations.v1.IWorkstationCluster[]
-              | null,
+              protos.google.cloud.workstations.v1.IWorkstationCluster[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -3499,8 +3498,7 @@ describe('v1.WorkstationsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.workstations.v1.IWorkstationConfig[]
-              | null,
+              protos.google.cloud.workstations.v1.IWorkstationConfig[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -3854,8 +3852,7 @@ describe('v1.WorkstationsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.workstations.v1.IWorkstationConfig[]
-              | null,
+              protos.google.cloud.workstations.v1.IWorkstationConfig[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4320,9 +4317,9 @@ describe('v1.WorkstationsClient', () => {
       assert(
         (client.descriptors.page.listWorkstations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4369,9 +4366,9 @@ describe('v1.WorkstationsClient', () => {
       assert(
         (client.descriptors.page.listWorkstations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4418,9 +4415,9 @@ describe('v1.WorkstationsClient', () => {
       assert(
         (client.descriptors.page.listWorkstations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4459,9 +4456,9 @@ describe('v1.WorkstationsClient', () => {
       assert(
         (client.descriptors.page.listWorkstations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

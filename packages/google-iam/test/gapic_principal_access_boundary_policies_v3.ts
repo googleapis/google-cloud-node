@@ -1258,8 +1258,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.iam.v3.IPrincipalAccessBoundaryPolicy[]
-              | null,
+              protos.google.iam.v3.IPrincipalAccessBoundaryPolicy[] | null,
           ) => {
             if (err) {
               reject(err);

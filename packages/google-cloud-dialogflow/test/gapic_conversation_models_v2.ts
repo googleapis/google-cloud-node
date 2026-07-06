@@ -1690,8 +1690,7 @@ describe('v2.ConversationModelsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.dialogflow.v2.IConversationModel[]
-              | null,
+              protos.google.cloud.dialogflow.v2.IConversationModel[] | null,
           ) => {
             if (err) {
               reject(err);

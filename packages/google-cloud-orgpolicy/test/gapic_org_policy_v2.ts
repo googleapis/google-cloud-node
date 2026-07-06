@@ -1711,9 +1711,9 @@ describe('v2.OrgPolicyClient', () => {
       assert(
         (client.descriptors.page.listConstraints.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1760,9 +1760,9 @@ describe('v2.OrgPolicyClient', () => {
       assert(
         (client.descriptors.page.listConstraints.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1809,9 +1809,9 @@ describe('v2.OrgPolicyClient', () => {
       assert(
         (client.descriptors.page.listConstraints.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1849,9 +1849,9 @@ describe('v2.OrgPolicyClient', () => {
       assert(
         (client.descriptors.page.listConstraints.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2018,9 +2018,9 @@ describe('v2.OrgPolicyClient', () => {
       assert(
         (client.descriptors.page.listPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2069,9 +2069,9 @@ describe('v2.OrgPolicyClient', () => {
       assert(
         (client.descriptors.page.listPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2112,9 +2112,9 @@ describe('v2.OrgPolicyClient', () => {
       assert(
         (client.descriptors.page.listPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2152,9 +2152,9 @@ describe('v2.OrgPolicyClient', () => {
       assert(
         (client.descriptors.page.listPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2234,8 +2234,7 @@ describe('v2.OrgPolicyClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.orgpolicy.v2.ICustomConstraint[]
-              | null,
+              protos.google.cloud.orgpolicy.v2.ICustomConstraint[] | null,
           ) => {
             if (err) {
               reject(err);

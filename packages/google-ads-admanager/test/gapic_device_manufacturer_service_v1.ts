@@ -566,8 +566,7 @@ describe('v1.DeviceManufacturerServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.ads.admanager.v1.IDeviceManufacturer[]
-              | null,
+              protos.google.ads.admanager.v1.IDeviceManufacturer[] | null,
           ) => {
             if (err) {
               reject(err);

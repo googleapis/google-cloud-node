@@ -4434,9 +4434,9 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listCdnKeys.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4486,9 +4486,9 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listCdnKeys.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4536,9 +4536,9 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listCdnKeys.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4579,9 +4579,9 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listCdnKeys.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4663,8 +4663,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.video.stitcher.v1.IVodStitchDetail[]
-              | null,
+              protos.google.cloud.video.stitcher.v1.IVodStitchDetail[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4774,9 +4773,9 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listVodStitchDetails.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4825,9 +4824,9 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listVodStitchDetails.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4876,9 +4875,9 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listVodStitchDetails.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4918,9 +4917,9 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listVodStitchDetails.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5002,8 +5001,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.video.stitcher.v1.IVodAdTagDetail[]
-              | null,
+              protos.google.cloud.video.stitcher.v1.IVodAdTagDetail[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -5113,9 +5111,9 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listVodAdTagDetails.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5164,9 +5162,9 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listVodAdTagDetails.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5215,9 +5213,9 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listVodAdTagDetails.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5257,9 +5255,9 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listVodAdTagDetails.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5341,8 +5339,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.video.stitcher.v1.ILiveAdTagDetail[]
-              | null,
+              protos.google.cloud.video.stitcher.v1.ILiveAdTagDetail[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -5452,9 +5449,9 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listLiveAdTagDetails.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5503,9 +5500,9 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listLiveAdTagDetails.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5554,9 +5551,9 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listLiveAdTagDetails.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5596,9 +5593,9 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listLiveAdTagDetails.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5787,9 +5784,9 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listSlates.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5839,9 +5836,9 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listSlates.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5889,9 +5886,9 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listSlates.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5932,9 +5929,9 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listSlates.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6124,9 +6121,9 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listLiveConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6175,9 +6172,9 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listLiveConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6225,9 +6222,9 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listLiveConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6267,9 +6264,9 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listLiveConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6458,9 +6455,9 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listVodConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6508,9 +6505,9 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listVodConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6558,9 +6555,9 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listVodConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6600,9 +6597,9 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listVodConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

@@ -995,8 +995,7 @@ describe('v1.AccountsServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.shopping.merchant.accounts.v1.IAccount[]
-              | null,
+              protos.google.shopping.merchant.accounts.v1.IAccount[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1254,8 +1253,7 @@ describe('v1.AccountsServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.shopping.merchant.accounts.v1.IAccount[]
-              | null,
+              protos.google.shopping.merchant.accounts.v1.IAccount[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1363,9 +1361,9 @@ describe('v1.AccountsServiceClient', () => {
       assert(
         (client.descriptors.page.listSubAccounts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1413,9 +1411,9 @@ describe('v1.AccountsServiceClient', () => {
       assert(
         (client.descriptors.page.listSubAccounts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1463,9 +1461,9 @@ describe('v1.AccountsServiceClient', () => {
       assert(
         (client.descriptors.page.listSubAccounts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1504,9 +1502,9 @@ describe('v1.AccountsServiceClient', () => {
       assert(
         (client.descriptors.page.listSubAccounts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

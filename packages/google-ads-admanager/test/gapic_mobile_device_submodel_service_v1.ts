@@ -590,8 +590,7 @@ describe('v1.MobileDeviceSubmodelServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.ads.admanager.v1.IMobileDeviceSubmodel[]
-              | null,
+              protos.google.ads.admanager.v1.IMobileDeviceSubmodel[] | null,
           ) => {
             if (err) {
               reject(err);

@@ -8949,9 +8949,9 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.searchTeamFolders.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -9001,9 +9001,9 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.searchTeamFolders.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -9051,9 +9051,9 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.searchTeamFolders.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -9092,9 +9092,9 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.searchTeamFolders.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -9285,9 +9285,9 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.queryFolderContents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -9337,9 +9337,9 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.queryFolderContents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -9387,9 +9387,9 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.queryFolderContents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -9428,9 +9428,9 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.queryFolderContents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -9974,9 +9974,9 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.listRepositories.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10023,9 +10023,9 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.listRepositories.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10072,9 +10072,9 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.listRepositories.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10113,9 +10113,9 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.listRepositories.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -10195,8 +10195,7 @@ describe('v1beta1.DataformClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.dataform.v1beta1.IDirectoryEntry[]
-              | null,
+              protos.google.cloud.dataform.v1beta1.IDirectoryEntry[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -10556,8 +10555,7 @@ describe('v1beta1.DataformClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.dataform.v1beta1.ICommitLogEntry[]
-              | null,
+              protos.google.cloud.dataform.v1beta1.ICommitLogEntry[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -11016,9 +11014,9 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.listWorkspaces.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11065,9 +11063,9 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.listWorkspaces.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11114,9 +11112,9 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.listWorkspaces.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11154,9 +11152,9 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.listWorkspaces.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -11236,8 +11234,7 @@ describe('v1beta1.DataformClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.dataform.v1beta1.IDirectoryEntry[]
-              | null,
+              protos.google.cloud.dataform.v1beta1.IDirectoryEntry[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -11590,8 +11587,7 @@ describe('v1beta1.DataformClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.dataform.v1beta1.ISearchResult[]
-              | null,
+              protos.google.cloud.dataform.v1beta1.ISearchResult[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -11699,9 +11695,9 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.searchFiles.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11751,9 +11747,9 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.searchFiles.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11801,9 +11797,9 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.searchFiles.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11844,9 +11840,9 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.searchFiles.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -11926,8 +11922,7 @@ describe('v1beta1.DataformClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.dataform.v1beta1.IReleaseConfig[]
-              | null,
+              protos.google.cloud.dataform.v1beta1.IReleaseConfig[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -12035,9 +12030,9 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.listReleaseConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -12085,9 +12080,9 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.listReleaseConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -12135,9 +12130,9 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.listReleaseConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -12176,9 +12171,9 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.listReleaseConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -12258,8 +12253,7 @@ describe('v1beta1.DataformClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.dataform.v1beta1.ICompilationResult[]
-              | null,
+              protos.google.cloud.dataform.v1beta1.ICompilationResult[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -12982,8 +12976,7 @@ describe('v1beta1.DataformClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.dataform.v1beta1.IWorkflowConfig[]
-              | null,
+              protos.google.cloud.dataform.v1beta1.IWorkflowConfig[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -13091,9 +13084,9 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.listWorkflowConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -13141,9 +13134,9 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.listWorkflowConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -13191,9 +13184,9 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.listWorkflowConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -13232,9 +13225,9 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.listWorkflowConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -13314,8 +13307,7 @@ describe('v1beta1.DataformClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.dataform.v1beta1.IWorkflowInvocation[]
-              | null,
+              protos.google.cloud.dataform.v1beta1.IWorkflowInvocation[] | null,
           ) => {
             if (err) {
               reject(err);

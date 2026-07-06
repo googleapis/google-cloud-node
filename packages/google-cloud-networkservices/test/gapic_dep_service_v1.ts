@@ -3701,8 +3701,7 @@ describe('v1.DepServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.networkservices.v1.ILbRouteExtension[]
-              | null,
+              protos.google.cloud.networkservices.v1.ILbRouteExtension[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4060,8 +4059,7 @@ describe('v1.DepServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.networkservices.v1.ILbEdgeExtension[]
-              | null,
+              protos.google.cloud.networkservices.v1.ILbEdgeExtension[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4171,9 +4169,9 @@ describe('v1.DepServiceClient', () => {
       assert(
         (client.descriptors.page.listLbEdgeExtensions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4223,9 +4221,9 @@ describe('v1.DepServiceClient', () => {
       assert(
         (client.descriptors.page.listLbEdgeExtensions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4273,9 +4271,9 @@ describe('v1.DepServiceClient', () => {
       assert(
         (client.descriptors.page.listLbEdgeExtensions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4314,9 +4312,9 @@ describe('v1.DepServiceClient', () => {
       assert(
         (client.descriptors.page.listLbEdgeExtensions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4396,8 +4394,7 @@ describe('v1.DepServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.networkservices.v1.IAuthzExtension[]
-              | null,
+              protos.google.cloud.networkservices.v1.IAuthzExtension[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4505,9 +4502,9 @@ describe('v1.DepServiceClient', () => {
       assert(
         (client.descriptors.page.listAuthzExtensions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4555,9 +4552,9 @@ describe('v1.DepServiceClient', () => {
       assert(
         (client.descriptors.page.listAuthzExtensions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4605,9 +4602,9 @@ describe('v1.DepServiceClient', () => {
       assert(
         (client.descriptors.page.listAuthzExtensions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4646,9 +4643,9 @@ describe('v1.DepServiceClient', () => {
       assert(
         (client.descriptors.page.listAuthzExtensions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

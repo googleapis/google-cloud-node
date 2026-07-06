@@ -1322,8 +1322,7 @@ describe('v1alpha.HypercomputeClusterClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.hypercomputecluster.v1alpha.ICluster[]
-              | null,
+              protos.google.cloud.hypercomputecluster.v1alpha.ICluster[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1435,9 +1434,9 @@ describe('v1alpha.HypercomputeClusterClient', () => {
       assert(
         (client.descriptors.page.listClusters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1490,9 +1489,9 @@ describe('v1alpha.HypercomputeClusterClient', () => {
       assert(
         (client.descriptors.page.listClusters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1541,9 +1540,9 @@ describe('v1alpha.HypercomputeClusterClient', () => {
       assert(
         (client.descriptors.page.listClusters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1583,9 +1582,9 @@ describe('v1alpha.HypercomputeClusterClient', () => {
       assert(
         (client.descriptors.page.listClusters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1666,8 +1665,7 @@ describe('v1alpha.HypercomputeClusterClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.hypercomputecluster.v1alpha.INode[]
-              | null,
+              protos.google.cloud.hypercomputecluster.v1alpha.INode[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1774,9 +1772,9 @@ describe('v1alpha.HypercomputeClusterClient', () => {
       assert(
         (client.descriptors.page.listNodes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1827,9 +1825,9 @@ describe('v1alpha.HypercomputeClusterClient', () => {
       assert(
         (client.descriptors.page.listNodes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1877,9 +1875,9 @@ describe('v1alpha.HypercomputeClusterClient', () => {
       assert(
         (client.descriptors.page.listNodes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1920,9 +1918,9 @@ describe('v1alpha.HypercomputeClusterClient', () => {
       assert(
         (client.descriptors.page.listNodes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

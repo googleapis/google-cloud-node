@@ -9120,8 +9120,7 @@ describe('v1.NetworkServicesClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.networkservices.v1.IEndpointPolicy[]
-              | null,
+              protos.google.cloud.networkservices.v1.IEndpointPolicy[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -9229,9 +9228,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listEndpointPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -9279,9 +9278,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listEndpointPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -9329,9 +9328,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listEndpointPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -9370,9 +9369,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listEndpointPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -9810,8 +9809,7 @@ describe('v1.NetworkServicesClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.networkservices.v1.IWasmPlugin[]
-              | null,
+              protos.google.cloud.networkservices.v1.IWasmPlugin[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -9919,9 +9917,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listWasmPlugins.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -9969,9 +9967,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listWasmPlugins.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10019,9 +10017,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listWasmPlugins.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10060,9 +10058,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listWasmPlugins.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -10247,9 +10245,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listGateways.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10298,9 +10296,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listGateways.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10347,9 +10345,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listGateways.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10387,9 +10385,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listGateways.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -10575,9 +10573,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listGrpcRoutes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10625,9 +10623,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listGrpcRoutes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10674,9 +10672,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listGrpcRoutes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10715,9 +10713,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listGrpcRoutes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -10903,9 +10901,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listHttpRoutes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10953,9 +10951,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listHttpRoutes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11002,9 +11000,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listHttpRoutes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11043,9 +11041,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listHttpRoutes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -11230,9 +11228,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listTcpRoutes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11279,9 +11277,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listTcpRoutes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11328,9 +11326,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listTcpRoutes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11369,9 +11367,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listTcpRoutes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -11556,9 +11554,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listTlsRoutes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11605,9 +11603,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listTlsRoutes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11654,9 +11652,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listTlsRoutes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11695,9 +11693,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listTlsRoutes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -11777,8 +11775,7 @@ describe('v1.NetworkServicesClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.networkservices.v1.IServiceBinding[]
-              | null,
+              protos.google.cloud.networkservices.v1.IServiceBinding[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -11886,9 +11883,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listServiceBindings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11936,9 +11933,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listServiceBindings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11986,9 +11983,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listServiceBindings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -12027,9 +12024,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listServiceBindings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -12214,9 +12211,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listMeshes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -12265,9 +12262,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listMeshes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -12314,9 +12311,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listMeshes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -12356,9 +12353,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listMeshes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -12438,8 +12435,7 @@ describe('v1.NetworkServicesClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.networkservices.v1.IServiceLbPolicy[]
-              | null,
+              protos.google.cloud.networkservices.v1.IServiceLbPolicy[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -12797,8 +12793,7 @@ describe('v1.NetworkServicesClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.networkservices.v1.IGatewayRouteView[]
-              | null,
+              protos.google.cloud.networkservices.v1.IGatewayRouteView[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -13156,8 +13151,7 @@ describe('v1.NetworkServicesClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.networkservices.v1.IMeshRouteView[]
-              | null,
+              protos.google.cloud.networkservices.v1.IMeshRouteView[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -13265,9 +13259,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listMeshRouteViews.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -13315,9 +13309,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listMeshRouteViews.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -13365,9 +13359,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listMeshRouteViews.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -13406,9 +13400,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listMeshRouteViews.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -13487,8 +13481,7 @@ describe('v1.NetworkServicesClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.networkservices.v1.IAgentGateway[]
-              | null,
+              protos.google.cloud.networkservices.v1.IAgentGateway[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -13596,9 +13589,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listAgentGateways.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -13646,9 +13639,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listAgentGateways.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -13696,9 +13689,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listAgentGateways.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -13737,9 +13730,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listAgentGateways.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

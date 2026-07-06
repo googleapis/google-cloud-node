@@ -1429,8 +1429,7 @@ describe('v2.ConversationProfilesClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.dialogflow.v2.IConversationProfile[]
-              | null,
+              protos.google.cloud.dialogflow.v2.IConversationProfile[] | null,
           ) => {
             if (err) {
               reject(err);

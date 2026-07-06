@@ -1050,9 +1050,9 @@ describe('v1.MapsPlatformDatasetsClient', () => {
       assert(
         (client.descriptors.page.fetchDatasetErrors.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1097,9 +1097,9 @@ describe('v1.MapsPlatformDatasetsClient', () => {
       assert(
         (client.descriptors.page.fetchDatasetErrors.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1141,9 +1141,9 @@ describe('v1.MapsPlatformDatasetsClient', () => {
       assert(
         (client.descriptors.page.fetchDatasetErrors.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1182,9 +1182,9 @@ describe('v1.MapsPlatformDatasetsClient', () => {
       assert(
         (client.descriptors.page.fetchDatasetErrors.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1265,8 +1265,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.maps.mapsplatformdatasets.v1.IDataset[]
-              | null,
+              protos.google.maps.mapsplatformdatasets.v1.IDataset[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1376,9 +1375,9 @@ describe('v1.MapsPlatformDatasetsClient', () => {
       assert(
         (client.descriptors.page.listDatasets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1429,9 +1428,9 @@ describe('v1.MapsPlatformDatasetsClient', () => {
       assert(
         (client.descriptors.page.listDatasets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1480,9 +1479,9 @@ describe('v1.MapsPlatformDatasetsClient', () => {
       assert(
         (client.descriptors.page.listDatasets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1522,9 +1521,9 @@ describe('v1.MapsPlatformDatasetsClient', () => {
       assert(
         (client.descriptors.page.listDatasets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

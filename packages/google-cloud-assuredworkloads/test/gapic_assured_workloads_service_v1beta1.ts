@@ -1239,8 +1239,7 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.assuredworkloads.v1beta1.IWorkload[]
-              | null,
+              protos.google.cloud.assuredworkloads.v1beta1.IWorkload[] | null,
           ) => {
             if (err) {
               reject(err);

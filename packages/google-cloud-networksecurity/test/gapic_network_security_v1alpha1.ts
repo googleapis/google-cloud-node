@@ -9159,8 +9159,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.networksecurity.v1alpha1.IUrlList[]
-              | null,
+              protos.google.cloud.networksecurity.v1alpha1.IUrlList[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -9268,9 +9267,9 @@ describe('v1alpha1.NetworkSecurityClient', () => {
       assert(
         (client.descriptors.page.listUrlLists.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -9320,9 +9319,9 @@ describe('v1alpha1.NetworkSecurityClient', () => {
       assert(
         (client.descriptors.page.listUrlLists.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -9370,9 +9369,9 @@ describe('v1alpha1.NetworkSecurityClient', () => {
       assert(
         (client.descriptors.page.listUrlLists.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -9411,9 +9410,9 @@ describe('v1alpha1.NetworkSecurityClient', () => {
       assert(
         (client.descriptors.page.listUrlLists.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -9962,9 +9961,9 @@ describe('v1alpha1.NetworkSecurityClient', () => {
       assert(
         (client.descriptors.page.listAuthzPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10014,9 +10013,9 @@ describe('v1alpha1.NetworkSecurityClient', () => {
       assert(
         (client.descriptors.page.listAuthzPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10064,9 +10063,9 @@ describe('v1alpha1.NetworkSecurityClient', () => {
       assert(
         (client.descriptors.page.listAuthzPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10105,9 +10104,9 @@ describe('v1alpha1.NetworkSecurityClient', () => {
       assert(
         (client.descriptors.page.listAuthzPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

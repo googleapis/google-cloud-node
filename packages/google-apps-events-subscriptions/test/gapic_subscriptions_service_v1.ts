@@ -1309,8 +1309,7 @@ describe('v1.SubscriptionsServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.apps.events.subscriptions.v1.ISubscription[]
-              | null,
+              protos.google.apps.events.subscriptions.v1.ISubscription[] | null,
           ) => {
             if (err) {
               reject(err);

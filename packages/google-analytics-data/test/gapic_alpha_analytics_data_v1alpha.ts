@@ -2220,8 +2220,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.analytics.data.v1alpha.IAudienceList[]
-              | null,
+              protos.google.analytics.data.v1alpha.IAudienceList[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2331,9 +2330,9 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       assert(
         (client.descriptors.page.listAudienceLists.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2382,9 +2381,9 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       assert(
         (client.descriptors.page.listAudienceLists.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2433,9 +2432,9 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       assert(
         (client.descriptors.page.listAudienceLists.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2475,9 +2474,9 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       assert(
         (client.descriptors.page.listAudienceLists.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3032,9 +3031,9 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       assert(
         (client.descriptors.page.listReportTasks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3082,9 +3081,9 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       assert(
         (client.descriptors.page.listReportTasks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3132,9 +3131,9 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       assert(
         (client.descriptors.page.listReportTasks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3174,9 +3173,9 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       assert(
         (client.descriptors.page.listReportTasks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

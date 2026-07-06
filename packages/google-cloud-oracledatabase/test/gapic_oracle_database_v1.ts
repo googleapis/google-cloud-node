@@ -9521,8 +9521,7 @@ describe('v1.OracleDatabaseClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.oracledatabase.v1.ICloudVmCluster[]
-              | null,
+              protos.google.cloud.oracledatabase.v1.ICloudVmCluster[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -9630,9 +9629,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listCloudVmClusters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -9680,9 +9679,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listCloudVmClusters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -9730,9 +9729,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listCloudVmClusters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -9771,9 +9770,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listCloudVmClusters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -9852,8 +9851,7 @@ describe('v1.OracleDatabaseClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.oracledatabase.v1.IEntitlement[]
-              | null,
+              protos.google.cloud.oracledatabase.v1.IEntitlement[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -9961,9 +9959,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listEntitlements.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10011,9 +10009,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listEntitlements.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10061,9 +10059,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listEntitlements.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10102,9 +10100,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listEntitlements.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -10289,9 +10287,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listDbServers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10338,9 +10336,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listDbServers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10387,9 +10385,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listDbServers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10427,9 +10425,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listDbServers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -10614,9 +10612,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listDbNodes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10665,9 +10663,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listDbNodes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10714,9 +10712,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listDbNodes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10756,9 +10754,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listDbNodes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -10943,9 +10941,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listGiVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10992,9 +10990,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listGiVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11041,9 +11039,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listGiVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11082,9 +11080,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listGiVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -11163,8 +11161,7 @@ describe('v1.OracleDatabaseClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.oracledatabase.v1.IMinorVersion[]
-              | null,
+              protos.google.cloud.oracledatabase.v1.IMinorVersion[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -11272,9 +11269,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listMinorVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11322,9 +11319,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listMinorVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11372,9 +11369,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listMinorVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11413,9 +11410,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listMinorVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -11495,8 +11492,7 @@ describe('v1.OracleDatabaseClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.oracledatabase.v1.IDbSystemShape[]
-              | null,
+              protos.google.cloud.oracledatabase.v1.IDbSystemShape[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -11604,9 +11600,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listDbSystemShapes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11654,9 +11650,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listDbSystemShapes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11704,9 +11700,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listDbSystemShapes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11745,9 +11741,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listDbSystemShapes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -13382,9 +13378,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listOdbNetworks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -13432,9 +13428,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listOdbNetworks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -13481,9 +13477,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listOdbNetworks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -13522,9 +13518,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listOdbNetworks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -13709,9 +13705,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listOdbSubnets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -13758,9 +13754,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listOdbSubnets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -13807,9 +13803,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listOdbSubnets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -13848,9 +13844,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listOdbSubnets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -13930,8 +13926,7 @@ describe('v1.OracleDatabaseClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.oracledatabase.v1.IExadbVmCluster[]
-              | null,
+              protos.google.cloud.oracledatabase.v1.IExadbVmCluster[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -14039,9 +14034,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listExadbVmClusters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -14089,9 +14084,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listExadbVmClusters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -14139,9 +14134,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listExadbVmClusters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -14180,9 +14175,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listExadbVmClusters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -15097,9 +15092,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listDatabases.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -15146,9 +15141,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listDatabases.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -15195,9 +15190,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listDatabases.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -15235,9 +15230,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listDatabases.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -15317,8 +15312,7 @@ describe('v1.OracleDatabaseClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.oracledatabase.v1.IPluggableDatabase[]
-              | null,
+              protos.google.cloud.oracledatabase.v1.IPluggableDatabase[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -15781,9 +15775,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listDbSystems.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -15830,9 +15824,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listDbSystems.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -15879,9 +15873,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listDbSystems.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -15919,9 +15913,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listDbSystems.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -18285,9 +18279,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listDbVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -18334,9 +18328,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listDbVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -18383,9 +18377,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listDbVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -18424,9 +18418,9 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (client.descriptors.page.listDbVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

@@ -2200,8 +2200,7 @@ describe('v1.StorageInsightsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.storageinsights.v1.IReportConfig[]
-              | null,
+              protos.google.cloud.storageinsights.v1.IReportConfig[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2309,9 +2308,9 @@ describe('v1.StorageInsightsClient', () => {
       assert(
         (client.descriptors.page.listReportConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2359,9 +2358,9 @@ describe('v1.StorageInsightsClient', () => {
       assert(
         (client.descriptors.page.listReportConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2409,9 +2408,9 @@ describe('v1.StorageInsightsClient', () => {
       assert(
         (client.descriptors.page.listReportConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2450,9 +2449,9 @@ describe('v1.StorageInsightsClient', () => {
       assert(
         (client.descriptors.page.listReportConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2531,8 +2530,7 @@ describe('v1.StorageInsightsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.storageinsights.v1.IReportDetail[]
-              | null,
+              protos.google.cloud.storageinsights.v1.IReportDetail[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2640,9 +2638,9 @@ describe('v1.StorageInsightsClient', () => {
       assert(
         (client.descriptors.page.listReportDetails.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2690,9 +2688,9 @@ describe('v1.StorageInsightsClient', () => {
       assert(
         (client.descriptors.page.listReportDetails.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2740,9 +2738,9 @@ describe('v1.StorageInsightsClient', () => {
       assert(
         (client.descriptors.page.listReportDetails.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2781,9 +2779,9 @@ describe('v1.StorageInsightsClient', () => {
       assert(
         (client.descriptors.page.listReportDetails.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2863,8 +2861,7 @@ describe('v1.StorageInsightsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.storageinsights.v1.IDatasetConfig[]
-              | null,
+              protos.google.cloud.storageinsights.v1.IDatasetConfig[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2972,9 +2969,9 @@ describe('v1.StorageInsightsClient', () => {
       assert(
         (client.descriptors.page.listDatasetConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3022,9 +3019,9 @@ describe('v1.StorageInsightsClient', () => {
       assert(
         (client.descriptors.page.listDatasetConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3072,9 +3069,9 @@ describe('v1.StorageInsightsClient', () => {
       assert(
         (client.descriptors.page.listDatasetConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3113,9 +3110,9 @@ describe('v1.StorageInsightsClient', () => {
       assert(
         (client.descriptors.page.listDatasetConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

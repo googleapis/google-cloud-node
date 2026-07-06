@@ -28,7 +28,7 @@
     var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
     
     // Exported root namespace
-    var $root = $protobuf.roots._google_shopping_datasources_protos || ($protobuf.roots._google_shopping_datasources_protos = {});
+    var $root = $protobuf.roots["_google_shopping_datasources_protos"] || ($protobuf.roots["_google_shopping_datasources_protos"] = {});
     
     $root.google = (function() {
     
@@ -127,7 +127,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(DataSourcesService.prototype.getDataSource = function getDataSource(request, callback) {
-                                return this.rpcCall(getDataSource, $root.google.shopping.merchant.datasources.v1.GetDataSourceRequest, $root.google.shopping.merchant.datasources.v1.DataSource, request, callback);
+                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, getDataSource, $root.google.shopping.merchant.datasources.v1.GetDataSourceRequest, $root.google.shopping.merchant.datasources.v1.DataSource, request, callback);
                             }, "name", { value: "GetDataSource" });
     
                             /**
@@ -160,7 +160,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(DataSourcesService.prototype.listDataSources = function listDataSources(request, callback) {
-                                return this.rpcCall(listDataSources, $root.google.shopping.merchant.datasources.v1.ListDataSourcesRequest, $root.google.shopping.merchant.datasources.v1.ListDataSourcesResponse, request, callback);
+                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, listDataSources, $root.google.shopping.merchant.datasources.v1.ListDataSourcesRequest, $root.google.shopping.merchant.datasources.v1.ListDataSourcesResponse, request, callback);
                             }, "name", { value: "ListDataSources" });
     
                             /**
@@ -193,7 +193,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(DataSourcesService.prototype.createDataSource = function createDataSource(request, callback) {
-                                return this.rpcCall(createDataSource, $root.google.shopping.merchant.datasources.v1.CreateDataSourceRequest, $root.google.shopping.merchant.datasources.v1.DataSource, request, callback);
+                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, createDataSource, $root.google.shopping.merchant.datasources.v1.CreateDataSourceRequest, $root.google.shopping.merchant.datasources.v1.DataSource, request, callback);
                             }, "name", { value: "CreateDataSource" });
     
                             /**
@@ -226,7 +226,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(DataSourcesService.prototype.updateDataSource = function updateDataSource(request, callback) {
-                                return this.rpcCall(updateDataSource, $root.google.shopping.merchant.datasources.v1.UpdateDataSourceRequest, $root.google.shopping.merchant.datasources.v1.DataSource, request, callback);
+                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, updateDataSource, $root.google.shopping.merchant.datasources.v1.UpdateDataSourceRequest, $root.google.shopping.merchant.datasources.v1.DataSource, request, callback);
                             }, "name", { value: "UpdateDataSource" });
     
                             /**
@@ -259,7 +259,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(DataSourcesService.prototype.deleteDataSource = function deleteDataSource(request, callback) {
-                                return this.rpcCall(deleteDataSource, $root.google.shopping.merchant.datasources.v1.DeleteDataSourceRequest, $root.google.protobuf.Empty, request, callback);
+                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, deleteDataSource, $root.google.shopping.merchant.datasources.v1.DeleteDataSourceRequest, $root.google.protobuf.Empty, request, callback);
                             }, "name", { value: "DeleteDataSource" });
     
                             /**
@@ -292,7 +292,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(DataSourcesService.prototype.fetchDataSource = function fetchDataSource(request, callback) {
-                                return this.rpcCall(fetchDataSource, $root.google.shopping.merchant.datasources.v1.FetchDataSourceRequest, $root.google.protobuf.Empty, request, callback);
+                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, fetchDataSource, $root.google.shopping.merchant.datasources.v1.FetchDataSourceRequest, $root.google.protobuf.Empty, request, callback);
                             }, "name", { value: "FetchDataSource" });
     
                             /**
@@ -474,9 +474,13 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            DataSource.encode = function encode(message, writer) {
+                            DataSource.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                                 if (message.dataSourceId != null && Object.hasOwnProperty.call(message, "dataSourceId"))
@@ -484,23 +488,23 @@
                                 if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
                                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.displayName);
                                 if (message.primaryProductDataSource != null && Object.hasOwnProperty.call(message, "primaryProductDataSource"))
-                                    $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.encode(message.primaryProductDataSource, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                    $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.encode(message.primaryProductDataSource, writer.uint32(/* id 4, wireType 2 =*/34).fork(), q + 1).ldelim();
                                 if (message.supplementalProductDataSource != null && Object.hasOwnProperty.call(message, "supplementalProductDataSource"))
-                                    $root.google.shopping.merchant.datasources.v1.SupplementalProductDataSource.encode(message.supplementalProductDataSource, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                    $root.google.shopping.merchant.datasources.v1.SupplementalProductDataSource.encode(message.supplementalProductDataSource, writer.uint32(/* id 5, wireType 2 =*/42).fork(), q + 1).ldelim();
                                 if (message.localInventoryDataSource != null && Object.hasOwnProperty.call(message, "localInventoryDataSource"))
-                                    $root.google.shopping.merchant.datasources.v1.LocalInventoryDataSource.encode(message.localInventoryDataSource, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                    $root.google.shopping.merchant.datasources.v1.LocalInventoryDataSource.encode(message.localInventoryDataSource, writer.uint32(/* id 6, wireType 2 =*/50).fork(), q + 1).ldelim();
                                 if (message.regionalInventoryDataSource != null && Object.hasOwnProperty.call(message, "regionalInventoryDataSource"))
-                                    $root.google.shopping.merchant.datasources.v1.RegionalInventoryDataSource.encode(message.regionalInventoryDataSource, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                    $root.google.shopping.merchant.datasources.v1.RegionalInventoryDataSource.encode(message.regionalInventoryDataSource, writer.uint32(/* id 7, wireType 2 =*/58).fork(), q + 1).ldelim();
                                 if (message.promotionDataSource != null && Object.hasOwnProperty.call(message, "promotionDataSource"))
-                                    $root.google.shopping.merchant.datasources.v1.PromotionDataSource.encode(message.promotionDataSource, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                    $root.google.shopping.merchant.datasources.v1.PromotionDataSource.encode(message.promotionDataSource, writer.uint32(/* id 8, wireType 2 =*/66).fork(), q + 1).ldelim();
                                 if (message.productReviewDataSource != null && Object.hasOwnProperty.call(message, "productReviewDataSource"))
-                                    $root.google.shopping.merchant.datasources.v1.ProductReviewDataSource.encode(message.productReviewDataSource, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                                    $root.google.shopping.merchant.datasources.v1.ProductReviewDataSource.encode(message.productReviewDataSource, writer.uint32(/* id 9, wireType 2 =*/74).fork(), q + 1).ldelim();
                                 if (message.input != null && Object.hasOwnProperty.call(message, "input"))
                                     writer.uint32(/* id 10, wireType 0 =*/80).int32(message.input);
                                 if (message.fileInput != null && Object.hasOwnProperty.call(message, "fileInput"))
-                                    $root.google.shopping.merchant.datasources.v1.FileInput.encode(message.fileInput, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                                    $root.google.shopping.merchant.datasources.v1.FileInput.encode(message.fileInput, writer.uint32(/* id 11, wireType 2 =*/90).fork(), q + 1).ldelim();
                                 if (message.merchantReviewDataSource != null && Object.hasOwnProperty.call(message, "merchantReviewDataSource"))
-                                    $root.google.shopping.merchant.datasources.v1.MerchantReviewDataSource.encode(message.merchantReviewDataSource, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                                    $root.google.shopping.merchant.datasources.v1.MerchantReviewDataSource.encode(message.merchantReviewDataSource, writer.uint32(/* id 12, wireType 2 =*/98).fork(), q + 1).ldelim();
                                 return writer;
                             };
     
@@ -514,7 +518,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             DataSource.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -629,7 +633,7 @@
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
                                 var properties = {};
-                                if (message.primaryProductDataSource != null && message.hasOwnProperty("primaryProductDataSource")) {
+                                if (message.primaryProductDataSource != null && Object.hasOwnProperty.call(message, "primaryProductDataSource")) {
                                     properties.Type = 1;
                                     {
                                         var error = $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.verify(message.primaryProductDataSource, long + 1);
@@ -637,7 +641,7 @@
                                             return "primaryProductDataSource." + error;
                                     }
                                 }
-                                if (message.supplementalProductDataSource != null && message.hasOwnProperty("supplementalProductDataSource")) {
+                                if (message.supplementalProductDataSource != null && Object.hasOwnProperty.call(message, "supplementalProductDataSource")) {
                                     if (properties.Type === 1)
                                         return "Type: multiple values";
                                     properties.Type = 1;
@@ -647,7 +651,7 @@
                                             return "supplementalProductDataSource." + error;
                                     }
                                 }
-                                if (message.localInventoryDataSource != null && message.hasOwnProperty("localInventoryDataSource")) {
+                                if (message.localInventoryDataSource != null && Object.hasOwnProperty.call(message, "localInventoryDataSource")) {
                                     if (properties.Type === 1)
                                         return "Type: multiple values";
                                     properties.Type = 1;
@@ -657,7 +661,7 @@
                                             return "localInventoryDataSource." + error;
                                     }
                                 }
-                                if (message.regionalInventoryDataSource != null && message.hasOwnProperty("regionalInventoryDataSource")) {
+                                if (message.regionalInventoryDataSource != null && Object.hasOwnProperty.call(message, "regionalInventoryDataSource")) {
                                     if (properties.Type === 1)
                                         return "Type: multiple values";
                                     properties.Type = 1;
@@ -667,7 +671,7 @@
                                             return "regionalInventoryDataSource." + error;
                                     }
                                 }
-                                if (message.promotionDataSource != null && message.hasOwnProperty("promotionDataSource")) {
+                                if (message.promotionDataSource != null && Object.hasOwnProperty.call(message, "promotionDataSource")) {
                                     if (properties.Type === 1)
                                         return "Type: multiple values";
                                     properties.Type = 1;
@@ -677,7 +681,7 @@
                                             return "promotionDataSource." + error;
                                     }
                                 }
-                                if (message.productReviewDataSource != null && message.hasOwnProperty("productReviewDataSource")) {
+                                if (message.productReviewDataSource != null && Object.hasOwnProperty.call(message, "productReviewDataSource")) {
                                     if (properties.Type === 1)
                                         return "Type: multiple values";
                                     properties.Type = 1;
@@ -687,7 +691,7 @@
                                             return "productReviewDataSource." + error;
                                     }
                                 }
-                                if (message.merchantReviewDataSource != null && message.hasOwnProperty("merchantReviewDataSource")) {
+                                if (message.merchantReviewDataSource != null && Object.hasOwnProperty.call(message, "merchantReviewDataSource")) {
                                     if (properties.Type === 1)
                                         return "Type: multiple values";
                                     properties.Type = 1;
@@ -697,16 +701,16 @@
                                             return "merchantReviewDataSource." + error;
                                     }
                                 }
-                                if (message.name != null && message.hasOwnProperty("name"))
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
-                                if (message.dataSourceId != null && message.hasOwnProperty("dataSourceId"))
+                                if (message.dataSourceId != null && Object.hasOwnProperty.call(message, "dataSourceId"))
                                     if (!$util.isInteger(message.dataSourceId) && !(message.dataSourceId && $util.isInteger(message.dataSourceId.low) && $util.isInteger(message.dataSourceId.high)))
                                         return "dataSourceId: integer|Long expected";
-                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
                                     if (!$util.isString(message.displayName))
                                         return "displayName: string expected";
-                                if (message.input != null && message.hasOwnProperty("input"))
+                                if (message.input != null && Object.hasOwnProperty.call(message, "input"))
                                     switch (message.input) {
                                     default:
                                         return "input: enum value expected";
@@ -717,7 +721,7 @@
                                     case 4:
                                         break;
                                     }
-                                if (message.fileInput != null && message.hasOwnProperty("fileInput")) {
+                                if (message.fileInput != null && Object.hasOwnProperty.call(message, "fileInput")) {
                                     var error = $root.google.shopping.merchant.datasources.v1.FileInput.verify(message.fileInput, long + 1);
                                     if (error)
                                         return "fileInput." + error;
@@ -736,43 +740,45 @@
                             DataSource.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.shopping.merchant.datasources.v1.DataSource)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.shopping.merchant.datasources.v1.DataSource: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.shopping.merchant.datasources.v1.DataSource();
                                 if (object.primaryProductDataSource != null) {
-                                    if (typeof object.primaryProductDataSource !== "object")
+                                    if (!$util.isObject(object.primaryProductDataSource))
                                         throw TypeError(".google.shopping.merchant.datasources.v1.DataSource.primaryProductDataSource: object expected");
                                     message.primaryProductDataSource = $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.fromObject(object.primaryProductDataSource, long + 1);
                                 }
                                 if (object.supplementalProductDataSource != null) {
-                                    if (typeof object.supplementalProductDataSource !== "object")
+                                    if (!$util.isObject(object.supplementalProductDataSource))
                                         throw TypeError(".google.shopping.merchant.datasources.v1.DataSource.supplementalProductDataSource: object expected");
                                     message.supplementalProductDataSource = $root.google.shopping.merchant.datasources.v1.SupplementalProductDataSource.fromObject(object.supplementalProductDataSource, long + 1);
                                 }
                                 if (object.localInventoryDataSource != null) {
-                                    if (typeof object.localInventoryDataSource !== "object")
+                                    if (!$util.isObject(object.localInventoryDataSource))
                                         throw TypeError(".google.shopping.merchant.datasources.v1.DataSource.localInventoryDataSource: object expected");
                                     message.localInventoryDataSource = $root.google.shopping.merchant.datasources.v1.LocalInventoryDataSource.fromObject(object.localInventoryDataSource, long + 1);
                                 }
                                 if (object.regionalInventoryDataSource != null) {
-                                    if (typeof object.regionalInventoryDataSource !== "object")
+                                    if (!$util.isObject(object.regionalInventoryDataSource))
                                         throw TypeError(".google.shopping.merchant.datasources.v1.DataSource.regionalInventoryDataSource: object expected");
                                     message.regionalInventoryDataSource = $root.google.shopping.merchant.datasources.v1.RegionalInventoryDataSource.fromObject(object.regionalInventoryDataSource, long + 1);
                                 }
                                 if (object.promotionDataSource != null) {
-                                    if (typeof object.promotionDataSource !== "object")
+                                    if (!$util.isObject(object.promotionDataSource))
                                         throw TypeError(".google.shopping.merchant.datasources.v1.DataSource.promotionDataSource: object expected");
                                     message.promotionDataSource = $root.google.shopping.merchant.datasources.v1.PromotionDataSource.fromObject(object.promotionDataSource, long + 1);
                                 }
                                 if (object.productReviewDataSource != null) {
-                                    if (typeof object.productReviewDataSource !== "object")
+                                    if (!$util.isObject(object.productReviewDataSource))
                                         throw TypeError(".google.shopping.merchant.datasources.v1.DataSource.productReviewDataSource: object expected");
                                     message.productReviewDataSource = $root.google.shopping.merchant.datasources.v1.ProductReviewDataSource.fromObject(object.productReviewDataSource, long + 1);
                                 }
                                 if (object.merchantReviewDataSource != null) {
-                                    if (typeof object.merchantReviewDataSource !== "object")
+                                    if (!$util.isObject(object.merchantReviewDataSource))
                                         throw TypeError(".google.shopping.merchant.datasources.v1.DataSource.merchantReviewDataSource: object expected");
                                     message.merchantReviewDataSource = $root.google.shopping.merchant.datasources.v1.MerchantReviewDataSource.fromObject(object.merchantReviewDataSource, long + 1);
                                 }
@@ -780,7 +786,7 @@
                                     message.name = String(object.name);
                                 if (object.dataSourceId != null)
                                     if ($util.Long)
-                                        (message.dataSourceId = $util.Long.fromValue(object.dataSourceId)).unsigned = false;
+                                        message.dataSourceId = $util.Long.fromValue(object.dataSourceId, false);
                                     else if (typeof object.dataSourceId === "string")
                                         message.dataSourceId = parseInt(object.dataSourceId, 10);
                                     else if (typeof object.dataSourceId === "number")
@@ -818,7 +824,7 @@
                                     break;
                                 }
                                 if (object.fileInput != null) {
-                                    if (typeof object.fileInput !== "object")
+                                    if (!$util.isObject(object.fileInput))
                                         throw TypeError(".google.shopping.merchant.datasources.v1.DataSource.fileInput: object expected");
                                     message.fileInput = $root.google.shopping.merchant.datasources.v1.FileInput.fromObject(object.fileInput, long + 1);
                                 }
@@ -834,66 +840,72 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            DataSource.toObject = function toObject(message, options) {
+                            DataSource.toObject = function toObject(message, options, q) {
                                 if (!options)
                                     options = {};
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 var object = {};
                                 if (options.defaults) {
                                     object.name = "";
                                     if ($util.Long) {
                                         var long = new $util.Long(0, 0, false);
-                                        object.dataSourceId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                        object.dataSourceId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                                     } else
-                                        object.dataSourceId = options.longs === String ? "0" : 0;
+                                        object.dataSourceId = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                                     object.displayName = "";
                                     object.input = options.enums === String ? "INPUT_UNSPECIFIED" : 0;
                                     object.fileInput = null;
                                 }
-                                if (message.name != null && message.hasOwnProperty("name"))
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     object.name = message.name;
-                                if (message.dataSourceId != null && message.hasOwnProperty("dataSourceId"))
-                                    if (typeof message.dataSourceId === "number")
+                                if (message.dataSourceId != null && Object.hasOwnProperty.call(message, "dataSourceId"))
+                                    if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                        object.dataSourceId = typeof message.dataSourceId === "number" ? BigInt(message.dataSourceId) : $util.Long.fromBits(message.dataSourceId.low >>> 0, message.dataSourceId.high >>> 0, false).toBigInt();
+                                    else if (typeof message.dataSourceId === "number")
                                         object.dataSourceId = options.longs === String ? String(message.dataSourceId) : message.dataSourceId;
                                     else
                                         object.dataSourceId = options.longs === String ? $util.Long.prototype.toString.call(message.dataSourceId) : options.longs === Number ? new $util.LongBits(message.dataSourceId.low >>> 0, message.dataSourceId.high >>> 0).toNumber() : message.dataSourceId;
-                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
                                     object.displayName = message.displayName;
-                                if (message.primaryProductDataSource != null && message.hasOwnProperty("primaryProductDataSource")) {
-                                    object.primaryProductDataSource = $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.toObject(message.primaryProductDataSource, options);
+                                if (message.primaryProductDataSource != null && Object.hasOwnProperty.call(message, "primaryProductDataSource")) {
+                                    object.primaryProductDataSource = $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.toObject(message.primaryProductDataSource, options, q + 1);
                                     if (options.oneofs)
                                         object.Type = "primaryProductDataSource";
                                 }
-                                if (message.supplementalProductDataSource != null && message.hasOwnProperty("supplementalProductDataSource")) {
-                                    object.supplementalProductDataSource = $root.google.shopping.merchant.datasources.v1.SupplementalProductDataSource.toObject(message.supplementalProductDataSource, options);
+                                if (message.supplementalProductDataSource != null && Object.hasOwnProperty.call(message, "supplementalProductDataSource")) {
+                                    object.supplementalProductDataSource = $root.google.shopping.merchant.datasources.v1.SupplementalProductDataSource.toObject(message.supplementalProductDataSource, options, q + 1);
                                     if (options.oneofs)
                                         object.Type = "supplementalProductDataSource";
                                 }
-                                if (message.localInventoryDataSource != null && message.hasOwnProperty("localInventoryDataSource")) {
-                                    object.localInventoryDataSource = $root.google.shopping.merchant.datasources.v1.LocalInventoryDataSource.toObject(message.localInventoryDataSource, options);
+                                if (message.localInventoryDataSource != null && Object.hasOwnProperty.call(message, "localInventoryDataSource")) {
+                                    object.localInventoryDataSource = $root.google.shopping.merchant.datasources.v1.LocalInventoryDataSource.toObject(message.localInventoryDataSource, options, q + 1);
                                     if (options.oneofs)
                                         object.Type = "localInventoryDataSource";
                                 }
-                                if (message.regionalInventoryDataSource != null && message.hasOwnProperty("regionalInventoryDataSource")) {
-                                    object.regionalInventoryDataSource = $root.google.shopping.merchant.datasources.v1.RegionalInventoryDataSource.toObject(message.regionalInventoryDataSource, options);
+                                if (message.regionalInventoryDataSource != null && Object.hasOwnProperty.call(message, "regionalInventoryDataSource")) {
+                                    object.regionalInventoryDataSource = $root.google.shopping.merchant.datasources.v1.RegionalInventoryDataSource.toObject(message.regionalInventoryDataSource, options, q + 1);
                                     if (options.oneofs)
                                         object.Type = "regionalInventoryDataSource";
                                 }
-                                if (message.promotionDataSource != null && message.hasOwnProperty("promotionDataSource")) {
-                                    object.promotionDataSource = $root.google.shopping.merchant.datasources.v1.PromotionDataSource.toObject(message.promotionDataSource, options);
+                                if (message.promotionDataSource != null && Object.hasOwnProperty.call(message, "promotionDataSource")) {
+                                    object.promotionDataSource = $root.google.shopping.merchant.datasources.v1.PromotionDataSource.toObject(message.promotionDataSource, options, q + 1);
                                     if (options.oneofs)
                                         object.Type = "promotionDataSource";
                                 }
-                                if (message.productReviewDataSource != null && message.hasOwnProperty("productReviewDataSource")) {
-                                    object.productReviewDataSource = $root.google.shopping.merchant.datasources.v1.ProductReviewDataSource.toObject(message.productReviewDataSource, options);
+                                if (message.productReviewDataSource != null && Object.hasOwnProperty.call(message, "productReviewDataSource")) {
+                                    object.productReviewDataSource = $root.google.shopping.merchant.datasources.v1.ProductReviewDataSource.toObject(message.productReviewDataSource, options, q + 1);
                                     if (options.oneofs)
                                         object.Type = "productReviewDataSource";
                                 }
-                                if (message.input != null && message.hasOwnProperty("input"))
+                                if (message.input != null && Object.hasOwnProperty.call(message, "input"))
                                     object.input = options.enums === String ? $root.google.shopping.merchant.datasources.v1.DataSource.Input[message.input] === undefined ? message.input : $root.google.shopping.merchant.datasources.v1.DataSource.Input[message.input] : message.input;
-                                if (message.fileInput != null && message.hasOwnProperty("fileInput"))
-                                    object.fileInput = $root.google.shopping.merchant.datasources.v1.FileInput.toObject(message.fileInput, options);
-                                if (message.merchantReviewDataSource != null && message.hasOwnProperty("merchantReviewDataSource")) {
-                                    object.merchantReviewDataSource = $root.google.shopping.merchant.datasources.v1.MerchantReviewDataSource.toObject(message.merchantReviewDataSource, options);
+                                if (message.fileInput != null && Object.hasOwnProperty.call(message, "fileInput"))
+                                    object.fileInput = $root.google.shopping.merchant.datasources.v1.FileInput.toObject(message.fileInput, options, q + 1);
+                                if (message.merchantReviewDataSource != null && Object.hasOwnProperty.call(message, "merchantReviewDataSource")) {
+                                    object.merchantReviewDataSource = $root.google.shopping.merchant.datasources.v1.MerchantReviewDataSource.toObject(message.merchantReviewDataSource, options, q + 1);
                                     if (options.oneofs)
                                         object.Type = "merchantReviewDataSource";
                                 }
@@ -1002,9 +1014,13 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            GetDataSourceRequest.encode = function encode(message, writer) {
+                            GetDataSourceRequest.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                                 return writer;
@@ -1020,7 +1036,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             GetDataSourceRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -1090,7 +1106,7 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
-                                if (message.name != null && message.hasOwnProperty("name"))
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
                                 return null;
@@ -1107,6 +1123,8 @@
                             GetDataSourceRequest.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.shopping.merchant.datasources.v1.GetDataSourceRequest)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.shopping.merchant.datasources.v1.GetDataSourceRequest: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -1126,13 +1144,17 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            GetDataSourceRequest.toObject = function toObject(message, options) {
+                            GetDataSourceRequest.toObject = function toObject(message, options, q) {
                                 if (!options)
                                     options = {};
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 var object = {};
                                 if (options.defaults)
                                     object.name = "";
-                                if (message.name != null && message.hasOwnProperty("name"))
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     object.name = message.name;
                                 return object;
                             };
@@ -1237,9 +1259,13 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            ListDataSourcesRequest.encode = function encode(message, writer) {
+                            ListDataSourcesRequest.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
                                 if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
@@ -1259,7 +1285,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ListDataSourcesRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -1337,13 +1363,13 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
-                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                     if (!$util.isString(message.parent))
                                         return "parent: string expected";
-                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
                                     if (!$util.isInteger(message.pageSize))
                                         return "pageSize: integer expected";
-                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                     if (!$util.isString(message.pageToken))
                                         return "pageToken: string expected";
                                 return null;
@@ -1360,6 +1386,8 @@
                             ListDataSourcesRequest.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.shopping.merchant.datasources.v1.ListDataSourcesRequest)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.shopping.merchant.datasources.v1.ListDataSourcesRequest: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -1383,20 +1411,24 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            ListDataSourcesRequest.toObject = function toObject(message, options) {
+                            ListDataSourcesRequest.toObject = function toObject(message, options, q) {
                                 if (!options)
                                     options = {};
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 var object = {};
                                 if (options.defaults) {
                                     object.parent = "";
                                     object.pageSize = 0;
                                     object.pageToken = "";
                                 }
-                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                     object.parent = message.parent;
-                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
                                     object.pageSize = message.pageSize;
-                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                     object.pageToken = message.pageToken;
                                 return object;
                             };
@@ -1493,12 +1525,16 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            ListDataSourcesResponse.encode = function encode(message, writer) {
+                            ListDataSourcesResponse.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 if (message.dataSources != null && message.dataSources.length)
                                     for (var i = 0; i < message.dataSources.length; ++i)
-                                        $root.google.shopping.merchant.datasources.v1.DataSource.encode(message.dataSources[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                        $root.google.shopping.merchant.datasources.v1.DataSource.encode(message.dataSources[i], writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                                 if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
                                 return writer;
@@ -1514,7 +1550,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ListDataSourcesResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -1590,7 +1626,7 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
-                                if (message.dataSources != null && message.hasOwnProperty("dataSources")) {
+                                if (message.dataSources != null && Object.hasOwnProperty.call(message, "dataSources")) {
                                     if (!Array.isArray(message.dataSources))
                                         return "dataSources: array expected";
                                     for (var i = 0; i < message.dataSources.length; ++i) {
@@ -1599,7 +1635,7 @@
                                             return "dataSources." + error;
                                     }
                                 }
-                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                                     if (!$util.isString(message.nextPageToken))
                                         return "nextPageToken: string expected";
                                 return null;
@@ -1616,6 +1652,8 @@
                             ListDataSourcesResponse.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.shopping.merchant.datasources.v1.ListDataSourcesResponse)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.shopping.merchant.datasources.v1.ListDataSourcesResponse: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -1626,7 +1664,7 @@
                                         throw TypeError(".google.shopping.merchant.datasources.v1.ListDataSourcesResponse.dataSources: array expected");
                                     message.dataSources = [];
                                     for (var i = 0; i < object.dataSources.length; ++i) {
-                                        if (typeof object.dataSources[i] !== "object")
+                                        if (!$util.isObject(object.dataSources[i]))
                                             throw TypeError(".google.shopping.merchant.datasources.v1.ListDataSourcesResponse.dataSources: object expected");
                                         message.dataSources[i] = $root.google.shopping.merchant.datasources.v1.DataSource.fromObject(object.dataSources[i], long + 1);
                                     }
@@ -1645,9 +1683,13 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            ListDataSourcesResponse.toObject = function toObject(message, options) {
+                            ListDataSourcesResponse.toObject = function toObject(message, options, q) {
                                 if (!options)
                                     options = {};
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 var object = {};
                                 if (options.arrays || options.defaults)
                                     object.dataSources = [];
@@ -1656,9 +1698,9 @@
                                 if (message.dataSources && message.dataSources.length) {
                                     object.dataSources = [];
                                     for (var j = 0; j < message.dataSources.length; ++j)
-                                        object.dataSources[j] = $root.google.shopping.merchant.datasources.v1.DataSource.toObject(message.dataSources[j], options);
+                                        object.dataSources[j] = $root.google.shopping.merchant.datasources.v1.DataSource.toObject(message.dataSources[j], options, q + 1);
                                 }
-                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                                     object.nextPageToken = message.nextPageToken;
                                 return object;
                             };
@@ -1754,13 +1796,17 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            CreateDataSourceRequest.encode = function encode(message, writer) {
+                            CreateDataSourceRequest.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
                                 if (message.dataSource != null && Object.hasOwnProperty.call(message, "dataSource"))
-                                    $root.google.shopping.merchant.datasources.v1.DataSource.encode(message.dataSource, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    $root.google.shopping.merchant.datasources.v1.DataSource.encode(message.dataSource, writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
                                 return writer;
                             };
     
@@ -1774,7 +1820,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             CreateDataSourceRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -1848,10 +1894,10 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
-                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                     if (!$util.isString(message.parent))
                                         return "parent: string expected";
-                                if (message.dataSource != null && message.hasOwnProperty("dataSource")) {
+                                if (message.dataSource != null && Object.hasOwnProperty.call(message, "dataSource")) {
                                     var error = $root.google.shopping.merchant.datasources.v1.DataSource.verify(message.dataSource, long + 1);
                                     if (error)
                                         return "dataSource." + error;
@@ -1870,6 +1916,8 @@
                             CreateDataSourceRequest.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.shopping.merchant.datasources.v1.CreateDataSourceRequest)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.shopping.merchant.datasources.v1.CreateDataSourceRequest: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -1878,7 +1926,7 @@
                                 if (object.parent != null)
                                     message.parent = String(object.parent);
                                 if (object.dataSource != null) {
-                                    if (typeof object.dataSource !== "object")
+                                    if (!$util.isObject(object.dataSource))
                                         throw TypeError(".google.shopping.merchant.datasources.v1.CreateDataSourceRequest.dataSource: object expected");
                                     message.dataSource = $root.google.shopping.merchant.datasources.v1.DataSource.fromObject(object.dataSource, long + 1);
                                 }
@@ -1894,18 +1942,22 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            CreateDataSourceRequest.toObject = function toObject(message, options) {
+                            CreateDataSourceRequest.toObject = function toObject(message, options, q) {
                                 if (!options)
                                     options = {};
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 var object = {};
                                 if (options.defaults) {
                                     object.parent = "";
                                     object.dataSource = null;
                                 }
-                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                     object.parent = message.parent;
-                                if (message.dataSource != null && message.hasOwnProperty("dataSource"))
-                                    object.dataSource = $root.google.shopping.merchant.datasources.v1.DataSource.toObject(message.dataSource, options);
+                                if (message.dataSource != null && Object.hasOwnProperty.call(message, "dataSource"))
+                                    object.dataSource = $root.google.shopping.merchant.datasources.v1.DataSource.toObject(message.dataSource, options, q + 1);
                                 return object;
                             };
     
@@ -2000,13 +2052,17 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            UpdateDataSourceRequest.encode = function encode(message, writer) {
+                            UpdateDataSourceRequest.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 if (message.dataSource != null && Object.hasOwnProperty.call(message, "dataSource"))
-                                    $root.google.shopping.merchant.datasources.v1.DataSource.encode(message.dataSource, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    $root.google.shopping.merchant.datasources.v1.DataSource.encode(message.dataSource, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                                 if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
-                                    $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
                                 return writer;
                             };
     
@@ -2020,7 +2076,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             UpdateDataSourceRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -2094,12 +2150,12 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
-                                if (message.dataSource != null && message.hasOwnProperty("dataSource")) {
+                                if (message.dataSource != null && Object.hasOwnProperty.call(message, "dataSource")) {
                                     var error = $root.google.shopping.merchant.datasources.v1.DataSource.verify(message.dataSource, long + 1);
                                     if (error)
                                         return "dataSource." + error;
                                 }
-                                if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask")) {
                                     var error = $root.google.protobuf.FieldMask.verify(message.updateMask, long + 1);
                                     if (error)
                                         return "updateMask." + error;
@@ -2118,18 +2174,20 @@
                             UpdateDataSourceRequest.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.shopping.merchant.datasources.v1.UpdateDataSourceRequest)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.shopping.merchant.datasources.v1.UpdateDataSourceRequest: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.shopping.merchant.datasources.v1.UpdateDataSourceRequest();
                                 if (object.dataSource != null) {
-                                    if (typeof object.dataSource !== "object")
+                                    if (!$util.isObject(object.dataSource))
                                         throw TypeError(".google.shopping.merchant.datasources.v1.UpdateDataSourceRequest.dataSource: object expected");
                                     message.dataSource = $root.google.shopping.merchant.datasources.v1.DataSource.fromObject(object.dataSource, long + 1);
                                 }
                                 if (object.updateMask != null) {
-                                    if (typeof object.updateMask !== "object")
+                                    if (!$util.isObject(object.updateMask))
                                         throw TypeError(".google.shopping.merchant.datasources.v1.UpdateDataSourceRequest.updateMask: object expected");
                                     message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask, long + 1);
                                 }
@@ -2145,18 +2203,22 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            UpdateDataSourceRequest.toObject = function toObject(message, options) {
+                            UpdateDataSourceRequest.toObject = function toObject(message, options, q) {
                                 if (!options)
                                     options = {};
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 var object = {};
                                 if (options.defaults) {
                                     object.dataSource = null;
                                     object.updateMask = null;
                                 }
-                                if (message.dataSource != null && message.hasOwnProperty("dataSource"))
-                                    object.dataSource = $root.google.shopping.merchant.datasources.v1.DataSource.toObject(message.dataSource, options);
-                                if (message.updateMask != null && message.hasOwnProperty("updateMask"))
-                                    object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                                if (message.dataSource != null && Object.hasOwnProperty.call(message, "dataSource"))
+                                    object.dataSource = $root.google.shopping.merchant.datasources.v1.DataSource.toObject(message.dataSource, options, q + 1);
+                                if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                    object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options, q + 1);
                                 return object;
                             };
     
@@ -2242,9 +2304,13 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            FetchDataSourceRequest.encode = function encode(message, writer) {
+                            FetchDataSourceRequest.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                                 return writer;
@@ -2260,7 +2326,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             FetchDataSourceRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -2330,7 +2396,7 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
-                                if (message.name != null && message.hasOwnProperty("name"))
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
                                 return null;
@@ -2347,6 +2413,8 @@
                             FetchDataSourceRequest.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.shopping.merchant.datasources.v1.FetchDataSourceRequest)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.shopping.merchant.datasources.v1.FetchDataSourceRequest: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -2366,13 +2434,17 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            FetchDataSourceRequest.toObject = function toObject(message, options) {
+                            FetchDataSourceRequest.toObject = function toObject(message, options, q) {
                                 if (!options)
                                     options = {};
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 var object = {};
                                 if (options.defaults)
                                     object.name = "";
-                                if (message.name != null && message.hasOwnProperty("name"))
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     object.name = message.name;
                                 return object;
                             };
@@ -2459,9 +2531,13 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            DeleteDataSourceRequest.encode = function encode(message, writer) {
+                            DeleteDataSourceRequest.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                                 return writer;
@@ -2477,7 +2553,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             DeleteDataSourceRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -2547,7 +2623,7 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
-                                if (message.name != null && message.hasOwnProperty("name"))
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
                                 return null;
@@ -2564,6 +2640,8 @@
                             DeleteDataSourceRequest.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.shopping.merchant.datasources.v1.DeleteDataSourceRequest)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.shopping.merchant.datasources.v1.DeleteDataSourceRequest: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -2583,13 +2661,17 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            DeleteDataSourceRequest.toObject = function toObject(message, options) {
+                            DeleteDataSourceRequest.toObject = function toObject(message, options, q) {
                                 if (!options)
                                     options = {};
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 var object = {};
                                 if (options.defaults)
                                     object.name = "";
-                                if (message.name != null && message.hasOwnProperty("name"))
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     object.name = message.name;
                                 return object;
                             };
@@ -2738,9 +2820,13 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            PrimaryProductDataSource.encode = function encode(message, writer) {
+                            PrimaryProductDataSource.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 if (message.feedLabel != null && Object.hasOwnProperty.call(message, "feedLabel"))
                                     writer.uint32(/* id 4, wireType 2 =*/34).string(message.feedLabel);
                                 if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage"))
@@ -2749,10 +2835,10 @@
                                     for (var i = 0; i < message.countries.length; ++i)
                                         writer.uint32(/* id 6, wireType 2 =*/50).string(message.countries[i]);
                                 if (message.defaultRule != null && Object.hasOwnProperty.call(message, "defaultRule"))
-                                    $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule.encode(message.defaultRule, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                    $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule.encode(message.defaultRule, writer.uint32(/* id 7, wireType 2 =*/58).fork(), q + 1).ldelim();
                                 if (message.destinations != null && message.destinations.length)
                                     for (var i = 0; i < message.destinations.length; ++i)
-                                        $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination.encode(message.destinations[i], writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                                        $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination.encode(message.destinations[i], writer.uint32(/* id 10, wireType 2 =*/82).fork(), q + 1).ldelim();
                                 if (message.legacyLocal != null && Object.hasOwnProperty.call(message, "legacyLocal"))
                                     writer.uint32(/* id 11, wireType 0 =*/88).bool(message.legacyLocal);
                                 return writer;
@@ -2768,7 +2854,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             PrimaryProductDataSource.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -2863,32 +2949,32 @@
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
                                 var properties = {};
-                                if (message.legacyLocal != null && message.hasOwnProperty("legacyLocal"))
+                                if (message.legacyLocal != null && Object.hasOwnProperty.call(message, "legacyLocal"))
                                     if (typeof message.legacyLocal !== "boolean")
                                         return "legacyLocal: boolean expected";
-                                if (message.feedLabel != null && message.hasOwnProperty("feedLabel")) {
+                                if (message.feedLabel != null && Object.hasOwnProperty.call(message, "feedLabel")) {
                                     properties._feedLabel = 1;
                                     if (!$util.isString(message.feedLabel))
                                         return "feedLabel: string expected";
                                 }
-                                if (message.contentLanguage != null && message.hasOwnProperty("contentLanguage")) {
+                                if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage")) {
                                     properties._contentLanguage = 1;
                                     if (!$util.isString(message.contentLanguage))
                                         return "contentLanguage: string expected";
                                 }
-                                if (message.countries != null && message.hasOwnProperty("countries")) {
+                                if (message.countries != null && Object.hasOwnProperty.call(message, "countries")) {
                                     if (!Array.isArray(message.countries))
                                         return "countries: array expected";
                                     for (var i = 0; i < message.countries.length; ++i)
                                         if (!$util.isString(message.countries[i]))
                                             return "countries: string[] expected";
                                 }
-                                if (message.defaultRule != null && message.hasOwnProperty("defaultRule")) {
+                                if (message.defaultRule != null && Object.hasOwnProperty.call(message, "defaultRule")) {
                                     var error = $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule.verify(message.defaultRule, long + 1);
                                     if (error)
                                         return "defaultRule." + error;
                                 }
-                                if (message.destinations != null && message.hasOwnProperty("destinations")) {
+                                if (message.destinations != null && Object.hasOwnProperty.call(message, "destinations")) {
                                     if (!Array.isArray(message.destinations))
                                         return "destinations: array expected";
                                     for (var i = 0; i < message.destinations.length; ++i) {
@@ -2911,6 +2997,8 @@
                             PrimaryProductDataSource.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.shopping.merchant.datasources.v1.PrimaryProductDataSource: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -2930,7 +3018,7 @@
                                         message.countries[i] = String(object.countries[i]);
                                 }
                                 if (object.defaultRule != null) {
-                                    if (typeof object.defaultRule !== "object")
+                                    if (!$util.isObject(object.defaultRule))
                                         throw TypeError(".google.shopping.merchant.datasources.v1.PrimaryProductDataSource.defaultRule: object expected");
                                     message.defaultRule = $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule.fromObject(object.defaultRule, long + 1);
                                 }
@@ -2939,7 +3027,7 @@
                                         throw TypeError(".google.shopping.merchant.datasources.v1.PrimaryProductDataSource.destinations: array expected");
                                     message.destinations = [];
                                     for (var i = 0; i < object.destinations.length; ++i) {
-                                        if (typeof object.destinations[i] !== "object")
+                                        if (!$util.isObject(object.destinations[i]))
                                             throw TypeError(".google.shopping.merchant.datasources.v1.PrimaryProductDataSource.destinations: object expected");
                                         message.destinations[i] = $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination.fromObject(object.destinations[i], long + 1);
                                     }
@@ -2956,9 +3044,13 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            PrimaryProductDataSource.toObject = function toObject(message, options) {
+                            PrimaryProductDataSource.toObject = function toObject(message, options, q) {
                                 if (!options)
                                     options = {};
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 var object = {};
                                 if (options.arrays || options.defaults) {
                                     object.countries = [];
@@ -2968,12 +3060,12 @@
                                     object.defaultRule = null;
                                     object.legacyLocal = false;
                                 }
-                                if (message.feedLabel != null && message.hasOwnProperty("feedLabel")) {
+                                if (message.feedLabel != null && Object.hasOwnProperty.call(message, "feedLabel")) {
                                     object.feedLabel = message.feedLabel;
                                     if (options.oneofs)
                                         object._feedLabel = "feedLabel";
                                 }
-                                if (message.contentLanguage != null && message.hasOwnProperty("contentLanguage")) {
+                                if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage")) {
                                     object.contentLanguage = message.contentLanguage;
                                     if (options.oneofs)
                                         object._contentLanguage = "contentLanguage";
@@ -2983,14 +3075,14 @@
                                     for (var j = 0; j < message.countries.length; ++j)
                                         object.countries[j] = message.countries[j];
                                 }
-                                if (message.defaultRule != null && message.hasOwnProperty("defaultRule"))
-                                    object.defaultRule = $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule.toObject(message.defaultRule, options);
+                                if (message.defaultRule != null && Object.hasOwnProperty.call(message, "defaultRule"))
+                                    object.defaultRule = $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule.toObject(message.defaultRule, options, q + 1);
                                 if (message.destinations && message.destinations.length) {
                                     object.destinations = [];
                                     for (var j = 0; j < message.destinations.length; ++j)
-                                        object.destinations[j] = $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination.toObject(message.destinations[j], options);
+                                        object.destinations[j] = $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination.toObject(message.destinations[j], options, q + 1);
                                 }
-                                if (message.legacyLocal != null && message.hasOwnProperty("legacyLocal"))
+                                if (message.legacyLocal != null && Object.hasOwnProperty.call(message, "legacyLocal"))
                                     object.legacyLocal = message.legacyLocal;
                                 return object;
                             };
@@ -3075,12 +3167,16 @@
                                  * @param {$protobuf.Writer} [writer] Writer to encode to
                                  * @returns {$protobuf.Writer} Writer
                                  */
-                                DefaultRule.encode = function encode(message, writer) {
+                                DefaultRule.encode = function encode(message, writer, q) {
                                     if (!writer)
                                         writer = $Writer.create();
+                                    if (q === undefined)
+                                        q = 0;
+                                    if (q > $util.recursionLimit)
+                                        throw Error("max depth exceeded");
                                     if (message.takeFromDataSources != null && message.takeFromDataSources.length)
                                         for (var i = 0; i < message.takeFromDataSources.length; ++i)
-                                            $root.google.shopping.merchant.datasources.v1.DataSourceReference.encode(message.takeFromDataSources[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                            $root.google.shopping.merchant.datasources.v1.DataSourceReference.encode(message.takeFromDataSources[i], writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                                     return writer;
                                 };
     
@@ -3094,7 +3190,7 @@
                                  * @returns {$protobuf.Writer} Writer
                                  */
                                 DefaultRule.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer).ldelim();
+                                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                                 };
     
                                 /**
@@ -3166,7 +3262,7 @@
                                         long = 0;
                                     if (long > $util.recursionLimit)
                                         return "maximum nesting depth exceeded";
-                                    if (message.takeFromDataSources != null && message.hasOwnProperty("takeFromDataSources")) {
+                                    if (message.takeFromDataSources != null && Object.hasOwnProperty.call(message, "takeFromDataSources")) {
                                         if (!Array.isArray(message.takeFromDataSources))
                                             return "takeFromDataSources: array expected";
                                         for (var i = 0; i < message.takeFromDataSources.length; ++i) {
@@ -3189,6 +3285,8 @@
                                 DefaultRule.fromObject = function fromObject(object, long) {
                                     if (object instanceof $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule)
                                         return object;
+                                    if (!$util.isObject(object))
+                                        throw TypeError(".google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule: object expected");
                                     if (long === undefined)
                                         long = 0;
                                     if (long > $util.recursionLimit)
@@ -3199,7 +3297,7 @@
                                             throw TypeError(".google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule.takeFromDataSources: array expected");
                                         message.takeFromDataSources = [];
                                         for (var i = 0; i < object.takeFromDataSources.length; ++i) {
-                                            if (typeof object.takeFromDataSources[i] !== "object")
+                                            if (!$util.isObject(object.takeFromDataSources[i]))
                                                 throw TypeError(".google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule.takeFromDataSources: object expected");
                                             message.takeFromDataSources[i] = $root.google.shopping.merchant.datasources.v1.DataSourceReference.fromObject(object.takeFromDataSources[i], long + 1);
                                         }
@@ -3216,16 +3314,20 @@
                                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                                  * @returns {Object.<string,*>} Plain object
                                  */
-                                DefaultRule.toObject = function toObject(message, options) {
+                                DefaultRule.toObject = function toObject(message, options, q) {
                                     if (!options)
                                         options = {};
+                                    if (q === undefined)
+                                        q = 0;
+                                    if (q > $util.recursionLimit)
+                                        throw Error("max depth exceeded");
                                     var object = {};
                                     if (options.arrays || options.defaults)
                                         object.takeFromDataSources = [];
                                     if (message.takeFromDataSources && message.takeFromDataSources.length) {
                                         object.takeFromDataSources = [];
                                         for (var j = 0; j < message.takeFromDataSources.length; ++j)
-                                            object.takeFromDataSources[j] = $root.google.shopping.merchant.datasources.v1.DataSourceReference.toObject(message.takeFromDataSources[j], options);
+                                            object.takeFromDataSources[j] = $root.google.shopping.merchant.datasources.v1.DataSourceReference.toObject(message.takeFromDataSources[j], options, q + 1);
                                     }
                                     return object;
                                 };
@@ -3321,9 +3423,13 @@
                                  * @param {$protobuf.Writer} [writer] Writer to encode to
                                  * @returns {$protobuf.Writer} Writer
                                  */
-                                Destination.encode = function encode(message, writer) {
+                                Destination.encode = function encode(message, writer, q) {
                                     if (!writer)
                                         writer = $Writer.create();
+                                    if (q === undefined)
+                                        q = 0;
+                                    if (q > $util.recursionLimit)
+                                        throw Error("max depth exceeded");
                                     if (message.destination != null && Object.hasOwnProperty.call(message, "destination"))
                                         writer.uint32(/* id 1, wireType 0 =*/8).int32(message.destination);
                                     if (message.state != null && Object.hasOwnProperty.call(message, "state"))
@@ -3341,7 +3447,7 @@
                                  * @returns {$protobuf.Writer} Writer
                                  */
                                 Destination.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer).ldelim();
+                                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                                 };
     
                                 /**
@@ -3415,7 +3521,7 @@
                                         long = 0;
                                     if (long > $util.recursionLimit)
                                         return "maximum nesting depth exceeded";
-                                    if (message.destination != null && message.hasOwnProperty("destination"))
+                                    if (message.destination != null && Object.hasOwnProperty.call(message, "destination"))
                                         switch (message.destination) {
                                         default:
                                             return "destination: enum value expected";
@@ -3434,7 +3540,7 @@
                                         case 12:
                                             break;
                                         }
-                                    if (message.state != null && message.hasOwnProperty("state"))
+                                    if (message.state != null && Object.hasOwnProperty.call(message, "state"))
                                         switch (message.state) {
                                         default:
                                             return "state: enum value expected";
@@ -3457,6 +3563,8 @@
                                 Destination.fromObject = function fromObject(object, long) {
                                     if (object instanceof $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination)
                                         return object;
+                                    if (!$util.isObject(object))
+                                        throw TypeError(".google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination: object expected");
                                     if (long === undefined)
                                         long = 0;
                                     if (long > $util.recursionLimit)
@@ -3554,17 +3662,21 @@
                                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                                  * @returns {Object.<string,*>} Plain object
                                  */
-                                Destination.toObject = function toObject(message, options) {
+                                Destination.toObject = function toObject(message, options, q) {
                                     if (!options)
                                         options = {};
+                                    if (q === undefined)
+                                        q = 0;
+                                    if (q > $util.recursionLimit)
+                                        throw Error("max depth exceeded");
                                     var object = {};
                                     if (options.defaults) {
                                         object.destination = options.enums === String ? "DESTINATION_ENUM_UNSPECIFIED" : 0;
                                         object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                                     }
-                                    if (message.destination != null && message.hasOwnProperty("destination"))
+                                    if (message.destination != null && Object.hasOwnProperty.call(message, "destination"))
                                         object.destination = options.enums === String ? $root.google.shopping.type.Destination.DestinationEnum[message.destination] === undefined ? message.destination : $root.google.shopping.type.Destination.DestinationEnum[message.destination] : message.destination;
-                                    if (message.state != null && message.hasOwnProperty("state"))
+                                    if (message.state != null && Object.hasOwnProperty.call(message, "state"))
                                         object.state = options.enums === String ? $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination.State[message.state] === undefined ? message.state : $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination.State[message.state] : message.state;
                                     return object;
                                 };
@@ -3704,16 +3816,20 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            SupplementalProductDataSource.encode = function encode(message, writer) {
+                            SupplementalProductDataSource.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 if (message.feedLabel != null && Object.hasOwnProperty.call(message, "feedLabel"))
                                     writer.uint32(/* id 4, wireType 2 =*/34).string(message.feedLabel);
                                 if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage"))
                                     writer.uint32(/* id 5, wireType 2 =*/42).string(message.contentLanguage);
                                 if (message.referencingPrimaryDataSources != null && message.referencingPrimaryDataSources.length)
                                     for (var i = 0; i < message.referencingPrimaryDataSources.length; ++i)
-                                        $root.google.shopping.merchant.datasources.v1.DataSourceReference.encode(message.referencingPrimaryDataSources[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                        $root.google.shopping.merchant.datasources.v1.DataSourceReference.encode(message.referencingPrimaryDataSources[i], writer.uint32(/* id 7, wireType 2 =*/58).fork(), q + 1).ldelim();
                                 return writer;
                             };
     
@@ -3727,7 +3843,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             SupplementalProductDataSource.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -3808,17 +3924,17 @@
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
                                 var properties = {};
-                                if (message.feedLabel != null && message.hasOwnProperty("feedLabel")) {
+                                if (message.feedLabel != null && Object.hasOwnProperty.call(message, "feedLabel")) {
                                     properties._feedLabel = 1;
                                     if (!$util.isString(message.feedLabel))
                                         return "feedLabel: string expected";
                                 }
-                                if (message.contentLanguage != null && message.hasOwnProperty("contentLanguage")) {
+                                if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage")) {
                                     properties._contentLanguage = 1;
                                     if (!$util.isString(message.contentLanguage))
                                         return "contentLanguage: string expected";
                                 }
-                                if (message.referencingPrimaryDataSources != null && message.hasOwnProperty("referencingPrimaryDataSources")) {
+                                if (message.referencingPrimaryDataSources != null && Object.hasOwnProperty.call(message, "referencingPrimaryDataSources")) {
                                     if (!Array.isArray(message.referencingPrimaryDataSources))
                                         return "referencingPrimaryDataSources: array expected";
                                     for (var i = 0; i < message.referencingPrimaryDataSources.length; ++i) {
@@ -3841,6 +3957,8 @@
                             SupplementalProductDataSource.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.shopping.merchant.datasources.v1.SupplementalProductDataSource)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.shopping.merchant.datasources.v1.SupplementalProductDataSource: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -3855,7 +3973,7 @@
                                         throw TypeError(".google.shopping.merchant.datasources.v1.SupplementalProductDataSource.referencingPrimaryDataSources: array expected");
                                     message.referencingPrimaryDataSources = [];
                                     for (var i = 0; i < object.referencingPrimaryDataSources.length; ++i) {
-                                        if (typeof object.referencingPrimaryDataSources[i] !== "object")
+                                        if (!$util.isObject(object.referencingPrimaryDataSources[i]))
                                             throw TypeError(".google.shopping.merchant.datasources.v1.SupplementalProductDataSource.referencingPrimaryDataSources: object expected");
                                         message.referencingPrimaryDataSources[i] = $root.google.shopping.merchant.datasources.v1.DataSourceReference.fromObject(object.referencingPrimaryDataSources[i], long + 1);
                                     }
@@ -3872,18 +3990,22 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            SupplementalProductDataSource.toObject = function toObject(message, options) {
+                            SupplementalProductDataSource.toObject = function toObject(message, options, q) {
                                 if (!options)
                                     options = {};
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 var object = {};
                                 if (options.arrays || options.defaults)
                                     object.referencingPrimaryDataSources = [];
-                                if (message.feedLabel != null && message.hasOwnProperty("feedLabel")) {
+                                if (message.feedLabel != null && Object.hasOwnProperty.call(message, "feedLabel")) {
                                     object.feedLabel = message.feedLabel;
                                     if (options.oneofs)
                                         object._feedLabel = "feedLabel";
                                 }
-                                if (message.contentLanguage != null && message.hasOwnProperty("contentLanguage")) {
+                                if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage")) {
                                     object.contentLanguage = message.contentLanguage;
                                     if (options.oneofs)
                                         object._contentLanguage = "contentLanguage";
@@ -3891,7 +4013,7 @@
                                 if (message.referencingPrimaryDataSources && message.referencingPrimaryDataSources.length) {
                                     object.referencingPrimaryDataSources = [];
                                     for (var j = 0; j < message.referencingPrimaryDataSources.length; ++j)
-                                        object.referencingPrimaryDataSources[j] = $root.google.shopping.merchant.datasources.v1.DataSourceReference.toObject(message.referencingPrimaryDataSources[j], options);
+                                        object.referencingPrimaryDataSources[j] = $root.google.shopping.merchant.datasources.v1.DataSourceReference.toObject(message.referencingPrimaryDataSources[j], options, q + 1);
                                 }
                                 return object;
                             };
@@ -3987,9 +4109,13 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            LocalInventoryDataSource.encode = function encode(message, writer) {
+                            LocalInventoryDataSource.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 if (message.feedLabel != null && Object.hasOwnProperty.call(message, "feedLabel"))
                                     writer.uint32(/* id 4, wireType 2 =*/34).string(message.feedLabel);
                                 if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage"))
@@ -4007,7 +4133,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             LocalInventoryDataSource.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -4081,10 +4207,10 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
-                                if (message.feedLabel != null && message.hasOwnProperty("feedLabel"))
+                                if (message.feedLabel != null && Object.hasOwnProperty.call(message, "feedLabel"))
                                     if (!$util.isString(message.feedLabel))
                                         return "feedLabel: string expected";
-                                if (message.contentLanguage != null && message.hasOwnProperty("contentLanguage"))
+                                if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage"))
                                     if (!$util.isString(message.contentLanguage))
                                         return "contentLanguage: string expected";
                                 return null;
@@ -4101,6 +4227,8 @@
                             LocalInventoryDataSource.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.shopping.merchant.datasources.v1.LocalInventoryDataSource)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.shopping.merchant.datasources.v1.LocalInventoryDataSource: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -4122,17 +4250,21 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            LocalInventoryDataSource.toObject = function toObject(message, options) {
+                            LocalInventoryDataSource.toObject = function toObject(message, options, q) {
                                 if (!options)
                                     options = {};
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 var object = {};
                                 if (options.defaults) {
                                     object.feedLabel = "";
                                     object.contentLanguage = "";
                                 }
-                                if (message.feedLabel != null && message.hasOwnProperty("feedLabel"))
+                                if (message.feedLabel != null && Object.hasOwnProperty.call(message, "feedLabel"))
                                     object.feedLabel = message.feedLabel;
-                                if (message.contentLanguage != null && message.hasOwnProperty("contentLanguage"))
+                                if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage"))
                                     object.contentLanguage = message.contentLanguage;
                                 return object;
                             };
@@ -4228,9 +4360,13 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            RegionalInventoryDataSource.encode = function encode(message, writer) {
+                            RegionalInventoryDataSource.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 if (message.feedLabel != null && Object.hasOwnProperty.call(message, "feedLabel"))
                                     writer.uint32(/* id 4, wireType 2 =*/34).string(message.feedLabel);
                                 if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage"))
@@ -4248,7 +4384,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             RegionalInventoryDataSource.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -4322,10 +4458,10 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
-                                if (message.feedLabel != null && message.hasOwnProperty("feedLabel"))
+                                if (message.feedLabel != null && Object.hasOwnProperty.call(message, "feedLabel"))
                                     if (!$util.isString(message.feedLabel))
                                         return "feedLabel: string expected";
-                                if (message.contentLanguage != null && message.hasOwnProperty("contentLanguage"))
+                                if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage"))
                                     if (!$util.isString(message.contentLanguage))
                                         return "contentLanguage: string expected";
                                 return null;
@@ -4342,6 +4478,8 @@
                             RegionalInventoryDataSource.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.shopping.merchant.datasources.v1.RegionalInventoryDataSource)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.shopping.merchant.datasources.v1.RegionalInventoryDataSource: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -4363,17 +4501,21 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            RegionalInventoryDataSource.toObject = function toObject(message, options) {
+                            RegionalInventoryDataSource.toObject = function toObject(message, options, q) {
                                 if (!options)
                                     options = {};
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 var object = {};
                                 if (options.defaults) {
                                     object.feedLabel = "";
                                     object.contentLanguage = "";
                                 }
-                                if (message.feedLabel != null && message.hasOwnProperty("feedLabel"))
+                                if (message.feedLabel != null && Object.hasOwnProperty.call(message, "feedLabel"))
                                     object.feedLabel = message.feedLabel;
-                                if (message.contentLanguage != null && message.hasOwnProperty("contentLanguage"))
+                                if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage"))
                                     object.contentLanguage = message.contentLanguage;
                                 return object;
                             };
@@ -4469,9 +4611,13 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            PromotionDataSource.encode = function encode(message, writer) {
+                            PromotionDataSource.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 if (message.targetCountry != null && Object.hasOwnProperty.call(message, "targetCountry"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.targetCountry);
                                 if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage"))
@@ -4489,7 +4635,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             PromotionDataSource.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -4563,10 +4709,10 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
-                                if (message.targetCountry != null && message.hasOwnProperty("targetCountry"))
+                                if (message.targetCountry != null && Object.hasOwnProperty.call(message, "targetCountry"))
                                     if (!$util.isString(message.targetCountry))
                                         return "targetCountry: string expected";
-                                if (message.contentLanguage != null && message.hasOwnProperty("contentLanguage"))
+                                if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage"))
                                     if (!$util.isString(message.contentLanguage))
                                         return "contentLanguage: string expected";
                                 return null;
@@ -4583,6 +4729,8 @@
                             PromotionDataSource.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.shopping.merchant.datasources.v1.PromotionDataSource)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.shopping.merchant.datasources.v1.PromotionDataSource: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -4604,17 +4752,21 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            PromotionDataSource.toObject = function toObject(message, options) {
+                            PromotionDataSource.toObject = function toObject(message, options, q) {
                                 if (!options)
                                     options = {};
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 var object = {};
                                 if (options.defaults) {
                                     object.targetCountry = "";
                                     object.contentLanguage = "";
                                 }
-                                if (message.targetCountry != null && message.hasOwnProperty("targetCountry"))
+                                if (message.targetCountry != null && Object.hasOwnProperty.call(message, "targetCountry"))
                                     object.targetCountry = message.targetCountry;
-                                if (message.contentLanguage != null && message.hasOwnProperty("contentLanguage"))
+                                if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage"))
                                     object.contentLanguage = message.contentLanguage;
                                 return object;
                             };
@@ -4692,9 +4844,13 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            ProductReviewDataSource.encode = function encode(message, writer) {
+                            ProductReviewDataSource.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 return writer;
                             };
     
@@ -4708,7 +4864,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ProductReviewDataSource.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -4788,10 +4944,6 @@
                             ProductReviewDataSource.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.shopping.merchant.datasources.v1.ProductReviewDataSource)
                                     return object;
-                                if (long === undefined)
-                                    long = 0;
-                                if (long > $util.recursionLimit)
-                                    throw Error("maximum nesting depth exceeded");
                                 return new $root.google.shopping.merchant.datasources.v1.ProductReviewDataSource();
                             };
     
@@ -4881,9 +5033,13 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            MerchantReviewDataSource.encode = function encode(message, writer) {
+                            MerchantReviewDataSource.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 return writer;
                             };
     
@@ -4897,7 +5053,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             MerchantReviewDataSource.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -4977,10 +5133,6 @@
                             MerchantReviewDataSource.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.shopping.merchant.datasources.v1.MerchantReviewDataSource)
                                     return object;
-                                if (long === undefined)
-                                    long = 0;
-                                if (long > $util.recursionLimit)
-                                    throw Error("maximum nesting depth exceeded");
                                 return new $root.google.shopping.merchant.datasources.v1.MerchantReviewDataSource();
                             };
     
@@ -5111,9 +5263,13 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            DataSourceReference.encode = function encode(message, writer) {
+                            DataSourceReference.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 if (message.self != null && Object.hasOwnProperty.call(message, "self"))
                                     writer.uint32(/* id 1, wireType 0 =*/8).bool(message.self);
                                 if (message.supplementalDataSourceName != null && Object.hasOwnProperty.call(message, "supplementalDataSourceName"))
@@ -5133,7 +5289,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             DataSourceReference.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -5212,19 +5368,19 @@
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
                                 var properties = {};
-                                if (message.self != null && message.hasOwnProperty("self")) {
+                                if (message.self != null && Object.hasOwnProperty.call(message, "self")) {
                                     properties.dataSourceId = 1;
                                     if (typeof message.self !== "boolean")
                                         return "self: boolean expected";
                                 }
-                                if (message.primaryDataSourceName != null && message.hasOwnProperty("primaryDataSourceName")) {
+                                if (message.primaryDataSourceName != null && Object.hasOwnProperty.call(message, "primaryDataSourceName")) {
                                     if (properties.dataSourceId === 1)
                                         return "dataSourceId: multiple values";
                                     properties.dataSourceId = 1;
                                     if (!$util.isString(message.primaryDataSourceName))
                                         return "primaryDataSourceName: string expected";
                                 }
-                                if (message.supplementalDataSourceName != null && message.hasOwnProperty("supplementalDataSourceName")) {
+                                if (message.supplementalDataSourceName != null && Object.hasOwnProperty.call(message, "supplementalDataSourceName")) {
                                     if (properties.dataSourceId === 1)
                                         return "dataSourceId: multiple values";
                                     properties.dataSourceId = 1;
@@ -5245,6 +5401,8 @@
                             DataSourceReference.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.shopping.merchant.datasources.v1.DataSourceReference)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.shopping.merchant.datasources.v1.DataSourceReference: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -5268,21 +5426,25 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            DataSourceReference.toObject = function toObject(message, options) {
+                            DataSourceReference.toObject = function toObject(message, options, q) {
                                 if (!options)
                                     options = {};
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 var object = {};
-                                if (message.self != null && message.hasOwnProperty("self")) {
+                                if (message.self != null && Object.hasOwnProperty.call(message, "self")) {
                                     object.self = message.self;
                                     if (options.oneofs)
                                         object.dataSourceId = "self";
                                 }
-                                if (message.supplementalDataSourceName != null && message.hasOwnProperty("supplementalDataSourceName")) {
+                                if (message.supplementalDataSourceName != null && Object.hasOwnProperty.call(message, "supplementalDataSourceName")) {
                                     object.supplementalDataSourceName = message.supplementalDataSourceName;
                                     if (options.oneofs)
                                         object.dataSourceId = "supplementalDataSourceName";
                                 }
-                                if (message.primaryDataSourceName != null && message.hasOwnProperty("primaryDataSourceName")) {
+                                if (message.primaryDataSourceName != null && Object.hasOwnProperty.call(message, "primaryDataSourceName")) {
                                     object.primaryDataSourceName = message.primaryDataSourceName;
                                     if (options.oneofs)
                                         object.dataSourceId = "primaryDataSourceName";
@@ -5390,11 +5552,15 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            FileInput.encode = function encode(message, writer) {
+                            FileInput.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 if (message.fetchSettings != null && Object.hasOwnProperty.call(message, "fetchSettings"))
-                                    $root.google.shopping.merchant.datasources.v1.FileInput.FetchSettings.encode(message.fetchSettings, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    $root.google.shopping.merchant.datasources.v1.FileInput.FetchSettings.encode(message.fetchSettings, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                                 if (message.fileName != null && Object.hasOwnProperty.call(message, "fileName"))
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.fileName);
                                 if (message.fileInputType != null && Object.hasOwnProperty.call(message, "fileInputType"))
@@ -5412,7 +5578,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             FileInput.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -5490,15 +5656,15 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
-                                if (message.fetchSettings != null && message.hasOwnProperty("fetchSettings")) {
+                                if (message.fetchSettings != null && Object.hasOwnProperty.call(message, "fetchSettings")) {
                                     var error = $root.google.shopping.merchant.datasources.v1.FileInput.FetchSettings.verify(message.fetchSettings, long + 1);
                                     if (error)
                                         return "fetchSettings." + error;
                                 }
-                                if (message.fileName != null && message.hasOwnProperty("fileName"))
+                                if (message.fileName != null && Object.hasOwnProperty.call(message, "fileName"))
                                     if (!$util.isString(message.fileName))
                                         return "fileName: string expected";
-                                if (message.fileInputType != null && message.hasOwnProperty("fileInputType"))
+                                if (message.fileInputType != null && Object.hasOwnProperty.call(message, "fileInputType"))
                                     switch (message.fileInputType) {
                                     default:
                                         return "fileInputType: enum value expected";
@@ -5522,13 +5688,15 @@
                             FileInput.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.shopping.merchant.datasources.v1.FileInput)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.shopping.merchant.datasources.v1.FileInput: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.shopping.merchant.datasources.v1.FileInput();
                                 if (object.fetchSettings != null) {
-                                    if (typeof object.fetchSettings !== "object")
+                                    if (!$util.isObject(object.fetchSettings))
                                         throw TypeError(".google.shopping.merchant.datasources.v1.FileInput.fetchSettings: object expected");
                                     message.fetchSettings = $root.google.shopping.merchant.datasources.v1.FileInput.FetchSettings.fromObject(object.fetchSettings, long + 1);
                                 }
@@ -5570,20 +5738,24 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            FileInput.toObject = function toObject(message, options) {
+                            FileInput.toObject = function toObject(message, options, q) {
                                 if (!options)
                                     options = {};
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 var object = {};
                                 if (options.defaults) {
                                     object.fetchSettings = null;
                                     object.fileName = "";
                                     object.fileInputType = options.enums === String ? "FILE_INPUT_TYPE_UNSPECIFIED" : 0;
                                 }
-                                if (message.fetchSettings != null && message.hasOwnProperty("fetchSettings"))
-                                    object.fetchSettings = $root.google.shopping.merchant.datasources.v1.FileInput.FetchSettings.toObject(message.fetchSettings, options);
-                                if (message.fileName != null && message.hasOwnProperty("fileName"))
+                                if (message.fetchSettings != null && Object.hasOwnProperty.call(message, "fetchSettings"))
+                                    object.fetchSettings = $root.google.shopping.merchant.datasources.v1.FileInput.FetchSettings.toObject(message.fetchSettings, options, q + 1);
+                                if (message.fileName != null && Object.hasOwnProperty.call(message, "fileName"))
                                     object.fileName = message.fileName;
-                                if (message.fileInputType != null && message.hasOwnProperty("fileInputType"))
+                                if (message.fileInputType != null && Object.hasOwnProperty.call(message, "fileInputType"))
                                     object.fileInputType = options.enums === String ? $root.google.shopping.merchant.datasources.v1.FileInput.FileInputType[message.fileInputType] === undefined ? message.fileInputType : $root.google.shopping.merchant.datasources.v1.FileInput.FileInputType[message.fileInputType] : message.fileInputType;
                                 return object;
                             };
@@ -5739,15 +5911,19 @@
                                  * @param {$protobuf.Writer} [writer] Writer to encode to
                                  * @returns {$protobuf.Writer} Writer
                                  */
-                                FetchSettings.encode = function encode(message, writer) {
+                                FetchSettings.encode = function encode(message, writer, q) {
                                     if (!writer)
                                         writer = $Writer.create();
+                                    if (q === undefined)
+                                        q = 0;
+                                    if (q > $util.recursionLimit)
+                                        throw Error("max depth exceeded");
                                     if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
                                         writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
                                     if (message.dayOfMonth != null && Object.hasOwnProperty.call(message, "dayOfMonth"))
                                         writer.uint32(/* id 2, wireType 0 =*/16).int32(message.dayOfMonth);
                                     if (message.timeOfDay != null && Object.hasOwnProperty.call(message, "timeOfDay"))
-                                        $root.google.type.TimeOfDay.encode(message.timeOfDay, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                        $root.google.type.TimeOfDay.encode(message.timeOfDay, writer.uint32(/* id 3, wireType 2 =*/26).fork(), q + 1).ldelim();
                                     if (message.dayOfWeek != null && Object.hasOwnProperty.call(message, "dayOfWeek"))
                                         writer.uint32(/* id 4, wireType 0 =*/32).int32(message.dayOfWeek);
                                     if (message.timeZone != null && Object.hasOwnProperty.call(message, "timeZone"))
@@ -5773,7 +5949,7 @@
                                  * @returns {$protobuf.Writer} Writer
                                  */
                                 FetchSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer).ldelim();
+                                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                                 };
     
                                 /**
@@ -5875,18 +6051,18 @@
                                         long = 0;
                                     if (long > $util.recursionLimit)
                                         return "maximum nesting depth exceeded";
-                                    if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                    if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
                                         if (typeof message.enabled !== "boolean")
                                             return "enabled: boolean expected";
-                                    if (message.dayOfMonth != null && message.hasOwnProperty("dayOfMonth"))
+                                    if (message.dayOfMonth != null && Object.hasOwnProperty.call(message, "dayOfMonth"))
                                         if (!$util.isInteger(message.dayOfMonth))
                                             return "dayOfMonth: integer expected";
-                                    if (message.timeOfDay != null && message.hasOwnProperty("timeOfDay")) {
+                                    if (message.timeOfDay != null && Object.hasOwnProperty.call(message, "timeOfDay")) {
                                         var error = $root.google.type.TimeOfDay.verify(message.timeOfDay, long + 1);
                                         if (error)
                                             return "timeOfDay." + error;
                                     }
-                                    if (message.dayOfWeek != null && message.hasOwnProperty("dayOfWeek"))
+                                    if (message.dayOfWeek != null && Object.hasOwnProperty.call(message, "dayOfWeek"))
                                         switch (message.dayOfWeek) {
                                         default:
                                             return "dayOfWeek: enum value expected";
@@ -5900,10 +6076,10 @@
                                         case 7:
                                             break;
                                         }
-                                    if (message.timeZone != null && message.hasOwnProperty("timeZone"))
+                                    if (message.timeZone != null && Object.hasOwnProperty.call(message, "timeZone"))
                                         if (!$util.isString(message.timeZone))
                                             return "timeZone: string expected";
-                                    if (message.frequency != null && message.hasOwnProperty("frequency"))
+                                    if (message.frequency != null && Object.hasOwnProperty.call(message, "frequency"))
                                         switch (message.frequency) {
                                         default:
                                             return "frequency: enum value expected";
@@ -5913,13 +6089,13 @@
                                         case 3:
                                             break;
                                         }
-                                    if (message.fetchUri != null && message.hasOwnProperty("fetchUri"))
+                                    if (message.fetchUri != null && Object.hasOwnProperty.call(message, "fetchUri"))
                                         if (!$util.isString(message.fetchUri))
                                             return "fetchUri: string expected";
-                                    if (message.username != null && message.hasOwnProperty("username"))
+                                    if (message.username != null && Object.hasOwnProperty.call(message, "username"))
                                         if (!$util.isString(message.username))
                                             return "username: string expected";
-                                    if (message.password != null && message.hasOwnProperty("password"))
+                                    if (message.password != null && Object.hasOwnProperty.call(message, "password"))
                                         if (!$util.isString(message.password))
                                             return "password: string expected";
                                     return null;
@@ -5936,6 +6112,8 @@
                                 FetchSettings.fromObject = function fromObject(object, long) {
                                     if (object instanceof $root.google.shopping.merchant.datasources.v1.FileInput.FetchSettings)
                                         return object;
+                                    if (!$util.isObject(object))
+                                        throw TypeError(".google.shopping.merchant.datasources.v1.FileInput.FetchSettings: object expected");
                                     if (long === undefined)
                                         long = 0;
                                     if (long > $util.recursionLimit)
@@ -5946,7 +6124,7 @@
                                     if (object.dayOfMonth != null)
                                         message.dayOfMonth = object.dayOfMonth | 0;
                                     if (object.timeOfDay != null) {
-                                        if (typeof object.timeOfDay !== "object")
+                                        if (!$util.isObject(object.timeOfDay))
                                             throw TypeError(".google.shopping.merchant.datasources.v1.FileInput.FetchSettings.timeOfDay: object expected");
                                         message.timeOfDay = $root.google.type.TimeOfDay.fromObject(object.timeOfDay, long + 1);
                                     }
@@ -6034,9 +6212,13 @@
                                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                                  * @returns {Object.<string,*>} Plain object
                                  */
-                                FetchSettings.toObject = function toObject(message, options) {
+                                FetchSettings.toObject = function toObject(message, options, q) {
                                     if (!options)
                                         options = {};
+                                    if (q === undefined)
+                                        q = 0;
+                                    if (q > $util.recursionLimit)
+                                        throw Error("max depth exceeded");
                                     var object = {};
                                     if (options.defaults) {
                                         object.enabled = false;
@@ -6049,23 +6231,23 @@
                                         object.username = "";
                                         object.password = "";
                                     }
-                                    if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                    if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
                                         object.enabled = message.enabled;
-                                    if (message.dayOfMonth != null && message.hasOwnProperty("dayOfMonth"))
+                                    if (message.dayOfMonth != null && Object.hasOwnProperty.call(message, "dayOfMonth"))
                                         object.dayOfMonth = message.dayOfMonth;
-                                    if (message.timeOfDay != null && message.hasOwnProperty("timeOfDay"))
-                                        object.timeOfDay = $root.google.type.TimeOfDay.toObject(message.timeOfDay, options);
-                                    if (message.dayOfWeek != null && message.hasOwnProperty("dayOfWeek"))
+                                    if (message.timeOfDay != null && Object.hasOwnProperty.call(message, "timeOfDay"))
+                                        object.timeOfDay = $root.google.type.TimeOfDay.toObject(message.timeOfDay, options, q + 1);
+                                    if (message.dayOfWeek != null && Object.hasOwnProperty.call(message, "dayOfWeek"))
                                         object.dayOfWeek = options.enums === String ? $root.google.type.DayOfWeek[message.dayOfWeek] === undefined ? message.dayOfWeek : $root.google.type.DayOfWeek[message.dayOfWeek] : message.dayOfWeek;
-                                    if (message.timeZone != null && message.hasOwnProperty("timeZone"))
+                                    if (message.timeZone != null && Object.hasOwnProperty.call(message, "timeZone"))
                                         object.timeZone = message.timeZone;
-                                    if (message.frequency != null && message.hasOwnProperty("frequency"))
+                                    if (message.frequency != null && Object.hasOwnProperty.call(message, "frequency"))
                                         object.frequency = options.enums === String ? $root.google.shopping.merchant.datasources.v1.FileInput.FetchSettings.Frequency[message.frequency] === undefined ? message.frequency : $root.google.shopping.merchant.datasources.v1.FileInput.FetchSettings.Frequency[message.frequency] : message.frequency;
-                                    if (message.fetchUri != null && message.hasOwnProperty("fetchUri"))
+                                    if (message.fetchUri != null && Object.hasOwnProperty.call(message, "fetchUri"))
                                         object.fetchUri = message.fetchUri;
-                                    if (message.username != null && message.hasOwnProperty("username"))
+                                    if (message.username != null && Object.hasOwnProperty.call(message, "username"))
                                         object.username = message.username;
-                                    if (message.password != null && message.hasOwnProperty("password"))
+                                    if (message.password != null && Object.hasOwnProperty.call(message, "password"))
                                         object.password = message.password;
                                     return object;
                                 };
@@ -6190,7 +6372,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(FileUploadsService.prototype.getFileUpload = function getFileUpload(request, callback) {
-                                return this.rpcCall(getFileUpload, $root.google.shopping.merchant.datasources.v1.GetFileUploadRequest, $root.google.shopping.merchant.datasources.v1.FileUpload, request, callback);
+                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, getFileUpload, $root.google.shopping.merchant.datasources.v1.GetFileUploadRequest, $root.google.shopping.merchant.datasources.v1.FileUpload, request, callback);
                             }, "name", { value: "GetFileUpload" });
     
                             /**
@@ -6323,9 +6505,13 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            FileUpload.encode = function encode(message, writer) {
+                            FileUpload.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                                 if (message.dataSourceId != null && Object.hasOwnProperty.call(message, "dataSourceId"))
@@ -6334,7 +6520,7 @@
                                     writer.uint32(/* id 3, wireType 0 =*/24).int32(message.processingState);
                                 if (message.issues != null && message.issues.length)
                                     for (var i = 0; i < message.issues.length; ++i)
-                                        $root.google.shopping.merchant.datasources.v1.FileUpload.Issue.encode(message.issues[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                        $root.google.shopping.merchant.datasources.v1.FileUpload.Issue.encode(message.issues[i], writer.uint32(/* id 4, wireType 2 =*/34).fork(), q + 1).ldelim();
                                 if (message.itemsTotal != null && Object.hasOwnProperty.call(message, "itemsTotal"))
                                     writer.uint32(/* id 5, wireType 0 =*/40).int64(message.itemsTotal);
                                 if (message.itemsCreated != null && Object.hasOwnProperty.call(message, "itemsCreated"))
@@ -6342,7 +6528,7 @@
                                 if (message.itemsUpdated != null && Object.hasOwnProperty.call(message, "itemsUpdated"))
                                     writer.uint32(/* id 7, wireType 0 =*/56).int64(message.itemsUpdated);
                                 if (message.uploadTime != null && Object.hasOwnProperty.call(message, "uploadTime"))
-                                    $root.google.protobuf.Timestamp.encode(message.uploadTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                    $root.google.protobuf.Timestamp.encode(message.uploadTime, writer.uint32(/* id 8, wireType 2 =*/66).fork(), q + 1).ldelim();
                                 return writer;
                             };
     
@@ -6356,7 +6542,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             FileUpload.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -6456,13 +6642,13 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
-                                if (message.name != null && message.hasOwnProperty("name"))
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
-                                if (message.dataSourceId != null && message.hasOwnProperty("dataSourceId"))
+                                if (message.dataSourceId != null && Object.hasOwnProperty.call(message, "dataSourceId"))
                                     if (!$util.isInteger(message.dataSourceId) && !(message.dataSourceId && $util.isInteger(message.dataSourceId.low) && $util.isInteger(message.dataSourceId.high)))
                                         return "dataSourceId: integer|Long expected";
-                                if (message.processingState != null && message.hasOwnProperty("processingState"))
+                                if (message.processingState != null && Object.hasOwnProperty.call(message, "processingState"))
                                     switch (message.processingState) {
                                     default:
                                         return "processingState: enum value expected";
@@ -6472,7 +6658,7 @@
                                     case 3:
                                         break;
                                     }
-                                if (message.issues != null && message.hasOwnProperty("issues")) {
+                                if (message.issues != null && Object.hasOwnProperty.call(message, "issues")) {
                                     if (!Array.isArray(message.issues))
                                         return "issues: array expected";
                                     for (var i = 0; i < message.issues.length; ++i) {
@@ -6481,16 +6667,16 @@
                                             return "issues." + error;
                                     }
                                 }
-                                if (message.itemsTotal != null && message.hasOwnProperty("itemsTotal"))
+                                if (message.itemsTotal != null && Object.hasOwnProperty.call(message, "itemsTotal"))
                                     if (!$util.isInteger(message.itemsTotal) && !(message.itemsTotal && $util.isInteger(message.itemsTotal.low) && $util.isInteger(message.itemsTotal.high)))
                                         return "itemsTotal: integer|Long expected";
-                                if (message.itemsCreated != null && message.hasOwnProperty("itemsCreated"))
+                                if (message.itemsCreated != null && Object.hasOwnProperty.call(message, "itemsCreated"))
                                     if (!$util.isInteger(message.itemsCreated) && !(message.itemsCreated && $util.isInteger(message.itemsCreated.low) && $util.isInteger(message.itemsCreated.high)))
                                         return "itemsCreated: integer|Long expected";
-                                if (message.itemsUpdated != null && message.hasOwnProperty("itemsUpdated"))
+                                if (message.itemsUpdated != null && Object.hasOwnProperty.call(message, "itemsUpdated"))
                                     if (!$util.isInteger(message.itemsUpdated) && !(message.itemsUpdated && $util.isInteger(message.itemsUpdated.low) && $util.isInteger(message.itemsUpdated.high)))
                                         return "itemsUpdated: integer|Long expected";
-                                if (message.uploadTime != null && message.hasOwnProperty("uploadTime")) {
+                                if (message.uploadTime != null && Object.hasOwnProperty.call(message, "uploadTime")) {
                                     var error = $root.google.protobuf.Timestamp.verify(message.uploadTime, long + 1);
                                     if (error)
                                         return "uploadTime." + error;
@@ -6509,6 +6695,8 @@
                             FileUpload.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.shopping.merchant.datasources.v1.FileUpload)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.shopping.merchant.datasources.v1.FileUpload: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -6518,7 +6706,7 @@
                                     message.name = String(object.name);
                                 if (object.dataSourceId != null)
                                     if ($util.Long)
-                                        (message.dataSourceId = $util.Long.fromValue(object.dataSourceId)).unsigned = false;
+                                        message.dataSourceId = $util.Long.fromValue(object.dataSourceId, false);
                                     else if (typeof object.dataSourceId === "string")
                                         message.dataSourceId = parseInt(object.dataSourceId, 10);
                                     else if (typeof object.dataSourceId === "number")
@@ -6554,14 +6742,14 @@
                                         throw TypeError(".google.shopping.merchant.datasources.v1.FileUpload.issues: array expected");
                                     message.issues = [];
                                     for (var i = 0; i < object.issues.length; ++i) {
-                                        if (typeof object.issues[i] !== "object")
+                                        if (!$util.isObject(object.issues[i]))
                                             throw TypeError(".google.shopping.merchant.datasources.v1.FileUpload.issues: object expected");
                                         message.issues[i] = $root.google.shopping.merchant.datasources.v1.FileUpload.Issue.fromObject(object.issues[i], long + 1);
                                     }
                                 }
                                 if (object.itemsTotal != null)
                                     if ($util.Long)
-                                        (message.itemsTotal = $util.Long.fromValue(object.itemsTotal)).unsigned = false;
+                                        message.itemsTotal = $util.Long.fromValue(object.itemsTotal, false);
                                     else if (typeof object.itemsTotal === "string")
                                         message.itemsTotal = parseInt(object.itemsTotal, 10);
                                     else if (typeof object.itemsTotal === "number")
@@ -6570,7 +6758,7 @@
                                         message.itemsTotal = new $util.LongBits(object.itemsTotal.low >>> 0, object.itemsTotal.high >>> 0).toNumber();
                                 if (object.itemsCreated != null)
                                     if ($util.Long)
-                                        (message.itemsCreated = $util.Long.fromValue(object.itemsCreated)).unsigned = false;
+                                        message.itemsCreated = $util.Long.fromValue(object.itemsCreated, false);
                                     else if (typeof object.itemsCreated === "string")
                                         message.itemsCreated = parseInt(object.itemsCreated, 10);
                                     else if (typeof object.itemsCreated === "number")
@@ -6579,7 +6767,7 @@
                                         message.itemsCreated = new $util.LongBits(object.itemsCreated.low >>> 0, object.itemsCreated.high >>> 0).toNumber();
                                 if (object.itemsUpdated != null)
                                     if ($util.Long)
-                                        (message.itemsUpdated = $util.Long.fromValue(object.itemsUpdated)).unsigned = false;
+                                        message.itemsUpdated = $util.Long.fromValue(object.itemsUpdated, false);
                                     else if (typeof object.itemsUpdated === "string")
                                         message.itemsUpdated = parseInt(object.itemsUpdated, 10);
                                     else if (typeof object.itemsUpdated === "number")
@@ -6587,7 +6775,7 @@
                                     else if (typeof object.itemsUpdated === "object")
                                         message.itemsUpdated = new $util.LongBits(object.itemsUpdated.low >>> 0, object.itemsUpdated.high >>> 0).toNumber();
                                 if (object.uploadTime != null) {
-                                    if (typeof object.uploadTime !== "object")
+                                    if (!$util.isObject(object.uploadTime))
                                         throw TypeError(".google.shopping.merchant.datasources.v1.FileUpload.uploadTime: object expected");
                                     message.uploadTime = $root.google.protobuf.Timestamp.fromObject(object.uploadTime, long + 1);
                                 }
@@ -6603,9 +6791,13 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            FileUpload.toObject = function toObject(message, options) {
+                            FileUpload.toObject = function toObject(message, options, q) {
                                 if (!options)
                                     options = {};
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 var object = {};
                                 if (options.arrays || options.defaults)
                                     object.issues = [];
@@ -6613,58 +6805,66 @@
                                     object.name = "";
                                     if ($util.Long) {
                                         var long = new $util.Long(0, 0, false);
-                                        object.dataSourceId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                        object.dataSourceId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                                     } else
-                                        object.dataSourceId = options.longs === String ? "0" : 0;
+                                        object.dataSourceId = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                                     object.processingState = options.enums === String ? "PROCESSING_STATE_UNSPECIFIED" : 0;
                                     if ($util.Long) {
                                         var long = new $util.Long(0, 0, false);
-                                        object.itemsTotal = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                        object.itemsTotal = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                                     } else
-                                        object.itemsTotal = options.longs === String ? "0" : 0;
+                                        object.itemsTotal = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                                     if ($util.Long) {
                                         var long = new $util.Long(0, 0, false);
-                                        object.itemsCreated = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                        object.itemsCreated = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                                     } else
-                                        object.itemsCreated = options.longs === String ? "0" : 0;
+                                        object.itemsCreated = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                                     if ($util.Long) {
                                         var long = new $util.Long(0, 0, false);
-                                        object.itemsUpdated = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                        object.itemsUpdated = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                                     } else
-                                        object.itemsUpdated = options.longs === String ? "0" : 0;
+                                        object.itemsUpdated = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                                     object.uploadTime = null;
                                 }
-                                if (message.name != null && message.hasOwnProperty("name"))
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     object.name = message.name;
-                                if (message.dataSourceId != null && message.hasOwnProperty("dataSourceId"))
-                                    if (typeof message.dataSourceId === "number")
+                                if (message.dataSourceId != null && Object.hasOwnProperty.call(message, "dataSourceId"))
+                                    if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                        object.dataSourceId = typeof message.dataSourceId === "number" ? BigInt(message.dataSourceId) : $util.Long.fromBits(message.dataSourceId.low >>> 0, message.dataSourceId.high >>> 0, false).toBigInt();
+                                    else if (typeof message.dataSourceId === "number")
                                         object.dataSourceId = options.longs === String ? String(message.dataSourceId) : message.dataSourceId;
                                     else
                                         object.dataSourceId = options.longs === String ? $util.Long.prototype.toString.call(message.dataSourceId) : options.longs === Number ? new $util.LongBits(message.dataSourceId.low >>> 0, message.dataSourceId.high >>> 0).toNumber() : message.dataSourceId;
-                                if (message.processingState != null && message.hasOwnProperty("processingState"))
+                                if (message.processingState != null && Object.hasOwnProperty.call(message, "processingState"))
                                     object.processingState = options.enums === String ? $root.google.shopping.merchant.datasources.v1.FileUpload.ProcessingState[message.processingState] === undefined ? message.processingState : $root.google.shopping.merchant.datasources.v1.FileUpload.ProcessingState[message.processingState] : message.processingState;
                                 if (message.issues && message.issues.length) {
                                     object.issues = [];
                                     for (var j = 0; j < message.issues.length; ++j)
-                                        object.issues[j] = $root.google.shopping.merchant.datasources.v1.FileUpload.Issue.toObject(message.issues[j], options);
+                                        object.issues[j] = $root.google.shopping.merchant.datasources.v1.FileUpload.Issue.toObject(message.issues[j], options, q + 1);
                                 }
-                                if (message.itemsTotal != null && message.hasOwnProperty("itemsTotal"))
-                                    if (typeof message.itemsTotal === "number")
+                                if (message.itemsTotal != null && Object.hasOwnProperty.call(message, "itemsTotal"))
+                                    if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                        object.itemsTotal = typeof message.itemsTotal === "number" ? BigInt(message.itemsTotal) : $util.Long.fromBits(message.itemsTotal.low >>> 0, message.itemsTotal.high >>> 0, false).toBigInt();
+                                    else if (typeof message.itemsTotal === "number")
                                         object.itemsTotal = options.longs === String ? String(message.itemsTotal) : message.itemsTotal;
                                     else
                                         object.itemsTotal = options.longs === String ? $util.Long.prototype.toString.call(message.itemsTotal) : options.longs === Number ? new $util.LongBits(message.itemsTotal.low >>> 0, message.itemsTotal.high >>> 0).toNumber() : message.itemsTotal;
-                                if (message.itemsCreated != null && message.hasOwnProperty("itemsCreated"))
-                                    if (typeof message.itemsCreated === "number")
+                                if (message.itemsCreated != null && Object.hasOwnProperty.call(message, "itemsCreated"))
+                                    if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                        object.itemsCreated = typeof message.itemsCreated === "number" ? BigInt(message.itemsCreated) : $util.Long.fromBits(message.itemsCreated.low >>> 0, message.itemsCreated.high >>> 0, false).toBigInt();
+                                    else if (typeof message.itemsCreated === "number")
                                         object.itemsCreated = options.longs === String ? String(message.itemsCreated) : message.itemsCreated;
                                     else
                                         object.itemsCreated = options.longs === String ? $util.Long.prototype.toString.call(message.itemsCreated) : options.longs === Number ? new $util.LongBits(message.itemsCreated.low >>> 0, message.itemsCreated.high >>> 0).toNumber() : message.itemsCreated;
-                                if (message.itemsUpdated != null && message.hasOwnProperty("itemsUpdated"))
-                                    if (typeof message.itemsUpdated === "number")
+                                if (message.itemsUpdated != null && Object.hasOwnProperty.call(message, "itemsUpdated"))
+                                    if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                        object.itemsUpdated = typeof message.itemsUpdated === "number" ? BigInt(message.itemsUpdated) : $util.Long.fromBits(message.itemsUpdated.low >>> 0, message.itemsUpdated.high >>> 0, false).toBigInt();
+                                    else if (typeof message.itemsUpdated === "number")
                                         object.itemsUpdated = options.longs === String ? String(message.itemsUpdated) : message.itemsUpdated;
                                     else
                                         object.itemsUpdated = options.longs === String ? $util.Long.prototype.toString.call(message.itemsUpdated) : options.longs === Number ? new $util.LongBits(message.itemsUpdated.low >>> 0, message.itemsUpdated.high >>> 0).toNumber() : message.itemsUpdated;
-                                if (message.uploadTime != null && message.hasOwnProperty("uploadTime"))
-                                    object.uploadTime = $root.google.protobuf.Timestamp.toObject(message.uploadTime, options);
+                                if (message.uploadTime != null && Object.hasOwnProperty.call(message, "uploadTime"))
+                                    object.uploadTime = $root.google.protobuf.Timestamp.toObject(message.uploadTime, options, q + 1);
                                 return object;
                             };
     
@@ -6792,9 +6992,13 @@
                                  * @param {$protobuf.Writer} [writer] Writer to encode to
                                  * @returns {$protobuf.Writer} Writer
                                  */
-                                Issue.encode = function encode(message, writer) {
+                                Issue.encode = function encode(message, writer, q) {
                                     if (!writer)
                                         writer = $Writer.create();
+                                    if (q === undefined)
+                                        q = 0;
+                                    if (q > $util.recursionLimit)
+                                        throw Error("max depth exceeded");
                                     if (message.title != null && Object.hasOwnProperty.call(message, "title"))
                                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.title);
                                     if (message.description != null && Object.hasOwnProperty.call(message, "description"))
@@ -6820,7 +7024,7 @@
                                  * @returns {$protobuf.Writer} Writer
                                  */
                                 Issue.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer).ldelim();
+                                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                                 };
     
                                 /**
@@ -6910,19 +7114,19 @@
                                         long = 0;
                                     if (long > $util.recursionLimit)
                                         return "maximum nesting depth exceeded";
-                                    if (message.title != null && message.hasOwnProperty("title"))
+                                    if (message.title != null && Object.hasOwnProperty.call(message, "title"))
                                         if (!$util.isString(message.title))
                                             return "title: string expected";
-                                    if (message.description != null && message.hasOwnProperty("description"))
+                                    if (message.description != null && Object.hasOwnProperty.call(message, "description"))
                                         if (!$util.isString(message.description))
                                             return "description: string expected";
-                                    if (message.code != null && message.hasOwnProperty("code"))
+                                    if (message.code != null && Object.hasOwnProperty.call(message, "code"))
                                         if (!$util.isString(message.code))
                                             return "code: string expected";
-                                    if (message.count != null && message.hasOwnProperty("count"))
+                                    if (message.count != null && Object.hasOwnProperty.call(message, "count"))
                                         if (!$util.isInteger(message.count) && !(message.count && $util.isInteger(message.count.low) && $util.isInteger(message.count.high)))
                                             return "count: integer|Long expected";
-                                    if (message.severity != null && message.hasOwnProperty("severity"))
+                                    if (message.severity != null && Object.hasOwnProperty.call(message, "severity"))
                                         switch (message.severity) {
                                         default:
                                             return "severity: enum value expected";
@@ -6931,7 +7135,7 @@
                                         case 2:
                                             break;
                                         }
-                                    if (message.documentationUri != null && message.hasOwnProperty("documentationUri"))
+                                    if (message.documentationUri != null && Object.hasOwnProperty.call(message, "documentationUri"))
                                         if (!$util.isString(message.documentationUri))
                                             return "documentationUri: string expected";
                                     return null;
@@ -6948,6 +7152,8 @@
                                 Issue.fromObject = function fromObject(object, long) {
                                     if (object instanceof $root.google.shopping.merchant.datasources.v1.FileUpload.Issue)
                                         return object;
+                                    if (!$util.isObject(object))
+                                        throw TypeError(".google.shopping.merchant.datasources.v1.FileUpload.Issue: object expected");
                                     if (long === undefined)
                                         long = 0;
                                     if (long > $util.recursionLimit)
@@ -6961,7 +7167,7 @@
                                         message.code = String(object.code);
                                     if (object.count != null)
                                         if ($util.Long)
-                                            (message.count = $util.Long.fromValue(object.count)).unsigned = false;
+                                            message.count = $util.Long.fromValue(object.count, false);
                                         else if (typeof object.count === "string")
                                             message.count = parseInt(object.count, 10);
                                         else if (typeof object.count === "number")
@@ -7002,9 +7208,13 @@
                                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                                  * @returns {Object.<string,*>} Plain object
                                  */
-                                Issue.toObject = function toObject(message, options) {
+                                Issue.toObject = function toObject(message, options, q) {
                                     if (!options)
                                         options = {};
+                                    if (q === undefined)
+                                        q = 0;
+                                    if (q > $util.recursionLimit)
+                                        throw Error("max depth exceeded");
                                     var object = {};
                                     if (options.defaults) {
                                         object.title = "";
@@ -7012,26 +7222,28 @@
                                         object.code = "";
                                         if ($util.Long) {
                                             var long = new $util.Long(0, 0, false);
-                                            object.count = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                            object.count = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                                         } else
-                                            object.count = options.longs === String ? "0" : 0;
+                                            object.count = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                                         object.severity = options.enums === String ? "SEVERITY_UNSPECIFIED" : 0;
                                         object.documentationUri = "";
                                     }
-                                    if (message.title != null && message.hasOwnProperty("title"))
+                                    if (message.title != null && Object.hasOwnProperty.call(message, "title"))
                                         object.title = message.title;
-                                    if (message.description != null && message.hasOwnProperty("description"))
+                                    if (message.description != null && Object.hasOwnProperty.call(message, "description"))
                                         object.description = message.description;
-                                    if (message.code != null && message.hasOwnProperty("code"))
+                                    if (message.code != null && Object.hasOwnProperty.call(message, "code"))
                                         object.code = message.code;
-                                    if (message.count != null && message.hasOwnProperty("count"))
-                                        if (typeof message.count === "number")
+                                    if (message.count != null && Object.hasOwnProperty.call(message, "count"))
+                                        if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                            object.count = typeof message.count === "number" ? BigInt(message.count) : $util.Long.fromBits(message.count.low >>> 0, message.count.high >>> 0, false).toBigInt();
+                                        else if (typeof message.count === "number")
                                             object.count = options.longs === String ? String(message.count) : message.count;
                                         else
                                             object.count = options.longs === String ? $util.Long.prototype.toString.call(message.count) : options.longs === Number ? new $util.LongBits(message.count.low >>> 0, message.count.high >>> 0).toNumber() : message.count;
-                                    if (message.severity != null && message.hasOwnProperty("severity"))
+                                    if (message.severity != null && Object.hasOwnProperty.call(message, "severity"))
                                         object.severity = options.enums === String ? $root.google.shopping.merchant.datasources.v1.FileUpload.Issue.Severity[message.severity] === undefined ? message.severity : $root.google.shopping.merchant.datasources.v1.FileUpload.Issue.Severity[message.severity] : message.severity;
-                                    if (message.documentationUri != null && message.hasOwnProperty("documentationUri"))
+                                    if (message.documentationUri != null && Object.hasOwnProperty.call(message, "documentationUri"))
                                         object.documentationUri = message.documentationUri;
                                     return object;
                                 };
@@ -7155,9 +7367,13 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            GetFileUploadRequest.encode = function encode(message, writer) {
+                            GetFileUploadRequest.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                                 return writer;
@@ -7173,7 +7389,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             GetFileUploadRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -7243,7 +7459,7 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
-                                if (message.name != null && message.hasOwnProperty("name"))
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
                                 return null;
@@ -7260,6 +7476,8 @@
                             GetFileUploadRequest.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.shopping.merchant.datasources.v1.GetFileUploadRequest)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.shopping.merchant.datasources.v1.GetFileUploadRequest: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -7279,13 +7497,17 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            GetFileUploadRequest.toObject = function toObject(message, options) {
+                            GetFileUploadRequest.toObject = function toObject(message, options, q) {
                                 if (!options)
                                     options = {};
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 var object = {};
                                 if (options.defaults)
                                     object.name = "";
-                                if (message.name != null && message.hasOwnProperty("name"))
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     object.name = message.name;
                                 return object;
                             };
@@ -7383,7 +7605,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(DataSourcesService.prototype.getDataSource = function getDataSource(request, callback) {
-                                return this.rpcCall(getDataSource, $root.google.shopping.merchant.datasources.v1beta.GetDataSourceRequest, $root.google.shopping.merchant.datasources.v1beta.DataSource, request, callback);
+                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, getDataSource, $root.google.shopping.merchant.datasources.v1beta.GetDataSourceRequest, $root.google.shopping.merchant.datasources.v1beta.DataSource, request, callback);
                             }, "name", { value: "GetDataSource" });
     
                             /**
@@ -7416,7 +7638,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(DataSourcesService.prototype.listDataSources = function listDataSources(request, callback) {
-                                return this.rpcCall(listDataSources, $root.google.shopping.merchant.datasources.v1beta.ListDataSourcesRequest, $root.google.shopping.merchant.datasources.v1beta.ListDataSourcesResponse, request, callback);
+                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, listDataSources, $root.google.shopping.merchant.datasources.v1beta.ListDataSourcesRequest, $root.google.shopping.merchant.datasources.v1beta.ListDataSourcesResponse, request, callback);
                             }, "name", { value: "ListDataSources" });
     
                             /**
@@ -7449,7 +7671,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(DataSourcesService.prototype.createDataSource = function createDataSource(request, callback) {
-                                return this.rpcCall(createDataSource, $root.google.shopping.merchant.datasources.v1beta.CreateDataSourceRequest, $root.google.shopping.merchant.datasources.v1beta.DataSource, request, callback);
+                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, createDataSource, $root.google.shopping.merchant.datasources.v1beta.CreateDataSourceRequest, $root.google.shopping.merchant.datasources.v1beta.DataSource, request, callback);
                             }, "name", { value: "CreateDataSource" });
     
                             /**
@@ -7482,7 +7704,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(DataSourcesService.prototype.updateDataSource = function updateDataSource(request, callback) {
-                                return this.rpcCall(updateDataSource, $root.google.shopping.merchant.datasources.v1beta.UpdateDataSourceRequest, $root.google.shopping.merchant.datasources.v1beta.DataSource, request, callback);
+                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, updateDataSource, $root.google.shopping.merchant.datasources.v1beta.UpdateDataSourceRequest, $root.google.shopping.merchant.datasources.v1beta.DataSource, request, callback);
                             }, "name", { value: "UpdateDataSource" });
     
                             /**
@@ -7515,7 +7737,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(DataSourcesService.prototype.deleteDataSource = function deleteDataSource(request, callback) {
-                                return this.rpcCall(deleteDataSource, $root.google.shopping.merchant.datasources.v1beta.DeleteDataSourceRequest, $root.google.protobuf.Empty, request, callback);
+                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, deleteDataSource, $root.google.shopping.merchant.datasources.v1beta.DeleteDataSourceRequest, $root.google.protobuf.Empty, request, callback);
                             }, "name", { value: "DeleteDataSource" });
     
                             /**
@@ -7548,7 +7770,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(DataSourcesService.prototype.fetchDataSource = function fetchDataSource(request, callback) {
-                                return this.rpcCall(fetchDataSource, $root.google.shopping.merchant.datasources.v1beta.FetchDataSourceRequest, $root.google.protobuf.Empty, request, callback);
+                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, fetchDataSource, $root.google.shopping.merchant.datasources.v1beta.FetchDataSourceRequest, $root.google.protobuf.Empty, request, callback);
                             }, "name", { value: "FetchDataSource" });
     
                             /**
@@ -7730,9 +7952,13 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            DataSource.encode = function encode(message, writer) {
+                            DataSource.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                                 if (message.dataSourceId != null && Object.hasOwnProperty.call(message, "dataSourceId"))
@@ -7740,23 +7966,23 @@
                                 if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
                                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.displayName);
                                 if (message.primaryProductDataSource != null && Object.hasOwnProperty.call(message, "primaryProductDataSource"))
-                                    $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.encode(message.primaryProductDataSource, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                    $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.encode(message.primaryProductDataSource, writer.uint32(/* id 4, wireType 2 =*/34).fork(), q + 1).ldelim();
                                 if (message.supplementalProductDataSource != null && Object.hasOwnProperty.call(message, "supplementalProductDataSource"))
-                                    $root.google.shopping.merchant.datasources.v1beta.SupplementalProductDataSource.encode(message.supplementalProductDataSource, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                    $root.google.shopping.merchant.datasources.v1beta.SupplementalProductDataSource.encode(message.supplementalProductDataSource, writer.uint32(/* id 5, wireType 2 =*/42).fork(), q + 1).ldelim();
                                 if (message.localInventoryDataSource != null && Object.hasOwnProperty.call(message, "localInventoryDataSource"))
-                                    $root.google.shopping.merchant.datasources.v1beta.LocalInventoryDataSource.encode(message.localInventoryDataSource, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                    $root.google.shopping.merchant.datasources.v1beta.LocalInventoryDataSource.encode(message.localInventoryDataSource, writer.uint32(/* id 6, wireType 2 =*/50).fork(), q + 1).ldelim();
                                 if (message.regionalInventoryDataSource != null && Object.hasOwnProperty.call(message, "regionalInventoryDataSource"))
-                                    $root.google.shopping.merchant.datasources.v1beta.RegionalInventoryDataSource.encode(message.regionalInventoryDataSource, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                    $root.google.shopping.merchant.datasources.v1beta.RegionalInventoryDataSource.encode(message.regionalInventoryDataSource, writer.uint32(/* id 7, wireType 2 =*/58).fork(), q + 1).ldelim();
                                 if (message.promotionDataSource != null && Object.hasOwnProperty.call(message, "promotionDataSource"))
-                                    $root.google.shopping.merchant.datasources.v1beta.PromotionDataSource.encode(message.promotionDataSource, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                    $root.google.shopping.merchant.datasources.v1beta.PromotionDataSource.encode(message.promotionDataSource, writer.uint32(/* id 8, wireType 2 =*/66).fork(), q + 1).ldelim();
                                 if (message.productReviewDataSource != null && Object.hasOwnProperty.call(message, "productReviewDataSource"))
-                                    $root.google.shopping.merchant.datasources.v1beta.ProductReviewDataSource.encode(message.productReviewDataSource, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                                    $root.google.shopping.merchant.datasources.v1beta.ProductReviewDataSource.encode(message.productReviewDataSource, writer.uint32(/* id 9, wireType 2 =*/74).fork(), q + 1).ldelim();
                                 if (message.input != null && Object.hasOwnProperty.call(message, "input"))
                                     writer.uint32(/* id 10, wireType 0 =*/80).int32(message.input);
                                 if (message.fileInput != null && Object.hasOwnProperty.call(message, "fileInput"))
-                                    $root.google.shopping.merchant.datasources.v1beta.FileInput.encode(message.fileInput, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                                    $root.google.shopping.merchant.datasources.v1beta.FileInput.encode(message.fileInput, writer.uint32(/* id 11, wireType 2 =*/90).fork(), q + 1).ldelim();
                                 if (message.merchantReviewDataSource != null && Object.hasOwnProperty.call(message, "merchantReviewDataSource"))
-                                    $root.google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource.encode(message.merchantReviewDataSource, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                                    $root.google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource.encode(message.merchantReviewDataSource, writer.uint32(/* id 12, wireType 2 =*/98).fork(), q + 1).ldelim();
                                 return writer;
                             };
     
@@ -7770,7 +7996,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             DataSource.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -7885,7 +8111,7 @@
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
                                 var properties = {};
-                                if (message.primaryProductDataSource != null && message.hasOwnProperty("primaryProductDataSource")) {
+                                if (message.primaryProductDataSource != null && Object.hasOwnProperty.call(message, "primaryProductDataSource")) {
                                     properties.Type = 1;
                                     {
                                         var error = $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.verify(message.primaryProductDataSource, long + 1);
@@ -7893,7 +8119,7 @@
                                             return "primaryProductDataSource." + error;
                                     }
                                 }
-                                if (message.supplementalProductDataSource != null && message.hasOwnProperty("supplementalProductDataSource")) {
+                                if (message.supplementalProductDataSource != null && Object.hasOwnProperty.call(message, "supplementalProductDataSource")) {
                                     if (properties.Type === 1)
                                         return "Type: multiple values";
                                     properties.Type = 1;
@@ -7903,7 +8129,7 @@
                                             return "supplementalProductDataSource." + error;
                                     }
                                 }
-                                if (message.localInventoryDataSource != null && message.hasOwnProperty("localInventoryDataSource")) {
+                                if (message.localInventoryDataSource != null && Object.hasOwnProperty.call(message, "localInventoryDataSource")) {
                                     if (properties.Type === 1)
                                         return "Type: multiple values";
                                     properties.Type = 1;
@@ -7913,7 +8139,7 @@
                                             return "localInventoryDataSource." + error;
                                     }
                                 }
-                                if (message.regionalInventoryDataSource != null && message.hasOwnProperty("regionalInventoryDataSource")) {
+                                if (message.regionalInventoryDataSource != null && Object.hasOwnProperty.call(message, "regionalInventoryDataSource")) {
                                     if (properties.Type === 1)
                                         return "Type: multiple values";
                                     properties.Type = 1;
@@ -7923,7 +8149,7 @@
                                             return "regionalInventoryDataSource." + error;
                                     }
                                 }
-                                if (message.promotionDataSource != null && message.hasOwnProperty("promotionDataSource")) {
+                                if (message.promotionDataSource != null && Object.hasOwnProperty.call(message, "promotionDataSource")) {
                                     if (properties.Type === 1)
                                         return "Type: multiple values";
                                     properties.Type = 1;
@@ -7933,7 +8159,7 @@
                                             return "promotionDataSource." + error;
                                     }
                                 }
-                                if (message.productReviewDataSource != null && message.hasOwnProperty("productReviewDataSource")) {
+                                if (message.productReviewDataSource != null && Object.hasOwnProperty.call(message, "productReviewDataSource")) {
                                     if (properties.Type === 1)
                                         return "Type: multiple values";
                                     properties.Type = 1;
@@ -7943,7 +8169,7 @@
                                             return "productReviewDataSource." + error;
                                     }
                                 }
-                                if (message.merchantReviewDataSource != null && message.hasOwnProperty("merchantReviewDataSource")) {
+                                if (message.merchantReviewDataSource != null && Object.hasOwnProperty.call(message, "merchantReviewDataSource")) {
                                     if (properties.Type === 1)
                                         return "Type: multiple values";
                                     properties.Type = 1;
@@ -7953,16 +8179,16 @@
                                             return "merchantReviewDataSource." + error;
                                     }
                                 }
-                                if (message.name != null && message.hasOwnProperty("name"))
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
-                                if (message.dataSourceId != null && message.hasOwnProperty("dataSourceId"))
+                                if (message.dataSourceId != null && Object.hasOwnProperty.call(message, "dataSourceId"))
                                     if (!$util.isInteger(message.dataSourceId) && !(message.dataSourceId && $util.isInteger(message.dataSourceId.low) && $util.isInteger(message.dataSourceId.high)))
                                         return "dataSourceId: integer|Long expected";
-                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
                                     if (!$util.isString(message.displayName))
                                         return "displayName: string expected";
-                                if (message.input != null && message.hasOwnProperty("input"))
+                                if (message.input != null && Object.hasOwnProperty.call(message, "input"))
                                     switch (message.input) {
                                     default:
                                         return "input: enum value expected";
@@ -7973,7 +8199,7 @@
                                     case 4:
                                         break;
                                     }
-                                if (message.fileInput != null && message.hasOwnProperty("fileInput")) {
+                                if (message.fileInput != null && Object.hasOwnProperty.call(message, "fileInput")) {
                                     var error = $root.google.shopping.merchant.datasources.v1beta.FileInput.verify(message.fileInput, long + 1);
                                     if (error)
                                         return "fileInput." + error;
@@ -7992,43 +8218,45 @@
                             DataSource.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.shopping.merchant.datasources.v1beta.DataSource)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.shopping.merchant.datasources.v1beta.DataSource: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.shopping.merchant.datasources.v1beta.DataSource();
                                 if (object.primaryProductDataSource != null) {
-                                    if (typeof object.primaryProductDataSource !== "object")
+                                    if (!$util.isObject(object.primaryProductDataSource))
                                         throw TypeError(".google.shopping.merchant.datasources.v1beta.DataSource.primaryProductDataSource: object expected");
                                     message.primaryProductDataSource = $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.fromObject(object.primaryProductDataSource, long + 1);
                                 }
                                 if (object.supplementalProductDataSource != null) {
-                                    if (typeof object.supplementalProductDataSource !== "object")
+                                    if (!$util.isObject(object.supplementalProductDataSource))
                                         throw TypeError(".google.shopping.merchant.datasources.v1beta.DataSource.supplementalProductDataSource: object expected");
                                     message.supplementalProductDataSource = $root.google.shopping.merchant.datasources.v1beta.SupplementalProductDataSource.fromObject(object.supplementalProductDataSource, long + 1);
                                 }
                                 if (object.localInventoryDataSource != null) {
-                                    if (typeof object.localInventoryDataSource !== "object")
+                                    if (!$util.isObject(object.localInventoryDataSource))
                                         throw TypeError(".google.shopping.merchant.datasources.v1beta.DataSource.localInventoryDataSource: object expected");
                                     message.localInventoryDataSource = $root.google.shopping.merchant.datasources.v1beta.LocalInventoryDataSource.fromObject(object.localInventoryDataSource, long + 1);
                                 }
                                 if (object.regionalInventoryDataSource != null) {
-                                    if (typeof object.regionalInventoryDataSource !== "object")
+                                    if (!$util.isObject(object.regionalInventoryDataSource))
                                         throw TypeError(".google.shopping.merchant.datasources.v1beta.DataSource.regionalInventoryDataSource: object expected");
                                     message.regionalInventoryDataSource = $root.google.shopping.merchant.datasources.v1beta.RegionalInventoryDataSource.fromObject(object.regionalInventoryDataSource, long + 1);
                                 }
                                 if (object.promotionDataSource != null) {
-                                    if (typeof object.promotionDataSource !== "object")
+                                    if (!$util.isObject(object.promotionDataSource))
                                         throw TypeError(".google.shopping.merchant.datasources.v1beta.DataSource.promotionDataSource: object expected");
                                     message.promotionDataSource = $root.google.shopping.merchant.datasources.v1beta.PromotionDataSource.fromObject(object.promotionDataSource, long + 1);
                                 }
                                 if (object.productReviewDataSource != null) {
-                                    if (typeof object.productReviewDataSource !== "object")
+                                    if (!$util.isObject(object.productReviewDataSource))
                                         throw TypeError(".google.shopping.merchant.datasources.v1beta.DataSource.productReviewDataSource: object expected");
                                     message.productReviewDataSource = $root.google.shopping.merchant.datasources.v1beta.ProductReviewDataSource.fromObject(object.productReviewDataSource, long + 1);
                                 }
                                 if (object.merchantReviewDataSource != null) {
-                                    if (typeof object.merchantReviewDataSource !== "object")
+                                    if (!$util.isObject(object.merchantReviewDataSource))
                                         throw TypeError(".google.shopping.merchant.datasources.v1beta.DataSource.merchantReviewDataSource: object expected");
                                     message.merchantReviewDataSource = $root.google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource.fromObject(object.merchantReviewDataSource, long + 1);
                                 }
@@ -8036,7 +8264,7 @@
                                     message.name = String(object.name);
                                 if (object.dataSourceId != null)
                                     if ($util.Long)
-                                        (message.dataSourceId = $util.Long.fromValue(object.dataSourceId)).unsigned = false;
+                                        message.dataSourceId = $util.Long.fromValue(object.dataSourceId, false);
                                     else if (typeof object.dataSourceId === "string")
                                         message.dataSourceId = parseInt(object.dataSourceId, 10);
                                     else if (typeof object.dataSourceId === "number")
@@ -8074,7 +8302,7 @@
                                     break;
                                 }
                                 if (object.fileInput != null) {
-                                    if (typeof object.fileInput !== "object")
+                                    if (!$util.isObject(object.fileInput))
                                         throw TypeError(".google.shopping.merchant.datasources.v1beta.DataSource.fileInput: object expected");
                                     message.fileInput = $root.google.shopping.merchant.datasources.v1beta.FileInput.fromObject(object.fileInput, long + 1);
                                 }
@@ -8090,66 +8318,72 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            DataSource.toObject = function toObject(message, options) {
+                            DataSource.toObject = function toObject(message, options, q) {
                                 if (!options)
                                     options = {};
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 var object = {};
                                 if (options.defaults) {
                                     object.name = "";
                                     if ($util.Long) {
                                         var long = new $util.Long(0, 0, false);
-                                        object.dataSourceId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                        object.dataSourceId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                                     } else
-                                        object.dataSourceId = options.longs === String ? "0" : 0;
+                                        object.dataSourceId = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                                     object.displayName = "";
                                     object.input = options.enums === String ? "INPUT_UNSPECIFIED" : 0;
                                     object.fileInput = null;
                                 }
-                                if (message.name != null && message.hasOwnProperty("name"))
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     object.name = message.name;
-                                if (message.dataSourceId != null && message.hasOwnProperty("dataSourceId"))
-                                    if (typeof message.dataSourceId === "number")
+                                if (message.dataSourceId != null && Object.hasOwnProperty.call(message, "dataSourceId"))
+                                    if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                        object.dataSourceId = typeof message.dataSourceId === "number" ? BigInt(message.dataSourceId) : $util.Long.fromBits(message.dataSourceId.low >>> 0, message.dataSourceId.high >>> 0, false).toBigInt();
+                                    else if (typeof message.dataSourceId === "number")
                                         object.dataSourceId = options.longs === String ? String(message.dataSourceId) : message.dataSourceId;
                                     else
                                         object.dataSourceId = options.longs === String ? $util.Long.prototype.toString.call(message.dataSourceId) : options.longs === Number ? new $util.LongBits(message.dataSourceId.low >>> 0, message.dataSourceId.high >>> 0).toNumber() : message.dataSourceId;
-                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
                                     object.displayName = message.displayName;
-                                if (message.primaryProductDataSource != null && message.hasOwnProperty("primaryProductDataSource")) {
-                                    object.primaryProductDataSource = $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.toObject(message.primaryProductDataSource, options);
+                                if (message.primaryProductDataSource != null && Object.hasOwnProperty.call(message, "primaryProductDataSource")) {
+                                    object.primaryProductDataSource = $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.toObject(message.primaryProductDataSource, options, q + 1);
                                     if (options.oneofs)
                                         object.Type = "primaryProductDataSource";
                                 }
-                                if (message.supplementalProductDataSource != null && message.hasOwnProperty("supplementalProductDataSource")) {
-                                    object.supplementalProductDataSource = $root.google.shopping.merchant.datasources.v1beta.SupplementalProductDataSource.toObject(message.supplementalProductDataSource, options);
+                                if (message.supplementalProductDataSource != null && Object.hasOwnProperty.call(message, "supplementalProductDataSource")) {
+                                    object.supplementalProductDataSource = $root.google.shopping.merchant.datasources.v1beta.SupplementalProductDataSource.toObject(message.supplementalProductDataSource, options, q + 1);
                                     if (options.oneofs)
                                         object.Type = "supplementalProductDataSource";
                                 }
-                                if (message.localInventoryDataSource != null && message.hasOwnProperty("localInventoryDataSource")) {
-                                    object.localInventoryDataSource = $root.google.shopping.merchant.datasources.v1beta.LocalInventoryDataSource.toObject(message.localInventoryDataSource, options);
+                                if (message.localInventoryDataSource != null && Object.hasOwnProperty.call(message, "localInventoryDataSource")) {
+                                    object.localInventoryDataSource = $root.google.shopping.merchant.datasources.v1beta.LocalInventoryDataSource.toObject(message.localInventoryDataSource, options, q + 1);
                                     if (options.oneofs)
                                         object.Type = "localInventoryDataSource";
                                 }
-                                if (message.regionalInventoryDataSource != null && message.hasOwnProperty("regionalInventoryDataSource")) {
-                                    object.regionalInventoryDataSource = $root.google.shopping.merchant.datasources.v1beta.RegionalInventoryDataSource.toObject(message.regionalInventoryDataSource, options);
+                                if (message.regionalInventoryDataSource != null && Object.hasOwnProperty.call(message, "regionalInventoryDataSource")) {
+                                    object.regionalInventoryDataSource = $root.google.shopping.merchant.datasources.v1beta.RegionalInventoryDataSource.toObject(message.regionalInventoryDataSource, options, q + 1);
                                     if (options.oneofs)
                                         object.Type = "regionalInventoryDataSource";
                                 }
-                                if (message.promotionDataSource != null && message.hasOwnProperty("promotionDataSource")) {
-                                    object.promotionDataSource = $root.google.shopping.merchant.datasources.v1beta.PromotionDataSource.toObject(message.promotionDataSource, options);
+                                if (message.promotionDataSource != null && Object.hasOwnProperty.call(message, "promotionDataSource")) {
+                                    object.promotionDataSource = $root.google.shopping.merchant.datasources.v1beta.PromotionDataSource.toObject(message.promotionDataSource, options, q + 1);
                                     if (options.oneofs)
                                         object.Type = "promotionDataSource";
                                 }
-                                if (message.productReviewDataSource != null && message.hasOwnProperty("productReviewDataSource")) {
-                                    object.productReviewDataSource = $root.google.shopping.merchant.datasources.v1beta.ProductReviewDataSource.toObject(message.productReviewDataSource, options);
+                                if (message.productReviewDataSource != null && Object.hasOwnProperty.call(message, "productReviewDataSource")) {
+                                    object.productReviewDataSource = $root.google.shopping.merchant.datasources.v1beta.ProductReviewDataSource.toObject(message.productReviewDataSource, options, q + 1);
                                     if (options.oneofs)
                                         object.Type = "productReviewDataSource";
                                 }
-                                if (message.input != null && message.hasOwnProperty("input"))
+                                if (message.input != null && Object.hasOwnProperty.call(message, "input"))
                                     object.input = options.enums === String ? $root.google.shopping.merchant.datasources.v1beta.DataSource.Input[message.input] === undefined ? message.input : $root.google.shopping.merchant.datasources.v1beta.DataSource.Input[message.input] : message.input;
-                                if (message.fileInput != null && message.hasOwnProperty("fileInput"))
-                                    object.fileInput = $root.google.shopping.merchant.datasources.v1beta.FileInput.toObject(message.fileInput, options);
-                                if (message.merchantReviewDataSource != null && message.hasOwnProperty("merchantReviewDataSource")) {
-                                    object.merchantReviewDataSource = $root.google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource.toObject(message.merchantReviewDataSource, options);
+                                if (message.fileInput != null && Object.hasOwnProperty.call(message, "fileInput"))
+                                    object.fileInput = $root.google.shopping.merchant.datasources.v1beta.FileInput.toObject(message.fileInput, options, q + 1);
+                                if (message.merchantReviewDataSource != null && Object.hasOwnProperty.call(message, "merchantReviewDataSource")) {
+                                    object.merchantReviewDataSource = $root.google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource.toObject(message.merchantReviewDataSource, options, q + 1);
                                     if (options.oneofs)
                                         object.Type = "merchantReviewDataSource";
                                 }
@@ -8258,9 +8492,13 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            GetDataSourceRequest.encode = function encode(message, writer) {
+                            GetDataSourceRequest.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                                 return writer;
@@ -8276,7 +8514,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             GetDataSourceRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -8346,7 +8584,7 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
-                                if (message.name != null && message.hasOwnProperty("name"))
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
                                 return null;
@@ -8363,6 +8601,8 @@
                             GetDataSourceRequest.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.shopping.merchant.datasources.v1beta.GetDataSourceRequest)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.shopping.merchant.datasources.v1beta.GetDataSourceRequest: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -8382,13 +8622,17 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            GetDataSourceRequest.toObject = function toObject(message, options) {
+                            GetDataSourceRequest.toObject = function toObject(message, options, q) {
                                 if (!options)
                                     options = {};
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 var object = {};
                                 if (options.defaults)
                                     object.name = "";
-                                if (message.name != null && message.hasOwnProperty("name"))
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     object.name = message.name;
                                 return object;
                             };
@@ -8493,9 +8737,13 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            ListDataSourcesRequest.encode = function encode(message, writer) {
+                            ListDataSourcesRequest.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
                                 if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
@@ -8515,7 +8763,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ListDataSourcesRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -8593,13 +8841,13 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
-                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                     if (!$util.isString(message.parent))
                                         return "parent: string expected";
-                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
                                     if (!$util.isInteger(message.pageSize))
                                         return "pageSize: integer expected";
-                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                     if (!$util.isString(message.pageToken))
                                         return "pageToken: string expected";
                                 return null;
@@ -8616,6 +8864,8 @@
                             ListDataSourcesRequest.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.shopping.merchant.datasources.v1beta.ListDataSourcesRequest)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.shopping.merchant.datasources.v1beta.ListDataSourcesRequest: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -8639,20 +8889,24 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            ListDataSourcesRequest.toObject = function toObject(message, options) {
+                            ListDataSourcesRequest.toObject = function toObject(message, options, q) {
                                 if (!options)
                                     options = {};
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 var object = {};
                                 if (options.defaults) {
                                     object.parent = "";
                                     object.pageSize = 0;
                                     object.pageToken = "";
                                 }
-                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                     object.parent = message.parent;
-                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
                                     object.pageSize = message.pageSize;
-                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                     object.pageToken = message.pageToken;
                                 return object;
                             };
@@ -8749,12 +9003,16 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            ListDataSourcesResponse.encode = function encode(message, writer) {
+                            ListDataSourcesResponse.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 if (message.dataSources != null && message.dataSources.length)
                                     for (var i = 0; i < message.dataSources.length; ++i)
-                                        $root.google.shopping.merchant.datasources.v1beta.DataSource.encode(message.dataSources[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                        $root.google.shopping.merchant.datasources.v1beta.DataSource.encode(message.dataSources[i], writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                                 if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
                                 return writer;
@@ -8770,7 +9028,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ListDataSourcesResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -8846,7 +9104,7 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
-                                if (message.dataSources != null && message.hasOwnProperty("dataSources")) {
+                                if (message.dataSources != null && Object.hasOwnProperty.call(message, "dataSources")) {
                                     if (!Array.isArray(message.dataSources))
                                         return "dataSources: array expected";
                                     for (var i = 0; i < message.dataSources.length; ++i) {
@@ -8855,7 +9113,7 @@
                                             return "dataSources." + error;
                                     }
                                 }
-                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                                     if (!$util.isString(message.nextPageToken))
                                         return "nextPageToken: string expected";
                                 return null;
@@ -8872,6 +9130,8 @@
                             ListDataSourcesResponse.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.shopping.merchant.datasources.v1beta.ListDataSourcesResponse)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.shopping.merchant.datasources.v1beta.ListDataSourcesResponse: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -8882,7 +9142,7 @@
                                         throw TypeError(".google.shopping.merchant.datasources.v1beta.ListDataSourcesResponse.dataSources: array expected");
                                     message.dataSources = [];
                                     for (var i = 0; i < object.dataSources.length; ++i) {
-                                        if (typeof object.dataSources[i] !== "object")
+                                        if (!$util.isObject(object.dataSources[i]))
                                             throw TypeError(".google.shopping.merchant.datasources.v1beta.ListDataSourcesResponse.dataSources: object expected");
                                         message.dataSources[i] = $root.google.shopping.merchant.datasources.v1beta.DataSource.fromObject(object.dataSources[i], long + 1);
                                     }
@@ -8901,9 +9161,13 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            ListDataSourcesResponse.toObject = function toObject(message, options) {
+                            ListDataSourcesResponse.toObject = function toObject(message, options, q) {
                                 if (!options)
                                     options = {};
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 var object = {};
                                 if (options.arrays || options.defaults)
                                     object.dataSources = [];
@@ -8912,9 +9176,9 @@
                                 if (message.dataSources && message.dataSources.length) {
                                     object.dataSources = [];
                                     for (var j = 0; j < message.dataSources.length; ++j)
-                                        object.dataSources[j] = $root.google.shopping.merchant.datasources.v1beta.DataSource.toObject(message.dataSources[j], options);
+                                        object.dataSources[j] = $root.google.shopping.merchant.datasources.v1beta.DataSource.toObject(message.dataSources[j], options, q + 1);
                                 }
-                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                                     object.nextPageToken = message.nextPageToken;
                                 return object;
                             };
@@ -9010,13 +9274,17 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            CreateDataSourceRequest.encode = function encode(message, writer) {
+                            CreateDataSourceRequest.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
                                 if (message.dataSource != null && Object.hasOwnProperty.call(message, "dataSource"))
-                                    $root.google.shopping.merchant.datasources.v1beta.DataSource.encode(message.dataSource, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    $root.google.shopping.merchant.datasources.v1beta.DataSource.encode(message.dataSource, writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
                                 return writer;
                             };
     
@@ -9030,7 +9298,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             CreateDataSourceRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -9104,10 +9372,10 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
-                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                     if (!$util.isString(message.parent))
                                         return "parent: string expected";
-                                if (message.dataSource != null && message.hasOwnProperty("dataSource")) {
+                                if (message.dataSource != null && Object.hasOwnProperty.call(message, "dataSource")) {
                                     var error = $root.google.shopping.merchant.datasources.v1beta.DataSource.verify(message.dataSource, long + 1);
                                     if (error)
                                         return "dataSource." + error;
@@ -9126,6 +9394,8 @@
                             CreateDataSourceRequest.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.shopping.merchant.datasources.v1beta.CreateDataSourceRequest)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.shopping.merchant.datasources.v1beta.CreateDataSourceRequest: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -9134,7 +9404,7 @@
                                 if (object.parent != null)
                                     message.parent = String(object.parent);
                                 if (object.dataSource != null) {
-                                    if (typeof object.dataSource !== "object")
+                                    if (!$util.isObject(object.dataSource))
                                         throw TypeError(".google.shopping.merchant.datasources.v1beta.CreateDataSourceRequest.dataSource: object expected");
                                     message.dataSource = $root.google.shopping.merchant.datasources.v1beta.DataSource.fromObject(object.dataSource, long + 1);
                                 }
@@ -9150,18 +9420,22 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            CreateDataSourceRequest.toObject = function toObject(message, options) {
+                            CreateDataSourceRequest.toObject = function toObject(message, options, q) {
                                 if (!options)
                                     options = {};
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 var object = {};
                                 if (options.defaults) {
                                     object.parent = "";
                                     object.dataSource = null;
                                 }
-                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                     object.parent = message.parent;
-                                if (message.dataSource != null && message.hasOwnProperty("dataSource"))
-                                    object.dataSource = $root.google.shopping.merchant.datasources.v1beta.DataSource.toObject(message.dataSource, options);
+                                if (message.dataSource != null && Object.hasOwnProperty.call(message, "dataSource"))
+                                    object.dataSource = $root.google.shopping.merchant.datasources.v1beta.DataSource.toObject(message.dataSource, options, q + 1);
                                 return object;
                             };
     
@@ -9256,13 +9530,17 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            UpdateDataSourceRequest.encode = function encode(message, writer) {
+                            UpdateDataSourceRequest.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 if (message.dataSource != null && Object.hasOwnProperty.call(message, "dataSource"))
-                                    $root.google.shopping.merchant.datasources.v1beta.DataSource.encode(message.dataSource, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    $root.google.shopping.merchant.datasources.v1beta.DataSource.encode(message.dataSource, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                                 if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
-                                    $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
                                 return writer;
                             };
     
@@ -9276,7 +9554,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             UpdateDataSourceRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -9350,12 +9628,12 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
-                                if (message.dataSource != null && message.hasOwnProperty("dataSource")) {
+                                if (message.dataSource != null && Object.hasOwnProperty.call(message, "dataSource")) {
                                     var error = $root.google.shopping.merchant.datasources.v1beta.DataSource.verify(message.dataSource, long + 1);
                                     if (error)
                                         return "dataSource." + error;
                                 }
-                                if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask")) {
                                     var error = $root.google.protobuf.FieldMask.verify(message.updateMask, long + 1);
                                     if (error)
                                         return "updateMask." + error;
@@ -9374,18 +9652,20 @@
                             UpdateDataSourceRequest.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.shopping.merchant.datasources.v1beta.UpdateDataSourceRequest)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.shopping.merchant.datasources.v1beta.UpdateDataSourceRequest: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.shopping.merchant.datasources.v1beta.UpdateDataSourceRequest();
                                 if (object.dataSource != null) {
-                                    if (typeof object.dataSource !== "object")
+                                    if (!$util.isObject(object.dataSource))
                                         throw TypeError(".google.shopping.merchant.datasources.v1beta.UpdateDataSourceRequest.dataSource: object expected");
                                     message.dataSource = $root.google.shopping.merchant.datasources.v1beta.DataSource.fromObject(object.dataSource, long + 1);
                                 }
                                 if (object.updateMask != null) {
-                                    if (typeof object.updateMask !== "object")
+                                    if (!$util.isObject(object.updateMask))
                                         throw TypeError(".google.shopping.merchant.datasources.v1beta.UpdateDataSourceRequest.updateMask: object expected");
                                     message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask, long + 1);
                                 }
@@ -9401,18 +9681,22 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            UpdateDataSourceRequest.toObject = function toObject(message, options) {
+                            UpdateDataSourceRequest.toObject = function toObject(message, options, q) {
                                 if (!options)
                                     options = {};
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 var object = {};
                                 if (options.defaults) {
                                     object.dataSource = null;
                                     object.updateMask = null;
                                 }
-                                if (message.dataSource != null && message.hasOwnProperty("dataSource"))
-                                    object.dataSource = $root.google.shopping.merchant.datasources.v1beta.DataSource.toObject(message.dataSource, options);
-                                if (message.updateMask != null && message.hasOwnProperty("updateMask"))
-                                    object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                                if (message.dataSource != null && Object.hasOwnProperty.call(message, "dataSource"))
+                                    object.dataSource = $root.google.shopping.merchant.datasources.v1beta.DataSource.toObject(message.dataSource, options, q + 1);
+                                if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                    object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options, q + 1);
                                 return object;
                             };
     
@@ -9498,9 +9782,13 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            FetchDataSourceRequest.encode = function encode(message, writer) {
+                            FetchDataSourceRequest.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                                 return writer;
@@ -9516,7 +9804,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             FetchDataSourceRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -9586,7 +9874,7 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
-                                if (message.name != null && message.hasOwnProperty("name"))
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
                                 return null;
@@ -9603,6 +9891,8 @@
                             FetchDataSourceRequest.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.shopping.merchant.datasources.v1beta.FetchDataSourceRequest)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.shopping.merchant.datasources.v1beta.FetchDataSourceRequest: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -9622,13 +9912,17 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            FetchDataSourceRequest.toObject = function toObject(message, options) {
+                            FetchDataSourceRequest.toObject = function toObject(message, options, q) {
                                 if (!options)
                                     options = {};
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 var object = {};
                                 if (options.defaults)
                                     object.name = "";
-                                if (message.name != null && message.hasOwnProperty("name"))
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     object.name = message.name;
                                 return object;
                             };
@@ -9715,9 +10009,13 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            DeleteDataSourceRequest.encode = function encode(message, writer) {
+                            DeleteDataSourceRequest.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                                 return writer;
@@ -9733,7 +10031,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             DeleteDataSourceRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -9803,7 +10101,7 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
-                                if (message.name != null && message.hasOwnProperty("name"))
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
                                 return null;
@@ -9820,6 +10118,8 @@
                             DeleteDataSourceRequest.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.shopping.merchant.datasources.v1beta.DeleteDataSourceRequest)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.shopping.merchant.datasources.v1beta.DeleteDataSourceRequest: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -9839,13 +10139,17 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            DeleteDataSourceRequest.toObject = function toObject(message, options) {
+                            DeleteDataSourceRequest.toObject = function toObject(message, options, q) {
                                 if (!options)
                                     options = {};
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 var object = {};
                                 if (options.defaults)
                                     object.name = "";
-                                if (message.name != null && message.hasOwnProperty("name"))
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     object.name = message.name;
                                 return object;
                             };
@@ -9994,9 +10298,13 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            PrimaryProductDataSource.encode = function encode(message, writer) {
+                            PrimaryProductDataSource.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 if (message.channel != null && Object.hasOwnProperty.call(message, "channel"))
                                     writer.uint32(/* id 3, wireType 0 =*/24).int32(message.channel);
                                 if (message.feedLabel != null && Object.hasOwnProperty.call(message, "feedLabel"))
@@ -10007,10 +10315,10 @@
                                     for (var i = 0; i < message.countries.length; ++i)
                                         writer.uint32(/* id 6, wireType 2 =*/50).string(message.countries[i]);
                                 if (message.defaultRule != null && Object.hasOwnProperty.call(message, "defaultRule"))
-                                    $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.DefaultRule.encode(message.defaultRule, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                    $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.DefaultRule.encode(message.defaultRule, writer.uint32(/* id 7, wireType 2 =*/58).fork(), q + 1).ldelim();
                                 if (message.destinations != null && message.destinations.length)
                                     for (var i = 0; i < message.destinations.length; ++i)
-                                        $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination.encode(message.destinations[i], writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                                        $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination.encode(message.destinations[i], writer.uint32(/* id 10, wireType 2 =*/82).fork(), q + 1).ldelim();
                                 return writer;
                             };
     
@@ -10024,7 +10332,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             PrimaryProductDataSource.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -10119,7 +10427,7 @@
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
                                 var properties = {};
-                                if (message.channel != null && message.hasOwnProperty("channel"))
+                                if (message.channel != null && Object.hasOwnProperty.call(message, "channel"))
                                     switch (message.channel) {
                                     default:
                                         return "channel: enum value expected";
@@ -10129,29 +10437,29 @@
                                     case 3:
                                         break;
                                     }
-                                if (message.feedLabel != null && message.hasOwnProperty("feedLabel")) {
+                                if (message.feedLabel != null && Object.hasOwnProperty.call(message, "feedLabel")) {
                                     properties._feedLabel = 1;
                                     if (!$util.isString(message.feedLabel))
                                         return "feedLabel: string expected";
                                 }
-                                if (message.contentLanguage != null && message.hasOwnProperty("contentLanguage")) {
+                                if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage")) {
                                     properties._contentLanguage = 1;
                                     if (!$util.isString(message.contentLanguage))
                                         return "contentLanguage: string expected";
                                 }
-                                if (message.countries != null && message.hasOwnProperty("countries")) {
+                                if (message.countries != null && Object.hasOwnProperty.call(message, "countries")) {
                                     if (!Array.isArray(message.countries))
                                         return "countries: array expected";
                                     for (var i = 0; i < message.countries.length; ++i)
                                         if (!$util.isString(message.countries[i]))
                                             return "countries: string[] expected";
                                 }
-                                if (message.defaultRule != null && message.hasOwnProperty("defaultRule")) {
+                                if (message.defaultRule != null && Object.hasOwnProperty.call(message, "defaultRule")) {
                                     var error = $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.DefaultRule.verify(message.defaultRule, long + 1);
                                     if (error)
                                         return "defaultRule." + error;
                                 }
-                                if (message.destinations != null && message.hasOwnProperty("destinations")) {
+                                if (message.destinations != null && Object.hasOwnProperty.call(message, "destinations")) {
                                     if (!Array.isArray(message.destinations))
                                         return "destinations: array expected";
                                     for (var i = 0; i < message.destinations.length; ++i) {
@@ -10174,6 +10482,8 @@
                             PrimaryProductDataSource.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -10215,7 +10525,7 @@
                                         message.countries[i] = String(object.countries[i]);
                                 }
                                 if (object.defaultRule != null) {
-                                    if (typeof object.defaultRule !== "object")
+                                    if (!$util.isObject(object.defaultRule))
                                         throw TypeError(".google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.defaultRule: object expected");
                                     message.defaultRule = $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.DefaultRule.fromObject(object.defaultRule, long + 1);
                                 }
@@ -10224,7 +10534,7 @@
                                         throw TypeError(".google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.destinations: array expected");
                                     message.destinations = [];
                                     for (var i = 0; i < object.destinations.length; ++i) {
-                                        if (typeof object.destinations[i] !== "object")
+                                        if (!$util.isObject(object.destinations[i]))
                                             throw TypeError(".google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.destinations: object expected");
                                         message.destinations[i] = $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination.fromObject(object.destinations[i], long + 1);
                                     }
@@ -10241,9 +10551,13 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            PrimaryProductDataSource.toObject = function toObject(message, options) {
+                            PrimaryProductDataSource.toObject = function toObject(message, options, q) {
                                 if (!options)
                                     options = {};
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 var object = {};
                                 if (options.arrays || options.defaults) {
                                     object.countries = [];
@@ -10253,14 +10567,14 @@
                                     object.channel = options.enums === String ? "CHANNEL_UNSPECIFIED" : 0;
                                     object.defaultRule = null;
                                 }
-                                if (message.channel != null && message.hasOwnProperty("channel"))
+                                if (message.channel != null && Object.hasOwnProperty.call(message, "channel"))
                                     object.channel = options.enums === String ? $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Channel[message.channel] === undefined ? message.channel : $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Channel[message.channel] : message.channel;
-                                if (message.feedLabel != null && message.hasOwnProperty("feedLabel")) {
+                                if (message.feedLabel != null && Object.hasOwnProperty.call(message, "feedLabel")) {
                                     object.feedLabel = message.feedLabel;
                                     if (options.oneofs)
                                         object._feedLabel = "feedLabel";
                                 }
-                                if (message.contentLanguage != null && message.hasOwnProperty("contentLanguage")) {
+                                if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage")) {
                                     object.contentLanguage = message.contentLanguage;
                                     if (options.oneofs)
                                         object._contentLanguage = "contentLanguage";
@@ -10270,12 +10584,12 @@
                                     for (var j = 0; j < message.countries.length; ++j)
                                         object.countries[j] = message.countries[j];
                                 }
-                                if (message.defaultRule != null && message.hasOwnProperty("defaultRule"))
-                                    object.defaultRule = $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.DefaultRule.toObject(message.defaultRule, options);
+                                if (message.defaultRule != null && Object.hasOwnProperty.call(message, "defaultRule"))
+                                    object.defaultRule = $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.DefaultRule.toObject(message.defaultRule, options, q + 1);
                                 if (message.destinations && message.destinations.length) {
                                     object.destinations = [];
                                     for (var j = 0; j < message.destinations.length; ++j)
-                                        object.destinations[j] = $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination.toObject(message.destinations[j], options);
+                                        object.destinations[j] = $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination.toObject(message.destinations[j], options, q + 1);
                                 }
                                 return object;
                             };
@@ -10360,12 +10674,16 @@
                                  * @param {$protobuf.Writer} [writer] Writer to encode to
                                  * @returns {$protobuf.Writer} Writer
                                  */
-                                DefaultRule.encode = function encode(message, writer) {
+                                DefaultRule.encode = function encode(message, writer, q) {
                                     if (!writer)
                                         writer = $Writer.create();
+                                    if (q === undefined)
+                                        q = 0;
+                                    if (q > $util.recursionLimit)
+                                        throw Error("max depth exceeded");
                                     if (message.takeFromDataSources != null && message.takeFromDataSources.length)
                                         for (var i = 0; i < message.takeFromDataSources.length; ++i)
-                                            $root.google.shopping.merchant.datasources.v1beta.DataSourceReference.encode(message.takeFromDataSources[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                            $root.google.shopping.merchant.datasources.v1beta.DataSourceReference.encode(message.takeFromDataSources[i], writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                                     return writer;
                                 };
     
@@ -10379,7 +10697,7 @@
                                  * @returns {$protobuf.Writer} Writer
                                  */
                                 DefaultRule.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer).ldelim();
+                                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                                 };
     
                                 /**
@@ -10451,7 +10769,7 @@
                                         long = 0;
                                     if (long > $util.recursionLimit)
                                         return "maximum nesting depth exceeded";
-                                    if (message.takeFromDataSources != null && message.hasOwnProperty("takeFromDataSources")) {
+                                    if (message.takeFromDataSources != null && Object.hasOwnProperty.call(message, "takeFromDataSources")) {
                                         if (!Array.isArray(message.takeFromDataSources))
                                             return "takeFromDataSources: array expected";
                                         for (var i = 0; i < message.takeFromDataSources.length; ++i) {
@@ -10474,6 +10792,8 @@
                                 DefaultRule.fromObject = function fromObject(object, long) {
                                     if (object instanceof $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.DefaultRule)
                                         return object;
+                                    if (!$util.isObject(object))
+                                        throw TypeError(".google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.DefaultRule: object expected");
                                     if (long === undefined)
                                         long = 0;
                                     if (long > $util.recursionLimit)
@@ -10484,7 +10804,7 @@
                                             throw TypeError(".google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.DefaultRule.takeFromDataSources: array expected");
                                         message.takeFromDataSources = [];
                                         for (var i = 0; i < object.takeFromDataSources.length; ++i) {
-                                            if (typeof object.takeFromDataSources[i] !== "object")
+                                            if (!$util.isObject(object.takeFromDataSources[i]))
                                                 throw TypeError(".google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.DefaultRule.takeFromDataSources: object expected");
                                             message.takeFromDataSources[i] = $root.google.shopping.merchant.datasources.v1beta.DataSourceReference.fromObject(object.takeFromDataSources[i], long + 1);
                                         }
@@ -10501,16 +10821,20 @@
                                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                                  * @returns {Object.<string,*>} Plain object
                                  */
-                                DefaultRule.toObject = function toObject(message, options) {
+                                DefaultRule.toObject = function toObject(message, options, q) {
                                     if (!options)
                                         options = {};
+                                    if (q === undefined)
+                                        q = 0;
+                                    if (q > $util.recursionLimit)
+                                        throw Error("max depth exceeded");
                                     var object = {};
                                     if (options.arrays || options.defaults)
                                         object.takeFromDataSources = [];
                                     if (message.takeFromDataSources && message.takeFromDataSources.length) {
                                         object.takeFromDataSources = [];
                                         for (var j = 0; j < message.takeFromDataSources.length; ++j)
-                                            object.takeFromDataSources[j] = $root.google.shopping.merchant.datasources.v1beta.DataSourceReference.toObject(message.takeFromDataSources[j], options);
+                                            object.takeFromDataSources[j] = $root.google.shopping.merchant.datasources.v1beta.DataSourceReference.toObject(message.takeFromDataSources[j], options, q + 1);
                                     }
                                     return object;
                                 };
@@ -10606,9 +10930,13 @@
                                  * @param {$protobuf.Writer} [writer] Writer to encode to
                                  * @returns {$protobuf.Writer} Writer
                                  */
-                                Destination.encode = function encode(message, writer) {
+                                Destination.encode = function encode(message, writer, q) {
                                     if (!writer)
                                         writer = $Writer.create();
+                                    if (q === undefined)
+                                        q = 0;
+                                    if (q > $util.recursionLimit)
+                                        throw Error("max depth exceeded");
                                     if (message.destination != null && Object.hasOwnProperty.call(message, "destination"))
                                         writer.uint32(/* id 1, wireType 0 =*/8).int32(message.destination);
                                     if (message.state != null && Object.hasOwnProperty.call(message, "state"))
@@ -10626,7 +10954,7 @@
                                  * @returns {$protobuf.Writer} Writer
                                  */
                                 Destination.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer).ldelim();
+                                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                                 };
     
                                 /**
@@ -10700,7 +11028,7 @@
                                         long = 0;
                                     if (long > $util.recursionLimit)
                                         return "maximum nesting depth exceeded";
-                                    if (message.destination != null && message.hasOwnProperty("destination"))
+                                    if (message.destination != null && Object.hasOwnProperty.call(message, "destination"))
                                         switch (message.destination) {
                                         default:
                                             return "destination: enum value expected";
@@ -10719,7 +11047,7 @@
                                         case 12:
                                             break;
                                         }
-                                    if (message.state != null && message.hasOwnProperty("state"))
+                                    if (message.state != null && Object.hasOwnProperty.call(message, "state"))
                                         switch (message.state) {
                                         default:
                                             return "state: enum value expected";
@@ -10742,6 +11070,8 @@
                                 Destination.fromObject = function fromObject(object, long) {
                                     if (object instanceof $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination)
                                         return object;
+                                    if (!$util.isObject(object))
+                                        throw TypeError(".google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination: object expected");
                                     if (long === undefined)
                                         long = 0;
                                     if (long > $util.recursionLimit)
@@ -10839,17 +11169,21 @@
                                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                                  * @returns {Object.<string,*>} Plain object
                                  */
-                                Destination.toObject = function toObject(message, options) {
+                                Destination.toObject = function toObject(message, options, q) {
                                     if (!options)
                                         options = {};
+                                    if (q === undefined)
+                                        q = 0;
+                                    if (q > $util.recursionLimit)
+                                        throw Error("max depth exceeded");
                                     var object = {};
                                     if (options.defaults) {
                                         object.destination = options.enums === String ? "DESTINATION_ENUM_UNSPECIFIED" : 0;
                                         object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                                     }
-                                    if (message.destination != null && message.hasOwnProperty("destination"))
+                                    if (message.destination != null && Object.hasOwnProperty.call(message, "destination"))
                                         object.destination = options.enums === String ? $root.google.shopping.type.Destination.DestinationEnum[message.destination] === undefined ? message.destination : $root.google.shopping.type.Destination.DestinationEnum[message.destination] : message.destination;
-                                    if (message.state != null && message.hasOwnProperty("state"))
+                                    if (message.state != null && Object.hasOwnProperty.call(message, "state"))
                                         object.state = options.enums === String ? $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination.State[message.state] === undefined ? message.state : $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination.State[message.state] : message.state;
                                     return object;
                                 };
@@ -11007,16 +11341,20 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            SupplementalProductDataSource.encode = function encode(message, writer) {
+                            SupplementalProductDataSource.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 if (message.feedLabel != null && Object.hasOwnProperty.call(message, "feedLabel"))
                                     writer.uint32(/* id 4, wireType 2 =*/34).string(message.feedLabel);
                                 if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage"))
                                     writer.uint32(/* id 5, wireType 2 =*/42).string(message.contentLanguage);
                                 if (message.referencingPrimaryDataSources != null && message.referencingPrimaryDataSources.length)
                                     for (var i = 0; i < message.referencingPrimaryDataSources.length; ++i)
-                                        $root.google.shopping.merchant.datasources.v1beta.DataSourceReference.encode(message.referencingPrimaryDataSources[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                        $root.google.shopping.merchant.datasources.v1beta.DataSourceReference.encode(message.referencingPrimaryDataSources[i], writer.uint32(/* id 7, wireType 2 =*/58).fork(), q + 1).ldelim();
                                 return writer;
                             };
     
@@ -11030,7 +11368,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             SupplementalProductDataSource.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -11111,17 +11449,17 @@
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
                                 var properties = {};
-                                if (message.feedLabel != null && message.hasOwnProperty("feedLabel")) {
+                                if (message.feedLabel != null && Object.hasOwnProperty.call(message, "feedLabel")) {
                                     properties._feedLabel = 1;
                                     if (!$util.isString(message.feedLabel))
                                         return "feedLabel: string expected";
                                 }
-                                if (message.contentLanguage != null && message.hasOwnProperty("contentLanguage")) {
+                                if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage")) {
                                     properties._contentLanguage = 1;
                                     if (!$util.isString(message.contentLanguage))
                                         return "contentLanguage: string expected";
                                 }
-                                if (message.referencingPrimaryDataSources != null && message.hasOwnProperty("referencingPrimaryDataSources")) {
+                                if (message.referencingPrimaryDataSources != null && Object.hasOwnProperty.call(message, "referencingPrimaryDataSources")) {
                                     if (!Array.isArray(message.referencingPrimaryDataSources))
                                         return "referencingPrimaryDataSources: array expected";
                                     for (var i = 0; i < message.referencingPrimaryDataSources.length; ++i) {
@@ -11144,6 +11482,8 @@
                             SupplementalProductDataSource.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.shopping.merchant.datasources.v1beta.SupplementalProductDataSource)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.shopping.merchant.datasources.v1beta.SupplementalProductDataSource: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -11158,7 +11498,7 @@
                                         throw TypeError(".google.shopping.merchant.datasources.v1beta.SupplementalProductDataSource.referencingPrimaryDataSources: array expected");
                                     message.referencingPrimaryDataSources = [];
                                     for (var i = 0; i < object.referencingPrimaryDataSources.length; ++i) {
-                                        if (typeof object.referencingPrimaryDataSources[i] !== "object")
+                                        if (!$util.isObject(object.referencingPrimaryDataSources[i]))
                                             throw TypeError(".google.shopping.merchant.datasources.v1beta.SupplementalProductDataSource.referencingPrimaryDataSources: object expected");
                                         message.referencingPrimaryDataSources[i] = $root.google.shopping.merchant.datasources.v1beta.DataSourceReference.fromObject(object.referencingPrimaryDataSources[i], long + 1);
                                     }
@@ -11175,18 +11515,22 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            SupplementalProductDataSource.toObject = function toObject(message, options) {
+                            SupplementalProductDataSource.toObject = function toObject(message, options, q) {
                                 if (!options)
                                     options = {};
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 var object = {};
                                 if (options.arrays || options.defaults)
                                     object.referencingPrimaryDataSources = [];
-                                if (message.feedLabel != null && message.hasOwnProperty("feedLabel")) {
+                                if (message.feedLabel != null && Object.hasOwnProperty.call(message, "feedLabel")) {
                                     object.feedLabel = message.feedLabel;
                                     if (options.oneofs)
                                         object._feedLabel = "feedLabel";
                                 }
-                                if (message.contentLanguage != null && message.hasOwnProperty("contentLanguage")) {
+                                if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage")) {
                                     object.contentLanguage = message.contentLanguage;
                                     if (options.oneofs)
                                         object._contentLanguage = "contentLanguage";
@@ -11194,7 +11538,7 @@
                                 if (message.referencingPrimaryDataSources && message.referencingPrimaryDataSources.length) {
                                     object.referencingPrimaryDataSources = [];
                                     for (var j = 0; j < message.referencingPrimaryDataSources.length; ++j)
-                                        object.referencingPrimaryDataSources[j] = $root.google.shopping.merchant.datasources.v1beta.DataSourceReference.toObject(message.referencingPrimaryDataSources[j], options);
+                                        object.referencingPrimaryDataSources[j] = $root.google.shopping.merchant.datasources.v1beta.DataSourceReference.toObject(message.referencingPrimaryDataSources[j], options, q + 1);
                                 }
                                 return object;
                             };
@@ -11290,9 +11634,13 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            LocalInventoryDataSource.encode = function encode(message, writer) {
+                            LocalInventoryDataSource.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 if (message.feedLabel != null && Object.hasOwnProperty.call(message, "feedLabel"))
                                     writer.uint32(/* id 4, wireType 2 =*/34).string(message.feedLabel);
                                 if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage"))
@@ -11310,7 +11658,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             LocalInventoryDataSource.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -11384,10 +11732,10 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
-                                if (message.feedLabel != null && message.hasOwnProperty("feedLabel"))
+                                if (message.feedLabel != null && Object.hasOwnProperty.call(message, "feedLabel"))
                                     if (!$util.isString(message.feedLabel))
                                         return "feedLabel: string expected";
-                                if (message.contentLanguage != null && message.hasOwnProperty("contentLanguage"))
+                                if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage"))
                                     if (!$util.isString(message.contentLanguage))
                                         return "contentLanguage: string expected";
                                 return null;
@@ -11404,6 +11752,8 @@
                             LocalInventoryDataSource.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.shopping.merchant.datasources.v1beta.LocalInventoryDataSource)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.shopping.merchant.datasources.v1beta.LocalInventoryDataSource: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -11425,17 +11775,21 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            LocalInventoryDataSource.toObject = function toObject(message, options) {
+                            LocalInventoryDataSource.toObject = function toObject(message, options, q) {
                                 if (!options)
                                     options = {};
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 var object = {};
                                 if (options.defaults) {
                                     object.feedLabel = "";
                                     object.contentLanguage = "";
                                 }
-                                if (message.feedLabel != null && message.hasOwnProperty("feedLabel"))
+                                if (message.feedLabel != null && Object.hasOwnProperty.call(message, "feedLabel"))
                                     object.feedLabel = message.feedLabel;
-                                if (message.contentLanguage != null && message.hasOwnProperty("contentLanguage"))
+                                if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage"))
                                     object.contentLanguage = message.contentLanguage;
                                 return object;
                             };
@@ -11531,9 +11885,13 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            RegionalInventoryDataSource.encode = function encode(message, writer) {
+                            RegionalInventoryDataSource.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 if (message.feedLabel != null && Object.hasOwnProperty.call(message, "feedLabel"))
                                     writer.uint32(/* id 4, wireType 2 =*/34).string(message.feedLabel);
                                 if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage"))
@@ -11551,7 +11909,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             RegionalInventoryDataSource.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -11625,10 +11983,10 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
-                                if (message.feedLabel != null && message.hasOwnProperty("feedLabel"))
+                                if (message.feedLabel != null && Object.hasOwnProperty.call(message, "feedLabel"))
                                     if (!$util.isString(message.feedLabel))
                                         return "feedLabel: string expected";
-                                if (message.contentLanguage != null && message.hasOwnProperty("contentLanguage"))
+                                if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage"))
                                     if (!$util.isString(message.contentLanguage))
                                         return "contentLanguage: string expected";
                                 return null;
@@ -11645,6 +12003,8 @@
                             RegionalInventoryDataSource.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.shopping.merchant.datasources.v1beta.RegionalInventoryDataSource)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.shopping.merchant.datasources.v1beta.RegionalInventoryDataSource: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -11666,17 +12026,21 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            RegionalInventoryDataSource.toObject = function toObject(message, options) {
+                            RegionalInventoryDataSource.toObject = function toObject(message, options, q) {
                                 if (!options)
                                     options = {};
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 var object = {};
                                 if (options.defaults) {
                                     object.feedLabel = "";
                                     object.contentLanguage = "";
                                 }
-                                if (message.feedLabel != null && message.hasOwnProperty("feedLabel"))
+                                if (message.feedLabel != null && Object.hasOwnProperty.call(message, "feedLabel"))
                                     object.feedLabel = message.feedLabel;
-                                if (message.contentLanguage != null && message.hasOwnProperty("contentLanguage"))
+                                if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage"))
                                     object.contentLanguage = message.contentLanguage;
                                 return object;
                             };
@@ -11772,9 +12136,13 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            PromotionDataSource.encode = function encode(message, writer) {
+                            PromotionDataSource.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 if (message.targetCountry != null && Object.hasOwnProperty.call(message, "targetCountry"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.targetCountry);
                                 if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage"))
@@ -11792,7 +12160,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             PromotionDataSource.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -11866,10 +12234,10 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
-                                if (message.targetCountry != null && message.hasOwnProperty("targetCountry"))
+                                if (message.targetCountry != null && Object.hasOwnProperty.call(message, "targetCountry"))
                                     if (!$util.isString(message.targetCountry))
                                         return "targetCountry: string expected";
-                                if (message.contentLanguage != null && message.hasOwnProperty("contentLanguage"))
+                                if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage"))
                                     if (!$util.isString(message.contentLanguage))
                                         return "contentLanguage: string expected";
                                 return null;
@@ -11886,6 +12254,8 @@
                             PromotionDataSource.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.shopping.merchant.datasources.v1beta.PromotionDataSource)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.shopping.merchant.datasources.v1beta.PromotionDataSource: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -11907,17 +12277,21 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            PromotionDataSource.toObject = function toObject(message, options) {
+                            PromotionDataSource.toObject = function toObject(message, options, q) {
                                 if (!options)
                                     options = {};
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 var object = {};
                                 if (options.defaults) {
                                     object.targetCountry = "";
                                     object.contentLanguage = "";
                                 }
-                                if (message.targetCountry != null && message.hasOwnProperty("targetCountry"))
+                                if (message.targetCountry != null && Object.hasOwnProperty.call(message, "targetCountry"))
                                     object.targetCountry = message.targetCountry;
-                                if (message.contentLanguage != null && message.hasOwnProperty("contentLanguage"))
+                                if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage"))
                                     object.contentLanguage = message.contentLanguage;
                                 return object;
                             };
@@ -11995,9 +12369,13 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            ProductReviewDataSource.encode = function encode(message, writer) {
+                            ProductReviewDataSource.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 return writer;
                             };
     
@@ -12011,7 +12389,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ProductReviewDataSource.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -12091,10 +12469,6 @@
                             ProductReviewDataSource.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.shopping.merchant.datasources.v1beta.ProductReviewDataSource)
                                     return object;
-                                if (long === undefined)
-                                    long = 0;
-                                if (long > $util.recursionLimit)
-                                    throw Error("maximum nesting depth exceeded");
                                 return new $root.google.shopping.merchant.datasources.v1beta.ProductReviewDataSource();
                             };
     
@@ -12184,9 +12558,13 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            MerchantReviewDataSource.encode = function encode(message, writer) {
+                            MerchantReviewDataSource.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 return writer;
                             };
     
@@ -12200,7 +12578,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             MerchantReviewDataSource.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -12280,10 +12658,6 @@
                             MerchantReviewDataSource.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource)
                                     return object;
-                                if (long === undefined)
-                                    long = 0;
-                                if (long > $util.recursionLimit)
-                                    throw Error("maximum nesting depth exceeded");
                                 return new $root.google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource();
                             };
     
@@ -12414,9 +12788,13 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            DataSourceReference.encode = function encode(message, writer) {
+                            DataSourceReference.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 if (message.self != null && Object.hasOwnProperty.call(message, "self"))
                                     writer.uint32(/* id 1, wireType 0 =*/8).bool(message.self);
                                 if (message.supplementalDataSourceName != null && Object.hasOwnProperty.call(message, "supplementalDataSourceName"))
@@ -12436,7 +12814,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             DataSourceReference.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -12515,19 +12893,19 @@
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
                                 var properties = {};
-                                if (message.self != null && message.hasOwnProperty("self")) {
+                                if (message.self != null && Object.hasOwnProperty.call(message, "self")) {
                                     properties.dataSourceId = 1;
                                     if (typeof message.self !== "boolean")
                                         return "self: boolean expected";
                                 }
-                                if (message.primaryDataSourceName != null && message.hasOwnProperty("primaryDataSourceName")) {
+                                if (message.primaryDataSourceName != null && Object.hasOwnProperty.call(message, "primaryDataSourceName")) {
                                     if (properties.dataSourceId === 1)
                                         return "dataSourceId: multiple values";
                                     properties.dataSourceId = 1;
                                     if (!$util.isString(message.primaryDataSourceName))
                                         return "primaryDataSourceName: string expected";
                                 }
-                                if (message.supplementalDataSourceName != null && message.hasOwnProperty("supplementalDataSourceName")) {
+                                if (message.supplementalDataSourceName != null && Object.hasOwnProperty.call(message, "supplementalDataSourceName")) {
                                     if (properties.dataSourceId === 1)
                                         return "dataSourceId: multiple values";
                                     properties.dataSourceId = 1;
@@ -12548,6 +12926,8 @@
                             DataSourceReference.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.shopping.merchant.datasources.v1beta.DataSourceReference)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.shopping.merchant.datasources.v1beta.DataSourceReference: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -12571,21 +12951,25 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            DataSourceReference.toObject = function toObject(message, options) {
+                            DataSourceReference.toObject = function toObject(message, options, q) {
                                 if (!options)
                                     options = {};
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 var object = {};
-                                if (message.self != null && message.hasOwnProperty("self")) {
+                                if (message.self != null && Object.hasOwnProperty.call(message, "self")) {
                                     object.self = message.self;
                                     if (options.oneofs)
                                         object.dataSourceId = "self";
                                 }
-                                if (message.supplementalDataSourceName != null && message.hasOwnProperty("supplementalDataSourceName")) {
+                                if (message.supplementalDataSourceName != null && Object.hasOwnProperty.call(message, "supplementalDataSourceName")) {
                                     object.supplementalDataSourceName = message.supplementalDataSourceName;
                                     if (options.oneofs)
                                         object.dataSourceId = "supplementalDataSourceName";
                                 }
-                                if (message.primaryDataSourceName != null && message.hasOwnProperty("primaryDataSourceName")) {
+                                if (message.primaryDataSourceName != null && Object.hasOwnProperty.call(message, "primaryDataSourceName")) {
                                     object.primaryDataSourceName = message.primaryDataSourceName;
                                     if (options.oneofs)
                                         object.dataSourceId = "primaryDataSourceName";
@@ -12693,11 +13077,15 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            FileInput.encode = function encode(message, writer) {
+                            FileInput.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 if (message.fetchSettings != null && Object.hasOwnProperty.call(message, "fetchSettings"))
-                                    $root.google.shopping.merchant.datasources.v1beta.FileInput.FetchSettings.encode(message.fetchSettings, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    $root.google.shopping.merchant.datasources.v1beta.FileInput.FetchSettings.encode(message.fetchSettings, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                                 if (message.fileName != null && Object.hasOwnProperty.call(message, "fileName"))
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.fileName);
                                 if (message.fileInputType != null && Object.hasOwnProperty.call(message, "fileInputType"))
@@ -12715,7 +13103,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             FileInput.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -12793,15 +13181,15 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
-                                if (message.fetchSettings != null && message.hasOwnProperty("fetchSettings")) {
+                                if (message.fetchSettings != null && Object.hasOwnProperty.call(message, "fetchSettings")) {
                                     var error = $root.google.shopping.merchant.datasources.v1beta.FileInput.FetchSettings.verify(message.fetchSettings, long + 1);
                                     if (error)
                                         return "fetchSettings." + error;
                                 }
-                                if (message.fileName != null && message.hasOwnProperty("fileName"))
+                                if (message.fileName != null && Object.hasOwnProperty.call(message, "fileName"))
                                     if (!$util.isString(message.fileName))
                                         return "fileName: string expected";
-                                if (message.fileInputType != null && message.hasOwnProperty("fileInputType"))
+                                if (message.fileInputType != null && Object.hasOwnProperty.call(message, "fileInputType"))
                                     switch (message.fileInputType) {
                                     default:
                                         return "fileInputType: enum value expected";
@@ -12825,13 +13213,15 @@
                             FileInput.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.shopping.merchant.datasources.v1beta.FileInput)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.shopping.merchant.datasources.v1beta.FileInput: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.shopping.merchant.datasources.v1beta.FileInput();
                                 if (object.fetchSettings != null) {
-                                    if (typeof object.fetchSettings !== "object")
+                                    if (!$util.isObject(object.fetchSettings))
                                         throw TypeError(".google.shopping.merchant.datasources.v1beta.FileInput.fetchSettings: object expected");
                                     message.fetchSettings = $root.google.shopping.merchant.datasources.v1beta.FileInput.FetchSettings.fromObject(object.fetchSettings, long + 1);
                                 }
@@ -12873,20 +13263,24 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            FileInput.toObject = function toObject(message, options) {
+                            FileInput.toObject = function toObject(message, options, q) {
                                 if (!options)
                                     options = {};
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 var object = {};
                                 if (options.defaults) {
                                     object.fetchSettings = null;
                                     object.fileName = "";
                                     object.fileInputType = options.enums === String ? "FILE_INPUT_TYPE_UNSPECIFIED" : 0;
                                 }
-                                if (message.fetchSettings != null && message.hasOwnProperty("fetchSettings"))
-                                    object.fetchSettings = $root.google.shopping.merchant.datasources.v1beta.FileInput.FetchSettings.toObject(message.fetchSettings, options);
-                                if (message.fileName != null && message.hasOwnProperty("fileName"))
+                                if (message.fetchSettings != null && Object.hasOwnProperty.call(message, "fetchSettings"))
+                                    object.fetchSettings = $root.google.shopping.merchant.datasources.v1beta.FileInput.FetchSettings.toObject(message.fetchSettings, options, q + 1);
+                                if (message.fileName != null && Object.hasOwnProperty.call(message, "fileName"))
                                     object.fileName = message.fileName;
-                                if (message.fileInputType != null && message.hasOwnProperty("fileInputType"))
+                                if (message.fileInputType != null && Object.hasOwnProperty.call(message, "fileInputType"))
                                     object.fileInputType = options.enums === String ? $root.google.shopping.merchant.datasources.v1beta.FileInput.FileInputType[message.fileInputType] === undefined ? message.fileInputType : $root.google.shopping.merchant.datasources.v1beta.FileInput.FileInputType[message.fileInputType] : message.fileInputType;
                                 return object;
                             };
@@ -13042,15 +13436,19 @@
                                  * @param {$protobuf.Writer} [writer] Writer to encode to
                                  * @returns {$protobuf.Writer} Writer
                                  */
-                                FetchSettings.encode = function encode(message, writer) {
+                                FetchSettings.encode = function encode(message, writer, q) {
                                     if (!writer)
                                         writer = $Writer.create();
+                                    if (q === undefined)
+                                        q = 0;
+                                    if (q > $util.recursionLimit)
+                                        throw Error("max depth exceeded");
                                     if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
                                         writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
                                     if (message.dayOfMonth != null && Object.hasOwnProperty.call(message, "dayOfMonth"))
                                         writer.uint32(/* id 2, wireType 0 =*/16).int32(message.dayOfMonth);
                                     if (message.timeOfDay != null && Object.hasOwnProperty.call(message, "timeOfDay"))
-                                        $root.google.type.TimeOfDay.encode(message.timeOfDay, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                        $root.google.type.TimeOfDay.encode(message.timeOfDay, writer.uint32(/* id 3, wireType 2 =*/26).fork(), q + 1).ldelim();
                                     if (message.dayOfWeek != null && Object.hasOwnProperty.call(message, "dayOfWeek"))
                                         writer.uint32(/* id 4, wireType 0 =*/32).int32(message.dayOfWeek);
                                     if (message.timeZone != null && Object.hasOwnProperty.call(message, "timeZone"))
@@ -13076,7 +13474,7 @@
                                  * @returns {$protobuf.Writer} Writer
                                  */
                                 FetchSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer).ldelim();
+                                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                                 };
     
                                 /**
@@ -13178,18 +13576,18 @@
                                         long = 0;
                                     if (long > $util.recursionLimit)
                                         return "maximum nesting depth exceeded";
-                                    if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                    if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
                                         if (typeof message.enabled !== "boolean")
                                             return "enabled: boolean expected";
-                                    if (message.dayOfMonth != null && message.hasOwnProperty("dayOfMonth"))
+                                    if (message.dayOfMonth != null && Object.hasOwnProperty.call(message, "dayOfMonth"))
                                         if (!$util.isInteger(message.dayOfMonth))
                                             return "dayOfMonth: integer expected";
-                                    if (message.timeOfDay != null && message.hasOwnProperty("timeOfDay")) {
+                                    if (message.timeOfDay != null && Object.hasOwnProperty.call(message, "timeOfDay")) {
                                         var error = $root.google.type.TimeOfDay.verify(message.timeOfDay, long + 1);
                                         if (error)
                                             return "timeOfDay." + error;
                                     }
-                                    if (message.dayOfWeek != null && message.hasOwnProperty("dayOfWeek"))
+                                    if (message.dayOfWeek != null && Object.hasOwnProperty.call(message, "dayOfWeek"))
                                         switch (message.dayOfWeek) {
                                         default:
                                             return "dayOfWeek: enum value expected";
@@ -13203,10 +13601,10 @@
                                         case 7:
                                             break;
                                         }
-                                    if (message.timeZone != null && message.hasOwnProperty("timeZone"))
+                                    if (message.timeZone != null && Object.hasOwnProperty.call(message, "timeZone"))
                                         if (!$util.isString(message.timeZone))
                                             return "timeZone: string expected";
-                                    if (message.frequency != null && message.hasOwnProperty("frequency"))
+                                    if (message.frequency != null && Object.hasOwnProperty.call(message, "frequency"))
                                         switch (message.frequency) {
                                         default:
                                             return "frequency: enum value expected";
@@ -13216,13 +13614,13 @@
                                         case 3:
                                             break;
                                         }
-                                    if (message.fetchUri != null && message.hasOwnProperty("fetchUri"))
+                                    if (message.fetchUri != null && Object.hasOwnProperty.call(message, "fetchUri"))
                                         if (!$util.isString(message.fetchUri))
                                             return "fetchUri: string expected";
-                                    if (message.username != null && message.hasOwnProperty("username"))
+                                    if (message.username != null && Object.hasOwnProperty.call(message, "username"))
                                         if (!$util.isString(message.username))
                                             return "username: string expected";
-                                    if (message.password != null && message.hasOwnProperty("password"))
+                                    if (message.password != null && Object.hasOwnProperty.call(message, "password"))
                                         if (!$util.isString(message.password))
                                             return "password: string expected";
                                     return null;
@@ -13239,6 +13637,8 @@
                                 FetchSettings.fromObject = function fromObject(object, long) {
                                     if (object instanceof $root.google.shopping.merchant.datasources.v1beta.FileInput.FetchSettings)
                                         return object;
+                                    if (!$util.isObject(object))
+                                        throw TypeError(".google.shopping.merchant.datasources.v1beta.FileInput.FetchSettings: object expected");
                                     if (long === undefined)
                                         long = 0;
                                     if (long > $util.recursionLimit)
@@ -13249,7 +13649,7 @@
                                     if (object.dayOfMonth != null)
                                         message.dayOfMonth = object.dayOfMonth | 0;
                                     if (object.timeOfDay != null) {
-                                        if (typeof object.timeOfDay !== "object")
+                                        if (!$util.isObject(object.timeOfDay))
                                             throw TypeError(".google.shopping.merchant.datasources.v1beta.FileInput.FetchSettings.timeOfDay: object expected");
                                         message.timeOfDay = $root.google.type.TimeOfDay.fromObject(object.timeOfDay, long + 1);
                                     }
@@ -13337,9 +13737,13 @@
                                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                                  * @returns {Object.<string,*>} Plain object
                                  */
-                                FetchSettings.toObject = function toObject(message, options) {
+                                FetchSettings.toObject = function toObject(message, options, q) {
                                     if (!options)
                                         options = {};
+                                    if (q === undefined)
+                                        q = 0;
+                                    if (q > $util.recursionLimit)
+                                        throw Error("max depth exceeded");
                                     var object = {};
                                     if (options.defaults) {
                                         object.enabled = false;
@@ -13352,23 +13756,23 @@
                                         object.username = "";
                                         object.password = "";
                                     }
-                                    if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                    if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
                                         object.enabled = message.enabled;
-                                    if (message.dayOfMonth != null && message.hasOwnProperty("dayOfMonth"))
+                                    if (message.dayOfMonth != null && Object.hasOwnProperty.call(message, "dayOfMonth"))
                                         object.dayOfMonth = message.dayOfMonth;
-                                    if (message.timeOfDay != null && message.hasOwnProperty("timeOfDay"))
-                                        object.timeOfDay = $root.google.type.TimeOfDay.toObject(message.timeOfDay, options);
-                                    if (message.dayOfWeek != null && message.hasOwnProperty("dayOfWeek"))
+                                    if (message.timeOfDay != null && Object.hasOwnProperty.call(message, "timeOfDay"))
+                                        object.timeOfDay = $root.google.type.TimeOfDay.toObject(message.timeOfDay, options, q + 1);
+                                    if (message.dayOfWeek != null && Object.hasOwnProperty.call(message, "dayOfWeek"))
                                         object.dayOfWeek = options.enums === String ? $root.google.type.DayOfWeek[message.dayOfWeek] === undefined ? message.dayOfWeek : $root.google.type.DayOfWeek[message.dayOfWeek] : message.dayOfWeek;
-                                    if (message.timeZone != null && message.hasOwnProperty("timeZone"))
+                                    if (message.timeZone != null && Object.hasOwnProperty.call(message, "timeZone"))
                                         object.timeZone = message.timeZone;
-                                    if (message.frequency != null && message.hasOwnProperty("frequency"))
+                                    if (message.frequency != null && Object.hasOwnProperty.call(message, "frequency"))
                                         object.frequency = options.enums === String ? $root.google.shopping.merchant.datasources.v1beta.FileInput.FetchSettings.Frequency[message.frequency] === undefined ? message.frequency : $root.google.shopping.merchant.datasources.v1beta.FileInput.FetchSettings.Frequency[message.frequency] : message.frequency;
-                                    if (message.fetchUri != null && message.hasOwnProperty("fetchUri"))
+                                    if (message.fetchUri != null && Object.hasOwnProperty.call(message, "fetchUri"))
                                         object.fetchUri = message.fetchUri;
-                                    if (message.username != null && message.hasOwnProperty("username"))
+                                    if (message.username != null && Object.hasOwnProperty.call(message, "username"))
                                         object.username = message.username;
-                                    if (message.password != null && message.hasOwnProperty("password"))
+                                    if (message.password != null && Object.hasOwnProperty.call(message, "password"))
                                         object.password = message.password;
                                     return object;
                                 };
@@ -13493,7 +13897,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(FileUploadsService.prototype.getFileUpload = function getFileUpload(request, callback) {
-                                return this.rpcCall(getFileUpload, $root.google.shopping.merchant.datasources.v1beta.GetFileUploadRequest, $root.google.shopping.merchant.datasources.v1beta.FileUpload, request, callback);
+                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, getFileUpload, $root.google.shopping.merchant.datasources.v1beta.GetFileUploadRequest, $root.google.shopping.merchant.datasources.v1beta.FileUpload, request, callback);
                             }, "name", { value: "GetFileUpload" });
     
                             /**
@@ -13626,9 +14030,13 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            FileUpload.encode = function encode(message, writer) {
+                            FileUpload.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                                 if (message.dataSourceId != null && Object.hasOwnProperty.call(message, "dataSourceId"))
@@ -13637,7 +14045,7 @@
                                     writer.uint32(/* id 3, wireType 0 =*/24).int32(message.processingState);
                                 if (message.issues != null && message.issues.length)
                                     for (var i = 0; i < message.issues.length; ++i)
-                                        $root.google.shopping.merchant.datasources.v1beta.FileUpload.Issue.encode(message.issues[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                        $root.google.shopping.merchant.datasources.v1beta.FileUpload.Issue.encode(message.issues[i], writer.uint32(/* id 4, wireType 2 =*/34).fork(), q + 1).ldelim();
                                 if (message.itemsTotal != null && Object.hasOwnProperty.call(message, "itemsTotal"))
                                     writer.uint32(/* id 5, wireType 0 =*/40).int64(message.itemsTotal);
                                 if (message.itemsCreated != null && Object.hasOwnProperty.call(message, "itemsCreated"))
@@ -13645,7 +14053,7 @@
                                 if (message.itemsUpdated != null && Object.hasOwnProperty.call(message, "itemsUpdated"))
                                     writer.uint32(/* id 7, wireType 0 =*/56).int64(message.itemsUpdated);
                                 if (message.uploadTime != null && Object.hasOwnProperty.call(message, "uploadTime"))
-                                    $root.google.protobuf.Timestamp.encode(message.uploadTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                    $root.google.protobuf.Timestamp.encode(message.uploadTime, writer.uint32(/* id 8, wireType 2 =*/66).fork(), q + 1).ldelim();
                                 return writer;
                             };
     
@@ -13659,7 +14067,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             FileUpload.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -13759,13 +14167,13 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
-                                if (message.name != null && message.hasOwnProperty("name"))
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
-                                if (message.dataSourceId != null && message.hasOwnProperty("dataSourceId"))
+                                if (message.dataSourceId != null && Object.hasOwnProperty.call(message, "dataSourceId"))
                                     if (!$util.isInteger(message.dataSourceId) && !(message.dataSourceId && $util.isInteger(message.dataSourceId.low) && $util.isInteger(message.dataSourceId.high)))
                                         return "dataSourceId: integer|Long expected";
-                                if (message.processingState != null && message.hasOwnProperty("processingState"))
+                                if (message.processingState != null && Object.hasOwnProperty.call(message, "processingState"))
                                     switch (message.processingState) {
                                     default:
                                         return "processingState: enum value expected";
@@ -13775,7 +14183,7 @@
                                     case 3:
                                         break;
                                     }
-                                if (message.issues != null && message.hasOwnProperty("issues")) {
+                                if (message.issues != null && Object.hasOwnProperty.call(message, "issues")) {
                                     if (!Array.isArray(message.issues))
                                         return "issues: array expected";
                                     for (var i = 0; i < message.issues.length; ++i) {
@@ -13784,16 +14192,16 @@
                                             return "issues." + error;
                                     }
                                 }
-                                if (message.itemsTotal != null && message.hasOwnProperty("itemsTotal"))
+                                if (message.itemsTotal != null && Object.hasOwnProperty.call(message, "itemsTotal"))
                                     if (!$util.isInteger(message.itemsTotal) && !(message.itemsTotal && $util.isInteger(message.itemsTotal.low) && $util.isInteger(message.itemsTotal.high)))
                                         return "itemsTotal: integer|Long expected";
-                                if (message.itemsCreated != null && message.hasOwnProperty("itemsCreated"))
+                                if (message.itemsCreated != null && Object.hasOwnProperty.call(message, "itemsCreated"))
                                     if (!$util.isInteger(message.itemsCreated) && !(message.itemsCreated && $util.isInteger(message.itemsCreated.low) && $util.isInteger(message.itemsCreated.high)))
                                         return "itemsCreated: integer|Long expected";
-                                if (message.itemsUpdated != null && message.hasOwnProperty("itemsUpdated"))
+                                if (message.itemsUpdated != null && Object.hasOwnProperty.call(message, "itemsUpdated"))
                                     if (!$util.isInteger(message.itemsUpdated) && !(message.itemsUpdated && $util.isInteger(message.itemsUpdated.low) && $util.isInteger(message.itemsUpdated.high)))
                                         return "itemsUpdated: integer|Long expected";
-                                if (message.uploadTime != null && message.hasOwnProperty("uploadTime")) {
+                                if (message.uploadTime != null && Object.hasOwnProperty.call(message, "uploadTime")) {
                                     var error = $root.google.protobuf.Timestamp.verify(message.uploadTime, long + 1);
                                     if (error)
                                         return "uploadTime." + error;
@@ -13812,6 +14220,8 @@
                             FileUpload.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.shopping.merchant.datasources.v1beta.FileUpload)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.shopping.merchant.datasources.v1beta.FileUpload: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -13821,7 +14231,7 @@
                                     message.name = String(object.name);
                                 if (object.dataSourceId != null)
                                     if ($util.Long)
-                                        (message.dataSourceId = $util.Long.fromValue(object.dataSourceId)).unsigned = false;
+                                        message.dataSourceId = $util.Long.fromValue(object.dataSourceId, false);
                                     else if (typeof object.dataSourceId === "string")
                                         message.dataSourceId = parseInt(object.dataSourceId, 10);
                                     else if (typeof object.dataSourceId === "number")
@@ -13857,14 +14267,14 @@
                                         throw TypeError(".google.shopping.merchant.datasources.v1beta.FileUpload.issues: array expected");
                                     message.issues = [];
                                     for (var i = 0; i < object.issues.length; ++i) {
-                                        if (typeof object.issues[i] !== "object")
+                                        if (!$util.isObject(object.issues[i]))
                                             throw TypeError(".google.shopping.merchant.datasources.v1beta.FileUpload.issues: object expected");
                                         message.issues[i] = $root.google.shopping.merchant.datasources.v1beta.FileUpload.Issue.fromObject(object.issues[i], long + 1);
                                     }
                                 }
                                 if (object.itemsTotal != null)
                                     if ($util.Long)
-                                        (message.itemsTotal = $util.Long.fromValue(object.itemsTotal)).unsigned = false;
+                                        message.itemsTotal = $util.Long.fromValue(object.itemsTotal, false);
                                     else if (typeof object.itemsTotal === "string")
                                         message.itemsTotal = parseInt(object.itemsTotal, 10);
                                     else if (typeof object.itemsTotal === "number")
@@ -13873,7 +14283,7 @@
                                         message.itemsTotal = new $util.LongBits(object.itemsTotal.low >>> 0, object.itemsTotal.high >>> 0).toNumber();
                                 if (object.itemsCreated != null)
                                     if ($util.Long)
-                                        (message.itemsCreated = $util.Long.fromValue(object.itemsCreated)).unsigned = false;
+                                        message.itemsCreated = $util.Long.fromValue(object.itemsCreated, false);
                                     else if (typeof object.itemsCreated === "string")
                                         message.itemsCreated = parseInt(object.itemsCreated, 10);
                                     else if (typeof object.itemsCreated === "number")
@@ -13882,7 +14292,7 @@
                                         message.itemsCreated = new $util.LongBits(object.itemsCreated.low >>> 0, object.itemsCreated.high >>> 0).toNumber();
                                 if (object.itemsUpdated != null)
                                     if ($util.Long)
-                                        (message.itemsUpdated = $util.Long.fromValue(object.itemsUpdated)).unsigned = false;
+                                        message.itemsUpdated = $util.Long.fromValue(object.itemsUpdated, false);
                                     else if (typeof object.itemsUpdated === "string")
                                         message.itemsUpdated = parseInt(object.itemsUpdated, 10);
                                     else if (typeof object.itemsUpdated === "number")
@@ -13890,7 +14300,7 @@
                                     else if (typeof object.itemsUpdated === "object")
                                         message.itemsUpdated = new $util.LongBits(object.itemsUpdated.low >>> 0, object.itemsUpdated.high >>> 0).toNumber();
                                 if (object.uploadTime != null) {
-                                    if (typeof object.uploadTime !== "object")
+                                    if (!$util.isObject(object.uploadTime))
                                         throw TypeError(".google.shopping.merchant.datasources.v1beta.FileUpload.uploadTime: object expected");
                                     message.uploadTime = $root.google.protobuf.Timestamp.fromObject(object.uploadTime, long + 1);
                                 }
@@ -13906,9 +14316,13 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            FileUpload.toObject = function toObject(message, options) {
+                            FileUpload.toObject = function toObject(message, options, q) {
                                 if (!options)
                                     options = {};
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 var object = {};
                                 if (options.arrays || options.defaults)
                                     object.issues = [];
@@ -13916,58 +14330,66 @@
                                     object.name = "";
                                     if ($util.Long) {
                                         var long = new $util.Long(0, 0, false);
-                                        object.dataSourceId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                        object.dataSourceId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                                     } else
-                                        object.dataSourceId = options.longs === String ? "0" : 0;
+                                        object.dataSourceId = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                                     object.processingState = options.enums === String ? "PROCESSING_STATE_UNSPECIFIED" : 0;
                                     if ($util.Long) {
                                         var long = new $util.Long(0, 0, false);
-                                        object.itemsTotal = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                        object.itemsTotal = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                                     } else
-                                        object.itemsTotal = options.longs === String ? "0" : 0;
+                                        object.itemsTotal = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                                     if ($util.Long) {
                                         var long = new $util.Long(0, 0, false);
-                                        object.itemsCreated = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                        object.itemsCreated = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                                     } else
-                                        object.itemsCreated = options.longs === String ? "0" : 0;
+                                        object.itemsCreated = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                                     if ($util.Long) {
                                         var long = new $util.Long(0, 0, false);
-                                        object.itemsUpdated = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                        object.itemsUpdated = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                                     } else
-                                        object.itemsUpdated = options.longs === String ? "0" : 0;
+                                        object.itemsUpdated = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                                     object.uploadTime = null;
                                 }
-                                if (message.name != null && message.hasOwnProperty("name"))
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     object.name = message.name;
-                                if (message.dataSourceId != null && message.hasOwnProperty("dataSourceId"))
-                                    if (typeof message.dataSourceId === "number")
+                                if (message.dataSourceId != null && Object.hasOwnProperty.call(message, "dataSourceId"))
+                                    if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                        object.dataSourceId = typeof message.dataSourceId === "number" ? BigInt(message.dataSourceId) : $util.Long.fromBits(message.dataSourceId.low >>> 0, message.dataSourceId.high >>> 0, false).toBigInt();
+                                    else if (typeof message.dataSourceId === "number")
                                         object.dataSourceId = options.longs === String ? String(message.dataSourceId) : message.dataSourceId;
                                     else
                                         object.dataSourceId = options.longs === String ? $util.Long.prototype.toString.call(message.dataSourceId) : options.longs === Number ? new $util.LongBits(message.dataSourceId.low >>> 0, message.dataSourceId.high >>> 0).toNumber() : message.dataSourceId;
-                                if (message.processingState != null && message.hasOwnProperty("processingState"))
+                                if (message.processingState != null && Object.hasOwnProperty.call(message, "processingState"))
                                     object.processingState = options.enums === String ? $root.google.shopping.merchant.datasources.v1beta.FileUpload.ProcessingState[message.processingState] === undefined ? message.processingState : $root.google.shopping.merchant.datasources.v1beta.FileUpload.ProcessingState[message.processingState] : message.processingState;
                                 if (message.issues && message.issues.length) {
                                     object.issues = [];
                                     for (var j = 0; j < message.issues.length; ++j)
-                                        object.issues[j] = $root.google.shopping.merchant.datasources.v1beta.FileUpload.Issue.toObject(message.issues[j], options);
+                                        object.issues[j] = $root.google.shopping.merchant.datasources.v1beta.FileUpload.Issue.toObject(message.issues[j], options, q + 1);
                                 }
-                                if (message.itemsTotal != null && message.hasOwnProperty("itemsTotal"))
-                                    if (typeof message.itemsTotal === "number")
+                                if (message.itemsTotal != null && Object.hasOwnProperty.call(message, "itemsTotal"))
+                                    if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                        object.itemsTotal = typeof message.itemsTotal === "number" ? BigInt(message.itemsTotal) : $util.Long.fromBits(message.itemsTotal.low >>> 0, message.itemsTotal.high >>> 0, false).toBigInt();
+                                    else if (typeof message.itemsTotal === "number")
                                         object.itemsTotal = options.longs === String ? String(message.itemsTotal) : message.itemsTotal;
                                     else
                                         object.itemsTotal = options.longs === String ? $util.Long.prototype.toString.call(message.itemsTotal) : options.longs === Number ? new $util.LongBits(message.itemsTotal.low >>> 0, message.itemsTotal.high >>> 0).toNumber() : message.itemsTotal;
-                                if (message.itemsCreated != null && message.hasOwnProperty("itemsCreated"))
-                                    if (typeof message.itemsCreated === "number")
+                                if (message.itemsCreated != null && Object.hasOwnProperty.call(message, "itemsCreated"))
+                                    if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                        object.itemsCreated = typeof message.itemsCreated === "number" ? BigInt(message.itemsCreated) : $util.Long.fromBits(message.itemsCreated.low >>> 0, message.itemsCreated.high >>> 0, false).toBigInt();
+                                    else if (typeof message.itemsCreated === "number")
                                         object.itemsCreated = options.longs === String ? String(message.itemsCreated) : message.itemsCreated;
                                     else
                                         object.itemsCreated = options.longs === String ? $util.Long.prototype.toString.call(message.itemsCreated) : options.longs === Number ? new $util.LongBits(message.itemsCreated.low >>> 0, message.itemsCreated.high >>> 0).toNumber() : message.itemsCreated;
-                                if (message.itemsUpdated != null && message.hasOwnProperty("itemsUpdated"))
-                                    if (typeof message.itemsUpdated === "number")
+                                if (message.itemsUpdated != null && Object.hasOwnProperty.call(message, "itemsUpdated"))
+                                    if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                        object.itemsUpdated = typeof message.itemsUpdated === "number" ? BigInt(message.itemsUpdated) : $util.Long.fromBits(message.itemsUpdated.low >>> 0, message.itemsUpdated.high >>> 0, false).toBigInt();
+                                    else if (typeof message.itemsUpdated === "number")
                                         object.itemsUpdated = options.longs === String ? String(message.itemsUpdated) : message.itemsUpdated;
                                     else
                                         object.itemsUpdated = options.longs === String ? $util.Long.prototype.toString.call(message.itemsUpdated) : options.longs === Number ? new $util.LongBits(message.itemsUpdated.low >>> 0, message.itemsUpdated.high >>> 0).toNumber() : message.itemsUpdated;
-                                if (message.uploadTime != null && message.hasOwnProperty("uploadTime"))
-                                    object.uploadTime = $root.google.protobuf.Timestamp.toObject(message.uploadTime, options);
+                                if (message.uploadTime != null && Object.hasOwnProperty.call(message, "uploadTime"))
+                                    object.uploadTime = $root.google.protobuf.Timestamp.toObject(message.uploadTime, options, q + 1);
                                 return object;
                             };
     
@@ -14095,9 +14517,13 @@
                                  * @param {$protobuf.Writer} [writer] Writer to encode to
                                  * @returns {$protobuf.Writer} Writer
                                  */
-                                Issue.encode = function encode(message, writer) {
+                                Issue.encode = function encode(message, writer, q) {
                                     if (!writer)
                                         writer = $Writer.create();
+                                    if (q === undefined)
+                                        q = 0;
+                                    if (q > $util.recursionLimit)
+                                        throw Error("max depth exceeded");
                                     if (message.title != null && Object.hasOwnProperty.call(message, "title"))
                                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.title);
                                     if (message.description != null && Object.hasOwnProperty.call(message, "description"))
@@ -14123,7 +14549,7 @@
                                  * @returns {$protobuf.Writer} Writer
                                  */
                                 Issue.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer).ldelim();
+                                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                                 };
     
                                 /**
@@ -14213,19 +14639,19 @@
                                         long = 0;
                                     if (long > $util.recursionLimit)
                                         return "maximum nesting depth exceeded";
-                                    if (message.title != null && message.hasOwnProperty("title"))
+                                    if (message.title != null && Object.hasOwnProperty.call(message, "title"))
                                         if (!$util.isString(message.title))
                                             return "title: string expected";
-                                    if (message.description != null && message.hasOwnProperty("description"))
+                                    if (message.description != null && Object.hasOwnProperty.call(message, "description"))
                                         if (!$util.isString(message.description))
                                             return "description: string expected";
-                                    if (message.code != null && message.hasOwnProperty("code"))
+                                    if (message.code != null && Object.hasOwnProperty.call(message, "code"))
                                         if (!$util.isString(message.code))
                                             return "code: string expected";
-                                    if (message.count != null && message.hasOwnProperty("count"))
+                                    if (message.count != null && Object.hasOwnProperty.call(message, "count"))
                                         if (!$util.isInteger(message.count) && !(message.count && $util.isInteger(message.count.low) && $util.isInteger(message.count.high)))
                                             return "count: integer|Long expected";
-                                    if (message.severity != null && message.hasOwnProperty("severity"))
+                                    if (message.severity != null && Object.hasOwnProperty.call(message, "severity"))
                                         switch (message.severity) {
                                         default:
                                             return "severity: enum value expected";
@@ -14234,7 +14660,7 @@
                                         case 2:
                                             break;
                                         }
-                                    if (message.documentationUri != null && message.hasOwnProperty("documentationUri"))
+                                    if (message.documentationUri != null && Object.hasOwnProperty.call(message, "documentationUri"))
                                         if (!$util.isString(message.documentationUri))
                                             return "documentationUri: string expected";
                                     return null;
@@ -14251,6 +14677,8 @@
                                 Issue.fromObject = function fromObject(object, long) {
                                     if (object instanceof $root.google.shopping.merchant.datasources.v1beta.FileUpload.Issue)
                                         return object;
+                                    if (!$util.isObject(object))
+                                        throw TypeError(".google.shopping.merchant.datasources.v1beta.FileUpload.Issue: object expected");
                                     if (long === undefined)
                                         long = 0;
                                     if (long > $util.recursionLimit)
@@ -14264,7 +14692,7 @@
                                         message.code = String(object.code);
                                     if (object.count != null)
                                         if ($util.Long)
-                                            (message.count = $util.Long.fromValue(object.count)).unsigned = false;
+                                            message.count = $util.Long.fromValue(object.count, false);
                                         else if (typeof object.count === "string")
                                             message.count = parseInt(object.count, 10);
                                         else if (typeof object.count === "number")
@@ -14305,9 +14733,13 @@
                                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                                  * @returns {Object.<string,*>} Plain object
                                  */
-                                Issue.toObject = function toObject(message, options) {
+                                Issue.toObject = function toObject(message, options, q) {
                                     if (!options)
                                         options = {};
+                                    if (q === undefined)
+                                        q = 0;
+                                    if (q > $util.recursionLimit)
+                                        throw Error("max depth exceeded");
                                     var object = {};
                                     if (options.defaults) {
                                         object.title = "";
@@ -14315,26 +14747,28 @@
                                         object.code = "";
                                         if ($util.Long) {
                                             var long = new $util.Long(0, 0, false);
-                                            object.count = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                            object.count = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                                         } else
-                                            object.count = options.longs === String ? "0" : 0;
+                                            object.count = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                                         object.severity = options.enums === String ? "SEVERITY_UNSPECIFIED" : 0;
                                         object.documentationUri = "";
                                     }
-                                    if (message.title != null && message.hasOwnProperty("title"))
+                                    if (message.title != null && Object.hasOwnProperty.call(message, "title"))
                                         object.title = message.title;
-                                    if (message.description != null && message.hasOwnProperty("description"))
+                                    if (message.description != null && Object.hasOwnProperty.call(message, "description"))
                                         object.description = message.description;
-                                    if (message.code != null && message.hasOwnProperty("code"))
+                                    if (message.code != null && Object.hasOwnProperty.call(message, "code"))
                                         object.code = message.code;
-                                    if (message.count != null && message.hasOwnProperty("count"))
-                                        if (typeof message.count === "number")
+                                    if (message.count != null && Object.hasOwnProperty.call(message, "count"))
+                                        if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                            object.count = typeof message.count === "number" ? BigInt(message.count) : $util.Long.fromBits(message.count.low >>> 0, message.count.high >>> 0, false).toBigInt();
+                                        else if (typeof message.count === "number")
                                             object.count = options.longs === String ? String(message.count) : message.count;
                                         else
                                             object.count = options.longs === String ? $util.Long.prototype.toString.call(message.count) : options.longs === Number ? new $util.LongBits(message.count.low >>> 0, message.count.high >>> 0).toNumber() : message.count;
-                                    if (message.severity != null && message.hasOwnProperty("severity"))
+                                    if (message.severity != null && Object.hasOwnProperty.call(message, "severity"))
                                         object.severity = options.enums === String ? $root.google.shopping.merchant.datasources.v1beta.FileUpload.Issue.Severity[message.severity] === undefined ? message.severity : $root.google.shopping.merchant.datasources.v1beta.FileUpload.Issue.Severity[message.severity] : message.severity;
-                                    if (message.documentationUri != null && message.hasOwnProperty("documentationUri"))
+                                    if (message.documentationUri != null && Object.hasOwnProperty.call(message, "documentationUri"))
                                         object.documentationUri = message.documentationUri;
                                     return object;
                                 };
@@ -14458,9 +14892,13 @@
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            GetFileUploadRequest.encode = function encode(message, writer) {
+                            GetFileUploadRequest.encode = function encode(message, writer, q) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                                 return writer;
@@ -14476,7 +14914,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             GetFileUploadRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                             };
     
                             /**
@@ -14546,7 +14984,7 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
-                                if (message.name != null && message.hasOwnProperty("name"))
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
                                 return null;
@@ -14563,6 +15001,8 @@
                             GetFileUploadRequest.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.shopping.merchant.datasources.v1beta.GetFileUploadRequest)
                                     return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.shopping.merchant.datasources.v1beta.GetFileUploadRequest: object expected");
                                 if (long === undefined)
                                     long = 0;
                                 if (long > $util.recursionLimit)
@@ -14582,13 +15022,17 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            GetFileUploadRequest.toObject = function toObject(message, options) {
+                            GetFileUploadRequest.toObject = function toObject(message, options, q) {
                                 if (!options)
                                     options = {};
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
                                 var object = {};
                                 if (options.defaults)
                                     object.name = "";
-                                if (message.name != null && message.hasOwnProperty("name"))
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     object.name = message.name;
                                 return object;
                             };
@@ -14711,9 +15155,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    Weight.encode = function encode(message, writer) {
+                    Weight.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.amountMicros != null && Object.hasOwnProperty.call(message, "amountMicros"))
                             writer.uint32(/* id 1, wireType 0 =*/8).int64(message.amountMicros);
                         if (message.unit != null && Object.hasOwnProperty.call(message, "unit"))
@@ -14731,7 +15179,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     Weight.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -14806,12 +15254,12 @@
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
                         var properties = {};
-                        if (message.amountMicros != null && message.hasOwnProperty("amountMicros")) {
+                        if (message.amountMicros != null && Object.hasOwnProperty.call(message, "amountMicros")) {
                             properties._amountMicros = 1;
                             if (!$util.isInteger(message.amountMicros) && !(message.amountMicros && $util.isInteger(message.amountMicros.low) && $util.isInteger(message.amountMicros.high)))
                                 return "amountMicros: integer|Long expected";
                         }
-                        if (message.unit != null && message.hasOwnProperty("unit"))
+                        if (message.unit != null && Object.hasOwnProperty.call(message, "unit"))
                             switch (message.unit) {
                             default:
                                 return "unit: enum value expected";
@@ -14834,6 +15282,8 @@
                     Weight.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.shopping.type.Weight)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.shopping.type.Weight: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -14841,7 +15291,7 @@
                         var message = new $root.google.shopping.type.Weight();
                         if (object.amountMicros != null)
                             if ($util.Long)
-                                (message.amountMicros = $util.Long.fromValue(object.amountMicros)).unsigned = false;
+                                message.amountMicros = $util.Long.fromValue(object.amountMicros, false);
                             else if (typeof object.amountMicros === "string")
                                 message.amountMicros = parseInt(object.amountMicros, 10);
                             else if (typeof object.amountMicros === "number")
@@ -14880,21 +15330,27 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    Weight.toObject = function toObject(message, options) {
+                    Weight.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults)
                             object.unit = options.enums === String ? "WEIGHT_UNIT_UNSPECIFIED" : 0;
-                        if (message.amountMicros != null && message.hasOwnProperty("amountMicros")) {
-                            if (typeof message.amountMicros === "number")
+                        if (message.amountMicros != null && Object.hasOwnProperty.call(message, "amountMicros")) {
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.amountMicros = typeof message.amountMicros === "number" ? BigInt(message.amountMicros) : $util.Long.fromBits(message.amountMicros.low >>> 0, message.amountMicros.high >>> 0, false).toBigInt();
+                            else if (typeof message.amountMicros === "number")
                                 object.amountMicros = options.longs === String ? String(message.amountMicros) : message.amountMicros;
                             else
                                 object.amountMicros = options.longs === String ? $util.Long.prototype.toString.call(message.amountMicros) : options.longs === Number ? new $util.LongBits(message.amountMicros.low >>> 0, message.amountMicros.high >>> 0).toNumber() : message.amountMicros;
                             if (options.oneofs)
                                 object._amountMicros = "amountMicros";
                         }
-                        if (message.unit != null && message.hasOwnProperty("unit"))
+                        if (message.unit != null && Object.hasOwnProperty.call(message, "unit"))
                             object.unit = options.enums === String ? $root.google.shopping.type.Weight.WeightUnit[message.unit] === undefined ? message.unit : $root.google.shopping.type.Weight.WeightUnit[message.unit] : message.unit;
                         return object;
                     };
@@ -15021,9 +15477,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    Price.encode = function encode(message, writer) {
+                    Price.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.amountMicros != null && Object.hasOwnProperty.call(message, "amountMicros"))
                             writer.uint32(/* id 1, wireType 0 =*/8).int64(message.amountMicros);
                         if (message.currencyCode != null && Object.hasOwnProperty.call(message, "currencyCode"))
@@ -15041,7 +15501,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     Price.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -15116,12 +15576,12 @@
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
                         var properties = {};
-                        if (message.amountMicros != null && message.hasOwnProperty("amountMicros")) {
+                        if (message.amountMicros != null && Object.hasOwnProperty.call(message, "amountMicros")) {
                             properties._amountMicros = 1;
                             if (!$util.isInteger(message.amountMicros) && !(message.amountMicros && $util.isInteger(message.amountMicros.low) && $util.isInteger(message.amountMicros.high)))
                                 return "amountMicros: integer|Long expected";
                         }
-                        if (message.currencyCode != null && message.hasOwnProperty("currencyCode")) {
+                        if (message.currencyCode != null && Object.hasOwnProperty.call(message, "currencyCode")) {
                             properties._currencyCode = 1;
                             if (!$util.isString(message.currencyCode))
                                 return "currencyCode: string expected";
@@ -15140,6 +15600,8 @@
                     Price.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.shopping.type.Price)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.shopping.type.Price: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -15147,7 +15609,7 @@
                         var message = new $root.google.shopping.type.Price();
                         if (object.amountMicros != null)
                             if ($util.Long)
-                                (message.amountMicros = $util.Long.fromValue(object.amountMicros)).unsigned = false;
+                                message.amountMicros = $util.Long.fromValue(object.amountMicros, false);
                             else if (typeof object.amountMicros === "string")
                                 message.amountMicros = parseInt(object.amountMicros, 10);
                             else if (typeof object.amountMicros === "number")
@@ -15168,19 +15630,25 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    Price.toObject = function toObject(message, options) {
+                    Price.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
-                        if (message.amountMicros != null && message.hasOwnProperty("amountMicros")) {
-                            if (typeof message.amountMicros === "number")
+                        if (message.amountMicros != null && Object.hasOwnProperty.call(message, "amountMicros")) {
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.amountMicros = typeof message.amountMicros === "number" ? BigInt(message.amountMicros) : $util.Long.fromBits(message.amountMicros.low >>> 0, message.amountMicros.high >>> 0, false).toBigInt();
+                            else if (typeof message.amountMicros === "number")
                                 object.amountMicros = options.longs === String ? String(message.amountMicros) : message.amountMicros;
                             else
                                 object.amountMicros = options.longs === String ? $util.Long.prototype.toString.call(message.amountMicros) : options.longs === Number ? new $util.LongBits(message.amountMicros.low >>> 0, message.amountMicros.high >>> 0).toNumber() : message.amountMicros;
                             if (options.oneofs)
                                 object._amountMicros = "amountMicros";
                         }
-                        if (message.currencyCode != null && message.hasOwnProperty("currencyCode")) {
+                        if (message.currencyCode != null && Object.hasOwnProperty.call(message, "currencyCode")) {
                             object.currencyCode = message.currencyCode;
                             if (options.oneofs)
                                 object._currencyCode = "currencyCode";
@@ -15304,16 +15772,20 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    CustomAttribute.encode = function encode(message, writer) {
+                    CustomAttribute.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                         if (message.value != null && Object.hasOwnProperty.call(message, "value"))
                             writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
                         if (message.groupValues != null && message.groupValues.length)
                             for (var i = 0; i < message.groupValues.length; ++i)
-                                $root.google.shopping.type.CustomAttribute.encode(message.groupValues[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                $root.google.shopping.type.CustomAttribute.encode(message.groupValues[i], writer.uint32(/* id 3, wireType 2 =*/26).fork(), q + 1).ldelim();
                         return writer;
                     };
     
@@ -15327,7 +15799,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     CustomAttribute.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -15408,17 +15880,17 @@
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
                         var properties = {};
-                        if (message.name != null && message.hasOwnProperty("name")) {
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name")) {
                             properties._name = 1;
                             if (!$util.isString(message.name))
                                 return "name: string expected";
                         }
-                        if (message.value != null && message.hasOwnProperty("value")) {
+                        if (message.value != null && Object.hasOwnProperty.call(message, "value")) {
                             properties._value = 1;
                             if (!$util.isString(message.value))
                                 return "value: string expected";
                         }
-                        if (message.groupValues != null && message.hasOwnProperty("groupValues")) {
+                        if (message.groupValues != null && Object.hasOwnProperty.call(message, "groupValues")) {
                             if (!Array.isArray(message.groupValues))
                                 return "groupValues: array expected";
                             for (var i = 0; i < message.groupValues.length; ++i) {
@@ -15441,6 +15913,8 @@
                     CustomAttribute.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.shopping.type.CustomAttribute)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.shopping.type.CustomAttribute: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -15455,7 +15929,7 @@
                                 throw TypeError(".google.shopping.type.CustomAttribute.groupValues: array expected");
                             message.groupValues = [];
                             for (var i = 0; i < object.groupValues.length; ++i) {
-                                if (typeof object.groupValues[i] !== "object")
+                                if (!$util.isObject(object.groupValues[i]))
                                     throw TypeError(".google.shopping.type.CustomAttribute.groupValues: object expected");
                                 message.groupValues[i] = $root.google.shopping.type.CustomAttribute.fromObject(object.groupValues[i], long + 1);
                             }
@@ -15472,18 +15946,22 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    CustomAttribute.toObject = function toObject(message, options) {
+                    CustomAttribute.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.arrays || options.defaults)
                             object.groupValues = [];
-                        if (message.name != null && message.hasOwnProperty("name")) {
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name")) {
                             object.name = message.name;
                             if (options.oneofs)
                                 object._name = "name";
                         }
-                        if (message.value != null && message.hasOwnProperty("value")) {
+                        if (message.value != null && Object.hasOwnProperty.call(message, "value")) {
                             object.value = message.value;
                             if (options.oneofs)
                                 object._value = "value";
@@ -15491,7 +15969,7 @@
                         if (message.groupValues && message.groupValues.length) {
                             object.groupValues = [];
                             for (var j = 0; j < message.groupValues.length; ++j)
-                                object.groupValues[j] = $root.google.shopping.type.CustomAttribute.toObject(message.groupValues[j], options);
+                                object.groupValues[j] = $root.google.shopping.type.CustomAttribute.toObject(message.groupValues[j], options, q + 1);
                         }
                         return object;
                     };
@@ -15569,9 +16047,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    Destination.encode = function encode(message, writer) {
+                    Destination.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         return writer;
                     };
     
@@ -15585,7 +16067,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     Destination.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -15665,10 +16147,6 @@
                     Destination.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.shopping.type.Destination)
                             return object;
-                        if (long === undefined)
-                            long = 0;
-                        if (long > $util.recursionLimit)
-                            throw Error("maximum nesting depth exceeded");
                         return new $root.google.shopping.type.Destination();
                     };
     
@@ -15794,9 +16272,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    ReportingContext.encode = function encode(message, writer) {
+                    ReportingContext.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         return writer;
                     };
     
@@ -15810,7 +16292,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ReportingContext.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -15890,10 +16372,6 @@
                     ReportingContext.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.shopping.type.ReportingContext)
                             return object;
-                        if (long === undefined)
-                            long = 0;
-                        if (long > $util.recursionLimit)
-                            throw Error("maximum nesting depth exceeded");
                         return new $root.google.shopping.type.ReportingContext();
                     };
     
@@ -16033,9 +16511,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    Channel.encode = function encode(message, writer) {
+                    Channel.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         return writer;
                     };
     
@@ -16049,7 +16531,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     Channel.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -16129,10 +16611,6 @@
                     Channel.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.shopping.type.Channel)
                             return object;
-                        if (long === undefined)
-                            long = 0;
-                        if (long > $util.recursionLimit)
-                            throw Error("maximum nesting depth exceeded");
                         return new $root.google.shopping.type.Channel();
                     };
     
@@ -16272,12 +16750,16 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                Http.encode = function encode(message, writer) {
+                Http.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.rules != null && message.rules.length)
                         for (var i = 0; i < message.rules.length; ++i)
-                            $root.google.api.HttpRule.encode(message.rules[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            $root.google.api.HttpRule.encode(message.rules[i], writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                     if (message.fullyDecodeReservedExpansion != null && Object.hasOwnProperty.call(message, "fullyDecodeReservedExpansion"))
                         writer.uint32(/* id 2, wireType 0 =*/16).bool(message.fullyDecodeReservedExpansion);
                     return writer;
@@ -16293,7 +16775,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 Http.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -16369,7 +16851,7 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.rules != null && message.hasOwnProperty("rules")) {
+                    if (message.rules != null && Object.hasOwnProperty.call(message, "rules")) {
                         if (!Array.isArray(message.rules))
                             return "rules: array expected";
                         for (var i = 0; i < message.rules.length; ++i) {
@@ -16378,7 +16860,7 @@
                                 return "rules." + error;
                         }
                     }
-                    if (message.fullyDecodeReservedExpansion != null && message.hasOwnProperty("fullyDecodeReservedExpansion"))
+                    if (message.fullyDecodeReservedExpansion != null && Object.hasOwnProperty.call(message, "fullyDecodeReservedExpansion"))
                         if (typeof message.fullyDecodeReservedExpansion !== "boolean")
                             return "fullyDecodeReservedExpansion: boolean expected";
                     return null;
@@ -16395,6 +16877,8 @@
                 Http.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.Http)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.Http: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -16405,7 +16889,7 @@
                             throw TypeError(".google.api.Http.rules: array expected");
                         message.rules = [];
                         for (var i = 0; i < object.rules.length; ++i) {
-                            if (typeof object.rules[i] !== "object")
+                            if (!$util.isObject(object.rules[i]))
                                 throw TypeError(".google.api.Http.rules: object expected");
                             message.rules[i] = $root.google.api.HttpRule.fromObject(object.rules[i], long + 1);
                         }
@@ -16424,9 +16908,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                Http.toObject = function toObject(message, options) {
+                Http.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.rules = [];
@@ -16435,9 +16923,9 @@
                     if (message.rules && message.rules.length) {
                         object.rules = [];
                         for (var j = 0; j < message.rules.length; ++j)
-                            object.rules[j] = $root.google.api.HttpRule.toObject(message.rules[j], options);
+                            object.rules[j] = $root.google.api.HttpRule.toObject(message.rules[j], options, q + 1);
                     }
-                    if (message.fullyDecodeReservedExpansion != null && message.hasOwnProperty("fullyDecodeReservedExpansion"))
+                    if (message.fullyDecodeReservedExpansion != null && Object.hasOwnProperty.call(message, "fullyDecodeReservedExpansion"))
                         object.fullyDecodeReservedExpansion = message.fullyDecodeReservedExpansion;
                     return object;
                 };
@@ -16620,9 +17108,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                HttpRule.encode = function encode(message, writer) {
+                HttpRule.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.selector != null && Object.hasOwnProperty.call(message, "selector"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.selector);
                     if (message.get != null && Object.hasOwnProperty.call(message, "get"))
@@ -16638,10 +17130,10 @@
                     if (message.body != null && Object.hasOwnProperty.call(message, "body"))
                         writer.uint32(/* id 7, wireType 2 =*/58).string(message.body);
                     if (message.custom != null && Object.hasOwnProperty.call(message, "custom"))
-                        $root.google.api.CustomHttpPattern.encode(message.custom, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                        $root.google.api.CustomHttpPattern.encode(message.custom, writer.uint32(/* id 8, wireType 2 =*/66).fork(), q + 1).ldelim();
                     if (message.additionalBindings != null && message.additionalBindings.length)
                         for (var i = 0; i < message.additionalBindings.length; ++i)
-                            $root.google.api.HttpRule.encode(message.additionalBindings[i], writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            $root.google.api.HttpRule.encode(message.additionalBindings[i], writer.uint32(/* id 11, wireType 2 =*/90).fork(), q + 1).ldelim();
                     if (message.responseBody != null && Object.hasOwnProperty.call(message, "responseBody"))
                         writer.uint32(/* id 12, wireType 2 =*/98).string(message.responseBody);
                     return writer;
@@ -16657,7 +17149,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 HttpRule.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -16766,43 +17258,43 @@
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
                     var properties = {};
-                    if (message.selector != null && message.hasOwnProperty("selector"))
+                    if (message.selector != null && Object.hasOwnProperty.call(message, "selector"))
                         if (!$util.isString(message.selector))
                             return "selector: string expected";
-                    if (message.get != null && message.hasOwnProperty("get")) {
+                    if (message.get != null && Object.hasOwnProperty.call(message, "get")) {
                         properties.pattern = 1;
                         if (!$util.isString(message.get))
                             return "get: string expected";
                     }
-                    if (message.put != null && message.hasOwnProperty("put")) {
+                    if (message.put != null && Object.hasOwnProperty.call(message, "put")) {
                         if (properties.pattern === 1)
                             return "pattern: multiple values";
                         properties.pattern = 1;
                         if (!$util.isString(message.put))
                             return "put: string expected";
                     }
-                    if (message.post != null && message.hasOwnProperty("post")) {
+                    if (message.post != null && Object.hasOwnProperty.call(message, "post")) {
                         if (properties.pattern === 1)
                             return "pattern: multiple values";
                         properties.pattern = 1;
                         if (!$util.isString(message.post))
                             return "post: string expected";
                     }
-                    if (message["delete"] != null && message.hasOwnProperty("delete")) {
+                    if (message["delete"] != null && Object.hasOwnProperty.call(message, "delete")) {
                         if (properties.pattern === 1)
                             return "pattern: multiple values";
                         properties.pattern = 1;
                         if (!$util.isString(message["delete"]))
                             return "delete: string expected";
                     }
-                    if (message.patch != null && message.hasOwnProperty("patch")) {
+                    if (message.patch != null && Object.hasOwnProperty.call(message, "patch")) {
                         if (properties.pattern === 1)
                             return "pattern: multiple values";
                         properties.pattern = 1;
                         if (!$util.isString(message.patch))
                             return "patch: string expected";
                     }
-                    if (message.custom != null && message.hasOwnProperty("custom")) {
+                    if (message.custom != null && Object.hasOwnProperty.call(message, "custom")) {
                         if (properties.pattern === 1)
                             return "pattern: multiple values";
                         properties.pattern = 1;
@@ -16812,13 +17304,13 @@
                                 return "custom." + error;
                         }
                     }
-                    if (message.body != null && message.hasOwnProperty("body"))
+                    if (message.body != null && Object.hasOwnProperty.call(message, "body"))
                         if (!$util.isString(message.body))
                             return "body: string expected";
-                    if (message.responseBody != null && message.hasOwnProperty("responseBody"))
+                    if (message.responseBody != null && Object.hasOwnProperty.call(message, "responseBody"))
                         if (!$util.isString(message.responseBody))
                             return "responseBody: string expected";
-                    if (message.additionalBindings != null && message.hasOwnProperty("additionalBindings")) {
+                    if (message.additionalBindings != null && Object.hasOwnProperty.call(message, "additionalBindings")) {
                         if (!Array.isArray(message.additionalBindings))
                             return "additionalBindings: array expected";
                         for (var i = 0; i < message.additionalBindings.length; ++i) {
@@ -16841,6 +17333,8 @@
                 HttpRule.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.HttpRule)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.HttpRule: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -16859,7 +17353,7 @@
                     if (object.patch != null)
                         message.patch = String(object.patch);
                     if (object.custom != null) {
-                        if (typeof object.custom !== "object")
+                        if (!$util.isObject(object.custom))
                             throw TypeError(".google.api.HttpRule.custom: object expected");
                         message.custom = $root.google.api.CustomHttpPattern.fromObject(object.custom, long + 1);
                     }
@@ -16872,7 +17366,7 @@
                             throw TypeError(".google.api.HttpRule.additionalBindings: array expected");
                         message.additionalBindings = [];
                         for (var i = 0; i < object.additionalBindings.length; ++i) {
-                            if (typeof object.additionalBindings[i] !== "object")
+                            if (!$util.isObject(object.additionalBindings[i]))
                                 throw TypeError(".google.api.HttpRule.additionalBindings: object expected");
                             message.additionalBindings[i] = $root.google.api.HttpRule.fromObject(object.additionalBindings[i], long + 1);
                         }
@@ -16889,9 +17383,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                HttpRule.toObject = function toObject(message, options) {
+                HttpRule.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.additionalBindings = [];
@@ -16900,46 +17398,46 @@
                         object.body = "";
                         object.responseBody = "";
                     }
-                    if (message.selector != null && message.hasOwnProperty("selector"))
+                    if (message.selector != null && Object.hasOwnProperty.call(message, "selector"))
                         object.selector = message.selector;
-                    if (message.get != null && message.hasOwnProperty("get")) {
+                    if (message.get != null && Object.hasOwnProperty.call(message, "get")) {
                         object.get = message.get;
                         if (options.oneofs)
                             object.pattern = "get";
                     }
-                    if (message.put != null && message.hasOwnProperty("put")) {
+                    if (message.put != null && Object.hasOwnProperty.call(message, "put")) {
                         object.put = message.put;
                         if (options.oneofs)
                             object.pattern = "put";
                     }
-                    if (message.post != null && message.hasOwnProperty("post")) {
+                    if (message.post != null && Object.hasOwnProperty.call(message, "post")) {
                         object.post = message.post;
                         if (options.oneofs)
                             object.pattern = "post";
                     }
-                    if (message["delete"] != null && message.hasOwnProperty("delete")) {
+                    if (message["delete"] != null && Object.hasOwnProperty.call(message, "delete")) {
                         object["delete"] = message["delete"];
                         if (options.oneofs)
                             object.pattern = "delete";
                     }
-                    if (message.patch != null && message.hasOwnProperty("patch")) {
+                    if (message.patch != null && Object.hasOwnProperty.call(message, "patch")) {
                         object.patch = message.patch;
                         if (options.oneofs)
                             object.pattern = "patch";
                     }
-                    if (message.body != null && message.hasOwnProperty("body"))
+                    if (message.body != null && Object.hasOwnProperty.call(message, "body"))
                         object.body = message.body;
-                    if (message.custom != null && message.hasOwnProperty("custom")) {
-                        object.custom = $root.google.api.CustomHttpPattern.toObject(message.custom, options);
+                    if (message.custom != null && Object.hasOwnProperty.call(message, "custom")) {
+                        object.custom = $root.google.api.CustomHttpPattern.toObject(message.custom, options, q + 1);
                         if (options.oneofs)
                             object.pattern = "custom";
                     }
                     if (message.additionalBindings && message.additionalBindings.length) {
                         object.additionalBindings = [];
                         for (var j = 0; j < message.additionalBindings.length; ++j)
-                            object.additionalBindings[j] = $root.google.api.HttpRule.toObject(message.additionalBindings[j], options);
+                            object.additionalBindings[j] = $root.google.api.HttpRule.toObject(message.additionalBindings[j], options, q + 1);
                     }
-                    if (message.responseBody != null && message.hasOwnProperty("responseBody"))
+                    if (message.responseBody != null && Object.hasOwnProperty.call(message, "responseBody"))
                         object.responseBody = message.responseBody;
                     return object;
                 };
@@ -17035,9 +17533,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                CustomHttpPattern.encode = function encode(message, writer) {
+                CustomHttpPattern.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.kind != null && Object.hasOwnProperty.call(message, "kind"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.kind);
                     if (message.path != null && Object.hasOwnProperty.call(message, "path"))
@@ -17055,7 +17557,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 CustomHttpPattern.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -17129,10 +17631,10 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.kind != null && message.hasOwnProperty("kind"))
+                    if (message.kind != null && Object.hasOwnProperty.call(message, "kind"))
                         if (!$util.isString(message.kind))
                             return "kind: string expected";
-                    if (message.path != null && message.hasOwnProperty("path"))
+                    if (message.path != null && Object.hasOwnProperty.call(message, "path"))
                         if (!$util.isString(message.path))
                             return "path: string expected";
                     return null;
@@ -17149,6 +17651,8 @@
                 CustomHttpPattern.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.CustomHttpPattern)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.CustomHttpPattern: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -17170,17 +17674,21 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                CustomHttpPattern.toObject = function toObject(message, options) {
+                CustomHttpPattern.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.defaults) {
                         object.kind = "";
                         object.path = "";
                     }
-                    if (message.kind != null && message.hasOwnProperty("kind"))
+                    if (message.kind != null && Object.hasOwnProperty.call(message, "kind"))
                         object.kind = message.kind;
-                    if (message.path != null && message.hasOwnProperty("path"))
+                    if (message.path != null && Object.hasOwnProperty.call(message, "path"))
                         object.path = message.path;
                     return object;
                 };
@@ -17286,9 +17794,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                CommonLanguageSettings.encode = function encode(message, writer) {
+                CommonLanguageSettings.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.referenceDocsUri != null && Object.hasOwnProperty.call(message, "referenceDocsUri"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.referenceDocsUri);
                     if (message.destinations != null && message.destinations.length) {
@@ -17298,7 +17810,7 @@
                         writer.ldelim();
                     }
                     if (message.selectiveGapicGeneration != null && Object.hasOwnProperty.call(message, "selectiveGapicGeneration"))
-                        $root.google.api.SelectiveGapicGeneration.encode(message.selectiveGapicGeneration, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        $root.google.api.SelectiveGapicGeneration.encode(message.selectiveGapicGeneration, writer.uint32(/* id 3, wireType 2 =*/26).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -17312,7 +17824,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 CommonLanguageSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -17397,10 +17909,10 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.referenceDocsUri != null && message.hasOwnProperty("referenceDocsUri"))
+                    if (message.referenceDocsUri != null && Object.hasOwnProperty.call(message, "referenceDocsUri"))
                         if (!$util.isString(message.referenceDocsUri))
                             return "referenceDocsUri: string expected";
-                    if (message.destinations != null && message.hasOwnProperty("destinations")) {
+                    if (message.destinations != null && Object.hasOwnProperty.call(message, "destinations")) {
                         if (!Array.isArray(message.destinations))
                             return "destinations: array expected";
                         for (var i = 0; i < message.destinations.length; ++i)
@@ -17413,7 +17925,7 @@
                                 break;
                             }
                     }
-                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration")) {
+                    if (message.selectiveGapicGeneration != null && Object.hasOwnProperty.call(message, "selectiveGapicGeneration")) {
                         var error = $root.google.api.SelectiveGapicGeneration.verify(message.selectiveGapicGeneration, long + 1);
                         if (error)
                             return "selectiveGapicGeneration." + error;
@@ -17432,6 +17944,8 @@
                 CommonLanguageSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.CommonLanguageSettings)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.CommonLanguageSettings: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -17465,7 +17979,7 @@
                             }
                     }
                     if (object.selectiveGapicGeneration != null) {
-                        if (typeof object.selectiveGapicGeneration !== "object")
+                        if (!$util.isObject(object.selectiveGapicGeneration))
                             throw TypeError(".google.api.CommonLanguageSettings.selectiveGapicGeneration: object expected");
                         message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.fromObject(object.selectiveGapicGeneration, long + 1);
                     }
@@ -17481,9 +17995,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                CommonLanguageSettings.toObject = function toObject(message, options) {
+                CommonLanguageSettings.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.destinations = [];
@@ -17491,15 +18009,15 @@
                         object.referenceDocsUri = "";
                         object.selectiveGapicGeneration = null;
                     }
-                    if (message.referenceDocsUri != null && message.hasOwnProperty("referenceDocsUri"))
+                    if (message.referenceDocsUri != null && Object.hasOwnProperty.call(message, "referenceDocsUri"))
                         object.referenceDocsUri = message.referenceDocsUri;
                     if (message.destinations && message.destinations.length) {
                         object.destinations = [];
                         for (var j = 0; j < message.destinations.length; ++j)
                             object.destinations[j] = options.enums === String ? $root.google.api.ClientLibraryDestination[message.destinations[j]] === undefined ? message.destinations[j] : $root.google.api.ClientLibraryDestination[message.destinations[j]] : message.destinations[j];
                     }
-                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration"))
-                        object.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.toObject(message.selectiveGapicGeneration, options);
+                    if (message.selectiveGapicGeneration != null && Object.hasOwnProperty.call(message, "selectiveGapicGeneration"))
+                        object.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.toObject(message.selectiveGapicGeneration, options, q + 1);
                     return object;
                 };
     
@@ -17675,9 +18193,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                ClientLibrarySettings.encode = function encode(message, writer) {
+                ClientLibrarySettings.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.version != null && Object.hasOwnProperty.call(message, "version"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.version);
                     if (message.launchStage != null && Object.hasOwnProperty.call(message, "launchStage"))
@@ -17685,21 +18207,21 @@
                     if (message.restNumericEnums != null && Object.hasOwnProperty.call(message, "restNumericEnums"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.restNumericEnums);
                     if (message.javaSettings != null && Object.hasOwnProperty.call(message, "javaSettings"))
-                        $root.google.api.JavaSettings.encode(message.javaSettings, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                        $root.google.api.JavaSettings.encode(message.javaSettings, writer.uint32(/* id 21, wireType 2 =*/170).fork(), q + 1).ldelim();
                     if (message.cppSettings != null && Object.hasOwnProperty.call(message, "cppSettings"))
-                        $root.google.api.CppSettings.encode(message.cppSettings, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
+                        $root.google.api.CppSettings.encode(message.cppSettings, writer.uint32(/* id 22, wireType 2 =*/178).fork(), q + 1).ldelim();
                     if (message.phpSettings != null && Object.hasOwnProperty.call(message, "phpSettings"))
-                        $root.google.api.PhpSettings.encode(message.phpSettings, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
+                        $root.google.api.PhpSettings.encode(message.phpSettings, writer.uint32(/* id 23, wireType 2 =*/186).fork(), q + 1).ldelim();
                     if (message.pythonSettings != null && Object.hasOwnProperty.call(message, "pythonSettings"))
-                        $root.google.api.PythonSettings.encode(message.pythonSettings, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
+                        $root.google.api.PythonSettings.encode(message.pythonSettings, writer.uint32(/* id 24, wireType 2 =*/194).fork(), q + 1).ldelim();
                     if (message.nodeSettings != null && Object.hasOwnProperty.call(message, "nodeSettings"))
-                        $root.google.api.NodeSettings.encode(message.nodeSettings, writer.uint32(/* id 25, wireType 2 =*/202).fork()).ldelim();
+                        $root.google.api.NodeSettings.encode(message.nodeSettings, writer.uint32(/* id 25, wireType 2 =*/202).fork(), q + 1).ldelim();
                     if (message.dotnetSettings != null && Object.hasOwnProperty.call(message, "dotnetSettings"))
-                        $root.google.api.DotnetSettings.encode(message.dotnetSettings, writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
+                        $root.google.api.DotnetSettings.encode(message.dotnetSettings, writer.uint32(/* id 26, wireType 2 =*/210).fork(), q + 1).ldelim();
                     if (message.rubySettings != null && Object.hasOwnProperty.call(message, "rubySettings"))
-                        $root.google.api.RubySettings.encode(message.rubySettings, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
+                        $root.google.api.RubySettings.encode(message.rubySettings, writer.uint32(/* id 27, wireType 2 =*/218).fork(), q + 1).ldelim();
                     if (message.goSettings != null && Object.hasOwnProperty.call(message, "goSettings"))
-                        $root.google.api.GoSettings.encode(message.goSettings, writer.uint32(/* id 28, wireType 2 =*/226).fork()).ldelim();
+                        $root.google.api.GoSettings.encode(message.goSettings, writer.uint32(/* id 28, wireType 2 =*/226).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -17713,7 +18235,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 ClientLibrarySettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -17823,10 +18345,10 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.version != null && message.hasOwnProperty("version"))
+                    if (message.version != null && Object.hasOwnProperty.call(message, "version"))
                         if (!$util.isString(message.version))
                             return "version: string expected";
-                    if (message.launchStage != null && message.hasOwnProperty("launchStage"))
+                    if (message.launchStage != null && Object.hasOwnProperty.call(message, "launchStage"))
                         switch (message.launchStage) {
                         default:
                             return "launchStage: enum value expected";
@@ -17840,45 +18362,45 @@
                         case 5:
                             break;
                         }
-                    if (message.restNumericEnums != null && message.hasOwnProperty("restNumericEnums"))
+                    if (message.restNumericEnums != null && Object.hasOwnProperty.call(message, "restNumericEnums"))
                         if (typeof message.restNumericEnums !== "boolean")
                             return "restNumericEnums: boolean expected";
-                    if (message.javaSettings != null && message.hasOwnProperty("javaSettings")) {
+                    if (message.javaSettings != null && Object.hasOwnProperty.call(message, "javaSettings")) {
                         var error = $root.google.api.JavaSettings.verify(message.javaSettings, long + 1);
                         if (error)
                             return "javaSettings." + error;
                     }
-                    if (message.cppSettings != null && message.hasOwnProperty("cppSettings")) {
+                    if (message.cppSettings != null && Object.hasOwnProperty.call(message, "cppSettings")) {
                         var error = $root.google.api.CppSettings.verify(message.cppSettings, long + 1);
                         if (error)
                             return "cppSettings." + error;
                     }
-                    if (message.phpSettings != null && message.hasOwnProperty("phpSettings")) {
+                    if (message.phpSettings != null && Object.hasOwnProperty.call(message, "phpSettings")) {
                         var error = $root.google.api.PhpSettings.verify(message.phpSettings, long + 1);
                         if (error)
                             return "phpSettings." + error;
                     }
-                    if (message.pythonSettings != null && message.hasOwnProperty("pythonSettings")) {
+                    if (message.pythonSettings != null && Object.hasOwnProperty.call(message, "pythonSettings")) {
                         var error = $root.google.api.PythonSettings.verify(message.pythonSettings, long + 1);
                         if (error)
                             return "pythonSettings." + error;
                     }
-                    if (message.nodeSettings != null && message.hasOwnProperty("nodeSettings")) {
+                    if (message.nodeSettings != null && Object.hasOwnProperty.call(message, "nodeSettings")) {
                         var error = $root.google.api.NodeSettings.verify(message.nodeSettings, long + 1);
                         if (error)
                             return "nodeSettings." + error;
                     }
-                    if (message.dotnetSettings != null && message.hasOwnProperty("dotnetSettings")) {
+                    if (message.dotnetSettings != null && Object.hasOwnProperty.call(message, "dotnetSettings")) {
                         var error = $root.google.api.DotnetSettings.verify(message.dotnetSettings, long + 1);
                         if (error)
                             return "dotnetSettings." + error;
                     }
-                    if (message.rubySettings != null && message.hasOwnProperty("rubySettings")) {
+                    if (message.rubySettings != null && Object.hasOwnProperty.call(message, "rubySettings")) {
                         var error = $root.google.api.RubySettings.verify(message.rubySettings, long + 1);
                         if (error)
                             return "rubySettings." + error;
                     }
-                    if (message.goSettings != null && message.hasOwnProperty("goSettings")) {
+                    if (message.goSettings != null && Object.hasOwnProperty.call(message, "goSettings")) {
                         var error = $root.google.api.GoSettings.verify(message.goSettings, long + 1);
                         if (error)
                             return "goSettings." + error;
@@ -17897,6 +18419,8 @@
                 ClientLibrarySettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.ClientLibrarySettings)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.ClientLibrarySettings: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -17947,42 +18471,42 @@
                     if (object.restNumericEnums != null)
                         message.restNumericEnums = Boolean(object.restNumericEnums);
                     if (object.javaSettings != null) {
-                        if (typeof object.javaSettings !== "object")
+                        if (!$util.isObject(object.javaSettings))
                             throw TypeError(".google.api.ClientLibrarySettings.javaSettings: object expected");
                         message.javaSettings = $root.google.api.JavaSettings.fromObject(object.javaSettings, long + 1);
                     }
                     if (object.cppSettings != null) {
-                        if (typeof object.cppSettings !== "object")
+                        if (!$util.isObject(object.cppSettings))
                             throw TypeError(".google.api.ClientLibrarySettings.cppSettings: object expected");
                         message.cppSettings = $root.google.api.CppSettings.fromObject(object.cppSettings, long + 1);
                     }
                     if (object.phpSettings != null) {
-                        if (typeof object.phpSettings !== "object")
+                        if (!$util.isObject(object.phpSettings))
                             throw TypeError(".google.api.ClientLibrarySettings.phpSettings: object expected");
                         message.phpSettings = $root.google.api.PhpSettings.fromObject(object.phpSettings, long + 1);
                     }
                     if (object.pythonSettings != null) {
-                        if (typeof object.pythonSettings !== "object")
+                        if (!$util.isObject(object.pythonSettings))
                             throw TypeError(".google.api.ClientLibrarySettings.pythonSettings: object expected");
                         message.pythonSettings = $root.google.api.PythonSettings.fromObject(object.pythonSettings, long + 1);
                     }
                     if (object.nodeSettings != null) {
-                        if (typeof object.nodeSettings !== "object")
+                        if (!$util.isObject(object.nodeSettings))
                             throw TypeError(".google.api.ClientLibrarySettings.nodeSettings: object expected");
                         message.nodeSettings = $root.google.api.NodeSettings.fromObject(object.nodeSettings, long + 1);
                     }
                     if (object.dotnetSettings != null) {
-                        if (typeof object.dotnetSettings !== "object")
+                        if (!$util.isObject(object.dotnetSettings))
                             throw TypeError(".google.api.ClientLibrarySettings.dotnetSettings: object expected");
                         message.dotnetSettings = $root.google.api.DotnetSettings.fromObject(object.dotnetSettings, long + 1);
                     }
                     if (object.rubySettings != null) {
-                        if (typeof object.rubySettings !== "object")
+                        if (!$util.isObject(object.rubySettings))
                             throw TypeError(".google.api.ClientLibrarySettings.rubySettings: object expected");
                         message.rubySettings = $root.google.api.RubySettings.fromObject(object.rubySettings, long + 1);
                     }
                     if (object.goSettings != null) {
-                        if (typeof object.goSettings !== "object")
+                        if (!$util.isObject(object.goSettings))
                             throw TypeError(".google.api.ClientLibrarySettings.goSettings: object expected");
                         message.goSettings = $root.google.api.GoSettings.fromObject(object.goSettings, long + 1);
                     }
@@ -17998,9 +18522,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                ClientLibrarySettings.toObject = function toObject(message, options) {
+                ClientLibrarySettings.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.defaults) {
                         object.version = "";
@@ -18015,28 +18543,28 @@
                         object.rubySettings = null;
                         object.goSettings = null;
                     }
-                    if (message.version != null && message.hasOwnProperty("version"))
+                    if (message.version != null && Object.hasOwnProperty.call(message, "version"))
                         object.version = message.version;
-                    if (message.launchStage != null && message.hasOwnProperty("launchStage"))
+                    if (message.launchStage != null && Object.hasOwnProperty.call(message, "launchStage"))
                         object.launchStage = options.enums === String ? $root.google.api.LaunchStage[message.launchStage] === undefined ? message.launchStage : $root.google.api.LaunchStage[message.launchStage] : message.launchStage;
-                    if (message.restNumericEnums != null && message.hasOwnProperty("restNumericEnums"))
+                    if (message.restNumericEnums != null && Object.hasOwnProperty.call(message, "restNumericEnums"))
                         object.restNumericEnums = message.restNumericEnums;
-                    if (message.javaSettings != null && message.hasOwnProperty("javaSettings"))
-                        object.javaSettings = $root.google.api.JavaSettings.toObject(message.javaSettings, options);
-                    if (message.cppSettings != null && message.hasOwnProperty("cppSettings"))
-                        object.cppSettings = $root.google.api.CppSettings.toObject(message.cppSettings, options);
-                    if (message.phpSettings != null && message.hasOwnProperty("phpSettings"))
-                        object.phpSettings = $root.google.api.PhpSettings.toObject(message.phpSettings, options);
-                    if (message.pythonSettings != null && message.hasOwnProperty("pythonSettings"))
-                        object.pythonSettings = $root.google.api.PythonSettings.toObject(message.pythonSettings, options);
-                    if (message.nodeSettings != null && message.hasOwnProperty("nodeSettings"))
-                        object.nodeSettings = $root.google.api.NodeSettings.toObject(message.nodeSettings, options);
-                    if (message.dotnetSettings != null && message.hasOwnProperty("dotnetSettings"))
-                        object.dotnetSettings = $root.google.api.DotnetSettings.toObject(message.dotnetSettings, options);
-                    if (message.rubySettings != null && message.hasOwnProperty("rubySettings"))
-                        object.rubySettings = $root.google.api.RubySettings.toObject(message.rubySettings, options);
-                    if (message.goSettings != null && message.hasOwnProperty("goSettings"))
-                        object.goSettings = $root.google.api.GoSettings.toObject(message.goSettings, options);
+                    if (message.javaSettings != null && Object.hasOwnProperty.call(message, "javaSettings"))
+                        object.javaSettings = $root.google.api.JavaSettings.toObject(message.javaSettings, options, q + 1);
+                    if (message.cppSettings != null && Object.hasOwnProperty.call(message, "cppSettings"))
+                        object.cppSettings = $root.google.api.CppSettings.toObject(message.cppSettings, options, q + 1);
+                    if (message.phpSettings != null && Object.hasOwnProperty.call(message, "phpSettings"))
+                        object.phpSettings = $root.google.api.PhpSettings.toObject(message.phpSettings, options, q + 1);
+                    if (message.pythonSettings != null && Object.hasOwnProperty.call(message, "pythonSettings"))
+                        object.pythonSettings = $root.google.api.PythonSettings.toObject(message.pythonSettings, options, q + 1);
+                    if (message.nodeSettings != null && Object.hasOwnProperty.call(message, "nodeSettings"))
+                        object.nodeSettings = $root.google.api.NodeSettings.toObject(message.nodeSettings, options, q + 1);
+                    if (message.dotnetSettings != null && Object.hasOwnProperty.call(message, "dotnetSettings"))
+                        object.dotnetSettings = $root.google.api.DotnetSettings.toObject(message.dotnetSettings, options, q + 1);
+                    if (message.rubySettings != null && Object.hasOwnProperty.call(message, "rubySettings"))
+                        object.rubySettings = $root.google.api.RubySettings.toObject(message.rubySettings, options, q + 1);
+                    if (message.goSettings != null && Object.hasOwnProperty.call(message, "goSettings"))
+                        object.goSettings = $root.google.api.GoSettings.toObject(message.goSettings, options, q + 1);
                     return object;
                 };
     
@@ -18215,12 +18743,16 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                Publishing.encode = function encode(message, writer) {
+                Publishing.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.methodSettings != null && message.methodSettings.length)
                         for (var i = 0; i < message.methodSettings.length; ++i)
-                            $root.google.api.MethodSettings.encode(message.methodSettings[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            $root.google.api.MethodSettings.encode(message.methodSettings[i], writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
                     if (message.newIssueUri != null && Object.hasOwnProperty.call(message, "newIssueUri"))
                         writer.uint32(/* id 101, wireType 2 =*/810).string(message.newIssueUri);
                     if (message.documentationUri != null && Object.hasOwnProperty.call(message, "documentationUri"))
@@ -18238,7 +18770,7 @@
                         writer.uint32(/* id 107, wireType 0 =*/856).int32(message.organization);
                     if (message.librarySettings != null && message.librarySettings.length)
                         for (var i = 0; i < message.librarySettings.length; ++i)
-                            $root.google.api.ClientLibrarySettings.encode(message.librarySettings[i], writer.uint32(/* id 109, wireType 2 =*/874).fork()).ldelim();
+                            $root.google.api.ClientLibrarySettings.encode(message.librarySettings[i], writer.uint32(/* id 109, wireType 2 =*/874).fork(), q + 1).ldelim();
                     if (message.protoReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "protoReferenceDocumentationUri"))
                         writer.uint32(/* id 110, wireType 2 =*/882).string(message.protoReferenceDocumentationUri);
                     if (message.restReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "restReferenceDocumentationUri"))
@@ -18256,7 +18788,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 Publishing.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -18372,7 +18904,7 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.methodSettings != null && message.hasOwnProperty("methodSettings")) {
+                    if (message.methodSettings != null && Object.hasOwnProperty.call(message, "methodSettings")) {
                         if (!Array.isArray(message.methodSettings))
                             return "methodSettings: array expected";
                         for (var i = 0; i < message.methodSettings.length; ++i) {
@@ -18381,29 +18913,29 @@
                                 return "methodSettings." + error;
                         }
                     }
-                    if (message.newIssueUri != null && message.hasOwnProperty("newIssueUri"))
+                    if (message.newIssueUri != null && Object.hasOwnProperty.call(message, "newIssueUri"))
                         if (!$util.isString(message.newIssueUri))
                             return "newIssueUri: string expected";
-                    if (message.documentationUri != null && message.hasOwnProperty("documentationUri"))
+                    if (message.documentationUri != null && Object.hasOwnProperty.call(message, "documentationUri"))
                         if (!$util.isString(message.documentationUri))
                             return "documentationUri: string expected";
-                    if (message.apiShortName != null && message.hasOwnProperty("apiShortName"))
+                    if (message.apiShortName != null && Object.hasOwnProperty.call(message, "apiShortName"))
                         if (!$util.isString(message.apiShortName))
                             return "apiShortName: string expected";
-                    if (message.githubLabel != null && message.hasOwnProperty("githubLabel"))
+                    if (message.githubLabel != null && Object.hasOwnProperty.call(message, "githubLabel"))
                         if (!$util.isString(message.githubLabel))
                             return "githubLabel: string expected";
-                    if (message.codeownerGithubTeams != null && message.hasOwnProperty("codeownerGithubTeams")) {
+                    if (message.codeownerGithubTeams != null && Object.hasOwnProperty.call(message, "codeownerGithubTeams")) {
                         if (!Array.isArray(message.codeownerGithubTeams))
                             return "codeownerGithubTeams: array expected";
                         for (var i = 0; i < message.codeownerGithubTeams.length; ++i)
                             if (!$util.isString(message.codeownerGithubTeams[i]))
                                 return "codeownerGithubTeams: string[] expected";
                     }
-                    if (message.docTagPrefix != null && message.hasOwnProperty("docTagPrefix"))
+                    if (message.docTagPrefix != null && Object.hasOwnProperty.call(message, "docTagPrefix"))
                         if (!$util.isString(message.docTagPrefix))
                             return "docTagPrefix: string expected";
-                    if (message.organization != null && message.hasOwnProperty("organization"))
+                    if (message.organization != null && Object.hasOwnProperty.call(message, "organization"))
                         switch (message.organization) {
                         default:
                             return "organization: enum value expected";
@@ -18417,7 +18949,7 @@
                         case 7:
                             break;
                         }
-                    if (message.librarySettings != null && message.hasOwnProperty("librarySettings")) {
+                    if (message.librarySettings != null && Object.hasOwnProperty.call(message, "librarySettings")) {
                         if (!Array.isArray(message.librarySettings))
                             return "librarySettings: array expected";
                         for (var i = 0; i < message.librarySettings.length; ++i) {
@@ -18426,10 +18958,10 @@
                                 return "librarySettings." + error;
                         }
                     }
-                    if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
+                    if (message.protoReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "protoReferenceDocumentationUri"))
                         if (!$util.isString(message.protoReferenceDocumentationUri))
                             return "protoReferenceDocumentationUri: string expected";
-                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                    if (message.restReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "restReferenceDocumentationUri"))
                         if (!$util.isString(message.restReferenceDocumentationUri))
                             return "restReferenceDocumentationUri: string expected";
                     return null;
@@ -18446,6 +18978,8 @@
                 Publishing.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.Publishing)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.Publishing: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -18456,7 +18990,7 @@
                             throw TypeError(".google.api.Publishing.methodSettings: array expected");
                         message.methodSettings = [];
                         for (var i = 0; i < object.methodSettings.length; ++i) {
-                            if (typeof object.methodSettings[i] !== "object")
+                            if (!$util.isObject(object.methodSettings[i]))
                                 throw TypeError(".google.api.Publishing.methodSettings: object expected");
                             message.methodSettings[i] = $root.google.api.MethodSettings.fromObject(object.methodSettings[i], long + 1);
                         }
@@ -18523,7 +19057,7 @@
                             throw TypeError(".google.api.Publishing.librarySettings: array expected");
                         message.librarySettings = [];
                         for (var i = 0; i < object.librarySettings.length; ++i) {
-                            if (typeof object.librarySettings[i] !== "object")
+                            if (!$util.isObject(object.librarySettings[i]))
                                 throw TypeError(".google.api.Publishing.librarySettings: object expected");
                             message.librarySettings[i] = $root.google.api.ClientLibrarySettings.fromObject(object.librarySettings[i], long + 1);
                         }
@@ -18544,9 +19078,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                Publishing.toObject = function toObject(message, options) {
+                Publishing.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults) {
                         object.methodSettings = [];
@@ -18566,33 +19104,33 @@
                     if (message.methodSettings && message.methodSettings.length) {
                         object.methodSettings = [];
                         for (var j = 0; j < message.methodSettings.length; ++j)
-                            object.methodSettings[j] = $root.google.api.MethodSettings.toObject(message.methodSettings[j], options);
+                            object.methodSettings[j] = $root.google.api.MethodSettings.toObject(message.methodSettings[j], options, q + 1);
                     }
-                    if (message.newIssueUri != null && message.hasOwnProperty("newIssueUri"))
+                    if (message.newIssueUri != null && Object.hasOwnProperty.call(message, "newIssueUri"))
                         object.newIssueUri = message.newIssueUri;
-                    if (message.documentationUri != null && message.hasOwnProperty("documentationUri"))
+                    if (message.documentationUri != null && Object.hasOwnProperty.call(message, "documentationUri"))
                         object.documentationUri = message.documentationUri;
-                    if (message.apiShortName != null && message.hasOwnProperty("apiShortName"))
+                    if (message.apiShortName != null && Object.hasOwnProperty.call(message, "apiShortName"))
                         object.apiShortName = message.apiShortName;
-                    if (message.githubLabel != null && message.hasOwnProperty("githubLabel"))
+                    if (message.githubLabel != null && Object.hasOwnProperty.call(message, "githubLabel"))
                         object.githubLabel = message.githubLabel;
                     if (message.codeownerGithubTeams && message.codeownerGithubTeams.length) {
                         object.codeownerGithubTeams = [];
                         for (var j = 0; j < message.codeownerGithubTeams.length; ++j)
                             object.codeownerGithubTeams[j] = message.codeownerGithubTeams[j];
                     }
-                    if (message.docTagPrefix != null && message.hasOwnProperty("docTagPrefix"))
+                    if (message.docTagPrefix != null && Object.hasOwnProperty.call(message, "docTagPrefix"))
                         object.docTagPrefix = message.docTagPrefix;
-                    if (message.organization != null && message.hasOwnProperty("organization"))
+                    if (message.organization != null && Object.hasOwnProperty.call(message, "organization"))
                         object.organization = options.enums === String ? $root.google.api.ClientLibraryOrganization[message.organization] === undefined ? message.organization : $root.google.api.ClientLibraryOrganization[message.organization] : message.organization;
                     if (message.librarySettings && message.librarySettings.length) {
                         object.librarySettings = [];
                         for (var j = 0; j < message.librarySettings.length; ++j)
-                            object.librarySettings[j] = $root.google.api.ClientLibrarySettings.toObject(message.librarySettings[j], options);
+                            object.librarySettings[j] = $root.google.api.ClientLibrarySettings.toObject(message.librarySettings[j], options, q + 1);
                     }
-                    if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
+                    if (message.protoReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "protoReferenceDocumentationUri"))
                         object.protoReferenceDocumentationUri = message.protoReferenceDocumentationUri;
-                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                    if (message.restReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "restReferenceDocumentationUri"))
                         object.restReferenceDocumentationUri = message.restReferenceDocumentationUri;
                     return object;
                 };
@@ -18698,16 +19236,20 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                JavaSettings.encode = function encode(message, writer) {
+                JavaSettings.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.libraryPackage != null && Object.hasOwnProperty.call(message, "libraryPackage"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.libraryPackage);
                     if (message.serviceClassNames != null && Object.hasOwnProperty.call(message, "serviceClassNames"))
                         for (var keys = Object.keys(message.serviceClassNames), i = 0; i < keys.length; ++i)
                             writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.serviceClassNames[keys[i]]).ldelim();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
-                        $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 3, wireType 2 =*/26).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -18721,7 +19263,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 JavaSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -18820,10 +19362,10 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.libraryPackage != null && message.hasOwnProperty("libraryPackage"))
+                    if (message.libraryPackage != null && Object.hasOwnProperty.call(message, "libraryPackage"))
                         if (!$util.isString(message.libraryPackage))
                             return "libraryPackage: string expected";
-                    if (message.serviceClassNames != null && message.hasOwnProperty("serviceClassNames")) {
+                    if (message.serviceClassNames != null && Object.hasOwnProperty.call(message, "serviceClassNames")) {
                         if (!$util.isObject(message.serviceClassNames))
                             return "serviceClassNames: object expected";
                         var key = Object.keys(message.serviceClassNames);
@@ -18831,7 +19373,7 @@
                             if (!$util.isString(message.serviceClassNames[key[i]]))
                                 return "serviceClassNames: string{k:string} expected";
                     }
-                    if (message.common != null && message.hasOwnProperty("common")) {
+                    if (message.common != null && Object.hasOwnProperty.call(message, "common")) {
                         var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
@@ -18850,6 +19392,8 @@
                 JavaSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.JavaSettings)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.JavaSettings: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -18858,7 +19402,7 @@
                     if (object.libraryPackage != null)
                         message.libraryPackage = String(object.libraryPackage);
                     if (object.serviceClassNames) {
-                        if (typeof object.serviceClassNames !== "object")
+                        if (!$util.isObject(object.serviceClassNames))
                             throw TypeError(".google.api.JavaSettings.serviceClassNames: object expected");
                         message.serviceClassNames = {};
                         for (var keys = Object.keys(object.serviceClassNames), i = 0; i < keys.length; ++i) {
@@ -18868,7 +19412,7 @@
                         }
                     }
                     if (object.common != null) {
-                        if (typeof object.common !== "object")
+                        if (!$util.isObject(object.common))
                             throw TypeError(".google.api.JavaSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
@@ -18884,9 +19428,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                JavaSettings.toObject = function toObject(message, options) {
+                JavaSettings.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.objects || options.defaults)
                         object.serviceClassNames = {};
@@ -18894,7 +19442,7 @@
                         object.libraryPackage = "";
                         object.common = null;
                     }
-                    if (message.libraryPackage != null && message.hasOwnProperty("libraryPackage"))
+                    if (message.libraryPackage != null && Object.hasOwnProperty.call(message, "libraryPackage"))
                         object.libraryPackage = message.libraryPackage;
                     var keys2;
                     if (message.serviceClassNames && (keys2 = Object.keys(message.serviceClassNames)).length) {
@@ -18905,8 +19453,8 @@
                             object.serviceClassNames[keys2[j]] = message.serviceClassNames[keys2[j]];
                         }
                     }
-                    if (message.common != null && message.hasOwnProperty("common"))
-                        object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    if (message.common != null && Object.hasOwnProperty.call(message, "common"))
+                        object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options, q + 1);
                     return object;
                 };
     
@@ -18992,11 +19540,15 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                CppSettings.encode = function encode(message, writer) {
+                CppSettings.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
-                        $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -19010,7 +19562,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 CppSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -19080,7 +19632,7 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.common != null && message.hasOwnProperty("common")) {
+                    if (message.common != null && Object.hasOwnProperty.call(message, "common")) {
                         var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
@@ -19099,13 +19651,15 @@
                 CppSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.CppSettings)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.CppSettings: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.CppSettings();
                     if (object.common != null) {
-                        if (typeof object.common !== "object")
+                        if (!$util.isObject(object.common))
                             throw TypeError(".google.api.CppSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
@@ -19121,14 +19675,18 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                CppSettings.toObject = function toObject(message, options) {
+                CppSettings.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.defaults)
                         object.common = null;
-                    if (message.common != null && message.hasOwnProperty("common"))
-                        object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    if (message.common != null && Object.hasOwnProperty.call(message, "common"))
+                        object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options, q + 1);
                     return object;
                 };
     
@@ -19214,11 +19772,15 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                PhpSettings.encode = function encode(message, writer) {
+                PhpSettings.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
-                        $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -19232,7 +19794,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 PhpSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -19302,7 +19864,7 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.common != null && message.hasOwnProperty("common")) {
+                    if (message.common != null && Object.hasOwnProperty.call(message, "common")) {
                         var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
@@ -19321,13 +19883,15 @@
                 PhpSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.PhpSettings)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.PhpSettings: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.PhpSettings();
                     if (object.common != null) {
-                        if (typeof object.common !== "object")
+                        if (!$util.isObject(object.common))
                             throw TypeError(".google.api.PhpSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
@@ -19343,14 +19907,18 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                PhpSettings.toObject = function toObject(message, options) {
+                PhpSettings.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.defaults)
                         object.common = null;
-                    if (message.common != null && message.hasOwnProperty("common"))
-                        object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    if (message.common != null && Object.hasOwnProperty.call(message, "common"))
+                        object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options, q + 1);
                     return object;
                 };
     
@@ -19445,13 +20013,17 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                PythonSettings.encode = function encode(message, writer) {
+                PythonSettings.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
-                        $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                     if (message.experimentalFeatures != null && Object.hasOwnProperty.call(message, "experimentalFeatures"))
-                        $root.google.api.PythonSettings.ExperimentalFeatures.encode(message.experimentalFeatures, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        $root.google.api.PythonSettings.ExperimentalFeatures.encode(message.experimentalFeatures, writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -19465,7 +20037,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 PythonSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -19539,12 +20111,12 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.common != null && message.hasOwnProperty("common")) {
+                    if (message.common != null && Object.hasOwnProperty.call(message, "common")) {
                         var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
                     }
-                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures")) {
+                    if (message.experimentalFeatures != null && Object.hasOwnProperty.call(message, "experimentalFeatures")) {
                         var error = $root.google.api.PythonSettings.ExperimentalFeatures.verify(message.experimentalFeatures, long + 1);
                         if (error)
                             return "experimentalFeatures." + error;
@@ -19563,18 +20135,20 @@
                 PythonSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.PythonSettings)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.PythonSettings: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.PythonSettings();
                     if (object.common != null) {
-                        if (typeof object.common !== "object")
+                        if (!$util.isObject(object.common))
                             throw TypeError(".google.api.PythonSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
                     if (object.experimentalFeatures != null) {
-                        if (typeof object.experimentalFeatures !== "object")
+                        if (!$util.isObject(object.experimentalFeatures))
                             throw TypeError(".google.api.PythonSettings.experimentalFeatures: object expected");
                         message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.fromObject(object.experimentalFeatures, long + 1);
                     }
@@ -19590,18 +20164,22 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                PythonSettings.toObject = function toObject(message, options) {
+                PythonSettings.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.defaults) {
                         object.common = null;
                         object.experimentalFeatures = null;
                     }
-                    if (message.common != null && message.hasOwnProperty("common"))
-                        object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
-                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures"))
-                        object.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.toObject(message.experimentalFeatures, options);
+                    if (message.common != null && Object.hasOwnProperty.call(message, "common"))
+                        object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options, q + 1);
+                    if (message.experimentalFeatures != null && Object.hasOwnProperty.call(message, "experimentalFeatures"))
+                        object.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.toObject(message.experimentalFeatures, options, q + 1);
                     return object;
                 };
     
@@ -19702,9 +20280,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    ExperimentalFeatures.encode = function encode(message, writer) {
+                    ExperimentalFeatures.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.restAsyncIoEnabled != null && Object.hasOwnProperty.call(message, "restAsyncIoEnabled"))
                             writer.uint32(/* id 1, wireType 0 =*/8).bool(message.restAsyncIoEnabled);
                         if (message.protobufPythonicTypesEnabled != null && Object.hasOwnProperty.call(message, "protobufPythonicTypesEnabled"))
@@ -19724,7 +20306,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ExperimentalFeatures.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -19802,13 +20384,13 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
+                        if (message.restAsyncIoEnabled != null && Object.hasOwnProperty.call(message, "restAsyncIoEnabled"))
                             if (typeof message.restAsyncIoEnabled !== "boolean")
                                 return "restAsyncIoEnabled: boolean expected";
-                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
+                        if (message.protobufPythonicTypesEnabled != null && Object.hasOwnProperty.call(message, "protobufPythonicTypesEnabled"))
                             if (typeof message.protobufPythonicTypesEnabled !== "boolean")
                                 return "protobufPythonicTypesEnabled: boolean expected";
-                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
+                        if (message.unversionedPackageDisabled != null && Object.hasOwnProperty.call(message, "unversionedPackageDisabled"))
                             if (typeof message.unversionedPackageDisabled !== "boolean")
                                 return "unversionedPackageDisabled: boolean expected";
                         return null;
@@ -19825,6 +20407,8 @@
                     ExperimentalFeatures.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.api.PythonSettings.ExperimentalFeatures)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.api.PythonSettings.ExperimentalFeatures: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -19848,20 +20432,24 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    ExperimentalFeatures.toObject = function toObject(message, options) {
+                    ExperimentalFeatures.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.restAsyncIoEnabled = false;
                             object.protobufPythonicTypesEnabled = false;
                             object.unversionedPackageDisabled = false;
                         }
-                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
+                        if (message.restAsyncIoEnabled != null && Object.hasOwnProperty.call(message, "restAsyncIoEnabled"))
                             object.restAsyncIoEnabled = message.restAsyncIoEnabled;
-                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
+                        if (message.protobufPythonicTypesEnabled != null && Object.hasOwnProperty.call(message, "protobufPythonicTypesEnabled"))
                             object.protobufPythonicTypesEnabled = message.protobufPythonicTypesEnabled;
-                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
+                        if (message.unversionedPackageDisabled != null && Object.hasOwnProperty.call(message, "unversionedPackageDisabled"))
                             object.unversionedPackageDisabled = message.unversionedPackageDisabled;
                         return object;
                     };
@@ -19951,11 +20539,15 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                NodeSettings.encode = function encode(message, writer) {
+                NodeSettings.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
-                        $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -19969,7 +20561,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 NodeSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -20039,7 +20631,7 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.common != null && message.hasOwnProperty("common")) {
+                    if (message.common != null && Object.hasOwnProperty.call(message, "common")) {
                         var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
@@ -20058,13 +20650,15 @@
                 NodeSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.NodeSettings)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.NodeSettings: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.NodeSettings();
                     if (object.common != null) {
-                        if (typeof object.common !== "object")
+                        if (!$util.isObject(object.common))
                             throw TypeError(".google.api.NodeSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
@@ -20080,14 +20674,18 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                NodeSettings.toObject = function toObject(message, options) {
+                NodeSettings.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.defaults)
                         object.common = null;
-                    if (message.common != null && message.hasOwnProperty("common"))
-                        object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    if (message.common != null && Object.hasOwnProperty.call(message, "common"))
+                        object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options, q + 1);
                     return object;
                 };
     
@@ -20223,11 +20821,15 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                DotnetSettings.encode = function encode(message, writer) {
+                DotnetSettings.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
-                        $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                     if (message.renamedServices != null && Object.hasOwnProperty.call(message, "renamedServices"))
                         for (var keys = Object.keys(message.renamedServices), i = 0; i < keys.length; ++i)
                             writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.renamedServices[keys[i]]).ldelim();
@@ -20256,7 +20858,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 DotnetSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -20394,12 +20996,12 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.common != null && message.hasOwnProperty("common")) {
+                    if (message.common != null && Object.hasOwnProperty.call(message, "common")) {
                         var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
                     }
-                    if (message.renamedServices != null && message.hasOwnProperty("renamedServices")) {
+                    if (message.renamedServices != null && Object.hasOwnProperty.call(message, "renamedServices")) {
                         if (!$util.isObject(message.renamedServices))
                             return "renamedServices: object expected";
                         var key = Object.keys(message.renamedServices);
@@ -20407,7 +21009,7 @@
                             if (!$util.isString(message.renamedServices[key[i]]))
                                 return "renamedServices: string{k:string} expected";
                     }
-                    if (message.renamedResources != null && message.hasOwnProperty("renamedResources")) {
+                    if (message.renamedResources != null && Object.hasOwnProperty.call(message, "renamedResources")) {
                         if (!$util.isObject(message.renamedResources))
                             return "renamedResources: object expected";
                         var key = Object.keys(message.renamedResources);
@@ -20415,21 +21017,21 @@
                             if (!$util.isString(message.renamedResources[key[i]]))
                                 return "renamedResources: string{k:string} expected";
                     }
-                    if (message.ignoredResources != null && message.hasOwnProperty("ignoredResources")) {
+                    if (message.ignoredResources != null && Object.hasOwnProperty.call(message, "ignoredResources")) {
                         if (!Array.isArray(message.ignoredResources))
                             return "ignoredResources: array expected";
                         for (var i = 0; i < message.ignoredResources.length; ++i)
                             if (!$util.isString(message.ignoredResources[i]))
                                 return "ignoredResources: string[] expected";
                     }
-                    if (message.forcedNamespaceAliases != null && message.hasOwnProperty("forcedNamespaceAliases")) {
+                    if (message.forcedNamespaceAliases != null && Object.hasOwnProperty.call(message, "forcedNamespaceAliases")) {
                         if (!Array.isArray(message.forcedNamespaceAliases))
                             return "forcedNamespaceAliases: array expected";
                         for (var i = 0; i < message.forcedNamespaceAliases.length; ++i)
                             if (!$util.isString(message.forcedNamespaceAliases[i]))
                                 return "forcedNamespaceAliases: string[] expected";
                     }
-                    if (message.handwrittenSignatures != null && message.hasOwnProperty("handwrittenSignatures")) {
+                    if (message.handwrittenSignatures != null && Object.hasOwnProperty.call(message, "handwrittenSignatures")) {
                         if (!Array.isArray(message.handwrittenSignatures))
                             return "handwrittenSignatures: array expected";
                         for (var i = 0; i < message.handwrittenSignatures.length; ++i)
@@ -20450,18 +21052,20 @@
                 DotnetSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.DotnetSettings)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.DotnetSettings: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.DotnetSettings();
                     if (object.common != null) {
-                        if (typeof object.common !== "object")
+                        if (!$util.isObject(object.common))
                             throw TypeError(".google.api.DotnetSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
                     if (object.renamedServices) {
-                        if (typeof object.renamedServices !== "object")
+                        if (!$util.isObject(object.renamedServices))
                             throw TypeError(".google.api.DotnetSettings.renamedServices: object expected");
                         message.renamedServices = {};
                         for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i) {
@@ -20471,7 +21075,7 @@
                         }
                     }
                     if (object.renamedResources) {
-                        if (typeof object.renamedResources !== "object")
+                        if (!$util.isObject(object.renamedResources))
                             throw TypeError(".google.api.DotnetSettings.renamedResources: object expected");
                         message.renamedResources = {};
                         for (var keys = Object.keys(object.renamedResources), i = 0; i < keys.length; ++i) {
@@ -20513,9 +21117,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                DotnetSettings.toObject = function toObject(message, options) {
+                DotnetSettings.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults) {
                         object.ignoredResources = [];
@@ -20528,8 +21136,8 @@
                     }
                     if (options.defaults)
                         object.common = null;
-                    if (message.common != null && message.hasOwnProperty("common"))
-                        object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    if (message.common != null && Object.hasOwnProperty.call(message, "common"))
+                        object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options, q + 1);
                     var keys2;
                     if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
                         object.renamedServices = {};
@@ -20647,11 +21255,15 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                RubySettings.encode = function encode(message, writer) {
+                RubySettings.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
-                        $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -20665,7 +21277,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 RubySettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -20735,7 +21347,7 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.common != null && message.hasOwnProperty("common")) {
+                    if (message.common != null && Object.hasOwnProperty.call(message, "common")) {
                         var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
@@ -20754,13 +21366,15 @@
                 RubySettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.RubySettings)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.RubySettings: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.RubySettings();
                     if (object.common != null) {
-                        if (typeof object.common !== "object")
+                        if (!$util.isObject(object.common))
                             throw TypeError(".google.api.RubySettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
@@ -20776,14 +21390,18 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                RubySettings.toObject = function toObject(message, options) {
+                RubySettings.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.defaults)
                         object.common = null;
-                    if (message.common != null && message.hasOwnProperty("common"))
-                        object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    if (message.common != null && Object.hasOwnProperty.call(message, "common"))
+                        object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options, q + 1);
                     return object;
                 };
     
@@ -20879,11 +21497,15 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                GoSettings.encode = function encode(message, writer) {
+                GoSettings.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
-                        $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                     if (message.renamedServices != null && Object.hasOwnProperty.call(message, "renamedServices"))
                         for (var keys = Object.keys(message.renamedServices), i = 0; i < keys.length; ++i)
                             writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.renamedServices[keys[i]]).ldelim();
@@ -20900,7 +21522,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 GoSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -20995,12 +21617,12 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.common != null && message.hasOwnProperty("common")) {
+                    if (message.common != null && Object.hasOwnProperty.call(message, "common")) {
                         var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
                     }
-                    if (message.renamedServices != null && message.hasOwnProperty("renamedServices")) {
+                    if (message.renamedServices != null && Object.hasOwnProperty.call(message, "renamedServices")) {
                         if (!$util.isObject(message.renamedServices))
                             return "renamedServices: object expected";
                         var key = Object.keys(message.renamedServices);
@@ -21022,18 +21644,20 @@
                 GoSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.GoSettings)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.GoSettings: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.GoSettings();
                     if (object.common != null) {
-                        if (typeof object.common !== "object")
+                        if (!$util.isObject(object.common))
                             throw TypeError(".google.api.GoSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
                     if (object.renamedServices) {
-                        if (typeof object.renamedServices !== "object")
+                        if (!$util.isObject(object.renamedServices))
                             throw TypeError(".google.api.GoSettings.renamedServices: object expected");
                         message.renamedServices = {};
                         for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i) {
@@ -21054,16 +21678,20 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                GoSettings.toObject = function toObject(message, options) {
+                GoSettings.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.objects || options.defaults)
                         object.renamedServices = {};
                     if (options.defaults)
                         object.common = null;
-                    if (message.common != null && message.hasOwnProperty("common"))
-                        object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    if (message.common != null && Object.hasOwnProperty.call(message, "common"))
+                        object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options, q + 1);
                     var keys2;
                     if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
                         object.renamedServices = {};
@@ -21177,13 +21805,17 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                MethodSettings.encode = function encode(message, writer) {
+                MethodSettings.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.selector != null && Object.hasOwnProperty.call(message, "selector"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.selector);
                     if (message.longRunning != null && Object.hasOwnProperty.call(message, "longRunning"))
-                        $root.google.api.MethodSettings.LongRunning.encode(message.longRunning, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        $root.google.api.MethodSettings.LongRunning.encode(message.longRunning, writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
                     if (message.autoPopulatedFields != null && message.autoPopulatedFields.length)
                         for (var i = 0; i < message.autoPopulatedFields.length; ++i)
                             writer.uint32(/* id 3, wireType 2 =*/26).string(message.autoPopulatedFields[i]);
@@ -21200,7 +21832,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 MethodSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -21280,15 +21912,15 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.selector != null && message.hasOwnProperty("selector"))
+                    if (message.selector != null && Object.hasOwnProperty.call(message, "selector"))
                         if (!$util.isString(message.selector))
                             return "selector: string expected";
-                    if (message.longRunning != null && message.hasOwnProperty("longRunning")) {
+                    if (message.longRunning != null && Object.hasOwnProperty.call(message, "longRunning")) {
                         var error = $root.google.api.MethodSettings.LongRunning.verify(message.longRunning, long + 1);
                         if (error)
                             return "longRunning." + error;
                     }
-                    if (message.autoPopulatedFields != null && message.hasOwnProperty("autoPopulatedFields")) {
+                    if (message.autoPopulatedFields != null && Object.hasOwnProperty.call(message, "autoPopulatedFields")) {
                         if (!Array.isArray(message.autoPopulatedFields))
                             return "autoPopulatedFields: array expected";
                         for (var i = 0; i < message.autoPopulatedFields.length; ++i)
@@ -21309,6 +21941,8 @@
                 MethodSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.MethodSettings)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.MethodSettings: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -21317,7 +21951,7 @@
                     if (object.selector != null)
                         message.selector = String(object.selector);
                     if (object.longRunning != null) {
-                        if (typeof object.longRunning !== "object")
+                        if (!$util.isObject(object.longRunning))
                             throw TypeError(".google.api.MethodSettings.longRunning: object expected");
                         message.longRunning = $root.google.api.MethodSettings.LongRunning.fromObject(object.longRunning, long + 1);
                     }
@@ -21340,9 +21974,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                MethodSettings.toObject = function toObject(message, options) {
+                MethodSettings.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.autoPopulatedFields = [];
@@ -21350,10 +21988,10 @@
                         object.selector = "";
                         object.longRunning = null;
                     }
-                    if (message.selector != null && message.hasOwnProperty("selector"))
+                    if (message.selector != null && Object.hasOwnProperty.call(message, "selector"))
                         object.selector = message.selector;
-                    if (message.longRunning != null && message.hasOwnProperty("longRunning"))
-                        object.longRunning = $root.google.api.MethodSettings.LongRunning.toObject(message.longRunning, options);
+                    if (message.longRunning != null && Object.hasOwnProperty.call(message, "longRunning"))
+                        object.longRunning = $root.google.api.MethodSettings.LongRunning.toObject(message.longRunning, options, q + 1);
                     if (message.autoPopulatedFields && message.autoPopulatedFields.length) {
                         object.autoPopulatedFields = [];
                         for (var j = 0; j < message.autoPopulatedFields.length; ++j)
@@ -21468,17 +22106,21 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    LongRunning.encode = function encode(message, writer) {
+                    LongRunning.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.initialPollDelay != null && Object.hasOwnProperty.call(message, "initialPollDelay"))
-                            $root.google.protobuf.Duration.encode(message.initialPollDelay, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            $root.google.protobuf.Duration.encode(message.initialPollDelay, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                         if (message.pollDelayMultiplier != null && Object.hasOwnProperty.call(message, "pollDelayMultiplier"))
                             writer.uint32(/* id 2, wireType 5 =*/21).float(message.pollDelayMultiplier);
                         if (message.maxPollDelay != null && Object.hasOwnProperty.call(message, "maxPollDelay"))
-                            $root.google.protobuf.Duration.encode(message.maxPollDelay, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            $root.google.protobuf.Duration.encode(message.maxPollDelay, writer.uint32(/* id 3, wireType 2 =*/26).fork(), q + 1).ldelim();
                         if (message.totalPollTimeout != null && Object.hasOwnProperty.call(message, "totalPollTimeout"))
-                            $root.google.protobuf.Duration.encode(message.totalPollTimeout, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            $root.google.protobuf.Duration.encode(message.totalPollTimeout, writer.uint32(/* id 4, wireType 2 =*/34).fork(), q + 1).ldelim();
                         return writer;
                     };
     
@@ -21492,7 +22134,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     LongRunning.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -21574,20 +22216,20 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.initialPollDelay != null && message.hasOwnProperty("initialPollDelay")) {
+                        if (message.initialPollDelay != null && Object.hasOwnProperty.call(message, "initialPollDelay")) {
                             var error = $root.google.protobuf.Duration.verify(message.initialPollDelay, long + 1);
                             if (error)
                                 return "initialPollDelay." + error;
                         }
-                        if (message.pollDelayMultiplier != null && message.hasOwnProperty("pollDelayMultiplier"))
+                        if (message.pollDelayMultiplier != null && Object.hasOwnProperty.call(message, "pollDelayMultiplier"))
                             if (typeof message.pollDelayMultiplier !== "number")
                                 return "pollDelayMultiplier: number expected";
-                        if (message.maxPollDelay != null && message.hasOwnProperty("maxPollDelay")) {
+                        if (message.maxPollDelay != null && Object.hasOwnProperty.call(message, "maxPollDelay")) {
                             var error = $root.google.protobuf.Duration.verify(message.maxPollDelay, long + 1);
                             if (error)
                                 return "maxPollDelay." + error;
                         }
-                        if (message.totalPollTimeout != null && message.hasOwnProperty("totalPollTimeout")) {
+                        if (message.totalPollTimeout != null && Object.hasOwnProperty.call(message, "totalPollTimeout")) {
                             var error = $root.google.protobuf.Duration.verify(message.totalPollTimeout, long + 1);
                             if (error)
                                 return "totalPollTimeout." + error;
@@ -21606,25 +22248,27 @@
                     LongRunning.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.api.MethodSettings.LongRunning)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.api.MethodSettings.LongRunning: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.api.MethodSettings.LongRunning();
                         if (object.initialPollDelay != null) {
-                            if (typeof object.initialPollDelay !== "object")
+                            if (!$util.isObject(object.initialPollDelay))
                                 throw TypeError(".google.api.MethodSettings.LongRunning.initialPollDelay: object expected");
                             message.initialPollDelay = $root.google.protobuf.Duration.fromObject(object.initialPollDelay, long + 1);
                         }
                         if (object.pollDelayMultiplier != null)
                             message.pollDelayMultiplier = Number(object.pollDelayMultiplier);
                         if (object.maxPollDelay != null) {
-                            if (typeof object.maxPollDelay !== "object")
+                            if (!$util.isObject(object.maxPollDelay))
                                 throw TypeError(".google.api.MethodSettings.LongRunning.maxPollDelay: object expected");
                             message.maxPollDelay = $root.google.protobuf.Duration.fromObject(object.maxPollDelay, long + 1);
                         }
                         if (object.totalPollTimeout != null) {
-                            if (typeof object.totalPollTimeout !== "object")
+                            if (!$util.isObject(object.totalPollTimeout))
                                 throw TypeError(".google.api.MethodSettings.LongRunning.totalPollTimeout: object expected");
                             message.totalPollTimeout = $root.google.protobuf.Duration.fromObject(object.totalPollTimeout, long + 1);
                         }
@@ -21640,9 +22284,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    LongRunning.toObject = function toObject(message, options) {
+                    LongRunning.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.initialPollDelay = null;
@@ -21650,14 +22298,14 @@
                             object.maxPollDelay = null;
                             object.totalPollTimeout = null;
                         }
-                        if (message.initialPollDelay != null && message.hasOwnProperty("initialPollDelay"))
-                            object.initialPollDelay = $root.google.protobuf.Duration.toObject(message.initialPollDelay, options);
-                        if (message.pollDelayMultiplier != null && message.hasOwnProperty("pollDelayMultiplier"))
+                        if (message.initialPollDelay != null && Object.hasOwnProperty.call(message, "initialPollDelay"))
+                            object.initialPollDelay = $root.google.protobuf.Duration.toObject(message.initialPollDelay, options, q + 1);
+                        if (message.pollDelayMultiplier != null && Object.hasOwnProperty.call(message, "pollDelayMultiplier"))
                             object.pollDelayMultiplier = options.json && !isFinite(message.pollDelayMultiplier) ? String(message.pollDelayMultiplier) : message.pollDelayMultiplier;
-                        if (message.maxPollDelay != null && message.hasOwnProperty("maxPollDelay"))
-                            object.maxPollDelay = $root.google.protobuf.Duration.toObject(message.maxPollDelay, options);
-                        if (message.totalPollTimeout != null && message.hasOwnProperty("totalPollTimeout"))
-                            object.totalPollTimeout = $root.google.protobuf.Duration.toObject(message.totalPollTimeout, options);
+                        if (message.maxPollDelay != null && Object.hasOwnProperty.call(message, "maxPollDelay"))
+                            object.maxPollDelay = $root.google.protobuf.Duration.toObject(message.maxPollDelay, options, q + 1);
+                        if (message.totalPollTimeout != null && Object.hasOwnProperty.call(message, "totalPollTimeout"))
+                            object.totalPollTimeout = $root.google.protobuf.Duration.toObject(message.totalPollTimeout, options, q + 1);
                         return object;
                     };
     
@@ -21798,9 +22446,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                SelectiveGapicGeneration.encode = function encode(message, writer) {
+                SelectiveGapicGeneration.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.methods != null && message.methods.length)
                         for (var i = 0; i < message.methods.length; ++i)
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.methods[i]);
@@ -21819,7 +22471,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 SelectiveGapicGeneration.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -21895,14 +22547,14 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.methods != null && message.hasOwnProperty("methods")) {
+                    if (message.methods != null && Object.hasOwnProperty.call(message, "methods")) {
                         if (!Array.isArray(message.methods))
                             return "methods: array expected";
                         for (var i = 0; i < message.methods.length; ++i)
                             if (!$util.isString(message.methods[i]))
                                 return "methods: string[] expected";
                     }
-                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
+                    if (message.generateOmittedAsInternal != null && Object.hasOwnProperty.call(message, "generateOmittedAsInternal"))
                         if (typeof message.generateOmittedAsInternal !== "boolean")
                             return "generateOmittedAsInternal: boolean expected";
                     return null;
@@ -21919,6 +22571,8 @@
                 SelectiveGapicGeneration.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.SelectiveGapicGeneration)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.SelectiveGapicGeneration: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -21945,9 +22599,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                SelectiveGapicGeneration.toObject = function toObject(message, options) {
+                SelectiveGapicGeneration.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.methods = [];
@@ -21958,7 +22616,7 @@
                         for (var j = 0; j < message.methods.length; ++j)
                             object.methods[j] = message.methods[j];
                     }
-                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
+                    if (message.generateOmittedAsInternal != null && Object.hasOwnProperty.call(message, "generateOmittedAsInternal"))
                         object.generateOmittedAsInternal = message.generateOmittedAsInternal;
                     return object;
                 };
@@ -22155,9 +22813,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                ResourceDescriptor.encode = function encode(message, writer) {
+                ResourceDescriptor.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
                     if (message.pattern != null && message.pattern.length)
@@ -22190,7 +22852,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -22293,20 +22955,20 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.type != null && message.hasOwnProperty("type"))
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                         if (!$util.isString(message.type))
                             return "type: string expected";
-                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
+                    if (message.pattern != null && Object.hasOwnProperty.call(message, "pattern")) {
                         if (!Array.isArray(message.pattern))
                             return "pattern: array expected";
                         for (var i = 0; i < message.pattern.length; ++i)
                             if (!$util.isString(message.pattern[i]))
                                 return "pattern: string[] expected";
                     }
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                    if (message.nameField != null && Object.hasOwnProperty.call(message, "nameField"))
                         if (!$util.isString(message.nameField))
                             return "nameField: string expected";
-                    if (message.history != null && message.hasOwnProperty("history"))
+                    if (message.history != null && Object.hasOwnProperty.call(message, "history"))
                         switch (message.history) {
                         default:
                             return "history: enum value expected";
@@ -22315,13 +22977,13 @@
                         case 2:
                             break;
                         }
-                    if (message.plural != null && message.hasOwnProperty("plural"))
+                    if (message.plural != null && Object.hasOwnProperty.call(message, "plural"))
                         if (!$util.isString(message.plural))
                             return "plural: string expected";
-                    if (message.singular != null && message.hasOwnProperty("singular"))
+                    if (message.singular != null && Object.hasOwnProperty.call(message, "singular"))
                         if (!$util.isString(message.singular))
                             return "singular: string expected";
-                    if (message.style != null && message.hasOwnProperty("style")) {
+                    if (message.style != null && Object.hasOwnProperty.call(message, "style")) {
                         if (!Array.isArray(message.style))
                             return "style: array expected";
                         for (var i = 0; i < message.style.length; ++i)
@@ -22347,6 +23009,8 @@
                 ResourceDescriptor.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.ResourceDescriptor)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.ResourceDescriptor: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -22420,9 +23084,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                ResourceDescriptor.toObject = function toObject(message, options) {
+                ResourceDescriptor.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults) {
                         object.pattern = [];
@@ -22435,20 +23103,20 @@
                         object.plural = "";
                         object.singular = "";
                     }
-                    if (message.type != null && message.hasOwnProperty("type"))
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                         object.type = message.type;
                     if (message.pattern && message.pattern.length) {
                         object.pattern = [];
                         for (var j = 0; j < message.pattern.length; ++j)
                             object.pattern[j] = message.pattern[j];
                     }
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                    if (message.nameField != null && Object.hasOwnProperty.call(message, "nameField"))
                         object.nameField = message.nameField;
-                    if (message.history != null && message.hasOwnProperty("history"))
+                    if (message.history != null && Object.hasOwnProperty.call(message, "history"))
                         object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
-                    if (message.plural != null && message.hasOwnProperty("plural"))
+                    if (message.plural != null && Object.hasOwnProperty.call(message, "plural"))
                         object.plural = message.plural;
-                    if (message.singular != null && message.hasOwnProperty("singular"))
+                    if (message.singular != null && Object.hasOwnProperty.call(message, "singular"))
                         object.singular = message.singular;
                     if (message.style && message.style.length) {
                         object.style = [];
@@ -22579,9 +23247,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                ResourceReference.encode = function encode(message, writer) {
+                ResourceReference.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
                     if (message.childType != null && Object.hasOwnProperty.call(message, "childType"))
@@ -22599,7 +23271,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -22673,10 +23345,10 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.type != null && message.hasOwnProperty("type"))
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                         if (!$util.isString(message.type))
                             return "type: string expected";
-                    if (message.childType != null && message.hasOwnProperty("childType"))
+                    if (message.childType != null && Object.hasOwnProperty.call(message, "childType"))
                         if (!$util.isString(message.childType))
                             return "childType: string expected";
                     return null;
@@ -22693,6 +23365,8 @@
                 ResourceReference.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.ResourceReference)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.ResourceReference: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -22714,17 +23388,21 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                ResourceReference.toObject = function toObject(message, options) {
+                ResourceReference.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.defaults) {
                         object.type = "";
                         object.childType = "";
                     }
-                    if (message.type != null && message.hasOwnProperty("type"))
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                         object.type = message.type;
-                    if (message.childType != null && message.hasOwnProperty("childType"))
+                    if (message.childType != null && Object.hasOwnProperty.call(message, "childType"))
                         object.childType = message.childType;
                     return object;
                 };
@@ -22824,12 +23502,16 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                FileDescriptorSet.encode = function encode(message, writer) {
+                FileDescriptorSet.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.file != null && message.file.length)
                         for (var i = 0; i < message.file.length; ++i)
-                            $root.google.protobuf.FileDescriptorProto.encode(message.file[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            $root.google.protobuf.FileDescriptorProto.encode(message.file[i], writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -22843,7 +23525,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 FileDescriptorSet.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -22915,7 +23597,7 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.file != null && message.hasOwnProperty("file")) {
+                    if (message.file != null && Object.hasOwnProperty.call(message, "file")) {
                         if (!Array.isArray(message.file))
                             return "file: array expected";
                         for (var i = 0; i < message.file.length; ++i) {
@@ -22938,6 +23620,8 @@
                 FileDescriptorSet.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FileDescriptorSet)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.FileDescriptorSet: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -22948,7 +23632,7 @@
                             throw TypeError(".google.protobuf.FileDescriptorSet.file: array expected");
                         message.file = [];
                         for (var i = 0; i < object.file.length; ++i) {
-                            if (typeof object.file[i] !== "object")
+                            if (!$util.isObject(object.file[i]))
                                 throw TypeError(".google.protobuf.FileDescriptorSet.file: object expected");
                             message.file[i] = $root.google.protobuf.FileDescriptorProto.fromObject(object.file[i], long + 1);
                         }
@@ -22965,16 +23649,20 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                FileDescriptorSet.toObject = function toObject(message, options) {
+                FileDescriptorSet.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.file = [];
                     if (message.file && message.file.length) {
                         object.file = [];
                         for (var j = 0; j < message.file.length; ++j)
-                            object.file[j] = $root.google.protobuf.FileDescriptorProto.toObject(message.file[j], options);
+                            object.file[j] = $root.google.protobuf.FileDescriptorProto.toObject(message.file[j], options, q + 1);
                     }
                     return object;
                 };
@@ -23220,9 +23908,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                FileDescriptorProto.encode = function encode(message, writer) {
+                FileDescriptorProto.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                     if (message["package"] != null && Object.hasOwnProperty.call(message, "package"))
@@ -23232,20 +23924,20 @@
                             writer.uint32(/* id 3, wireType 2 =*/26).string(message.dependency[i]);
                     if (message.messageType != null && message.messageType.length)
                         for (var i = 0; i < message.messageType.length; ++i)
-                            $root.google.protobuf.DescriptorProto.encode(message.messageType[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            $root.google.protobuf.DescriptorProto.encode(message.messageType[i], writer.uint32(/* id 4, wireType 2 =*/34).fork(), q + 1).ldelim();
                     if (message.enumType != null && message.enumType.length)
                         for (var i = 0; i < message.enumType.length; ++i)
-                            $root.google.protobuf.EnumDescriptorProto.encode(message.enumType[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            $root.google.protobuf.EnumDescriptorProto.encode(message.enumType[i], writer.uint32(/* id 5, wireType 2 =*/42).fork(), q + 1).ldelim();
                     if (message.service != null && message.service.length)
                         for (var i = 0; i < message.service.length; ++i)
-                            $root.google.protobuf.ServiceDescriptorProto.encode(message.service[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            $root.google.protobuf.ServiceDescriptorProto.encode(message.service[i], writer.uint32(/* id 6, wireType 2 =*/50).fork(), q + 1).ldelim();
                     if (message.extension != null && message.extension.length)
                         for (var i = 0; i < message.extension.length; ++i)
-                            $root.google.protobuf.FieldDescriptorProto.encode(message.extension[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            $root.google.protobuf.FieldDescriptorProto.encode(message.extension[i], writer.uint32(/* id 7, wireType 2 =*/58).fork(), q + 1).ldelim();
                     if (message.options != null && Object.hasOwnProperty.call(message, "options"))
-                        $root.google.protobuf.FileOptions.encode(message.options, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                        $root.google.protobuf.FileOptions.encode(message.options, writer.uint32(/* id 8, wireType 2 =*/66).fork(), q + 1).ldelim();
                     if (message.sourceCodeInfo != null && Object.hasOwnProperty.call(message, "sourceCodeInfo"))
-                        $root.google.protobuf.SourceCodeInfo.encode(message.sourceCodeInfo, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                        $root.google.protobuf.SourceCodeInfo.encode(message.sourceCodeInfo, writer.uint32(/* id 9, wireType 2 =*/74).fork(), q + 1).ldelim();
                     if (message.publicDependency != null && message.publicDependency.length)
                         for (var i = 0; i < message.publicDependency.length; ++i)
                             writer.uint32(/* id 10, wireType 0 =*/80).int32(message.publicDependency[i]);
@@ -23272,7 +23964,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 FileDescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -23420,41 +24112,41 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
-                    if (message["package"] != null && message.hasOwnProperty("package"))
+                    if (message["package"] != null && Object.hasOwnProperty.call(message, "package"))
                         if (!$util.isString(message["package"]))
                             return "package: string expected";
-                    if (message.dependency != null && message.hasOwnProperty("dependency")) {
+                    if (message.dependency != null && Object.hasOwnProperty.call(message, "dependency")) {
                         if (!Array.isArray(message.dependency))
                             return "dependency: array expected";
                         for (var i = 0; i < message.dependency.length; ++i)
                             if (!$util.isString(message.dependency[i]))
                                 return "dependency: string[] expected";
                     }
-                    if (message.publicDependency != null && message.hasOwnProperty("publicDependency")) {
+                    if (message.publicDependency != null && Object.hasOwnProperty.call(message, "publicDependency")) {
                         if (!Array.isArray(message.publicDependency))
                             return "publicDependency: array expected";
                         for (var i = 0; i < message.publicDependency.length; ++i)
                             if (!$util.isInteger(message.publicDependency[i]))
                                 return "publicDependency: integer[] expected";
                     }
-                    if (message.weakDependency != null && message.hasOwnProperty("weakDependency")) {
+                    if (message.weakDependency != null && Object.hasOwnProperty.call(message, "weakDependency")) {
                         if (!Array.isArray(message.weakDependency))
                             return "weakDependency: array expected";
                         for (var i = 0; i < message.weakDependency.length; ++i)
                             if (!$util.isInteger(message.weakDependency[i]))
                                 return "weakDependency: integer[] expected";
                     }
-                    if (message.optionDependency != null && message.hasOwnProperty("optionDependency")) {
+                    if (message.optionDependency != null && Object.hasOwnProperty.call(message, "optionDependency")) {
                         if (!Array.isArray(message.optionDependency))
                             return "optionDependency: array expected";
                         for (var i = 0; i < message.optionDependency.length; ++i)
                             if (!$util.isString(message.optionDependency[i]))
                                 return "optionDependency: string[] expected";
                     }
-                    if (message.messageType != null && message.hasOwnProperty("messageType")) {
+                    if (message.messageType != null && Object.hasOwnProperty.call(message, "messageType")) {
                         if (!Array.isArray(message.messageType))
                             return "messageType: array expected";
                         for (var i = 0; i < message.messageType.length; ++i) {
@@ -23463,7 +24155,7 @@
                                 return "messageType." + error;
                         }
                     }
-                    if (message.enumType != null && message.hasOwnProperty("enumType")) {
+                    if (message.enumType != null && Object.hasOwnProperty.call(message, "enumType")) {
                         if (!Array.isArray(message.enumType))
                             return "enumType: array expected";
                         for (var i = 0; i < message.enumType.length; ++i) {
@@ -23472,7 +24164,7 @@
                                 return "enumType." + error;
                         }
                     }
-                    if (message.service != null && message.hasOwnProperty("service")) {
+                    if (message.service != null && Object.hasOwnProperty.call(message, "service")) {
                         if (!Array.isArray(message.service))
                             return "service: array expected";
                         for (var i = 0; i < message.service.length; ++i) {
@@ -23481,7 +24173,7 @@
                                 return "service." + error;
                         }
                     }
-                    if (message.extension != null && message.hasOwnProperty("extension")) {
+                    if (message.extension != null && Object.hasOwnProperty.call(message, "extension")) {
                         if (!Array.isArray(message.extension))
                             return "extension: array expected";
                         for (var i = 0; i < message.extension.length; ++i) {
@@ -23490,20 +24182,20 @@
                                 return "extension." + error;
                         }
                     }
-                    if (message.options != null && message.hasOwnProperty("options")) {
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options")) {
                         var error = $root.google.protobuf.FileOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
-                    if (message.sourceCodeInfo != null && message.hasOwnProperty("sourceCodeInfo")) {
+                    if (message.sourceCodeInfo != null && Object.hasOwnProperty.call(message, "sourceCodeInfo")) {
                         var error = $root.google.protobuf.SourceCodeInfo.verify(message.sourceCodeInfo, long + 1);
                         if (error)
                             return "sourceCodeInfo." + error;
                     }
-                    if (message.syntax != null && message.hasOwnProperty("syntax"))
+                    if (message.syntax != null && Object.hasOwnProperty.call(message, "syntax"))
                         if (!$util.isString(message.syntax))
                             return "syntax: string expected";
-                    if (message.edition != null && message.hasOwnProperty("edition"))
+                    if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                         switch (message.edition) {
                         default:
                             return "edition: enum value expected";
@@ -23535,6 +24227,8 @@
                 FileDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FileDescriptorProto)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.FileDescriptorProto: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -23577,7 +24271,7 @@
                             throw TypeError(".google.protobuf.FileDescriptorProto.messageType: array expected");
                         message.messageType = [];
                         for (var i = 0; i < object.messageType.length; ++i) {
-                            if (typeof object.messageType[i] !== "object")
+                            if (!$util.isObject(object.messageType[i]))
                                 throw TypeError(".google.protobuf.FileDescriptorProto.messageType: object expected");
                             message.messageType[i] = $root.google.protobuf.DescriptorProto.fromObject(object.messageType[i], long + 1);
                         }
@@ -23587,7 +24281,7 @@
                             throw TypeError(".google.protobuf.FileDescriptorProto.enumType: array expected");
                         message.enumType = [];
                         for (var i = 0; i < object.enumType.length; ++i) {
-                            if (typeof object.enumType[i] !== "object")
+                            if (!$util.isObject(object.enumType[i]))
                                 throw TypeError(".google.protobuf.FileDescriptorProto.enumType: object expected");
                             message.enumType[i] = $root.google.protobuf.EnumDescriptorProto.fromObject(object.enumType[i], long + 1);
                         }
@@ -23597,7 +24291,7 @@
                             throw TypeError(".google.protobuf.FileDescriptorProto.service: array expected");
                         message.service = [];
                         for (var i = 0; i < object.service.length; ++i) {
-                            if (typeof object.service[i] !== "object")
+                            if (!$util.isObject(object.service[i]))
                                 throw TypeError(".google.protobuf.FileDescriptorProto.service: object expected");
                             message.service[i] = $root.google.protobuf.ServiceDescriptorProto.fromObject(object.service[i], long + 1);
                         }
@@ -23607,18 +24301,18 @@
                             throw TypeError(".google.protobuf.FileDescriptorProto.extension: array expected");
                         message.extension = [];
                         for (var i = 0; i < object.extension.length; ++i) {
-                            if (typeof object.extension[i] !== "object")
+                            if (!$util.isObject(object.extension[i]))
                                 throw TypeError(".google.protobuf.FileDescriptorProto.extension: object expected");
                             message.extension[i] = $root.google.protobuf.FieldDescriptorProto.fromObject(object.extension[i], long + 1);
                         }
                     }
                     if (object.options != null) {
-                        if (typeof object.options !== "object")
+                        if (!$util.isObject(object.options))
                             throw TypeError(".google.protobuf.FileDescriptorProto.options: object expected");
                         message.options = $root.google.protobuf.FileOptions.fromObject(object.options, long + 1);
                     }
                     if (object.sourceCodeInfo != null) {
-                        if (typeof object.sourceCodeInfo !== "object")
+                        if (!$util.isObject(object.sourceCodeInfo))
                             throw TypeError(".google.protobuf.FileDescriptorProto.sourceCodeInfo: object expected");
                         message.sourceCodeInfo = $root.google.protobuf.SourceCodeInfo.fromObject(object.sourceCodeInfo, long + 1);
                     }
@@ -23692,9 +24386,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                FileDescriptorProto.toObject = function toObject(message, options) {
+                FileDescriptorProto.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults) {
                         object.dependency = [];
@@ -23714,9 +24412,9 @@
                         object.syntax = "";
                         object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
                     }
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         object.name = message.name;
-                    if (message["package"] != null && message.hasOwnProperty("package"))
+                    if (message["package"] != null && Object.hasOwnProperty.call(message, "package"))
                         object["package"] = message["package"];
                     if (message.dependency && message.dependency.length) {
                         object.dependency = [];
@@ -23726,27 +24424,27 @@
                     if (message.messageType && message.messageType.length) {
                         object.messageType = [];
                         for (var j = 0; j < message.messageType.length; ++j)
-                            object.messageType[j] = $root.google.protobuf.DescriptorProto.toObject(message.messageType[j], options);
+                            object.messageType[j] = $root.google.protobuf.DescriptorProto.toObject(message.messageType[j], options, q + 1);
                     }
                     if (message.enumType && message.enumType.length) {
                         object.enumType = [];
                         for (var j = 0; j < message.enumType.length; ++j)
-                            object.enumType[j] = $root.google.protobuf.EnumDescriptorProto.toObject(message.enumType[j], options);
+                            object.enumType[j] = $root.google.protobuf.EnumDescriptorProto.toObject(message.enumType[j], options, q + 1);
                     }
                     if (message.service && message.service.length) {
                         object.service = [];
                         for (var j = 0; j < message.service.length; ++j)
-                            object.service[j] = $root.google.protobuf.ServiceDescriptorProto.toObject(message.service[j], options);
+                            object.service[j] = $root.google.protobuf.ServiceDescriptorProto.toObject(message.service[j], options, q + 1);
                     }
                     if (message.extension && message.extension.length) {
                         object.extension = [];
                         for (var j = 0; j < message.extension.length; ++j)
-                            object.extension[j] = $root.google.protobuf.FieldDescriptorProto.toObject(message.extension[j], options);
+                            object.extension[j] = $root.google.protobuf.FieldDescriptorProto.toObject(message.extension[j], options, q + 1);
                     }
-                    if (message.options != null && message.hasOwnProperty("options"))
-                        object.options = $root.google.protobuf.FileOptions.toObject(message.options, options);
-                    if (message.sourceCodeInfo != null && message.hasOwnProperty("sourceCodeInfo"))
-                        object.sourceCodeInfo = $root.google.protobuf.SourceCodeInfo.toObject(message.sourceCodeInfo, options);
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                        object.options = $root.google.protobuf.FileOptions.toObject(message.options, options, q + 1);
+                    if (message.sourceCodeInfo != null && Object.hasOwnProperty.call(message, "sourceCodeInfo"))
+                        object.sourceCodeInfo = $root.google.protobuf.SourceCodeInfo.toObject(message.sourceCodeInfo, options, q + 1);
                     if (message.publicDependency && message.publicDependency.length) {
                         object.publicDependency = [];
                         for (var j = 0; j < message.publicDependency.length; ++j)
@@ -23757,9 +24455,9 @@
                         for (var j = 0; j < message.weakDependency.length; ++j)
                             object.weakDependency[j] = message.weakDependency[j];
                     }
-                    if (message.syntax != null && message.hasOwnProperty("syntax"))
+                    if (message.syntax != null && Object.hasOwnProperty.call(message, "syntax"))
                         object.syntax = message.syntax;
-                    if (message.edition != null && message.hasOwnProperty("edition"))
+                    if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                         object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
                     if (message.optionDependency && message.optionDependency.length) {
                         object.optionDependency = [];
@@ -23949,34 +24647,38 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                DescriptorProto.encode = function encode(message, writer) {
+                DescriptorProto.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                     if (message.field != null && message.field.length)
                         for (var i = 0; i < message.field.length; ++i)
-                            $root.google.protobuf.FieldDescriptorProto.encode(message.field[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            $root.google.protobuf.FieldDescriptorProto.encode(message.field[i], writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
                     if (message.nestedType != null && message.nestedType.length)
                         for (var i = 0; i < message.nestedType.length; ++i)
-                            $root.google.protobuf.DescriptorProto.encode(message.nestedType[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            $root.google.protobuf.DescriptorProto.encode(message.nestedType[i], writer.uint32(/* id 3, wireType 2 =*/26).fork(), q + 1).ldelim();
                     if (message.enumType != null && message.enumType.length)
                         for (var i = 0; i < message.enumType.length; ++i)
-                            $root.google.protobuf.EnumDescriptorProto.encode(message.enumType[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            $root.google.protobuf.EnumDescriptorProto.encode(message.enumType[i], writer.uint32(/* id 4, wireType 2 =*/34).fork(), q + 1).ldelim();
                     if (message.extensionRange != null && message.extensionRange.length)
                         for (var i = 0; i < message.extensionRange.length; ++i)
-                            $root.google.protobuf.DescriptorProto.ExtensionRange.encode(message.extensionRange[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            $root.google.protobuf.DescriptorProto.ExtensionRange.encode(message.extensionRange[i], writer.uint32(/* id 5, wireType 2 =*/42).fork(), q + 1).ldelim();
                     if (message.extension != null && message.extension.length)
                         for (var i = 0; i < message.extension.length; ++i)
-                            $root.google.protobuf.FieldDescriptorProto.encode(message.extension[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            $root.google.protobuf.FieldDescriptorProto.encode(message.extension[i], writer.uint32(/* id 6, wireType 2 =*/50).fork(), q + 1).ldelim();
                     if (message.options != null && Object.hasOwnProperty.call(message, "options"))
-                        $root.google.protobuf.MessageOptions.encode(message.options, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                        $root.google.protobuf.MessageOptions.encode(message.options, writer.uint32(/* id 7, wireType 2 =*/58).fork(), q + 1).ldelim();
                     if (message.oneofDecl != null && message.oneofDecl.length)
                         for (var i = 0; i < message.oneofDecl.length; ++i)
-                            $root.google.protobuf.OneofDescriptorProto.encode(message.oneofDecl[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            $root.google.protobuf.OneofDescriptorProto.encode(message.oneofDecl[i], writer.uint32(/* id 8, wireType 2 =*/66).fork(), q + 1).ldelim();
                     if (message.reservedRange != null && message.reservedRange.length)
                         for (var i = 0; i < message.reservedRange.length; ++i)
-                            $root.google.protobuf.DescriptorProto.ReservedRange.encode(message.reservedRange[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            $root.google.protobuf.DescriptorProto.ReservedRange.encode(message.reservedRange[i], writer.uint32(/* id 9, wireType 2 =*/74).fork(), q + 1).ldelim();
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 10, wireType 2 =*/82).string(message.reservedName[i]);
@@ -23995,7 +24697,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 DescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -24121,10 +24823,10 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
-                    if (message.field != null && message.hasOwnProperty("field")) {
+                    if (message.field != null && Object.hasOwnProperty.call(message, "field")) {
                         if (!Array.isArray(message.field))
                             return "field: array expected";
                         for (var i = 0; i < message.field.length; ++i) {
@@ -24133,7 +24835,7 @@
                                 return "field." + error;
                         }
                     }
-                    if (message.extension != null && message.hasOwnProperty("extension")) {
+                    if (message.extension != null && Object.hasOwnProperty.call(message, "extension")) {
                         if (!Array.isArray(message.extension))
                             return "extension: array expected";
                         for (var i = 0; i < message.extension.length; ++i) {
@@ -24142,7 +24844,7 @@
                                 return "extension." + error;
                         }
                     }
-                    if (message.nestedType != null && message.hasOwnProperty("nestedType")) {
+                    if (message.nestedType != null && Object.hasOwnProperty.call(message, "nestedType")) {
                         if (!Array.isArray(message.nestedType))
                             return "nestedType: array expected";
                         for (var i = 0; i < message.nestedType.length; ++i) {
@@ -24151,7 +24853,7 @@
                                 return "nestedType." + error;
                         }
                     }
-                    if (message.enumType != null && message.hasOwnProperty("enumType")) {
+                    if (message.enumType != null && Object.hasOwnProperty.call(message, "enumType")) {
                         if (!Array.isArray(message.enumType))
                             return "enumType: array expected";
                         for (var i = 0; i < message.enumType.length; ++i) {
@@ -24160,7 +24862,7 @@
                                 return "enumType." + error;
                         }
                     }
-                    if (message.extensionRange != null && message.hasOwnProperty("extensionRange")) {
+                    if (message.extensionRange != null && Object.hasOwnProperty.call(message, "extensionRange")) {
                         if (!Array.isArray(message.extensionRange))
                             return "extensionRange: array expected";
                         for (var i = 0; i < message.extensionRange.length; ++i) {
@@ -24169,7 +24871,7 @@
                                 return "extensionRange." + error;
                         }
                     }
-                    if (message.oneofDecl != null && message.hasOwnProperty("oneofDecl")) {
+                    if (message.oneofDecl != null && Object.hasOwnProperty.call(message, "oneofDecl")) {
                         if (!Array.isArray(message.oneofDecl))
                             return "oneofDecl: array expected";
                         for (var i = 0; i < message.oneofDecl.length; ++i) {
@@ -24178,12 +24880,12 @@
                                 return "oneofDecl." + error;
                         }
                     }
-                    if (message.options != null && message.hasOwnProperty("options")) {
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options")) {
                         var error = $root.google.protobuf.MessageOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
-                    if (message.reservedRange != null && message.hasOwnProperty("reservedRange")) {
+                    if (message.reservedRange != null && Object.hasOwnProperty.call(message, "reservedRange")) {
                         if (!Array.isArray(message.reservedRange))
                             return "reservedRange: array expected";
                         for (var i = 0; i < message.reservedRange.length; ++i) {
@@ -24192,14 +24894,14 @@
                                 return "reservedRange." + error;
                         }
                     }
-                    if (message.reservedName != null && message.hasOwnProperty("reservedName")) {
+                    if (message.reservedName != null && Object.hasOwnProperty.call(message, "reservedName")) {
                         if (!Array.isArray(message.reservedName))
                             return "reservedName: array expected";
                         for (var i = 0; i < message.reservedName.length; ++i)
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
-                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
                         switch (message.visibility) {
                         default:
                             return "visibility: enum value expected";
@@ -24222,6 +24924,8 @@
                 DescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.DescriptorProto)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.DescriptorProto: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -24234,7 +24938,7 @@
                             throw TypeError(".google.protobuf.DescriptorProto.field: array expected");
                         message.field = [];
                         for (var i = 0; i < object.field.length; ++i) {
-                            if (typeof object.field[i] !== "object")
+                            if (!$util.isObject(object.field[i]))
                                 throw TypeError(".google.protobuf.DescriptorProto.field: object expected");
                             message.field[i] = $root.google.protobuf.FieldDescriptorProto.fromObject(object.field[i], long + 1);
                         }
@@ -24244,7 +24948,7 @@
                             throw TypeError(".google.protobuf.DescriptorProto.extension: array expected");
                         message.extension = [];
                         for (var i = 0; i < object.extension.length; ++i) {
-                            if (typeof object.extension[i] !== "object")
+                            if (!$util.isObject(object.extension[i]))
                                 throw TypeError(".google.protobuf.DescriptorProto.extension: object expected");
                             message.extension[i] = $root.google.protobuf.FieldDescriptorProto.fromObject(object.extension[i], long + 1);
                         }
@@ -24254,7 +24958,7 @@
                             throw TypeError(".google.protobuf.DescriptorProto.nestedType: array expected");
                         message.nestedType = [];
                         for (var i = 0; i < object.nestedType.length; ++i) {
-                            if (typeof object.nestedType[i] !== "object")
+                            if (!$util.isObject(object.nestedType[i]))
                                 throw TypeError(".google.protobuf.DescriptorProto.nestedType: object expected");
                             message.nestedType[i] = $root.google.protobuf.DescriptorProto.fromObject(object.nestedType[i], long + 1);
                         }
@@ -24264,7 +24968,7 @@
                             throw TypeError(".google.protobuf.DescriptorProto.enumType: array expected");
                         message.enumType = [];
                         for (var i = 0; i < object.enumType.length; ++i) {
-                            if (typeof object.enumType[i] !== "object")
+                            if (!$util.isObject(object.enumType[i]))
                                 throw TypeError(".google.protobuf.DescriptorProto.enumType: object expected");
                             message.enumType[i] = $root.google.protobuf.EnumDescriptorProto.fromObject(object.enumType[i], long + 1);
                         }
@@ -24274,7 +24978,7 @@
                             throw TypeError(".google.protobuf.DescriptorProto.extensionRange: array expected");
                         message.extensionRange = [];
                         for (var i = 0; i < object.extensionRange.length; ++i) {
-                            if (typeof object.extensionRange[i] !== "object")
+                            if (!$util.isObject(object.extensionRange[i]))
                                 throw TypeError(".google.protobuf.DescriptorProto.extensionRange: object expected");
                             message.extensionRange[i] = $root.google.protobuf.DescriptorProto.ExtensionRange.fromObject(object.extensionRange[i], long + 1);
                         }
@@ -24284,13 +24988,13 @@
                             throw TypeError(".google.protobuf.DescriptorProto.oneofDecl: array expected");
                         message.oneofDecl = [];
                         for (var i = 0; i < object.oneofDecl.length; ++i) {
-                            if (typeof object.oneofDecl[i] !== "object")
+                            if (!$util.isObject(object.oneofDecl[i]))
                                 throw TypeError(".google.protobuf.DescriptorProto.oneofDecl: object expected");
                             message.oneofDecl[i] = $root.google.protobuf.OneofDescriptorProto.fromObject(object.oneofDecl[i], long + 1);
                         }
                     }
                     if (object.options != null) {
-                        if (typeof object.options !== "object")
+                        if (!$util.isObject(object.options))
                             throw TypeError(".google.protobuf.DescriptorProto.options: object expected");
                         message.options = $root.google.protobuf.MessageOptions.fromObject(object.options, long + 1);
                     }
@@ -24299,7 +25003,7 @@
                             throw TypeError(".google.protobuf.DescriptorProto.reservedRange: array expected");
                         message.reservedRange = [];
                         for (var i = 0; i < object.reservedRange.length; ++i) {
-                            if (typeof object.reservedRange[i] !== "object")
+                            if (!$util.isObject(object.reservedRange[i]))
                                 throw TypeError(".google.protobuf.DescriptorProto.reservedRange: object expected");
                             message.reservedRange[i] = $root.google.protobuf.DescriptorProto.ReservedRange.fromObject(object.reservedRange[i], long + 1);
                         }
@@ -24343,9 +25047,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                DescriptorProto.toObject = function toObject(message, options) {
+                DescriptorProto.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults) {
                         object.field = [];
@@ -24362,51 +25070,51 @@
                         object.options = null;
                         object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         object.name = message.name;
                     if (message.field && message.field.length) {
                         object.field = [];
                         for (var j = 0; j < message.field.length; ++j)
-                            object.field[j] = $root.google.protobuf.FieldDescriptorProto.toObject(message.field[j], options);
+                            object.field[j] = $root.google.protobuf.FieldDescriptorProto.toObject(message.field[j], options, q + 1);
                     }
                     if (message.nestedType && message.nestedType.length) {
                         object.nestedType = [];
                         for (var j = 0; j < message.nestedType.length; ++j)
-                            object.nestedType[j] = $root.google.protobuf.DescriptorProto.toObject(message.nestedType[j], options);
+                            object.nestedType[j] = $root.google.protobuf.DescriptorProto.toObject(message.nestedType[j], options, q + 1);
                     }
                     if (message.enumType && message.enumType.length) {
                         object.enumType = [];
                         for (var j = 0; j < message.enumType.length; ++j)
-                            object.enumType[j] = $root.google.protobuf.EnumDescriptorProto.toObject(message.enumType[j], options);
+                            object.enumType[j] = $root.google.protobuf.EnumDescriptorProto.toObject(message.enumType[j], options, q + 1);
                     }
                     if (message.extensionRange && message.extensionRange.length) {
                         object.extensionRange = [];
                         for (var j = 0; j < message.extensionRange.length; ++j)
-                            object.extensionRange[j] = $root.google.protobuf.DescriptorProto.ExtensionRange.toObject(message.extensionRange[j], options);
+                            object.extensionRange[j] = $root.google.protobuf.DescriptorProto.ExtensionRange.toObject(message.extensionRange[j], options, q + 1);
                     }
                     if (message.extension && message.extension.length) {
                         object.extension = [];
                         for (var j = 0; j < message.extension.length; ++j)
-                            object.extension[j] = $root.google.protobuf.FieldDescriptorProto.toObject(message.extension[j], options);
+                            object.extension[j] = $root.google.protobuf.FieldDescriptorProto.toObject(message.extension[j], options, q + 1);
                     }
-                    if (message.options != null && message.hasOwnProperty("options"))
-                        object.options = $root.google.protobuf.MessageOptions.toObject(message.options, options);
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                        object.options = $root.google.protobuf.MessageOptions.toObject(message.options, options, q + 1);
                     if (message.oneofDecl && message.oneofDecl.length) {
                         object.oneofDecl = [];
                         for (var j = 0; j < message.oneofDecl.length; ++j)
-                            object.oneofDecl[j] = $root.google.protobuf.OneofDescriptorProto.toObject(message.oneofDecl[j], options);
+                            object.oneofDecl[j] = $root.google.protobuf.OneofDescriptorProto.toObject(message.oneofDecl[j], options, q + 1);
                     }
                     if (message.reservedRange && message.reservedRange.length) {
                         object.reservedRange = [];
                         for (var j = 0; j < message.reservedRange.length; ++j)
-                            object.reservedRange[j] = $root.google.protobuf.DescriptorProto.ReservedRange.toObject(message.reservedRange[j], options);
+                            object.reservedRange[j] = $root.google.protobuf.DescriptorProto.ReservedRange.toObject(message.reservedRange[j], options, q + 1);
                     }
                     if (message.reservedName && message.reservedName.length) {
                         object.reservedName = [];
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
-                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
                         object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
@@ -24508,15 +25216,19 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    ExtensionRange.encode = function encode(message, writer) {
+                    ExtensionRange.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.start != null && Object.hasOwnProperty.call(message, "start"))
                             writer.uint32(/* id 1, wireType 0 =*/8).int32(message.start);
                         if (message.end != null && Object.hasOwnProperty.call(message, "end"))
                             writer.uint32(/* id 2, wireType 0 =*/16).int32(message.end);
                         if (message.options != null && Object.hasOwnProperty.call(message, "options"))
-                            $root.google.protobuf.ExtensionRangeOptions.encode(message.options, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            $root.google.protobuf.ExtensionRangeOptions.encode(message.options, writer.uint32(/* id 3, wireType 2 =*/26).fork(), q + 1).ldelim();
                         return writer;
                     };
     
@@ -24530,7 +25242,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ExtensionRange.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -24608,13 +25320,13 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.start != null && message.hasOwnProperty("start"))
+                        if (message.start != null && Object.hasOwnProperty.call(message, "start"))
                             if (!$util.isInteger(message.start))
                                 return "start: integer expected";
-                        if (message.end != null && message.hasOwnProperty("end"))
+                        if (message.end != null && Object.hasOwnProperty.call(message, "end"))
                             if (!$util.isInteger(message.end))
                                 return "end: integer expected";
-                        if (message.options != null && message.hasOwnProperty("options")) {
+                        if (message.options != null && Object.hasOwnProperty.call(message, "options")) {
                             var error = $root.google.protobuf.ExtensionRangeOptions.verify(message.options, long + 1);
                             if (error)
                                 return "options." + error;
@@ -24633,6 +25345,8 @@
                     ExtensionRange.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.DescriptorProto.ExtensionRange)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.protobuf.DescriptorProto.ExtensionRange: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -24643,7 +25357,7 @@
                         if (object.end != null)
                             message.end = object.end | 0;
                         if (object.options != null) {
-                            if (typeof object.options !== "object")
+                            if (!$util.isObject(object.options))
                                 throw TypeError(".google.protobuf.DescriptorProto.ExtensionRange.options: object expected");
                             message.options = $root.google.protobuf.ExtensionRangeOptions.fromObject(object.options, long + 1);
                         }
@@ -24659,21 +25373,25 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    ExtensionRange.toObject = function toObject(message, options) {
+                    ExtensionRange.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.start = 0;
                             object.end = 0;
                             object.options = null;
                         }
-                        if (message.start != null && message.hasOwnProperty("start"))
+                        if (message.start != null && Object.hasOwnProperty.call(message, "start"))
                             object.start = message.start;
-                        if (message.end != null && message.hasOwnProperty("end"))
+                        if (message.end != null && Object.hasOwnProperty.call(message, "end"))
                             object.end = message.end;
-                        if (message.options != null && message.hasOwnProperty("options"))
-                            object.options = $root.google.protobuf.ExtensionRangeOptions.toObject(message.options, options);
+                        if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                            object.options = $root.google.protobuf.ExtensionRangeOptions.toObject(message.options, options, q + 1);
                         return object;
                     };
     
@@ -24768,9 +25486,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    ReservedRange.encode = function encode(message, writer) {
+                    ReservedRange.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.start != null && Object.hasOwnProperty.call(message, "start"))
                             writer.uint32(/* id 1, wireType 0 =*/8).int32(message.start);
                         if (message.end != null && Object.hasOwnProperty.call(message, "end"))
@@ -24788,7 +25510,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ReservedRange.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -24862,10 +25584,10 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.start != null && message.hasOwnProperty("start"))
+                        if (message.start != null && Object.hasOwnProperty.call(message, "start"))
                             if (!$util.isInteger(message.start))
                                 return "start: integer expected";
-                        if (message.end != null && message.hasOwnProperty("end"))
+                        if (message.end != null && Object.hasOwnProperty.call(message, "end"))
                             if (!$util.isInteger(message.end))
                                 return "end: integer expected";
                         return null;
@@ -24882,6 +25604,8 @@
                     ReservedRange.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.DescriptorProto.ReservedRange)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.protobuf.DescriptorProto.ReservedRange: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -24903,17 +25627,21 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    ReservedRange.toObject = function toObject(message, options) {
+                    ReservedRange.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.start = 0;
                             object.end = 0;
                         }
-                        if (message.start != null && message.hasOwnProperty("start"))
+                        if (message.start != null && Object.hasOwnProperty.call(message, "start"))
                             object.start = message.start;
-                        if (message.end != null && message.hasOwnProperty("end"))
+                        if (message.end != null && Object.hasOwnProperty.call(message, "end"))
                             object.end = message.end;
                         return object;
                     };
@@ -25032,19 +25760,23 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                ExtensionRangeOptions.encode = function encode(message, writer) {
+                ExtensionRangeOptions.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.declaration != null && message.declaration.length)
                         for (var i = 0; i < message.declaration.length; ++i)
-                            $root.google.protobuf.ExtensionRangeOptions.Declaration.encode(message.declaration[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            $root.google.protobuf.ExtensionRangeOptions.Declaration.encode(message.declaration[i], writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
                     if (message.verification != null && Object.hasOwnProperty.call(message, "verification"))
                         writer.uint32(/* id 3, wireType 0 =*/24).int32(message.verification);
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 50, wireType 2 =*/402).fork()).ldelim();
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 50, wireType 2 =*/402).fork(), q + 1).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
-                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -25058,7 +25790,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 ExtensionRangeOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -25144,7 +25876,7 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
+                    if (message.uninterpretedOption != null && Object.hasOwnProperty.call(message, "uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
@@ -25153,7 +25885,7 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
-                    if (message.declaration != null && message.hasOwnProperty("declaration")) {
+                    if (message.declaration != null && Object.hasOwnProperty.call(message, "declaration")) {
                         if (!Array.isArray(message.declaration))
                             return "declaration: array expected";
                         for (var i = 0; i < message.declaration.length; ++i) {
@@ -25162,12 +25894,12 @@
                                 return "declaration." + error;
                         }
                     }
-                    if (message.features != null && message.hasOwnProperty("features")) {
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features")) {
                         var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
-                    if (message.verification != null && message.hasOwnProperty("verification"))
+                    if (message.verification != null && Object.hasOwnProperty.call(message, "verification"))
                         switch (message.verification) {
                         default:
                             return "verification: enum value expected";
@@ -25189,6 +25921,8 @@
                 ExtensionRangeOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.ExtensionRangeOptions)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.ExtensionRangeOptions: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -25199,7 +25933,7 @@
                             throw TypeError(".google.protobuf.ExtensionRangeOptions.uninterpretedOption: array expected");
                         message.uninterpretedOption = [];
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
-                            if (typeof object.uninterpretedOption[i] !== "object")
+                            if (!$util.isObject(object.uninterpretedOption[i]))
                                 throw TypeError(".google.protobuf.ExtensionRangeOptions.uninterpretedOption: object expected");
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
@@ -25209,13 +25943,13 @@
                             throw TypeError(".google.protobuf.ExtensionRangeOptions.declaration: array expected");
                         message.declaration = [];
                         for (var i = 0; i < object.declaration.length; ++i) {
-                            if (typeof object.declaration[i] !== "object")
+                            if (!$util.isObject(object.declaration[i]))
                                 throw TypeError(".google.protobuf.ExtensionRangeOptions.declaration: object expected");
                             message.declaration[i] = $root.google.protobuf.ExtensionRangeOptions.Declaration.fromObject(object.declaration[i], long + 1);
                         }
                     }
                     if (object.features != null) {
-                        if (typeof object.features !== "object")
+                        if (!$util.isObject(object.features))
                             throw TypeError(".google.protobuf.ExtensionRangeOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
@@ -25247,9 +25981,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                ExtensionRangeOptions.toObject = function toObject(message, options) {
+                ExtensionRangeOptions.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults) {
                         object.declaration = [];
@@ -25262,16 +26000,16 @@
                     if (message.declaration && message.declaration.length) {
                         object.declaration = [];
                         for (var j = 0; j < message.declaration.length; ++j)
-                            object.declaration[j] = $root.google.protobuf.ExtensionRangeOptions.Declaration.toObject(message.declaration[j], options);
+                            object.declaration[j] = $root.google.protobuf.ExtensionRangeOptions.Declaration.toObject(message.declaration[j], options, q + 1);
                     }
-                    if (message.verification != null && message.hasOwnProperty("verification"))
+                    if (message.verification != null && Object.hasOwnProperty.call(message, "verification"))
                         object.verification = options.enums === String ? $root.google.protobuf.ExtensionRangeOptions.VerificationState[message.verification] === undefined ? message.verification : $root.google.protobuf.ExtensionRangeOptions.VerificationState[message.verification] : message.verification;
-                    if (message.features != null && message.hasOwnProperty("features"))
-                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options, q + 1);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
-                            object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
+                            object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options, q + 1);
                     }
                     return object;
                 };
@@ -25391,9 +26129,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    Declaration.encode = function encode(message, writer) {
+                    Declaration.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.number != null && Object.hasOwnProperty.call(message, "number"))
                             writer.uint32(/* id 1, wireType 0 =*/8).int32(message.number);
                         if (message.fullName != null && Object.hasOwnProperty.call(message, "fullName"))
@@ -25417,7 +26159,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     Declaration.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -25503,19 +26245,19 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.number != null && message.hasOwnProperty("number"))
+                        if (message.number != null && Object.hasOwnProperty.call(message, "number"))
                             if (!$util.isInteger(message.number))
                                 return "number: integer expected";
-                        if (message.fullName != null && message.hasOwnProperty("fullName"))
+                        if (message.fullName != null && Object.hasOwnProperty.call(message, "fullName"))
                             if (!$util.isString(message.fullName))
                                 return "fullName: string expected";
-                        if (message.type != null && message.hasOwnProperty("type"))
+                        if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                             if (!$util.isString(message.type))
                                 return "type: string expected";
-                        if (message.reserved != null && message.hasOwnProperty("reserved"))
+                        if (message.reserved != null && Object.hasOwnProperty.call(message, "reserved"))
                             if (typeof message.reserved !== "boolean")
                                 return "reserved: boolean expected";
-                        if (message.repeated != null && message.hasOwnProperty("repeated"))
+                        if (message.repeated != null && Object.hasOwnProperty.call(message, "repeated"))
                             if (typeof message.repeated !== "boolean")
                                 return "repeated: boolean expected";
                         return null;
@@ -25532,6 +26274,8 @@
                     Declaration.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.ExtensionRangeOptions.Declaration)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.protobuf.ExtensionRangeOptions.Declaration: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -25559,9 +26303,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    Declaration.toObject = function toObject(message, options) {
+                    Declaration.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.number = 0;
@@ -25570,15 +26318,15 @@
                             object.reserved = false;
                             object.repeated = false;
                         }
-                        if (message.number != null && message.hasOwnProperty("number"))
+                        if (message.number != null && Object.hasOwnProperty.call(message, "number"))
                             object.number = message.number;
-                        if (message.fullName != null && message.hasOwnProperty("fullName"))
+                        if (message.fullName != null && Object.hasOwnProperty.call(message, "fullName"))
                             object.fullName = message.fullName;
-                        if (message.type != null && message.hasOwnProperty("type"))
+                        if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                             object.type = message.type;
-                        if (message.reserved != null && message.hasOwnProperty("reserved"))
+                        if (message.reserved != null && Object.hasOwnProperty.call(message, "reserved"))
                             object.reserved = message.reserved;
-                        if (message.repeated != null && message.hasOwnProperty("repeated"))
+                        if (message.repeated != null && Object.hasOwnProperty.call(message, "repeated"))
                             object.repeated = message.repeated;
                         return object;
                     };
@@ -25772,9 +26520,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                FieldDescriptorProto.encode = function encode(message, writer) {
+                FieldDescriptorProto.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                     if (message.extendee != null && Object.hasOwnProperty.call(message, "extendee"))
@@ -25790,7 +26542,7 @@
                     if (message.defaultValue != null && Object.hasOwnProperty.call(message, "defaultValue"))
                         writer.uint32(/* id 7, wireType 2 =*/58).string(message.defaultValue);
                     if (message.options != null && Object.hasOwnProperty.call(message, "options"))
-                        $root.google.protobuf.FieldOptions.encode(message.options, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                        $root.google.protobuf.FieldOptions.encode(message.options, writer.uint32(/* id 8, wireType 2 =*/66).fork(), q + 1).ldelim();
                     if (message.oneofIndex != null && Object.hasOwnProperty.call(message, "oneofIndex"))
                         writer.uint32(/* id 9, wireType 0 =*/72).int32(message.oneofIndex);
                     if (message.jsonName != null && Object.hasOwnProperty.call(message, "jsonName"))
@@ -25810,7 +26562,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 FieldDescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -25920,13 +26672,13 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
-                    if (message.number != null && message.hasOwnProperty("number"))
+                    if (message.number != null && Object.hasOwnProperty.call(message, "number"))
                         if (!$util.isInteger(message.number))
                             return "number: integer expected";
-                    if (message.label != null && message.hasOwnProperty("label"))
+                    if (message.label != null && Object.hasOwnProperty.call(message, "label"))
                         switch (message.label) {
                         default:
                             return "label: enum value expected";
@@ -25935,7 +26687,7 @@
                         case 2:
                             break;
                         }
-                    if (message.type != null && message.hasOwnProperty("type"))
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                         switch (message.type) {
                         default:
                             return "type: enum value expected";
@@ -25959,27 +26711,27 @@
                         case 18:
                             break;
                         }
-                    if (message.typeName != null && message.hasOwnProperty("typeName"))
+                    if (message.typeName != null && Object.hasOwnProperty.call(message, "typeName"))
                         if (!$util.isString(message.typeName))
                             return "typeName: string expected";
-                    if (message.extendee != null && message.hasOwnProperty("extendee"))
+                    if (message.extendee != null && Object.hasOwnProperty.call(message, "extendee"))
                         if (!$util.isString(message.extendee))
                             return "extendee: string expected";
-                    if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
+                    if (message.defaultValue != null && Object.hasOwnProperty.call(message, "defaultValue"))
                         if (!$util.isString(message.defaultValue))
                             return "defaultValue: string expected";
-                    if (message.oneofIndex != null && message.hasOwnProperty("oneofIndex"))
+                    if (message.oneofIndex != null && Object.hasOwnProperty.call(message, "oneofIndex"))
                         if (!$util.isInteger(message.oneofIndex))
                             return "oneofIndex: integer expected";
-                    if (message.jsonName != null && message.hasOwnProperty("jsonName"))
+                    if (message.jsonName != null && Object.hasOwnProperty.call(message, "jsonName"))
                         if (!$util.isString(message.jsonName))
                             return "jsonName: string expected";
-                    if (message.options != null && message.hasOwnProperty("options")) {
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options")) {
                         var error = $root.google.protobuf.FieldOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
-                    if (message.proto3Optional != null && message.hasOwnProperty("proto3Optional"))
+                    if (message.proto3Optional != null && Object.hasOwnProperty.call(message, "proto3Optional"))
                         if (typeof message.proto3Optional !== "boolean")
                             return "proto3Optional: boolean expected";
                     return null;
@@ -25996,6 +26748,8 @@
                 FieldDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FieldDescriptorProto)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.FieldDescriptorProto: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -26116,7 +26870,7 @@
                     if (object.jsonName != null)
                         message.jsonName = String(object.jsonName);
                     if (object.options != null) {
-                        if (typeof object.options !== "object")
+                        if (!$util.isObject(object.options))
                             throw TypeError(".google.protobuf.FieldDescriptorProto.options: object expected");
                         message.options = $root.google.protobuf.FieldOptions.fromObject(object.options, long + 1);
                     }
@@ -26134,9 +26888,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                FieldDescriptorProto.toObject = function toObject(message, options) {
+                FieldDescriptorProto.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.defaults) {
                         object.name = "";
@@ -26151,27 +26909,27 @@
                         object.jsonName = "";
                         object.proto3Optional = false;
                     }
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         object.name = message.name;
-                    if (message.extendee != null && message.hasOwnProperty("extendee"))
+                    if (message.extendee != null && Object.hasOwnProperty.call(message, "extendee"))
                         object.extendee = message.extendee;
-                    if (message.number != null && message.hasOwnProperty("number"))
+                    if (message.number != null && Object.hasOwnProperty.call(message, "number"))
                         object.number = message.number;
-                    if (message.label != null && message.hasOwnProperty("label"))
+                    if (message.label != null && Object.hasOwnProperty.call(message, "label"))
                         object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] === undefined ? message.label : $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
-                    if (message.type != null && message.hasOwnProperty("type"))
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                         object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] === undefined ? message.type : $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
-                    if (message.typeName != null && message.hasOwnProperty("typeName"))
+                    if (message.typeName != null && Object.hasOwnProperty.call(message, "typeName"))
                         object.typeName = message.typeName;
-                    if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
+                    if (message.defaultValue != null && Object.hasOwnProperty.call(message, "defaultValue"))
                         object.defaultValue = message.defaultValue;
-                    if (message.options != null && message.hasOwnProperty("options"))
-                        object.options = $root.google.protobuf.FieldOptions.toObject(message.options, options);
-                    if (message.oneofIndex != null && message.hasOwnProperty("oneofIndex"))
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                        object.options = $root.google.protobuf.FieldOptions.toObject(message.options, options, q + 1);
+                    if (message.oneofIndex != null && Object.hasOwnProperty.call(message, "oneofIndex"))
                         object.oneofIndex = message.oneofIndex;
-                    if (message.jsonName != null && message.hasOwnProperty("jsonName"))
+                    if (message.jsonName != null && Object.hasOwnProperty.call(message, "jsonName"))
                         object.jsonName = message.jsonName;
-                    if (message.proto3Optional != null && message.hasOwnProperty("proto3Optional"))
+                    if (message.proto3Optional != null && Object.hasOwnProperty.call(message, "proto3Optional"))
                         object.proto3Optional = message.proto3Optional;
                     return object;
                 };
@@ -26329,13 +27087,17 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                OneofDescriptorProto.encode = function encode(message, writer) {
+                OneofDescriptorProto.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                     if (message.options != null && Object.hasOwnProperty.call(message, "options"))
-                        $root.google.protobuf.OneofOptions.encode(message.options, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        $root.google.protobuf.OneofOptions.encode(message.options, writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -26349,7 +27111,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 OneofDescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -26423,10 +27185,10 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
-                    if (message.options != null && message.hasOwnProperty("options")) {
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options")) {
                         var error = $root.google.protobuf.OneofOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
@@ -26445,6 +27207,8 @@
                 OneofDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.OneofDescriptorProto)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.OneofDescriptorProto: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -26453,7 +27217,7 @@
                     if (object.name != null)
                         message.name = String(object.name);
                     if (object.options != null) {
-                        if (typeof object.options !== "object")
+                        if (!$util.isObject(object.options))
                             throw TypeError(".google.protobuf.OneofDescriptorProto.options: object expected");
                         message.options = $root.google.protobuf.OneofOptions.fromObject(object.options, long + 1);
                     }
@@ -26469,18 +27233,22 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                OneofDescriptorProto.toObject = function toObject(message, options) {
+                OneofDescriptorProto.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
                     }
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         object.name = message.name;
-                    if (message.options != null && message.hasOwnProperty("options"))
-                        object.options = $root.google.protobuf.OneofOptions.toObject(message.options, options);
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                        object.options = $root.google.protobuf.OneofOptions.toObject(message.options, options, q + 1);
                     return object;
                 };
     
@@ -26614,19 +27382,23 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                EnumDescriptorProto.encode = function encode(message, writer) {
+                EnumDescriptorProto.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                     if (message.value != null && message.value.length)
                         for (var i = 0; i < message.value.length; ++i)
-                            $root.google.protobuf.EnumValueDescriptorProto.encode(message.value[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            $root.google.protobuf.EnumValueDescriptorProto.encode(message.value[i], writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
                     if (message.options != null && Object.hasOwnProperty.call(message, "options"))
-                        $root.google.protobuf.EnumOptions.encode(message.options, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        $root.google.protobuf.EnumOptions.encode(message.options, writer.uint32(/* id 3, wireType 2 =*/26).fork(), q + 1).ldelim();
                     if (message.reservedRange != null && message.reservedRange.length)
                         for (var i = 0; i < message.reservedRange.length; ++i)
-                            $root.google.protobuf.EnumDescriptorProto.EnumReservedRange.encode(message.reservedRange[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            $root.google.protobuf.EnumDescriptorProto.EnumReservedRange.encode(message.reservedRange[i], writer.uint32(/* id 4, wireType 2 =*/34).fork(), q + 1).ldelim();
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 5, wireType 2 =*/42).string(message.reservedName[i]);
@@ -26645,7 +27417,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 EnumDescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -26741,10 +27513,10 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
-                    if (message.value != null && message.hasOwnProperty("value")) {
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value")) {
                         if (!Array.isArray(message.value))
                             return "value: array expected";
                         for (var i = 0; i < message.value.length; ++i) {
@@ -26753,12 +27525,12 @@
                                 return "value." + error;
                         }
                     }
-                    if (message.options != null && message.hasOwnProperty("options")) {
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options")) {
                         var error = $root.google.protobuf.EnumOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
-                    if (message.reservedRange != null && message.hasOwnProperty("reservedRange")) {
+                    if (message.reservedRange != null && Object.hasOwnProperty.call(message, "reservedRange")) {
                         if (!Array.isArray(message.reservedRange))
                             return "reservedRange: array expected";
                         for (var i = 0; i < message.reservedRange.length; ++i) {
@@ -26767,14 +27539,14 @@
                                 return "reservedRange." + error;
                         }
                     }
-                    if (message.reservedName != null && message.hasOwnProperty("reservedName")) {
+                    if (message.reservedName != null && Object.hasOwnProperty.call(message, "reservedName")) {
                         if (!Array.isArray(message.reservedName))
                             return "reservedName: array expected";
                         for (var i = 0; i < message.reservedName.length; ++i)
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
-                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
                         switch (message.visibility) {
                         default:
                             return "visibility: enum value expected";
@@ -26797,6 +27569,8 @@
                 EnumDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.EnumDescriptorProto)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.EnumDescriptorProto: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -26809,13 +27583,13 @@
                             throw TypeError(".google.protobuf.EnumDescriptorProto.value: array expected");
                         message.value = [];
                         for (var i = 0; i < object.value.length; ++i) {
-                            if (typeof object.value[i] !== "object")
+                            if (!$util.isObject(object.value[i]))
                                 throw TypeError(".google.protobuf.EnumDescriptorProto.value: object expected");
                             message.value[i] = $root.google.protobuf.EnumValueDescriptorProto.fromObject(object.value[i], long + 1);
                         }
                     }
                     if (object.options != null) {
-                        if (typeof object.options !== "object")
+                        if (!$util.isObject(object.options))
                             throw TypeError(".google.protobuf.EnumDescriptorProto.options: object expected");
                         message.options = $root.google.protobuf.EnumOptions.fromObject(object.options, long + 1);
                     }
@@ -26824,7 +27598,7 @@
                             throw TypeError(".google.protobuf.EnumDescriptorProto.reservedRange: array expected");
                         message.reservedRange = [];
                         for (var i = 0; i < object.reservedRange.length; ++i) {
-                            if (typeof object.reservedRange[i] !== "object")
+                            if (!$util.isObject(object.reservedRange[i]))
                                 throw TypeError(".google.protobuf.EnumDescriptorProto.reservedRange: object expected");
                             message.reservedRange[i] = $root.google.protobuf.EnumDescriptorProto.EnumReservedRange.fromObject(object.reservedRange[i], long + 1);
                         }
@@ -26868,9 +27642,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                EnumDescriptorProto.toObject = function toObject(message, options) {
+                EnumDescriptorProto.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults) {
                         object.value = [];
@@ -26882,26 +27660,26 @@
                         object.options = null;
                         object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         object.name = message.name;
                     if (message.value && message.value.length) {
                         object.value = [];
                         for (var j = 0; j < message.value.length; ++j)
-                            object.value[j] = $root.google.protobuf.EnumValueDescriptorProto.toObject(message.value[j], options);
+                            object.value[j] = $root.google.protobuf.EnumValueDescriptorProto.toObject(message.value[j], options, q + 1);
                     }
-                    if (message.options != null && message.hasOwnProperty("options"))
-                        object.options = $root.google.protobuf.EnumOptions.toObject(message.options, options);
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                        object.options = $root.google.protobuf.EnumOptions.toObject(message.options, options, q + 1);
                     if (message.reservedRange && message.reservedRange.length) {
                         object.reservedRange = [];
                         for (var j = 0; j < message.reservedRange.length; ++j)
-                            object.reservedRange[j] = $root.google.protobuf.EnumDescriptorProto.EnumReservedRange.toObject(message.reservedRange[j], options);
+                            object.reservedRange[j] = $root.google.protobuf.EnumDescriptorProto.EnumReservedRange.toObject(message.reservedRange[j], options, q + 1);
                     }
                     if (message.reservedName && message.reservedName.length) {
                         object.reservedName = [];
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
-                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
                         object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
@@ -26994,9 +27772,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    EnumReservedRange.encode = function encode(message, writer) {
+                    EnumReservedRange.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.start != null && Object.hasOwnProperty.call(message, "start"))
                             writer.uint32(/* id 1, wireType 0 =*/8).int32(message.start);
                         if (message.end != null && Object.hasOwnProperty.call(message, "end"))
@@ -27014,7 +27796,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     EnumReservedRange.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -27088,10 +27870,10 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.start != null && message.hasOwnProperty("start"))
+                        if (message.start != null && Object.hasOwnProperty.call(message, "start"))
                             if (!$util.isInteger(message.start))
                                 return "start: integer expected";
-                        if (message.end != null && message.hasOwnProperty("end"))
+                        if (message.end != null && Object.hasOwnProperty.call(message, "end"))
                             if (!$util.isInteger(message.end))
                                 return "end: integer expected";
                         return null;
@@ -27108,6 +27890,8 @@
                     EnumReservedRange.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.EnumDescriptorProto.EnumReservedRange)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.protobuf.EnumDescriptorProto.EnumReservedRange: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -27129,17 +27913,21 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    EnumReservedRange.toObject = function toObject(message, options) {
+                    EnumReservedRange.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.start = 0;
                             object.end = 0;
                         }
-                        if (message.start != null && message.hasOwnProperty("start"))
+                        if (message.start != null && Object.hasOwnProperty.call(message, "start"))
                             object.start = message.start;
-                        if (message.end != null && message.hasOwnProperty("end"))
+                        if (message.end != null && Object.hasOwnProperty.call(message, "end"))
                             object.end = message.end;
                         return object;
                     };
@@ -27247,15 +28035,19 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                EnumValueDescriptorProto.encode = function encode(message, writer) {
+                EnumValueDescriptorProto.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                     if (message.number != null && Object.hasOwnProperty.call(message, "number"))
                         writer.uint32(/* id 2, wireType 0 =*/16).int32(message.number);
                     if (message.options != null && Object.hasOwnProperty.call(message, "options"))
-                        $root.google.protobuf.EnumValueOptions.encode(message.options, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        $root.google.protobuf.EnumValueOptions.encode(message.options, writer.uint32(/* id 3, wireType 2 =*/26).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -27269,7 +28061,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 EnumValueDescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -27347,13 +28139,13 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
-                    if (message.number != null && message.hasOwnProperty("number"))
+                    if (message.number != null && Object.hasOwnProperty.call(message, "number"))
                         if (!$util.isInteger(message.number))
                             return "number: integer expected";
-                    if (message.options != null && message.hasOwnProperty("options")) {
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options")) {
                         var error = $root.google.protobuf.EnumValueOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
@@ -27372,6 +28164,8 @@
                 EnumValueDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.EnumValueDescriptorProto)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.EnumValueDescriptorProto: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -27382,7 +28176,7 @@
                     if (object.number != null)
                         message.number = object.number | 0;
                     if (object.options != null) {
-                        if (typeof object.options !== "object")
+                        if (!$util.isObject(object.options))
                             throw TypeError(".google.protobuf.EnumValueDescriptorProto.options: object expected");
                         message.options = $root.google.protobuf.EnumValueOptions.fromObject(object.options, long + 1);
                     }
@@ -27398,21 +28192,25 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                EnumValueDescriptorProto.toObject = function toObject(message, options) {
+                EnumValueDescriptorProto.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.defaults) {
                         object.name = "";
                         object.number = 0;
                         object.options = null;
                     }
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         object.name = message.name;
-                    if (message.number != null && message.hasOwnProperty("number"))
+                    if (message.number != null && Object.hasOwnProperty.call(message, "number"))
                         object.number = message.number;
-                    if (message.options != null && message.hasOwnProperty("options"))
-                        object.options = $root.google.protobuf.EnumValueOptions.toObject(message.options, options);
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                        object.options = $root.google.protobuf.EnumValueOptions.toObject(message.options, options, q + 1);
                     return object;
                 };
     
@@ -27517,16 +28315,20 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                ServiceDescriptorProto.encode = function encode(message, writer) {
+                ServiceDescriptorProto.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                     if (message.method != null && message.method.length)
                         for (var i = 0; i < message.method.length; ++i)
-                            $root.google.protobuf.MethodDescriptorProto.encode(message.method[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            $root.google.protobuf.MethodDescriptorProto.encode(message.method[i], writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
                     if (message.options != null && Object.hasOwnProperty.call(message, "options"))
-                        $root.google.protobuf.ServiceOptions.encode(message.options, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        $root.google.protobuf.ServiceOptions.encode(message.options, writer.uint32(/* id 3, wireType 2 =*/26).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -27540,7 +28342,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 ServiceDescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -27620,10 +28422,10 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
-                    if (message.method != null && message.hasOwnProperty("method")) {
+                    if (message.method != null && Object.hasOwnProperty.call(message, "method")) {
                         if (!Array.isArray(message.method))
                             return "method: array expected";
                         for (var i = 0; i < message.method.length; ++i) {
@@ -27632,7 +28434,7 @@
                                 return "method." + error;
                         }
                     }
-                    if (message.options != null && message.hasOwnProperty("options")) {
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options")) {
                         var error = $root.google.protobuf.ServiceOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
@@ -27651,6 +28453,8 @@
                 ServiceDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.ServiceDescriptorProto)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.ServiceDescriptorProto: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -27663,13 +28467,13 @@
                             throw TypeError(".google.protobuf.ServiceDescriptorProto.method: array expected");
                         message.method = [];
                         for (var i = 0; i < object.method.length; ++i) {
-                            if (typeof object.method[i] !== "object")
+                            if (!$util.isObject(object.method[i]))
                                 throw TypeError(".google.protobuf.ServiceDescriptorProto.method: object expected");
                             message.method[i] = $root.google.protobuf.MethodDescriptorProto.fromObject(object.method[i], long + 1);
                         }
                     }
                     if (object.options != null) {
-                        if (typeof object.options !== "object")
+                        if (!$util.isObject(object.options))
                             throw TypeError(".google.protobuf.ServiceDescriptorProto.options: object expected");
                         message.options = $root.google.protobuf.ServiceOptions.fromObject(object.options, long + 1);
                     }
@@ -27685,9 +28489,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                ServiceDescriptorProto.toObject = function toObject(message, options) {
+                ServiceDescriptorProto.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.method = [];
@@ -27695,15 +28503,15 @@
                         object.name = "";
                         object.options = null;
                     }
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         object.name = message.name;
                     if (message.method && message.method.length) {
                         object.method = [];
                         for (var j = 0; j < message.method.length; ++j)
-                            object.method[j] = $root.google.protobuf.MethodDescriptorProto.toObject(message.method[j], options);
+                            object.method[j] = $root.google.protobuf.MethodDescriptorProto.toObject(message.method[j], options, q + 1);
                     }
-                    if (message.options != null && message.hasOwnProperty("options"))
-                        object.options = $root.google.protobuf.ServiceOptions.toObject(message.options, options);
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                        object.options = $root.google.protobuf.ServiceOptions.toObject(message.options, options, q + 1);
                     return object;
                 };
     
@@ -27834,9 +28642,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                MethodDescriptorProto.encode = function encode(message, writer) {
+                MethodDescriptorProto.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                     if (message.inputType != null && Object.hasOwnProperty.call(message, "inputType"))
@@ -27844,7 +28656,7 @@
                     if (message.outputType != null && Object.hasOwnProperty.call(message, "outputType"))
                         writer.uint32(/* id 3, wireType 2 =*/26).string(message.outputType);
                     if (message.options != null && Object.hasOwnProperty.call(message, "options"))
-                        $root.google.protobuf.MethodOptions.encode(message.options, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        $root.google.protobuf.MethodOptions.encode(message.options, writer.uint32(/* id 4, wireType 2 =*/34).fork(), q + 1).ldelim();
                     if (message.clientStreaming != null && Object.hasOwnProperty.call(message, "clientStreaming"))
                         writer.uint32(/* id 5, wireType 0 =*/40).bool(message.clientStreaming);
                     if (message.serverStreaming != null && Object.hasOwnProperty.call(message, "serverStreaming"))
@@ -27862,7 +28674,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 MethodDescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -27952,24 +28764,24 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
-                    if (message.inputType != null && message.hasOwnProperty("inputType"))
+                    if (message.inputType != null && Object.hasOwnProperty.call(message, "inputType"))
                         if (!$util.isString(message.inputType))
                             return "inputType: string expected";
-                    if (message.outputType != null && message.hasOwnProperty("outputType"))
+                    if (message.outputType != null && Object.hasOwnProperty.call(message, "outputType"))
                         if (!$util.isString(message.outputType))
                             return "outputType: string expected";
-                    if (message.options != null && message.hasOwnProperty("options")) {
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options")) {
                         var error = $root.google.protobuf.MethodOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
-                    if (message.clientStreaming != null && message.hasOwnProperty("clientStreaming"))
+                    if (message.clientStreaming != null && Object.hasOwnProperty.call(message, "clientStreaming"))
                         if (typeof message.clientStreaming !== "boolean")
                             return "clientStreaming: boolean expected";
-                    if (message.serverStreaming != null && message.hasOwnProperty("serverStreaming"))
+                    if (message.serverStreaming != null && Object.hasOwnProperty.call(message, "serverStreaming"))
                         if (typeof message.serverStreaming !== "boolean")
                             return "serverStreaming: boolean expected";
                     return null;
@@ -27986,6 +28798,8 @@
                 MethodDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.MethodDescriptorProto)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.MethodDescriptorProto: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -27998,7 +28812,7 @@
                     if (object.outputType != null)
                         message.outputType = String(object.outputType);
                     if (object.options != null) {
-                        if (typeof object.options !== "object")
+                        if (!$util.isObject(object.options))
                             throw TypeError(".google.protobuf.MethodDescriptorProto.options: object expected");
                         message.options = $root.google.protobuf.MethodOptions.fromObject(object.options, long + 1);
                     }
@@ -28018,9 +28832,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                MethodDescriptorProto.toObject = function toObject(message, options) {
+                MethodDescriptorProto.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.defaults) {
                         object.name = "";
@@ -28030,17 +28848,17 @@
                         object.clientStreaming = false;
                         object.serverStreaming = false;
                     }
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         object.name = message.name;
-                    if (message.inputType != null && message.hasOwnProperty("inputType"))
+                    if (message.inputType != null && Object.hasOwnProperty.call(message, "inputType"))
                         object.inputType = message.inputType;
-                    if (message.outputType != null && message.hasOwnProperty("outputType"))
+                    if (message.outputType != null && Object.hasOwnProperty.call(message, "outputType"))
                         object.outputType = message.outputType;
-                    if (message.options != null && message.hasOwnProperty("options"))
-                        object.options = $root.google.protobuf.MethodOptions.toObject(message.options, options);
-                    if (message.clientStreaming != null && message.hasOwnProperty("clientStreaming"))
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                        object.options = $root.google.protobuf.MethodOptions.toObject(message.options, options, q + 1);
+                    if (message.clientStreaming != null && Object.hasOwnProperty.call(message, "clientStreaming"))
                         object.clientStreaming = message.clientStreaming;
-                    if (message.serverStreaming != null && message.hasOwnProperty("serverStreaming"))
+                    if (message.serverStreaming != null && Object.hasOwnProperty.call(message, "serverStreaming"))
                         object.serverStreaming = message.serverStreaming;
                     return object;
                 };
@@ -28318,9 +29136,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                FileOptions.encode = function encode(message, writer) {
+                FileOptions.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.javaPackage != null && Object.hasOwnProperty.call(message, "javaPackage"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.javaPackage);
                     if (message.javaOuterClassname != null && Object.hasOwnProperty.call(message, "javaOuterClassname"))
@@ -28360,13 +29182,13 @@
                     if (message.rubyPackage != null && Object.hasOwnProperty.call(message, "rubyPackage"))
                         writer.uint32(/* id 45, wireType 2 =*/362).string(message.rubyPackage);
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 50, wireType 2 =*/402).fork()).ldelim();
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 50, wireType 2 =*/402).fork(), q + 1).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
-                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork(), q + 1).ldelim();
                     if (message[".google.api.resourceDefinition"] != null && message[".google.api.resourceDefinition"].length)
                         for (var i = 0; i < message[".google.api.resourceDefinition"].length; ++i)
-                            $root.google.api.ResourceDescriptor.encode(message[".google.api.resourceDefinition"][i], writer.uint32(/* id 1053, wireType 2 =*/8426).fork()).ldelim();
+                            $root.google.api.ResourceDescriptor.encode(message[".google.api.resourceDefinition"][i], writer.uint32(/* id 1053, wireType 2 =*/8426).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -28380,7 +29202,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 FileOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -28538,22 +29360,22 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.javaPackage != null && message.hasOwnProperty("javaPackage"))
+                    if (message.javaPackage != null && Object.hasOwnProperty.call(message, "javaPackage"))
                         if (!$util.isString(message.javaPackage))
                             return "javaPackage: string expected";
-                    if (message.javaOuterClassname != null && message.hasOwnProperty("javaOuterClassname"))
+                    if (message.javaOuterClassname != null && Object.hasOwnProperty.call(message, "javaOuterClassname"))
                         if (!$util.isString(message.javaOuterClassname))
                             return "javaOuterClassname: string expected";
-                    if (message.javaMultipleFiles != null && message.hasOwnProperty("javaMultipleFiles"))
+                    if (message.javaMultipleFiles != null && Object.hasOwnProperty.call(message, "javaMultipleFiles"))
                         if (typeof message.javaMultipleFiles !== "boolean")
                             return "javaMultipleFiles: boolean expected";
-                    if (message.javaGenerateEqualsAndHash != null && message.hasOwnProperty("javaGenerateEqualsAndHash"))
+                    if (message.javaGenerateEqualsAndHash != null && Object.hasOwnProperty.call(message, "javaGenerateEqualsAndHash"))
                         if (typeof message.javaGenerateEqualsAndHash !== "boolean")
                             return "javaGenerateEqualsAndHash: boolean expected";
-                    if (message.javaStringCheckUtf8 != null && message.hasOwnProperty("javaStringCheckUtf8"))
+                    if (message.javaStringCheckUtf8 != null && Object.hasOwnProperty.call(message, "javaStringCheckUtf8"))
                         if (typeof message.javaStringCheckUtf8 !== "boolean")
                             return "javaStringCheckUtf8: boolean expected";
-                    if (message.optimizeFor != null && message.hasOwnProperty("optimizeFor"))
+                    if (message.optimizeFor != null && Object.hasOwnProperty.call(message, "optimizeFor"))
                         switch (message.optimizeFor) {
                         default:
                             return "optimizeFor: enum value expected";
@@ -28562,51 +29384,51 @@
                         case 3:
                             break;
                         }
-                    if (message.goPackage != null && message.hasOwnProperty("goPackage"))
+                    if (message.goPackage != null && Object.hasOwnProperty.call(message, "goPackage"))
                         if (!$util.isString(message.goPackage))
                             return "goPackage: string expected";
-                    if (message.ccGenericServices != null && message.hasOwnProperty("ccGenericServices"))
+                    if (message.ccGenericServices != null && Object.hasOwnProperty.call(message, "ccGenericServices"))
                         if (typeof message.ccGenericServices !== "boolean")
                             return "ccGenericServices: boolean expected";
-                    if (message.javaGenericServices != null && message.hasOwnProperty("javaGenericServices"))
+                    if (message.javaGenericServices != null && Object.hasOwnProperty.call(message, "javaGenericServices"))
                         if (typeof message.javaGenericServices !== "boolean")
                             return "javaGenericServices: boolean expected";
-                    if (message.pyGenericServices != null && message.hasOwnProperty("pyGenericServices"))
+                    if (message.pyGenericServices != null && Object.hasOwnProperty.call(message, "pyGenericServices"))
                         if (typeof message.pyGenericServices !== "boolean")
                             return "pyGenericServices: boolean expected";
-                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
-                    if (message.ccEnableArenas != null && message.hasOwnProperty("ccEnableArenas"))
+                    if (message.ccEnableArenas != null && Object.hasOwnProperty.call(message, "ccEnableArenas"))
                         if (typeof message.ccEnableArenas !== "boolean")
                             return "ccEnableArenas: boolean expected";
-                    if (message.objcClassPrefix != null && message.hasOwnProperty("objcClassPrefix"))
+                    if (message.objcClassPrefix != null && Object.hasOwnProperty.call(message, "objcClassPrefix"))
                         if (!$util.isString(message.objcClassPrefix))
                             return "objcClassPrefix: string expected";
-                    if (message.csharpNamespace != null && message.hasOwnProperty("csharpNamespace"))
+                    if (message.csharpNamespace != null && Object.hasOwnProperty.call(message, "csharpNamespace"))
                         if (!$util.isString(message.csharpNamespace))
                             return "csharpNamespace: string expected";
-                    if (message.swiftPrefix != null && message.hasOwnProperty("swiftPrefix"))
+                    if (message.swiftPrefix != null && Object.hasOwnProperty.call(message, "swiftPrefix"))
                         if (!$util.isString(message.swiftPrefix))
                             return "swiftPrefix: string expected";
-                    if (message.phpClassPrefix != null && message.hasOwnProperty("phpClassPrefix"))
+                    if (message.phpClassPrefix != null && Object.hasOwnProperty.call(message, "phpClassPrefix"))
                         if (!$util.isString(message.phpClassPrefix))
                             return "phpClassPrefix: string expected";
-                    if (message.phpNamespace != null && message.hasOwnProperty("phpNamespace"))
+                    if (message.phpNamespace != null && Object.hasOwnProperty.call(message, "phpNamespace"))
                         if (!$util.isString(message.phpNamespace))
                             return "phpNamespace: string expected";
-                    if (message.phpMetadataNamespace != null && message.hasOwnProperty("phpMetadataNamespace"))
+                    if (message.phpMetadataNamespace != null && Object.hasOwnProperty.call(message, "phpMetadataNamespace"))
                         if (!$util.isString(message.phpMetadataNamespace))
                             return "phpMetadataNamespace: string expected";
-                    if (message.rubyPackage != null && message.hasOwnProperty("rubyPackage"))
+                    if (message.rubyPackage != null && Object.hasOwnProperty.call(message, "rubyPackage"))
                         if (!$util.isString(message.rubyPackage))
                             return "rubyPackage: string expected";
-                    if (message.features != null && message.hasOwnProperty("features")) {
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features")) {
                         var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
-                    if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
+                    if (message.uninterpretedOption != null && Object.hasOwnProperty.call(message, "uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
@@ -28615,7 +29437,7 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
-                    if (message[".google.api.resourceDefinition"] != null && message.hasOwnProperty(".google.api.resourceDefinition")) {
+                    if (message[".google.api.resourceDefinition"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceDefinition")) {
                         if (!Array.isArray(message[".google.api.resourceDefinition"]))
                             return ".google.api.resourceDefinition: array expected";
                         for (var i = 0; i < message[".google.api.resourceDefinition"].length; ++i) {
@@ -28638,6 +29460,8 @@
                 FileOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FileOptions)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.FileOptions: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -28700,7 +29524,7 @@
                     if (object.rubyPackage != null)
                         message.rubyPackage = String(object.rubyPackage);
                     if (object.features != null) {
-                        if (typeof object.features !== "object")
+                        if (!$util.isObject(object.features))
                             throw TypeError(".google.protobuf.FileOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
@@ -28709,7 +29533,7 @@
                             throw TypeError(".google.protobuf.FileOptions.uninterpretedOption: array expected");
                         message.uninterpretedOption = [];
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
-                            if (typeof object.uninterpretedOption[i] !== "object")
+                            if (!$util.isObject(object.uninterpretedOption[i]))
                                 throw TypeError(".google.protobuf.FileOptions.uninterpretedOption: object expected");
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
@@ -28719,7 +29543,7 @@
                             throw TypeError(".google.protobuf.FileOptions..google.api.resourceDefinition: array expected");
                         message[".google.api.resourceDefinition"] = [];
                         for (var i = 0; i < object[".google.api.resourceDefinition"].length; ++i) {
-                            if (typeof object[".google.api.resourceDefinition"][i] !== "object")
+                            if (!$util.isObject(object[".google.api.resourceDefinition"][i]))
                                 throw TypeError(".google.protobuf.FileOptions..google.api.resourceDefinition: object expected");
                             message[".google.api.resourceDefinition"][i] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resourceDefinition"][i], long + 1);
                         }
@@ -28736,9 +29560,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                FileOptions.toObject = function toObject(message, options) {
+                FileOptions.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults) {
                         object.uninterpretedOption = [];
@@ -28766,55 +29594,55 @@
                         object.rubyPackage = "";
                         object.features = null;
                     }
-                    if (message.javaPackage != null && message.hasOwnProperty("javaPackage"))
+                    if (message.javaPackage != null && Object.hasOwnProperty.call(message, "javaPackage"))
                         object.javaPackage = message.javaPackage;
-                    if (message.javaOuterClassname != null && message.hasOwnProperty("javaOuterClassname"))
+                    if (message.javaOuterClassname != null && Object.hasOwnProperty.call(message, "javaOuterClassname"))
                         object.javaOuterClassname = message.javaOuterClassname;
-                    if (message.optimizeFor != null && message.hasOwnProperty("optimizeFor"))
+                    if (message.optimizeFor != null && Object.hasOwnProperty.call(message, "optimizeFor"))
                         object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] === undefined ? message.optimizeFor : $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
-                    if (message.javaMultipleFiles != null && message.hasOwnProperty("javaMultipleFiles"))
+                    if (message.javaMultipleFiles != null && Object.hasOwnProperty.call(message, "javaMultipleFiles"))
                         object.javaMultipleFiles = message.javaMultipleFiles;
-                    if (message.goPackage != null && message.hasOwnProperty("goPackage"))
+                    if (message.goPackage != null && Object.hasOwnProperty.call(message, "goPackage"))
                         object.goPackage = message.goPackage;
-                    if (message.ccGenericServices != null && message.hasOwnProperty("ccGenericServices"))
+                    if (message.ccGenericServices != null && Object.hasOwnProperty.call(message, "ccGenericServices"))
                         object.ccGenericServices = message.ccGenericServices;
-                    if (message.javaGenericServices != null && message.hasOwnProperty("javaGenericServices"))
+                    if (message.javaGenericServices != null && Object.hasOwnProperty.call(message, "javaGenericServices"))
                         object.javaGenericServices = message.javaGenericServices;
-                    if (message.pyGenericServices != null && message.hasOwnProperty("pyGenericServices"))
+                    if (message.pyGenericServices != null && Object.hasOwnProperty.call(message, "pyGenericServices"))
                         object.pyGenericServices = message.pyGenericServices;
-                    if (message.javaGenerateEqualsAndHash != null && message.hasOwnProperty("javaGenerateEqualsAndHash"))
+                    if (message.javaGenerateEqualsAndHash != null && Object.hasOwnProperty.call(message, "javaGenerateEqualsAndHash"))
                         object.javaGenerateEqualsAndHash = message.javaGenerateEqualsAndHash;
-                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         object.deprecated = message.deprecated;
-                    if (message.javaStringCheckUtf8 != null && message.hasOwnProperty("javaStringCheckUtf8"))
+                    if (message.javaStringCheckUtf8 != null && Object.hasOwnProperty.call(message, "javaStringCheckUtf8"))
                         object.javaStringCheckUtf8 = message.javaStringCheckUtf8;
-                    if (message.ccEnableArenas != null && message.hasOwnProperty("ccEnableArenas"))
+                    if (message.ccEnableArenas != null && Object.hasOwnProperty.call(message, "ccEnableArenas"))
                         object.ccEnableArenas = message.ccEnableArenas;
-                    if (message.objcClassPrefix != null && message.hasOwnProperty("objcClassPrefix"))
+                    if (message.objcClassPrefix != null && Object.hasOwnProperty.call(message, "objcClassPrefix"))
                         object.objcClassPrefix = message.objcClassPrefix;
-                    if (message.csharpNamespace != null && message.hasOwnProperty("csharpNamespace"))
+                    if (message.csharpNamespace != null && Object.hasOwnProperty.call(message, "csharpNamespace"))
                         object.csharpNamespace = message.csharpNamespace;
-                    if (message.swiftPrefix != null && message.hasOwnProperty("swiftPrefix"))
+                    if (message.swiftPrefix != null && Object.hasOwnProperty.call(message, "swiftPrefix"))
                         object.swiftPrefix = message.swiftPrefix;
-                    if (message.phpClassPrefix != null && message.hasOwnProperty("phpClassPrefix"))
+                    if (message.phpClassPrefix != null && Object.hasOwnProperty.call(message, "phpClassPrefix"))
                         object.phpClassPrefix = message.phpClassPrefix;
-                    if (message.phpNamespace != null && message.hasOwnProperty("phpNamespace"))
+                    if (message.phpNamespace != null && Object.hasOwnProperty.call(message, "phpNamespace"))
                         object.phpNamespace = message.phpNamespace;
-                    if (message.phpMetadataNamespace != null && message.hasOwnProperty("phpMetadataNamespace"))
+                    if (message.phpMetadataNamespace != null && Object.hasOwnProperty.call(message, "phpMetadataNamespace"))
                         object.phpMetadataNamespace = message.phpMetadataNamespace;
-                    if (message.rubyPackage != null && message.hasOwnProperty("rubyPackage"))
+                    if (message.rubyPackage != null && Object.hasOwnProperty.call(message, "rubyPackage"))
                         object.rubyPackage = message.rubyPackage;
-                    if (message.features != null && message.hasOwnProperty("features"))
-                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options, q + 1);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
-                            object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
+                            object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options, q + 1);
                     }
                     if (message[".google.api.resourceDefinition"] && message[".google.api.resourceDefinition"].length) {
                         object[".google.api.resourceDefinition"] = [];
                         for (var j = 0; j < message[".google.api.resourceDefinition"].length; ++j)
-                            object[".google.api.resourceDefinition"][j] = $root.google.api.ResourceDescriptor.toObject(message[".google.api.resourceDefinition"][j], options);
+                            object[".google.api.resourceDefinition"][j] = $root.google.api.ResourceDescriptor.toObject(message[".google.api.resourceDefinition"][j], options, q + 1);
                     }
                     return object;
                 };
@@ -28981,9 +29809,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                MessageOptions.encode = function encode(message, writer) {
+                MessageOptions.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.messageSetWireFormat != null && Object.hasOwnProperty.call(message, "messageSetWireFormat"))
                         writer.uint32(/* id 1, wireType 0 =*/8).bool(message.messageSetWireFormat);
                     if (message.noStandardDescriptorAccessor != null && Object.hasOwnProperty.call(message, "noStandardDescriptorAccessor"))
@@ -28995,12 +29827,12 @@
                     if (message.deprecatedLegacyJsonFieldConflicts != null && Object.hasOwnProperty.call(message, "deprecatedLegacyJsonFieldConflicts"))
                         writer.uint32(/* id 11, wireType 0 =*/88).bool(message.deprecatedLegacyJsonFieldConflicts);
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 12, wireType 2 =*/98).fork(), q + 1).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
-                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork(), q + 1).ldelim();
                     if (message[".google.api.resource"] != null && Object.hasOwnProperty.call(message, ".google.api.resource"))
-                        $root.google.api.ResourceDescriptor.encode(message[".google.api.resource"], writer.uint32(/* id 1053, wireType 2 =*/8426).fork()).ldelim();
+                        $root.google.api.ResourceDescriptor.encode(message[".google.api.resource"], writer.uint32(/* id 1053, wireType 2 =*/8426).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -29014,7 +29846,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 MessageOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -29114,27 +29946,27 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.messageSetWireFormat != null && message.hasOwnProperty("messageSetWireFormat"))
+                    if (message.messageSetWireFormat != null && Object.hasOwnProperty.call(message, "messageSetWireFormat"))
                         if (typeof message.messageSetWireFormat !== "boolean")
                             return "messageSetWireFormat: boolean expected";
-                    if (message.noStandardDescriptorAccessor != null && message.hasOwnProperty("noStandardDescriptorAccessor"))
+                    if (message.noStandardDescriptorAccessor != null && Object.hasOwnProperty.call(message, "noStandardDescriptorAccessor"))
                         if (typeof message.noStandardDescriptorAccessor !== "boolean")
                             return "noStandardDescriptorAccessor: boolean expected";
-                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
-                    if (message.mapEntry != null && message.hasOwnProperty("mapEntry"))
+                    if (message.mapEntry != null && Object.hasOwnProperty.call(message, "mapEntry"))
                         if (typeof message.mapEntry !== "boolean")
                             return "mapEntry: boolean expected";
-                    if (message.deprecatedLegacyJsonFieldConflicts != null && message.hasOwnProperty("deprecatedLegacyJsonFieldConflicts"))
+                    if (message.deprecatedLegacyJsonFieldConflicts != null && Object.hasOwnProperty.call(message, "deprecatedLegacyJsonFieldConflicts"))
                         if (typeof message.deprecatedLegacyJsonFieldConflicts !== "boolean")
                             return "deprecatedLegacyJsonFieldConflicts: boolean expected";
-                    if (message.features != null && message.hasOwnProperty("features")) {
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features")) {
                         var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
-                    if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
+                    if (message.uninterpretedOption != null && Object.hasOwnProperty.call(message, "uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
@@ -29143,7 +29975,7 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
-                    if (message[".google.api.resource"] != null && message.hasOwnProperty(".google.api.resource")) {
+                    if (message[".google.api.resource"] != null && Object.hasOwnProperty.call(message, ".google.api.resource")) {
                         var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resource"], long + 1);
                         if (error)
                             return ".google.api.resource." + error;
@@ -29162,6 +29994,8 @@
                 MessageOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.MessageOptions)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.MessageOptions: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -29178,7 +30012,7 @@
                     if (object.deprecatedLegacyJsonFieldConflicts != null)
                         message.deprecatedLegacyJsonFieldConflicts = Boolean(object.deprecatedLegacyJsonFieldConflicts);
                     if (object.features != null) {
-                        if (typeof object.features !== "object")
+                        if (!$util.isObject(object.features))
                             throw TypeError(".google.protobuf.MessageOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
@@ -29187,13 +30021,13 @@
                             throw TypeError(".google.protobuf.MessageOptions.uninterpretedOption: array expected");
                         message.uninterpretedOption = [];
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
-                            if (typeof object.uninterpretedOption[i] !== "object")
+                            if (!$util.isObject(object.uninterpretedOption[i]))
                                 throw TypeError(".google.protobuf.MessageOptions.uninterpretedOption: object expected");
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     if (object[".google.api.resource"] != null) {
-                        if (typeof object[".google.api.resource"] !== "object")
+                        if (!$util.isObject(object[".google.api.resource"]))
                             throw TypeError(".google.protobuf.MessageOptions..google.api.resource: object expected");
                         message[".google.api.resource"] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resource"], long + 1);
                     }
@@ -29209,9 +30043,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                MessageOptions.toObject = function toObject(message, options) {
+                MessageOptions.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.uninterpretedOption = [];
@@ -29224,25 +30062,25 @@
                         object.features = null;
                         object[".google.api.resource"] = null;
                     }
-                    if (message.messageSetWireFormat != null && message.hasOwnProperty("messageSetWireFormat"))
+                    if (message.messageSetWireFormat != null && Object.hasOwnProperty.call(message, "messageSetWireFormat"))
                         object.messageSetWireFormat = message.messageSetWireFormat;
-                    if (message.noStandardDescriptorAccessor != null && message.hasOwnProperty("noStandardDescriptorAccessor"))
+                    if (message.noStandardDescriptorAccessor != null && Object.hasOwnProperty.call(message, "noStandardDescriptorAccessor"))
                         object.noStandardDescriptorAccessor = message.noStandardDescriptorAccessor;
-                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         object.deprecated = message.deprecated;
-                    if (message.mapEntry != null && message.hasOwnProperty("mapEntry"))
+                    if (message.mapEntry != null && Object.hasOwnProperty.call(message, "mapEntry"))
                         object.mapEntry = message.mapEntry;
-                    if (message.deprecatedLegacyJsonFieldConflicts != null && message.hasOwnProperty("deprecatedLegacyJsonFieldConflicts"))
+                    if (message.deprecatedLegacyJsonFieldConflicts != null && Object.hasOwnProperty.call(message, "deprecatedLegacyJsonFieldConflicts"))
                         object.deprecatedLegacyJsonFieldConflicts = message.deprecatedLegacyJsonFieldConflicts;
-                    if (message.features != null && message.hasOwnProperty("features"))
-                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options, q + 1);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
-                            object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
+                            object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options, q + 1);
                     }
-                    if (message[".google.api.resource"] != null && message.hasOwnProperty(".google.api.resource"))
-                        object[".google.api.resource"] = $root.google.api.ResourceDescriptor.toObject(message[".google.api.resource"], options);
+                    if (message[".google.api.resource"] != null && Object.hasOwnProperty.call(message, ".google.api.resource"))
+                        object[".google.api.resource"] = $root.google.api.ResourceDescriptor.toObject(message[".google.api.resource"], options, q + 1);
                     return object;
                 };
     
@@ -29467,9 +30305,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                FieldOptions.encode = function encode(message, writer) {
+                FieldOptions.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.ctype != null && Object.hasOwnProperty.call(message, "ctype"))
                         writer.uint32(/* id 1, wireType 0 =*/8).int32(message.ctype);
                     if (message.packed != null && Object.hasOwnProperty.call(message, "packed"))
@@ -29493,19 +30335,19 @@
                             writer.uint32(/* id 19, wireType 0 =*/152).int32(message.targets[i]);
                     if (message.editionDefaults != null && message.editionDefaults.length)
                         for (var i = 0; i < message.editionDefaults.length; ++i)
-                            $root.google.protobuf.FieldOptions.EditionDefault.encode(message.editionDefaults[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                            $root.google.protobuf.FieldOptions.EditionDefault.encode(message.editionDefaults[i], writer.uint32(/* id 20, wireType 2 =*/162).fork(), q + 1).ldelim();
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 21, wireType 2 =*/170).fork(), q + 1).ldelim();
                     if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
-                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
+                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 22, wireType 2 =*/178).fork(), q + 1).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
-                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork(), q + 1).ldelim();
                     if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length)
                         for (var i = 0; i < message[".google.api.fieldBehavior"].length; ++i)
                             writer.uint32(/* id 1052, wireType 0 =*/8416).int32(message[".google.api.fieldBehavior"][i]);
                     if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
-                        $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
+                        $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -29519,7 +30361,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 FieldOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -29667,7 +30509,7 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.ctype != null && message.hasOwnProperty("ctype"))
+                    if (message.ctype != null && Object.hasOwnProperty.call(message, "ctype"))
                         switch (message.ctype) {
                         default:
                             return "ctype: enum value expected";
@@ -29676,10 +30518,10 @@
                         case 2:
                             break;
                         }
-                    if (message.packed != null && message.hasOwnProperty("packed"))
+                    if (message.packed != null && Object.hasOwnProperty.call(message, "packed"))
                         if (typeof message.packed !== "boolean")
                             return "packed: boolean expected";
-                    if (message.jstype != null && message.hasOwnProperty("jstype"))
+                    if (message.jstype != null && Object.hasOwnProperty.call(message, "jstype"))
                         switch (message.jstype) {
                         default:
                             return "jstype: enum value expected";
@@ -29688,22 +30530,22 @@
                         case 2:
                             break;
                         }
-                    if (message.lazy != null && message.hasOwnProperty("lazy"))
+                    if (message.lazy != null && Object.hasOwnProperty.call(message, "lazy"))
                         if (typeof message.lazy !== "boolean")
                             return "lazy: boolean expected";
-                    if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
+                    if (message.unverifiedLazy != null && Object.hasOwnProperty.call(message, "unverifiedLazy"))
                         if (typeof message.unverifiedLazy !== "boolean")
                             return "unverifiedLazy: boolean expected";
-                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
-                    if (message.weak != null && message.hasOwnProperty("weak"))
+                    if (message.weak != null && Object.hasOwnProperty.call(message, "weak"))
                         if (typeof message.weak !== "boolean")
                             return "weak: boolean expected";
-                    if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
+                    if (message.debugRedact != null && Object.hasOwnProperty.call(message, "debugRedact"))
                         if (typeof message.debugRedact !== "boolean")
                             return "debugRedact: boolean expected";
-                    if (message.retention != null && message.hasOwnProperty("retention"))
+                    if (message.retention != null && Object.hasOwnProperty.call(message, "retention"))
                         switch (message.retention) {
                         default:
                             return "retention: enum value expected";
@@ -29712,7 +30554,7 @@
                         case 2:
                             break;
                         }
-                    if (message.targets != null && message.hasOwnProperty("targets")) {
+                    if (message.targets != null && Object.hasOwnProperty.call(message, "targets")) {
                         if (!Array.isArray(message.targets))
                             return "targets: array expected";
                         for (var i = 0; i < message.targets.length; ++i)
@@ -29732,7 +30574,7 @@
                                 break;
                             }
                     }
-                    if (message.editionDefaults != null && message.hasOwnProperty("editionDefaults")) {
+                    if (message.editionDefaults != null && Object.hasOwnProperty.call(message, "editionDefaults")) {
                         if (!Array.isArray(message.editionDefaults))
                             return "editionDefaults: array expected";
                         for (var i = 0; i < message.editionDefaults.length; ++i) {
@@ -29741,17 +30583,17 @@
                                 return "editionDefaults." + error;
                         }
                     }
-                    if (message.features != null && message.hasOwnProperty("features")) {
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features")) {
                         var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
-                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
+                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport")) {
                         var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport, long + 1);
                         if (error)
                             return "featureSupport." + error;
                     }
-                    if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
+                    if (message.uninterpretedOption != null && Object.hasOwnProperty.call(message, "uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
@@ -29760,7 +30602,7 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
-                    if (message[".google.api.fieldBehavior"] != null && message.hasOwnProperty(".google.api.fieldBehavior")) {
+                    if (message[".google.api.fieldBehavior"] != null && Object.hasOwnProperty.call(message, ".google.api.fieldBehavior")) {
                         if (!Array.isArray(message[".google.api.fieldBehavior"]))
                             return ".google.api.fieldBehavior: array expected";
                         for (var i = 0; i < message[".google.api.fieldBehavior"].length; ++i)
@@ -29779,7 +30621,7 @@
                                 break;
                             }
                     }
-                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
+                    if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference")) {
                         var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"], long + 1);
                         if (error)
                             return ".google.api.resourceReference." + error;
@@ -29798,6 +30640,8 @@
                 FieldOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FieldOptions)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.FieldOptions: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -29933,18 +30777,18 @@
                             throw TypeError(".google.protobuf.FieldOptions.editionDefaults: array expected");
                         message.editionDefaults = [];
                         for (var i = 0; i < object.editionDefaults.length; ++i) {
-                            if (typeof object.editionDefaults[i] !== "object")
+                            if (!$util.isObject(object.editionDefaults[i]))
                                 throw TypeError(".google.protobuf.FieldOptions.editionDefaults: object expected");
                             message.editionDefaults[i] = $root.google.protobuf.FieldOptions.EditionDefault.fromObject(object.editionDefaults[i], long + 1);
                         }
                     }
                     if (object.features != null) {
-                        if (typeof object.features !== "object")
+                        if (!$util.isObject(object.features))
                             throw TypeError(".google.protobuf.FieldOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     if (object.featureSupport != null) {
-                        if (typeof object.featureSupport !== "object")
+                        if (!$util.isObject(object.featureSupport))
                             throw TypeError(".google.protobuf.FieldOptions.featureSupport: object expected");
                         message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport, long + 1);
                     }
@@ -29953,7 +30797,7 @@
                             throw TypeError(".google.protobuf.FieldOptions.uninterpretedOption: array expected");
                         message.uninterpretedOption = [];
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
-                            if (typeof object.uninterpretedOption[i] !== "object")
+                            if (!$util.isObject(object.uninterpretedOption[i]))
                                 throw TypeError(".google.protobuf.FieldOptions.uninterpretedOption: object expected");
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
@@ -30008,7 +30852,7 @@
                             }
                     }
                     if (object[".google.api.resourceReference"] != null) {
-                        if (typeof object[".google.api.resourceReference"] !== "object")
+                        if (!$util.isObject(object[".google.api.resourceReference"]))
                             throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
                         message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"], long + 1);
                     }
@@ -30024,9 +30868,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                FieldOptions.toObject = function toObject(message, options) {
+                FieldOptions.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults) {
                         object.targets = [];
@@ -30048,23 +30896,23 @@
                         object.featureSupport = null;
                         object[".google.api.resourceReference"] = null;
                     }
-                    if (message.ctype != null && message.hasOwnProperty("ctype"))
+                    if (message.ctype != null && Object.hasOwnProperty.call(message, "ctype"))
                         object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
-                    if (message.packed != null && message.hasOwnProperty("packed"))
+                    if (message.packed != null && Object.hasOwnProperty.call(message, "packed"))
                         object.packed = message.packed;
-                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         object.deprecated = message.deprecated;
-                    if (message.lazy != null && message.hasOwnProperty("lazy"))
+                    if (message.lazy != null && Object.hasOwnProperty.call(message, "lazy"))
                         object.lazy = message.lazy;
-                    if (message.jstype != null && message.hasOwnProperty("jstype"))
+                    if (message.jstype != null && Object.hasOwnProperty.call(message, "jstype"))
                         object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] === undefined ? message.jstype : $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
-                    if (message.weak != null && message.hasOwnProperty("weak"))
+                    if (message.weak != null && Object.hasOwnProperty.call(message, "weak"))
                         object.weak = message.weak;
-                    if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
+                    if (message.unverifiedLazy != null && Object.hasOwnProperty.call(message, "unverifiedLazy"))
                         object.unverifiedLazy = message.unverifiedLazy;
-                    if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
+                    if (message.debugRedact != null && Object.hasOwnProperty.call(message, "debugRedact"))
                         object.debugRedact = message.debugRedact;
-                    if (message.retention != null && message.hasOwnProperty("retention"))
+                    if (message.retention != null && Object.hasOwnProperty.call(message, "retention"))
                         object.retention = options.enums === String ? $root.google.protobuf.FieldOptions.OptionRetention[message.retention] === undefined ? message.retention : $root.google.protobuf.FieldOptions.OptionRetention[message.retention] : message.retention;
                     if (message.targets && message.targets.length) {
                         object.targets = [];
@@ -30074,24 +30922,24 @@
                     if (message.editionDefaults && message.editionDefaults.length) {
                         object.editionDefaults = [];
                         for (var j = 0; j < message.editionDefaults.length; ++j)
-                            object.editionDefaults[j] = $root.google.protobuf.FieldOptions.EditionDefault.toObject(message.editionDefaults[j], options);
+                            object.editionDefaults[j] = $root.google.protobuf.FieldOptions.EditionDefault.toObject(message.editionDefaults[j], options, q + 1);
                     }
-                    if (message.features != null && message.hasOwnProperty("features"))
-                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
-                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
-                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options, q + 1);
+                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
+                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options, q + 1);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
-                            object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
+                            object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options, q + 1);
                     }
                     if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
                         object[".google.api.fieldBehavior"] = [];
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
                             object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] === undefined ? message[".google.api.fieldBehavior"][j] : $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
-                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
-                        object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
+                    if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
+                        object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options, q + 1);
                     return object;
                 };
     
@@ -30261,9 +31109,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    EditionDefault.encode = function encode(message, writer) {
+                    EditionDefault.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.value != null && Object.hasOwnProperty.call(message, "value"))
                             writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
                         if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
@@ -30281,7 +31133,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     EditionDefault.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -30355,7 +31207,7 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.edition != null && message.hasOwnProperty("edition"))
+                        if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                             switch (message.edition) {
                             default:
                                 return "edition: enum value expected";
@@ -30373,7 +31225,7 @@
                             case 2147483647:
                                 break;
                             }
-                        if (message.value != null && message.hasOwnProperty("value"))
+                        if (message.value != null && Object.hasOwnProperty.call(message, "value"))
                             if (!$util.isString(message.value))
                                 return "value: string expected";
                         return null;
@@ -30390,6 +31242,8 @@
                     EditionDefault.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.FieldOptions.EditionDefault)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.protobuf.FieldOptions.EditionDefault: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -30465,17 +31319,21 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    EditionDefault.toObject = function toObject(message, options) {
+                    EditionDefault.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.value = "";
                             object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
                         }
-                        if (message.value != null && message.hasOwnProperty("value"))
+                        if (message.value != null && Object.hasOwnProperty.call(message, "value"))
                             object.value = message.value;
-                        if (message.edition != null && message.hasOwnProperty("edition"))
+                        if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                             object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
                         return object;
                     };
@@ -30589,9 +31447,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    FeatureSupport.encode = function encode(message, writer) {
+                    FeatureSupport.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.editionIntroduced != null && Object.hasOwnProperty.call(message, "editionIntroduced"))
                             writer.uint32(/* id 1, wireType 0 =*/8).int32(message.editionIntroduced);
                         if (message.editionDeprecated != null && Object.hasOwnProperty.call(message, "editionDeprecated"))
@@ -30613,7 +31475,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     FeatureSupport.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -30695,7 +31557,7 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
+                        if (message.editionIntroduced != null && Object.hasOwnProperty.call(message, "editionIntroduced"))
                             switch (message.editionIntroduced) {
                             default:
                                 return "editionIntroduced: enum value expected";
@@ -30713,7 +31575,7 @@
                             case 2147483647:
                                 break;
                             }
-                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
+                        if (message.editionDeprecated != null && Object.hasOwnProperty.call(message, "editionDeprecated"))
                             switch (message.editionDeprecated) {
                             default:
                                 return "editionDeprecated: enum value expected";
@@ -30731,10 +31593,10 @@
                             case 2147483647:
                                 break;
                             }
-                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
+                        if (message.deprecationWarning != null && Object.hasOwnProperty.call(message, "deprecationWarning"))
                             if (!$util.isString(message.deprecationWarning))
                                 return "deprecationWarning: string expected";
-                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
+                        if (message.editionRemoved != null && Object.hasOwnProperty.call(message, "editionRemoved"))
                             switch (message.editionRemoved) {
                             default:
                                 return "editionRemoved: enum value expected";
@@ -30766,6 +31628,8 @@
                     FeatureSupport.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.FieldOptions.FeatureSupport)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.protobuf.FieldOptions.FeatureSupport: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -30953,9 +31817,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    FeatureSupport.toObject = function toObject(message, options) {
+                    FeatureSupport.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.editionIntroduced = options.enums === String ? "EDITION_UNKNOWN" : 0;
@@ -30963,13 +31831,13 @@
                             object.deprecationWarning = "";
                             object.editionRemoved = options.enums === String ? "EDITION_UNKNOWN" : 0;
                         }
-                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
+                        if (message.editionIntroduced != null && Object.hasOwnProperty.call(message, "editionIntroduced"))
                             object.editionIntroduced = options.enums === String ? $root.google.protobuf.Edition[message.editionIntroduced] === undefined ? message.editionIntroduced : $root.google.protobuf.Edition[message.editionIntroduced] : message.editionIntroduced;
-                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
+                        if (message.editionDeprecated != null && Object.hasOwnProperty.call(message, "editionDeprecated"))
                             object.editionDeprecated = options.enums === String ? $root.google.protobuf.Edition[message.editionDeprecated] === undefined ? message.editionDeprecated : $root.google.protobuf.Edition[message.editionDeprecated] : message.editionDeprecated;
-                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
+                        if (message.deprecationWarning != null && Object.hasOwnProperty.call(message, "deprecationWarning"))
                             object.deprecationWarning = message.deprecationWarning;
-                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
+                        if (message.editionRemoved != null && Object.hasOwnProperty.call(message, "editionRemoved"))
                             object.editionRemoved = options.enums === String ? $root.google.protobuf.Edition[message.editionRemoved] === undefined ? message.editionRemoved : $root.google.protobuf.Edition[message.editionRemoved] : message.editionRemoved;
                         return object;
                     };
@@ -31069,14 +31937,18 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                OneofOptions.encode = function encode(message, writer) {
+                OneofOptions.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
-                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -31090,7 +31962,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 OneofOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -31166,12 +32038,12 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.features != null && message.hasOwnProperty("features")) {
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features")) {
                         var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
-                    if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
+                    if (message.uninterpretedOption != null && Object.hasOwnProperty.call(message, "uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
@@ -31194,13 +32066,15 @@
                 OneofOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.OneofOptions)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.OneofOptions: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.OneofOptions();
                     if (object.features != null) {
-                        if (typeof object.features !== "object")
+                        if (!$util.isObject(object.features))
                             throw TypeError(".google.protobuf.OneofOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
@@ -31209,7 +32083,7 @@
                             throw TypeError(".google.protobuf.OneofOptions.uninterpretedOption: array expected");
                         message.uninterpretedOption = [];
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
-                            if (typeof object.uninterpretedOption[i] !== "object")
+                            if (!$util.isObject(object.uninterpretedOption[i]))
                                 throw TypeError(".google.protobuf.OneofOptions.uninterpretedOption: object expected");
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
@@ -31226,20 +32100,24 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                OneofOptions.toObject = function toObject(message, options) {
+                OneofOptions.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.uninterpretedOption = [];
                     if (options.defaults)
                         object.features = null;
-                    if (message.features != null && message.hasOwnProperty("features"))
-                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options, q + 1);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
-                            object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
+                            object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options, q + 1);
                     }
                     return object;
                 };
@@ -31363,9 +32241,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                EnumOptions.encode = function encode(message, writer) {
+                EnumOptions.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.allowAlias != null && Object.hasOwnProperty.call(message, "allowAlias"))
                         writer.uint32(/* id 2, wireType 0 =*/16).bool(message.allowAlias);
                     if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
@@ -31373,10 +32255,10 @@
                     if (message.deprecatedLegacyJsonFieldConflicts != null && Object.hasOwnProperty.call(message, "deprecatedLegacyJsonFieldConflicts"))
                         writer.uint32(/* id 6, wireType 0 =*/48).bool(message.deprecatedLegacyJsonFieldConflicts);
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 7, wireType 2 =*/58).fork(), q + 1).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
-                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -31390,7 +32272,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 EnumOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -31478,21 +32360,21 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.allowAlias != null && message.hasOwnProperty("allowAlias"))
+                    if (message.allowAlias != null && Object.hasOwnProperty.call(message, "allowAlias"))
                         if (typeof message.allowAlias !== "boolean")
                             return "allowAlias: boolean expected";
-                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
-                    if (message.deprecatedLegacyJsonFieldConflicts != null && message.hasOwnProperty("deprecatedLegacyJsonFieldConflicts"))
+                    if (message.deprecatedLegacyJsonFieldConflicts != null && Object.hasOwnProperty.call(message, "deprecatedLegacyJsonFieldConflicts"))
                         if (typeof message.deprecatedLegacyJsonFieldConflicts !== "boolean")
                             return "deprecatedLegacyJsonFieldConflicts: boolean expected";
-                    if (message.features != null && message.hasOwnProperty("features")) {
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features")) {
                         var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
-                    if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
+                    if (message.uninterpretedOption != null && Object.hasOwnProperty.call(message, "uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
@@ -31515,6 +32397,8 @@
                 EnumOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.EnumOptions)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.EnumOptions: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -31527,7 +32411,7 @@
                     if (object.deprecatedLegacyJsonFieldConflicts != null)
                         message.deprecatedLegacyJsonFieldConflicts = Boolean(object.deprecatedLegacyJsonFieldConflicts);
                     if (object.features != null) {
-                        if (typeof object.features !== "object")
+                        if (!$util.isObject(object.features))
                             throw TypeError(".google.protobuf.EnumOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
@@ -31536,7 +32420,7 @@
                             throw TypeError(".google.protobuf.EnumOptions.uninterpretedOption: array expected");
                         message.uninterpretedOption = [];
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
-                            if (typeof object.uninterpretedOption[i] !== "object")
+                            if (!$util.isObject(object.uninterpretedOption[i]))
                                 throw TypeError(".google.protobuf.EnumOptions.uninterpretedOption: object expected");
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
@@ -31553,9 +32437,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                EnumOptions.toObject = function toObject(message, options) {
+                EnumOptions.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.uninterpretedOption = [];
@@ -31565,18 +32453,18 @@
                         object.deprecatedLegacyJsonFieldConflicts = false;
                         object.features = null;
                     }
-                    if (message.allowAlias != null && message.hasOwnProperty("allowAlias"))
+                    if (message.allowAlias != null && Object.hasOwnProperty.call(message, "allowAlias"))
                         object.allowAlias = message.allowAlias;
-                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         object.deprecated = message.deprecated;
-                    if (message.deprecatedLegacyJsonFieldConflicts != null && message.hasOwnProperty("deprecatedLegacyJsonFieldConflicts"))
+                    if (message.deprecatedLegacyJsonFieldConflicts != null && Object.hasOwnProperty.call(message, "deprecatedLegacyJsonFieldConflicts"))
                         object.deprecatedLegacyJsonFieldConflicts = message.deprecatedLegacyJsonFieldConflicts;
-                    if (message.features != null && message.hasOwnProperty("features"))
-                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options, q + 1);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
-                            object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
+                            object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options, q + 1);
                     }
                     return object;
                 };
@@ -31700,20 +32588,24 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                EnumValueOptions.encode = function encode(message, writer) {
+                EnumValueOptions.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         writer.uint32(/* id 1, wireType 0 =*/8).bool(message.deprecated);
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
                     if (message.debugRedact != null && Object.hasOwnProperty.call(message, "debugRedact"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.debugRedact);
                     if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
-                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 4, wireType 2 =*/34).fork(), q + 1).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
-                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -31727,7 +32619,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 EnumValueOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -31815,23 +32707,23 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
-                    if (message.features != null && message.hasOwnProperty("features")) {
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features")) {
                         var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
-                    if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
+                    if (message.debugRedact != null && Object.hasOwnProperty.call(message, "debugRedact"))
                         if (typeof message.debugRedact !== "boolean")
                             return "debugRedact: boolean expected";
-                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
+                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport")) {
                         var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport, long + 1);
                         if (error)
                             return "featureSupport." + error;
                     }
-                    if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
+                    if (message.uninterpretedOption != null && Object.hasOwnProperty.call(message, "uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
@@ -31854,6 +32746,8 @@
                 EnumValueOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.EnumValueOptions)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.EnumValueOptions: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -31862,14 +32756,14 @@
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     if (object.features != null) {
-                        if (typeof object.features !== "object")
+                        if (!$util.isObject(object.features))
                             throw TypeError(".google.protobuf.EnumValueOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     if (object.debugRedact != null)
                         message.debugRedact = Boolean(object.debugRedact);
                     if (object.featureSupport != null) {
-                        if (typeof object.featureSupport !== "object")
+                        if (!$util.isObject(object.featureSupport))
                             throw TypeError(".google.protobuf.EnumValueOptions.featureSupport: object expected");
                         message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport, long + 1);
                     }
@@ -31878,7 +32772,7 @@
                             throw TypeError(".google.protobuf.EnumValueOptions.uninterpretedOption: array expected");
                         message.uninterpretedOption = [];
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
-                            if (typeof object.uninterpretedOption[i] !== "object")
+                            if (!$util.isObject(object.uninterpretedOption[i]))
                                 throw TypeError(".google.protobuf.EnumValueOptions.uninterpretedOption: object expected");
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
@@ -31895,9 +32789,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                EnumValueOptions.toObject = function toObject(message, options) {
+                EnumValueOptions.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.uninterpretedOption = [];
@@ -31907,18 +32805,18 @@
                         object.debugRedact = false;
                         object.featureSupport = null;
                     }
-                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         object.deprecated = message.deprecated;
-                    if (message.features != null && message.hasOwnProperty("features"))
-                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
-                    if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options, q + 1);
+                    if (message.debugRedact != null && Object.hasOwnProperty.call(message, "debugRedact"))
                         object.debugRedact = message.debugRedact;
-                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
-                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
+                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
+                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options, q + 1);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
-                            object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
+                            object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options, q + 1);
                     }
                     return object;
                 };
@@ -32051,16 +32949,20 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                ServiceOptions.encode = function encode(message, writer) {
+                ServiceOptions.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         writer.uint32(/* id 33, wireType 0 =*/264).bool(message.deprecated);
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 34, wireType 2 =*/274).fork()).ldelim();
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 34, wireType 2 =*/274).fork(), q + 1).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
-                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork(), q + 1).ldelim();
                     if (message[".google.api.defaultHost"] != null && Object.hasOwnProperty.call(message, ".google.api.defaultHost"))
                         writer.uint32(/* id 1049, wireType 2 =*/8394).string(message[".google.api.defaultHost"]);
                     if (message[".google.api.oauthScopes"] != null && Object.hasOwnProperty.call(message, ".google.api.oauthScopes"))
@@ -32080,7 +32982,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 ServiceOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -32172,15 +33074,15 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.features != null && message.hasOwnProperty("features")) {
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features")) {
                         var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
-                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
-                    if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
+                    if (message.uninterpretedOption != null && Object.hasOwnProperty.call(message, "uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
@@ -32189,13 +33091,13 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
-                    if (message[".google.api.defaultHost"] != null && message.hasOwnProperty(".google.api.defaultHost"))
+                    if (message[".google.api.defaultHost"] != null && Object.hasOwnProperty.call(message, ".google.api.defaultHost"))
                         if (!$util.isString(message[".google.api.defaultHost"]))
                             return ".google.api.defaultHost: string expected";
-                    if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
+                    if (message[".google.api.oauthScopes"] != null && Object.hasOwnProperty.call(message, ".google.api.oauthScopes"))
                         if (!$util.isString(message[".google.api.oauthScopes"]))
                             return ".google.api.oauthScopes: string expected";
-                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                    if (message[".google.api.apiVersion"] != null && Object.hasOwnProperty.call(message, ".google.api.apiVersion"))
                         if (!$util.isString(message[".google.api.apiVersion"]))
                             return ".google.api.apiVersion: string expected";
                     return null;
@@ -32212,13 +33114,15 @@
                 ServiceOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.ServiceOptions)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.ServiceOptions: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.ServiceOptions();
                     if (object.features != null) {
-                        if (typeof object.features !== "object")
+                        if (!$util.isObject(object.features))
                             throw TypeError(".google.protobuf.ServiceOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
@@ -32229,7 +33133,7 @@
                             throw TypeError(".google.protobuf.ServiceOptions.uninterpretedOption: array expected");
                         message.uninterpretedOption = [];
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
-                            if (typeof object.uninterpretedOption[i] !== "object")
+                            if (!$util.isObject(object.uninterpretedOption[i]))
                                 throw TypeError(".google.protobuf.ServiceOptions.uninterpretedOption: object expected");
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
@@ -32252,9 +33156,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                ServiceOptions.toObject = function toObject(message, options) {
+                ServiceOptions.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.uninterpretedOption = [];
@@ -32265,20 +33173,20 @@
                         object[".google.api.oauthScopes"] = "";
                         object[".google.api.apiVersion"] = "";
                     }
-                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         object.deprecated = message.deprecated;
-                    if (message.features != null && message.hasOwnProperty("features"))
-                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options, q + 1);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
-                            object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
+                            object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options, q + 1);
                     }
-                    if (message[".google.api.defaultHost"] != null && message.hasOwnProperty(".google.api.defaultHost"))
+                    if (message[".google.api.defaultHost"] != null && Object.hasOwnProperty.call(message, ".google.api.defaultHost"))
                         object[".google.api.defaultHost"] = message[".google.api.defaultHost"];
-                    if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
+                    if (message[".google.api.oauthScopes"] != null && Object.hasOwnProperty.call(message, ".google.api.oauthScopes"))
                         object[".google.api.oauthScopes"] = message[".google.api.oauthScopes"];
-                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                    if (message[".google.api.apiVersion"] != null && Object.hasOwnProperty.call(message, ".google.api.apiVersion"))
                         object[".google.api.apiVersion"] = message[".google.api.apiVersion"];
                     return object;
                 };
@@ -32412,23 +33320,27 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                MethodOptions.encode = function encode(message, writer) {
+                MethodOptions.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         writer.uint32(/* id 33, wireType 0 =*/264).bool(message.deprecated);
                     if (message.idempotencyLevel != null && Object.hasOwnProperty.call(message, "idempotencyLevel"))
                         writer.uint32(/* id 34, wireType 0 =*/272).int32(message.idempotencyLevel);
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 35, wireType 2 =*/282).fork()).ldelim();
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 35, wireType 2 =*/282).fork(), q + 1).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
-                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork(), q + 1).ldelim();
                     if (message[".google.api.methodSignature"] != null && message[".google.api.methodSignature"].length)
                         for (var i = 0; i < message[".google.api.methodSignature"].length; ++i)
                             writer.uint32(/* id 1051, wireType 2 =*/8410).string(message[".google.api.methodSignature"][i]);
                     if (message[".google.api.http"] != null && Object.hasOwnProperty.call(message, ".google.api.http"))
-                        $root.google.api.HttpRule.encode(message[".google.api.http"], writer.uint32(/* id 72295728, wireType 2 =*/578365826).fork()).ldelim();
+                        $root.google.api.HttpRule.encode(message[".google.api.http"], writer.uint32(/* id 72295728, wireType 2 =*/578365826).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -32442,7 +33354,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 MethodOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -32536,10 +33448,10 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
-                    if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
+                    if (message.idempotencyLevel != null && Object.hasOwnProperty.call(message, "idempotencyLevel"))
                         switch (message.idempotencyLevel) {
                         default:
                             return "idempotencyLevel: enum value expected";
@@ -32548,12 +33460,12 @@
                         case 2:
                             break;
                         }
-                    if (message.features != null && message.hasOwnProperty("features")) {
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features")) {
                         var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
-                    if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
+                    if (message.uninterpretedOption != null && Object.hasOwnProperty.call(message, "uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
@@ -32562,12 +33474,12 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
-                    if (message[".google.api.http"] != null && message.hasOwnProperty(".google.api.http")) {
+                    if (message[".google.api.http"] != null && Object.hasOwnProperty.call(message, ".google.api.http")) {
                         var error = $root.google.api.HttpRule.verify(message[".google.api.http"], long + 1);
                         if (error)
                             return ".google.api.http." + error;
                     }
-                    if (message[".google.api.methodSignature"] != null && message.hasOwnProperty(".google.api.methodSignature")) {
+                    if (message[".google.api.methodSignature"] != null && Object.hasOwnProperty.call(message, ".google.api.methodSignature")) {
                         if (!Array.isArray(message[".google.api.methodSignature"]))
                             return ".google.api.methodSignature: array expected";
                         for (var i = 0; i < message[".google.api.methodSignature"].length; ++i)
@@ -32588,6 +33500,8 @@
                 MethodOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.MethodOptions)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.MethodOptions: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -32616,7 +33530,7 @@
                         break;
                     }
                     if (object.features != null) {
-                        if (typeof object.features !== "object")
+                        if (!$util.isObject(object.features))
                             throw TypeError(".google.protobuf.MethodOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
@@ -32625,13 +33539,13 @@
                             throw TypeError(".google.protobuf.MethodOptions.uninterpretedOption: array expected");
                         message.uninterpretedOption = [];
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
-                            if (typeof object.uninterpretedOption[i] !== "object")
+                            if (!$util.isObject(object.uninterpretedOption[i]))
                                 throw TypeError(".google.protobuf.MethodOptions.uninterpretedOption: object expected");
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     if (object[".google.api.http"] != null) {
-                        if (typeof object[".google.api.http"] !== "object")
+                        if (!$util.isObject(object[".google.api.http"]))
                             throw TypeError(".google.protobuf.MethodOptions..google.api.http: object expected");
                         message[".google.api.http"] = $root.google.api.HttpRule.fromObject(object[".google.api.http"], long + 1);
                     }
@@ -32654,9 +33568,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                MethodOptions.toObject = function toObject(message, options) {
+                MethodOptions.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults) {
                         object.uninterpretedOption = [];
@@ -32668,24 +33586,24 @@
                         object.features = null;
                         object[".google.api.http"] = null;
                     }
-                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         object.deprecated = message.deprecated;
-                    if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
+                    if (message.idempotencyLevel != null && Object.hasOwnProperty.call(message, "idempotencyLevel"))
                         object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
-                    if (message.features != null && message.hasOwnProperty("features"))
-                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options, q + 1);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
-                            object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
+                            object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options, q + 1);
                     }
                     if (message[".google.api.methodSignature"] && message[".google.api.methodSignature"].length) {
                         object[".google.api.methodSignature"] = [];
                         for (var j = 0; j < message[".google.api.methodSignature"].length; ++j)
                             object[".google.api.methodSignature"][j] = message[".google.api.methodSignature"][j];
                     }
-                    if (message[".google.api.http"] != null && message.hasOwnProperty(".google.api.http"))
-                        object[".google.api.http"] = $root.google.api.HttpRule.toObject(message[".google.api.http"], options);
+                    if (message[".google.api.http"] != null && Object.hasOwnProperty.call(message, ".google.api.http"))
+                        object[".google.api.http"] = $root.google.api.HttpRule.toObject(message[".google.api.http"], options, q + 1);
                     return object;
                 };
     
@@ -32842,12 +33760,16 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                UninterpretedOption.encode = function encode(message, writer) {
+                UninterpretedOption.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.name != null && message.name.length)
                         for (var i = 0; i < message.name.length; ++i)
-                            $root.google.protobuf.UninterpretedOption.NamePart.encode(message.name[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            $root.google.protobuf.UninterpretedOption.NamePart.encode(message.name[i], writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
                     if (message.identifierValue != null && Object.hasOwnProperty.call(message, "identifierValue"))
                         writer.uint32(/* id 3, wireType 2 =*/26).string(message.identifierValue);
                     if (message.positiveIntValue != null && Object.hasOwnProperty.call(message, "positiveIntValue"))
@@ -32873,7 +33795,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 UninterpretedOption.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -32969,7 +33891,7 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.name != null && message.hasOwnProperty("name")) {
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name")) {
                         if (!Array.isArray(message.name))
                             return "name: array expected";
                         for (var i = 0; i < message.name.length; ++i) {
@@ -32978,22 +33900,22 @@
                                 return "name." + error;
                         }
                     }
-                    if (message.identifierValue != null && message.hasOwnProperty("identifierValue"))
+                    if (message.identifierValue != null && Object.hasOwnProperty.call(message, "identifierValue"))
                         if (!$util.isString(message.identifierValue))
                             return "identifierValue: string expected";
-                    if (message.positiveIntValue != null && message.hasOwnProperty("positiveIntValue"))
+                    if (message.positiveIntValue != null && Object.hasOwnProperty.call(message, "positiveIntValue"))
                         if (!$util.isInteger(message.positiveIntValue) && !(message.positiveIntValue && $util.isInteger(message.positiveIntValue.low) && $util.isInteger(message.positiveIntValue.high)))
                             return "positiveIntValue: integer|Long expected";
-                    if (message.negativeIntValue != null && message.hasOwnProperty("negativeIntValue"))
+                    if (message.negativeIntValue != null && Object.hasOwnProperty.call(message, "negativeIntValue"))
                         if (!$util.isInteger(message.negativeIntValue) && !(message.negativeIntValue && $util.isInteger(message.negativeIntValue.low) && $util.isInteger(message.negativeIntValue.high)))
                             return "negativeIntValue: integer|Long expected";
-                    if (message.doubleValue != null && message.hasOwnProperty("doubleValue"))
+                    if (message.doubleValue != null && Object.hasOwnProperty.call(message, "doubleValue"))
                         if (typeof message.doubleValue !== "number")
                             return "doubleValue: number expected";
-                    if (message.stringValue != null && message.hasOwnProperty("stringValue"))
+                    if (message.stringValue != null && Object.hasOwnProperty.call(message, "stringValue"))
                         if (!(message.stringValue && typeof message.stringValue.length === "number" || $util.isString(message.stringValue)))
                             return "stringValue: buffer expected";
-                    if (message.aggregateValue != null && message.hasOwnProperty("aggregateValue"))
+                    if (message.aggregateValue != null && Object.hasOwnProperty.call(message, "aggregateValue"))
                         if (!$util.isString(message.aggregateValue))
                             return "aggregateValue: string expected";
                     return null;
@@ -33010,6 +33932,8 @@
                 UninterpretedOption.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.UninterpretedOption)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.UninterpretedOption: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -33020,7 +33944,7 @@
                             throw TypeError(".google.protobuf.UninterpretedOption.name: array expected");
                         message.name = [];
                         for (var i = 0; i < object.name.length; ++i) {
-                            if (typeof object.name[i] !== "object")
+                            if (!$util.isObject(object.name[i]))
                                 throw TypeError(".google.protobuf.UninterpretedOption.name: object expected");
                             message.name[i] = $root.google.protobuf.UninterpretedOption.NamePart.fromObject(object.name[i], long + 1);
                         }
@@ -33029,7 +33953,7 @@
                         message.identifierValue = String(object.identifierValue);
                     if (object.positiveIntValue != null)
                         if ($util.Long)
-                            (message.positiveIntValue = $util.Long.fromValue(object.positiveIntValue)).unsigned = true;
+                            message.positiveIntValue = $util.Long.fromValue(object.positiveIntValue, true);
                         else if (typeof object.positiveIntValue === "string")
                             message.positiveIntValue = parseInt(object.positiveIntValue, 10);
                         else if (typeof object.positiveIntValue === "number")
@@ -33038,7 +33962,7 @@
                             message.positiveIntValue = new $util.LongBits(object.positiveIntValue.low >>> 0, object.positiveIntValue.high >>> 0).toNumber(true);
                     if (object.negativeIntValue != null)
                         if ($util.Long)
-                            (message.negativeIntValue = $util.Long.fromValue(object.negativeIntValue)).unsigned = false;
+                            message.negativeIntValue = $util.Long.fromValue(object.negativeIntValue, false);
                         else if (typeof object.negativeIntValue === "string")
                             message.negativeIntValue = parseInt(object.negativeIntValue, 10);
                         else if (typeof object.negativeIntValue === "number")
@@ -33066,9 +33990,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                UninterpretedOption.toObject = function toObject(message, options) {
+                UninterpretedOption.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.name = [];
@@ -33076,14 +34004,14 @@
                         object.identifierValue = "";
                         if ($util.Long) {
                             var long = new $util.Long(0, 0, true);
-                            object.positiveIntValue = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                            object.positiveIntValue = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                         } else
-                            object.positiveIntValue = options.longs === String ? "0" : 0;
+                            object.positiveIntValue = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                         if ($util.Long) {
                             var long = new $util.Long(0, 0, false);
-                            object.negativeIntValue = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                            object.negativeIntValue = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                         } else
-                            object.negativeIntValue = options.longs === String ? "0" : 0;
+                            object.negativeIntValue = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                         object.doubleValue = 0;
                         if (options.bytes === String)
                             object.stringValue = "";
@@ -33097,25 +34025,29 @@
                     if (message.name && message.name.length) {
                         object.name = [];
                         for (var j = 0; j < message.name.length; ++j)
-                            object.name[j] = $root.google.protobuf.UninterpretedOption.NamePart.toObject(message.name[j], options);
+                            object.name[j] = $root.google.protobuf.UninterpretedOption.NamePart.toObject(message.name[j], options, q + 1);
                     }
-                    if (message.identifierValue != null && message.hasOwnProperty("identifierValue"))
+                    if (message.identifierValue != null && Object.hasOwnProperty.call(message, "identifierValue"))
                         object.identifierValue = message.identifierValue;
-                    if (message.positiveIntValue != null && message.hasOwnProperty("positiveIntValue"))
-                        if (typeof message.positiveIntValue === "number")
+                    if (message.positiveIntValue != null && Object.hasOwnProperty.call(message, "positiveIntValue"))
+                        if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                            object.positiveIntValue = typeof message.positiveIntValue === "number" ? BigInt(message.positiveIntValue) : $util.Long.fromBits(message.positiveIntValue.low >>> 0, message.positiveIntValue.high >>> 0, true).toBigInt();
+                        else if (typeof message.positiveIntValue === "number")
                             object.positiveIntValue = options.longs === String ? String(message.positiveIntValue) : message.positiveIntValue;
                         else
                             object.positiveIntValue = options.longs === String ? $util.Long.prototype.toString.call(message.positiveIntValue) : options.longs === Number ? new $util.LongBits(message.positiveIntValue.low >>> 0, message.positiveIntValue.high >>> 0).toNumber(true) : message.positiveIntValue;
-                    if (message.negativeIntValue != null && message.hasOwnProperty("negativeIntValue"))
-                        if (typeof message.negativeIntValue === "number")
+                    if (message.negativeIntValue != null && Object.hasOwnProperty.call(message, "negativeIntValue"))
+                        if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                            object.negativeIntValue = typeof message.negativeIntValue === "number" ? BigInt(message.negativeIntValue) : $util.Long.fromBits(message.negativeIntValue.low >>> 0, message.negativeIntValue.high >>> 0, false).toBigInt();
+                        else if (typeof message.negativeIntValue === "number")
                             object.negativeIntValue = options.longs === String ? String(message.negativeIntValue) : message.negativeIntValue;
                         else
                             object.negativeIntValue = options.longs === String ? $util.Long.prototype.toString.call(message.negativeIntValue) : options.longs === Number ? new $util.LongBits(message.negativeIntValue.low >>> 0, message.negativeIntValue.high >>> 0).toNumber() : message.negativeIntValue;
-                    if (message.doubleValue != null && message.hasOwnProperty("doubleValue"))
+                    if (message.doubleValue != null && Object.hasOwnProperty.call(message, "doubleValue"))
                         object.doubleValue = options.json && !isFinite(message.doubleValue) ? String(message.doubleValue) : message.doubleValue;
-                    if (message.stringValue != null && message.hasOwnProperty("stringValue"))
+                    if (message.stringValue != null && Object.hasOwnProperty.call(message, "stringValue"))
                         object.stringValue = options.bytes === String ? $util.base64.encode(message.stringValue, 0, message.stringValue.length) : options.bytes === Array ? Array.prototype.slice.call(message.stringValue) : message.stringValue;
-                    if (message.aggregateValue != null && message.hasOwnProperty("aggregateValue"))
+                    if (message.aggregateValue != null && Object.hasOwnProperty.call(message, "aggregateValue"))
                         object.aggregateValue = message.aggregateValue;
                     return object;
                 };
@@ -33208,9 +34140,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    NamePart.encode = function encode(message, writer) {
+                    NamePart.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.namePart);
                         writer.uint32(/* id 2, wireType 0 =*/16).bool(message.isExtension);
                         return writer;
@@ -33226,7 +34162,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     NamePart.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -33266,9 +34202,9 @@
                                 break;
                             }
                         }
-                        if (!message.hasOwnProperty("namePart"))
+                        if (!Object.hasOwnProperty.call(message, "namePart"))
                             throw $util.ProtocolError("missing required 'namePart'", { instance: message });
-                        if (!message.hasOwnProperty("isExtension"))
+                        if (!Object.hasOwnProperty.call(message, "isExtension"))
                             throw $util.ProtocolError("missing required 'isExtension'", { instance: message });
                         return message;
                     };
@@ -33322,6 +34258,8 @@
                     NamePart.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.UninterpretedOption.NamePart)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.protobuf.UninterpretedOption.NamePart: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -33343,17 +34281,21 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    NamePart.toObject = function toObject(message, options) {
+                    NamePart.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.namePart = "";
                             object.isExtension = false;
                         }
-                        if (message.namePart != null && message.hasOwnProperty("namePart"))
+                        if (message.namePart != null && Object.hasOwnProperty.call(message, "namePart"))
                             object.namePart = message.namePart;
-                        if (message.isExtension != null && message.hasOwnProperty("isExtension"))
+                        if (message.isExtension != null && Object.hasOwnProperty.call(message, "isExtension"))
                             object.isExtension = message.isExtension;
                         return object;
                     };
@@ -33506,9 +34448,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                FeatureSet.encode = function encode(message, writer) {
+                FeatureSet.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.fieldPresence != null && Object.hasOwnProperty.call(message, "fieldPresence"))
                         writer.uint32(/* id 1, wireType 0 =*/8).int32(message.fieldPresence);
                     if (message.enumType != null && Object.hasOwnProperty.call(message, "enumType"))
@@ -33538,7 +34484,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 FeatureSet.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -33636,7 +34582,7 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
+                    if (message.fieldPresence != null && Object.hasOwnProperty.call(message, "fieldPresence"))
                         switch (message.fieldPresence) {
                         default:
                             return "fieldPresence: enum value expected";
@@ -33646,7 +34592,7 @@
                         case 3:
                             break;
                         }
-                    if (message.enumType != null && message.hasOwnProperty("enumType"))
+                    if (message.enumType != null && Object.hasOwnProperty.call(message, "enumType"))
                         switch (message.enumType) {
                         default:
                             return "enumType: enum value expected";
@@ -33655,7 +34601,7 @@
                         case 2:
                             break;
                         }
-                    if (message.repeatedFieldEncoding != null && message.hasOwnProperty("repeatedFieldEncoding"))
+                    if (message.repeatedFieldEncoding != null && Object.hasOwnProperty.call(message, "repeatedFieldEncoding"))
                         switch (message.repeatedFieldEncoding) {
                         default:
                             return "repeatedFieldEncoding: enum value expected";
@@ -33664,7 +34610,7 @@
                         case 2:
                             break;
                         }
-                    if (message.utf8Validation != null && message.hasOwnProperty("utf8Validation"))
+                    if (message.utf8Validation != null && Object.hasOwnProperty.call(message, "utf8Validation"))
                         switch (message.utf8Validation) {
                         default:
                             return "utf8Validation: enum value expected";
@@ -33673,7 +34619,7 @@
                         case 3:
                             break;
                         }
-                    if (message.messageEncoding != null && message.hasOwnProperty("messageEncoding"))
+                    if (message.messageEncoding != null && Object.hasOwnProperty.call(message, "messageEncoding"))
                         switch (message.messageEncoding) {
                         default:
                             return "messageEncoding: enum value expected";
@@ -33682,7 +34628,7 @@
                         case 2:
                             break;
                         }
-                    if (message.jsonFormat != null && message.hasOwnProperty("jsonFormat"))
+                    if (message.jsonFormat != null && Object.hasOwnProperty.call(message, "jsonFormat"))
                         switch (message.jsonFormat) {
                         default:
                             return "jsonFormat: enum value expected";
@@ -33691,7 +34637,7 @@
                         case 2:
                             break;
                         }
-                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
+                    if (message.enforceNamingStyle != null && Object.hasOwnProperty.call(message, "enforceNamingStyle"))
                         switch (message.enforceNamingStyle) {
                         default:
                             return "enforceNamingStyle: enum value expected";
@@ -33700,7 +34646,7 @@
                         case 2:
                             break;
                         }
-                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
+                    if (message.defaultSymbolVisibility != null && Object.hasOwnProperty.call(message, "defaultSymbolVisibility"))
                         switch (message.defaultSymbolVisibility) {
                         default:
                             return "defaultSymbolVisibility: enum value expected";
@@ -33725,6 +34671,8 @@
                 FeatureSet.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FeatureSet)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.FeatureSet: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -33914,9 +34862,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                FeatureSet.toObject = function toObject(message, options) {
+                FeatureSet.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.defaults) {
                         object.fieldPresence = options.enums === String ? "FIELD_PRESENCE_UNKNOWN" : 0;
@@ -33928,21 +34880,21 @@
                         object.enforceNamingStyle = options.enums === String ? "ENFORCE_NAMING_STYLE_UNKNOWN" : 0;
                         object.defaultSymbolVisibility = options.enums === String ? "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN" : 0;
                     }
-                    if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
+                    if (message.fieldPresence != null && Object.hasOwnProperty.call(message, "fieldPresence"))
                         object.fieldPresence = options.enums === String ? $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] === undefined ? message.fieldPresence : $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] : message.fieldPresence;
-                    if (message.enumType != null && message.hasOwnProperty("enumType"))
+                    if (message.enumType != null && Object.hasOwnProperty.call(message, "enumType"))
                         object.enumType = options.enums === String ? $root.google.protobuf.FeatureSet.EnumType[message.enumType] === undefined ? message.enumType : $root.google.protobuf.FeatureSet.EnumType[message.enumType] : message.enumType;
-                    if (message.repeatedFieldEncoding != null && message.hasOwnProperty("repeatedFieldEncoding"))
+                    if (message.repeatedFieldEncoding != null && Object.hasOwnProperty.call(message, "repeatedFieldEncoding"))
                         object.repeatedFieldEncoding = options.enums === String ? $root.google.protobuf.FeatureSet.RepeatedFieldEncoding[message.repeatedFieldEncoding] === undefined ? message.repeatedFieldEncoding : $root.google.protobuf.FeatureSet.RepeatedFieldEncoding[message.repeatedFieldEncoding] : message.repeatedFieldEncoding;
-                    if (message.utf8Validation != null && message.hasOwnProperty("utf8Validation"))
+                    if (message.utf8Validation != null && Object.hasOwnProperty.call(message, "utf8Validation"))
                         object.utf8Validation = options.enums === String ? $root.google.protobuf.FeatureSet.Utf8Validation[message.utf8Validation] === undefined ? message.utf8Validation : $root.google.protobuf.FeatureSet.Utf8Validation[message.utf8Validation] : message.utf8Validation;
-                    if (message.messageEncoding != null && message.hasOwnProperty("messageEncoding"))
+                    if (message.messageEncoding != null && Object.hasOwnProperty.call(message, "messageEncoding"))
                         object.messageEncoding = options.enums === String ? $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] === undefined ? message.messageEncoding : $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] : message.messageEncoding;
-                    if (message.jsonFormat != null && message.hasOwnProperty("jsonFormat"))
+                    if (message.jsonFormat != null && Object.hasOwnProperty.call(message, "jsonFormat"))
                         object.jsonFormat = options.enums === String ? $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] === undefined ? message.jsonFormat : $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] : message.jsonFormat;
-                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
+                    if (message.enforceNamingStyle != null && Object.hasOwnProperty.call(message, "enforceNamingStyle"))
                         object.enforceNamingStyle = options.enums === String ? $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] === undefined ? message.enforceNamingStyle : $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] : message.enforceNamingStyle;
-                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
+                    if (message.defaultSymbolVisibility != null && Object.hasOwnProperty.call(message, "defaultSymbolVisibility"))
                         object.defaultSymbolVisibility = options.enums === String ? $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] === undefined ? message.defaultSymbolVisibility : $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] : message.defaultSymbolVisibility;
                     return object;
                 };
@@ -34131,9 +35083,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    VisibilityFeature.encode = function encode(message, writer) {
+                    VisibilityFeature.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         return writer;
                     };
     
@@ -34147,7 +35103,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     VisibilityFeature.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -34227,10 +35183,6 @@
                     VisibilityFeature.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.FeatureSet.VisibilityFeature)
                             return object;
-                        if (long === undefined)
-                            long = 0;
-                        if (long > $util.recursionLimit)
-                            throw Error("maximum nesting depth exceeded");
                         return new $root.google.protobuf.FeatureSet.VisibilityFeature();
                     };
     
@@ -34371,12 +35323,16 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                FeatureSetDefaults.encode = function encode(message, writer) {
+                FeatureSetDefaults.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.defaults != null && message.defaults.length)
                         for (var i = 0; i < message.defaults.length; ++i)
-                            $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.encode(message.defaults[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.encode(message.defaults[i], writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                     if (message.minimumEdition != null && Object.hasOwnProperty.call(message, "minimumEdition"))
                         writer.uint32(/* id 4, wireType 0 =*/32).int32(message.minimumEdition);
                     if (message.maximumEdition != null && Object.hasOwnProperty.call(message, "maximumEdition"))
@@ -34394,7 +35350,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 FeatureSetDefaults.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -34474,7 +35430,7 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.defaults != null && message.hasOwnProperty("defaults")) {
+                    if (message.defaults != null && Object.hasOwnProperty.call(message, "defaults")) {
                         if (!Array.isArray(message.defaults))
                             return "defaults: array expected";
                         for (var i = 0; i < message.defaults.length; ++i) {
@@ -34483,7 +35439,7 @@
                                 return "defaults." + error;
                         }
                     }
-                    if (message.minimumEdition != null && message.hasOwnProperty("minimumEdition"))
+                    if (message.minimumEdition != null && Object.hasOwnProperty.call(message, "minimumEdition"))
                         switch (message.minimumEdition) {
                         default:
                             return "minimumEdition: enum value expected";
@@ -34501,7 +35457,7 @@
                         case 2147483647:
                             break;
                         }
-                    if (message.maximumEdition != null && message.hasOwnProperty("maximumEdition"))
+                    if (message.maximumEdition != null && Object.hasOwnProperty.call(message, "maximumEdition"))
                         switch (message.maximumEdition) {
                         default:
                             return "maximumEdition: enum value expected";
@@ -34533,6 +35489,8 @@
                 FeatureSetDefaults.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FeatureSetDefaults)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.FeatureSetDefaults: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -34543,7 +35501,7 @@
                             throw TypeError(".google.protobuf.FeatureSetDefaults.defaults: array expected");
                         message.defaults = [];
                         for (var i = 0; i < object.defaults.length; ++i) {
-                            if (typeof object.defaults[i] !== "object")
+                            if (!$util.isObject(object.defaults[i]))
                                 throw TypeError(".google.protobuf.FeatureSetDefaults.defaults: object expected");
                             message.defaults[i] = $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fromObject(object.defaults[i], long + 1);
                         }
@@ -34672,9 +35630,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                FeatureSetDefaults.toObject = function toObject(message, options) {
+                FeatureSetDefaults.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.defaults = [];
@@ -34685,11 +35647,11 @@
                     if (message.defaults && message.defaults.length) {
                         object.defaults = [];
                         for (var j = 0; j < message.defaults.length; ++j)
-                            object.defaults[j] = $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.toObject(message.defaults[j], options);
+                            object.defaults[j] = $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.toObject(message.defaults[j], options, q + 1);
                     }
-                    if (message.minimumEdition != null && message.hasOwnProperty("minimumEdition"))
+                    if (message.minimumEdition != null && Object.hasOwnProperty.call(message, "minimumEdition"))
                         object.minimumEdition = options.enums === String ? $root.google.protobuf.Edition[message.minimumEdition] === undefined ? message.minimumEdition : $root.google.protobuf.Edition[message.minimumEdition] : message.minimumEdition;
-                    if (message.maximumEdition != null && message.hasOwnProperty("maximumEdition"))
+                    if (message.maximumEdition != null && Object.hasOwnProperty.call(message, "maximumEdition"))
                         object.maximumEdition = options.enums === String ? $root.google.protobuf.Edition[message.maximumEdition] === undefined ? message.maximumEdition : $root.google.protobuf.Edition[message.maximumEdition] : message.maximumEdition;
                     return object;
                 };
@@ -34791,15 +35753,19 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    FeatureSetEditionDefault.encode = function encode(message, writer) {
+                    FeatureSetEditionDefault.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                             writer.uint32(/* id 3, wireType 0 =*/24).int32(message.edition);
                         if (message.overridableFeatures != null && Object.hasOwnProperty.call(message, "overridableFeatures"))
-                            $root.google.protobuf.FeatureSet.encode(message.overridableFeatures, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            $root.google.protobuf.FeatureSet.encode(message.overridableFeatures, writer.uint32(/* id 4, wireType 2 =*/34).fork(), q + 1).ldelim();
                         if (message.fixedFeatures != null && Object.hasOwnProperty.call(message, "fixedFeatures"))
-                            $root.google.protobuf.FeatureSet.encode(message.fixedFeatures, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            $root.google.protobuf.FeatureSet.encode(message.fixedFeatures, writer.uint32(/* id 5, wireType 2 =*/42).fork(), q + 1).ldelim();
                         return writer;
                     };
     
@@ -34813,7 +35779,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     FeatureSetEditionDefault.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -34891,7 +35857,7 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.edition != null && message.hasOwnProperty("edition"))
+                        if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                             switch (message.edition) {
                             default:
                                 return "edition: enum value expected";
@@ -34909,12 +35875,12 @@
                             case 2147483647:
                                 break;
                             }
-                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures")) {
+                        if (message.overridableFeatures != null && Object.hasOwnProperty.call(message, "overridableFeatures")) {
                             var error = $root.google.protobuf.FeatureSet.verify(message.overridableFeatures, long + 1);
                             if (error)
                                 return "overridableFeatures." + error;
                         }
-                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures")) {
+                        if (message.fixedFeatures != null && Object.hasOwnProperty.call(message, "fixedFeatures")) {
                             var error = $root.google.protobuf.FeatureSet.verify(message.fixedFeatures, long + 1);
                             if (error)
                                 return "fixedFeatures." + error;
@@ -34933,6 +35899,8 @@
                     FeatureSetEditionDefault.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -34995,12 +35963,12 @@
                             break;
                         }
                         if (object.overridableFeatures != null) {
-                            if (typeof object.overridableFeatures !== "object")
+                            if (!$util.isObject(object.overridableFeatures))
                                 throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.overridableFeatures: object expected");
                             message.overridableFeatures = $root.google.protobuf.FeatureSet.fromObject(object.overridableFeatures, long + 1);
                         }
                         if (object.fixedFeatures != null) {
-                            if (typeof object.fixedFeatures !== "object")
+                            if (!$util.isObject(object.fixedFeatures))
                                 throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fixedFeatures: object expected");
                             message.fixedFeatures = $root.google.protobuf.FeatureSet.fromObject(object.fixedFeatures, long + 1);
                         }
@@ -35016,21 +35984,25 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    FeatureSetEditionDefault.toObject = function toObject(message, options) {
+                    FeatureSetEditionDefault.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.defaults) {
                             object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
                             object.overridableFeatures = null;
                             object.fixedFeatures = null;
                         }
-                        if (message.edition != null && message.hasOwnProperty("edition"))
+                        if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                             object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
-                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures"))
-                            object.overridableFeatures = $root.google.protobuf.FeatureSet.toObject(message.overridableFeatures, options);
-                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures"))
-                            object.fixedFeatures = $root.google.protobuf.FeatureSet.toObject(message.fixedFeatures, options);
+                        if (message.overridableFeatures != null && Object.hasOwnProperty.call(message, "overridableFeatures"))
+                            object.overridableFeatures = $root.google.protobuf.FeatureSet.toObject(message.overridableFeatures, options, q + 1);
+                        if (message.fixedFeatures != null && Object.hasOwnProperty.call(message, "fixedFeatures"))
+                            object.fixedFeatures = $root.google.protobuf.FeatureSet.toObject(message.fixedFeatures, options, q + 1);
                         return object;
                     };
     
@@ -35120,12 +36092,16 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                SourceCodeInfo.encode = function encode(message, writer) {
+                SourceCodeInfo.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.location != null && message.location.length)
                         for (var i = 0; i < message.location.length; ++i)
-                            $root.google.protobuf.SourceCodeInfo.Location.encode(message.location[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            $root.google.protobuf.SourceCodeInfo.Location.encode(message.location[i], writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -35139,7 +36115,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 SourceCodeInfo.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -35211,7 +36187,7 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.location != null && message.hasOwnProperty("location")) {
+                    if (message.location != null && Object.hasOwnProperty.call(message, "location")) {
                         if (!Array.isArray(message.location))
                             return "location: array expected";
                         for (var i = 0; i < message.location.length; ++i) {
@@ -35234,6 +36210,8 @@
                 SourceCodeInfo.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.SourceCodeInfo)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.SourceCodeInfo: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -35244,7 +36222,7 @@
                             throw TypeError(".google.protobuf.SourceCodeInfo.location: array expected");
                         message.location = [];
                         for (var i = 0; i < object.location.length; ++i) {
-                            if (typeof object.location[i] !== "object")
+                            if (!$util.isObject(object.location[i]))
                                 throw TypeError(".google.protobuf.SourceCodeInfo.location: object expected");
                             message.location[i] = $root.google.protobuf.SourceCodeInfo.Location.fromObject(object.location[i], long + 1);
                         }
@@ -35261,16 +36239,20 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                SourceCodeInfo.toObject = function toObject(message, options) {
+                SourceCodeInfo.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.location = [];
                     if (message.location && message.location.length) {
                         object.location = [];
                         for (var j = 0; j < message.location.length; ++j)
-                            object.location[j] = $root.google.protobuf.SourceCodeInfo.Location.toObject(message.location[j], options);
+                            object.location[j] = $root.google.protobuf.SourceCodeInfo.Location.toObject(message.location[j], options, q + 1);
                     }
                     return object;
                 };
@@ -35393,9 +36375,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    Location.encode = function encode(message, writer) {
+                    Location.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.path != null && message.path.length) {
                             writer.uint32(/* id 1, wireType 2 =*/10).fork();
                             for (var i = 0; i < message.path.length; ++i)
@@ -35428,7 +36414,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     Location.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -35530,27 +36516,27 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.path != null && message.hasOwnProperty("path")) {
+                        if (message.path != null && Object.hasOwnProperty.call(message, "path")) {
                             if (!Array.isArray(message.path))
                                 return "path: array expected";
                             for (var i = 0; i < message.path.length; ++i)
                                 if (!$util.isInteger(message.path[i]))
                                     return "path: integer[] expected";
                         }
-                        if (message.span != null && message.hasOwnProperty("span")) {
+                        if (message.span != null && Object.hasOwnProperty.call(message, "span")) {
                             if (!Array.isArray(message.span))
                                 return "span: array expected";
                             for (var i = 0; i < message.span.length; ++i)
                                 if (!$util.isInteger(message.span[i]))
                                     return "span: integer[] expected";
                         }
-                        if (message.leadingComments != null && message.hasOwnProperty("leadingComments"))
+                        if (message.leadingComments != null && Object.hasOwnProperty.call(message, "leadingComments"))
                             if (!$util.isString(message.leadingComments))
                                 return "leadingComments: string expected";
-                        if (message.trailingComments != null && message.hasOwnProperty("trailingComments"))
+                        if (message.trailingComments != null && Object.hasOwnProperty.call(message, "trailingComments"))
                             if (!$util.isString(message.trailingComments))
                                 return "trailingComments: string expected";
-                        if (message.leadingDetachedComments != null && message.hasOwnProperty("leadingDetachedComments")) {
+                        if (message.leadingDetachedComments != null && Object.hasOwnProperty.call(message, "leadingDetachedComments")) {
                             if (!Array.isArray(message.leadingDetachedComments))
                                 return "leadingDetachedComments: array expected";
                             for (var i = 0; i < message.leadingDetachedComments.length; ++i)
@@ -35571,6 +36557,8 @@
                     Location.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.SourceCodeInfo.Location)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.protobuf.SourceCodeInfo.Location: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -35613,9 +36601,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    Location.toObject = function toObject(message, options) {
+                    Location.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.arrays || options.defaults) {
                             object.path = [];
@@ -35636,9 +36628,9 @@
                             for (var j = 0; j < message.span.length; ++j)
                                 object.span[j] = message.span[j];
                         }
-                        if (message.leadingComments != null && message.hasOwnProperty("leadingComments"))
+                        if (message.leadingComments != null && Object.hasOwnProperty.call(message, "leadingComments"))
                             object.leadingComments = message.leadingComments;
-                        if (message.trailingComments != null && message.hasOwnProperty("trailingComments"))
+                        if (message.trailingComments != null && Object.hasOwnProperty.call(message, "trailingComments"))
                             object.trailingComments = message.trailingComments;
                         if (message.leadingDetachedComments && message.leadingDetachedComments.length) {
                             object.leadingDetachedComments = [];
@@ -35734,12 +36726,16 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                GeneratedCodeInfo.encode = function encode(message, writer) {
+                GeneratedCodeInfo.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.annotation != null && message.annotation.length)
                         for (var i = 0; i < message.annotation.length; ++i)
-                            $root.google.protobuf.GeneratedCodeInfo.Annotation.encode(message.annotation[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            $root.google.protobuf.GeneratedCodeInfo.Annotation.encode(message.annotation[i], writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -35753,7 +36749,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 GeneratedCodeInfo.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -35825,7 +36821,7 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.annotation != null && message.hasOwnProperty("annotation")) {
+                    if (message.annotation != null && Object.hasOwnProperty.call(message, "annotation")) {
                         if (!Array.isArray(message.annotation))
                             return "annotation: array expected";
                         for (var i = 0; i < message.annotation.length; ++i) {
@@ -35848,6 +36844,8 @@
                 GeneratedCodeInfo.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.GeneratedCodeInfo)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.GeneratedCodeInfo: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -35858,7 +36856,7 @@
                             throw TypeError(".google.protobuf.GeneratedCodeInfo.annotation: array expected");
                         message.annotation = [];
                         for (var i = 0; i < object.annotation.length; ++i) {
-                            if (typeof object.annotation[i] !== "object")
+                            if (!$util.isObject(object.annotation[i]))
                                 throw TypeError(".google.protobuf.GeneratedCodeInfo.annotation: object expected");
                             message.annotation[i] = $root.google.protobuf.GeneratedCodeInfo.Annotation.fromObject(object.annotation[i], long + 1);
                         }
@@ -35875,16 +36873,20 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                GeneratedCodeInfo.toObject = function toObject(message, options) {
+                GeneratedCodeInfo.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.annotation = [];
                     if (message.annotation && message.annotation.length) {
                         object.annotation = [];
                         for (var j = 0; j < message.annotation.length; ++j)
-                            object.annotation[j] = $root.google.protobuf.GeneratedCodeInfo.Annotation.toObject(message.annotation[j], options);
+                            object.annotation[j] = $root.google.protobuf.GeneratedCodeInfo.Annotation.toObject(message.annotation[j], options, q + 1);
                     }
                     return object;
                 };
@@ -36005,9 +37007,13 @@
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    Annotation.encode = function encode(message, writer) {
+                    Annotation.encode = function encode(message, writer, q) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         if (message.path != null && message.path.length) {
                             writer.uint32(/* id 1, wireType 2 =*/10).fork();
                             for (var i = 0; i < message.path.length; ++i)
@@ -36035,7 +37041,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     Annotation.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                     };
     
                     /**
@@ -36128,23 +37134,23 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.path != null && message.hasOwnProperty("path")) {
+                        if (message.path != null && Object.hasOwnProperty.call(message, "path")) {
                             if (!Array.isArray(message.path))
                                 return "path: array expected";
                             for (var i = 0; i < message.path.length; ++i)
                                 if (!$util.isInteger(message.path[i]))
                                     return "path: integer[] expected";
                         }
-                        if (message.sourceFile != null && message.hasOwnProperty("sourceFile"))
+                        if (message.sourceFile != null && Object.hasOwnProperty.call(message, "sourceFile"))
                             if (!$util.isString(message.sourceFile))
                                 return "sourceFile: string expected";
-                        if (message.begin != null && message.hasOwnProperty("begin"))
+                        if (message.begin != null && Object.hasOwnProperty.call(message, "begin"))
                             if (!$util.isInteger(message.begin))
                                 return "begin: integer expected";
-                        if (message.end != null && message.hasOwnProperty("end"))
+                        if (message.end != null && Object.hasOwnProperty.call(message, "end"))
                             if (!$util.isInteger(message.end))
                                 return "end: integer expected";
-                        if (message.semantic != null && message.hasOwnProperty("semantic"))
+                        if (message.semantic != null && Object.hasOwnProperty.call(message, "semantic"))
                             switch (message.semantic) {
                             default:
                                 return "semantic: enum value expected";
@@ -36167,6 +37173,8 @@
                     Annotation.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.GeneratedCodeInfo.Annotation)
                             return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.protobuf.GeneratedCodeInfo.Annotation: object expected");
                         if (long === undefined)
                             long = 0;
                         if (long > $util.recursionLimit)
@@ -36217,9 +37225,13 @@
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    Annotation.toObject = function toObject(message, options) {
+                    Annotation.toObject = function toObject(message, options, q) {
                         if (!options)
                             options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
                         var object = {};
                         if (options.arrays || options.defaults)
                             object.path = [];
@@ -36234,13 +37246,13 @@
                             for (var j = 0; j < message.path.length; ++j)
                                 object.path[j] = message.path[j];
                         }
-                        if (message.sourceFile != null && message.hasOwnProperty("sourceFile"))
+                        if (message.sourceFile != null && Object.hasOwnProperty.call(message, "sourceFile"))
                             object.sourceFile = message.sourceFile;
-                        if (message.begin != null && message.hasOwnProperty("begin"))
+                        if (message.begin != null && Object.hasOwnProperty.call(message, "begin"))
                             object.begin = message.begin;
-                        if (message.end != null && message.hasOwnProperty("end"))
+                        if (message.end != null && Object.hasOwnProperty.call(message, "end"))
                             object.end = message.end;
-                        if (message.semantic != null && message.hasOwnProperty("semantic"))
+                        if (message.semantic != null && Object.hasOwnProperty.call(message, "semantic"))
                             object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] === undefined ? message.semantic : $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
@@ -36371,9 +37383,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                Duration.encode = function encode(message, writer) {
+                Duration.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
                         writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
                     if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
@@ -36391,7 +37407,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 Duration.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -36465,10 +37481,10 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
                         if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
                             return "seconds: integer|Long expected";
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
                         if (!$util.isInteger(message.nanos))
                             return "nanos: integer expected";
                     return null;
@@ -36485,6 +37501,8 @@
                 Duration.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.Duration)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.Duration: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -36492,7 +37510,7 @@
                     var message = new $root.google.protobuf.Duration();
                     if (object.seconds != null)
                         if ($util.Long)
-                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
+                            message.seconds = $util.Long.fromValue(object.seconds, false);
                         else if (typeof object.seconds === "string")
                             message.seconds = parseInt(object.seconds, 10);
                         else if (typeof object.seconds === "number")
@@ -36513,24 +37531,30 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                Duration.toObject = function toObject(message, options) {
+                Duration.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.defaults) {
                         if ($util.Long) {
                             var long = new $util.Long(0, 0, false);
-                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                         } else
-                            object.seconds = options.longs === String ? "0" : 0;
+                            object.seconds = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                         object.nanos = 0;
                     }
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (typeof message.seconds === "number")
+                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
+                        if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                            object.seconds = typeof message.seconds === "number" ? BigInt(message.seconds) : $util.Long.fromBits(message.seconds.low >>> 0, message.seconds.high >>> 0, false).toBigInt();
+                        else if (typeof message.seconds === "number")
                             object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
                         else
                             object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
                         object.nanos = message.nanos;
                     return object;
                 };
@@ -36608,9 +37632,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                Empty.encode = function encode(message, writer) {
+                Empty.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     return writer;
                 };
     
@@ -36624,7 +37652,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 Empty.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -36704,10 +37732,6 @@
                 Empty.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.Empty)
                         return object;
-                    if (long === undefined)
-                        long = 0;
-                    if (long > $util.recursionLimit)
-                        throw Error("maximum nesting depth exceeded");
                     return new $root.google.protobuf.Empty();
                 };
     
@@ -36807,9 +37831,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                FieldMask.encode = function encode(message, writer) {
+                FieldMask.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.paths != null && message.paths.length)
                         for (var i = 0; i < message.paths.length; ++i)
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.paths[i]);
@@ -36826,7 +37854,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 FieldMask.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -36898,7 +37926,7 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.paths != null && message.hasOwnProperty("paths")) {
+                    if (message.paths != null && Object.hasOwnProperty.call(message, "paths")) {
                         if (!Array.isArray(message.paths))
                             return "paths: array expected";
                         for (var i = 0; i < message.paths.length; ++i)
@@ -36919,6 +37947,8 @@
                 FieldMask.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FieldMask)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.FieldMask: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -36943,9 +37973,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                FieldMask.toObject = function toObject(message, options) {
+                FieldMask.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.paths = [];
@@ -37048,9 +38082,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                Timestamp.encode = function encode(message, writer) {
+                Timestamp.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
                         writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
                     if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
@@ -37068,7 +38106,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 Timestamp.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -37142,10 +38180,10 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
                         if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
                             return "seconds: integer|Long expected";
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
                         if (!$util.isInteger(message.nanos))
                             return "nanos: integer expected";
                     return null;
@@ -37162,6 +38200,8 @@
                 Timestamp.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.Timestamp)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.protobuf.Timestamp: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -37169,7 +38209,7 @@
                     var message = new $root.google.protobuf.Timestamp();
                     if (object.seconds != null)
                         if ($util.Long)
-                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
+                            message.seconds = $util.Long.fromValue(object.seconds, false);
                         else if (typeof object.seconds === "string")
                             message.seconds = parseInt(object.seconds, 10);
                         else if (typeof object.seconds === "number")
@@ -37190,24 +38230,30 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                Timestamp.toObject = function toObject(message, options) {
+                Timestamp.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.defaults) {
                         if ($util.Long) {
                             var long = new $util.Long(0, 0, false);
-                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                         } else
-                            object.seconds = options.longs === String ? "0" : 0;
+                            object.seconds = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                         object.nanos = 0;
                     }
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (typeof message.seconds === "number")
+                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
+                        if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                            object.seconds = typeof message.seconds === "number" ? BigInt(message.seconds) : $util.Long.fromBits(message.seconds.low >>> 0, message.seconds.high >>> 0, false).toBigInt();
+                        else if (typeof message.seconds === "number")
                             object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
                         else
                             object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
                         object.nanos = message.nanos;
                     return object;
                 };
@@ -37359,9 +38405,13 @@
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                TimeOfDay.encode = function encode(message, writer) {
+                TimeOfDay.encode = function encode(message, writer, q) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     if (message.hours != null && Object.hasOwnProperty.call(message, "hours"))
                         writer.uint32(/* id 1, wireType 0 =*/8).int32(message.hours);
                     if (message.minutes != null && Object.hasOwnProperty.call(message, "minutes"))
@@ -37383,7 +38433,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 TimeOfDay.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
                 };
     
                 /**
@@ -37465,16 +38515,16 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.hours != null && message.hasOwnProperty("hours"))
+                    if (message.hours != null && Object.hasOwnProperty.call(message, "hours"))
                         if (!$util.isInteger(message.hours))
                             return "hours: integer expected";
-                    if (message.minutes != null && message.hasOwnProperty("minutes"))
+                    if (message.minutes != null && Object.hasOwnProperty.call(message, "minutes"))
                         if (!$util.isInteger(message.minutes))
                             return "minutes: integer expected";
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
                         if (!$util.isInteger(message.seconds))
                             return "seconds: integer expected";
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
                         if (!$util.isInteger(message.nanos))
                             return "nanos: integer expected";
                     return null;
@@ -37491,6 +38541,8 @@
                 TimeOfDay.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.type.TimeOfDay)
                         return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.type.TimeOfDay: object expected");
                     if (long === undefined)
                         long = 0;
                     if (long > $util.recursionLimit)
@@ -37516,9 +38568,13 @@
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                TimeOfDay.toObject = function toObject(message, options) {
+                TimeOfDay.toObject = function toObject(message, options, q) {
                     if (!options)
                         options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
                     var object = {};
                     if (options.defaults) {
                         object.hours = 0;
@@ -37526,13 +38582,13 @@
                         object.seconds = 0;
                         object.nanos = 0;
                     }
-                    if (message.hours != null && message.hasOwnProperty("hours"))
+                    if (message.hours != null && Object.hasOwnProperty.call(message, "hours"))
                         object.hours = message.hours;
-                    if (message.minutes != null && message.hasOwnProperty("minutes"))
+                    if (message.minutes != null && Object.hasOwnProperty.call(message, "minutes"))
                         object.minutes = message.minutes;
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
                         object.seconds = message.seconds;
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
                         object.nanos = message.nanos;
                     return object;
                 };

@@ -1816,8 +1816,7 @@ describe('v1.DataAgentServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.geminidataanalytics.v1.IDataAgent[]
-              | null,
+              protos.google.cloud.geminidataanalytics.v1.IDataAgent[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1925,9 +1924,9 @@ describe('v1.DataAgentServiceClient', () => {
       assert(
         (client.descriptors.page.listDataAgents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1975,9 +1974,9 @@ describe('v1.DataAgentServiceClient', () => {
       assert(
         (client.descriptors.page.listDataAgents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2025,9 +2024,9 @@ describe('v1.DataAgentServiceClient', () => {
       assert(
         (client.descriptors.page.listDataAgents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2066,9 +2065,9 @@ describe('v1.DataAgentServiceClient', () => {
       assert(
         (client.descriptors.page.listDataAgents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2148,8 +2147,7 @@ describe('v1.DataAgentServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.geminidataanalytics.v1.IDataAgent[]
-              | null,
+              protos.google.cloud.geminidataanalytics.v1.IDataAgent[] | null,
           ) => {
             if (err) {
               reject(err);

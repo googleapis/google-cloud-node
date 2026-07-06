@@ -1319,8 +1319,7 @@ describe('v1.RegionsServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.shopping.merchant.accounts.v1.IRegion[]
-              | null,
+              protos.google.shopping.merchant.accounts.v1.IRegion[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1428,9 +1427,9 @@ describe('v1.RegionsServiceClient', () => {
       assert(
         (client.descriptors.page.listRegions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1480,9 +1479,9 @@ describe('v1.RegionsServiceClient', () => {
       assert(
         (client.descriptors.page.listRegions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1530,9 +1529,9 @@ describe('v1.RegionsServiceClient', () => {
       assert(
         (client.descriptors.page.listRegions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1573,9 +1572,9 @@ describe('v1.RegionsServiceClient', () => {
       assert(
         (client.descriptors.page.listRegions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

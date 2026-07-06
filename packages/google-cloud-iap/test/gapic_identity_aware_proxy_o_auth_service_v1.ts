@@ -1460,8 +1460,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.iap.v1.IIdentityAwareProxyClient[]
-              | null,
+              protos.google.cloud.iap.v1.IIdentityAwareProxyClient[] | null,
           ) => {
             if (err) {
               reject(err);

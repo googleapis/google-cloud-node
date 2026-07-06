@@ -2397,9 +2397,9 @@ describe('v1.BusinessGlossaryServiceClient', () => {
       assert(
         (client.descriptors.page.listGlossaries.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2447,9 +2447,9 @@ describe('v1.BusinessGlossaryServiceClient', () => {
       assert(
         (client.descriptors.page.listGlossaries.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2491,9 +2491,9 @@ describe('v1.BusinessGlossaryServiceClient', () => {
       assert(
         (client.descriptors.page.listGlossaries.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2532,9 +2532,9 @@ describe('v1.BusinessGlossaryServiceClient', () => {
       assert(
         (client.descriptors.page.listGlossaries.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3082,9 +3082,9 @@ describe('v1.BusinessGlossaryServiceClient', () => {
       assert(
         (client.descriptors.page.listGlossaryTerms.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3132,9 +3132,9 @@ describe('v1.BusinessGlossaryServiceClient', () => {
       assert(
         (client.descriptors.page.listGlossaryTerms.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3182,9 +3182,9 @@ describe('v1.BusinessGlossaryServiceClient', () => {
       assert(
         (client.descriptors.page.listGlossaryTerms.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3223,9 +3223,9 @@ describe('v1.BusinessGlossaryServiceClient', () => {
       assert(
         (client.descriptors.page.listGlossaryTerms.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

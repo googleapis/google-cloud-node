@@ -1964,9 +1964,9 @@ describe('v1beta1.PolicyTagManagerClient', () => {
       assert(
         (client.descriptors.page.listTaxonomies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2014,9 +2014,9 @@ describe('v1beta1.PolicyTagManagerClient', () => {
       assert(
         (client.descriptors.page.listTaxonomies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2063,9 +2063,9 @@ describe('v1beta1.PolicyTagManagerClient', () => {
       assert(
         (client.descriptors.page.listTaxonomies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2104,9 +2104,9 @@ describe('v1beta1.PolicyTagManagerClient', () => {
       assert(
         (client.descriptors.page.listTaxonomies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2185,8 +2185,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.datacatalog.v1beta1.IPolicyTag[]
-              | null,
+              protos.google.cloud.datacatalog.v1beta1.IPolicyTag[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2294,9 +2293,9 @@ describe('v1beta1.PolicyTagManagerClient', () => {
       assert(
         (client.descriptors.page.listPolicyTags.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2344,9 +2343,9 @@ describe('v1beta1.PolicyTagManagerClient', () => {
       assert(
         (client.descriptors.page.listPolicyTags.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2394,9 +2393,9 @@ describe('v1beta1.PolicyTagManagerClient', () => {
       assert(
         (client.descriptors.page.listPolicyTags.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2435,9 +2434,9 @@ describe('v1beta1.PolicyTagManagerClient', () => {
       assert(
         (client.descriptors.page.listPolicyTags.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

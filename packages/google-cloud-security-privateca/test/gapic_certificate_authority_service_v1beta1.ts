@@ -3479,9 +3479,9 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
       assert(
         (client.descriptors.page.listCertificates.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3534,9 +3534,9 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
       assert(
         (client.descriptors.page.listCertificates.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3587,9 +3587,9 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
       assert(
         (client.descriptors.page.listCertificates.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3631,9 +3631,9 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
       assert(
         (client.descriptors.page.listCertificates.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4602,9 +4602,9 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
       assert(
         (client.descriptors.page.listReusableConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4657,9 +4657,9 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
       assert(
         (client.descriptors.page.listReusableConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4710,9 +4710,9 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
       assert(
         (client.descriptors.page.listReusableConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4754,9 +4754,9 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
       assert(
         (client.descriptors.page.listReusableConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

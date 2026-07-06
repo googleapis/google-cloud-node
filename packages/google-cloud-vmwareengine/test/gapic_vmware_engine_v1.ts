@@ -10627,9 +10627,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listPrivateClouds.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10677,9 +10677,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listPrivateClouds.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10726,9 +10726,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listPrivateClouds.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10767,9 +10767,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listPrivateClouds.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -10954,9 +10954,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listClusters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11005,9 +11005,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listClusters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11054,9 +11054,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listClusters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11094,9 +11094,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listClusters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -11260,9 +11260,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNodes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11311,9 +11311,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNodes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11353,9 +11353,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNodes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11394,9 +11394,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNodes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -11476,8 +11476,7 @@ describe('v1.VmwareEngineClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.vmwareengine.v1.IExternalAddress[]
-              | null,
+              protos.google.cloud.vmwareengine.v1.IExternalAddress[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -11832,8 +11831,7 @@ describe('v1.VmwareEngineClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.vmwareengine.v1.IExternalAddress[]
-              | null,
+              protos.google.cloud.vmwareengine.v1.IExternalAddress[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -12280,9 +12278,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listSubnets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -12331,9 +12329,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listSubnets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -12374,9 +12372,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listSubnets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -12416,9 +12414,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listSubnets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -12498,8 +12496,7 @@ describe('v1.VmwareEngineClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.vmwareengine.v1.IExternalAccessRule[]
-              | null,
+              protos.google.cloud.vmwareengine.v1.IExternalAccessRule[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -12857,8 +12854,7 @@ describe('v1.VmwareEngineClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.vmwareengine.v1.ILoggingServer[]
-              | null,
+              protos.google.cloud.vmwareengine.v1.ILoggingServer[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -12966,9 +12962,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listLoggingServers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -13016,9 +13012,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listLoggingServers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -13066,9 +13062,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listLoggingServers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -13107,9 +13103,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listLoggingServers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -13294,9 +13290,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNodeTypes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -13343,9 +13339,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNodeTypes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -13392,9 +13388,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNodeTypes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -13432,9 +13428,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNodeTypes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -13514,8 +13510,7 @@ describe('v1.VmwareEngineClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.vmwareengine.v1.INetworkPeering[]
-              | null,
+              protos.google.cloud.vmwareengine.v1.INetworkPeering[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -13623,9 +13618,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNetworkPeerings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -13673,9 +13668,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNetworkPeerings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -13723,9 +13718,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNetworkPeerings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -13764,9 +13759,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNetworkPeerings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -13952,9 +13947,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listPeeringRoutes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -14002,9 +13997,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listPeeringRoutes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -14051,9 +14046,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listPeeringRoutes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -14092,9 +14087,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listPeeringRoutes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -14174,8 +14169,7 @@ describe('v1.VmwareEngineClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.vmwareengine.v1.IHcxActivationKey[]
-              | null,
+              protos.google.cloud.vmwareengine.v1.IHcxActivationKey[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -14529,8 +14523,7 @@ describe('v1.VmwareEngineClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.vmwareengine.v1.INetworkPolicy[]
-              | null,
+              protos.google.cloud.vmwareengine.v1.INetworkPolicy[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -14638,9 +14631,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNetworkPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -14688,9 +14681,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNetworkPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -14738,9 +14731,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNetworkPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -14779,9 +14772,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNetworkPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -15226,8 +15219,7 @@ describe('v1.VmwareEngineClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.vmwareengine.v1.IVmwareEngineNetwork[]
-              | null,
+              protos.google.cloud.vmwareengine.v1.IVmwareEngineNetwork[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -15585,8 +15577,7 @@ describe('v1.VmwareEngineClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.vmwareengine.v1.IPrivateConnection[]
-              | null,
+              protos.google.cloud.vmwareengine.v1.IPrivateConnection[] | null,
           ) => {
             if (err) {
               reject(err);

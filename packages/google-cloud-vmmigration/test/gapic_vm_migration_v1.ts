@@ -9242,9 +9242,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listSources.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -9293,9 +9293,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listSources.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -9336,9 +9336,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listSources.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -9378,9 +9378,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listSources.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -9819,8 +9819,7 @@ describe('v1.VmMigrationClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.vmmigration.v1.IUtilizationReport[]
-              | null,
+              protos.google.cloud.vmmigration.v1.IUtilizationReport[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -10174,8 +10173,7 @@ describe('v1.VmMigrationClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.vmmigration.v1.IDatacenterConnector[]
-              | null,
+              protos.google.cloud.vmmigration.v1.IDatacenterConnector[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -10638,9 +10636,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listMigratingVms.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10687,9 +10685,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listMigratingVms.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10736,9 +10734,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listMigratingVms.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10776,9 +10774,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listMigratingVms.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -10963,9 +10961,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listCloneJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11012,9 +11010,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listCloneJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11061,9 +11059,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listCloneJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11101,9 +11099,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listCloneJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -11288,9 +11286,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listCutoverJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11337,9 +11335,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listCutoverJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11386,9 +11384,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listCutoverJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11426,9 +11424,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listCutoverJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -11595,9 +11593,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listGroups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11646,9 +11644,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listGroups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11689,9 +11687,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listGroups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11731,9 +11729,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listGroups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -11920,9 +11918,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listTargetProjects.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11970,9 +11968,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listTargetProjects.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -12019,9 +12017,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listTargetProjects.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -12060,9 +12058,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listTargetProjects.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -12142,8 +12140,7 @@ describe('v1.VmMigrationClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.vmmigration.v1.IReplicationCycle[]
-              | null,
+              protos.google.cloud.vmmigration.v1.IReplicationCycle[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -12602,9 +12599,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listImageImports.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -12651,9 +12648,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listImageImports.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -12700,9 +12697,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listImageImports.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -12740,9 +12737,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listImageImports.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -12822,8 +12819,7 @@ describe('v1.VmMigrationClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.vmmigration.v1.IImageImportJob[]
-              | null,
+              protos.google.cloud.vmmigration.v1.IImageImportJob[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -12931,9 +12927,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listImageImportJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -12981,9 +12977,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listImageImportJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -13031,9 +13027,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listImageImportJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -13072,9 +13068,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listImageImportJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -13154,8 +13150,7 @@ describe('v1.VmMigrationClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.vmmigration.v1.IDiskMigrationJob[]
-              | null,
+              protos.google.cloud.vmmigration.v1.IDiskMigrationJob[] | null,
           ) => {
             if (err) {
               reject(err);

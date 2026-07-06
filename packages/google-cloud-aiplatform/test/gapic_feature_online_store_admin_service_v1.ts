@@ -2340,8 +2340,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.aiplatform.v1.IFeatureOnlineStore[]
-              | null,
+              protos.google.cloud.aiplatform.v1.IFeatureOnlineStore[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2827,9 +2826,9 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listFeatureViews.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2879,9 +2878,9 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listFeatureViews.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2931,9 +2930,9 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listFeatureViews.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2974,9 +2973,9 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listFeatureViews.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3062,8 +3061,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.aiplatform.v1.IFeatureViewSync[]
-              | null,
+              protos.google.cloud.aiplatform.v1.IFeatureViewSync[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -3177,9 +3175,9 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listFeatureViewSyncs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3230,9 +3228,9 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listFeatureViewSyncs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3283,9 +3281,9 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listFeatureViewSyncs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3327,9 +3325,9 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listFeatureViewSyncs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

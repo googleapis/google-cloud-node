@@ -933,9 +933,9 @@ describe('v1beta.MerchantReviewsServiceClient', () => {
       assert(
         (client.descriptors.page.listMerchantReviews.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -986,9 +986,9 @@ describe('v1beta.MerchantReviewsServiceClient', () => {
       assert(
         (client.descriptors.page.listMerchantReviews.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1037,9 +1037,9 @@ describe('v1beta.MerchantReviewsServiceClient', () => {
       assert(
         (client.descriptors.page.listMerchantReviews.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1079,9 +1079,9 @@ describe('v1beta.MerchantReviewsServiceClient', () => {
       assert(
         (client.descriptors.page.listMerchantReviews.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

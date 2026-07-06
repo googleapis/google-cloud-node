@@ -1416,8 +1416,7 @@ describe('v4.DataPointsServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.devicesandservices.health.v4.IDataPoint[]
-              | null,
+              protos.google.devicesandservices.health.v4.IDataPoint[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1525,9 +1524,9 @@ describe('v4.DataPointsServiceClient', () => {
       assert(
         (client.descriptors.page.listDataPoints.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1575,9 +1574,9 @@ describe('v4.DataPointsServiceClient', () => {
       assert(
         (client.descriptors.page.listDataPoints.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1625,9 +1624,9 @@ describe('v4.DataPointsServiceClient', () => {
       assert(
         (client.descriptors.page.listDataPoints.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1666,9 +1665,9 @@ describe('v4.DataPointsServiceClient', () => {
       assert(
         (client.descriptors.page.listDataPoints.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1859,9 +1858,9 @@ describe('v4.DataPointsServiceClient', () => {
       assert(
         (client.descriptors.page.reconcileDataPoints.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1911,9 +1910,9 @@ describe('v4.DataPointsServiceClient', () => {
       assert(
         (client.descriptors.page.reconcileDataPoints.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1961,9 +1960,9 @@ describe('v4.DataPointsServiceClient', () => {
       assert(
         (client.descriptors.page.reconcileDataPoints.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2002,9 +2001,9 @@ describe('v4.DataPointsServiceClient', () => {
       assert(
         (client.descriptors.page.reconcileDataPoints.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2194,9 +2193,9 @@ describe('v4.DataPointsServiceClient', () => {
       assert(
         (client.descriptors.page.rollUpDataPoints.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2246,9 +2245,9 @@ describe('v4.DataPointsServiceClient', () => {
       assert(
         (client.descriptors.page.rollUpDataPoints.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2296,9 +2295,9 @@ describe('v4.DataPointsServiceClient', () => {
       assert(
         (client.descriptors.page.rollUpDataPoints.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2337,9 +2336,9 @@ describe('v4.DataPointsServiceClient', () => {
       assert(
         (client.descriptors.page.rollUpDataPoints.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

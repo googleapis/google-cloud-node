@@ -3758,8 +3758,7 @@ describe('v1.DatastreamClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.datastream.v1.IConnectionProfile[]
-              | null,
+              protos.google.cloud.datastream.v1.IConnectionProfile[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4200,9 +4199,9 @@ describe('v1.DatastreamClient', () => {
       assert(
         (client.descriptors.page.listStreams.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4251,9 +4250,9 @@ describe('v1.DatastreamClient', () => {
       assert(
         (client.descriptors.page.listStreams.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4294,9 +4293,9 @@ describe('v1.DatastreamClient', () => {
       assert(
         (client.descriptors.page.listStreams.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4336,9 +4335,9 @@ describe('v1.DatastreamClient', () => {
       assert(
         (client.descriptors.page.listStreams.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4523,9 +4522,9 @@ describe('v1.DatastreamClient', () => {
       assert(
         (client.descriptors.page.listStreamObjects.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4572,9 +4571,9 @@ describe('v1.DatastreamClient', () => {
       assert(
         (client.descriptors.page.listStreamObjects.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4621,9 +4620,9 @@ describe('v1.DatastreamClient', () => {
       assert(
         (client.descriptors.page.listStreamObjects.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4661,9 +4660,9 @@ describe('v1.DatastreamClient', () => {
       assert(
         (client.descriptors.page.listStreamObjects.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4812,9 +4811,9 @@ describe('v1.DatastreamClient', () => {
       assert(
         (client.descriptors.page.fetchStaticIps.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4858,9 +4857,9 @@ describe('v1.DatastreamClient', () => {
       assert(
         (client.descriptors.page.fetchStaticIps.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4897,9 +4896,9 @@ describe('v1.DatastreamClient', () => {
       assert(
         (client.descriptors.page.fetchStaticIps.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4937,9 +4936,9 @@ describe('v1.DatastreamClient', () => {
       assert(
         (client.descriptors.page.fetchStaticIps.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5019,8 +5018,7 @@ describe('v1.DatastreamClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.datastream.v1.IPrivateConnection[]
-              | null,
+              protos.google.cloud.datastream.v1.IPrivateConnection[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -5461,9 +5459,9 @@ describe('v1.DatastreamClient', () => {
       assert(
         (client.descriptors.page.listRoutes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5512,9 +5510,9 @@ describe('v1.DatastreamClient', () => {
       assert(
         (client.descriptors.page.listRoutes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5555,9 +5553,9 @@ describe('v1.DatastreamClient', () => {
       assert(
         (client.descriptors.page.listRoutes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5597,9 +5595,9 @@ describe('v1.DatastreamClient', () => {
       assert(
         (client.descriptors.page.listRoutes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

@@ -8338,8 +8338,7 @@ describe('v1.SecureSourceManagerClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.securesourcemanager.v1.IInstance[]
-              | null,
+              protos.google.cloud.securesourcemanager.v1.IInstance[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -8451,9 +8450,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listInstances.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -8503,9 +8502,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listInstances.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -8555,9 +8554,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listInstances.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -8598,9 +8597,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listInstances.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -8683,8 +8682,7 @@ describe('v1.SecureSourceManagerClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.securesourcemanager.v1.IRepository[]
-              | null,
+              protos.google.cloud.securesourcemanager.v1.IRepository[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -8796,9 +8794,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listRepositories.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -8848,9 +8846,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listRepositories.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -8900,9 +8898,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listRepositories.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -8943,9 +8941,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listRepositories.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -9135,9 +9133,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listHooks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -9188,9 +9186,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listHooks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -9238,9 +9236,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listHooks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -9282,9 +9280,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listHooks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -9367,8 +9365,7 @@ describe('v1.SecureSourceManagerClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.securesourcemanager.v1.IBranchRule[]
-              | null,
+              protos.google.cloud.securesourcemanager.v1.IBranchRule[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -9480,9 +9477,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listBranchRules.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -9532,9 +9529,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listBranchRules.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -9584,9 +9581,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listBranchRules.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -9627,9 +9624,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listBranchRules.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -9712,8 +9709,7 @@ describe('v1.SecureSourceManagerClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.securesourcemanager.v1.IPullRequest[]
-              | null,
+              protos.google.cloud.securesourcemanager.v1.IPullRequest[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -9827,9 +9823,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listPullRequests.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -9881,9 +9877,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listPullRequests.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -9933,9 +9929,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listPullRequests.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -9976,9 +9972,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listPullRequests.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -10062,8 +10058,7 @@ describe('v1.SecureSourceManagerClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.securesourcemanager.v1.IFileDiff[]
-              | null,
+              protos.google.cloud.securesourcemanager.v1.IFileDiff[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -10430,8 +10425,7 @@ describe('v1.SecureSourceManagerClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.securesourcemanager.v1.ITreeEntry[]
-              | null,
+              protos.google.cloud.securesourcemanager.v1.ITreeEntry[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -10540,9 +10534,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.fetchTree.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10594,9 +10588,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.fetchTree.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10645,9 +10639,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.fetchTree.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10689,9 +10683,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.fetchTree.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -10885,9 +10879,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listIssues.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10939,9 +10933,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listIssues.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10990,9 +10984,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listIssues.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11035,9 +11029,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listIssues.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -11493,8 +11487,7 @@ describe('v1.SecureSourceManagerClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.securesourcemanager.v1.IIssueComment[]
-              | null,
+              protos.google.cloud.securesourcemanager.v1.IIssueComment[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -11608,9 +11601,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listIssueComments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11662,9 +11655,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listIssueComments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11714,9 +11707,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listIssueComments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11757,9 +11750,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listIssueComments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

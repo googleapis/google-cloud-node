@@ -741,8 +741,7 @@ describe('v1.HostProjectRegistrationServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.apihub.v1.IHostProjectRegistration[]
-              | null,
+              protos.google.cloud.apihub.v1.IHostProjectRegistration[] | null,
           ) => {
             if (err) {
               reject(err);

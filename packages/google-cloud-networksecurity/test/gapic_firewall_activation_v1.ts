@@ -2628,8 +2628,7 @@ describe('v1.FirewallActivationClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.networksecurity.v1.IFirewallEndpoint[]
-              | null,
+              protos.google.cloud.networksecurity.v1.IFirewallEndpoint[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2987,8 +2986,7 @@ describe('v1.FirewallActivationClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.networksecurity.v1.IFirewallEndpoint[]
-              | null,
+              protos.google.cloud.networksecurity.v1.IFirewallEndpoint[] | null,
           ) => {
             if (err) {
               reject(err);

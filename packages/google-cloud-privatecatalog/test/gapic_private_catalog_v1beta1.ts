@@ -395,8 +395,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.privatecatalog.v1beta1.ICatalog[]
-              | null,
+              protos.google.cloud.privatecatalog.v1beta1.ICatalog[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -504,9 +503,9 @@ describe('v1beta1.PrivateCatalogClient', () => {
       assert(
         (client.descriptors.page.searchCatalogs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -554,9 +553,9 @@ describe('v1beta1.PrivateCatalogClient', () => {
       assert(
         (client.descriptors.page.searchCatalogs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -604,9 +603,9 @@ describe('v1beta1.PrivateCatalogClient', () => {
       assert(
         (client.descriptors.page.searchCatalogs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -645,9 +644,9 @@ describe('v1beta1.PrivateCatalogClient', () => {
       assert(
         (client.descriptors.page.searchCatalogs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -726,8 +725,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.privatecatalog.v1beta1.IProduct[]
-              | null,
+              protos.google.cloud.privatecatalog.v1beta1.IProduct[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -835,9 +833,9 @@ describe('v1beta1.PrivateCatalogClient', () => {
       assert(
         (client.descriptors.page.searchProducts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -885,9 +883,9 @@ describe('v1beta1.PrivateCatalogClient', () => {
       assert(
         (client.descriptors.page.searchProducts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -935,9 +933,9 @@ describe('v1beta1.PrivateCatalogClient', () => {
       assert(
         (client.descriptors.page.searchProducts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -976,9 +974,9 @@ describe('v1beta1.PrivateCatalogClient', () => {
       assert(
         (client.descriptors.page.searchProducts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1057,8 +1055,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.privatecatalog.v1beta1.IVersion[]
-              | null,
+              protos.google.cloud.privatecatalog.v1beta1.IVersion[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1166,9 +1163,9 @@ describe('v1beta1.PrivateCatalogClient', () => {
       assert(
         (client.descriptors.page.searchVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1216,9 +1213,9 @@ describe('v1beta1.PrivateCatalogClient', () => {
       assert(
         (client.descriptors.page.searchVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1266,9 +1263,9 @@ describe('v1beta1.PrivateCatalogClient', () => {
       assert(
         (client.descriptors.page.searchVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1307,9 +1304,9 @@ describe('v1beta1.PrivateCatalogClient', () => {
       assert(
         (client.descriptors.page.searchVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

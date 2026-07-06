@@ -801,9 +801,9 @@ describe('v1.DataObjectSearchServiceClient', () => {
       assert(
         (client.descriptors.page.searchDataObjects.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -852,9 +852,9 @@ describe('v1.DataObjectSearchServiceClient', () => {
       assert(
         (client.descriptors.page.searchDataObjects.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -902,9 +902,9 @@ describe('v1.DataObjectSearchServiceClient', () => {
       assert(
         (client.descriptors.page.searchDataObjects.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -944,9 +944,9 @@ describe('v1.DataObjectSearchServiceClient', () => {
       assert(
         (client.descriptors.page.searchDataObjects.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1135,9 +1135,9 @@ describe('v1.DataObjectSearchServiceClient', () => {
       assert(
         (client.descriptors.page.queryDataObjects.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1185,9 +1185,9 @@ describe('v1.DataObjectSearchServiceClient', () => {
       assert(
         (client.descriptors.page.queryDataObjects.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1235,9 +1235,9 @@ describe('v1.DataObjectSearchServiceClient', () => {
       assert(
         (client.descriptors.page.queryDataObjects.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1276,9 +1276,9 @@ describe('v1.DataObjectSearchServiceClient', () => {
       assert(
         (client.descriptors.page.queryDataObjects.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

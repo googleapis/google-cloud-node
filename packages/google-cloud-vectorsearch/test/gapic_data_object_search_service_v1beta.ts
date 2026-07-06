@@ -692,8 +692,7 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.vectorsearch.v1beta.ISearchResult[]
-              | null,
+              protos.google.cloud.vectorsearch.v1beta.ISearchResult[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -803,9 +802,9 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
       assert(
         (client.descriptors.page.searchDataObjects.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -854,9 +853,9 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
       assert(
         (client.descriptors.page.searchDataObjects.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -905,9 +904,9 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
       assert(
         (client.descriptors.page.searchDataObjects.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -947,9 +946,9 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
       assert(
         (client.descriptors.page.searchDataObjects.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1030,8 +1029,7 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.vectorsearch.v1beta.IDataObject[]
-              | null,
+              protos.google.cloud.vectorsearch.v1beta.IDataObject[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1141,9 +1139,9 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
       assert(
         (client.descriptors.page.queryDataObjects.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1192,9 +1190,9 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
       assert(
         (client.descriptors.page.queryDataObjects.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1243,9 +1241,9 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
       assert(
         (client.descriptors.page.queryDataObjects.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1285,9 +1283,9 @@ describe('v1beta.DataObjectSearchServiceClient', () => {
       assert(
         (client.descriptors.page.queryDataObjects.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

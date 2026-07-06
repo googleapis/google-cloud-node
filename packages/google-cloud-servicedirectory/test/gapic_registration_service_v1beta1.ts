@@ -2465,8 +2465,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.servicedirectory.v1beta1.INamespace[]
-              | null,
+              protos.google.cloud.servicedirectory.v1beta1.INamespace[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2578,9 +2577,9 @@ describe('v1beta1.RegistrationServiceClient', () => {
       assert(
         (client.descriptors.page.listNamespaces.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2631,9 +2630,9 @@ describe('v1beta1.RegistrationServiceClient', () => {
       assert(
         (client.descriptors.page.listNamespaces.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2682,9 +2681,9 @@ describe('v1beta1.RegistrationServiceClient', () => {
       assert(
         (client.descriptors.page.listNamespaces.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2724,9 +2723,9 @@ describe('v1beta1.RegistrationServiceClient', () => {
       assert(
         (client.descriptors.page.listNamespaces.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2807,8 +2806,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.servicedirectory.v1beta1.IService[]
-              | null,
+              protos.google.cloud.servicedirectory.v1beta1.IService[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2918,9 +2916,9 @@ describe('v1beta1.RegistrationServiceClient', () => {
       assert(
         (client.descriptors.page.listServices.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2971,9 +2969,9 @@ describe('v1beta1.RegistrationServiceClient', () => {
       assert(
         (client.descriptors.page.listServices.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3022,9 +3020,9 @@ describe('v1beta1.RegistrationServiceClient', () => {
       assert(
         (client.descriptors.page.listServices.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3064,9 +3062,9 @@ describe('v1beta1.RegistrationServiceClient', () => {
       assert(
         (client.descriptors.page.listServices.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3147,8 +3145,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.servicedirectory.v1beta1.IEndpoint[]
-              | null,
+              protos.google.cloud.servicedirectory.v1beta1.IEndpoint[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -3258,9 +3255,9 @@ describe('v1beta1.RegistrationServiceClient', () => {
       assert(
         (client.descriptors.page.listEndpoints.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3309,9 +3306,9 @@ describe('v1beta1.RegistrationServiceClient', () => {
       assert(
         (client.descriptors.page.listEndpoints.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3360,9 +3357,9 @@ describe('v1beta1.RegistrationServiceClient', () => {
       assert(
         (client.descriptors.page.listEndpoints.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3402,9 +3399,9 @@ describe('v1beta1.RegistrationServiceClient', () => {
       assert(
         (client.descriptors.page.listEndpoints.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

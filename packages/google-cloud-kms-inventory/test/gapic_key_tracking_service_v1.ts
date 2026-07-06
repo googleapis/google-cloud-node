@@ -536,8 +536,7 @@ describe('v1.KeyTrackingServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.kms.inventory.v1.IProtectedResource[]
-              | null,
+              protos.google.cloud.kms.inventory.v1.IProtectedResource[] | null,
           ) => {
             if (err) {
               reject(err);

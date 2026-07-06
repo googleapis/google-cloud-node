@@ -1752,9 +1752,9 @@ describe('v1beta.WebSecurityScannerClient', () => {
       assert(
         (client.descriptors.page.listScanConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1805,9 +1805,9 @@ describe('v1beta.WebSecurityScannerClient', () => {
       assert(
         (client.descriptors.page.listScanConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1856,9 +1856,9 @@ describe('v1beta.WebSecurityScannerClient', () => {
       assert(
         (client.descriptors.page.listScanConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1898,9 +1898,9 @@ describe('v1beta.WebSecurityScannerClient', () => {
       assert(
         (client.descriptors.page.listScanConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1981,8 +1981,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.websecurityscanner.v1beta.IScanRun[]
-              | null,
+              protos.google.cloud.websecurityscanner.v1beta.IScanRun[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2092,9 +2091,9 @@ describe('v1beta.WebSecurityScannerClient', () => {
       assert(
         (client.descriptors.page.listScanRuns.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2145,9 +2144,9 @@ describe('v1beta.WebSecurityScannerClient', () => {
       assert(
         (client.descriptors.page.listScanRuns.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2196,9 +2195,9 @@ describe('v1beta.WebSecurityScannerClient', () => {
       assert(
         (client.descriptors.page.listScanRuns.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2238,9 +2237,9 @@ describe('v1beta.WebSecurityScannerClient', () => {
       assert(
         (client.descriptors.page.listScanRuns.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2434,9 +2433,9 @@ describe('v1beta.WebSecurityScannerClient', () => {
       assert(
         (client.descriptors.page.listCrawledUrls.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2487,9 +2486,9 @@ describe('v1beta.WebSecurityScannerClient', () => {
       assert(
         (client.descriptors.page.listCrawledUrls.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2538,9 +2537,9 @@ describe('v1beta.WebSecurityScannerClient', () => {
       assert(
         (client.descriptors.page.listCrawledUrls.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2580,9 +2579,9 @@ describe('v1beta.WebSecurityScannerClient', () => {
       assert(
         (client.descriptors.page.listCrawledUrls.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2663,8 +2662,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.websecurityscanner.v1beta.IFinding[]
-              | null,
+              protos.google.cloud.websecurityscanner.v1beta.IFinding[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2774,9 +2772,9 @@ describe('v1beta.WebSecurityScannerClient', () => {
       assert(
         (client.descriptors.page.listFindings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2827,9 +2825,9 @@ describe('v1beta.WebSecurityScannerClient', () => {
       assert(
         (client.descriptors.page.listFindings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2878,9 +2876,9 @@ describe('v1beta.WebSecurityScannerClient', () => {
       assert(
         (client.descriptors.page.listFindings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2920,9 +2918,9 @@ describe('v1beta.WebSecurityScannerClient', () => {
       assert(
         (client.descriptors.page.listFindings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

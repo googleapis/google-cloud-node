@@ -3004,9 +3004,9 @@ describe('v1.LiveVideoAnalyticsClient', () => {
       assert(
         (client.descriptors.page.listPublicOperators.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3053,9 +3053,9 @@ describe('v1.LiveVideoAnalyticsClient', () => {
       assert(
         (client.descriptors.page.listPublicOperators.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3096,9 +3096,9 @@ describe('v1.LiveVideoAnalyticsClient', () => {
       assert(
         (client.descriptors.page.listPublicOperators.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3136,9 +3136,9 @@ describe('v1.LiveVideoAnalyticsClient', () => {
       assert(
         (client.descriptors.page.listPublicOperators.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3305,9 +3305,9 @@ describe('v1.LiveVideoAnalyticsClient', () => {
       assert(
         (client.descriptors.page.listOperators.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3354,9 +3354,9 @@ describe('v1.LiveVideoAnalyticsClient', () => {
       assert(
         (client.descriptors.page.listOperators.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3397,9 +3397,9 @@ describe('v1.LiveVideoAnalyticsClient', () => {
       assert(
         (client.descriptors.page.listOperators.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3437,9 +3437,9 @@ describe('v1.LiveVideoAnalyticsClient', () => {
       assert(
         (client.descriptors.page.listOperators.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3606,9 +3606,9 @@ describe('v1.LiveVideoAnalyticsClient', () => {
       assert(
         (client.descriptors.page.listAnalyses.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3657,9 +3657,9 @@ describe('v1.LiveVideoAnalyticsClient', () => {
       assert(
         (client.descriptors.page.listAnalyses.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3700,9 +3700,9 @@ describe('v1.LiveVideoAnalyticsClient', () => {
       assert(
         (client.descriptors.page.listAnalyses.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3740,9 +3740,9 @@ describe('v1.LiveVideoAnalyticsClient', () => {
       assert(
         (client.descriptors.page.listAnalyses.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3909,9 +3909,9 @@ describe('v1.LiveVideoAnalyticsClient', () => {
       assert(
         (client.descriptors.page.listProcesses.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3958,9 +3958,9 @@ describe('v1.LiveVideoAnalyticsClient', () => {
       assert(
         (client.descriptors.page.listProcesses.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4001,9 +4001,9 @@ describe('v1.LiveVideoAnalyticsClient', () => {
       assert(
         (client.descriptors.page.listProcesses.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4041,9 +4041,9 @@ describe('v1.LiveVideoAnalyticsClient', () => {
       assert(
         (client.descriptors.page.listProcesses.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

@@ -3339,9 +3339,9 @@ describe('v1beta1.ServiceUsageClient', () => {
       assert(
         (client.descriptors.page.listServices.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3392,9 +3392,9 @@ describe('v1beta1.ServiceUsageClient', () => {
       assert(
         (client.descriptors.page.listServices.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3443,9 +3443,9 @@ describe('v1beta1.ServiceUsageClient', () => {
       assert(
         (client.descriptors.page.listServices.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3485,9 +3485,9 @@ describe('v1beta1.ServiceUsageClient', () => {
       assert(
         (client.descriptors.page.listServices.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3926,8 +3926,7 @@ describe('v1beta1.ServiceUsageClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.api.serviceusage.v1beta1.IQuotaOverride[]
-              | null,
+              protos.google.api.serviceusage.v1beta1.IQuotaOverride[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4035,9 +4034,9 @@ describe('v1beta1.ServiceUsageClient', () => {
       assert(
         (client.descriptors.page.listAdminOverrides.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4085,9 +4084,9 @@ describe('v1beta1.ServiceUsageClient', () => {
       assert(
         (client.descriptors.page.listAdminOverrides.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4135,9 +4134,9 @@ describe('v1beta1.ServiceUsageClient', () => {
       assert(
         (client.descriptors.page.listAdminOverrides.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4176,9 +4175,9 @@ describe('v1beta1.ServiceUsageClient', () => {
       assert(
         (client.descriptors.page.listAdminOverrides.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4258,8 +4257,7 @@ describe('v1beta1.ServiceUsageClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.api.serviceusage.v1beta1.IQuotaOverride[]
-              | null,
+              protos.google.api.serviceusage.v1beta1.IQuotaOverride[] | null,
           ) => {
             if (err) {
               reject(err);

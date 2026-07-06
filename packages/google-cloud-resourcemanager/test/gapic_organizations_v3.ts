@@ -904,8 +904,7 @@ describe('v3.OrganizationsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.resourcemanager.v3.IOrganization[]
-              | null,
+              protos.google.cloud.resourcemanager.v3.IOrganization[] | null,
           ) => {
             if (err) {
               reject(err);

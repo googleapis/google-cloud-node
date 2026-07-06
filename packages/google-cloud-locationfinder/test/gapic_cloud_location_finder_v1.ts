@@ -556,8 +556,7 @@ describe('v1.CloudLocationFinderClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.locationfinder.v1.ICloudLocation[]
-              | null,
+              protos.google.cloud.locationfinder.v1.ICloudLocation[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -669,9 +668,9 @@ describe('v1.CloudLocationFinderClient', () => {
       assert(
         (client.descriptors.page.listCloudLocations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -721,9 +720,9 @@ describe('v1.CloudLocationFinderClient', () => {
       assert(
         (client.descriptors.page.listCloudLocations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -773,9 +772,9 @@ describe('v1.CloudLocationFinderClient', () => {
       assert(
         (client.descriptors.page.listCloudLocations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -816,9 +815,9 @@ describe('v1.CloudLocationFinderClient', () => {
       assert(
         (client.descriptors.page.listCloudLocations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -902,8 +901,7 @@ describe('v1.CloudLocationFinderClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.locationfinder.v1.ICloudLocation[]
-              | null,
+              protos.google.cloud.locationfinder.v1.ICloudLocation[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1015,9 +1013,9 @@ describe('v1.CloudLocationFinderClient', () => {
       assert(
         (client.descriptors.page.searchCloudLocations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1067,9 +1065,9 @@ describe('v1.CloudLocationFinderClient', () => {
       assert(
         (client.descriptors.page.searchCloudLocations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1119,9 +1117,9 @@ describe('v1.CloudLocationFinderClient', () => {
       assert(
         (client.descriptors.page.searchCloudLocations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1162,9 +1160,9 @@ describe('v1.CloudLocationFinderClient', () => {
       assert(
         (client.descriptors.page.searchCloudLocations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
