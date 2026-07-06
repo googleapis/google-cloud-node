@@ -366,7 +366,7 @@ describe('Bucket', () => {
       });
       assert.deepStrictEqual(
         bucket.instancePreconditionOpts,
-        options.preconditionOpts
+        options.preconditionOpts,
       );
     });
 
@@ -386,7 +386,7 @@ describe('Bucket', () => {
       });
       assert.deepStrictEqual(
         bucket.instancePreconditionOpts,
-        options.preconditionOpts
+        options.preconditionOpts,
       );
     });
 
@@ -406,7 +406,7 @@ describe('Bucket', () => {
       });
       assert.deepStrictEqual(
         bucket.instancePreconditionOpts,
-        options.preconditionOpts
+        options.preconditionOpts,
       );
     });
 
@@ -426,7 +426,7 @@ describe('Bucket', () => {
       });
       assert.deepStrictEqual(
         bucket.instancePreconditionOpts,
-        options.preconditionOpts
+        options.preconditionOpts,
       );
     });
 
@@ -709,7 +709,7 @@ describe('Bucket', () => {
       destination.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(
           reqOpts.json.destination.contentType,
-          mime.getType(destination.name)
+          mime.getType(destination.name),
         );
 
         done();
@@ -725,7 +725,7 @@ describe('Bucket', () => {
       destination.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(
           reqOpts.json.destination.contentType,
-          destination.metadata.contentType
+          destination.metadata.contentType,
         );
 
         done();
@@ -740,7 +740,7 @@ describe('Bucket', () => {
       destination.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(
           reqOpts.json.destination.contentType,
-          mime.getType(destination.name)
+          mime.getType(destination.name),
         );
 
         done();
@@ -831,19 +831,19 @@ describe('Bucket', () => {
       destination.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(
           reqOpts.qs.ifGenerationMatch,
-          options.ifGenerationMatch
+          options.ifGenerationMatch,
         );
         assert.strictEqual(
           reqOpts.qs.ifGenerationNotMatch,
-          options.ifGenerationNotMatch
+          options.ifGenerationNotMatch,
         );
         assert.strictEqual(
           reqOpts.qs.ifMetagenerationMatch,
-          options.ifMetagenerationMatch
+          options.ifMetagenerationMatch,
         );
         assert.strictEqual(
           reqOpts.qs.ifMetagenerationNotMatch,
-          options.ifMetagenerationNotMatch
+          options.ifMetagenerationNotMatch,
         );
         done();
       };
@@ -857,7 +857,7 @@ describe('Bucket', () => {
 
       destination.request = (
         reqOpts: DecorateRequestOptions,
-        callback: Function
+        callback: Function,
       ) => {
         callback();
       };
@@ -873,7 +873,7 @@ describe('Bucket', () => {
 
       destination.request = (
         reqOpts: DecorateRequestOptions,
-        callback: Function
+        callback: Function,
       ) => {
         callback(error);
       };
@@ -891,7 +891,7 @@ describe('Bucket', () => {
 
       destination.request = (
         reqOpts: DecorateRequestOptions,
-        callback: Function
+        callback: Function,
       ) => {
         callback(null, resp);
       };
@@ -902,7 +902,7 @@ describe('Bucket', () => {
         (err: Error, obj: {}, apiResponse: {}) => {
           assert.strictEqual(resp, apiResponse);
           done();
-        }
+        },
       );
     });
 
@@ -912,7 +912,7 @@ describe('Bucket', () => {
 
       destination.request = (
         reqOpts: DecorateRequestOptions,
-        callback: Function
+        callback: Function,
       ) => {
         assert.strictEqual(reqOpts.maxRetries, 0);
         callback();
@@ -944,7 +944,10 @@ describe('Bucket', () => {
         return [{}];
       };
 
-      destination.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
+      destination.request = (
+        reqOpts: DecorateRequestOptions,
+        callback: Function,
+      ) => {
         assert.strictEqual(reqOpts.qs.deleteSourceObjects, undefined);
         assert.strictEqual(reqOpts.json.deleteSourceObjects, undefined);
         assert.strictEqual(reqOpts.json.sourceObjects[0].generation, 12345);
@@ -959,7 +962,7 @@ describe('Bucket', () => {
           assert.ifError(err);
           assert.strictEqual(deletedCount, 2);
           done();
-        }
+        },
       );
     });
 
@@ -975,7 +978,10 @@ describe('Bucket', () => {
         };
       });
 
-      destination.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
+      destination.request = (
+        reqOpts: DecorateRequestOptions,
+        callback: Function,
+      ) => {
         assert.strictEqual(reqOpts.json.deleteSourceObjects, undefined);
         callback(null, {});
       };
@@ -1000,16 +1006,24 @@ describe('Bucket', () => {
         };
       });
 
-      destination.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
+      destination.request = (
+        reqOpts: DecorateRequestOptions,
+        callback: Function,
+      ) => {
         assert.strictEqual(reqOpts.json.deleteSourceObjects, undefined);
         callback(composeError);
       };
 
-      bucket.combine(sources, destination, {deleteSourceObjects: true}, (err: any) => {
-        assert.strictEqual(err, composeError);
-        assert.strictEqual(deletedCount, 0);
-        done();
-      });
+      bucket.combine(
+        sources,
+        destination,
+        {deleteSourceObjects: true},
+        (err: any) => {
+          assert.strictEqual(err, composeError);
+          assert.strictEqual(deletedCount, 0);
+          done();
+        },
+      );
     });
 
     it('should return ComposeCleanupError if deleting source objects fails', done => {
@@ -1028,7 +1042,10 @@ describe('Bucket', () => {
         return [{}];
       };
 
-      destination.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
+      destination.request = (
+        reqOpts: DecorateRequestOptions,
+        callback: Function,
+      ) => {
         assert.strictEqual(reqOpts.json.deleteSourceObjects, undefined);
         callback(null, {success: true});
       };
@@ -1052,7 +1069,7 @@ describe('Bucket', () => {
           } catch (assertErr) {
             done(assertErr);
           }
-        }
+        },
       );
     });
   });
@@ -1113,7 +1130,7 @@ describe('Bucket', () => {
       beforeEach(() => {
         bucket.request = (
           reqOpts: DecorateRequestOptions,
-          callback: Function
+          callback: Function,
         ) => {
           callback(error, apiResponse);
         };
@@ -1129,7 +1146,7 @@ describe('Bucket', () => {
             assert.strictEqual(apiResponse_, apiResponse);
 
             done();
-          }
+          },
         );
       });
     });
@@ -1142,7 +1159,7 @@ describe('Bucket', () => {
       beforeEach(() => {
         bucket.request = (
           reqOpts: DecorateRequestOptions,
-          callback: Function
+          callback: Function,
         ) => {
           callback(null, apiResponse);
         };
@@ -1166,7 +1183,7 @@ describe('Bucket', () => {
             assert.strictEqual(channel_.metadata, apiResponse);
             assert.strictEqual(apiResponse_, apiResponse);
             done();
-          }
+          },
         );
       });
     });
@@ -1202,7 +1219,7 @@ describe('Bucket', () => {
       const expectedTopic = PUBSUB_SERVICE_PATH + topic;
       const expectedJson = Object.assign(
         {topic: expectedTopic},
-        convertObjKeysToSnakeCase(options)
+        convertObjKeysToSnakeCase(options),
       );
 
       bucket.request = (reqOpts: DecorateRequestOptions) => {
@@ -1285,7 +1302,7 @@ describe('Bucket', () => {
 
       bucket.request = (
         reqOpts: DecorateRequestOptions,
-        callback: Function
+        callback: Function,
       ) => {
         callback(error, response);
       };
@@ -1297,7 +1314,7 @@ describe('Bucket', () => {
           assert.strictEqual(notification, null);
           assert.strictEqual(resp, response);
           done();
-        }
+        },
       );
     });
 
@@ -1308,7 +1325,7 @@ describe('Bucket', () => {
 
       bucket.request = (
         reqOpts: DecorateRequestOptions,
-        callback: Function
+        callback: Function,
       ) => {
         callback(null, response);
       };
@@ -1326,7 +1343,7 @@ describe('Bucket', () => {
           assert.strictEqual(notification.metadata, response);
           assert.strictEqual(resp, response);
           done();
-        }
+        },
       );
     });
   });
@@ -1626,7 +1643,7 @@ describe('Bucket', () => {
       bucket.setMetadata = (
         metadata: {},
         _optionsOrCallback: {},
-        callback: Function
+        callback: Function,
       ) => {
         assert.deepStrictEqual(metadata, {
           billing: {
@@ -1643,7 +1660,7 @@ describe('Bucket', () => {
       bucket.setMetadata = (
         metadata: {},
         optionsOrCallback: {},
-        callback: Function
+        callback: Function,
       ) => {
         assert.strictEqual(callback, undefined);
         done();
@@ -1694,7 +1711,7 @@ describe('Bucket', () => {
           {
             bucket: 'bucket-name',
           },
-          assert.ifError
+          assert.ifError,
         ),
           BucketExceptionMessages.CONFIGURATION_OBJECT_PREFIX_REQUIRED;
       });
@@ -1776,7 +1793,7 @@ describe('Bucket', () => {
           prefix: PREFIX,
           bucket: bucketName,
         },
-        assert.ifError
+        assert.ifError,
       );
     });
 
@@ -1786,7 +1803,7 @@ describe('Bucket', () => {
       bucket.setMetadata = (metadata: BucketMetadata) => {
         assert.deepStrictEqual(
           metadata!.logging!.logBucket,
-          bucketForLogging.id
+          bucketForLogging.id,
         );
         setImmediate(done);
         return Promise.resolve([]);
@@ -1797,7 +1814,7 @@ describe('Bucket', () => {
           prefix: PREFIX,
           bucket: bucketForLogging,
         },
-        assert.ifError
+        assert.ifError,
       );
     });
 
@@ -1807,10 +1824,10 @@ describe('Bucket', () => {
       bucket.setMetadata = (
         metadata: {},
         optionsOrCallback: {},
-        callback: Function
+        callback: Function,
       ) => {
         Promise.resolve([setMetadataResponse]).then(resp =>
-          callback(null, ...resp)
+          callback(null, ...resp),
         );
       };
 
@@ -1820,7 +1837,7 @@ describe('Bucket', () => {
           assert.ifError(err);
           assert.strictEqual(response, setMetadataResponse);
           done();
-        }
+        },
       );
     });
 
@@ -1843,7 +1860,7 @@ describe('Bucket', () => {
       bucket.setMetadata = (
         metadata: {},
         optionsOrCallback: {},
-        callback: Function
+        callback: Function,
       ) => {
         assert.deepStrictEqual(metadata, {
           billing: {
@@ -1860,7 +1877,7 @@ describe('Bucket', () => {
       bucket.setMetadata = (
         metadata: {},
         optionsOrCallback: {},
-        callback: Function
+        callback: Function,
       ) => {
         assert.equal(callback, undefined);
         done();
@@ -1933,7 +1950,7 @@ describe('Bucket', () => {
           delimiter: '/',
           autoPaginate: false,
         },
-        util.noop
+        util.noop,
       );
     });
 
@@ -1941,7 +1958,7 @@ describe('Bucket', () => {
       const token = 'next-page-token';
       bucket.request = (
         reqOpts: DecorateRequestOptions,
-        callback: Function
+        callback: Function,
       ) => {
         callback(null, {nextPageToken: token, items: []});
       };
@@ -1950,14 +1967,14 @@ describe('Bucket', () => {
         (err: Error, results: {}, nextQuery: GetFilesOptions) => {
           assert.strictEqual(nextQuery.pageToken, token);
           assert.strictEqual(nextQuery.maxResults, 5);
-        }
+        },
       );
     });
 
     it('should return null nextQuery if there are no more results', () => {
       bucket.request = (
         reqOpts: DecorateRequestOptions,
-        callback: Function
+        callback: Function,
       ) => {
         callback(null, {items: []});
       };
@@ -1965,14 +1982,14 @@ describe('Bucket', () => {
         {maxResults: 5},
         (err: Error, results: {}, nextQuery: {}) => {
           assert.strictEqual(nextQuery, null);
-        }
+        },
       );
     });
 
     it('should return File objects', done => {
       bucket.request = (
         reqOpts: DecorateRequestOptions,
-        callback: Function
+        callback: Function,
       ) => {
         callback(null, {
           items: [{name: 'fake-file-name', generation: 1}],
@@ -1983,7 +2000,7 @@ describe('Bucket', () => {
         assert(files[0] instanceof FakeFile);
         assert.strictEqual(
           typeof files[0].calledWith_[2].generation,
-          'undefined'
+          'undefined',
         );
         done();
       });
@@ -1992,7 +2009,7 @@ describe('Bucket', () => {
     it('should return versioned Files if queried for versions', done => {
       bucket.request = (
         reqOpts: DecorateRequestOptions,
-        callback: Function
+        callback: Function,
       ) => {
         callback(null, {
           items: [{name: 'fake-file-name', generation: 1}],
@@ -2010,7 +2027,7 @@ describe('Bucket', () => {
     it('should return Files with specified values if queried for fields', done => {
       bucket.request = (
         reqOpts: DecorateRequestOptions,
-        callback: Function
+        callback: Function,
       ) => {
         callback(null, {
           items: [{name: 'fake-file-name'}],
@@ -2023,14 +2040,14 @@ describe('Bucket', () => {
           assert.ifError(err);
           assert.strictEqual(files[0].name, 'fake-file-name');
           done();
-        }
+        },
       );
     });
 
     it('should add nextPageToken to fields for autoPaginate', done => {
       bucket.request = (
         reqOpts: DecorateRequestOptions,
-        callback: Function
+        callback: Function,
       ) => {
         assert.strictEqual(reqOpts.qs.fields, 'items(name),nextPageToken');
         callback(null, {
@@ -2046,7 +2063,7 @@ describe('Bucket', () => {
           assert.strictEqual(files[0].name, 'fake-file-name');
           assert.strictEqual(nextQuery.pageToken, 'fake-page-token');
           done();
-        }
+        },
       );
     });
 
@@ -2054,7 +2071,7 @@ describe('Bucket', () => {
       const softDeletedTime = new Date('1/1/2024').toISOString();
       bucket.request = (
         reqOpts: DecorateRequestOptions,
-        callback: Function
+        callback: Function,
       ) => {
         callback(null, {
           items: [{name: 'fake-file-name', generation: 1, softDeletedTime}],
@@ -2074,7 +2091,7 @@ describe('Bucket', () => {
 
       bucket.request = (
         reqOpts: DecorateRequestOptions,
-        callback: Function
+        callback: Function,
       ) => {
         callback(null, {
           items: [{name: 'fake-file-name', kmsKeyName}],
@@ -2092,7 +2109,7 @@ describe('Bucket', () => {
       const resp = {items: [{name: 'fake-file-name'}]};
       bucket.request = (
         reqOpts: DecorateRequestOptions,
-        callback: Function
+        callback: Function,
       ) => {
         callback(null, resp);
       };
@@ -2100,7 +2117,7 @@ describe('Bucket', () => {
         (err: Error, files: Array<{}>, nextQuery: {}, apiResponse: {}) => {
           assert.deepStrictEqual(resp, apiResponse);
           done();
-        }
+        },
       );
     });
 
@@ -2110,7 +2127,7 @@ describe('Bucket', () => {
 
       bucket.request = (
         reqOpts: DecorateRequestOptions,
-        callback: Function
+        callback: Function,
       ) => {
         callback(error, apiResponse);
       };
@@ -2123,7 +2140,7 @@ describe('Bucket', () => {
           assert.strictEqual(apiResponse_, apiResponse);
 
           done();
-        }
+        },
       );
     });
 
@@ -2137,7 +2154,7 @@ describe('Bucket', () => {
       };
       bucket.request = (
         reqOpts: DecorateRequestOptions,
-        callback: Function
+        callback: Function,
       ) => {
         callback(null, {items: [fileMetadata]});
       };
@@ -2199,7 +2216,7 @@ describe('Bucket', () => {
       };
       bucket.request = (
         reqOpts: DecorateRequestOptions,
-        callback: Function
+        callback: Function,
       ) => {
         callback(null, {items: [fileMetadata]});
       };
@@ -2208,7 +2225,7 @@ describe('Bucket', () => {
         assert.ifError(err);
         assert.deepStrictEqual(
           files[0].metadata.contexts,
-          fileMetadata.contexts
+          fileMetadata.contexts,
         );
         done();
       });
@@ -2309,7 +2326,7 @@ describe('Bucket', () => {
 
       bucket.request = (
         reqOpts: DecorateRequestOptions,
-        callback: Function
+        callback: Function,
       ) => {
         callback(error, response);
       };
@@ -2320,7 +2337,7 @@ describe('Bucket', () => {
           assert.strictEqual(notifications, null);
           assert.strictEqual(resp, response);
           done();
-        }
+        },
       );
     });
 
@@ -2330,7 +2347,7 @@ describe('Bucket', () => {
 
       bucket.request = (
         reqOpts: DecorateRequestOptions,
-        callback: Function
+        callback: Function,
       ) => {
         callback(null, response);
       };
@@ -2353,7 +2370,7 @@ describe('Bucket', () => {
           });
           assert.strictEqual(resp, response);
           done();
-        }
+        },
       );
     });
   });
@@ -2379,7 +2396,7 @@ describe('Bucket', () => {
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       urlSignerStub = (sandbox.stub as any)(fakeSigner, 'URLSigner').returns(
-        signer
+        signer,
       );
 
       SIGNED_URL_CONFIG = {
@@ -2418,7 +2435,7 @@ describe('Bucket', () => {
             signingEndpoint: undefined,
           });
           done();
-        }
+        },
       );
     });
   });
@@ -2436,7 +2453,7 @@ describe('Bucket', () => {
 
       bucket.request = (
         reqOpts: DecorateRequestOptions,
-        callback: Function
+        callback: Function,
       ) => {
         assert.deepStrictEqual(reqOpts, {
           method: 'POST',
@@ -2472,7 +2489,7 @@ describe('Bucket', () => {
 
       bucket.makeAllFilesPublicPrivate_ = (
         opts: MakeAllFilesPublicPrivateOptions,
-        callback: Function
+        callback: Function,
       ) => {
         assert.strictEqual(opts.private, true);
         assert.strictEqual(opts.force, true);
@@ -2518,7 +2535,7 @@ describe('Bucket', () => {
     it('should not make files private by default', done => {
       bucket.parent.request = (
         reqOpts: DecorateRequestOptions,
-        callback: Function
+        callback: Function,
       ) => {
         callback();
       };
@@ -2535,7 +2552,7 @@ describe('Bucket', () => {
 
       bucket.parent.request = (
         reqOpts: DecorateRequestOptions,
-        callback: Function
+        callback: Function,
       ) => {
         callback(error);
       };
@@ -2551,7 +2568,7 @@ describe('Bucket', () => {
     beforeEach(() => {
       bucket.request = (
         reqOpts: DecorateRequestOptions,
-        callback: Function
+        callback: Function,
       ) => {
         callback();
       };
@@ -2578,7 +2595,7 @@ describe('Bucket', () => {
 
       bucket.makeAllFilesPublicPrivate_ = (
         opts: MakeAllFilesPublicPrivateOptions,
-        callback: Function
+        callback: Function,
       ) => {
         assert.strictEqual(opts.public, true);
         assert.strictEqual(opts.force, true);
@@ -2597,7 +2614,7 @@ describe('Bucket', () => {
           assert(didSetDefaultAcl);
           assert(didMakeFilesPublic);
           done();
-        }
+        },
       );
     });
 
@@ -2642,7 +2659,7 @@ describe('Bucket', () => {
       bucket.setMetadata = (
         metadata: {},
         _optionsOrCallback: {},
-        callback: Function
+        callback: Function,
       ) => {
         assert.deepStrictEqual(metadata, {
           retentionPolicy: null,
@@ -2659,7 +2676,7 @@ describe('Bucket', () => {
     it('should pass options to underlying request call', async () => {
       bucket.request = function (
         reqOpts: DecorateRequestOptions,
-        callback_: Function
+        callback_: Function,
       ) {
         assert.strictEqual(this, bucket);
         assert.deepStrictEqual(reqOpts, {
@@ -2684,7 +2701,7 @@ describe('Bucket', () => {
 
     it('should set the userProject if qs is undefined', done => {
       FakeServiceObject.prototype.request = ((
-        reqOpts: DecorateRequestOptions
+        reqOpts: DecorateRequestOptions,
       ) => {
         assert.strictEqual(reqOpts.qs.userProject, USER_PROJECT);
         done();
@@ -2702,7 +2719,7 @@ describe('Bucket', () => {
       };
 
       FakeServiceObject.prototype.request = ((
-        reqOpts: DecorateRequestOptions
+        reqOpts: DecorateRequestOptions,
       ) => {
         assert.strictEqual(reqOpts.qs.userProject, USER_PROJECT);
         assert.strictEqual(reqOpts.qs, options.qs);
@@ -2722,7 +2739,7 @@ describe('Bucket', () => {
       };
 
       FakeServiceObject.prototype.request = ((
-        reqOpts: DecorateRequestOptions
+        reqOpts: DecorateRequestOptions,
       ) => {
         assert.strictEqual(reqOpts.qs.userProject, fakeUserProject);
         done();
@@ -2753,7 +2770,7 @@ describe('Bucket', () => {
       bucket.setMetadata = (
         metadata: BucketMetadata,
         _callbackOrOptions: {},
-        callback: Function
+        callback: Function,
       ) => {
         assert.strictEqual(metadata.labels, labels);
         Promise.resolve([]).then(resp => callback(null, ...resp));
@@ -2779,7 +2796,7 @@ describe('Bucket', () => {
       bucket.setMetadata = (
         metadata: {},
         _callbackOrOptions: {},
-        callback: Function
+        callback: Function,
       ) => {
         assert.deepStrictEqual(metadata, {
           retentionPolicy: {
@@ -2801,7 +2818,7 @@ describe('Bucket', () => {
       bucket.setMetadata = (
         metadata: {},
         _callbackOrOptions: {},
-        callback: Function
+        callback: Function,
       ) => {
         assert.deepStrictEqual(metadata, {
           cors: corsConfiguration,
@@ -2841,7 +2858,7 @@ describe('Bucket', () => {
       bucket.setMetadata = (
         metadata: BucketMetadata,
         options: {},
-        callback: Function
+        callback: Function,
       ) => {
         assert.deepStrictEqual(metadata, {storageClass: STORAGE_CLASS});
         assert.strictEqual(options, OPTIONS);
@@ -2872,14 +2889,14 @@ describe('Bucket', () => {
       methods.forEach(method => {
         assert.strictEqual(
           bucket.methods[method].reqOpts.qs.userProject,
-          undefined
+          undefined,
         );
       });
       bucket.setUserProject(USER_PROJECT);
       methods.forEach(method => {
         assert.strictEqual(
           bucket.methods[method].reqOpts.qs.userProject,
-          USER_PROJECT
+          USER_PROJECT,
         );
       });
     });
@@ -2889,12 +2906,12 @@ describe('Bucket', () => {
     const basename = 'testfile.json';
     const filepath = path.join(
       getDirName(),
-      '../../../test/testdata/' + basename
+      '../../../test/testdata/' + basename,
     );
     const nonExistentFilePath = path.join(
       getDirName(),
       '../../../test/testdata/',
-      'non-existent-file'
+      'non-existent-file',
     );
     const metadata = {
       metadata: {
@@ -3055,7 +3072,7 @@ describe('Bucket', () => {
             _transform(
               chunk: string | Buffer,
               _encoding: string,
-              done: Function
+              done: Function,
             ) {
               this.push(chunk);
               setTimeout(() => {
@@ -3136,7 +3153,7 @@ describe('Bucket', () => {
             _transform(
               chunk: string | Buffer,
               _encoding: string,
-              done: Function
+              done: Function,
             ) {
               this.push(chunk);
               setTimeout(() => {
@@ -3183,7 +3200,7 @@ describe('Bucket', () => {
             _transform(
               chunk: string | Buffer,
               _encoding: string,
-              done: Function
+              done: Function,
             ) {
               this.push(chunk);
               setTimeout(() => {
@@ -3241,7 +3258,7 @@ describe('Bucket', () => {
         setImmediate(() => {
           assert.strictEqual(
             options!.metadata!.contentType,
-            metadata.contentType
+            metadata.contentType,
           );
           done();
         });
@@ -3309,7 +3326,7 @@ describe('Bucket', () => {
           assert.strictEqual(file, fakeFile);
           assert.strictEqual(apiResponse, metadata);
           done();
-        }
+        },
       );
     });
 
@@ -3419,7 +3436,7 @@ describe('Bucket', () => {
         (errs: Error[]) => {
           assert.deepStrictEqual(errs, [error, error]);
           done();
-        }
+        },
       );
     });
 
@@ -3448,7 +3465,7 @@ describe('Bucket', () => {
           assert.deepStrictEqual(errs, [error, error]);
           assert.deepStrictEqual(files, successFiles);
           done();
-        }
+        },
       );
     });
   });
@@ -3462,7 +3479,7 @@ describe('Bucket', () => {
     it('should set autoRetry to false when ifMetagenerationMatch is undefined (setMetadata)', done => {
       bucket.disableAutoRetryConditionallyIdempotent_(
         bucket.methods.setMetadata,
-        AvailableServiceObjectMethods.setMetadata
+        AvailableServiceObjectMethods.setMetadata,
       );
       assert.strictEqual(bucket.storage.retryOptions.autoRetry, false);
       done();
@@ -3471,7 +3488,7 @@ describe('Bucket', () => {
     it('should set autoRetry to false when ifMetagenerationMatch is undefined (delete)', done => {
       bucket.disableAutoRetryConditionallyIdempotent_(
         bucket.methods.delete,
-        AvailableServiceObjectMethods.delete
+        AvailableServiceObjectMethods.delete,
       );
       assert.strictEqual(bucket.storage.retryOptions.autoRetry, false);
       done();
@@ -3486,7 +3503,7 @@ describe('Bucket', () => {
       });
       bucket.disableAutoRetryConditionallyIdempotent_(
         bucket.methods.delete,
-        AvailableServiceObjectMethods.delete
+        AvailableServiceObjectMethods.delete,
       );
       assert.strictEqual(bucket.storage.retryOptions.autoRetry, false);
       done();
@@ -3500,7 +3517,7 @@ describe('Bucket', () => {
       });
       bucket.disableAutoRetryConditionallyIdempotent_(
         bucket.methods.delete,
-        AvailableServiceObjectMethods.delete
+        AvailableServiceObjectMethods.delete,
       );
       assert.strictEqual(bucket.storage.retryOptions.autoRetry, true);
       done();
@@ -3532,22 +3549,22 @@ describe('Bucket', () => {
         bucket.setMetadata = (metadata: BucketMetadata) => {
           assert.strictEqual(
             metadata.encryption?.defaultKmsKeyName,
-            encryptionMetadata.encryption.defaultKmsKeyName
+            encryptionMetadata.encryption.defaultKmsKeyName,
           );
 
           assert.deepStrictEqual(
             metadata.encryption?.googleManagedEncryptionEnforcementConfig,
-            {restrictionMode: 'FullyRestricted', effectiveTime: effectiveTime}
+            {restrictionMode: 'FullyRestricted', effectiveTime: effectiveTime},
           );
 
           assert.deepStrictEqual(
             metadata.encryption?.customerManagedEncryptionEnforcementConfig,
-            {restrictionMode: 'NotRestricted', effectiveTime: effectiveTime}
+            {restrictionMode: 'NotRestricted', effectiveTime: effectiveTime},
           );
 
           assert.deepStrictEqual(
             metadata.encryption?.customerSuppliedEncryptionEnforcementConfig,
-            {restrictionMode: 'FullyRestricted', effectiveTime: effectiveTime}
+            {restrictionMode: 'FullyRestricted', effectiveTime: effectiveTime},
           );
         };
         bucket.setMetadata(encryptionMetadata, assert.ifError);
@@ -3575,7 +3592,7 @@ describe('Bucket', () => {
           assert.strictEqual(
             metadata.encryption?.customerSuppliedEncryptionEnforcementConfig
               ?.restrictionMode,
-            'FullyRestricted'
+            'FullyRestricted',
           );
           done();
         };
@@ -3596,7 +3613,7 @@ describe('Bucket', () => {
           assert.strictEqual(
             metadata.encryption?.googleManagedEncryptionEnforcementConfig
               ?.restrictionMode,
-            'fully_restricted'
+            'fully_restricted',
           );
           done();
         };
@@ -3617,15 +3634,15 @@ describe('Bucket', () => {
         bucket.setMetadata = (metadata: BucketMetadata) => {
           assert.ok(metadata.encryption?.defaultKmsKeyName);
           assert.ok(
-            metadata.encryption?.googleManagedEncryptionEnforcementConfig
+            metadata.encryption?.googleManagedEncryptionEnforcementConfig,
           );
           assert.strictEqual(
             metadata.encryption?.customerManagedEncryptionEnforcementConfig,
-            undefined
+            undefined,
           );
           assert.strictEqual(
             metadata.encryption?.customerSuppliedEncryptionEnforcementConfig,
-            undefined
+            undefined,
           );
           done();
         };

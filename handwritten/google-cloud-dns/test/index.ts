@@ -135,7 +135,7 @@ describe('DNS', () => {
       assert.deepStrictEqual(
         calledWith.packageJson,
         // eslint-disable-next-line @typescript-eslint/no-var-requires
-        require('../../package.json')
+        require('../../package.json'),
       );
     });
 
@@ -226,7 +226,7 @@ describe('DNS', () => {
             assert.strictEqual(zone, null);
             assert.strictEqual(apiResponse_, apiResponse);
             done();
-          }
+          },
         );
       });
     });
@@ -265,7 +265,7 @@ describe('DNS', () => {
             assert.strictEqual(apiResponse_, apiResponse);
 
             done();
-          }
+          },
         );
       });
 
@@ -318,7 +318,7 @@ describe('DNS', () => {
             err: Error,
             zones: Zone[],
             nextQuery: {},
-            apiResponse_: Response
+            apiResponse_: Response,
           ) => {
             assert.strictEqual(err, error);
             assert.strictEqual(zones, null);
@@ -326,7 +326,7 @@ describe('DNS', () => {
             assert.strictEqual(apiResponse_, apiResponse);
 
             done();
-          }
+          },
         );
       });
     });
@@ -377,7 +377,7 @@ describe('DNS', () => {
             nextQuery,
             Object.assign({}, query, {
               pageToken: apiResponseWithNextPageToken.nextPageToken,
-            })
+            }),
           );
 
           done();
@@ -391,7 +391,7 @@ describe('DNS', () => {
             err: Error,
             zones: Zone[],
             nextQuery: {},
-            apiResponse_: Response
+            apiResponse_: Response,
           ) => {
             assert.ifError(err);
             assert.strictEqual(zones[0], zone);
@@ -399,7 +399,7 @@ describe('DNS', () => {
             assert.strictEqual(apiResponse_, apiResponse);
 
             done();
-          }
+          },
         );
       });
 

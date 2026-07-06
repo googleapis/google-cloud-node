@@ -140,7 +140,7 @@ describe('Notification', () => {
 
       BUCKET.request = (
         reqOpts: DecorateRequestOptions,
-        callback: Function
+        callback: Function,
       ) => {
         assert.strictEqual(reqOpts.method, 'DELETE');
         assert.strictEqual(reqOpts.uri, 'notificationConfigs/123');
@@ -154,7 +154,7 @@ describe('Notification', () => {
     it('should optionally accept options', done => {
       BUCKET.request = (
         reqOpts: DecorateRequestOptions,
-        callback: Function
+        callback: Function,
       ) => {
         assert.deepStrictEqual(reqOpts.qs, {});
         callback(); // the done fn
@@ -166,7 +166,7 @@ describe('Notification', () => {
     it('should optionally accept a callback', done => {
       BUCKET.request = (
         _reqOpts: DecorateRequestOptions,
-        callback: Function
+        callback: Function,
       ) => {
         callback(); // the done fn
       };
@@ -250,7 +250,7 @@ describe('Notification', () => {
           {},
           {
             maxResults: 5,
-          }
+          },
         );
 
         notification.get = (config_: {}) => {
@@ -290,7 +290,7 @@ describe('Notification', () => {
               assert.strictEqual(instance, null);
               assert.strictEqual(resp, apiResponse);
               done();
-            }
+            },
           );
         });
 
@@ -342,7 +342,7 @@ describe('Notification', () => {
 
       BUCKET.request = (
         _reqOpts: DecorateRequestOptions,
-        callback: Function
+        callback: Function,
       ) => {
         callback(error, response, response);
       };
@@ -360,7 +360,7 @@ describe('Notification', () => {
 
       BUCKET.request = (
         _reqOpts: DecorateRequestOptions,
-        callback: Function
+        callback: Function,
       ) => {
         callback(null, response, response);
       };

@@ -187,7 +187,7 @@ describe('Zone', () => {
 
       zone.createChange = (
         options: CreateChangeRequest,
-        callback: Function
+        callback: Function,
       ) => {
         assert.strictEqual(options.add, records);
         callback();
@@ -215,7 +215,7 @@ describe('Zone', () => {
           type: crypto.randomUUID(),
           rrdatas: [crypto.randomUUID(), crypto.randomUUID()],
         },
-        recordJson
+        recordJson,
       );
 
       return {
@@ -312,7 +312,7 @@ describe('Zone', () => {
             assert.strictEqual(err, error);
             assert.strictEqual(apiResponse_, apiResponse);
             done();
-          }
+          },
         );
       });
     });
@@ -342,7 +342,7 @@ describe('Zone', () => {
             assert.strictEqual(change_.metadata, apiResponse);
             assert.strictEqual(apiResponse_, apiResponse);
             done();
-          }
+          },
         );
       });
     });
@@ -390,7 +390,7 @@ describe('Zone', () => {
 
       zone.createChange = (
         options: CreateChangeRequest,
-        callback: Function
+        callback: Function,
       ) => {
         assert.deepStrictEqual(options.delete, [recordsToDelete]);
         callback();
@@ -462,7 +462,7 @@ describe('Zone', () => {
       it('should delete non-NS and non-SOA records', done => {
         zone.deleteRecords = (
           recordsToDelete: string[],
-          callback: Function
+          callback: Function,
         ) => {
           assert.deepStrictEqual(recordsToDelete, expectedRecordsToDelete);
           callback();
@@ -539,7 +539,7 @@ describe('Zone', () => {
         writeFileOverride = (
           path_: string,
           content: string,
-          encoding: string
+          encoding: string,
         ) => {
           assert.strictEqual(path_, path);
           assert.strictEqual(content, expectedZonefileContents);
@@ -559,7 +559,7 @@ describe('Zone', () => {
             path: string,
             content: string,
             encoding: string,
-            callback: Function
+            callback: Function,
           ) => {
             callback(error);
           };
@@ -579,7 +579,7 @@ describe('Zone', () => {
             path: string,
             content: string,
             encoding: string,
-            callback: Function
+            callback: Function,
           ) => {
             callback();
           };
@@ -648,12 +648,12 @@ describe('Zone', () => {
             err: Error,
             changes: Change[],
             nextQuery: {},
-            apiResponse_: Response
+            apiResponse_: Response,
           ) => {
             assert.strictEqual(err, error);
             assert.strictEqual(apiResponse_, apiResponse);
             done();
-          }
+          },
         );
       });
     });
@@ -703,14 +703,14 @@ describe('Zone', () => {
             err: Error,
             changes: Change[],
             nextQuery: {},
-            apiResponse_: Response
+            apiResponse_: Response,
           ) => {
             assert.ifError(err);
             assert.strictEqual(changes[0], change);
             assert.strictEqual(changes[0].metadata, apiResponse.changes[0]);
             assert.strictEqual(apiResponse_, apiResponse);
             done();
-          }
+          },
         );
       });
     });
@@ -734,12 +734,12 @@ describe('Zone', () => {
             err: Error,
             changes: Change[],
             nextQuery: {},
-            apiResponse_: Response
+            apiResponse_: Response,
           ) => {
             assert.strictEqual(err, error);
             assert.strictEqual(apiResponse_, apiResponse);
             done();
-          }
+          },
         );
       });
 
@@ -795,13 +795,13 @@ describe('Zone', () => {
             err: Error,
             records: Record[],
             nextQuery: {},
-            apiResponse_: Response
+            apiResponse_: Response,
           ) => {
             assert.ifError(err);
             assert.strictEqual(records[0], record);
             assert.strictEqual(apiResponse_, apiResponse);
             done();
-          }
+          },
         );
 
         it('should not require a query', done => {
@@ -866,7 +866,7 @@ describe('Zone', () => {
         readFileOverride = (
           path: string,
           encoding: string,
-          callback: Function
+          callback: Function,
         ) => {
           callback(error);
         };
@@ -897,7 +897,7 @@ describe('Zone', () => {
         readFileOverride = (
           path: string,
           encoding: string,
-          callback: Function
+          callback: Function,
         ) => {
           callback();
         };
@@ -906,7 +906,7 @@ describe('Zone', () => {
       it('should add records', done => {
         zone.addRecords = (
           recordsToCreate: FakeRecord[],
-          callback: Function
+          callback: Function,
         ) => {
           assert.strictEqual(recordsToCreate.length, 1);
           const recordToCreate = recordsToCreate[0];
@@ -998,7 +998,7 @@ describe('Zone', () => {
       it('should create a change', done => {
         zone.createChange = (
           options: CreateChangeRequest,
-          callback: Function
+          callback: Function,
         ) => {
           assert.strictEqual(options.add, recordsToCreate);
           assert.strictEqual(options.delete, recordsToDelete);

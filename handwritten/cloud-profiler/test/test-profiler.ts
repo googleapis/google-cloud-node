@@ -106,7 +106,7 @@ describe('Profiler', () => {
   beforeEach(() => {
     sinonStubs.push(sinon.stub(timeProfiler, 'start'));
     sinonStubs.push(
-      sinon.stub(timeProfiler, 'profile').returns(Promise.resolve(timeProfile))
+      sinon.stub(timeProfiler, 'profile').returns(Promise.resolve(timeProfile)),
     );
 
     sinonStubs.push(sinon.stub(heapProfiler, 'stop'));
@@ -131,7 +131,7 @@ describe('Profiler', () => {
       const prof = await profiler.profile(requestProf);
       const decodedBytes = Buffer.from(prof.profileBytes as 'string', 'base64');
       const unzippedBytes = (await promisify(zlib.gunzip)(
-        decodedBytes
+        decodedBytes,
       )) as Uint8Array;
       const outProfile = perftools.profiles.Profile.decode(unzippedBytes);
       assert.deepStrictEqual(decodedTimeProfile, outProfile);
@@ -146,7 +146,7 @@ describe('Profiler', () => {
       const prof = await profiler.profile(requestProf);
       const decodedBytes = Buffer.from(prof.profileBytes as 'string', 'base64');
       const unzippedBytes = (await promisify(zlib.gunzip)(
-        decodedBytes
+        decodedBytes,
       )) as Uint8Array;
       const outProfile = perftools.profiles.Profile.decode(unzippedBytes);
       assert.deepStrictEqual(decodedHeapProfile, outProfile);
@@ -165,7 +165,7 @@ describe('Profiler', () => {
       } catch (err) {
         assert.strictEqual(
           (err as Error).message,
-          'Unexpected profile type UNKNOWN.'
+          'Unexpected profile type UNKNOWN.',
         );
       }
     });
@@ -193,14 +193,14 @@ describe('Profiler', () => {
 
         const decodedBytes = Buffer.from(encodedBytes as string, 'base64');
         const unzippedBytes = (await promisify(zlib.gunzip)(
-          decodedBytes
+          decodedBytes,
         )) as Uint8Array;
         const outProfile = perftools.profiles.Profile.decode(unzippedBytes);
 
         // compare to decodedTimeProfile, which is equivalent to timeProfile,
         // but numbers are replaced with longs.
         assert.deepStrictEqual(decodedTimeProfile, outProfile);
-      }
+      },
     );
     it('should throw error when time profiling is not enabled.', async () => {
       const config = extend(true, {}, testConfig);
@@ -218,7 +218,7 @@ describe('Profiler', () => {
       } catch (err) {
         assert.strictEqual(
           (err as Error).message,
-          'Cannot collect time profile, time profiler not enabled.'
+          'Cannot collect time profile, time profiler not enabled.',
         );
       }
     });
@@ -245,14 +245,14 @@ describe('Profiler', () => {
 
         const decodedBytes = Buffer.from(encodedBytes as string, 'base64');
         const unzippedBytes = (await promisify(zlib.gunzip)(
-          decodedBytes
+          decodedBytes,
         )) as Uint8Array;
         const outProfile = perftools.profiles.Profile.decode(unzippedBytes);
 
         // compare to decodedTimeProfile, which is equivalent to timeProfile,
         // but numbers are replaced with longs.
         assert.deepStrictEqual(decodedHeapProfile, outProfile);
-      }
+      },
     );
     it('should throw error when heap profiling is not enabled.', async () => {
       const config = extend(true, {}, testConfig);
@@ -269,7 +269,7 @@ describe('Profiler', () => {
       } catch (err) {
         assert.strictEqual(
           (err as Error).message,
-          'Cannot collect heap profile, heap profiler not enabled.'
+          'Cannot collect heap profile, heap profiler not enabled.',
         );
       }
     });
@@ -304,10 +304,10 @@ describe('Profiler', () => {
       };
       const decodedBytes = Buffer.from(
         uploaded.profileBytes as string,
-        'base64'
+        'base64',
       );
       const unzippedBytes = (await promisify(zlib.gunzip)(
-        decodedBytes
+        decodedBytes,
       )) as Uint8Array;
       const outProfile = perftools.profiles.Profile.decode(unzippedBytes);
       assert.deepStrictEqual(decodedTimeProfile, outProfile);
@@ -335,10 +335,10 @@ describe('Profiler', () => {
       };
       const decodedBytes = Buffer.from(
         uploaded.profileBytes as string,
-        'base64'
+        'base64',
       );
       const unzippedBytes = (await promisify(zlib.gunzip)(
-        decodedBytes
+        decodedBytes,
       )) as Uint8Array;
       const outProfile = perftools.profiles.Profile.decode(unzippedBytes);
       assert.deepStrictEqual(decodedHeapProfile, outProfile);
@@ -387,7 +387,7 @@ describe('Profiler', () => {
           1,
           null,
           {},
-          {statusCode: 500, statusMessage: 'Error 500'}
+          {statusCode: 500, statusMessage: 'Error 500'},
         );
       const profiler = new Profiler(testConfig);
       await profiler.profileAndUpload(requestProf);
@@ -412,7 +412,7 @@ describe('Profiler', () => {
       assert.strictEqual(
         apiMock.isDone(),
         false,
-        'call to upload profile should not be retried'
+        'call to upload profile should not be retried',
       );
     });
     it('should send request to upload profile to default API without error.', async () => {
@@ -541,7 +541,7 @@ describe('Profiler', () => {
         assert.strictEqual(
           (err as Error).message,
           'Profile not valid: ' +
-            '{"name":"projects/12345678901/test-projectId"}.'
+            '{"name":"projects/12345678901/test-projectId"}.',
         );
       }
     });
@@ -601,9 +601,9 @@ describe('Profiler', () => {
         assert.deepStrictEqual(response, actualResponse);
         assert.deepStrictEqual(
           expRequestBody,
-          requestStub.firstCall.args[0].body
+          requestStub.firstCall.args[0].body,
         );
-      }
+      },
     );
     it(
       'should not have instance and zone in request body when instance and' +
@@ -634,9 +634,9 @@ describe('Profiler', () => {
         assert.deepStrictEqual(response, actualResponse);
         assert.deepStrictEqual(
           expRequestBody,
-          requestStub.firstCall.args[0].body
+          requestStub.firstCall.args[0].body,
         );
-      }
+      },
     );
     it('should keep additional fields in request profile.', async () => {
       const response = {
@@ -696,7 +696,7 @@ describe('Profiler', () => {
             1,
             undefined,
             {error: {details: [{retryDelay: '50s'}]}},
-            {statusCode: 409}
+            {statusCode: 409},
           );
 
         const profiler = new Profiler(testConfig);
@@ -706,10 +706,10 @@ describe('Profiler', () => {
         } catch (err) {
           assert.strictEqual(
             (err as BackoffResponseError).backoffMillis,
-            50000
+            50000,
           );
         }
-      }
+      },
     );
     it('should throw error when response undefined', async () => {
       requestStub = sinon
@@ -724,7 +724,7 @@ describe('Profiler', () => {
       } catch (err) {
         assert.strictEqual(
           (err as Error).message,
-          'Profile not valid: undefined.'
+          'Profile not valid: undefined.',
         );
       }
     });
@@ -772,7 +772,7 @@ describe('Profiler', () => {
       assert.strictEqual(
         0,
         delayMillis,
-        'No delay before asking to collect next profile'
+        'No delay before asking to collect next profile',
       );
     });
     it(
@@ -787,7 +787,7 @@ describe('Profiler', () => {
         const profiler = new Profiler(testConfig);
         const delayMillis = await profiler.collectProfile();
         assert.deepStrictEqual(EXPECTED_BACKOFF, delayMillis);
-      }
+      },
     );
     it('should reset backoff after success', async () => {
       const createProfileResponseBody = {
@@ -822,7 +822,7 @@ describe('Profiler', () => {
           1,
           new Error('error creating profile'),
           undefined,
-          undefined
+          undefined,
         );
       const profiler = new Profiler(testConfig);
       let delayMillis = await profiler.collectProfile();
@@ -847,12 +847,12 @@ describe('Profiler', () => {
             1,
             undefined,
             {error: {details: [{retryDelay: '50s'}]}},
-            {statusCode: 409}
+            {statusCode: 409},
           );
         const profiler = new Profiler(testConfig);
         const delayMillis = await profiler.collectProfile();
         assert.strictEqual(50000, delayMillis);
-      }
+      },
     );
     it(
       'should return expected backoff when non-200 error and invalid server backoff' +
@@ -868,12 +868,12 @@ describe('Profiler', () => {
             {
               statusCode: 409,
               body: {message: 'some message'},
-            }
+            },
           );
         const profiler = new Profiler(testConfig);
         const delayMillis = await profiler.collectProfile();
         assert.strictEqual(EXPECTED_BACKOFF, delayMillis);
-      }
+      },
     );
     it(
       'should return expected backoff when non-200 error and invalid server backoff' +
@@ -886,12 +886,12 @@ describe('Profiler', () => {
             1,
             undefined,
             {error: {details: [{retryDelay: 'not a duration'}]}},
-            {statusCode: 409}
+            {statusCode: 409},
           );
         const profiler = new Profiler(testConfig);
         const delayMillis = await profiler.collectProfile();
         assert.strictEqual(EXPECTED_BACKOFF, delayMillis);
-      }
+      },
     );
     it(
       'should return backoff limit, when server specified backoff is greater' +
@@ -904,12 +904,12 @@ describe('Profiler', () => {
             1,
             undefined,
             {error: {details: [{retryDelay: '1000h'}]}},
-            {statusCode: 409}
+            {statusCode: 409},
           );
         const profiler = new Profiler(testConfig);
         const delayMillis = await profiler.collectProfile();
         assert.strictEqual(ms('7d'), delayMillis);
-      }
+      },
     );
     it(
       'should indicate collectProfile should be called immediately if there' +
@@ -933,7 +933,7 @@ describe('Profiler', () => {
         const profiler = new Profiler(testConfig);
         const delayMillis = await profiler.collectProfile();
         assert.strictEqual(0, delayMillis);
-      }
+      },
     );
   });
 });
