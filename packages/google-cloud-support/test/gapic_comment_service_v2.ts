@@ -1307,5 +1307,70 @@ describe('v2.CommentServiceClient', () => {
         );
       });
     });
+
+    describe('supportEventSubscription', async () => {
+      const fakePath = '/rendered/path/supportEventSubscription';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        support_event_subscription: 'supportEventSubscriptionValue',
+      };
+      const client = new commentserviceModule.v2.CommentServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.supportEventSubscriptionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.supportEventSubscriptionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('supportEventSubscriptionPath', () => {
+        const result = client.supportEventSubscriptionPath(
+          'organizationValue',
+          'supportEventSubscriptionValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.supportEventSubscriptionPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchOrganizationFromSupportEventSubscriptionName', () => {
+        const result =
+          client.matchOrganizationFromSupportEventSubscriptionName(fakePath);
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates.supportEventSubscriptionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSupportEventSubscriptionFromSupportEventSubscriptionName', () => {
+        const result =
+          client.matchSupportEventSubscriptionFromSupportEventSubscriptionName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'supportEventSubscriptionValue');
+        assert(
+          (
+            client.pathTemplates.supportEventSubscriptionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
   });
 });

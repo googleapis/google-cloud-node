@@ -7286,7 +7286,21 @@
                           "requestType": "BidiSessionClientMessage",
                           "requestStream": true,
                           "responseType": "BidiSessionServerMessage",
-                          "responseStream": true
+                          "responseStream": true,
+                          "options": {
+                            "(google.api.routing).routing_parameters.field": "config.session",
+                            "(google.api.routing).routing_parameters.path_template": "{session=projects/*/locations/*/apps/*/sessions/*}"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.routing)": {
+                                "routing_parameters": {
+                                  "field": "config.session",
+                                  "path_template": "{session=projects/*/locations/*/apps/*/sessions/*}"
+                                }
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -19214,7 +19228,21 @@
                           "requestType": "BidiSessionClientMessage",
                           "requestStream": true,
                           "responseType": "BidiSessionServerMessage",
-                          "responseStream": true
+                          "responseStream": true,
+                          "options": {
+                            "(google.api.routing).routing_parameters.field": "config.session",
+                            "(google.api.routing).routing_parameters.path_template": "{session=projects/*/locations/*/apps/*/sessions/*}"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.routing)": {
+                                "routing_parameters": {
+                                  "field": "config.session",
+                                  "path_template": "{session=projects/*/locations/*/apps/*/sessions/*}"
+                                }
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -22466,9 +22494,9 @@
         },
         "api": {
           "options": {
-            "go_package": "google.golang.org/genproto/googleapis/api;api",
+            "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "LaunchStageProto",
+            "java_outer_classname": "RoutingProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI"
           },
@@ -23005,6 +23033,32 @@
                 "BETA": 3,
                 "GA": 4,
                 "DEPRECATED": 5
+              }
+            },
+            "routing": {
+              "type": "google.api.RoutingRule",
+              "id": 72295729,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "RoutingRule": {
+              "fields": {
+                "routingParameters": {
+                  "rule": "repeated",
+                  "type": "RoutingParameter",
+                  "id": 2
+                }
+              }
+            },
+            "RoutingParameter": {
+              "fields": {
+                "field": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pathTemplate": {
+                  "type": "string",
+                  "id": 2
+                }
               }
             }
           }

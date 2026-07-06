@@ -1509,6 +1509,195 @@ describe('v1.RuleExecutionErrorServiceClient', () => {
       });
     });
 
+    describe('findingsRefinement', async () => {
+      const fakePath = '/rendered/path/findingsRefinement';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        findings_refinement: 'findingsRefinementValue',
+      };
+      const client =
+        new ruleexecutionerrorserviceModule.v1.RuleExecutionErrorServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.findingsRefinementPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.findingsRefinementPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('findingsRefinementPath', () => {
+        const result = client.findingsRefinementPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'findingsRefinementValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.findingsRefinementPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromFindingsRefinementName', () => {
+        const result = client.matchProjectFromFindingsRefinementName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.findingsRefinementPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromFindingsRefinementName', () => {
+        const result = client.matchLocationFromFindingsRefinementName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.findingsRefinementPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromFindingsRefinementName', () => {
+        const result = client.matchInstanceFromFindingsRefinementName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (
+            client.pathTemplates.findingsRefinementPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchFindingsRefinementFromFindingsRefinementName', () => {
+        const result =
+          client.matchFindingsRefinementFromFindingsRefinementName(fakePath);
+        assert.strictEqual(result, 'findingsRefinementValue');
+        assert(
+          (
+            client.pathTemplates.findingsRefinementPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('findingsRefinementDeployment', async () => {
+      const fakePath = '/rendered/path/findingsRefinementDeployment';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        findings_refinement: 'findingsRefinementValue',
+      };
+      const client =
+        new ruleexecutionerrorserviceModule.v1.RuleExecutionErrorServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.findingsRefinementDeploymentPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.findingsRefinementDeploymentPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('findingsRefinementDeploymentPath', () => {
+        const result = client.findingsRefinementDeploymentPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'findingsRefinementValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.findingsRefinementDeploymentPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromFindingsRefinementDeploymentName', () => {
+        const result =
+          client.matchProjectFromFindingsRefinementDeploymentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.findingsRefinementDeploymentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromFindingsRefinementDeploymentName', () => {
+        const result =
+          client.matchLocationFromFindingsRefinementDeploymentName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.findingsRefinementDeploymentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromFindingsRefinementDeploymentName', () => {
+        const result =
+          client.matchInstanceFromFindingsRefinementDeploymentName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (
+            client.pathTemplates.findingsRefinementDeploymentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchFindingsRefinementFromFindingsRefinementDeploymentName', () => {
+        const result =
+          client.matchFindingsRefinementFromFindingsRefinementDeploymentName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'findingsRefinementValue');
+        assert(
+          (
+            client.pathTemplates.findingsRefinementDeploymentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('instance', async () => {
       const fakePath = '/rendered/path/instance';
       const expectedParameters = {

@@ -16664,6 +16664,9 @@ export namespace google {
                     /** InputAudioConfig singleUtterance */
                     singleUtterance?: (boolean|null);
 
+                    /** InputAudioConfig enableVoiceActivityEvents */
+                    enableVoiceActivityEvents?: (boolean|null);
+
                     /** InputAudioConfig disableNoSpeechRecognizedEvent */
                     disableNoSpeechRecognizedEvent?: (boolean|null);
 
@@ -16712,6 +16715,9 @@ export namespace google {
 
                     /** InputAudioConfig singleUtterance. */
                     public singleUtterance: boolean;
+
+                    /** InputAudioConfig enableVoiceActivityEvents. */
+                    public enableVoiceActivityEvents: boolean;
 
                     /** InputAudioConfig disableNoSpeechRecognizedEvent. */
                     public disableNoSpeechRecognizedEvent: boolean;
@@ -18926,7 +18932,11 @@ export namespace google {
                     enum MessageType {
                         MESSAGE_TYPE_UNSPECIFIED = 0,
                         TRANSCRIPT = 1,
-                        END_OF_SINGLE_UTTERANCE = 2
+                        DTMF_DIGITS = 3,
+                        END_OF_SINGLE_UTTERANCE = 2,
+                        PARTIAL_DTMF_DIGITS = 4,
+                        SPEECH_ACTIVITY_BEGIN = 5,
+                        SPEECH_ACTIVITY_END = 6
                     }
                 }
 
@@ -32455,6 +32465,9 @@ export namespace google {
 
                     /** SearchKnowledgeDebugInfo serviceLatency */
                     serviceLatency?: (google.cloud.dialogflow.v2.IServiceLatency|null);
+
+                    /** SearchKnowledgeDebugInfo cesDebugInfo */
+                    cesDebugInfo?: (google.protobuf.IStruct|null);
                 }
 
                 /** Represents a SearchKnowledgeDebugInfo. */
@@ -32477,6 +32490,9 @@ export namespace google {
 
                     /** SearchKnowledgeDebugInfo serviceLatency. */
                     public serviceLatency?: (google.cloud.dialogflow.v2.IServiceLatency|null);
+
+                    /** SearchKnowledgeDebugInfo cesDebugInfo. */
+                    public cesDebugInfo?: (google.protobuf.IStruct|null);
 
                     /**
                      * Creates a new SearchKnowledgeDebugInfo instance using the specified properties.
@@ -72934,6 +72950,9 @@ export namespace google {
                     /** InputAudioConfig singleUtterance */
                     singleUtterance?: (boolean|null);
 
+                    /** InputAudioConfig enableVoiceActivityEvents */
+                    enableVoiceActivityEvents?: (boolean|null);
+
                     /** InputAudioConfig disableNoSpeechRecognizedEvent */
                     disableNoSpeechRecognizedEvent?: (boolean|null);
 
@@ -72988,6 +73007,9 @@ export namespace google {
 
                     /** InputAudioConfig singleUtterance. */
                     public singleUtterance: boolean;
+
+                    /** InputAudioConfig enableVoiceActivityEvents. */
+                    public enableVoiceActivityEvents: boolean;
 
                     /** InputAudioConfig disableNoSpeechRecognizedEvent. */
                     public disableNoSpeechRecognizedEvent: boolean;
@@ -75490,7 +75512,9 @@ export namespace google {
                         TRANSCRIPT = 1,
                         END_OF_SINGLE_UTTERANCE = 2,
                         DTMF_DIGITS = 3,
-                        PARTIAL_DTMF_DIGITS = 4
+                        PARTIAL_DTMF_DIGITS = 4,
+                        SPEECH_ACTIVITY_BEGIN = 5,
+                        SPEECH_ACTIVITY_END = 6
                     }
                 }
 
@@ -90887,6 +90911,9 @@ export namespace google {
 
                     /** SearchKnowledgeDebugInfo serviceLatency */
                     serviceLatency?: (google.cloud.dialogflow.v2beta1.IServiceLatency|null);
+
+                    /** SearchKnowledgeDebugInfo cesDebugInfo */
+                    cesDebugInfo?: (google.protobuf.IStruct|null);
                 }
 
                 /** Represents a SearchKnowledgeDebugInfo. */
@@ -90909,6 +90936,9 @@ export namespace google {
 
                     /** SearchKnowledgeDebugInfo serviceLatency. */
                     public serviceLatency?: (google.cloud.dialogflow.v2beta1.IServiceLatency|null);
+
+                    /** SearchKnowledgeDebugInfo cesDebugInfo. */
+                    public cesDebugInfo?: (google.protobuf.IStruct|null);
 
                     /**
                      * Creates a new SearchKnowledgeDebugInfo instance using the specified properties.
