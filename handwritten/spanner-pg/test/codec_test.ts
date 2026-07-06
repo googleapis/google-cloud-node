@@ -24,7 +24,7 @@ describe('Codec Type Transformations', () => {
     it('should encode null / undefined', () => {
       const res = encodeValue(null);
       assert.deepStrictEqual(res.valueProto, {nullValue: 0});
-      assert.strictEqual(res.typeProto.code, TypeCode.TYPE_CODE_UNSPECIFIED);
+      assert.strictEqual(res.typeProto.code, TypeCode.STRING);
     });
 
     it('should encode string', () => {

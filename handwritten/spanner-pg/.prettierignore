@@ -2,3 +2,4 @@
 **/coverage
 build/
 docs/
+test/pg-suite/

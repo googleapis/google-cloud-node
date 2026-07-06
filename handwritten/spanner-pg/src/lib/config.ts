@@ -18,12 +18,17 @@ import {ClientConfig} from './client.js';
  * Resolves a pg-compatible config or connection string into a Spanner-compatible DSN.
  */
 export function resolveDsn(config?: string | ClientConfig): string {
-  if (!config) {
+  if (
+    !config ||
+    (typeof config === 'object' && !config.database && !config.connectionString)
+  ) {
     const pgConnStr = process.env.DATABASE_URL || process.env.PGCONNECTSTRING;
     if (pgConnStr) {
       return parseConnectionString(pgConnStr);
     }
-    throw new Error('No connection configuration specified');
+    if (!config) {
+      throw new Error('No connection configuration specified');
+    }
   }
 
   if (typeof config === 'string') {
@@ -37,7 +42,12 @@ export function resolveDsn(config?: string | ClientConfig): string {
   // Build DSN from parts
   let dbPath = '';
   if (config.database) {
-    if (config.database.includes('projects/')) {
+    if (
+      config.database.startsWith('postgresql://') ||
+      config.database.startsWith('postgres://')
+    ) {
+      dbPath = parseConnectionString(config.database);
+    } else if (config.database.includes('projects/')) {
       dbPath = config.database;
     } else if (config.project && config.instance) {
       dbPath = `projects/${config.project}/instances/${config.instance}/databases/${config.database}`;
@@ -58,7 +68,9 @@ export function resolveDsn(config?: string | ClientConfig): string {
 
   if (config.host) {
     const port = config.port || 5432;
-    queryParams.push(`api_endpoint=${config.host}:${port}`);
+    if (!(config.host === 'localhost' && port === 5432)) {
+      queryParams.push(`api_endpoint=${config.host}:${port}`);
+    }
   }
 
   if (process.env.SPANNER_EMULATOR_HOST) {

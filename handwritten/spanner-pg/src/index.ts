@@ -14,10 +14,41 @@
 
 import {Client} from './lib/client.js';
 import {Pool} from './lib/pool.js';
+import {Query} from './lib/query.js';
 
-export {Client, Pool};
+export {Client, Pool, Query};
 export const native = {Client, Pool};
 export const types = {
   getTypeParser: (id: number) => (val: string) => val,
   setTypeParser: (id: number, parser: Function) => {},
 };
+
+export const defaults = {
+  host: 'localhost',
+  port: 5432,
+  user: 'postgres',
+  password: '',
+  database: 'postgres',
+};
+
+export class DatabaseError extends Error {
+  severity?: string;
+  code?: string;
+  detail?: string;
+  hint?: string;
+  position?: string;
+  internalPosition?: string;
+  internalQuery?: string;
+  where?: string;
+  schema?: string;
+  table?: string;
+  column?: string;
+  dataType?: string;
+  constraint?: string;
+  file?: string;
+  line?: string;
+  routine?: string;
+}
+
+export const escapeIdentifier = (str: string) => `"${str.replace(/"/g, '""')}"`;
+export const escapeLiteral = (str: string) => `'${str.replace(/'/g, "''")}'`;

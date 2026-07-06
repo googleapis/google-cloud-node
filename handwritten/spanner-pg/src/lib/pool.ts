@@ -83,9 +83,8 @@ export class Pool extends EventEmitter {
       }
       return client;
     } catch (err: any) {
-      this.emit('error', err);
       if (callback) {
-        callback(err);
+        callback(err, undefined as any, (() => {}) as any);
         return undefined as any;
       }
       throw err;

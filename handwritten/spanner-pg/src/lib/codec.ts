@@ -28,7 +28,7 @@ export function encodeValue(val: any): EncodedParam {
   if (val === null || val === undefined) {
     return {
       valueProto: {nullValue: 0},
-      typeProto: {code: TypeCode.TYPE_CODE_UNSPECIFIED},
+      typeProto: {code: TypeCode.STRING},
     };
   }
 
@@ -85,14 +85,14 @@ export function encodeValue(val: any): EncodedParam {
       };
     }
     const encodedElements = val.map(encodeValue);
-    const elementTypeCode = encodedElements[0].typeProto.code;
+    const elementTypeProto = encodedElements[0].typeProto;
     return {
       valueProto: {
         listValue: {values: encodedElements.map(el => el.valueProto)},
       },
       typeProto: {
         code: TypeCode.ARRAY,
-        arrayElementType: {code: elementTypeCode},
+        arrayElementType: elementTypeProto,
       },
     };
   }

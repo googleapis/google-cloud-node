@@ -20,5 +20,8 @@
     "test/*.ts",
     "test/**/*.ts",
     "production-test/*.ts"
+  ],
+  "exclude": [
+    "test/pg-suite/cloudflare"
   ]
 }
