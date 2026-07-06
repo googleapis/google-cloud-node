@@ -901,9 +901,15 @@ describe('v1beta.ExecutionsClient', () => {
       assert(
         (client.descriptors.page.listExecutions.createStream as SinonStub)
           .getCall(0)
+<<<<<<< HEAD
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams,
           ),
+=======
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+>>>>>>> main
       );
     });
 
@@ -953,9 +959,15 @@ describe('v1beta.ExecutionsClient', () => {
       assert(
         (client.descriptors.page.listExecutions.createStream as SinonStub)
           .getCall(0)
+<<<<<<< HEAD
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams,
           ),
+=======
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+>>>>>>> main
       );
     });
 
@@ -1003,9 +1015,15 @@ describe('v1beta.ExecutionsClient', () => {
       assert(
         (client.descriptors.page.listExecutions.asyncIterate as SinonStub)
           .getCall(0)
+<<<<<<< HEAD
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams,
           ),
+=======
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+>>>>>>> main
       );
     });
 
@@ -1044,9 +1062,15 @@ describe('v1beta.ExecutionsClient', () => {
       assert(
         (client.descriptors.page.listExecutions.asyncIterate as SinonStub)
           .getCall(0)
+<<<<<<< HEAD
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams,
           ),
+=======
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+>>>>>>> main
       );
     });
   });

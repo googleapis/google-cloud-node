@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "@google-cloud/typeless-sample-bot": "^2.1.0",
+    "@types/node": "^25.6.0",
     "gts": "^5.0.0",
     "mocha": "^10.0.0"
   }
