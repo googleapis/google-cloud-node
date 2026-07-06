@@ -2805,8 +2805,7 @@ describe('v1alpha2.DomainsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.domains.v1alpha2.IRegistration[]
-              | null,
+              protos.google.cloud.domains.v1alpha2.IRegistration[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2914,9 +2913,9 @@ describe('v1alpha2.DomainsClient', () => {
       assert(
         (client.descriptors.page.listRegistrations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2964,9 +2963,9 @@ describe('v1alpha2.DomainsClient', () => {
       assert(
         (client.descriptors.page.listRegistrations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3014,9 +3013,9 @@ describe('v1alpha2.DomainsClient', () => {
       assert(
         (client.descriptors.page.listRegistrations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3055,9 +3054,9 @@ describe('v1alpha2.DomainsClient', () => {
       assert(
         (client.descriptors.page.listRegistrations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

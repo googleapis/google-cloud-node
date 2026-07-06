@@ -948,8 +948,7 @@ describe('v2.SessionEntityTypesClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.dialogflow.v2.ISessionEntityType[]
-              | null,
+              protos.google.cloud.dialogflow.v2.ISessionEntityType[] | null,
           ) => {
             if (err) {
               reject(err);

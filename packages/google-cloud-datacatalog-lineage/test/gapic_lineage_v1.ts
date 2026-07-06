@@ -2415,8 +2415,7 @@ describe('v1.LineageClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.datacatalog.lineage.v1.IProcess[]
-              | null,
+              protos.google.cloud.datacatalog.lineage.v1.IProcess[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2524,9 +2523,9 @@ describe('v1.LineageClient', () => {
       assert(
         (client.descriptors.page.listProcesses.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2574,9 +2573,9 @@ describe('v1.LineageClient', () => {
       assert(
         (client.descriptors.page.listProcesses.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2624,9 +2623,9 @@ describe('v1.LineageClient', () => {
       assert(
         (client.descriptors.page.listProcesses.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2665,9 +2664,9 @@ describe('v1.LineageClient', () => {
       assert(
         (client.descriptors.page.listProcesses.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2849,9 +2848,9 @@ describe('v1.LineageClient', () => {
       assert(
         (client.descriptors.page.listRuns.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2900,9 +2899,9 @@ describe('v1.LineageClient', () => {
       assert(
         (client.descriptors.page.listRuns.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2948,9 +2947,9 @@ describe('v1.LineageClient', () => {
       assert(
         (client.descriptors.page.listRuns.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2989,9 +2988,9 @@ describe('v1.LineageClient', () => {
       assert(
         (client.descriptors.page.listRuns.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3070,8 +3069,7 @@ describe('v1.LineageClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.datacatalog.lineage.v1.ILineageEvent[]
-              | null,
+              protos.google.cloud.datacatalog.lineage.v1.ILineageEvent[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -3181,9 +3179,9 @@ describe('v1.LineageClient', () => {
       assert(
         (client.descriptors.page.listLineageEvents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3233,9 +3231,9 @@ describe('v1.LineageClient', () => {
       assert(
         (client.descriptors.page.listLineageEvents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3283,9 +3281,9 @@ describe('v1.LineageClient', () => {
       assert(
         (client.descriptors.page.listLineageEvents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3324,9 +3322,9 @@ describe('v1.LineageClient', () => {
       assert(
         (client.descriptors.page.listLineageEvents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3511,9 +3509,9 @@ describe('v1.LineageClient', () => {
       assert(
         (client.descriptors.page.searchLinks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3562,9 +3560,9 @@ describe('v1.LineageClient', () => {
       assert(
         (client.descriptors.page.searchLinks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3611,9 +3609,9 @@ describe('v1.LineageClient', () => {
       assert(
         (client.descriptors.page.searchLinks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3654,9 +3652,9 @@ describe('v1.LineageClient', () => {
       assert(
         (client.descriptors.page.searchLinks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3736,8 +3734,7 @@ describe('v1.LineageClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.datacatalog.lineage.v1.IProcessLinks[]
-              | null,
+              protos.google.cloud.datacatalog.lineage.v1.IProcessLinks[] | null,
           ) => {
             if (err) {
               reject(err);

@@ -10461,9 +10461,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listConversations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10514,9 +10514,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listConversations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10565,9 +10565,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listConversations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10607,9 +10607,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listConversations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -10690,8 +10690,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.contactcenterinsights.v1.IAnalysis[]
-              | null,
+              protos.google.cloud.contactcenterinsights.v1.IAnalysis[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -10801,9 +10800,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listAnalyses.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10854,9 +10853,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listAnalyses.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10905,9 +10904,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listAnalyses.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -10947,9 +10946,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listAnalyses.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -11144,9 +11143,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listPhraseMatchers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11197,9 +11196,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listPhraseMatchers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11248,9 +11247,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listPhraseMatchers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11290,9 +11289,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listPhraseMatchers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -11486,9 +11485,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listAnalysisRules.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11539,9 +11538,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listAnalysisRules.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11590,9 +11589,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listAnalysisRules.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11632,9 +11631,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listAnalysisRules.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -11715,8 +11714,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.contactcenterinsights.v1.IView[]
-              | null,
+              protos.google.cloud.contactcenterinsights.v1.IView[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -11823,9 +11821,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listViews.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11876,9 +11874,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listViews.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11926,9 +11924,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listViews.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -11969,9 +11967,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listViews.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -12052,8 +12050,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.contactcenterinsights.v1.IQaQuestion[]
-              | null,
+              protos.google.cloud.contactcenterinsights.v1.IQaQuestion[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -12165,9 +12162,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listQaQuestions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -12218,9 +12215,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listQaQuestions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -12269,9 +12266,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listQaQuestions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -12311,9 +12308,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listQaQuestions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -12507,9 +12504,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listQaScorecards.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -12560,9 +12557,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listQaScorecards.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -12611,9 +12608,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listQaScorecards.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -12653,9 +12650,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listQaScorecards.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -13216,9 +13213,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listFeedbackLabels.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -13269,9 +13266,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listFeedbackLabels.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -13320,9 +13317,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listFeedbackLabels.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -13362,9 +13359,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listFeedbackLabels.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

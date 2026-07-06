@@ -1199,8 +1199,7 @@ describe('v2.ConversationDatasetsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.dialogflow.v2.IConversationDataset[]
-              | null,
+              protos.google.cloud.dialogflow.v2.IConversationDataset[] | null,
           ) => {
             if (err) {
               reject(err);

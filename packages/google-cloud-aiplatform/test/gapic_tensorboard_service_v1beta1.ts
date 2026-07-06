@@ -4415,8 +4415,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.aiplatform.v1beta1.ITensorboard[]
-              | null,
+              protos.google.cloud.aiplatform.v1beta1.ITensorboard[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4526,9 +4525,9 @@ describe('v1beta1.TensorboardServiceClient', () => {
       assert(
         (client.descriptors.page.listTensorboards.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4577,9 +4576,9 @@ describe('v1beta1.TensorboardServiceClient', () => {
       assert(
         (client.descriptors.page.listTensorboards.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4628,9 +4627,9 @@ describe('v1beta1.TensorboardServiceClient', () => {
       assert(
         (client.descriptors.page.listTensorboards.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4670,9 +4669,9 @@ describe('v1beta1.TensorboardServiceClient', () => {
       assert(
         (client.descriptors.page.listTensorboards.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5120,8 +5119,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.aiplatform.v1beta1.ITensorboardRun[]
-              | null,
+              protos.google.cloud.aiplatform.v1beta1.ITensorboardRun[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -5231,9 +5229,9 @@ describe('v1beta1.TensorboardServiceClient', () => {
       assert(
         (client.descriptors.page.listTensorboardRuns.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5282,9 +5280,9 @@ describe('v1beta1.TensorboardServiceClient', () => {
       assert(
         (client.descriptors.page.listTensorboardRuns.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5333,9 +5331,9 @@ describe('v1beta1.TensorboardServiceClient', () => {
       assert(
         (client.descriptors.page.listTensorboardRuns.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5375,9 +5373,9 @@ describe('v1beta1.TensorboardServiceClient', () => {
       assert(
         (client.descriptors.page.listTensorboardRuns.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

@@ -1969,8 +1969,7 @@ describe('v1.ServiceManagerClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.api.servicemanagement.v1.IManagedService[]
-              | null,
+              protos.google.api.servicemanagement.v1.IManagedService[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2314,9 +2313,9 @@ describe('v1.ServiceManagerClient', () => {
       assert(
         (client.descriptors.page.listServiceConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2360,9 +2359,9 @@ describe('v1.ServiceManagerClient', () => {
       assert(
         (client.descriptors.page.listServiceConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2403,9 +2402,9 @@ describe('v1.ServiceManagerClient', () => {
       assert(
         (client.descriptors.page.listServiceConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2443,9 +2442,9 @@ describe('v1.ServiceManagerClient', () => {
       assert(
         (client.descriptors.page.listServiceConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2631,9 +2630,9 @@ describe('v1.ServiceManagerClient', () => {
       assert(
         (client.descriptors.page.listServiceRollouts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2680,9 +2679,9 @@ describe('v1.ServiceManagerClient', () => {
       assert(
         (client.descriptors.page.listServiceRollouts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2729,9 +2728,9 @@ describe('v1.ServiceManagerClient', () => {
       assert(
         (client.descriptors.page.listServiceRollouts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2769,9 +2768,9 @@ describe('v1.ServiceManagerClient', () => {
       assert(
         (client.descriptors.page.listServiceRollouts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

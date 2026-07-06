@@ -1708,9 +1708,9 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
       assert(
         (client.descriptors.page.listWorkloads.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1763,9 +1763,9 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
       assert(
         (client.descriptors.page.listWorkloads.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1816,9 +1816,9 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
       assert(
         (client.descriptors.page.listWorkloads.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1860,9 +1860,9 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
       assert(
         (client.descriptors.page.listWorkloads.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2064,9 +2064,9 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
       assert(
         (client.descriptors.page.listCustomers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2119,9 +2119,9 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
       assert(
         (client.descriptors.page.listCustomers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2172,9 +2172,9 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
       assert(
         (client.descriptors.page.listCustomers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2216,9 +2216,9 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
       assert(
         (client.descriptors.page.listCustomers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

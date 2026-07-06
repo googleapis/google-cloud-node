@@ -460,8 +460,7 @@ describe('v1beta.DatabaseCenterClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.databasecenter.v1beta.IProduct[]
-              | null,
+              protos.google.cloud.databasecenter.v1beta.IProduct[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1329,9 +1328,9 @@ describe('v1beta.DatabaseCenterClient', () => {
       assert(
         (client.descriptors.page.aggregateQueryStats.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1381,9 +1380,9 @@ describe('v1beta.DatabaseCenterClient', () => {
       assert(
         (client.descriptors.page.aggregateQueryStats.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1431,9 +1430,9 @@ describe('v1beta.DatabaseCenterClient', () => {
       assert(
         (client.descriptors.page.aggregateQueryStats.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1472,9 +1471,9 @@ describe('v1beta.DatabaseCenterClient', () => {
       assert(
         (client.descriptors.page.aggregateQueryStats.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

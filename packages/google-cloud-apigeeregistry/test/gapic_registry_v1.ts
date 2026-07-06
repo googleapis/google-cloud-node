@@ -4209,9 +4209,9 @@ describe('v1.RegistryClient', () => {
       assert(
         (client.descriptors.page.listApis.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4260,9 +4260,9 @@ describe('v1.RegistryClient', () => {
       assert(
         (client.descriptors.page.listApis.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4302,9 +4302,9 @@ describe('v1.RegistryClient', () => {
       assert(
         (client.descriptors.page.listApis.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4343,9 +4343,9 @@ describe('v1.RegistryClient', () => {
       assert(
         (client.descriptors.page.listApis.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4531,9 +4531,9 @@ describe('v1.RegistryClient', () => {
       assert(
         (client.descriptors.page.listApiVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4581,9 +4581,9 @@ describe('v1.RegistryClient', () => {
       assert(
         (client.descriptors.page.listApiVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4630,9 +4630,9 @@ describe('v1.RegistryClient', () => {
       assert(
         (client.descriptors.page.listApiVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4671,9 +4671,9 @@ describe('v1.RegistryClient', () => {
       assert(
         (client.descriptors.page.listApiVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4858,9 +4858,9 @@ describe('v1.RegistryClient', () => {
       assert(
         (client.descriptors.page.listApiSpecs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4909,9 +4909,9 @@ describe('v1.RegistryClient', () => {
       assert(
         (client.descriptors.page.listApiSpecs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4958,9 +4958,9 @@ describe('v1.RegistryClient', () => {
       assert(
         (client.descriptors.page.listApiSpecs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4998,9 +4998,9 @@ describe('v1.RegistryClient', () => {
       assert(
         (client.descriptors.page.listApiSpecs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5186,9 +5186,9 @@ describe('v1.RegistryClient', () => {
       assert(
         (client.descriptors.page.listApiSpecRevisions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5235,9 +5235,9 @@ describe('v1.RegistryClient', () => {
       assert(
         (client.descriptors.page.listApiSpecRevisions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5284,9 +5284,9 @@ describe('v1.RegistryClient', () => {
       assert(
         (client.descriptors.page.listApiSpecRevisions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5324,9 +5324,9 @@ describe('v1.RegistryClient', () => {
       assert(
         (client.descriptors.page.listApiSpecRevisions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5406,8 +5406,7 @@ describe('v1.RegistryClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.apigeeregistry.v1.IApiDeployment[]
-              | null,
+              protos.google.cloud.apigeeregistry.v1.IApiDeployment[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -5515,9 +5514,9 @@ describe('v1.RegistryClient', () => {
       assert(
         (client.descriptors.page.listApiDeployments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5565,9 +5564,9 @@ describe('v1.RegistryClient', () => {
       assert(
         (client.descriptors.page.listApiDeployments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5615,9 +5614,9 @@ describe('v1.RegistryClient', () => {
       assert(
         (client.descriptors.page.listApiDeployments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5656,9 +5655,9 @@ describe('v1.RegistryClient', () => {
       assert(
         (client.descriptors.page.listApiDeployments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5738,8 +5737,7 @@ describe('v1.RegistryClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.apigeeregistry.v1.IApiDeployment[]
-              | null,
+              protos.google.cloud.apigeeregistry.v1.IApiDeployment[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -6198,9 +6196,9 @@ describe('v1.RegistryClient', () => {
       assert(
         (client.descriptors.page.listArtifacts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6247,9 +6245,9 @@ describe('v1.RegistryClient', () => {
       assert(
         (client.descriptors.page.listArtifacts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6296,9 +6294,9 @@ describe('v1.RegistryClient', () => {
       assert(
         (client.descriptors.page.listArtifacts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6336,9 +6334,9 @@ describe('v1.RegistryClient', () => {
       assert(
         (client.descriptors.page.listArtifacts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

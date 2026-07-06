@@ -958,8 +958,7 @@ describe('v1beta1.GenAiCacheServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.aiplatform.v1beta1.ICachedContent[]
-              | null,
+              protos.google.cloud.aiplatform.v1beta1.ICachedContent[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1069,9 +1068,9 @@ describe('v1beta1.GenAiCacheServiceClient', () => {
       assert(
         (client.descriptors.page.listCachedContents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1120,9 +1119,9 @@ describe('v1beta1.GenAiCacheServiceClient', () => {
       assert(
         (client.descriptors.page.listCachedContents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1171,9 +1170,9 @@ describe('v1beta1.GenAiCacheServiceClient', () => {
       assert(
         (client.descriptors.page.listCachedContents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1213,9 +1212,9 @@ describe('v1beta1.GenAiCacheServiceClient', () => {
       assert(
         (client.descriptors.page.listCachedContents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

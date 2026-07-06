@@ -590,8 +590,7 @@ describe('v1.OperatingSystemVersionServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.ads.admanager.v1.IOperatingSystemVersion[]
-              | null,
+              protos.google.ads.admanager.v1.IOperatingSystemVersion[] | null,
           ) => {
             if (err) {
               reject(err);

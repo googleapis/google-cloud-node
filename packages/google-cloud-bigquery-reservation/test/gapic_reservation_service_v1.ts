@@ -3508,8 +3508,7 @@ describe('v1.ReservationServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.bigquery.reservation.v1.IReservation[]
-              | null,
+              protos.google.cloud.bigquery.reservation.v1.IReservation[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -3619,9 +3618,9 @@ describe('v1.ReservationServiceClient', () => {
       assert(
         (client.descriptors.page.listReservations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3671,9 +3670,9 @@ describe('v1.ReservationServiceClient', () => {
       assert(
         (client.descriptors.page.listReservations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3721,9 +3720,9 @@ describe('v1.ReservationServiceClient', () => {
       assert(
         (client.descriptors.page.listReservations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3762,9 +3761,9 @@ describe('v1.ReservationServiceClient', () => {
       assert(
         (client.descriptors.page.listReservations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4202,8 +4201,7 @@ describe('v1.ReservationServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.bigquery.reservation.v1.IAssignment[]
-              | null,
+              protos.google.cloud.bigquery.reservation.v1.IAssignment[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4313,9 +4311,9 @@ describe('v1.ReservationServiceClient', () => {
       assert(
         (client.descriptors.page.listAssignments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4365,9 +4363,9 @@ describe('v1.ReservationServiceClient', () => {
       assert(
         (client.descriptors.page.listAssignments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4415,9 +4413,9 @@ describe('v1.ReservationServiceClient', () => {
       assert(
         (client.descriptors.page.listAssignments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4456,9 +4454,9 @@ describe('v1.ReservationServiceClient', () => {
       assert(
         (client.descriptors.page.listAssignments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4540,8 +4538,7 @@ describe('v1.ReservationServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.bigquery.reservation.v1.IAssignment[]
-              | null,
+              protos.google.cloud.bigquery.reservation.v1.IAssignment[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4656,9 +4653,9 @@ describe('v1.ReservationServiceClient', () => {
       assert(
         (client.descriptors.page.searchAssignments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4710,9 +4707,9 @@ describe('v1.ReservationServiceClient', () => {
       assert(
         (client.descriptors.page.searchAssignments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4762,9 +4759,9 @@ describe('v1.ReservationServiceClient', () => {
       assert(
         (client.descriptors.page.searchAssignments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4805,9 +4802,9 @@ describe('v1.ReservationServiceClient', () => {
       assert(
         (client.descriptors.page.searchAssignments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4887,8 +4884,7 @@ describe('v1.ReservationServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.bigquery.reservation.v1.IAssignment[]
-              | null,
+              protos.google.cloud.bigquery.reservation.v1.IAssignment[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4998,9 +4994,9 @@ describe('v1.ReservationServiceClient', () => {
       assert(
         (client.descriptors.page.searchAllAssignments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5050,9 +5046,9 @@ describe('v1.ReservationServiceClient', () => {
       assert(
         (client.descriptors.page.searchAllAssignments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5100,9 +5096,9 @@ describe('v1.ReservationServiceClient', () => {
       assert(
         (client.descriptors.page.searchAllAssignments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5141,9 +5137,9 @@ describe('v1.ReservationServiceClient', () => {
       assert(
         (client.descriptors.page.searchAllAssignments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

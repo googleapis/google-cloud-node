@@ -6739,9 +6739,9 @@ describe('v1.DataMigrationServiceClient', () => {
       assert(
         (client.descriptors.page.listMigrationJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6789,9 +6789,9 @@ describe('v1.DataMigrationServiceClient', () => {
       assert(
         (client.descriptors.page.listMigrationJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6839,9 +6839,9 @@ describe('v1.DataMigrationServiceClient', () => {
       assert(
         (client.descriptors.page.listMigrationJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6880,9 +6880,9 @@ describe('v1.DataMigrationServiceClient', () => {
       assert(
         (client.descriptors.page.listMigrationJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6964,8 +6964,7 @@ describe('v1.DataMigrationServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.clouddms.v1.IConnectionProfile[]
-              | null,
+              protos.google.cloud.clouddms.v1.IConnectionProfile[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -7326,8 +7325,7 @@ describe('v1.DataMigrationServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.clouddms.v1.IPrivateConnection[]
-              | null,
+              protos.google.cloud.clouddms.v1.IPrivateConnection[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -7688,8 +7686,7 @@ describe('v1.DataMigrationServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.clouddms.v1.IConversionWorkspace[]
-              | null,
+              protos.google.cloud.clouddms.v1.IConversionWorkspace[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -8157,9 +8154,9 @@ describe('v1.DataMigrationServiceClient', () => {
       assert(
         (client.descriptors.page.listMappingRules.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -8207,9 +8204,9 @@ describe('v1.DataMigrationServiceClient', () => {
       assert(
         (client.descriptors.page.listMappingRules.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -8257,9 +8254,9 @@ describe('v1.DataMigrationServiceClient', () => {
       assert(
         (client.descriptors.page.listMappingRules.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -8298,9 +8295,9 @@ describe('v1.DataMigrationServiceClient', () => {
       assert(
         (client.descriptors.page.listMappingRules.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -8809,9 +8806,9 @@ describe('v1.DataMigrationServiceClient', () => {
       assert(
         (client.descriptors.page.fetchStaticIps.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -8856,9 +8853,9 @@ describe('v1.DataMigrationServiceClient', () => {
       assert(
         (client.descriptors.page.fetchStaticIps.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -8896,9 +8893,9 @@ describe('v1.DataMigrationServiceClient', () => {
       assert(
         (client.descriptors.page.fetchStaticIps.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -8937,9 +8934,9 @@ describe('v1.DataMigrationServiceClient', () => {
       assert(
         (client.descriptors.page.fetchStaticIps.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

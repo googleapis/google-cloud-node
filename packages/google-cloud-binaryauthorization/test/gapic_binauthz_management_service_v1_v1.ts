@@ -1297,8 +1297,7 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.binaryauthorization.v1.IAttestor[]
-              | null,
+              protos.google.cloud.binaryauthorization.v1.IAttestor[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1412,9 +1411,9 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       assert(
         (client.descriptors.page.listAttestors.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1465,9 +1464,9 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       assert(
         (client.descriptors.page.listAttestors.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1518,9 +1517,9 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       assert(
         (client.descriptors.page.listAttestors.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1562,9 +1561,9 @@ describe('v1.BinauthzManagementServiceV1Client', () => {
       assert(
         (client.descriptors.page.listAttestors.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

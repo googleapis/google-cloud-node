@@ -683,8 +683,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.apihub.v1.IDiscoveredApiObservation[]
-              | null,
+              protos.google.cloud.apihub.v1.IDiscoveredApiObservation[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1048,8 +1047,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.apihub.v1.IDiscoveredApiOperation[]
-              | null,
+              protos.google.cloud.apihub.v1.IDiscoveredApiOperation[] | null,
           ) => {
             if (err) {
               reject(err);

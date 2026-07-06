@@ -1411,8 +1411,7 @@ describe('v1.PersistentResourceServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.aiplatform.v1.IPersistentResource[]
-              | null,
+              protos.google.cloud.aiplatform.v1.IPersistentResource[] | null,
           ) => {
             if (err) {
               reject(err);

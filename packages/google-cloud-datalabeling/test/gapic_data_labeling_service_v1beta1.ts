@@ -4349,9 +4349,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listDatasets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4402,9 +4402,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listDatasets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4452,9 +4452,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listDatasets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4494,9 +4494,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listDatasets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4577,8 +4577,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.datalabeling.v1beta1.IDataItem[]
-              | null,
+              protos.google.cloud.datalabeling.v1beta1.IDataItem[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4688,9 +4687,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listDataItems.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4739,9 +4738,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listDataItems.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4790,9 +4789,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listDataItems.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4832,9 +4831,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listDataItems.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5390,9 +5389,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listExamples.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5443,9 +5442,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listExamples.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5493,9 +5492,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listExamples.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5535,9 +5534,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listExamples.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5984,8 +5983,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.datalabeling.v1beta1.IInstruction[]
-              | null,
+              protos.google.cloud.datalabeling.v1beta1.IInstruction[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -6095,9 +6093,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listInstructions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6146,9 +6144,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listInstructions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6197,9 +6195,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listInstructions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6239,9 +6237,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listInstructions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6322,8 +6320,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.datalabeling.v1beta1.IEvaluation[]
-              | null,
+              protos.google.cloud.datalabeling.v1beta1.IEvaluation[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -6433,9 +6430,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.searchEvaluations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6484,9 +6481,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.searchEvaluations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6535,9 +6532,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.searchEvaluations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6577,9 +6574,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.searchEvaluations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7027,8 +7024,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.datalabeling.v1beta1.IEvaluationJob[]
-              | null,
+              protos.google.cloud.datalabeling.v1beta1.IEvaluationJob[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -7140,9 +7136,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listEvaluationJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -7193,9 +7189,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listEvaluationJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -7244,9 +7240,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listEvaluationJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -7286,9 +7282,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listEvaluationJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

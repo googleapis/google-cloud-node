@@ -1113,9 +1113,9 @@ describe('v1.ReportServiceClient', () => {
       assert(
         (client.descriptors.page.listReports.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1161,9 +1161,9 @@ describe('v1.ReportServiceClient', () => {
       assert(
         (client.descriptors.page.listReports.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1204,9 +1204,9 @@ describe('v1.ReportServiceClient', () => {
       assert(
         (client.descriptors.page.listReports.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1246,9 +1246,9 @@ describe('v1.ReportServiceClient', () => {
       assert(
         (client.descriptors.page.listReports.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1328,8 +1328,7 @@ describe('v1.ReportServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.ads.admanager.v1.ReportDataTable.IRow[]
-              | null,
+              protos.google.ads.admanager.v1.ReportDataTable.IRow[] | null,
           ) => {
             if (err) {
               reject(err);

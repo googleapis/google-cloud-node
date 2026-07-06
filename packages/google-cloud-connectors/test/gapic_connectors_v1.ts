@@ -2244,9 +2244,9 @@ describe('v1.ConnectorsClient', () => {
       assert(
         (client.descriptors.page.listConnections.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2293,9 +2293,9 @@ describe('v1.ConnectorsClient', () => {
       assert(
         (client.descriptors.page.listConnections.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2342,9 +2342,9 @@ describe('v1.ConnectorsClient', () => {
       assert(
         (client.descriptors.page.listConnections.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2382,9 +2382,9 @@ describe('v1.ConnectorsClient', () => {
       assert(
         (client.descriptors.page.listConnections.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2551,9 +2551,9 @@ describe('v1.ConnectorsClient', () => {
       assert(
         (client.descriptors.page.listProviders.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2600,9 +2600,9 @@ describe('v1.ConnectorsClient', () => {
       assert(
         (client.descriptors.page.listProviders.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2643,9 +2643,9 @@ describe('v1.ConnectorsClient', () => {
       assert(
         (client.descriptors.page.listProviders.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2683,9 +2683,9 @@ describe('v1.ConnectorsClient', () => {
       assert(
         (client.descriptors.page.listProviders.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2870,9 +2870,9 @@ describe('v1.ConnectorsClient', () => {
       assert(
         (client.descriptors.page.listConnectors.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2919,9 +2919,9 @@ describe('v1.ConnectorsClient', () => {
       assert(
         (client.descriptors.page.listConnectors.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2968,9 +2968,9 @@ describe('v1.ConnectorsClient', () => {
       assert(
         (client.descriptors.page.listConnectors.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3008,9 +3008,9 @@ describe('v1.ConnectorsClient', () => {
       assert(
         (client.descriptors.page.listConnectors.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3090,8 +3090,7 @@ describe('v1.ConnectorsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.connectors.v1.IConnectorVersion[]
-              | null,
+              protos.google.cloud.connectors.v1.IConnectorVersion[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -3445,8 +3444,7 @@ describe('v1.ConnectorsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.connectors.v1.IRuntimeEntitySchema[]
-              | null,
+              protos.google.cloud.connectors.v1.IRuntimeEntitySchema[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -3800,8 +3798,7 @@ describe('v1.ConnectorsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.connectors.v1.IRuntimeActionSchema[]
-              | null,
+              protos.google.cloud.connectors.v1.IRuntimeActionSchema[] | null,
           ) => {
             if (err) {
               reject(err);

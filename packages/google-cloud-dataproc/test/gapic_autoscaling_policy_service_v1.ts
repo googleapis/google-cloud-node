@@ -980,8 +980,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.dataproc.v1.IAutoscalingPolicy[]
-              | null,
+              protos.google.cloud.dataproc.v1.IAutoscalingPolicy[] | null,
           ) => {
             if (err) {
               reject(err);
