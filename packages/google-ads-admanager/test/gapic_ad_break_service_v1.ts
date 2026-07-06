@@ -1024,9 +1024,9 @@ describe('v1.AdBreakServiceClient', () => {
       assert(
         (client.descriptors.page.listAdBreaks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1075,9 +1075,9 @@ describe('v1.AdBreakServiceClient', () => {
       assert(
         (client.descriptors.page.listAdBreaks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1118,9 +1118,9 @@ describe('v1.AdBreakServiceClient', () => {
       assert(
         (client.descriptors.page.listAdBreaks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1158,9 +1158,9 @@ describe('v1.AdBreakServiceClient', () => {
       assert(
         (client.descriptors.page.listAdBreaks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

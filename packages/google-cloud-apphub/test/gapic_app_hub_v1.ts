@@ -3945,8 +3945,7 @@ describe('v1.AppHubClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.apphub.v1.IServiceProjectAttachment[]
-              | null,
+              protos.google.cloud.apphub.v1.IServiceProjectAttachment[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4744,9 +4743,9 @@ describe('v1.AppHubClient', () => {
       assert(
         (client.descriptors.page.listServices.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4792,9 +4791,9 @@ describe('v1.AppHubClient', () => {
       assert(
         (client.descriptors.page.listServices.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4835,9 +4834,9 @@ describe('v1.AppHubClient', () => {
       assert(
         (client.descriptors.page.listServices.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4875,9 +4874,9 @@ describe('v1.AppHubClient', () => {
       assert(
         (client.descriptors.page.listServices.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5396,9 +5395,9 @@ describe('v1.AppHubClient', () => {
       assert(
         (client.descriptors.page.listWorkloads.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5445,9 +5444,9 @@ describe('v1.AppHubClient', () => {
       assert(
         (client.descriptors.page.listWorkloads.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5488,9 +5487,9 @@ describe('v1.AppHubClient', () => {
       assert(
         (client.descriptors.page.listWorkloads.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5528,9 +5527,9 @@ describe('v1.AppHubClient', () => {
       assert(
         (client.descriptors.page.listWorkloads.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5697,9 +5696,9 @@ describe('v1.AppHubClient', () => {
       assert(
         (client.descriptors.page.listApplications.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5746,9 +5745,9 @@ describe('v1.AppHubClient', () => {
       assert(
         (client.descriptors.page.listApplications.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5789,9 +5788,9 @@ describe('v1.AppHubClient', () => {
       assert(
         (client.descriptors.page.listApplications.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5829,9 +5828,9 @@ describe('v1.AppHubClient', () => {
       assert(
         (client.descriptors.page.listApplications.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

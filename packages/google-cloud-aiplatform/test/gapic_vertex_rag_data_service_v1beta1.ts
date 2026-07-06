@@ -4084,9 +4084,9 @@ describe('v1beta1.VertexRagDataServiceClient', () => {
       assert(
         (client.descriptors.page.listRagCorpora.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4135,9 +4135,9 @@ describe('v1beta1.VertexRagDataServiceClient', () => {
       assert(
         (client.descriptors.page.listRagCorpora.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4185,9 +4185,9 @@ describe('v1beta1.VertexRagDataServiceClient', () => {
       assert(
         (client.descriptors.page.listRagCorpora.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4227,9 +4227,9 @@ describe('v1beta1.VertexRagDataServiceClient', () => {
       assert(
         (client.descriptors.page.listRagCorpora.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4418,9 +4418,9 @@ describe('v1beta1.VertexRagDataServiceClient', () => {
       assert(
         (client.descriptors.page.listRagFiles.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4470,9 +4470,9 @@ describe('v1beta1.VertexRagDataServiceClient', () => {
       assert(
         (client.descriptors.page.listRagFiles.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4520,9 +4520,9 @@ describe('v1beta1.VertexRagDataServiceClient', () => {
       assert(
         (client.descriptors.page.listRagFiles.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4561,9 +4561,9 @@ describe('v1beta1.VertexRagDataServiceClient', () => {
       assert(
         (client.descriptors.page.listRagFiles.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4645,8 +4645,7 @@ describe('v1beta1.VertexRagDataServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.aiplatform.v1beta1.IRagDataSchema[]
-              | null,
+              protos.google.cloud.aiplatform.v1beta1.IRagDataSchema[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4756,9 +4755,9 @@ describe('v1beta1.VertexRagDataServiceClient', () => {
       assert(
         (client.descriptors.page.listRagDataSchemas.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4807,9 +4806,9 @@ describe('v1beta1.VertexRagDataServiceClient', () => {
       assert(
         (client.descriptors.page.listRagDataSchemas.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4858,9 +4857,9 @@ describe('v1beta1.VertexRagDataServiceClient', () => {
       assert(
         (client.descriptors.page.listRagDataSchemas.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4900,9 +4899,9 @@ describe('v1beta1.VertexRagDataServiceClient', () => {
       assert(
         (client.descriptors.page.listRagDataSchemas.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4983,8 +4982,7 @@ describe('v1beta1.VertexRagDataServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.aiplatform.v1beta1.IRagMetadata[]
-              | null,
+              protos.google.cloud.aiplatform.v1beta1.IRagMetadata[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -5094,9 +5092,9 @@ describe('v1beta1.VertexRagDataServiceClient', () => {
       assert(
         (client.descriptors.page.listRagMetadata.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5145,9 +5143,9 @@ describe('v1beta1.VertexRagDataServiceClient', () => {
       assert(
         (client.descriptors.page.listRagMetadata.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5196,9 +5194,9 @@ describe('v1beta1.VertexRagDataServiceClient', () => {
       assert(
         (client.descriptors.page.listRagMetadata.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5238,9 +5236,9 @@ describe('v1beta1.VertexRagDataServiceClient', () => {
       assert(
         (client.descriptors.page.listRagMetadata.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

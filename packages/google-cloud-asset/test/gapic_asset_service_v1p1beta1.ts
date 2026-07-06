@@ -503,9 +503,9 @@ describe('v1p1beta1.AssetServiceClient', () => {
       assert(
         (client.descriptors.page.searchAllResources.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -555,9 +555,9 @@ describe('v1p1beta1.AssetServiceClient', () => {
       assert(
         (client.descriptors.page.searchAllResources.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -605,9 +605,9 @@ describe('v1p1beta1.AssetServiceClient', () => {
       assert(
         (client.descriptors.page.searchAllResources.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -646,9 +646,9 @@ describe('v1p1beta1.AssetServiceClient', () => {
       assert(
         (client.descriptors.page.searchAllResources.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -839,9 +839,9 @@ describe('v1p1beta1.AssetServiceClient', () => {
       assert(
         (client.descriptors.page.searchAllIamPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -891,9 +891,9 @@ describe('v1p1beta1.AssetServiceClient', () => {
       assert(
         (client.descriptors.page.searchAllIamPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -941,9 +941,9 @@ describe('v1p1beta1.AssetServiceClient', () => {
       assert(
         (client.descriptors.page.searchAllIamPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -982,9 +982,9 @@ describe('v1p1beta1.AssetServiceClient', () => {
       assert(
         (client.descriptors.page.searchAllIamPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

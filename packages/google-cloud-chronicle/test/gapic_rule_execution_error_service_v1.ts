@@ -410,8 +410,7 @@ describe('v1.RuleExecutionErrorServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.chronicle.v1.IRuleExecutionError[]
-              | null,
+              protos.google.cloud.chronicle.v1.IRuleExecutionError[] | null,
           ) => {
             if (err) {
               reject(err);

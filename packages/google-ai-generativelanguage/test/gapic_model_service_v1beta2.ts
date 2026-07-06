@@ -503,8 +503,7 @@ describe('v1beta2.ModelServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.ai.generativelanguage.v1beta2.IModel[]
-              | null,
+              protos.google.ai.generativelanguage.v1beta2.IModel[] | null,
           ) => {
             if (err) {
               reject(err);

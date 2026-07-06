@@ -1311,8 +1311,7 @@ describe('v1beta.ModelServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.ai.generativelanguage.v1beta.ITunedModel[]
-              | null,
+              protos.google.ai.generativelanguage.v1beta.ITunedModel[] | null,
           ) => {
             if (err) {
               reject(err);

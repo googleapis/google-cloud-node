@@ -590,8 +590,7 @@ describe('v1.CustomTargetingValueServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.ads.admanager.v1.ICustomTargetingValue[]
-              | null,
+              protos.google.ads.admanager.v1.ICustomTargetingValue[] | null,
           ) => {
             if (err) {
               reject(err);

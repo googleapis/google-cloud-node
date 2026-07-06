@@ -1043,8 +1043,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.apihub.v1.IRuntimeProjectAttachment[]
-              | null,
+              protos.google.cloud.apihub.v1.IRuntimeProjectAttachment[] | null,
           ) => {
             if (err) {
               reject(err);

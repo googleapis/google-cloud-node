@@ -1429,8 +1429,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.ads.admanager.v1.ICustomTargetingKey[]
-              | null,
+              protos.google.ads.admanager.v1.ICustomTargetingKey[] | null,
           ) => {
             if (err) {
               reject(err);

@@ -5288,9 +5288,9 @@ describe('v1.BackupDRClient', () => {
       assert(
         (client.descriptors.page.listBackupVaults.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5337,9 +5337,9 @@ describe('v1.BackupDRClient', () => {
       assert(
         (client.descriptors.page.listBackupVaults.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5386,9 +5386,9 @@ describe('v1.BackupDRClient', () => {
       assert(
         (client.descriptors.page.listBackupVaults.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5426,9 +5426,9 @@ describe('v1.BackupDRClient', () => {
       assert(
         (client.descriptors.page.listBackupVaults.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5944,9 +5944,9 @@ describe('v1.BackupDRClient', () => {
       assert(
         (client.descriptors.page.listDataSources.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5993,9 +5993,9 @@ describe('v1.BackupDRClient', () => {
       assert(
         (client.descriptors.page.listDataSources.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6036,9 +6036,9 @@ describe('v1.BackupDRClient', () => {
       assert(
         (client.descriptors.page.listDataSources.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6076,9 +6076,9 @@ describe('v1.BackupDRClient', () => {
       assert(
         (client.descriptors.page.listDataSources.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6245,9 +6245,9 @@ describe('v1.BackupDRClient', () => {
       assert(
         (client.descriptors.page.listBackups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6296,9 +6296,9 @@ describe('v1.BackupDRClient', () => {
       assert(
         (client.descriptors.page.listBackups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6339,9 +6339,9 @@ describe('v1.BackupDRClient', () => {
       assert(
         (client.descriptors.page.listBackups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6381,9 +6381,9 @@ describe('v1.BackupDRClient', () => {
       assert(
         (client.descriptors.page.listBackups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6881,9 +6881,9 @@ describe('v1.BackupDRClient', () => {
       assert(
         (client.descriptors.page.listBackupPlans.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6930,9 +6930,9 @@ describe('v1.BackupDRClient', () => {
       assert(
         (client.descriptors.page.listBackupPlans.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6973,9 +6973,9 @@ describe('v1.BackupDRClient', () => {
       assert(
         (client.descriptors.page.listBackupPlans.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -7013,9 +7013,9 @@ describe('v1.BackupDRClient', () => {
       assert(
         (client.descriptors.page.listBackupPlans.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7095,8 +7095,7 @@ describe('v1.BackupDRClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.backupdr.v1.IBackupPlanRevision[]
-              | null,
+              protos.google.cloud.backupdr.v1.IBackupPlanRevision[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -7450,8 +7449,7 @@ describe('v1.BackupDRClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.backupdr.v1.IBackupPlanAssociation[]
-              | null,
+              protos.google.cloud.backupdr.v1.IBackupPlanAssociation[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -7808,8 +7806,7 @@ describe('v1.BackupDRClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.backupdr.v1.IBackupPlanAssociation[]
-              | null,
+              protos.google.cloud.backupdr.v1.IBackupPlanAssociation[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -8175,8 +8172,7 @@ describe('v1.BackupDRClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.backupdr.v1.IDataSourceReference[]
-              | null,
+              protos.google.cloud.backupdr.v1.IDataSourceReference[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -8533,8 +8529,7 @@ describe('v1.BackupDRClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.backupdr.v1.IDataSourceReference[]
-              | null,
+              protos.google.cloud.backupdr.v1.IDataSourceReference[] | null,
           ) => {
             if (err) {
               reject(err);

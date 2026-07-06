@@ -883,8 +883,7 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.ads.datamanager.v1.IUserListDirectLicense[]
-              | null,
+              protos.google.ads.datamanager.v1.IUserListDirectLicense[] | null,
           ) => {
             if (err) {
               reject(err);

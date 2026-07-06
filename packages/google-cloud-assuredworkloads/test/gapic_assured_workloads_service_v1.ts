@@ -1487,9 +1487,9 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
       assert(
         (client.descriptors.page.listWorkloads.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1538,9 +1538,9 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
       assert(
         (client.descriptors.page.listWorkloads.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1588,9 +1588,9 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
       assert(
         (client.descriptors.page.listWorkloads.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1630,9 +1630,9 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
       assert(
         (client.descriptors.page.listWorkloads.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1693,8 +1693,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.assuredworkloads.v1.IViolation[]
-              | null,
+              protos.google.cloud.assuredworkloads.v1.IViolation[] | null,
           ) => {
             if (err) {
               reject(err);

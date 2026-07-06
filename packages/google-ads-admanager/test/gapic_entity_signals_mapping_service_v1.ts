@@ -1198,8 +1198,7 @@ describe('v1.EntitySignalsMappingServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.ads.admanager.v1.IEntitySignalsMapping[]
-              | null,
+              protos.google.ads.admanager.v1.IEntitySignalsMapping[] | null,
           ) => {
             if (err) {
               reject(err);

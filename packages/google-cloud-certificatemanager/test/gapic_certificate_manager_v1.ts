@@ -4577,8 +4577,7 @@ describe('v1.CertificateManagerClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.certificatemanager.v1.ICertificate[]
-              | null,
+              protos.google.cloud.certificatemanager.v1.ICertificate[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4686,9 +4685,9 @@ describe('v1.CertificateManagerClient', () => {
       assert(
         (client.descriptors.page.listCertificates.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4736,9 +4735,9 @@ describe('v1.CertificateManagerClient', () => {
       assert(
         (client.descriptors.page.listCertificates.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4786,9 +4785,9 @@ describe('v1.CertificateManagerClient', () => {
       assert(
         (client.descriptors.page.listCertificates.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4827,9 +4826,9 @@ describe('v1.CertificateManagerClient', () => {
       assert(
         (client.descriptors.page.listCertificates.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5020,9 +5019,9 @@ describe('v1.CertificateManagerClient', () => {
       assert(
         (client.descriptors.page.listCertificateMaps.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5072,9 +5071,9 @@ describe('v1.CertificateManagerClient', () => {
       assert(
         (client.descriptors.page.listCertificateMaps.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5122,9 +5121,9 @@ describe('v1.CertificateManagerClient', () => {
       assert(
         (client.descriptors.page.listCertificateMaps.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5163,9 +5162,9 @@ describe('v1.CertificateManagerClient', () => {
       assert(
         (client.descriptors.page.listCertificateMaps.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6327,8 +6326,7 @@ describe('v1.CertificateManagerClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.certificatemanager.v1.ITrustConfig[]
-              | null,
+              protos.google.cloud.certificatemanager.v1.ITrustConfig[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -6436,9 +6434,9 @@ describe('v1.CertificateManagerClient', () => {
       assert(
         (client.descriptors.page.listTrustConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6486,9 +6484,9 @@ describe('v1.CertificateManagerClient', () => {
       assert(
         (client.descriptors.page.listTrustConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6536,9 +6534,9 @@ describe('v1.CertificateManagerClient', () => {
       assert(
         (client.descriptors.page.listTrustConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6577,9 +6575,9 @@ describe('v1.CertificateManagerClient', () => {
       assert(
         (client.descriptors.page.listTrustConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

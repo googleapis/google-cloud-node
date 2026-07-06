@@ -767,9 +767,9 @@ describe('v1beta.CloudApiRegistryClient', () => {
       assert(
         (client.descriptors.page.listMcpServers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -817,9 +817,9 @@ describe('v1beta.CloudApiRegistryClient', () => {
       assert(
         (client.descriptors.page.listMcpServers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -866,9 +866,9 @@ describe('v1beta.CloudApiRegistryClient', () => {
       assert(
         (client.descriptors.page.listMcpServers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -907,9 +907,9 @@ describe('v1beta.CloudApiRegistryClient', () => {
       assert(
         (client.descriptors.page.listMcpServers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1094,9 +1094,9 @@ describe('v1beta.CloudApiRegistryClient', () => {
       assert(
         (client.descriptors.page.listMcpTools.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1145,9 +1145,9 @@ describe('v1beta.CloudApiRegistryClient', () => {
       assert(
         (client.descriptors.page.listMcpTools.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1194,9 +1194,9 @@ describe('v1beta.CloudApiRegistryClient', () => {
       assert(
         (client.descriptors.page.listMcpTools.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1234,9 +1234,9 @@ describe('v1beta.CloudApiRegistryClient', () => {
       assert(
         (client.descriptors.page.listMcpTools.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
