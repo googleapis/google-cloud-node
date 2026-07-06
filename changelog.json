@@ -4,6 +4,24 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "e132e80349d8531c1cb9193255ad55ace1db5329",
+          "message": "Kokoro pipeline for system test",
+          "issues": [
+            "8751"
+          ],
+          "scope": "spanner"
+        }
+      ],
+      "version": "8.8.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/spanner",
+      "id": "91efec41-6f4d-46a2-85e4-30da0709e6a2",
+      "createTime": "2026-07-06T06:28:40.860Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "d9399f0cf44b79e2b38ce429b17709ee9845544e",
           "message": "Migrate google-cloud-capacityplanner to librarian v0.22.0",
@@ -81457,5 +81475,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-06-30T19:41:56.401Z"
+  "updateTime": "2026-07-06T06:28:40.860Z"
 }
