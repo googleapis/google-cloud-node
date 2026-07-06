@@ -19,6 +19,7 @@ import * as chaiAsPromised from 'chai-as-promised';
 
 import {ClientPool, CLIENT_TERMINATED_ERROR_MSG} from '../src/pool';
 import {Deferred} from '../src/util';
+import {setLogFunction, setLibVersion} from '../src/logger';
 
 use(chaiAsPromised);
 
@@ -573,6 +574,107 @@ describe('Client pool', () => {
     await clientPool.run(REQUEST_TAG, USE_GRPC, () => Promise.resolve());
 
     expect(clientPool.size).to.equal(1);
+  });
+
+  it('garbage collects idle REST clients upon gRPC transition and reuses gRPC client', async () => {
+    let clientCount = 0;
+    const clientPool = new ClientPool<{}>(100, 1, () => {
+      ++clientCount;
+      return {};
+    });
+
+    // Run REST operation
+    await clientPool.run(REQUEST_TAG, USE_REST, () => Promise.resolve());
+    expect(clientCount).to.equal(1);
+
+    // Run gRPC operation
+    await clientPool.run(REQUEST_TAG, USE_GRPC, () => Promise.resolve());
+    expect(clientCount).to.equal(2);
+
+    // Run subsequent operations.
+    await clientPool.run(REQUEST_TAG, USE_REST, () => Promise.resolve());
+    await clientPool.run(REQUEST_TAG, USE_REST, () => Promise.resolve());
+
+    // Assert that the active client in the pool is gRPC enabled, and that no extra clients were created.
+    expect(
+      clientPool.size,
+      'Pool size should equal 1 after eager eviction of REST client',
+    ).to.equal(1);
+    const activeClientMetadata = Array.from(clientPool._activeClients.values());
+    const gRPCClientRemaining = activeClientMetadata.some(m => m.grpcEnabled);
+
+    expect(
+      gRPCClientRemaining,
+      'The active client in pool must be gRPC-enabled',
+    ).to.be.true;
+    expect(
+      clientCount,
+      'Subsequent operations should reuse the gRPC client without creating new clients',
+    ).to.equal(2);
+  });
+
+  it('garbage collects active REST clients upon release after gRPC transition', async () => {
+    let createdCount = 0;
+    const destroyedClientIds: string[] = [];
+
+    const clientPool = new ClientPool<{id: string}>(
+      100, // concurrentOperationLimit
+      1, // maxIdleClients
+      requiresGrpc => {
+        createdCount++;
+        return {id: `client-${createdCount}`};
+      },
+      async client => {
+        destroyedClientIds.push(client.id);
+      },
+    );
+
+    const restDeferred = new Deferred<void>();
+
+    // Run REST operation that stays active (client-1 active)
+    const restOpPromise = clientPool.run(
+      REQUEST_TAG,
+      USE_REST,
+      () => restDeferred.promise,
+    );
+    expect(createdCount).to.equal(1);
+    expect(clientPool.size).to.equal(1);
+
+    // Run gRPC operation (transitions pool to gRPC, creates client-2)
+    // client-1 is active so it is NOT eagerly evicted during transition.
+    await clientPool.run(REQUEST_TAG, USE_GRPC, () => Promise.resolve());
+    expect(createdCount).to.equal(2);
+    expect(clientPool.size).to.equal(2);
+
+    // Resolve the active REST operation (triggers release for client-1)
+    restDeferred.resolve();
+    await restOpPromise;
+
+    // Assert that client-1 (REST client) is destroyed immediately upon completion
+    expect(destroyedClientIds).to.include('client-1');
+    expect(clientPool.size).to.equal(1);
+
+    const activeClients = Array.from(clientPool._activeClients.keys());
+    expect(activeClients.map(c => c.id)).to.not.include('client-1');
+    expect(activeClients.map(c => c.id)).to.include('client-2');
+  });
+
+  it('logs transition to gRPC', async () => {
+    const logs: string[] = [];
+    setLibVersion('8.6.0');
+    setLogFunction(msg => logs.push(msg));
+
+    try {
+      const clientPool = new ClientPool<{}>(100, 1, () => ({}));
+
+      await clientPool.run('op-rest', USE_REST, () => Promise.resolve());
+      await clientPool.run('op-grpc', USE_GRPC, () => Promise.resolve());
+
+      expect(logs.some(l => l.includes('Transitioning pool to gRPC'))).to.be
+        .true;
+    } finally {
+      setLogFunction(null);
+    }
   });
 
   it('keeps pool of idle clients', async () => {
