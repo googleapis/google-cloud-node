@@ -31,11 +31,6 @@ steps:
   # - 'GOOGLE_APPLICATION_CREDENTIALS=/secrets/sa-key.json'
   id: 'run-system-tests'
   waitFor: ['install-dependencies']
-  # For Secret Manager, uncomment these (adjust secret name and volume path as needed):
-  # secretEnv: ['SA_KEY']
-  # volumes:
-  #   - name: 'sa-keys'
-  #     path: '/secrets'
 
 # 3. (Optional) Code Coverage Reporting
 - name: 'node:24'
