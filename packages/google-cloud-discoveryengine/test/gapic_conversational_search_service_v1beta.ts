@@ -2240,8 +2240,7 @@ describe('v1beta.ConversationalSearchServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.discoveryengine.v1beta.IConversation[]
-              | null,
+              protos.google.cloud.discoveryengine.v1beta.IConversation[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2357,9 +2356,9 @@ describe('v1beta.ConversationalSearchServiceClient', () => {
       assert(
         (client.descriptors.page.listConversations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2412,9 +2411,9 @@ describe('v1beta.ConversationalSearchServiceClient', () => {
       assert(
         (client.descriptors.page.listConversations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2465,9 +2464,9 @@ describe('v1beta.ConversationalSearchServiceClient', () => {
       assert(
         (client.descriptors.page.listConversations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2509,9 +2508,9 @@ describe('v1beta.ConversationalSearchServiceClient', () => {
       assert(
         (client.descriptors.page.listConversations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2596,8 +2595,7 @@ describe('v1beta.ConversationalSearchServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.discoveryengine.v1beta.ISession[]
-              | null,
+              protos.google.cloud.discoveryengine.v1beta.ISession[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2711,9 +2709,9 @@ describe('v1beta.ConversationalSearchServiceClient', () => {
       assert(
         (client.descriptors.page.listSessions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2766,9 +2764,9 @@ describe('v1beta.ConversationalSearchServiceClient', () => {
       assert(
         (client.descriptors.page.listSessions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2819,9 +2817,9 @@ describe('v1beta.ConversationalSearchServiceClient', () => {
       assert(
         (client.descriptors.page.listSessions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2863,9 +2861,9 @@ describe('v1beta.ConversationalSearchServiceClient', () => {
       assert(
         (client.descriptors.page.listSessions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

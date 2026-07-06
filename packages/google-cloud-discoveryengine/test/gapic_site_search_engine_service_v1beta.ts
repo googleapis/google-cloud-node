@@ -2872,8 +2872,7 @@ describe('v1beta.SiteSearchEngineServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.discoveryengine.v1beta.ITargetSite[]
-              | null,
+              protos.google.cloud.discoveryengine.v1beta.ITargetSite[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2983,9 +2982,9 @@ describe('v1beta.SiteSearchEngineServiceClient', () => {
       assert(
         (client.descriptors.page.listTargetSites.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3034,9 +3033,9 @@ describe('v1beta.SiteSearchEngineServiceClient', () => {
       assert(
         (client.descriptors.page.listTargetSites.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3085,9 +3084,9 @@ describe('v1beta.SiteSearchEngineServiceClient', () => {
       assert(
         (client.descriptors.page.listTargetSites.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3127,9 +3126,9 @@ describe('v1beta.SiteSearchEngineServiceClient', () => {
       assert(
         (client.descriptors.page.listTargetSites.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3211,8 +3210,7 @@ describe('v1beta.SiteSearchEngineServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.discoveryengine.v1beta.ITargetSite[]
-              | null,
+              protos.google.cloud.discoveryengine.v1beta.ITargetSite[] | null,
           ) => {
             if (err) {
               reject(err);

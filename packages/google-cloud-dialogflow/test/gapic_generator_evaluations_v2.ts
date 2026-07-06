@@ -935,8 +935,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.dialogflow.v2.IGeneratorEvaluation[]
-              | null,
+              protos.google.cloud.dialogflow.v2.IGeneratorEvaluation[] | null,
           ) => {
             if (err) {
               reject(err);
