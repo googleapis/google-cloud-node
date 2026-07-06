@@ -234,7 +234,7 @@ export class Change extends ServiceObject {
    */
   create(
     configOrCallback?: CreateChangeRequest | CreateChangeCallback,
-    callback?: CreateChangeCallback
+    callback?: CreateChangeCallback,
   ): void | Promise<CreateChangeResponse> {
     const config = typeof configOrCallback === 'object' ? configOrCallback : {};
     callback =

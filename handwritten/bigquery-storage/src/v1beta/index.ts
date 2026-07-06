@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export { MetastorePartitionServiceClient } from './metastore_partition_service_client';
+export {MetastorePartitionServiceClient} from './metastore_partition_service_client';

@@ -28,7 +28,7 @@ const pjson = require('../../package.json');
 const serviceRegex = /^[a-z0-9]([-a-z0-9_.]{0,253}[a-z0-9])?$/;
 
 function hasService(
-  config: Config
+  config: Config,
 ): config is {serviceContext: {service: string}} {
   return (
     config.serviceContext !== undefined &&
@@ -85,7 +85,7 @@ function initConfigLocal(config: Config): LocalConfig {
   ) {
     throw new Error(
       'serviceMapSearchPath is an empty array. Use disableSourceMaps to' +
-        ' disable source map support instead.'
+        ' disable source map support instead.',
     );
   }
 
@@ -99,7 +99,7 @@ function initConfigLocal(config: Config): LocalConfig {
     throw new Error(
       `Service ${
         mergedConfig.serviceContext.service
-      } does not match regular expression "${serviceRegex.toString()}"`
+      } does not match regular expression "${serviceRegex.toString()}"`,
     );
   }
 
@@ -111,12 +111,12 @@ function initConfigLocal(config: Config): LocalConfig {
  * metadata.
  */
 async function initConfigMetadata(
-  config: LocalConfig
+  config: LocalConfig,
 ): Promise<ProfilerConfig> {
   const logger = createLogger(config.logLevel);
   const getMetadataProperty = async (
     f: (s: string) => Promise<string>,
-    field: string
+    field: string,
   ) => {
     try {
       return await f(field);
@@ -175,7 +175,7 @@ export async function createProfiler(config: Config = {}): Promise<Profiler> {
       `Could not start profiler: node version ${process.version}` +
         ` does not satisfies "${pjson.engines.node}"` +
         '\nSee https://github.com/googleapis/cloud-profiler-nodejs#prerequisites' +
-        ' for details.'
+        ' for details.',
     );
   }
 
@@ -187,7 +187,7 @@ export async function createProfiler(config: Config = {}): Promise<Profiler> {
   if (!localConfig.disableHeap) {
     heapProfiler.start(
       localConfig.heapIntervalBytes,
-      localConfig.heapMaxStackDepth
+      localConfig.heapMaxStackDepth,
     );
   }
   let profilerConfig: ProfilerConfig;
