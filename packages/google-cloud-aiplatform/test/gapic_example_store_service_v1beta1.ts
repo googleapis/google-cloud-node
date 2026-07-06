@@ -1595,8 +1595,7 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.aiplatform.v1beta1.IExampleStore[]
-              | null,
+              protos.google.cloud.aiplatform.v1beta1.IExampleStore[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1706,9 +1705,9 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       assert(
         (client.descriptors.page.listExampleStores.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1757,9 +1756,9 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       assert(
         (client.descriptors.page.listExampleStores.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1808,9 +1807,9 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       assert(
         (client.descriptors.page.listExampleStores.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1850,9 +1849,9 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       assert(
         (client.descriptors.page.listExampleStores.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2041,9 +2040,9 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       assert(
         (client.descriptors.page.fetchExamples.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2091,9 +2090,9 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       assert(
         (client.descriptors.page.fetchExamples.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2141,9 +2140,9 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       assert(
         (client.descriptors.page.fetchExamples.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2182,9 +2181,9 @@ describe('v1beta1.ExampleStoreServiceClient', () => {
       assert(
         (client.descriptors.page.fetchExamples.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

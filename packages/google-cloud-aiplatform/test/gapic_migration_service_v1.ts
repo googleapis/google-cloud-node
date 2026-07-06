@@ -627,8 +627,7 @@ describe('v1.MigrationServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.aiplatform.v1.IMigratableResource[]
-              | null,
+              protos.google.cloud.aiplatform.v1.IMigratableResource[] | null,
           ) => {
             if (err) {
               reject(err);
