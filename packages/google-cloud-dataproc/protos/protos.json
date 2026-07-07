@@ -2637,6 +2637,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "diskConfig": {
+                              "type": "DiskConfig",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -2742,6 +2749,71 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
+                          }
+                        },
+                        "attachedDiskConfigs": {
+                          "rule": "repeated",
+                          "type": "AttachedDiskConfig",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "AttachedDiskConfig": {
+                      "oneofs": {
+                        "_provisionedIops": {
+                          "oneof": [
+                            "provisionedIops"
+                          ]
+                        },
+                        "_provisionedThroughput": {
+                          "oneof": [
+                            "provisionedThroughput"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "diskType": {
+                          "type": "DiskType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "diskSizeGb": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "provisionedIops": {
+                          "type": "int64",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "provisionedThroughput": {
+                          "type": "int64",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "DiskType": {
+                          "values": {
+                            "DISK_TYPE_UNSPECIFIED": 0,
+                            "HYPERDISK_BALANCED": 1,
+                            "HYPERDISK_EXTREME": 2,
+                            "HYPERDISK_ML": 3,
+                            "HYPERDISK_THROUGHPUT": 4
                           }
                         }
                       }

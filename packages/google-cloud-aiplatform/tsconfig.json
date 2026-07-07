@@ -1,12 +1,11 @@
 {
-  // This file is handwritten since this library has many custom handwritten files
   "extends": "./node_modules/gts/tsconfig-google.json",
   "compilerOptions": {
     "rootDir": ".",
     "outDir": "build",
     "resolveJsonModule": true,
     "lib": [
-      "es2018",
+      "es2023",
       "dom"
     ]
   },
@@ -16,8 +15,8 @@
     "test/*.ts",
     "test/**/*.ts",
     "system-test/*.ts",
-    "src/enhanced-types.json",
     "src/**/*.json",
+    "samples/**/*.json",
     "protos/protos.json"
   ]
 }

@@ -1,6 +1,20 @@
 {
-  "extends": "./node_modules/gts",
+  "extends": [
+    "./node_modules/gts",
+    "plugin:prettier/recommended",
+    "plugin:import/recommended",
+    "plugin:import/typescript",
+    "plugin:promise/recommended"
+  ],
   "root": true,
+  // Note: All rules configured as "error" are blocking in the PR CI pipeline.
+  // Only rules configured as "warn" remain non-blocking.
+  "rules": {
+    "import/no-unresolved": "off",
+    "import/no-extraneous-dependencies": "error",
+    "promise/catch-or-return": "error",
+    "promise/always-return": "error"
+  },
   "ignorePatterns": [
     "**/node_modules",
     "**/build",
