@@ -906,8 +906,8 @@
                                     case 2:
                                     case 3:
                                     case 4:
-                                    case 5:
                                     case 6:
+                                    case 7:
                                         break;
                                     }
                                 if (message.lastTransitionTime != null && message.hasOwnProperty("lastTransitionTime")) {
@@ -992,12 +992,12 @@
                                     message.type = 4;
                                     break;
                                 case "TYPE_APP_CREATED_OR_ALREADY_EXISTS":
-                                case 5:
-                                    message.type = 5;
-                                    break;
-                                case "TYPE_APP_COMPONENTS_REGISTERED":
                                 case 6:
                                     message.type = 6;
+                                    break;
+                                case "TYPE_APP_COMPONENTS_REGISTERED":
+                                case 7:
+                                    message.type = 7;
                                     break;
                                 }
                                 if (object.lastTransitionTime != null) {
@@ -1098,8 +1098,8 @@
                              * @property {number} TYPE_UPDATING=2 TYPE_UPDATING value
                              * @property {number} TYPE_PROVISIONED=3 TYPE_PROVISIONED value
                              * @property {number} TYPE_OPERATION_ERROR=4 TYPE_OPERATION_ERROR value
-                             * @property {number} TYPE_APP_CREATED_OR_ALREADY_EXISTS=5 TYPE_APP_CREATED_OR_ALREADY_EXISTS value
-                             * @property {number} TYPE_APP_COMPONENTS_REGISTERED=6 TYPE_APP_COMPONENTS_REGISTERED value
+                             * @property {number} TYPE_APP_CREATED_OR_ALREADY_EXISTS=6 TYPE_APP_CREATED_OR_ALREADY_EXISTS value
+                             * @property {number} TYPE_APP_COMPONENTS_REGISTERED=7 TYPE_APP_COMPONENTS_REGISTERED value
                              */
                             UnitCondition.Type = (function() {
                                 var valuesById = {}, values = Object.create(valuesById);
@@ -1108,8 +1108,8 @@
                                 values[valuesById[2] = "TYPE_UPDATING"] = 2;
                                 values[valuesById[3] = "TYPE_PROVISIONED"] = 3;
                                 values[valuesById[4] = "TYPE_OPERATION_ERROR"] = 4;
-                                values[valuesById[5] = "TYPE_APP_CREATED_OR_ALREADY_EXISTS"] = 5;
-                                values[valuesById[6] = "TYPE_APP_COMPONENTS_REGISTERED"] = 6;
+                                values[valuesById[6] = "TYPE_APP_CREATED_OR_ALREADY_EXISTS"] = 6;
+                                values[valuesById[7] = "TYPE_APP_COMPONENTS_REGISTERED"] = 7;
                                 return values;
                             })();
     

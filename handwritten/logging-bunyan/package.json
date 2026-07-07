@@ -54,10 +54,10 @@
   },
   "dependencies": {
     "@google-cloud/logging": "^11.0.0",
-    "google-auth-library": "^9.0.0"
+    "google-auth-library": "^10.6.2"
   },
   "devDependencies": {
-    "@google-cloud/common": "^5.0.0",
+    "@google-cloud/common": "^6.0.0",
     "@types/bunyan": "^1.8.4",
     "@types/express": "^4.16.0",
     "@types/mocha": "^9.0.0",
@@ -70,7 +70,7 @@
     "cpy-cli": "^4.0.0",
     "delay": "^5.0.0",
     "express": "^4.16.3",
-    "gts": "^5.0.0",
+    "gts": "^6.0.2",
     "jsdoc": "^4.0.0",
     "jsdoc-fresh": "^3.0.0",
     "jsdoc-region-tag": "^3.0.0",
@@ -81,6 +81,9 @@
   },
   "peerDependencies": {
     "bunyan": "*"
+  },
+  "overrides": {
+    "whatwg-url": "^14.0.0"
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/logging-bunyan"
 }

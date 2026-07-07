@@ -20045,6 +20045,7 @@
                          * @property {google.protobuf.ITimestamp|null} [expireEventTime] ImportJob expireEventTime
                          * @property {google.cloud.kms.v1.ImportJob.ImportJobState|null} [state] ImportJob state
                          * @property {google.cloud.kms.v1.ImportJob.IWrappingPublicKey|null} [publicKey] ImportJob publicKey
+                         * @property {google.cloud.kms.v1.PublicKey.PublicKeyFormat|null} [publicKeyFormat] ImportJob publicKeyFormat
                          * @property {google.cloud.kms.v1.IKeyOperationAttestation|null} [attestation] ImportJob attestation
                          * @property {string|null} [cryptoKeyBackend] ImportJob cryptoKeyBackend
                          */
@@ -20137,6 +20138,14 @@
                         ImportJob.prototype.publicKey = null;
     
                         /**
+                         * ImportJob publicKeyFormat.
+                         * @member {google.cloud.kms.v1.PublicKey.PublicKeyFormat} publicKeyFormat
+                         * @memberof google.cloud.kms.v1.ImportJob
+                         * @instance
+                         */
+                        ImportJob.prototype.publicKeyFormat = 0;
+    
+                        /**
                          * ImportJob attestation.
                          * @member {google.cloud.kms.v1.IKeyOperationAttestation|null|undefined} attestation
                          * @memberof google.cloud.kms.v1.ImportJob
@@ -20198,6 +20207,8 @@
                                 $root.google.protobuf.Timestamp.encode(message.expireEventTime, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             if (message.cryptoKeyBackend != null && Object.hasOwnProperty.call(message, "cryptoKeyBackend"))
                                 writer.uint32(/* id 11, wireType 2 =*/90).string(message.cryptoKeyBackend);
+                            if (message.publicKeyFormat != null && Object.hasOwnProperty.call(message, "publicKeyFormat"))
+                                writer.uint32(/* id 12, wireType 0 =*/96).int32(message.publicKeyFormat);
                             return writer;
                         };
     
@@ -20274,6 +20285,10 @@
                                         message.publicKey = $root.google.cloud.kms.v1.ImportJob.WrappingPublicKey.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
+                                case 12: {
+                                        message.publicKeyFormat = reader.int32();
+                                        break;
+                                    }
                                 case 8: {
                                         message.attestation = $root.google.cloud.kms.v1.KeyOperationAttestation.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
@@ -20335,6 +20350,9 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 8:
+                                case 9:
+                                case 10:
                                     break;
                                 }
                             if (message.protectionLevel != null && message.hasOwnProperty("protectionLevel"))
@@ -20384,6 +20402,17 @@
                                 if (error)
                                     return "publicKey." + error;
                             }
+                            if (message.publicKeyFormat != null && message.hasOwnProperty("publicKeyFormat"))
+                                switch (message.publicKeyFormat) {
+                                default:
+                                    return "publicKeyFormat: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
                             if (message.attestation != null && message.hasOwnProperty("attestation")) {
                                 var error = $root.google.cloud.kms.v1.KeyOperationAttestation.verify(message.attestation, long + 1);
                                 if (error)
@@ -20447,6 +20476,18 @@
                             case "RSA_OAEP_4096_SHA256":
                             case 6:
                                 message.importMethod = 6;
+                                break;
+                            case "HPKE_KEM_ML_KEM_768_HKDF_SHA256_AES_256_GCM":
+                            case 8:
+                                message.importMethod = 8;
+                                break;
+                            case "HPKE_KEM_ML_KEM_1024_HKDF_SHA256_AES_256_GCM":
+                            case 9:
+                                message.importMethod = 9;
+                                break;
+                            case "HPKE_KEM_XWING_HKDF_SHA256_AES_256_GCM":
+                            case 10:
+                                message.importMethod = 10;
                                 break;
                             }
                             switch (object.protectionLevel) {
@@ -20530,6 +20571,34 @@
                                     throw TypeError(".google.cloud.kms.v1.ImportJob.publicKey: object expected");
                                 message.publicKey = $root.google.cloud.kms.v1.ImportJob.WrappingPublicKey.fromObject(object.publicKey, long + 1);
                             }
+                            switch (object.publicKeyFormat) {
+                            default:
+                                if (typeof object.publicKeyFormat === "number") {
+                                    message.publicKeyFormat = object.publicKeyFormat;
+                                    break;
+                                }
+                                break;
+                            case "PUBLIC_KEY_FORMAT_UNSPECIFIED":
+                            case 0:
+                                message.publicKeyFormat = 0;
+                                break;
+                            case "PEM":
+                            case 1:
+                                message.publicKeyFormat = 1;
+                                break;
+                            case "DER":
+                            case 2:
+                                message.publicKeyFormat = 2;
+                                break;
+                            case "NIST_PQC":
+                            case 3:
+                                message.publicKeyFormat = 3;
+                                break;
+                            case "XWING_RAW_BYTES":
+                            case 4:
+                                message.publicKeyFormat = 4;
+                                break;
+                            }
                             if (object.attestation != null) {
                                 if (typeof object.attestation !== "object")
                                     throw TypeError(".google.cloud.kms.v1.ImportJob.attestation: object expected");
@@ -20565,6 +20634,7 @@
                                 object.protectionLevel = options.enums === String ? "PROTECTION_LEVEL_UNSPECIFIED" : 0;
                                 object.expireEventTime = null;
                                 object.cryptoKeyBackend = "";
+                                object.publicKeyFormat = options.enums === String ? "PUBLIC_KEY_FORMAT_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -20588,6 +20658,8 @@
                                 object.expireEventTime = $root.google.protobuf.Timestamp.toObject(message.expireEventTime, options);
                             if (message.cryptoKeyBackend != null && message.hasOwnProperty("cryptoKeyBackend"))
                                 object.cryptoKeyBackend = message.cryptoKeyBackend;
+                            if (message.publicKeyFormat != null && message.hasOwnProperty("publicKeyFormat"))
+                                object.publicKeyFormat = options.enums === String ? $root.google.cloud.kms.v1.PublicKey.PublicKeyFormat[message.publicKeyFormat] === undefined ? message.publicKeyFormat : $root.google.cloud.kms.v1.PublicKey.PublicKeyFormat[message.publicKeyFormat] : message.publicKeyFormat;
                             return object;
                         };
     
@@ -20628,6 +20700,9 @@
                          * @property {number} RSA_OAEP_4096_SHA256_AES_256=4 RSA_OAEP_4096_SHA256_AES_256 value
                          * @property {number} RSA_OAEP_3072_SHA256=5 RSA_OAEP_3072_SHA256 value
                          * @property {number} RSA_OAEP_4096_SHA256=6 RSA_OAEP_4096_SHA256 value
+                         * @property {number} HPKE_KEM_ML_KEM_768_HKDF_SHA256_AES_256_GCM=8 HPKE_KEM_ML_KEM_768_HKDF_SHA256_AES_256_GCM value
+                         * @property {number} HPKE_KEM_ML_KEM_1024_HKDF_SHA256_AES_256_GCM=9 HPKE_KEM_ML_KEM_1024_HKDF_SHA256_AES_256_GCM value
+                         * @property {number} HPKE_KEM_XWING_HKDF_SHA256_AES_256_GCM=10 HPKE_KEM_XWING_HKDF_SHA256_AES_256_GCM value
                          */
                         ImportJob.ImportMethod = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -20638,6 +20713,9 @@
                             values[valuesById[4] = "RSA_OAEP_4096_SHA256_AES_256"] = 4;
                             values[valuesById[5] = "RSA_OAEP_3072_SHA256"] = 5;
                             values[valuesById[6] = "RSA_OAEP_4096_SHA256"] = 6;
+                            values[valuesById[8] = "HPKE_KEM_ML_KEM_768_HKDF_SHA256_AES_256_GCM"] = 8;
+                            values[valuesById[9] = "HPKE_KEM_ML_KEM_1024_HKDF_SHA256_AES_256_GCM"] = 9;
+                            values[valuesById[10] = "HPKE_KEM_XWING_HKDF_SHA256_AES_256_GCM"] = 10;
                             return values;
                         })();
     
@@ -20666,6 +20744,7 @@
                              * @memberof google.cloud.kms.v1.ImportJob
                              * @interface IWrappingPublicKey
                              * @property {string|null} [pem] WrappingPublicKey pem
+                             * @property {Uint8Array|null} [data] WrappingPublicKey data
                              */
     
                             /**
@@ -20690,6 +20769,14 @@
                              * @instance
                              */
                             WrappingPublicKey.prototype.pem = "";
+    
+                            /**
+                             * WrappingPublicKey data.
+                             * @member {Uint8Array} data
+                             * @memberof google.cloud.kms.v1.ImportJob.WrappingPublicKey
+                             * @instance
+                             */
+                            WrappingPublicKey.prototype.data = $util.newBuffer([]);
     
                             /**
                              * Creates a new WrappingPublicKey instance using the specified properties.
@@ -20717,6 +20804,8 @@
                                     writer = $Writer.create();
                                 if (message.pem != null && Object.hasOwnProperty.call(message, "pem"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.pem);
+                                if (message.data != null && Object.hasOwnProperty.call(message, "data"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.data);
                                 return writer;
                             };
     
@@ -20761,6 +20850,10 @@
                                             message.pem = reader.string();
                                             break;
                                         }
+                                    case 2: {
+                                            message.data = reader.bytes();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7, long);
                                         break;
@@ -20803,6 +20896,9 @@
                                 if (message.pem != null && message.hasOwnProperty("pem"))
                                     if (!$util.isString(message.pem))
                                         return "pem: string expected";
+                                if (message.data != null && message.hasOwnProperty("data"))
+                                    if (!(message.data && typeof message.data.length === "number" || $util.isString(message.data)))
+                                        return "data: buffer expected";
                                 return null;
                             };
     
@@ -20824,6 +20920,11 @@
                                 var message = new $root.google.cloud.kms.v1.ImportJob.WrappingPublicKey();
                                 if (object.pem != null)
                                     message.pem = String(object.pem);
+                                if (object.data != null)
+                                    if (typeof object.data === "string")
+                                        $util.base64.decode(object.data, message.data = $util.newBuffer($util.base64.length(object.data)), 0);
+                                    else if (object.data.length >= 0)
+                                        message.data = object.data;
                                 return message;
                             };
     
@@ -20840,10 +20941,20 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults)
+                                if (options.defaults) {
                                     object.pem = "";
+                                    if (options.bytes === String)
+                                        object.data = "";
+                                    else {
+                                        object.data = [];
+                                        if (options.bytes !== Array)
+                                            object.data = $util.newBuffer(object.data);
+                                    }
+                                }
                                 if (message.pem != null && message.hasOwnProperty("pem"))
                                     object.pem = message.pem;
+                                if (message.data != null && message.hasOwnProperty("data"))
+                                    object.data = options.bytes === String ? $util.base64.encode(message.data, 0, message.data.length) : options.bytes === Array ? Array.prototype.slice.call(message.data) : message.data;
                                 return object;
                             };
     
@@ -26867,6 +26978,7 @@
                          * @memberof google.cloud.kms.v1
                          * @interface IGetImportJobRequest
                          * @property {string|null} [name] GetImportJobRequest name
+                         * @property {google.cloud.kms.v1.PublicKey.PublicKeyFormat|null} [publicKeyFormat] GetImportJobRequest publicKeyFormat
                          */
     
                         /**
@@ -26891,6 +27003,14 @@
                          * @instance
                          */
                         GetImportJobRequest.prototype.name = "";
+    
+                        /**
+                         * GetImportJobRequest publicKeyFormat.
+                         * @member {google.cloud.kms.v1.PublicKey.PublicKeyFormat} publicKeyFormat
+                         * @memberof google.cloud.kms.v1.GetImportJobRequest
+                         * @instance
+                         */
+                        GetImportJobRequest.prototype.publicKeyFormat = 0;
     
                         /**
                          * Creates a new GetImportJobRequest instance using the specified properties.
@@ -26918,6 +27038,8 @@
                                 writer = $Writer.create();
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.publicKeyFormat != null && Object.hasOwnProperty.call(message, "publicKeyFormat"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.publicKeyFormat);
                             return writer;
                         };
     
@@ -26962,6 +27084,10 @@
                                         message.name = reader.string();
                                         break;
                                     }
+                                case 2: {
+                                        message.publicKeyFormat = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7, long);
                                     break;
@@ -27004,6 +27130,17 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.publicKeyFormat != null && message.hasOwnProperty("publicKeyFormat"))
+                                switch (message.publicKeyFormat) {
+                                default:
+                                    return "publicKeyFormat: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -27025,6 +27162,34 @@
                             var message = new $root.google.cloud.kms.v1.GetImportJobRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
+                            switch (object.publicKeyFormat) {
+                            default:
+                                if (typeof object.publicKeyFormat === "number") {
+                                    message.publicKeyFormat = object.publicKeyFormat;
+                                    break;
+                                }
+                                break;
+                            case "PUBLIC_KEY_FORMAT_UNSPECIFIED":
+                            case 0:
+                                message.publicKeyFormat = 0;
+                                break;
+                            case "PEM":
+                            case 1:
+                                message.publicKeyFormat = 1;
+                                break;
+                            case "DER":
+                            case 2:
+                                message.publicKeyFormat = 2;
+                                break;
+                            case "NIST_PQC":
+                            case 3:
+                                message.publicKeyFormat = 3;
+                                break;
+                            case "XWING_RAW_BYTES":
+                            case 4:
+                                message.publicKeyFormat = 4;
+                                break;
+                            }
                             return message;
                         };
     
@@ -27041,10 +27206,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.name = "";
+                                object.publicKeyFormat = options.enums === String ? "PUBLIC_KEY_FORMAT_UNSPECIFIED" : 0;
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.publicKeyFormat != null && message.hasOwnProperty("publicKeyFormat"))
+                                object.publicKeyFormat = options.enums === String ? $root.google.cloud.kms.v1.PublicKey.PublicKeyFormat[message.publicKeyFormat] === undefined ? message.publicKeyFormat : $root.google.cloud.kms.v1.PublicKey.PublicKeyFormat[message.publicKeyFormat] : message.publicKeyFormat;
                             return object;
                         };
     
