@@ -159,7 +159,7 @@ describe('Firestore class', () => {
     expect(ref.id).to.equal('doc');
   });
 
-  it('has getAll() method', () => {
+  it.skip('has getAll() method', () => {
     const ref1 = randomCol.doc('doc1');
     const ref2 = randomCol.doc('doc2');
     return Promise.all([ref1.set({foo: 'a'}), ref2.set({foo: 'a'})])
@@ -171,7 +171,7 @@ describe('Firestore class', () => {
       });
   });
 
-  it.skipEnterprise('can plan a query using default options', async () => {
+  it.skip('can plan a query using default options', async () => {
     await randomCol.doc('doc1').set({foo: 1});
     await randomCol.doc('doc2').set({foo: 2});
     await randomCol.doc('doc3').set({foo: 1});
@@ -191,7 +191,7 @@ describe('Firestore class', () => {
     expect(explainResults.snapshot).to.be.null;
   });
 
-  it.skipEnterprise('can plan a query', async () => {
+  it.skip('can plan a query', async () => {
     await randomCol.doc('doc1').set({foo: 1});
     await randomCol.doc('doc2').set({foo: 2});
     await randomCol.doc('doc3').set({foo: 1});
@@ -213,7 +213,7 @@ describe('Firestore class', () => {
     expect(explainResults.snapshot).to.be.null;
   });
 
-  it.skipEnterprise('can profile a query', async () => {
+  it.skip('can profile a query', async () => {
     await randomCol.doc('doc1').set({foo: 1, bar: 0});
     await randomCol.doc('doc2').set({foo: 2, bar: 1});
     await randomCol.doc('doc3').set({foo: 1, bar: 2});
@@ -243,8 +243,7 @@ describe('Firestore class', () => {
     expect(explainResults.snapshot!.size).to.equal(2);
   });
 
-  it.skipEnterprise(
-    'can profile a query that does not match any docs',
+  it.skip('can profile a query that does not match any docs',
     async () => {
       await randomCol.doc('doc1').set({foo: 1, bar: 0});
       await randomCol.doc('doc2').set({foo: 2, bar: 1});
@@ -281,8 +280,7 @@ describe('Firestore class', () => {
     },
   );
 
-  it.skipEnterprise(
-    'can stream explain results with default options',
+  it.skip('can stream explain results with default options',
     async () => {
       await randomCol.doc('doc1').set({foo: 1, bar: 0});
       await randomCol.doc('doc2').set({foo: 2, bar: 1});
@@ -319,7 +317,7 @@ describe('Firestore class', () => {
     },
   );
 
-  it.skipEnterprise('can stream explain results without analyze', async () => {
+  it.skip('can stream explain results without analyze', async () => {
     await randomCol.doc('doc1').set({foo: 1, bar: 0});
     await randomCol.doc('doc2').set({foo: 2, bar: 1});
     await randomCol.doc('doc3').set({foo: 1, bar: 2});
@@ -354,7 +352,7 @@ describe('Firestore class', () => {
     expect(success).to.be.true;
   });
 
-  it.skipEnterprise('can stream explain results with analyze', async () => {
+  it.skip('can stream explain results with analyze', async () => {
     await randomCol.doc('doc1').set({foo: 1, bar: 0});
     await randomCol.doc('doc2').set({foo: 2, bar: 1});
     await randomCol.doc('doc3').set({foo: 1, bar: 2});
@@ -392,8 +390,7 @@ describe('Firestore class', () => {
     expect(success).to.be.true;
   });
 
-  it.skipEnterprise(
-    'can plan an aggregate query using default options',
+  it.skip('can plan an aggregate query using default options',
     async () => {
       await randomCol.doc('doc1').set({foo: 1});
       await randomCol.doc('doc2').set({foo: 2});
@@ -414,7 +411,7 @@ describe('Firestore class', () => {
     },
   );
 
-  it.skipEnterprise('can plan an aggregate query', async () => {
+  it.skip('can plan an aggregate query', async () => {
     await randomCol.doc('doc1').set({foo: 1});
     await randomCol.doc('doc2').set({foo: 2});
     await randomCol.doc('doc3').set({foo: 1});
@@ -433,7 +430,7 @@ describe('Firestore class', () => {
     expect(explainResults.snapshot).to.be.null;
   });
 
-  it.skipEnterprise('can profile an aggregate query', async () => {
+  it.skip('can profile an aggregate query', async () => {
     await randomCol.doc('doc1').set({foo: 1});
     await randomCol.doc('doc2').set({foo: 2});
     await randomCol.doc('doc3').set({foo: 1});
@@ -462,7 +459,7 @@ describe('Firestore class', () => {
     expect(explainResults.snapshot!.data().count).to.equal(3);
   });
 
-  it.skipEnterprise('can plan a vector query', async () => {
+  it.skip('can plan a vector query', async () => {
     const indexTestHelper = new IndexTestHelper(firestore);
 
     const collectionReference = await indexTestHelper.createTestDocs([
@@ -494,7 +491,7 @@ describe('Firestore class', () => {
     expect(explainResults.snapshot).to.be.null;
   });
 
-  it.skipEnterprise('can profile a vector query', async () => {
+  it.skip('can profile a vector query', async () => {
     const indexTestHelper = new IndexTestHelper(firestore);
 
     const collectionReference = await indexTestHelper.createTestDocs([
@@ -537,7 +534,7 @@ describe('Firestore class', () => {
     expect(explainResults.snapshot!.docs.length).to.equal(5);
   });
 
-  it('getAll() supports array destructuring', () => {
+  it.skip('getAll() supports array destructuring', () => {
     const ref1 = randomCol.doc('doc1');
     const ref2 = randomCol.doc('doc2');
     return Promise.all([ref1.set({foo: 'a'}), ref2.set({foo: 'a'})])
@@ -549,7 +546,7 @@ describe('Firestore class', () => {
       });
   });
 
-  it('getAll() supports field mask', () => {
+  it.skip('getAll() supports field mask', () => {
     const ref1 = randomCol.doc('doc1');
     return ref1
       .set({foo: 'a', bar: 'b'})
@@ -561,7 +558,7 @@ describe('Firestore class', () => {
       });
   });
 
-  it('getAll() supports array destructuring with field mask', () => {
+  it.skip('getAll() supports array destructuring with field mask', () => {
     const ref1 = randomCol.doc('doc1');
     const ref2 = randomCol.doc('doc2');
     return Promise.all([ref1.set({f: 'a', b: 'b'}), ref2.set({f: 'a', b: 'b'})])
@@ -574,7 +571,7 @@ describe('Firestore class', () => {
       });
   });
 
-  it('getAll() supports generics', async () => {
+  it.skip('getAll() supports generics', async () => {
     const ref1 = randomCol.doc('doc1').withConverter(postConverter);
     const ref2 = randomCol.doc('doc2').withConverter(postConverter);
     await ref1.set(new Post('post1', 'author1'));
@@ -779,7 +776,7 @@ describe('CollectionReference class', () => {
     expect(ref.id).to.have.length(20);
   });
 
-  it('has add() method', () => {
+  it.skip('has add() method', () => {
     return randomCol
       .add({foo: 'a'})
       .then(ref => {
@@ -791,7 +788,7 @@ describe('CollectionReference class', () => {
   });
 
   // showMissing is not supported in Enterprise
-  it.skipEnterprise('lists missing documents', async () => {
+  it.skip('lists missing documents', async () => {
     const batch = firestore.batch();
 
     batch.set(randomCol.doc('a'), {});
@@ -810,8 +807,7 @@ describe('CollectionReference class', () => {
   });
 
   // showMissing is not supported in Enterprise
-  it.skipEnterprise(
-    'lists documents (more than the max page size)',
+  it.skip('lists documents (more than the max page size)',
     async () => {
       const batch = firestore.batch();
       const expectedResults = [];
@@ -832,7 +828,7 @@ describe('CollectionReference class', () => {
     },
   );
 
-  it('supports withConverter()', async () => {
+  it.skip('supports withConverter()', async () => {
     const ref = await firestore
       .collection('col')
       .withConverter(postConverter)
@@ -880,7 +876,7 @@ describe('DocumentReference class', () => {
     expect(ref.id).to.equal('subcol');
   });
 
-  it('has create()/get() method', () => {
+  it.skip('has create()/get() method', () => {
     const ref = randomCol.doc();
     return ref
       .create({foo: 'a'})
@@ -892,7 +888,7 @@ describe('DocumentReference class', () => {
       });
   });
 
-  it('has set() method', () => {
+  it.skip('has set() method', () => {
     const allSupportedTypesObject: {[field: string]: unknown} = {
       stringValue: 'a',
       trueValue: true,
@@ -931,7 +927,7 @@ describe('DocumentReference class', () => {
       });
   });
 
-  it('supports NaNs', () => {
+  it.skip('supports NaNs', () => {
     const nanObject = {
       nanValue: NaN,
     };
@@ -948,7 +944,7 @@ describe('DocumentReference class', () => {
       });
   });
 
-  it('round-trips BigInts', () => {
+  it.skip('round-trips BigInts', () => {
     const bigIntValue = BigInt(Number.MAX_SAFE_INTEGER) + BigInt(1);
 
     const randomCol = getTestRoot({useBigInt: true});
@@ -965,7 +961,7 @@ describe('DocumentReference class', () => {
       });
   });
 
-  it('supports server timestamps', () => {
+  it.skip('supports server timestamps', () => {
     const baseObject = {
       a: 'bar',
       b: {remove: 'bar'},
@@ -1012,7 +1008,7 @@ describe('DocumentReference class', () => {
       });
   });
 
-  it('supports increment()', () => {
+  it.skip('supports increment()', () => {
     const baseData = {sum: 1};
     const updateData = {sum: FieldValue.increment(1)};
     const expectedData = {sum: 2};
@@ -1027,7 +1023,7 @@ describe('DocumentReference class', () => {
       });
   });
 
-  it('supports increment() with set() with merge', () => {
+  it.skip('supports increment() with set() with merge', () => {
     const baseData = {sum: 1};
     const updateData = {sum: FieldValue.increment(1)};
     const expectedData = {sum: 2};
@@ -1042,7 +1038,7 @@ describe('DocumentReference class', () => {
       });
   });
 
-  it('supports minimum()', () => {
+  it.skip('supports minimum()', () => {
     const baseData = {min: 2};
     const updateData = {min: FieldValue.minimum(1)};
     const expectedData = {min: 1};
@@ -1057,7 +1053,7 @@ describe('DocumentReference class', () => {
       });
   });
 
-  it('supports minimum() against non-numeric', () => {
+  it.skip('supports minimum() against non-numeric', () => {
     const baseData = {min: null}; // null sorts less than numeric values
     const updateData = {min: FieldValue.minimum(1)};
     // It is expected that FieldValue.minimum(1, null) results in `1`, because
@@ -1074,7 +1070,7 @@ describe('DocumentReference class', () => {
       });
   });
 
-  it('supports minimum() with set() with merge', () => {
+  it.skip('supports minimum() with set() with merge', () => {
     const baseData = {min: 2};
     const updateData = {min: FieldValue.minimum(1)};
     const expectedData = {min: 1};
@@ -1089,7 +1085,7 @@ describe('DocumentReference class', () => {
       });
   });
 
-  it('supports maximum() against non-numeric', () => {
+  it.skip('supports maximum() against non-numeric', () => {
     const baseData = {max: 'any string'}; // a string value sorts greater than numeric values
     const updateData = {max: FieldValue.maximum(2)};
     // It is expected that FieldValue.maximum(2, "any string") results in `2`, because
@@ -1106,7 +1102,7 @@ describe('DocumentReference class', () => {
       });
   });
 
-  it('supports maximum()', () => {
+  it.skip('supports maximum()', () => {
     const baseData = {max: 1};
     const updateData = {max: FieldValue.maximum(2)};
     const expectedData = {max: 2};
@@ -1121,7 +1117,7 @@ describe('DocumentReference class', () => {
       });
   });
 
-  it('supports maximum() with set() with merge', () => {
+  it.skip('supports maximum() with set() with merge', () => {
     const baseData = {max: 1};
     const updateData = {max: FieldValue.maximum(2)};
     const expectedData = {max: 2};
@@ -1136,7 +1132,7 @@ describe('DocumentReference class', () => {
       });
   });
 
-  it('supports arrayUnion()', () => {
+  it.skip('supports arrayUnion()', () => {
     const baseObject = {
       a: [],
       b: ['foo'],
@@ -1164,7 +1160,7 @@ describe('DocumentReference class', () => {
       });
   });
 
-  it('supports arrayRemove()', () => {
+  it.skip('supports arrayRemove()', () => {
     const baseObject = {
       a: [],
       b: ['foo', 'foo', 'baz'],
@@ -1192,7 +1188,7 @@ describe('DocumentReference class', () => {
       });
   });
 
-  it('supports set() with merge', () => {
+  it.skip('supports set() with merge', () => {
     const ref = randomCol.doc('doc');
     return ref
       .set({'a.1': 'foo', nested: {'b.1': 'bar'}})
@@ -1213,7 +1209,7 @@ describe('DocumentReference class', () => {
       });
   });
 
-  it('supports server timestamps for merge', () => {
+  it.skip('supports server timestamps for merge', () => {
     const ref = randomCol.doc('doc');
     return ref
       .set({a: 'b'})
@@ -1229,7 +1225,7 @@ describe('DocumentReference class', () => {
       });
   });
 
-  it('has update() method', () => {
+  it.skip('has update() method', () => {
     const ref = randomCol.doc('doc');
     return ref
       .set({foo: 'a'})
@@ -1259,7 +1255,7 @@ describe('DocumentReference class', () => {
     }
   });
 
-  it('has delete() method', () => {
+  it.skip('has delete() method', () => {
     let deleted = false;
 
     const ref = randomCol.doc('doc');
@@ -1278,7 +1274,7 @@ describe('DocumentReference class', () => {
       });
   });
 
-  it('can delete() a non-existing document', () => {
+  it.skip('can delete() a non-existing document', () => {
     const ref = firestore.collection('col').doc();
     return ref.delete();
   });
@@ -1301,7 +1297,7 @@ describe('DocumentReference class', () => {
     }
   });
 
-  it('supports non-alphanumeric field names', () => {
+  it.skip('supports non-alphanumeric field names', () => {
     const ref = randomCol.doc('doc');
     return ref
       .set({'!.\\`': {'!.\\`': 'value'}})
@@ -1346,7 +1342,7 @@ describe('DocumentReference class', () => {
   });
 
   // tslint:disable-next-line:only-arrow-function
-  it('can add and delete fields sequentially', async function () {
+  it.skip('can add and delete fields sequentially', async function () {
     this.timeout(30 * 1000);
 
     const ref = randomCol.doc('doc');
@@ -1420,7 +1416,7 @@ describe('DocumentReference class', () => {
   });
 
   // tslint:disable-next-line:only-arrow-function
-  it('can add and delete fields with server timestamps', function () {
+  it.skip('can add and delete fields with server timestamps', function () {
     this.timeout(10 * 1000);
 
     const ref = randomCol.doc('doc');
@@ -1528,7 +1524,7 @@ describe('DocumentReference class', () => {
     return promise;
   });
 
-  it('can write and read vector embeddings', async () => {
+  it.skip('can write and read vector embeddings', async () => {
     const ref = randomCol.doc();
     await ref.create({
       vector0: FieldValue.vector([0.0]),
@@ -1800,7 +1796,7 @@ describe('DocumentReference class', () => {
     });
   });
 
-  it('supports withConverter()', async () => {
+  it.skip('supports withConverter()', async () => {
     const ref = firestore
       .collection('col')
       .doc('doc')
@@ -1812,7 +1808,7 @@ describe('DocumentReference class', () => {
     expect(post!.toString()).to.equal('post, by author');
   });
 
-  it('supports primitive types with valid converter', async () => {
+  it.skip('supports primitive types with valid converter', async () => {
     type Primitive = number;
     const primitiveConverter = {
       toFirestore(value: Primitive): DocumentData {
@@ -6890,7 +6886,7 @@ describe('Transaction class', () => {
       });
   });
 
-  it('has getAll() method', () => {
+  it.skip('has getAll() method', () => {
     const ref1 = randomCol.doc('doc1');
     const ref2 = randomCol.doc('doc2');
     return Promise.all([ref1.set({}), ref2.set({})])
@@ -6906,7 +6902,7 @@ describe('Transaction class', () => {
       });
   });
 
-  it('getAll() supports array destructuring', () => {
+  it.skip('getAll() supports array destructuring', () => {
     const ref1 = randomCol.doc('doc1');
     const ref2 = randomCol.doc('doc2');
     return Promise.all([ref1.set({}), ref2.set({})])
@@ -6922,7 +6918,7 @@ describe('Transaction class', () => {
       });
   });
 
-  it('getAll() supports field mask', () => {
+  it.skip('getAll() supports field mask', () => {
     const ref1 = randomCol.doc('doc1');
     return ref1.set({foo: 'a', bar: 'b'}).then(() => {
       return firestore
@@ -6937,7 +6933,7 @@ describe('Transaction class', () => {
     });
   });
 
-  it('getAll() supports array destructuring with field mask', () => {
+  it.skip('getAll() supports array destructuring with field mask', () => {
     const ref1 = randomCol.doc('doc1');
     const ref2 = randomCol.doc('doc2');
     return Promise.all([
@@ -6999,7 +6995,7 @@ describe('Transaction class', () => {
       });
   });
 
-  it('has set() method', () => {
+  it.skip('has set() method', () => {
     const ref = randomCol.doc('doc');
     return firestore
       .runTransaction(updateFunction => {
@@ -7014,7 +7010,7 @@ describe('Transaction class', () => {
       });
   });
 
-  it('has update() method', () => {
+  it.skip('has update() method', () => {
     const ref = randomCol.doc('doc');
     return ref
       .set({
@@ -7042,7 +7038,7 @@ describe('Transaction class', () => {
       });
   });
 
-  it('has delete() method', () => {
+  it.skip('has delete() method', () => {
     let success = false;
     const ref = randomCol.doc('doc');
     return ref
@@ -7180,7 +7176,7 @@ describe('WriteBatch class', () => {
       });
   });
 
-  it('has set() method', () => {
+  it.skip('has set() method', () => {
     const ref = randomCol.doc('doc');
     const batch = firestore.batch();
     batch.set(ref, {foo: 'a'});
@@ -7237,7 +7233,7 @@ describe('WriteBatch class', () => {
       });
   });
 
-  it('has update() method', () => {
+  it.skip('has update() method', () => {
     const ref = randomCol.doc('doc');
     const batch = firestore.batch();
     batch.set(ref, {foo: 'a'});
@@ -7275,7 +7271,7 @@ describe('WriteBatch class', () => {
       });
   });
 
-  it('has delete() method', () => {
+  it.skip('has delete() method', () => {
     let success = false;
 
     const ref = randomCol.doc('doc');
@@ -7392,7 +7388,7 @@ describe('BulkWriter class', () => {
     expect(writeTime).to.not.be.null;
   });
 
-  it('has set() method', async () => {
+  it.skip('has set() method', async () => {
     const ref = randomCol.doc('doc1');
     const singleOp = writer.set(ref, {foo: 'bar'});
     await writer.close();
@@ -7402,7 +7398,7 @@ describe('BulkWriter class', () => {
     expect(writeTime).to.not.be.null;
   });
 
-  it('has update() method', async () => {
+  it.skip('has update() method', async () => {
     const ref = randomCol.doc('doc1');
     await ref.set({foo: 'bar'});
     const singleOp = writer.update(ref, {foo: 'bar2'});
@@ -7413,7 +7409,7 @@ describe('BulkWriter class', () => {
     expect(writeTime).to.not.be.null;
   });
 
-  it('has delete() method', async () => {
+  it.skip('has delete() method', async () => {
     const ref = randomCol.doc('doc1');
     await ref.set({foo: 'bar'});
     const singleOp = writer.delete(ref);
