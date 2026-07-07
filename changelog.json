@@ -5,6 +5,23 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "3391fd27d1c15e051293207a07c6db00e760d370",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8672"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/promisify",
+      "id": "20912a56-2568-49fa-a6ba-180bdfa33d32",
+      "createTime": "2026-06-24T18:20:52.132Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "a2415320b9c840f6ae27894451abb561a080ff82",
           "message": "Consolidate prettierignore and prettierrc files: handwritten",
           "issues": [
