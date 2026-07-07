@@ -159,6 +159,14 @@ export function mutateInternal(
               // of recursing into `errors` (e.g. pino).
               const entryError = new Error(rpcError.message) as ServiceError;
               entryError.code = rpcError.code;
+              // Preserve the gRPC debugging context that the former
+              // self-reference carried for each entry.
+              if (rpcError.metadata) {
+                entryError.metadata = rpcError.metadata;
+              }
+              if (rpcError.details) {
+                entryError.details = rpcError.details;
+              }
               return entryError;
             }),
         );
