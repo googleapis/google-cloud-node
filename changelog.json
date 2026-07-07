@@ -4,6 +4,57 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "a2415320b9c840f6ae27894451abb561a080ff82",
+          "message": "Consolidate prettierignore and prettierrc files: handwritten",
+          "issues": [
+            "8081"
+          ]
+        }
+      ],
+      "version": "0.16.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/reports",
+      "id": "2db81b06-da11-4258-9851-75e4731580bc",
+      "createTime": "2026-07-07T04:29:41.741Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a2415320b9c840f6ae27894451abb561a080ff82",
+          "message": "Consolidate prettierignore and prettierrc files: handwritten",
+          "issues": [
+            "8081"
+          ]
+        }
+      ],
+      "version": "0.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis-cluster",
+      "id": "2b5ed336-af93-40d3-afff-18a9ba82a111",
+      "createTime": "2026-07-07T04:29:41.717Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a2415320b9c840f6ae27894451abb561a080ff82",
+          "message": "Consolidate prettierignore and prettierrc files: handwritten",
+          "issues": [
+            "8081"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/memorystore",
+      "id": "f6f204a5-eab8-44ad-9ae6-432c873b4caa",
+      "createTime": "2026-07-07T04:29:41.694Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "e132e80349d8531c1cb9193255ad55ace1db5329",
           "message": "Kokoro pipeline for system test",
@@ -81475,5 +81526,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-07-06T06:28:40.860Z"
+  "updateTime": "2026-07-07T04:29:41.741Z"
 }
