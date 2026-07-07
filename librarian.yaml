@@ -1152,7 +1152,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-memorystore
-    version: 0.6.1
+    version: 0.7.0
     apis:
       - path: google/cloud/memorystore/v1
       - path: google/cloud/memorystore/v1beta
@@ -1385,7 +1385,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-redis-cluster
-    version: 0.11.0
+    version: 0.12.0
     apis:
       - path: google/cloud/redis/cluster/v1
       - path: google/cloud/redis/cluster/v1beta1
@@ -2144,7 +2144,7 @@ libraries:
       package_name: '@google-shopping/quota'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
   - name: google-shopping-merchant-reports
-    version: 0.15.0
+    version: 0.16.0
     apis:
       - path: google/shopping/merchant/reports/v1
       - path: google/shopping/merchant/reports/v1beta
