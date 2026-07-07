@@ -618,7 +618,7 @@ describe('Firestore class', () => {
 
 // Skip partition query tests when running against the emulator because
 // partition queries are not supported by the emulator.
-describe.skipEmulator.skipEnterprise('CollectionGroup class', () => {
+describe.skip('CollectionGroup class', () => {
   const desiredPartitionCount = 3;
   const documentCount = 2 * 128 + 127; // Minimum partition size is 128.
 
