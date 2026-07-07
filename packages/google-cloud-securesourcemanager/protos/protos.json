@@ -15,8 +15,8 @@
                     "java_package": "com.google.cloud.securesourcemanager.v1",
                     "php_namespace": "Google\\Cloud\\SecureSourceManager\\V1",
                     "ruby_package": "Google::Cloud::SecureSourceManager::V1",
-                    "(google.api.resource_definition).type": "compute.googleapis.com/ServiceAttachment",
-                    "(google.api.resource_definition).pattern": "projects/{project}/regions/{region}/serviceAttachments/{service_attachment}"
+                    "(google.api.resource_definition).type": "dlp.googleapis.com/InspectTemplate",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/inspectTemplates/{inspect_template}"
                   },
                   "nested": {
                     "SecureSourceManager": {
@@ -1547,6 +1547,21 @@
                           "options": {
                             "(google.api.field_behavior)": "INPUT_ONLY"
                           }
+                        },
+                        "serviceAccount": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "iam.googleapis.com/ServiceAccount"
+                          }
+                        },
+                        "scanConfig": {
+                          "type": "ScanConfig",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -1593,6 +1608,38 @@
                             "readme": {
                               "type": "string",
                               "id": 4
+                            }
+                          }
+                        },
+                        "ScanConfig": {
+                          "fields": {
+                            "secretScanConfig": {
+                              "type": "SecretScanConfig",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "SecretScanConfig": {
+                              "fields": {
+                                "enabled": {
+                                  "type": "bool",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "inspectTemplate": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "(google.api.resource_reference).type": "dlp.googleapis.com/InspectTemplate"
+                                  }
+                                }
+                              }
                             }
                           }
                         }

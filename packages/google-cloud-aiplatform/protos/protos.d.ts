@@ -190604,6 +190604,9 @@ export namespace google {
 
                     /** PublisherModelConfig loggingConfig */
                     loggingConfig?: (google.cloud.aiplatform.v1beta1.IPredictRequestResponseLoggingConfig|null);
+
+                    /** PublisherModelConfig dataSharingEnabledProvider */
+                    dataSharingEnabledProvider?: (google.cloud.aiplatform.v1beta1.PublisherModelConfig.ModelProvider|keyof typeof google.cloud.aiplatform.v1beta1.PublisherModelConfig.ModelProvider|null);
                 }
 
                 /** Represents a PublisherModelConfig. */
@@ -190617,6 +190620,9 @@ export namespace google {
 
                     /** PublisherModelConfig loggingConfig. */
                     public loggingConfig?: (google.cloud.aiplatform.v1beta1.IPredictRequestResponseLoggingConfig|null);
+
+                    /** PublisherModelConfig dataSharingEnabledProvider. */
+                    public dataSharingEnabledProvider: (google.cloud.aiplatform.v1beta1.PublisherModelConfig.ModelProvider|keyof typeof google.cloud.aiplatform.v1beta1.PublisherModelConfig.ModelProvider);
 
                     /**
                      * Creates a new PublisherModelConfig instance using the specified properties.
@@ -190694,6 +190700,15 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace PublisherModelConfig {
+
+                    /** ModelProvider enum. */
+                    enum ModelProvider {
+                        MODEL_PROVIDER_UNSPECIFIED = 0,
+                        ANTHROPIC = 1
+                    }
                 }
 
                 /** Properties of a ClientConnectionConfig. */

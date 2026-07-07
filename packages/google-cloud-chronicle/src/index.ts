@@ -32,6 +32,8 @@ const EntityServiceClient = v1.EntityServiceClient;
 type EntityServiceClient = v1.EntityServiceClient;
 const FeaturedContentNativeDashboardServiceClient = v1.FeaturedContentNativeDashboardServiceClient;
 type FeaturedContentNativeDashboardServiceClient = v1.FeaturedContentNativeDashboardServiceClient;
+const FindingsRefinementServiceClient = v1.FindingsRefinementServiceClient;
+type FindingsRefinementServiceClient = v1.FindingsRefinementServiceClient;
 const InstanceServiceClient = v1.InstanceServiceClient;
 type InstanceServiceClient = v1.InstanceServiceClient;
 const NativeDashboardServiceClient = v1.NativeDashboardServiceClient;
@@ -43,7 +45,7 @@ type RuleExecutionErrorServiceClient = v1.RuleExecutionErrorServiceClient;
 const RuleServiceClient = v1.RuleServiceClient;
 type RuleServiceClient = v1.RuleServiceClient;
 
-export {v1, BigQueryExportServiceClient, DashboardChartServiceClient, DashboardQueryServiceClient, DataAccessControlServiceClient, DataTableServiceClient, EntityServiceClient, FeaturedContentNativeDashboardServiceClient, InstanceServiceClient, NativeDashboardServiceClient, ReferenceListServiceClient, RuleExecutionErrorServiceClient, RuleServiceClient};
-export default {v1, BigQueryExportServiceClient, DashboardChartServiceClient, DashboardQueryServiceClient, DataAccessControlServiceClient, DataTableServiceClient, EntityServiceClient, FeaturedContentNativeDashboardServiceClient, InstanceServiceClient, NativeDashboardServiceClient, ReferenceListServiceClient, RuleExecutionErrorServiceClient, RuleServiceClient};
+export {v1, BigQueryExportServiceClient, DashboardChartServiceClient, DashboardQueryServiceClient, DataAccessControlServiceClient, DataTableServiceClient, EntityServiceClient, FeaturedContentNativeDashboardServiceClient, FindingsRefinementServiceClient, InstanceServiceClient, NativeDashboardServiceClient, ReferenceListServiceClient, RuleExecutionErrorServiceClient, RuleServiceClient};
+export default {v1, BigQueryExportServiceClient, DashboardChartServiceClient, DashboardQueryServiceClient, DataAccessControlServiceClient, DataTableServiceClient, EntityServiceClient, FeaturedContentNativeDashboardServiceClient, FindingsRefinementServiceClient, InstanceServiceClient, NativeDashboardServiceClient, ReferenceListServiceClient, RuleExecutionErrorServiceClient, RuleServiceClient};
 import * as protos from '../protos/protos';
 export {protos};
