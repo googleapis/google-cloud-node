@@ -1769,7 +1769,6 @@ libraries:
       - path: google/cloud/workflows/executions/v1
       - path: google/cloud/workflows/executions/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-workloadmanager
