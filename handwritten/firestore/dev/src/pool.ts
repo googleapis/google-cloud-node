@@ -118,11 +118,39 @@ export class ClientPool<T extends object> {
     let selectedClient: T | null = null;
     let selectedClientRequestCount = -1;
 
+    const previouslyGrpcEnabled = this.grpcEnabled;
     // Transition to grpc when we see the first operation that requires grpc.
     this.grpcEnabled = this.grpcEnabled || requiresGrpc;
 
     // Require a grpc client for this operation if we have transitioned to grpc.
     requiresGrpc = requiresGrpc || this.grpcEnabled;
+
+    if (!previouslyGrpcEnabled && this.grpcEnabled) {
+      // We just transitioned to GRPC. Let's garbage collect any idle REST clients.
+      for (const [client, metadata] of this.activeClients) {
+        if (!metadata.grpcEnabled && metadata.activeRequestCount === 0) {
+          const clientId = this.clientIdByClient.get(client);
+          logger(
+            `ClientPool[${this.instanceId}].acquire`,
+            requestTag,
+            'Garbage collecting idle REST client [%s] after transition to GRPC',
+            clientId,
+          );
+          this.activeClients.delete(client);
+          this.failedClients.delete(client);
+          // Fire-and-forget the destructor, catching errors to prevent unhandled promise rejections.
+          this.clientDestructor(client).catch(err => {
+            logger(
+              `ClientPool[${this.instanceId}].acquire`,
+              requestTag,
+              'Error during garbage collection of REST client [%s]: %s',
+              clientId,
+              err,
+            );
+          });
+        }
+      }
+    }
 
     for (const [client, metadata] of this.activeClients) {
       // Use the "most-full" client that can still accommodate the request
