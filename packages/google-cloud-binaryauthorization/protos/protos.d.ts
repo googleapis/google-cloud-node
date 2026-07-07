@@ -58,6 +58,9 @@ export namespace google {
 
                     /** Policy updateTime */
                     updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Policy etag */
+                    etag?: (string|null);
                 }
 
                 /** Represents a Policy. */
@@ -98,6 +101,9 @@ export namespace google {
 
                     /** Policy updateTime. */
                     public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Policy etag. */
+                    public etag: string;
 
                     /**
                      * Creates a new Policy instance using the specified properties.
@@ -425,6 +431,9 @@ export namespace google {
 
                     /** Attestor updateTime */
                     updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Attestor etag */
+                    etag?: (string|null);
                 }
 
                 /** Represents an Attestor. */
@@ -447,6 +456,9 @@ export namespace google {
 
                     /** Attestor updateTime. */
                     public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Attestor etag. */
+                    public etag: string;
 
                     /** Attestor attestorType. */
                     public attestorType?: "userOwnedGrafeasNote";
@@ -646,6 +658,9 @@ export namespace google {
 
                     /** PkixPublicKey signatureAlgorithm */
                     signatureAlgorithm?: (google.cloud.binaryauthorization.v1.PkixPublicKey.SignatureAlgorithm|keyof typeof google.cloud.binaryauthorization.v1.PkixPublicKey.SignatureAlgorithm|null);
+
+                    /** PkixPublicKey keyId */
+                    keyId?: (string|null);
                 }
 
                 /** Represents a PkixPublicKey. */
@@ -662,6 +677,9 @@ export namespace google {
 
                     /** PkixPublicKey signatureAlgorithm. */
                     public signatureAlgorithm: (google.cloud.binaryauthorization.v1.PkixPublicKey.SignatureAlgorithm|keyof typeof google.cloud.binaryauthorization.v1.PkixPublicKey.SignatureAlgorithm);
+
+                    /** PkixPublicKey keyId. */
+                    public keyId: string;
 
                     /**
                      * Creates a new PkixPublicKey instance using the specified properties.
@@ -747,9 +765,13 @@ export namespace google {
                     enum SignatureAlgorithm {
                         SIGNATURE_ALGORITHM_UNSPECIFIED = 0,
                         RSA_PSS_2048_SHA256 = 1,
+                        RSA_SIGN_PSS_2048_SHA256 = 1,
                         RSA_PSS_3072_SHA256 = 2,
+                        RSA_SIGN_PSS_3072_SHA256 = 2,
                         RSA_PSS_4096_SHA256 = 3,
+                        RSA_SIGN_PSS_4096_SHA256 = 3,
                         RSA_PSS_4096_SHA512 = 4,
+                        RSA_SIGN_PSS_4096_SHA512 = 4,
                         RSA_SIGN_PKCS1_2048_SHA256 = 5,
                         RSA_SIGN_PKCS1_3072_SHA256 = 6,
                         RSA_SIGN_PKCS1_4096_SHA256 = 7,
@@ -759,7 +781,8 @@ export namespace google {
                         ECDSA_P384_SHA384 = 10,
                         EC_SIGN_P384_SHA384 = 10,
                         ECDSA_P521_SHA512 = 11,
-                        EC_SIGN_P521_SHA512 = 11
+                        EC_SIGN_P521_SHA512 = 11,
+                        ML_DSA_65 = 13
                     }
                 }
 
@@ -3056,6 +3079,9 @@ export namespace google {
 
                     /** Policy updateTime */
                     updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Policy etag */
+                    etag?: (string|null);
                 }
 
                 /** Represents a Policy. */
@@ -3096,6 +3122,9 @@ export namespace google {
 
                     /** Policy updateTime. */
                     public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Policy etag. */
+                    public etag: string;
 
                     /**
                      * Creates a new Policy instance using the specified properties.
@@ -3423,6 +3452,9 @@ export namespace google {
 
                     /** Attestor updateTime */
                     updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Attestor etag */
+                    etag?: (string|null);
                 }
 
                 /** Represents an Attestor. */
@@ -3445,6 +3477,9 @@ export namespace google {
 
                     /** Attestor updateTime. */
                     public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Attestor etag. */
+                    public etag: string;
 
                     /** Attestor attestorType. */
                     public attestorType?: "userOwnedDrydockNote";
@@ -3745,9 +3780,13 @@ export namespace google {
                     enum SignatureAlgorithm {
                         SIGNATURE_ALGORITHM_UNSPECIFIED = 0,
                         RSA_PSS_2048_SHA256 = 1,
+                        RSA_SIGN_PSS_2048_SHA256 = 1,
                         RSA_PSS_3072_SHA256 = 2,
+                        RSA_SIGN_PSS_3072_SHA256 = 2,
                         RSA_PSS_4096_SHA256 = 3,
+                        RSA_SIGN_PSS_4096_SHA256 = 3,
                         RSA_PSS_4096_SHA512 = 4,
+                        RSA_SIGN_PSS_4096_SHA512 = 4,
                         RSA_SIGN_PKCS1_2048_SHA256 = 5,
                         RSA_SIGN_PKCS1_3072_SHA256 = 6,
                         RSA_SIGN_PKCS1_4096_SHA256 = 7,
@@ -3757,7 +3796,8 @@ export namespace google {
                         ECDSA_P384_SHA384 = 10,
                         EC_SIGN_P384_SHA384 = 10,
                         ECDSA_P521_SHA512 = 11,
-                        EC_SIGN_P521_SHA512 = 11
+                        EC_SIGN_P521_SHA512 = 11,
+                        ML_DSA_65 = 13
                     }
                 }
 
@@ -4050,6 +4090,51 @@ export namespace google {
                     type DeleteAttestorCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
                 }
 
+                /** Represents a SystemPolicyV1Beta1 */
+                class SystemPolicyV1Beta1 extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new SystemPolicyV1Beta1 service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new SystemPolicyV1Beta1 service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): SystemPolicyV1Beta1;
+
+                    /**
+                     * Calls GetSystemPolicy.
+                     * @param request GetSystemPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Policy
+                     */
+                    public getSystemPolicy(request: google.cloud.binaryauthorization.v1beta1.IGetSystemPolicyRequest, callback: google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1.GetSystemPolicyCallback): void;
+
+                    /**
+                     * Calls GetSystemPolicy.
+                     * @param request GetSystemPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getSystemPolicy(request: google.cloud.binaryauthorization.v1beta1.IGetSystemPolicyRequest): Promise<google.cloud.binaryauthorization.v1beta1.Policy>;
+                }
+
+                namespace SystemPolicyV1Beta1 {
+
+                    /**
+                     * Callback as used by {@link google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1|getSystemPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Policy
+                     */
+                    type GetSystemPolicyCallback = (error: (Error|null), response?: google.cloud.binaryauthorization.v1beta1.Policy) => void;
+                }
+
                 /** Properties of a GetPolicyRequest. */
                 interface IGetPolicyRequest {
 
@@ -4145,51 +4230,6 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Represents a SystemPolicyV1Beta1 */
-                class SystemPolicyV1Beta1 extends $protobuf.rpc.Service {
-
-                    /**
-                     * Constructs a new SystemPolicyV1Beta1 service.
-                     * @param rpcImpl RPC implementation
-                     * @param [requestDelimited=false] Whether requests are length-delimited
-                     * @param [responseDelimited=false] Whether responses are length-delimited
-                     */
-                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
-
-                    /**
-                     * Creates new SystemPolicyV1Beta1 service using the specified rpc implementation.
-                     * @param rpcImpl RPC implementation
-                     * @param [requestDelimited=false] Whether requests are length-delimited
-                     * @param [responseDelimited=false] Whether responses are length-delimited
-                     * @returns RPC service. Useful where requests and/or responses are streamed.
-                     */
-                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): SystemPolicyV1Beta1;
-
-                    /**
-                     * Calls GetSystemPolicy.
-                     * @param request GetSystemPolicyRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Policy
-                     */
-                    public getSystemPolicy(request: google.cloud.binaryauthorization.v1beta1.IGetSystemPolicyRequest, callback: google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1.GetSystemPolicyCallback): void;
-
-                    /**
-                     * Calls GetSystemPolicy.
-                     * @param request GetSystemPolicyRequest message or plain object
-                     * @returns Promise
-                     */
-                    public getSystemPolicy(request: google.cloud.binaryauthorization.v1beta1.IGetSystemPolicyRequest): Promise<google.cloud.binaryauthorization.v1beta1.Policy>;
-                }
-
-                namespace SystemPolicyV1Beta1 {
-
-                    /**
-                     * Callback as used by {@link google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1|getSystemPolicy}.
-                     * @param error Error, if any
-                     * @param [response] Policy
-                     */
-                    type GetSystemPolicyCallback = (error: (Error|null), response?: google.cloud.binaryauthorization.v1beta1.Policy) => void;
                 }
 
                 /** Properties of an UpdatePolicyRequest. */
