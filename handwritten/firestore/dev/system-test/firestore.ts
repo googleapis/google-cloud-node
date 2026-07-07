@@ -1319,7 +1319,7 @@ describe('DocumentReference class', () => {
   // TODO this test times out in the RPC because there is no index in the backend
   // to support the query. The latency scales with the total number of collection
   // groups in the database, regardless of which collection / parent is being listed.
-  it.skipEnterprise('has listCollections() method', () => {
+  it.skip('has listCollections() method', () => {
     const collections: string[] = [];
     const promises: Array<Promise<{}>> = [];
 
