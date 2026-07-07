@@ -148,106 +148,93 @@ export interface SignedPostPolicyV4Output {
   url: string;
   fields: PolicyFields;
 }
-
 export interface GetSignedUrlConfig
   extends Pick<SignerGetSignedUrlConfig, 'host' | 'signingEndpoint'> {
+  
   /**
-   * The date and time when the signed URL becomes active/usable.
-   * Maps to the `X-Goog-Date` query parameter in V4 signed URLs.
-   * If not specified, the current time is used by default. This is useful for pre-generating
-   * URLs that are only valid starting at a future point in time, or for pinning a static date
-   * to ensure consistent URL generation across identical calls (beneficial for caching).
-   */
-  accessibleAt?: string | number | Date;
-
-  /**
-   * The action/operation permitted by the signed URL.
-   * Supported values are:
-   * - `'read'`: Allows retrieving file data (HTTP GET method).
-   * - `'write'`: Allows uploading or overwriting file data (HTTP PUT method).
-   * - `'delete'`: Allows deleting the file (HTTP DELETE method).
-   * - `'resumable'`: Allows starting or resuming a resumable upload (HTTP POST method).
+   * The action to permit with the signed URL.
+   * - `'read'`: Allows downloading/viewing the file (HTTP GET).
+   * - `'write'`: Allows uploading/overwriting the file (HTTP PUT).
+   * - `'delete'`: Allows removing the file (HTTP DELETE).
+   * - `'resumable'`: Allows resumable uploads (HTTP POST). 
+   * Note: When using `'resumable'`, the header `X-Goog-Resumable: start` must be sent in the client request.
    */
   action: 'read' | 'write' | 'delete' | 'resumable';
 
   /**
-   * The Custom Domain Name (CNAME) to use instead of the default GCS hostname.
-   * If you have configured a custom domain for your bucket, specifying this option
-   * will format the generated URL with your custom domain.
-   */
-  cname?: string;
-
-  /**
-   * The MD5 digest of the content as a base64-encoded string.
-   * Required if you want to enforce integrity checking on upload. The client
-   * must send the exact matching `Content-MD5` header when using the signed URL.
-   */
-  contentMd5?: string;
-
-  /**
-   * The expected MIME type (Content-Type) of the file.
-   * Useful when using `'write'` or `'resumable'` actions to enforce that the client upload
-   * carries a specific `Content-Type` header matching this value.
-   */
-  contentType?: string;
-
-  /**
-   * The expiration date/time when the signed URL will no longer be valid.
-   * The value can be a JavaScript `Date` object, an epoch timestamp (number of milliseconds),
-   * or a date string. The maximum validity period is 7 days for V4 signed URLs.
-   */
-  expires: string | number | Date;
-
-  /**
-   * Custom HTTP extension headers to be included as signed headers in the signed URL.
-   * Keys must be header names (e.g., `x-goog-meta-custom`) and values must be their expected values.
-   * The user must send these exact headers when making the HTTP request using the signed URL.
-   */
-  extensionHeaders?: http.OutgoingHttpHeaders;
-
-  /**
-   * A convenience option to prompt the browser to save the downloaded file with a specific filename.
-   * This is a friendly shortcut that automatically formats the `responseDisposition` parameter
-   * under the hood to `attachment; filename="<filename>"`.
-   * Note: If both `promptSaveAs` and `responseDisposition` are specified, `promptSaveAs` takes precedence
-   * and overrides `responseDisposition`.
-   */
-  promptSaveAs?: string;
-
-  /**
-   * Additional query parameters to append to the final signed URL.
-   * Note: For V4 signed URLs, only query parameters starting with `x-goog-` are included in the signature
-   * (and thus protected against tampering). Other custom query parameters are appended to the URL but not signed.
-   */
-  queryParams?: Query;
-
-  /**
-   * Overrides the `Content-Disposition` response header returned by GCS on download.
-   * For example, setting this to `attachment; filename="new-name.png"` forces the browser
-   * to download the file with the specified filename.
-   * Note: This option will be overridden if `promptSaveAs` is also specified.
-   */
-  responseDisposition?: string;
-
-  /**
-   * Overrides the `Content-Type` response header returned by GCS on download.
-   * Useful if you want GCS to serve a file with a specific MIME type when accessed
-   * via this signed URL, overriding its stored metadata.
-   */
-  responseType?: string;
-
-  /**
-   * The signature version to use when generating the signed URL.
-   * - `'v4'`: Google's recommended SHA256-based signing mechanism (default).
-   * - `'v2'`: The legacy SHA1-based signing mechanism.
+   * The signing version to use. 
+   * @default 'v2'
    */
   version?: 'v2' | 'v4';
 
   /**
-   * If true, uses virtual hosted-style URLs (e.g. `https://bucket-name.storage.googleapis.com/object-name`)
-   * instead of path-style URLs (e.g. `https://storage.googleapis.com/bucket-name/object-name`).
+   * Use virtual hosted-style URLs (e.g., `https://mybucket.storage.googleapis.com/...`) 
+   * instead of path-style URLs (e.g., `https://storage.googleapis.com/mybucket/...`). 
+   * Virtual hosted-style URLs are generally preferred.
+   * @default false
    */
   virtualHostedStyle?: boolean;
+
+  /**
+   * The custom domain name (CNAME) mapped to this bucket (e.g., `"https://cdn.example.com"`).
+   */
+  cname?: string;
+
+  /**
+   * The MD5 digest value in base64. If provided, the client request **must** * include an identical `Content-MD5` HTTP header. 
+   * If omitted, the client request must not include this header.
+   */
+  contentMd5?: string;
+
+  /**
+   * The expected Content-Type of the file. If provided, the client request **must** * include an identical `Content-Type` HTTP header. 
+   * If omitted, the client request must not include this header.
+   */
+  contentType?: string;
+
+  /**
+   * The expiration timestamp for the link. Any provided value is passed directly to `new Date()`.
+   * * @throws {Error} If an expiration timestamp from the past is given.
+   * @note `'v4'` signing supports a maximum duration of 7 days (604,800 seconds) from the creation time.
+   */
+  expires: string | number | Date;
+
+  /**
+   * The timestamp when this link becomes usable. Any provided value is passed directly to `new Date()`.
+   * @default Date.now()
+   * @note Only supported/applicable when `version` is set to `'v4'`.
+   */
+  accessibleAt?: string | number | Date;
+
+  /**
+   * Canonical extension headers that the server will validate against the client's request.
+   * * Requirements:
+   * - Header names must be prefixed with `x-goog-` and must be entirely lowercase.
+   * - Multi-valued headers passed as an array are converted into a comma-separated string (no spaces). 
+   * The client must format them identically to prevent signature mismatches.
+   */
+  extensionHeaders?: http.OutgoingHttpHeaders;
+
+  /**
+   * The filename to prompt the browser/user to save the file as upon access.
+   * Note: This option is ignored if `responseDisposition` is explicitly set.
+   */
+  promptSaveAs?: string;
+
+  /**
+   * Maps to the `response-content-disposition` query parameter in the signed URL.
+   */
+  responseDisposition?: string;
+
+  /**
+   * Maps to the `response-content-type` query parameter in the signed URL.
+   */
+  responseType?: string;
+
+  /**
+   * Additional query parameters to include natively in the generated signed URL.
+   */
+  queryParams?: Query;
 }
 
 export interface GetFileMetadataOptions {
