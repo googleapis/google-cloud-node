@@ -18,6 +18,30 @@ sources:
   googleapis:
     commit: b6f9ff05aaec18070232a1ab36da98e684bc7909
     sha256: 91788c6f956a0a409abe89a304c123cff73cb0ebb46b494e56d7ac9ece86f8cf
+tools:
+  pnpm:
+    - name: gapic-generator-typescript
+      version: "gapic-generator-v4.12.1"
+      package: "https://github.com/googleapis/google-cloud-node/archive/gapic-generator-v4.12.1.tar.gz"
+      checksum: "477e4a9b3442457667846bd5c629d1c059e7caf2d5a3ebce95da626a2d42ea80"
+      build:
+        - "pnpm install"
+        # tsc only compiles TypeScript; the generator also needs templates/
+        # and protos/ in build/ (resolved via __dirname at runtime).
+        - "./node_modules/.bin/tsc"
+        - "cp -a templates protos build/"
+        # Pass the full directory name into "pnpm add" so that the generator
+        # is registered with the name "gapic-generator-typescript" rather than
+        # an arbitrary name such as "5".
+        - 'pnpm add -g "$PWD"'
+    - name: gapic-node-processing
+      version: "0.1.8"
+    - name: gapic-tools
+      version: "1.0.6"
+    - name: protobufjs-cli
+      version: "1.2.0"
+    - name: protobufjs
+      version: "7.5.8"
 default:
   keep:
     - librarian.js
@@ -824,12 +848,11 @@ libraries:
         nodejs:
           mixins: google.longrunning.Operations;google.cloud.location.Locations
       - path: google/cloud/dialogflow/cx/v3beta1
-        nodejs:
-          mixins: google.longrunning.Operations;google.cloud.location.Locations
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v3
+      metadata_name_override: dialogflow-cx
+      name_pretty_override: Dialogflow CX API
   - name: google-cloud-discoveryengine
     version: 2.8.0
     apis:
@@ -1748,6 +1771,8 @@ libraries:
     apis:
       - path: google/cloud/workflows/v1
       - path: google/cloud/workflows/v1beta
+      - path: google/cloud/workflows/executions/v1
+      - path: google/cloud/workflows/executions/v1beta
     copyright_year: "2026"
     skip_generate: true
     nodejs:
