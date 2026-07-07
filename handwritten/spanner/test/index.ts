@@ -2456,10 +2456,47 @@ describe('Spanner', () => {
       spanner.clients_.set('fake-client', fakeClient);
 
       try {
-        await (spanner.close() as unknown as Promise<void>);
+        await spanner.close();
         assert.fail('Expected promise to be rejected');
       } catch (err) {
         assert.strictEqual(err, error);
+      }
+    });
+
+    it('should return a rejected promise if closing a client throws synchronously', async () => {
+      const error = new Error('sync err');
+      const fakeClient = {
+        close: sandbox.stub().throws(error),
+      };
+      spanner.clients_.set('fake-client', fakeClient);
+
+      try {
+        await spanner.close();
+        assert.fail('Expected promise to be rejected');
+      } catch (err) {
+        assert.strictEqual(err, error);
+      }
+    });
+
+    it('should wait for all clients to close and return the first error', async () => {
+      const error1 = new Error('err1');
+      const error2 = new Error('err2');
+      const fakeOperationsClient = {
+        close: sandbox.stub().rejects(error1),
+      };
+      const fakeClient = {
+        close: sandbox.stub().rejects(error2),
+        operationsClient: fakeOperationsClient,
+      };
+      spanner.clients_.set('fake-client', fakeClient);
+
+      try {
+        await spanner.close();
+        assert.fail('Expected promise to be rejected');
+      } catch (err) {
+        assert.strictEqual(err, error1);
+        assert.strictEqual(fakeOperationsClient.close.callCount, 1);
+        assert.strictEqual(fakeClient.close.callCount, 1);
       }
     });
   });

@@ -573,17 +573,48 @@ class Spanner extends GrpcService {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const client = c as any;
       if (client.operationsClient && client.operationsClient.close) {
-        promises.push(client.operationsClient.close());
+        try {
+          promises.push(Promise.resolve(client.operationsClient.close()));
+        } catch (err) {
+          promises.push(Promise.reject(err));
+        }
       }
-      promises.push(client.close());
+      try {
+        if (client.close) {
+          promises.push(Promise.resolve(client.close()));
+        }
+      } catch (err) {
+        promises.push(Promise.reject(err));
+      }
     });
 
-    // Wait for all clients to close, then do cleanup
-    const res = Promise.all(promises).then(() => cleanup());
+    // Wait for all clients to close (even if some fail), then do cleanup
+    const res = Promise.all(
+      promises.map(p =>
+        p.then(
+          () => undefined,
+          err => err || new Error('Unknown error during close'),
+        ),
+      ),
+    ).then(results => {
+      return cleanup()
+        .catch(err => {
+          console.error('Error occured during cleanup: ', err);
+        })
+        .then(() => {
+          // results contains `undefined` for success, or the error for failure
+          const error = results.find(r => r !== undefined);
+          if (error) {
+            throw error;
+          }
+        });
+    });
+
     if (callback) {
+      // process.nextTick prevents Unhandled Promise Rejections if callback throws
       res.then(
-        () => callback(null),
-        err => callback(err),
+        () => process.nextTick(() => callback(null)),
+        err => process.nextTick(() => callback(err)),
       );
     } else {
       return res;
