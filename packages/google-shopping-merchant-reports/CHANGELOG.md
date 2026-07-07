@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.16.0](https://github.com/googleapis/google-cloud-node/compare/reports-v0.15.0...reports-v0.16.0) (2026-07-07)
+
+
+### Features
+
+* Consolidate prettierignore and prettierrc files: handwritten ([#8081](https://github.com/googleapis/google-cloud-node/issues/8081)) ([a241532](https://github.com/googleapis/google-cloud-node/commit/a2415320b9c840f6ae27894451abb561a080ff82))
+
 ## [0.15.0](https://github.com/googleapis/google-cloud-node/compare/reports-v0.14.0...reports-v0.15.0) (2026-05-01)
 
 

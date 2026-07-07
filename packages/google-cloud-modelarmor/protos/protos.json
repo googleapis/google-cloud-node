@@ -277,6 +277,13 @@
                         "STREAMING_MODE_REALTIME": 2
                       }
                     },
+                    "Modality": {
+                      "values": {
+                        "MODALITY_UNSPECIFIED": 0,
+                        "MODALITY_TEXT": 1,
+                        "MODALITY_IMAGE": 2
+                      }
+                    },
                     "Template": {
                       "options": {
                         "(google.api.resource).type": "modelarmor.googleapis.com/Template",
@@ -391,6 +398,14 @@
                             "multiLanguageDetection": {
                               "type": "MultiLanguageDetection",
                               "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "modalities": {
+                              "rule": "repeated",
+                              "type": "Modality",
+                              "id": 11,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
@@ -1201,7 +1216,8 @@
                         "result": {
                           "oneof": [
                             "inspectResult",
-                            "deidentifyResult"
+                            "deidentifyResult",
+                            "redactResult"
                           ]
                         }
                       },
@@ -1213,6 +1229,10 @@
                         "deidentifyResult": {
                           "type": "SdpDeidentifyResult",
                           "id": 2
+                        },
+                        "redactResult": {
+                          "type": "SdpRedactResult",
+                          "id": 3
                         }
                       }
                     },
@@ -1245,6 +1265,10 @@
                         "findingsTruncated": {
                           "type": "bool",
                           "id": 5
+                        },
+                        "extractedImageText": {
+                          "type": "string",
+                          "id": 6
                         }
                       }
                     },
@@ -1295,7 +1319,8 @@
                             "EXCEL_DOCUMENT": 4,
                             "POWERPOINT_DOCUMENT": 5,
                             "TXT": 6,
-                            "CSV": 7
+                            "CSV": 7,
+                            "IMAGE": 8
                           }
                         }
                       }
@@ -1336,6 +1361,56 @@
                         }
                       }
                     },
+                    "SdpImageFindingLocation": {
+                      "fields": {
+                        "boundingBoxes": {
+                          "rule": "repeated",
+                          "type": "SdpBoundingBox",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "SdpBoundingBox": {
+                          "fields": {
+                            "top": {
+                              "type": "int32",
+                              "id": 1
+                            },
+                            "left": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "width": {
+                              "type": "int32",
+                              "id": 3
+                            },
+                            "height": {
+                              "type": "int32",
+                              "id": 4
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "SdpContentLocation": {
+                      "oneofs": {
+                        "location": {
+                          "oneof": [
+                            "imageFindingLocation"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "imageFindingLocation": {
+                          "type": "SdpImageFindingLocation",
+                          "id": 2
+                        },
+                        "containerName": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
                     "SdpFinding": {
                       "fields": {
                         "infoType": {
@@ -1361,8 +1436,58 @@
                             "codepointRange": {
                               "type": "RangeInfo",
                               "id": 2
+                            },
+                            "contentLocations": {
+                              "rule": "repeated",
+                              "type": "SdpContentLocation",
+                              "id": 3
                             }
                           }
+                        }
+                      }
+                    },
+                    "SdpRedactResult": {
+                      "fields": {
+                        "executionState": {
+                          "type": "FilterExecutionState",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "messageItems": {
+                          "rule": "repeated",
+                          "type": "MessageItem",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "matchState": {
+                          "type": "FilterMatchState",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "redactedImage": {
+                          "type": "bytes",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "findings": {
+                          "rule": "repeated",
+                          "type": "SdpFinding",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "extractedImageText": {
+                          "type": "string",
+                          "id": 6
                         }
                       }
                     },

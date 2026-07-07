@@ -2303,6 +2303,13 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "publicKeyFormat": {
+                          "type": "PublicKey.PublicKeyFormat",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "attestation": {
                           "type": "KeyOperationAttestation",
                           "id": 8,
@@ -2328,7 +2335,10 @@
                             "RSA_OAEP_3072_SHA256_AES_256": 3,
                             "RSA_OAEP_4096_SHA256_AES_256": 4,
                             "RSA_OAEP_3072_SHA256": 5,
-                            "RSA_OAEP_4096_SHA256": 6
+                            "RSA_OAEP_4096_SHA256": 6,
+                            "HPKE_KEM_ML_KEM_768_HKDF_SHA256_AES_256_GCM": 8,
+                            "HPKE_KEM_ML_KEM_1024_HKDF_SHA256_AES_256_GCM": 9,
+                            "HPKE_KEM_XWING_HKDF_SHA256_AES_256_GCM": 10
                           }
                         },
                         "ImportJobState": {
@@ -2344,6 +2354,13 @@
                             "pem": {
                               "type": "string",
                               "id": 1
+                            },
+                            "data": {
+                              "type": "bytes",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         }
@@ -3426,6 +3443,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "cloudkms.googleapis.com/ImportJob"
+                          }
+                        },
+                        "publicKeyFormat": {
+                          "type": "PublicKey.PublicKeyFormat",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }

@@ -48450,6 +48450,5878 @@
                         return DashboardDefinition;
                     })();
     
+                    v1.FindingsRefinementService = (function() {
+    
+                        /**
+                         * Constructs a new FindingsRefinementService service.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a FindingsRefinementService
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function FindingsRefinementService(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (FindingsRefinementService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = FindingsRefinementService;
+    
+                        /**
+                         * Creates new FindingsRefinementService service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementService
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {FindingsRefinementService} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        FindingsRefinementService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.chronicle.v1.FindingsRefinementService|getFindingsRefinement}.
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementService
+                         * @typedef GetFindingsRefinementCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.chronicle.v1.FindingsRefinement} [response] FindingsRefinement
+                         */
+    
+                        /**
+                         * Calls GetFindingsRefinement.
+                         * @function getFindingsRefinement
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IGetFindingsRefinementRequest} request GetFindingsRefinementRequest message or plain object
+                         * @param {google.cloud.chronicle.v1.FindingsRefinementService.GetFindingsRefinementCallback} callback Node-style callback called with the error, if any, and FindingsRefinement
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(FindingsRefinementService.prototype.getFindingsRefinement = function getFindingsRefinement(request, callback) {
+                            return this.rpcCall(getFindingsRefinement, $root.google.cloud.chronicle.v1.GetFindingsRefinementRequest, $root.google.cloud.chronicle.v1.FindingsRefinement, request, callback);
+                        }, "name", { value: "GetFindingsRefinement" });
+    
+                        /**
+                         * Calls GetFindingsRefinement.
+                         * @function getFindingsRefinement
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IGetFindingsRefinementRequest} request GetFindingsRefinementRequest message or plain object
+                         * @returns {Promise<google.cloud.chronicle.v1.FindingsRefinement>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.chronicle.v1.FindingsRefinementService|listFindingsRefinements}.
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementService
+                         * @typedef ListFindingsRefinementsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.chronicle.v1.ListFindingsRefinementsResponse} [response] ListFindingsRefinementsResponse
+                         */
+    
+                        /**
+                         * Calls ListFindingsRefinements.
+                         * @function listFindingsRefinements
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IListFindingsRefinementsRequest} request ListFindingsRefinementsRequest message or plain object
+                         * @param {google.cloud.chronicle.v1.FindingsRefinementService.ListFindingsRefinementsCallback} callback Node-style callback called with the error, if any, and ListFindingsRefinementsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(FindingsRefinementService.prototype.listFindingsRefinements = function listFindingsRefinements(request, callback) {
+                            return this.rpcCall(listFindingsRefinements, $root.google.cloud.chronicle.v1.ListFindingsRefinementsRequest, $root.google.cloud.chronicle.v1.ListFindingsRefinementsResponse, request, callback);
+                        }, "name", { value: "ListFindingsRefinements" });
+    
+                        /**
+                         * Calls ListFindingsRefinements.
+                         * @function listFindingsRefinements
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IListFindingsRefinementsRequest} request ListFindingsRefinementsRequest message or plain object
+                         * @returns {Promise<google.cloud.chronicle.v1.ListFindingsRefinementsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.chronicle.v1.FindingsRefinementService|createFindingsRefinement}.
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementService
+                         * @typedef CreateFindingsRefinementCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.chronicle.v1.FindingsRefinement} [response] FindingsRefinement
+                         */
+    
+                        /**
+                         * Calls CreateFindingsRefinement.
+                         * @function createFindingsRefinement
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.ICreateFindingsRefinementRequest} request CreateFindingsRefinementRequest message or plain object
+                         * @param {google.cloud.chronicle.v1.FindingsRefinementService.CreateFindingsRefinementCallback} callback Node-style callback called with the error, if any, and FindingsRefinement
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(FindingsRefinementService.prototype.createFindingsRefinement = function createFindingsRefinement(request, callback) {
+                            return this.rpcCall(createFindingsRefinement, $root.google.cloud.chronicle.v1.CreateFindingsRefinementRequest, $root.google.cloud.chronicle.v1.FindingsRefinement, request, callback);
+                        }, "name", { value: "CreateFindingsRefinement" });
+    
+                        /**
+                         * Calls CreateFindingsRefinement.
+                         * @function createFindingsRefinement
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.ICreateFindingsRefinementRequest} request CreateFindingsRefinementRequest message or plain object
+                         * @returns {Promise<google.cloud.chronicle.v1.FindingsRefinement>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.chronicle.v1.FindingsRefinementService|updateFindingsRefinement}.
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementService
+                         * @typedef UpdateFindingsRefinementCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.chronicle.v1.FindingsRefinement} [response] FindingsRefinement
+                         */
+    
+                        /**
+                         * Calls UpdateFindingsRefinement.
+                         * @function updateFindingsRefinement
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IUpdateFindingsRefinementRequest} request UpdateFindingsRefinementRequest message or plain object
+                         * @param {google.cloud.chronicle.v1.FindingsRefinementService.UpdateFindingsRefinementCallback} callback Node-style callback called with the error, if any, and FindingsRefinement
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(FindingsRefinementService.prototype.updateFindingsRefinement = function updateFindingsRefinement(request, callback) {
+                            return this.rpcCall(updateFindingsRefinement, $root.google.cloud.chronicle.v1.UpdateFindingsRefinementRequest, $root.google.cloud.chronicle.v1.FindingsRefinement, request, callback);
+                        }, "name", { value: "UpdateFindingsRefinement" });
+    
+                        /**
+                         * Calls UpdateFindingsRefinement.
+                         * @function updateFindingsRefinement
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IUpdateFindingsRefinementRequest} request UpdateFindingsRefinementRequest message or plain object
+                         * @returns {Promise<google.cloud.chronicle.v1.FindingsRefinement>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.chronicle.v1.FindingsRefinementService|getFindingsRefinementDeployment}.
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementService
+                         * @typedef GetFindingsRefinementDeploymentCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.chronicle.v1.FindingsRefinementDeployment} [response] FindingsRefinementDeployment
+                         */
+    
+                        /**
+                         * Calls GetFindingsRefinementDeployment.
+                         * @function getFindingsRefinementDeployment
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IGetFindingsRefinementDeploymentRequest} request GetFindingsRefinementDeploymentRequest message or plain object
+                         * @param {google.cloud.chronicle.v1.FindingsRefinementService.GetFindingsRefinementDeploymentCallback} callback Node-style callback called with the error, if any, and FindingsRefinementDeployment
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(FindingsRefinementService.prototype.getFindingsRefinementDeployment = function getFindingsRefinementDeployment(request, callback) {
+                            return this.rpcCall(getFindingsRefinementDeployment, $root.google.cloud.chronicle.v1.GetFindingsRefinementDeploymentRequest, $root.google.cloud.chronicle.v1.FindingsRefinementDeployment, request, callback);
+                        }, "name", { value: "GetFindingsRefinementDeployment" });
+    
+                        /**
+                         * Calls GetFindingsRefinementDeployment.
+                         * @function getFindingsRefinementDeployment
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IGetFindingsRefinementDeploymentRequest} request GetFindingsRefinementDeploymentRequest message or plain object
+                         * @returns {Promise<google.cloud.chronicle.v1.FindingsRefinementDeployment>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.chronicle.v1.FindingsRefinementService|updateFindingsRefinementDeployment}.
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementService
+                         * @typedef UpdateFindingsRefinementDeploymentCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.chronicle.v1.FindingsRefinementDeployment} [response] FindingsRefinementDeployment
+                         */
+    
+                        /**
+                         * Calls UpdateFindingsRefinementDeployment.
+                         * @function updateFindingsRefinementDeployment
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IUpdateFindingsRefinementDeploymentRequest} request UpdateFindingsRefinementDeploymentRequest message or plain object
+                         * @param {google.cloud.chronicle.v1.FindingsRefinementService.UpdateFindingsRefinementDeploymentCallback} callback Node-style callback called with the error, if any, and FindingsRefinementDeployment
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(FindingsRefinementService.prototype.updateFindingsRefinementDeployment = function updateFindingsRefinementDeployment(request, callback) {
+                            return this.rpcCall(updateFindingsRefinementDeployment, $root.google.cloud.chronicle.v1.UpdateFindingsRefinementDeploymentRequest, $root.google.cloud.chronicle.v1.FindingsRefinementDeployment, request, callback);
+                        }, "name", { value: "UpdateFindingsRefinementDeployment" });
+    
+                        /**
+                         * Calls UpdateFindingsRefinementDeployment.
+                         * @function updateFindingsRefinementDeployment
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IUpdateFindingsRefinementDeploymentRequest} request UpdateFindingsRefinementDeploymentRequest message or plain object
+                         * @returns {Promise<google.cloud.chronicle.v1.FindingsRefinementDeployment>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.chronicle.v1.FindingsRefinementService|listAllFindingsRefinementDeployments}.
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementService
+                         * @typedef ListAllFindingsRefinementDeploymentsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsResponse} [response] ListAllFindingsRefinementDeploymentsResponse
+                         */
+    
+                        /**
+                         * Calls ListAllFindingsRefinementDeployments.
+                         * @function listAllFindingsRefinementDeployments
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IListAllFindingsRefinementDeploymentsRequest} request ListAllFindingsRefinementDeploymentsRequest message or plain object
+                         * @param {google.cloud.chronicle.v1.FindingsRefinementService.ListAllFindingsRefinementDeploymentsCallback} callback Node-style callback called with the error, if any, and ListAllFindingsRefinementDeploymentsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(FindingsRefinementService.prototype.listAllFindingsRefinementDeployments = function listAllFindingsRefinementDeployments(request, callback) {
+                            return this.rpcCall(listAllFindingsRefinementDeployments, $root.google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsRequest, $root.google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsResponse, request, callback);
+                        }, "name", { value: "ListAllFindingsRefinementDeployments" });
+    
+                        /**
+                         * Calls ListAllFindingsRefinementDeployments.
+                         * @function listAllFindingsRefinementDeployments
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IListAllFindingsRefinementDeploymentsRequest} request ListAllFindingsRefinementDeploymentsRequest message or plain object
+                         * @returns {Promise<google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.chronicle.v1.FindingsRefinementService|computeFindingsRefinementActivity}.
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementService
+                         * @typedef ComputeFindingsRefinementActivityCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.chronicle.v1.ComputeFindingsRefinementActivityResponse} [response] ComputeFindingsRefinementActivityResponse
+                         */
+    
+                        /**
+                         * Calls ComputeFindingsRefinementActivity.
+                         * @function computeFindingsRefinementActivity
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IComputeFindingsRefinementActivityRequest} request ComputeFindingsRefinementActivityRequest message or plain object
+                         * @param {google.cloud.chronicle.v1.FindingsRefinementService.ComputeFindingsRefinementActivityCallback} callback Node-style callback called with the error, if any, and ComputeFindingsRefinementActivityResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(FindingsRefinementService.prototype.computeFindingsRefinementActivity = function computeFindingsRefinementActivity(request, callback) {
+                            return this.rpcCall(computeFindingsRefinementActivity, $root.google.cloud.chronicle.v1.ComputeFindingsRefinementActivityRequest, $root.google.cloud.chronicle.v1.ComputeFindingsRefinementActivityResponse, request, callback);
+                        }, "name", { value: "ComputeFindingsRefinementActivity" });
+    
+                        /**
+                         * Calls ComputeFindingsRefinementActivity.
+                         * @function computeFindingsRefinementActivity
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IComputeFindingsRefinementActivityRequest} request ComputeFindingsRefinementActivityRequest message or plain object
+                         * @returns {Promise<google.cloud.chronicle.v1.ComputeFindingsRefinementActivityResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.chronicle.v1.FindingsRefinementService|computeAllFindingsRefinementActivities}.
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementService
+                         * @typedef ComputeAllFindingsRefinementActivitiesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesResponse} [response] ComputeAllFindingsRefinementActivitiesResponse
+                         */
+    
+                        /**
+                         * Calls ComputeAllFindingsRefinementActivities.
+                         * @function computeAllFindingsRefinementActivities
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IComputeAllFindingsRefinementActivitiesRequest} request ComputeAllFindingsRefinementActivitiesRequest message or plain object
+                         * @param {google.cloud.chronicle.v1.FindingsRefinementService.ComputeAllFindingsRefinementActivitiesCallback} callback Node-style callback called with the error, if any, and ComputeAllFindingsRefinementActivitiesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(FindingsRefinementService.prototype.computeAllFindingsRefinementActivities = function computeAllFindingsRefinementActivities(request, callback) {
+                            return this.rpcCall(computeAllFindingsRefinementActivities, $root.google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesRequest, $root.google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesResponse, request, callback);
+                        }, "name", { value: "ComputeAllFindingsRefinementActivities" });
+    
+                        /**
+                         * Calls ComputeAllFindingsRefinementActivities.
+                         * @function computeAllFindingsRefinementActivities
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IComputeAllFindingsRefinementActivitiesRequest} request ComputeAllFindingsRefinementActivitiesRequest message or plain object
+                         * @returns {Promise<google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        return FindingsRefinementService;
+                    })();
+    
+                    /**
+                     * FindingsRefinementType enum.
+                     * @name google.cloud.chronicle.v1.FindingsRefinementType
+                     * @enum {number}
+                     * @property {number} FINDINGS_REFINEMENT_TYPE_UNSPECIFIED=0 FINDINGS_REFINEMENT_TYPE_UNSPECIFIED value
+                     * @property {number} DETECTION_EXCLUSION=1 DETECTION_EXCLUSION value
+                     */
+                    v1.FindingsRefinementType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "FINDINGS_REFINEMENT_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "DETECTION_EXCLUSION"] = 1;
+                        return values;
+                    })();
+    
+                    v1.FindingsRefinement = (function() {
+    
+                        /**
+                         * Properties of a FindingsRefinement.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IFindingsRefinement
+                         * @property {string|null} [name] FindingsRefinement name
+                         * @property {string|null} [displayName] FindingsRefinement displayName
+                         * @property {google.cloud.chronicle.v1.FindingsRefinementType|null} [type] FindingsRefinement type
+                         * @property {google.protobuf.ITimestamp|null} [createTime] FindingsRefinement createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] FindingsRefinement updateTime
+                         * @property {string|null} [query] FindingsRefinement query
+                         * @property {Array.<google.cloud.chronicle.v1.IOutcomeFilter>|null} [outcomeFilters] FindingsRefinement outcomeFilters
+                         */
+    
+                        /**
+                         * Constructs a new FindingsRefinement.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a FindingsRefinement.
+                         * @implements IFindingsRefinement
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IFindingsRefinement=} [properties] Properties to set
+                         */
+                        function FindingsRefinement(properties) {
+                            this.outcomeFilters = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FindingsRefinement name.
+                         * @member {string} name
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinement
+                         * @instance
+                         */
+                        FindingsRefinement.prototype.name = "";
+    
+                        /**
+                         * FindingsRefinement displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinement
+                         * @instance
+                         */
+                        FindingsRefinement.prototype.displayName = "";
+    
+                        /**
+                         * FindingsRefinement type.
+                         * @member {google.cloud.chronicle.v1.FindingsRefinementType} type
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinement
+                         * @instance
+                         */
+                        FindingsRefinement.prototype.type = 0;
+    
+                        /**
+                         * FindingsRefinement createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinement
+                         * @instance
+                         */
+                        FindingsRefinement.prototype.createTime = null;
+    
+                        /**
+                         * FindingsRefinement updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinement
+                         * @instance
+                         */
+                        FindingsRefinement.prototype.updateTime = null;
+    
+                        /**
+                         * FindingsRefinement query.
+                         * @member {string} query
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinement
+                         * @instance
+                         */
+                        FindingsRefinement.prototype.query = "";
+    
+                        /**
+                         * FindingsRefinement outcomeFilters.
+                         * @member {Array.<google.cloud.chronicle.v1.IOutcomeFilter>} outcomeFilters
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinement
+                         * @instance
+                         */
+                        FindingsRefinement.prototype.outcomeFilters = $util.emptyArray;
+    
+                        /**
+                         * Creates a new FindingsRefinement instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinement
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IFindingsRefinement=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.FindingsRefinement} FindingsRefinement instance
+                         */
+                        FindingsRefinement.create = function create(properties) {
+                            return new FindingsRefinement(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FindingsRefinement message. Does not implicitly {@link google.cloud.chronicle.v1.FindingsRefinement.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinement
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IFindingsRefinement} message FindingsRefinement message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FindingsRefinement.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.type);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.query != null && Object.hasOwnProperty.call(message, "query"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.query);
+                            if (message.outcomeFilters != null && message.outcomeFilters.length)
+                                for (var i = 0; i < message.outcomeFilters.length; ++i)
+                                    $root.google.cloud.chronicle.v1.OutcomeFilter.encode(message.outcomeFilters[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FindingsRefinement message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.FindingsRefinement.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinement
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IFindingsRefinement} message FindingsRefinement message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FindingsRefinement.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FindingsRefinement message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinement
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.FindingsRefinement} FindingsRefinement
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FindingsRefinement.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.FindingsRefinement();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.type = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 5: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 7: {
+                                        message.query = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        if (!(message.outcomeFilters && message.outcomeFilters.length))
+                                            message.outcomeFilters = [];
+                                        message.outcomeFilters.push($root.google.cloud.chronicle.v1.OutcomeFilter.decode(reader, reader.uint32(), undefined, long + 1));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FindingsRefinement message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinement
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.FindingsRefinement} FindingsRefinement
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FindingsRefinement.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FindingsRefinement message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinement
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FindingsRefinement.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                    break;
+                                }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime, long + 1);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime, long + 1);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.query != null && message.hasOwnProperty("query"))
+                                if (!$util.isString(message.query))
+                                    return "query: string expected";
+                            if (message.outcomeFilters != null && message.hasOwnProperty("outcomeFilters")) {
+                                if (!Array.isArray(message.outcomeFilters))
+                                    return "outcomeFilters: array expected";
+                                for (var i = 0; i < message.outcomeFilters.length; ++i) {
+                                    var error = $root.google.cloud.chronicle.v1.OutcomeFilter.verify(message.outcomeFilters[i], long + 1);
+                                    if (error)
+                                        return "outcomeFilters." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FindingsRefinement message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinement
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.FindingsRefinement} FindingsRefinement
+                         */
+                        FindingsRefinement.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.FindingsRefinement)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.chronicle.v1.FindingsRefinement();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
+                            case "FINDINGS_REFINEMENT_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "DETECTION_EXCLUSION":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            }
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.chronicle.v1.FindingsRefinement.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime, long + 1);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.chronicle.v1.FindingsRefinement.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime, long + 1);
+                            }
+                            if (object.query != null)
+                                message.query = String(object.query);
+                            if (object.outcomeFilters) {
+                                if (!Array.isArray(object.outcomeFilters))
+                                    throw TypeError(".google.cloud.chronicle.v1.FindingsRefinement.outcomeFilters: array expected");
+                                message.outcomeFilters = [];
+                                for (var i = 0; i < object.outcomeFilters.length; ++i) {
+                                    if (typeof object.outcomeFilters[i] !== "object")
+                                        throw TypeError(".google.cloud.chronicle.v1.FindingsRefinement.outcomeFilters: object expected");
+                                    message.outcomeFilters[i] = $root.google.cloud.chronicle.v1.OutcomeFilter.fromObject(object.outcomeFilters[i], long + 1);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FindingsRefinement message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinement
+                         * @static
+                         * @param {google.cloud.chronicle.v1.FindingsRefinement} message FindingsRefinement
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FindingsRefinement.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.outcomeFilters = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.displayName = "";
+                                object.type = options.enums === String ? "FINDINGS_REFINEMENT_TYPE_UNSPECIFIED" : 0;
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.query = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.cloud.chronicle.v1.FindingsRefinementType[message.type] === undefined ? message.type : $root.google.cloud.chronicle.v1.FindingsRefinementType[message.type] : message.type;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.query != null && message.hasOwnProperty("query"))
+                                object.query = message.query;
+                            if (message.outcomeFilters && message.outcomeFilters.length) {
+                                object.outcomeFilters = [];
+                                for (var j = 0; j < message.outcomeFilters.length; ++j)
+                                    object.outcomeFilters[j] = $root.google.cloud.chronicle.v1.OutcomeFilter.toObject(message.outcomeFilters[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FindingsRefinement to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinement
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FindingsRefinement.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FindingsRefinement
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinement
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FindingsRefinement.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.FindingsRefinement";
+                        };
+    
+                        return FindingsRefinement;
+                    })();
+    
+                    v1.FindingsRefinementDeployment = (function() {
+    
+                        /**
+                         * Properties of a FindingsRefinementDeployment.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IFindingsRefinementDeployment
+                         * @property {google.cloud.chronicle.v1.IDetectionExclusionApplication|null} [detectionExclusionApplication] FindingsRefinementDeployment detectionExclusionApplication
+                         * @property {string|null} [name] FindingsRefinementDeployment name
+                         * @property {boolean|null} [enabled] FindingsRefinementDeployment enabled
+                         * @property {boolean|null} [archived] FindingsRefinementDeployment archived
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] FindingsRefinementDeployment updateTime
+                         */
+    
+                        /**
+                         * Constructs a new FindingsRefinementDeployment.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a FindingsRefinementDeployment.
+                         * @implements IFindingsRefinementDeployment
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IFindingsRefinementDeployment=} [properties] Properties to set
+                         */
+                        function FindingsRefinementDeployment(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FindingsRefinementDeployment detectionExclusionApplication.
+                         * @member {google.cloud.chronicle.v1.IDetectionExclusionApplication|null|undefined} detectionExclusionApplication
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementDeployment
+                         * @instance
+                         */
+                        FindingsRefinementDeployment.prototype.detectionExclusionApplication = null;
+    
+                        /**
+                         * FindingsRefinementDeployment name.
+                         * @member {string} name
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementDeployment
+                         * @instance
+                         */
+                        FindingsRefinementDeployment.prototype.name = "";
+    
+                        /**
+                         * FindingsRefinementDeployment enabled.
+                         * @member {boolean} enabled
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementDeployment
+                         * @instance
+                         */
+                        FindingsRefinementDeployment.prototype.enabled = false;
+    
+                        /**
+                         * FindingsRefinementDeployment archived.
+                         * @member {boolean} archived
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementDeployment
+                         * @instance
+                         */
+                        FindingsRefinementDeployment.prototype.archived = false;
+    
+                        /**
+                         * FindingsRefinementDeployment updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementDeployment
+                         * @instance
+                         */
+                        FindingsRefinementDeployment.prototype.updateTime = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * FindingsRefinementDeployment FindingsRefinementApplication.
+                         * @member {"detectionExclusionApplication"|undefined} FindingsRefinementApplication
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementDeployment
+                         * @instance
+                         */
+                        Object.defineProperty(FindingsRefinementDeployment.prototype, "FindingsRefinementApplication", {
+                            get: $util.oneOfGetter($oneOfFields = ["detectionExclusionApplication"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new FindingsRefinementDeployment instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementDeployment
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IFindingsRefinementDeployment=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.FindingsRefinementDeployment} FindingsRefinementDeployment instance
+                         */
+                        FindingsRefinementDeployment.create = function create(properties) {
+                            return new FindingsRefinementDeployment(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FindingsRefinementDeployment message. Does not implicitly {@link google.cloud.chronicle.v1.FindingsRefinementDeployment.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementDeployment
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IFindingsRefinementDeployment} message FindingsRefinementDeployment message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FindingsRefinementDeployment.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.enabled);
+                            if (message.archived != null && Object.hasOwnProperty.call(message, "archived"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.archived);
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.detectionExclusionApplication != null && Object.hasOwnProperty.call(message, "detectionExclusionApplication"))
+                                $root.google.cloud.chronicle.v1.DetectionExclusionApplication.encode(message.detectionExclusionApplication, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FindingsRefinementDeployment message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.FindingsRefinementDeployment.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementDeployment
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IFindingsRefinementDeployment} message FindingsRefinementDeployment message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FindingsRefinementDeployment.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FindingsRefinementDeployment message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementDeployment
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.FindingsRefinementDeployment} FindingsRefinementDeployment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FindingsRefinementDeployment.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.FindingsRefinementDeployment();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 5: {
+                                        message.detectionExclusionApplication = $root.google.cloud.chronicle.v1.DetectionExclusionApplication.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.enabled = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.archived = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FindingsRefinementDeployment message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementDeployment
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.FindingsRefinementDeployment} FindingsRefinementDeployment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FindingsRefinementDeployment.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FindingsRefinementDeployment message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementDeployment
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FindingsRefinementDeployment.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            var properties = {};
+                            if (message.detectionExclusionApplication != null && message.hasOwnProperty("detectionExclusionApplication")) {
+                                properties.FindingsRefinementApplication = 1;
+                                {
+                                    var error = $root.google.cloud.chronicle.v1.DetectionExclusionApplication.verify(message.detectionExclusionApplication, long + 1);
+                                    if (error)
+                                        return "detectionExclusionApplication." + error;
+                                }
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                if (typeof message.enabled !== "boolean")
+                                    return "enabled: boolean expected";
+                            if (message.archived != null && message.hasOwnProperty("archived"))
+                                if (typeof message.archived !== "boolean")
+                                    return "archived: boolean expected";
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime, long + 1);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FindingsRefinementDeployment message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementDeployment
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.FindingsRefinementDeployment} FindingsRefinementDeployment
+                         */
+                        FindingsRefinementDeployment.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.FindingsRefinementDeployment)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.chronicle.v1.FindingsRefinementDeployment();
+                            if (object.detectionExclusionApplication != null) {
+                                if (typeof object.detectionExclusionApplication !== "object")
+                                    throw TypeError(".google.cloud.chronicle.v1.FindingsRefinementDeployment.detectionExclusionApplication: object expected");
+                                message.detectionExclusionApplication = $root.google.cloud.chronicle.v1.DetectionExclusionApplication.fromObject(object.detectionExclusionApplication, long + 1);
+                            }
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.enabled != null)
+                                message.enabled = Boolean(object.enabled);
+                            if (object.archived != null)
+                                message.archived = Boolean(object.archived);
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.chronicle.v1.FindingsRefinementDeployment.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime, long + 1);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FindingsRefinementDeployment message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementDeployment
+                         * @static
+                         * @param {google.cloud.chronicle.v1.FindingsRefinementDeployment} message FindingsRefinementDeployment
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FindingsRefinementDeployment.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.enabled = false;
+                                object.archived = false;
+                                object.updateTime = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                object.enabled = message.enabled;
+                            if (message.archived != null && message.hasOwnProperty("archived"))
+                                object.archived = message.archived;
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.detectionExclusionApplication != null && message.hasOwnProperty("detectionExclusionApplication")) {
+                                object.detectionExclusionApplication = $root.google.cloud.chronicle.v1.DetectionExclusionApplication.toObject(message.detectionExclusionApplication, options);
+                                if (options.oneofs)
+                                    object.FindingsRefinementApplication = "detectionExclusionApplication";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FindingsRefinementDeployment to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementDeployment
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FindingsRefinementDeployment.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FindingsRefinementDeployment
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementDeployment
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FindingsRefinementDeployment.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.FindingsRefinementDeployment";
+                        };
+    
+                        return FindingsRefinementDeployment;
+                    })();
+    
+                    v1.DetectionExclusionApplication = (function() {
+    
+                        /**
+                         * Properties of a DetectionExclusionApplication.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IDetectionExclusionApplication
+                         * @property {Array.<string>|null} [curatedRuleSets] DetectionExclusionApplication curatedRuleSets
+                         * @property {Array.<string>|null} [curatedRules] DetectionExclusionApplication curatedRules
+                         * @property {Array.<string>|null} [rules] DetectionExclusionApplication rules
+                         * @property {Array.<string>|null} [deletedCuratedRuleSets] DetectionExclusionApplication deletedCuratedRuleSets
+                         */
+    
+                        /**
+                         * Constructs a new DetectionExclusionApplication.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a DetectionExclusionApplication.
+                         * @implements IDetectionExclusionApplication
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IDetectionExclusionApplication=} [properties] Properties to set
+                         */
+                        function DetectionExclusionApplication(properties) {
+                            this.curatedRuleSets = [];
+                            this.curatedRules = [];
+                            this.rules = [];
+                            this.deletedCuratedRuleSets = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DetectionExclusionApplication curatedRuleSets.
+                         * @member {Array.<string>} curatedRuleSets
+                         * @memberof google.cloud.chronicle.v1.DetectionExclusionApplication
+                         * @instance
+                         */
+                        DetectionExclusionApplication.prototype.curatedRuleSets = $util.emptyArray;
+    
+                        /**
+                         * DetectionExclusionApplication curatedRules.
+                         * @member {Array.<string>} curatedRules
+                         * @memberof google.cloud.chronicle.v1.DetectionExclusionApplication
+                         * @instance
+                         */
+                        DetectionExclusionApplication.prototype.curatedRules = $util.emptyArray;
+    
+                        /**
+                         * DetectionExclusionApplication rules.
+                         * @member {Array.<string>} rules
+                         * @memberof google.cloud.chronicle.v1.DetectionExclusionApplication
+                         * @instance
+                         */
+                        DetectionExclusionApplication.prototype.rules = $util.emptyArray;
+    
+                        /**
+                         * DetectionExclusionApplication deletedCuratedRuleSets.
+                         * @member {Array.<string>} deletedCuratedRuleSets
+                         * @memberof google.cloud.chronicle.v1.DetectionExclusionApplication
+                         * @instance
+                         */
+                        DetectionExclusionApplication.prototype.deletedCuratedRuleSets = $util.emptyArray;
+    
+                        /**
+                         * Creates a new DetectionExclusionApplication instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.DetectionExclusionApplication
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IDetectionExclusionApplication=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.DetectionExclusionApplication} DetectionExclusionApplication instance
+                         */
+                        DetectionExclusionApplication.create = function create(properties) {
+                            return new DetectionExclusionApplication(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DetectionExclusionApplication message. Does not implicitly {@link google.cloud.chronicle.v1.DetectionExclusionApplication.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.DetectionExclusionApplication
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IDetectionExclusionApplication} message DetectionExclusionApplication message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DetectionExclusionApplication.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.curatedRuleSets != null && message.curatedRuleSets.length)
+                                for (var i = 0; i < message.curatedRuleSets.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.curatedRuleSets[i]);
+                            if (message.curatedRules != null && message.curatedRules.length)
+                                for (var i = 0; i < message.curatedRules.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.curatedRules[i]);
+                            if (message.rules != null && message.rules.length)
+                                for (var i = 0; i < message.rules.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.rules[i]);
+                            if (message.deletedCuratedRuleSets != null && message.deletedCuratedRuleSets.length)
+                                for (var i = 0; i < message.deletedCuratedRuleSets.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.deletedCuratedRuleSets[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DetectionExclusionApplication message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DetectionExclusionApplication.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.DetectionExclusionApplication
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IDetectionExclusionApplication} message DetectionExclusionApplication message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DetectionExclusionApplication.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DetectionExclusionApplication message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.DetectionExclusionApplication
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.DetectionExclusionApplication} DetectionExclusionApplication
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DetectionExclusionApplication.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.DetectionExclusionApplication();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.curatedRuleSets && message.curatedRuleSets.length))
+                                            message.curatedRuleSets = [];
+                                        message.curatedRuleSets.push(reader.string());
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.curatedRules && message.curatedRules.length))
+                                            message.curatedRules = [];
+                                        message.curatedRules.push(reader.string());
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.rules && message.rules.length))
+                                            message.rules = [];
+                                        message.rules.push(reader.string());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.deletedCuratedRuleSets && message.deletedCuratedRuleSets.length))
+                                            message.deletedCuratedRuleSets = [];
+                                        message.deletedCuratedRuleSets.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DetectionExclusionApplication message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.DetectionExclusionApplication
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.DetectionExclusionApplication} DetectionExclusionApplication
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DetectionExclusionApplication.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DetectionExclusionApplication message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.DetectionExclusionApplication
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DetectionExclusionApplication.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.curatedRuleSets != null && message.hasOwnProperty("curatedRuleSets")) {
+                                if (!Array.isArray(message.curatedRuleSets))
+                                    return "curatedRuleSets: array expected";
+                                for (var i = 0; i < message.curatedRuleSets.length; ++i)
+                                    if (!$util.isString(message.curatedRuleSets[i]))
+                                        return "curatedRuleSets: string[] expected";
+                            }
+                            if (message.curatedRules != null && message.hasOwnProperty("curatedRules")) {
+                                if (!Array.isArray(message.curatedRules))
+                                    return "curatedRules: array expected";
+                                for (var i = 0; i < message.curatedRules.length; ++i)
+                                    if (!$util.isString(message.curatedRules[i]))
+                                        return "curatedRules: string[] expected";
+                            }
+                            if (message.rules != null && message.hasOwnProperty("rules")) {
+                                if (!Array.isArray(message.rules))
+                                    return "rules: array expected";
+                                for (var i = 0; i < message.rules.length; ++i)
+                                    if (!$util.isString(message.rules[i]))
+                                        return "rules: string[] expected";
+                            }
+                            if (message.deletedCuratedRuleSets != null && message.hasOwnProperty("deletedCuratedRuleSets")) {
+                                if (!Array.isArray(message.deletedCuratedRuleSets))
+                                    return "deletedCuratedRuleSets: array expected";
+                                for (var i = 0; i < message.deletedCuratedRuleSets.length; ++i)
+                                    if (!$util.isString(message.deletedCuratedRuleSets[i]))
+                                        return "deletedCuratedRuleSets: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DetectionExclusionApplication message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.DetectionExclusionApplication
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.DetectionExclusionApplication} DetectionExclusionApplication
+                         */
+                        DetectionExclusionApplication.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.DetectionExclusionApplication)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.chronicle.v1.DetectionExclusionApplication();
+                            if (object.curatedRuleSets) {
+                                if (!Array.isArray(object.curatedRuleSets))
+                                    throw TypeError(".google.cloud.chronicle.v1.DetectionExclusionApplication.curatedRuleSets: array expected");
+                                message.curatedRuleSets = [];
+                                for (var i = 0; i < object.curatedRuleSets.length; ++i)
+                                    message.curatedRuleSets[i] = String(object.curatedRuleSets[i]);
+                            }
+                            if (object.curatedRules) {
+                                if (!Array.isArray(object.curatedRules))
+                                    throw TypeError(".google.cloud.chronicle.v1.DetectionExclusionApplication.curatedRules: array expected");
+                                message.curatedRules = [];
+                                for (var i = 0; i < object.curatedRules.length; ++i)
+                                    message.curatedRules[i] = String(object.curatedRules[i]);
+                            }
+                            if (object.rules) {
+                                if (!Array.isArray(object.rules))
+                                    throw TypeError(".google.cloud.chronicle.v1.DetectionExclusionApplication.rules: array expected");
+                                message.rules = [];
+                                for (var i = 0; i < object.rules.length; ++i)
+                                    message.rules[i] = String(object.rules[i]);
+                            }
+                            if (object.deletedCuratedRuleSets) {
+                                if (!Array.isArray(object.deletedCuratedRuleSets))
+                                    throw TypeError(".google.cloud.chronicle.v1.DetectionExclusionApplication.deletedCuratedRuleSets: array expected");
+                                message.deletedCuratedRuleSets = [];
+                                for (var i = 0; i < object.deletedCuratedRuleSets.length; ++i)
+                                    message.deletedCuratedRuleSets[i] = String(object.deletedCuratedRuleSets[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DetectionExclusionApplication message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.DetectionExclusionApplication
+                         * @static
+                         * @param {google.cloud.chronicle.v1.DetectionExclusionApplication} message DetectionExclusionApplication
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DetectionExclusionApplication.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.curatedRuleSets = [];
+                                object.curatedRules = [];
+                                object.rules = [];
+                                object.deletedCuratedRuleSets = [];
+                            }
+                            if (message.curatedRuleSets && message.curatedRuleSets.length) {
+                                object.curatedRuleSets = [];
+                                for (var j = 0; j < message.curatedRuleSets.length; ++j)
+                                    object.curatedRuleSets[j] = message.curatedRuleSets[j];
+                            }
+                            if (message.curatedRules && message.curatedRules.length) {
+                                object.curatedRules = [];
+                                for (var j = 0; j < message.curatedRules.length; ++j)
+                                    object.curatedRules[j] = message.curatedRules[j];
+                            }
+                            if (message.rules && message.rules.length) {
+                                object.rules = [];
+                                for (var j = 0; j < message.rules.length; ++j)
+                                    object.rules[j] = message.rules[j];
+                            }
+                            if (message.deletedCuratedRuleSets && message.deletedCuratedRuleSets.length) {
+                                object.deletedCuratedRuleSets = [];
+                                for (var j = 0; j < message.deletedCuratedRuleSets.length; ++j)
+                                    object.deletedCuratedRuleSets[j] = message.deletedCuratedRuleSets[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DetectionExclusionApplication to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.DetectionExclusionApplication
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DetectionExclusionApplication.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DetectionExclusionApplication
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.DetectionExclusionApplication
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DetectionExclusionApplication.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.DetectionExclusionApplication";
+                        };
+    
+                        return DetectionExclusionApplication;
+                    })();
+    
+                    v1.FindingsRefinementActivity = (function() {
+    
+                        /**
+                         * Properties of a FindingsRefinementActivity.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IFindingsRefinementActivity
+                         * @property {google.cloud.chronicle.v1.IDetectionExclusionActivity|null} [detectionExclusionActivity] FindingsRefinementActivity detectionExclusionActivity
+                         * @property {string|null} [findingsRefinement] FindingsRefinementActivity findingsRefinement
+                         */
+    
+                        /**
+                         * Constructs a new FindingsRefinementActivity.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a FindingsRefinementActivity.
+                         * @implements IFindingsRefinementActivity
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IFindingsRefinementActivity=} [properties] Properties to set
+                         */
+                        function FindingsRefinementActivity(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FindingsRefinementActivity detectionExclusionActivity.
+                         * @member {google.cloud.chronicle.v1.IDetectionExclusionActivity|null|undefined} detectionExclusionActivity
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementActivity
+                         * @instance
+                         */
+                        FindingsRefinementActivity.prototype.detectionExclusionActivity = null;
+    
+                        /**
+                         * FindingsRefinementActivity findingsRefinement.
+                         * @member {string} findingsRefinement
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementActivity
+                         * @instance
+                         */
+                        FindingsRefinementActivity.prototype.findingsRefinement = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * FindingsRefinementActivity Activity.
+                         * @member {"detectionExclusionActivity"|undefined} Activity
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementActivity
+                         * @instance
+                         */
+                        Object.defineProperty(FindingsRefinementActivity.prototype, "Activity", {
+                            get: $util.oneOfGetter($oneOfFields = ["detectionExclusionActivity"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new FindingsRefinementActivity instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementActivity
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IFindingsRefinementActivity=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.FindingsRefinementActivity} FindingsRefinementActivity instance
+                         */
+                        FindingsRefinementActivity.create = function create(properties) {
+                            return new FindingsRefinementActivity(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FindingsRefinementActivity message. Does not implicitly {@link google.cloud.chronicle.v1.FindingsRefinementActivity.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementActivity
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IFindingsRefinementActivity} message FindingsRefinementActivity message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FindingsRefinementActivity.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.findingsRefinement != null && Object.hasOwnProperty.call(message, "findingsRefinement"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.findingsRefinement);
+                            if (message.detectionExclusionActivity != null && Object.hasOwnProperty.call(message, "detectionExclusionActivity"))
+                                $root.google.cloud.chronicle.v1.DetectionExclusionActivity.encode(message.detectionExclusionActivity, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FindingsRefinementActivity message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.FindingsRefinementActivity.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementActivity
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IFindingsRefinementActivity} message FindingsRefinementActivity message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FindingsRefinementActivity.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FindingsRefinementActivity message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementActivity
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.FindingsRefinementActivity} FindingsRefinementActivity
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FindingsRefinementActivity.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.FindingsRefinementActivity();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 2: {
+                                        message.detectionExclusionActivity = $root.google.cloud.chronicle.v1.DetectionExclusionActivity.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 1: {
+                                        message.findingsRefinement = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FindingsRefinementActivity message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementActivity
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.FindingsRefinementActivity} FindingsRefinementActivity
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FindingsRefinementActivity.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FindingsRefinementActivity message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementActivity
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FindingsRefinementActivity.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            var properties = {};
+                            if (message.detectionExclusionActivity != null && message.hasOwnProperty("detectionExclusionActivity")) {
+                                properties.Activity = 1;
+                                {
+                                    var error = $root.google.cloud.chronicle.v1.DetectionExclusionActivity.verify(message.detectionExclusionActivity, long + 1);
+                                    if (error)
+                                        return "detectionExclusionActivity." + error;
+                                }
+                            }
+                            if (message.findingsRefinement != null && message.hasOwnProperty("findingsRefinement"))
+                                if (!$util.isString(message.findingsRefinement))
+                                    return "findingsRefinement: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FindingsRefinementActivity message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementActivity
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.FindingsRefinementActivity} FindingsRefinementActivity
+                         */
+                        FindingsRefinementActivity.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.FindingsRefinementActivity)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.chronicle.v1.FindingsRefinementActivity();
+                            if (object.detectionExclusionActivity != null) {
+                                if (typeof object.detectionExclusionActivity !== "object")
+                                    throw TypeError(".google.cloud.chronicle.v1.FindingsRefinementActivity.detectionExclusionActivity: object expected");
+                                message.detectionExclusionActivity = $root.google.cloud.chronicle.v1.DetectionExclusionActivity.fromObject(object.detectionExclusionActivity, long + 1);
+                            }
+                            if (object.findingsRefinement != null)
+                                message.findingsRefinement = String(object.findingsRefinement);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FindingsRefinementActivity message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementActivity
+                         * @static
+                         * @param {google.cloud.chronicle.v1.FindingsRefinementActivity} message FindingsRefinementActivity
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FindingsRefinementActivity.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.findingsRefinement = "";
+                            if (message.findingsRefinement != null && message.hasOwnProperty("findingsRefinement"))
+                                object.findingsRefinement = message.findingsRefinement;
+                            if (message.detectionExclusionActivity != null && message.hasOwnProperty("detectionExclusionActivity")) {
+                                object.detectionExclusionActivity = $root.google.cloud.chronicle.v1.DetectionExclusionActivity.toObject(message.detectionExclusionActivity, options);
+                                if (options.oneofs)
+                                    object.Activity = "detectionExclusionActivity";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FindingsRefinementActivity to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementActivity
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FindingsRefinementActivity.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FindingsRefinementActivity
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.FindingsRefinementActivity
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FindingsRefinementActivity.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.FindingsRefinementActivity";
+                        };
+    
+                        return FindingsRefinementActivity;
+                    })();
+    
+                    v1.DetectionExclusionActivity = (function() {
+    
+                        /**
+                         * Properties of a DetectionExclusionActivity.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IDetectionExclusionActivity
+                         * @property {Array.<google.cloud.chronicle.v1.DetectionExclusionActivity.IDetectionExclusionDetectorActivity>|null} [detectionExclusionDetectorActivities] DetectionExclusionActivity detectionExclusionDetectorActivities
+                         */
+    
+                        /**
+                         * Constructs a new DetectionExclusionActivity.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a DetectionExclusionActivity.
+                         * @implements IDetectionExclusionActivity
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IDetectionExclusionActivity=} [properties] Properties to set
+                         */
+                        function DetectionExclusionActivity(properties) {
+                            this.detectionExclusionDetectorActivities = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DetectionExclusionActivity detectionExclusionDetectorActivities.
+                         * @member {Array.<google.cloud.chronicle.v1.DetectionExclusionActivity.IDetectionExclusionDetectorActivity>} detectionExclusionDetectorActivities
+                         * @memberof google.cloud.chronicle.v1.DetectionExclusionActivity
+                         * @instance
+                         */
+                        DetectionExclusionActivity.prototype.detectionExclusionDetectorActivities = $util.emptyArray;
+    
+                        /**
+                         * Creates a new DetectionExclusionActivity instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.DetectionExclusionActivity
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IDetectionExclusionActivity=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.DetectionExclusionActivity} DetectionExclusionActivity instance
+                         */
+                        DetectionExclusionActivity.create = function create(properties) {
+                            return new DetectionExclusionActivity(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DetectionExclusionActivity message. Does not implicitly {@link google.cloud.chronicle.v1.DetectionExclusionActivity.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.DetectionExclusionActivity
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IDetectionExclusionActivity} message DetectionExclusionActivity message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DetectionExclusionActivity.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.detectionExclusionDetectorActivities != null && message.detectionExclusionDetectorActivities.length)
+                                for (var i = 0; i < message.detectionExclusionDetectorActivities.length; ++i)
+                                    $root.google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity.encode(message.detectionExclusionDetectorActivities[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DetectionExclusionActivity message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DetectionExclusionActivity.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.DetectionExclusionActivity
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IDetectionExclusionActivity} message DetectionExclusionActivity message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DetectionExclusionActivity.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DetectionExclusionActivity message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.DetectionExclusionActivity
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.DetectionExclusionActivity} DetectionExclusionActivity
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DetectionExclusionActivity.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.DetectionExclusionActivity();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.detectionExclusionDetectorActivities && message.detectionExclusionDetectorActivities.length))
+                                            message.detectionExclusionDetectorActivities = [];
+                                        message.detectionExclusionDetectorActivities.push($root.google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity.decode(reader, reader.uint32(), undefined, long + 1));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DetectionExclusionActivity message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.DetectionExclusionActivity
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.DetectionExclusionActivity} DetectionExclusionActivity
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DetectionExclusionActivity.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DetectionExclusionActivity message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.DetectionExclusionActivity
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DetectionExclusionActivity.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.detectionExclusionDetectorActivities != null && message.hasOwnProperty("detectionExclusionDetectorActivities")) {
+                                if (!Array.isArray(message.detectionExclusionDetectorActivities))
+                                    return "detectionExclusionDetectorActivities: array expected";
+                                for (var i = 0; i < message.detectionExclusionDetectorActivities.length; ++i) {
+                                    var error = $root.google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity.verify(message.detectionExclusionDetectorActivities[i], long + 1);
+                                    if (error)
+                                        return "detectionExclusionDetectorActivities." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DetectionExclusionActivity message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.DetectionExclusionActivity
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.DetectionExclusionActivity} DetectionExclusionActivity
+                         */
+                        DetectionExclusionActivity.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.DetectionExclusionActivity)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.chronicle.v1.DetectionExclusionActivity();
+                            if (object.detectionExclusionDetectorActivities) {
+                                if (!Array.isArray(object.detectionExclusionDetectorActivities))
+                                    throw TypeError(".google.cloud.chronicle.v1.DetectionExclusionActivity.detectionExclusionDetectorActivities: array expected");
+                                message.detectionExclusionDetectorActivities = [];
+                                for (var i = 0; i < object.detectionExclusionDetectorActivities.length; ++i) {
+                                    if (typeof object.detectionExclusionDetectorActivities[i] !== "object")
+                                        throw TypeError(".google.cloud.chronicle.v1.DetectionExclusionActivity.detectionExclusionDetectorActivities: object expected");
+                                    message.detectionExclusionDetectorActivities[i] = $root.google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity.fromObject(object.detectionExclusionDetectorActivities[i], long + 1);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DetectionExclusionActivity message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.DetectionExclusionActivity
+                         * @static
+                         * @param {google.cloud.chronicle.v1.DetectionExclusionActivity} message DetectionExclusionActivity
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DetectionExclusionActivity.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.detectionExclusionDetectorActivities = [];
+                            if (message.detectionExclusionDetectorActivities && message.detectionExclusionDetectorActivities.length) {
+                                object.detectionExclusionDetectorActivities = [];
+                                for (var j = 0; j < message.detectionExclusionDetectorActivities.length; ++j)
+                                    object.detectionExclusionDetectorActivities[j] = $root.google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity.toObject(message.detectionExclusionDetectorActivities[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DetectionExclusionActivity to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.DetectionExclusionActivity
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DetectionExclusionActivity.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DetectionExclusionActivity
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.DetectionExclusionActivity
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DetectionExclusionActivity.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.DetectionExclusionActivity";
+                        };
+    
+                        DetectionExclusionActivity.DetectionExclusionDetectorActivity = (function() {
+    
+                            /**
+                             * Properties of a DetectionExclusionDetectorActivity.
+                             * @memberof google.cloud.chronicle.v1.DetectionExclusionActivity
+                             * @interface IDetectionExclusionDetectorActivity
+                             * @property {string|null} [curatedRule] DetectionExclusionDetectorActivity curatedRule
+                             * @property {string|null} [curatedRuleSet] DetectionExclusionDetectorActivity curatedRuleSet
+                             * @property {string|null} [rule] DetectionExclusionDetectorActivity rule
+                             * @property {string|null} [deletedCuratedRuleSet] DetectionExclusionDetectorActivity deletedCuratedRuleSet
+                             * @property {number|Long|null} [excludedDetectionCount] DetectionExclusionDetectorActivity excludedDetectionCount
+                             * @property {number|Long|null} [totalDetectionCount] DetectionExclusionDetectorActivity totalDetectionCount
+                             */
+    
+                            /**
+                             * Constructs a new DetectionExclusionDetectorActivity.
+                             * @memberof google.cloud.chronicle.v1.DetectionExclusionActivity
+                             * @classdesc Represents a DetectionExclusionDetectorActivity.
+                             * @implements IDetectionExclusionDetectorActivity
+                             * @constructor
+                             * @param {google.cloud.chronicle.v1.DetectionExclusionActivity.IDetectionExclusionDetectorActivity=} [properties] Properties to set
+                             */
+                            function DetectionExclusionDetectorActivity(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DetectionExclusionDetectorActivity curatedRule.
+                             * @member {string|null|undefined} curatedRule
+                             * @memberof google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity
+                             * @instance
+                             */
+                            DetectionExclusionDetectorActivity.prototype.curatedRule = null;
+    
+                            /**
+                             * DetectionExclusionDetectorActivity curatedRuleSet.
+                             * @member {string|null|undefined} curatedRuleSet
+                             * @memberof google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity
+                             * @instance
+                             */
+                            DetectionExclusionDetectorActivity.prototype.curatedRuleSet = null;
+    
+                            /**
+                             * DetectionExclusionDetectorActivity rule.
+                             * @member {string|null|undefined} rule
+                             * @memberof google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity
+                             * @instance
+                             */
+                            DetectionExclusionDetectorActivity.prototype.rule = null;
+    
+                            /**
+                             * DetectionExclusionDetectorActivity deletedCuratedRuleSet.
+                             * @member {string|null|undefined} deletedCuratedRuleSet
+                             * @memberof google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity
+                             * @instance
+                             */
+                            DetectionExclusionDetectorActivity.prototype.deletedCuratedRuleSet = null;
+    
+                            /**
+                             * DetectionExclusionDetectorActivity excludedDetectionCount.
+                             * @member {number|Long} excludedDetectionCount
+                             * @memberof google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity
+                             * @instance
+                             */
+                            DetectionExclusionDetectorActivity.prototype.excludedDetectionCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * DetectionExclusionDetectorActivity totalDetectionCount.
+                             * @member {number|Long} totalDetectionCount
+                             * @memberof google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity
+                             * @instance
+                             */
+                            DetectionExclusionDetectorActivity.prototype.totalDetectionCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * DetectionExclusionDetectorActivity detectorName.
+                             * @member {"curatedRule"|"curatedRuleSet"|"rule"|"deletedCuratedRuleSet"|undefined} detectorName
+                             * @memberof google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity
+                             * @instance
+                             */
+                            Object.defineProperty(DetectionExclusionDetectorActivity.prototype, "detectorName", {
+                                get: $util.oneOfGetter($oneOfFields = ["curatedRule", "curatedRuleSet", "rule", "deletedCuratedRuleSet"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new DetectionExclusionDetectorActivity instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity
+                             * @static
+                             * @param {google.cloud.chronicle.v1.DetectionExclusionActivity.IDetectionExclusionDetectorActivity=} [properties] Properties to set
+                             * @returns {google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity} DetectionExclusionDetectorActivity instance
+                             */
+                            DetectionExclusionDetectorActivity.create = function create(properties) {
+                                return new DetectionExclusionDetectorActivity(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DetectionExclusionDetectorActivity message. Does not implicitly {@link google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity
+                             * @static
+                             * @param {google.cloud.chronicle.v1.DetectionExclusionActivity.IDetectionExclusionDetectorActivity} message DetectionExclusionDetectorActivity message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DetectionExclusionDetectorActivity.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.curatedRule != null && Object.hasOwnProperty.call(message, "curatedRule"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.curatedRule);
+                                if (message.curatedRuleSet != null && Object.hasOwnProperty.call(message, "curatedRuleSet"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.curatedRuleSet);
+                                if (message.excludedDetectionCount != null && Object.hasOwnProperty.call(message, "excludedDetectionCount"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int64(message.excludedDetectionCount);
+                                if (message.totalDetectionCount != null && Object.hasOwnProperty.call(message, "totalDetectionCount"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int64(message.totalDetectionCount);
+                                if (message.rule != null && Object.hasOwnProperty.call(message, "rule"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.rule);
+                                if (message.deletedCuratedRuleSet != null && Object.hasOwnProperty.call(message, "deletedCuratedRuleSet"))
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.deletedCuratedRuleSet);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DetectionExclusionDetectorActivity message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity
+                             * @static
+                             * @param {google.cloud.chronicle.v1.DetectionExclusionActivity.IDetectionExclusionDetectorActivity} message DetectionExclusionDetectorActivity message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DetectionExclusionDetectorActivity.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DetectionExclusionDetectorActivity message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity} DetectionExclusionDetectorActivity
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DetectionExclusionDetectorActivity.decode = function decode(reader, length, error, long) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.curatedRule = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.curatedRuleSet = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.rule = reader.string();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.deletedCuratedRuleSet = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.excludedDetectionCount = reader.int64();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.totalDetectionCount = reader.int64();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7, long);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DetectionExclusionDetectorActivity message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity} DetectionExclusionDetectorActivity
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DetectionExclusionDetectorActivity.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DetectionExclusionDetectorActivity message.
+                             * @function verify
+                             * @memberof google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DetectionExclusionDetectorActivity.verify = function verify(message, long) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
+                                var properties = {};
+                                if (message.curatedRule != null && message.hasOwnProperty("curatedRule")) {
+                                    properties.detectorName = 1;
+                                    if (!$util.isString(message.curatedRule))
+                                        return "curatedRule: string expected";
+                                }
+                                if (message.curatedRuleSet != null && message.hasOwnProperty("curatedRuleSet")) {
+                                    if (properties.detectorName === 1)
+                                        return "detectorName: multiple values";
+                                    properties.detectorName = 1;
+                                    if (!$util.isString(message.curatedRuleSet))
+                                        return "curatedRuleSet: string expected";
+                                }
+                                if (message.rule != null && message.hasOwnProperty("rule")) {
+                                    if (properties.detectorName === 1)
+                                        return "detectorName: multiple values";
+                                    properties.detectorName = 1;
+                                    if (!$util.isString(message.rule))
+                                        return "rule: string expected";
+                                }
+                                if (message.deletedCuratedRuleSet != null && message.hasOwnProperty("deletedCuratedRuleSet")) {
+                                    if (properties.detectorName === 1)
+                                        return "detectorName: multiple values";
+                                    properties.detectorName = 1;
+                                    if (!$util.isString(message.deletedCuratedRuleSet))
+                                        return "deletedCuratedRuleSet: string expected";
+                                }
+                                if (message.excludedDetectionCount != null && message.hasOwnProperty("excludedDetectionCount"))
+                                    if (!$util.isInteger(message.excludedDetectionCount) && !(message.excludedDetectionCount && $util.isInteger(message.excludedDetectionCount.low) && $util.isInteger(message.excludedDetectionCount.high)))
+                                        return "excludedDetectionCount: integer|Long expected";
+                                if (message.totalDetectionCount != null && message.hasOwnProperty("totalDetectionCount"))
+                                    if (!$util.isInteger(message.totalDetectionCount) && !(message.totalDetectionCount && $util.isInteger(message.totalDetectionCount.low) && $util.isInteger(message.totalDetectionCount.high)))
+                                        return "totalDetectionCount: integer|Long expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DetectionExclusionDetectorActivity message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity} DetectionExclusionDetectorActivity
+                             */
+                            DetectionExclusionDetectorActivity.fromObject = function fromObject(object, long) {
+                                if (object instanceof $root.google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity)
+                                    return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var message = new $root.google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity();
+                                if (object.curatedRule != null)
+                                    message.curatedRule = String(object.curatedRule);
+                                if (object.curatedRuleSet != null)
+                                    message.curatedRuleSet = String(object.curatedRuleSet);
+                                if (object.rule != null)
+                                    message.rule = String(object.rule);
+                                if (object.deletedCuratedRuleSet != null)
+                                    message.deletedCuratedRuleSet = String(object.deletedCuratedRuleSet);
+                                if (object.excludedDetectionCount != null)
+                                    if ($util.Long)
+                                        (message.excludedDetectionCount = $util.Long.fromValue(object.excludedDetectionCount)).unsigned = false;
+                                    else if (typeof object.excludedDetectionCount === "string")
+                                        message.excludedDetectionCount = parseInt(object.excludedDetectionCount, 10);
+                                    else if (typeof object.excludedDetectionCount === "number")
+                                        message.excludedDetectionCount = object.excludedDetectionCount;
+                                    else if (typeof object.excludedDetectionCount === "object")
+                                        message.excludedDetectionCount = new $util.LongBits(object.excludedDetectionCount.low >>> 0, object.excludedDetectionCount.high >>> 0).toNumber();
+                                if (object.totalDetectionCount != null)
+                                    if ($util.Long)
+                                        (message.totalDetectionCount = $util.Long.fromValue(object.totalDetectionCount)).unsigned = false;
+                                    else if (typeof object.totalDetectionCount === "string")
+                                        message.totalDetectionCount = parseInt(object.totalDetectionCount, 10);
+                                    else if (typeof object.totalDetectionCount === "number")
+                                        message.totalDetectionCount = object.totalDetectionCount;
+                                    else if (typeof object.totalDetectionCount === "object")
+                                        message.totalDetectionCount = new $util.LongBits(object.totalDetectionCount.low >>> 0, object.totalDetectionCount.high >>> 0).toNumber();
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DetectionExclusionDetectorActivity message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity
+                             * @static
+                             * @param {google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity} message DetectionExclusionDetectorActivity
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DetectionExclusionDetectorActivity.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.excludedDetectionCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.excludedDetectionCount = options.longs === String ? "0" : 0;
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.totalDetectionCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.totalDetectionCount = options.longs === String ? "0" : 0;
+                                }
+                                if (message.curatedRule != null && message.hasOwnProperty("curatedRule")) {
+                                    object.curatedRule = message.curatedRule;
+                                    if (options.oneofs)
+                                        object.detectorName = "curatedRule";
+                                }
+                                if (message.curatedRuleSet != null && message.hasOwnProperty("curatedRuleSet")) {
+                                    object.curatedRuleSet = message.curatedRuleSet;
+                                    if (options.oneofs)
+                                        object.detectorName = "curatedRuleSet";
+                                }
+                                if (message.excludedDetectionCount != null && message.hasOwnProperty("excludedDetectionCount"))
+                                    if (typeof message.excludedDetectionCount === "number")
+                                        object.excludedDetectionCount = options.longs === String ? String(message.excludedDetectionCount) : message.excludedDetectionCount;
+                                    else
+                                        object.excludedDetectionCount = options.longs === String ? $util.Long.prototype.toString.call(message.excludedDetectionCount) : options.longs === Number ? new $util.LongBits(message.excludedDetectionCount.low >>> 0, message.excludedDetectionCount.high >>> 0).toNumber() : message.excludedDetectionCount;
+                                if (message.totalDetectionCount != null && message.hasOwnProperty("totalDetectionCount"))
+                                    if (typeof message.totalDetectionCount === "number")
+                                        object.totalDetectionCount = options.longs === String ? String(message.totalDetectionCount) : message.totalDetectionCount;
+                                    else
+                                        object.totalDetectionCount = options.longs === String ? $util.Long.prototype.toString.call(message.totalDetectionCount) : options.longs === Number ? new $util.LongBits(message.totalDetectionCount.low >>> 0, message.totalDetectionCount.high >>> 0).toNumber() : message.totalDetectionCount;
+                                if (message.rule != null && message.hasOwnProperty("rule")) {
+                                    object.rule = message.rule;
+                                    if (options.oneofs)
+                                        object.detectorName = "rule";
+                                }
+                                if (message.deletedCuratedRuleSet != null && message.hasOwnProperty("deletedCuratedRuleSet")) {
+                                    object.deletedCuratedRuleSet = message.deletedCuratedRuleSet;
+                                    if (options.oneofs)
+                                        object.detectorName = "deletedCuratedRuleSet";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DetectionExclusionDetectorActivity to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DetectionExclusionDetectorActivity.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DetectionExclusionDetectorActivity
+                             * @function getTypeUrl
+                             * @memberof google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DetectionExclusionDetectorActivity.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity";
+                            };
+    
+                            return DetectionExclusionDetectorActivity;
+                        })();
+    
+                        return DetectionExclusionActivity;
+                    })();
+    
+                    v1.GetFindingsRefinementRequest = (function() {
+    
+                        /**
+                         * Properties of a GetFindingsRefinementRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IGetFindingsRefinementRequest
+                         * @property {string|null} [name] GetFindingsRefinementRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetFindingsRefinementRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a GetFindingsRefinementRequest.
+                         * @implements IGetFindingsRefinementRequest
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IGetFindingsRefinementRequest=} [properties] Properties to set
+                         */
+                        function GetFindingsRefinementRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetFindingsRefinementRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.chronicle.v1.GetFindingsRefinementRequest
+                         * @instance
+                         */
+                        GetFindingsRefinementRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetFindingsRefinementRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.GetFindingsRefinementRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IGetFindingsRefinementRequest=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.GetFindingsRefinementRequest} GetFindingsRefinementRequest instance
+                         */
+                        GetFindingsRefinementRequest.create = function create(properties) {
+                            return new GetFindingsRefinementRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetFindingsRefinementRequest message. Does not implicitly {@link google.cloud.chronicle.v1.GetFindingsRefinementRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.GetFindingsRefinementRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IGetFindingsRefinementRequest} message GetFindingsRefinementRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetFindingsRefinementRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetFindingsRefinementRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.GetFindingsRefinementRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.GetFindingsRefinementRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IGetFindingsRefinementRequest} message GetFindingsRefinementRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetFindingsRefinementRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetFindingsRefinementRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.GetFindingsRefinementRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.GetFindingsRefinementRequest} GetFindingsRefinementRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetFindingsRefinementRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.GetFindingsRefinementRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetFindingsRefinementRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.GetFindingsRefinementRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.GetFindingsRefinementRequest} GetFindingsRefinementRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetFindingsRefinementRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetFindingsRefinementRequest message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.GetFindingsRefinementRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetFindingsRefinementRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetFindingsRefinementRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.GetFindingsRefinementRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.GetFindingsRefinementRequest} GetFindingsRefinementRequest
+                         */
+                        GetFindingsRefinementRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.GetFindingsRefinementRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.chronicle.v1.GetFindingsRefinementRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetFindingsRefinementRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.GetFindingsRefinementRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.GetFindingsRefinementRequest} message GetFindingsRefinementRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetFindingsRefinementRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetFindingsRefinementRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.GetFindingsRefinementRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetFindingsRefinementRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetFindingsRefinementRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.GetFindingsRefinementRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetFindingsRefinementRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.GetFindingsRefinementRequest";
+                        };
+    
+                        return GetFindingsRefinementRequest;
+                    })();
+    
+                    v1.ListFindingsRefinementsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListFindingsRefinementsRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IListFindingsRefinementsRequest
+                         * @property {string|null} [parent] ListFindingsRefinementsRequest parent
+                         * @property {number|null} [pageSize] ListFindingsRefinementsRequest pageSize
+                         * @property {string|null} [pageToken] ListFindingsRefinementsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListFindingsRefinementsRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a ListFindingsRefinementsRequest.
+                         * @implements IListFindingsRefinementsRequest
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IListFindingsRefinementsRequest=} [properties] Properties to set
+                         */
+                        function ListFindingsRefinementsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListFindingsRefinementsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.chronicle.v1.ListFindingsRefinementsRequest
+                         * @instance
+                         */
+                        ListFindingsRefinementsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListFindingsRefinementsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.chronicle.v1.ListFindingsRefinementsRequest
+                         * @instance
+                         */
+                        ListFindingsRefinementsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListFindingsRefinementsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.chronicle.v1.ListFindingsRefinementsRequest
+                         * @instance
+                         */
+                        ListFindingsRefinementsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListFindingsRefinementsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.ListFindingsRefinementsRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IListFindingsRefinementsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.ListFindingsRefinementsRequest} ListFindingsRefinementsRequest instance
+                         */
+                        ListFindingsRefinementsRequest.create = function create(properties) {
+                            return new ListFindingsRefinementsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListFindingsRefinementsRequest message. Does not implicitly {@link google.cloud.chronicle.v1.ListFindingsRefinementsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.ListFindingsRefinementsRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IListFindingsRefinementsRequest} message ListFindingsRefinementsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListFindingsRefinementsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListFindingsRefinementsRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ListFindingsRefinementsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.ListFindingsRefinementsRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IListFindingsRefinementsRequest} message ListFindingsRefinementsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListFindingsRefinementsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListFindingsRefinementsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.ListFindingsRefinementsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.ListFindingsRefinementsRequest} ListFindingsRefinementsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListFindingsRefinementsRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.ListFindingsRefinementsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListFindingsRefinementsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.ListFindingsRefinementsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.ListFindingsRefinementsRequest} ListFindingsRefinementsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListFindingsRefinementsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListFindingsRefinementsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.ListFindingsRefinementsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListFindingsRefinementsRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListFindingsRefinementsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.ListFindingsRefinementsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.ListFindingsRefinementsRequest} ListFindingsRefinementsRequest
+                         */
+                        ListFindingsRefinementsRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.ListFindingsRefinementsRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.chronicle.v1.ListFindingsRefinementsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListFindingsRefinementsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.ListFindingsRefinementsRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.ListFindingsRefinementsRequest} message ListFindingsRefinementsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListFindingsRefinementsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListFindingsRefinementsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.ListFindingsRefinementsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListFindingsRefinementsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListFindingsRefinementsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.ListFindingsRefinementsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListFindingsRefinementsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.ListFindingsRefinementsRequest";
+                        };
+    
+                        return ListFindingsRefinementsRequest;
+                    })();
+    
+                    v1.ListFindingsRefinementsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListFindingsRefinementsResponse.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IListFindingsRefinementsResponse
+                         * @property {Array.<google.cloud.chronicle.v1.IFindingsRefinement>|null} [findingsRefinements] ListFindingsRefinementsResponse findingsRefinements
+                         * @property {string|null} [nextPageToken] ListFindingsRefinementsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListFindingsRefinementsResponse.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a ListFindingsRefinementsResponse.
+                         * @implements IListFindingsRefinementsResponse
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IListFindingsRefinementsResponse=} [properties] Properties to set
+                         */
+                        function ListFindingsRefinementsResponse(properties) {
+                            this.findingsRefinements = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListFindingsRefinementsResponse findingsRefinements.
+                         * @member {Array.<google.cloud.chronicle.v1.IFindingsRefinement>} findingsRefinements
+                         * @memberof google.cloud.chronicle.v1.ListFindingsRefinementsResponse
+                         * @instance
+                         */
+                        ListFindingsRefinementsResponse.prototype.findingsRefinements = $util.emptyArray;
+    
+                        /**
+                         * ListFindingsRefinementsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.chronicle.v1.ListFindingsRefinementsResponse
+                         * @instance
+                         */
+                        ListFindingsRefinementsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListFindingsRefinementsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.ListFindingsRefinementsResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IListFindingsRefinementsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.ListFindingsRefinementsResponse} ListFindingsRefinementsResponse instance
+                         */
+                        ListFindingsRefinementsResponse.create = function create(properties) {
+                            return new ListFindingsRefinementsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListFindingsRefinementsResponse message. Does not implicitly {@link google.cloud.chronicle.v1.ListFindingsRefinementsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.ListFindingsRefinementsResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IListFindingsRefinementsResponse} message ListFindingsRefinementsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListFindingsRefinementsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.findingsRefinements != null && message.findingsRefinements.length)
+                                for (var i = 0; i < message.findingsRefinements.length; ++i)
+                                    $root.google.cloud.chronicle.v1.FindingsRefinement.encode(message.findingsRefinements[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListFindingsRefinementsResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ListFindingsRefinementsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.ListFindingsRefinementsResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IListFindingsRefinementsResponse} message ListFindingsRefinementsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListFindingsRefinementsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListFindingsRefinementsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.ListFindingsRefinementsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.ListFindingsRefinementsResponse} ListFindingsRefinementsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListFindingsRefinementsResponse.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.ListFindingsRefinementsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.findingsRefinements && message.findingsRefinements.length))
+                                            message.findingsRefinements = [];
+                                        message.findingsRefinements.push($root.google.cloud.chronicle.v1.FindingsRefinement.decode(reader, reader.uint32(), undefined, long + 1));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListFindingsRefinementsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.ListFindingsRefinementsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.ListFindingsRefinementsResponse} ListFindingsRefinementsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListFindingsRefinementsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListFindingsRefinementsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.ListFindingsRefinementsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListFindingsRefinementsResponse.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.findingsRefinements != null && message.hasOwnProperty("findingsRefinements")) {
+                                if (!Array.isArray(message.findingsRefinements))
+                                    return "findingsRefinements: array expected";
+                                for (var i = 0; i < message.findingsRefinements.length; ++i) {
+                                    var error = $root.google.cloud.chronicle.v1.FindingsRefinement.verify(message.findingsRefinements[i], long + 1);
+                                    if (error)
+                                        return "findingsRefinements." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListFindingsRefinementsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.ListFindingsRefinementsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.ListFindingsRefinementsResponse} ListFindingsRefinementsResponse
+                         */
+                        ListFindingsRefinementsResponse.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.ListFindingsRefinementsResponse)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.chronicle.v1.ListFindingsRefinementsResponse();
+                            if (object.findingsRefinements) {
+                                if (!Array.isArray(object.findingsRefinements))
+                                    throw TypeError(".google.cloud.chronicle.v1.ListFindingsRefinementsResponse.findingsRefinements: array expected");
+                                message.findingsRefinements = [];
+                                for (var i = 0; i < object.findingsRefinements.length; ++i) {
+                                    if (typeof object.findingsRefinements[i] !== "object")
+                                        throw TypeError(".google.cloud.chronicle.v1.ListFindingsRefinementsResponse.findingsRefinements: object expected");
+                                    message.findingsRefinements[i] = $root.google.cloud.chronicle.v1.FindingsRefinement.fromObject(object.findingsRefinements[i], long + 1);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListFindingsRefinementsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.ListFindingsRefinementsResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.ListFindingsRefinementsResponse} message ListFindingsRefinementsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListFindingsRefinementsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.findingsRefinements = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.findingsRefinements && message.findingsRefinements.length) {
+                                object.findingsRefinements = [];
+                                for (var j = 0; j < message.findingsRefinements.length; ++j)
+                                    object.findingsRefinements[j] = $root.google.cloud.chronicle.v1.FindingsRefinement.toObject(message.findingsRefinements[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListFindingsRefinementsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.ListFindingsRefinementsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListFindingsRefinementsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListFindingsRefinementsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.ListFindingsRefinementsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListFindingsRefinementsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.ListFindingsRefinementsResponse";
+                        };
+    
+                        return ListFindingsRefinementsResponse;
+                    })();
+    
+                    v1.CreateFindingsRefinementRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateFindingsRefinementRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface ICreateFindingsRefinementRequest
+                         * @property {string|null} [parent] CreateFindingsRefinementRequest parent
+                         * @property {google.cloud.chronicle.v1.IFindingsRefinement|null} [findingsRefinement] CreateFindingsRefinementRequest findingsRefinement
+                         */
+    
+                        /**
+                         * Constructs a new CreateFindingsRefinementRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a CreateFindingsRefinementRequest.
+                         * @implements ICreateFindingsRefinementRequest
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.ICreateFindingsRefinementRequest=} [properties] Properties to set
+                         */
+                        function CreateFindingsRefinementRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateFindingsRefinementRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.chronicle.v1.CreateFindingsRefinementRequest
+                         * @instance
+                         */
+                        CreateFindingsRefinementRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateFindingsRefinementRequest findingsRefinement.
+                         * @member {google.cloud.chronicle.v1.IFindingsRefinement|null|undefined} findingsRefinement
+                         * @memberof google.cloud.chronicle.v1.CreateFindingsRefinementRequest
+                         * @instance
+                         */
+                        CreateFindingsRefinementRequest.prototype.findingsRefinement = null;
+    
+                        /**
+                         * Creates a new CreateFindingsRefinementRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.CreateFindingsRefinementRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.ICreateFindingsRefinementRequest=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.CreateFindingsRefinementRequest} CreateFindingsRefinementRequest instance
+                         */
+                        CreateFindingsRefinementRequest.create = function create(properties) {
+                            return new CreateFindingsRefinementRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateFindingsRefinementRequest message. Does not implicitly {@link google.cloud.chronicle.v1.CreateFindingsRefinementRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.CreateFindingsRefinementRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.ICreateFindingsRefinementRequest} message CreateFindingsRefinementRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateFindingsRefinementRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.findingsRefinement != null && Object.hasOwnProperty.call(message, "findingsRefinement"))
+                                $root.google.cloud.chronicle.v1.FindingsRefinement.encode(message.findingsRefinement, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateFindingsRefinementRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.CreateFindingsRefinementRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.CreateFindingsRefinementRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.ICreateFindingsRefinementRequest} message CreateFindingsRefinementRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateFindingsRefinementRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateFindingsRefinementRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.CreateFindingsRefinementRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.CreateFindingsRefinementRequest} CreateFindingsRefinementRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateFindingsRefinementRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.CreateFindingsRefinementRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.findingsRefinement = $root.google.cloud.chronicle.v1.FindingsRefinement.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateFindingsRefinementRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.CreateFindingsRefinementRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.CreateFindingsRefinementRequest} CreateFindingsRefinementRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateFindingsRefinementRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateFindingsRefinementRequest message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.CreateFindingsRefinementRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateFindingsRefinementRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.findingsRefinement != null && message.hasOwnProperty("findingsRefinement")) {
+                                var error = $root.google.cloud.chronicle.v1.FindingsRefinement.verify(message.findingsRefinement, long + 1);
+                                if (error)
+                                    return "findingsRefinement." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateFindingsRefinementRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.CreateFindingsRefinementRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.CreateFindingsRefinementRequest} CreateFindingsRefinementRequest
+                         */
+                        CreateFindingsRefinementRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.CreateFindingsRefinementRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.chronicle.v1.CreateFindingsRefinementRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.findingsRefinement != null) {
+                                if (typeof object.findingsRefinement !== "object")
+                                    throw TypeError(".google.cloud.chronicle.v1.CreateFindingsRefinementRequest.findingsRefinement: object expected");
+                                message.findingsRefinement = $root.google.cloud.chronicle.v1.FindingsRefinement.fromObject(object.findingsRefinement, long + 1);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateFindingsRefinementRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.CreateFindingsRefinementRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.CreateFindingsRefinementRequest} message CreateFindingsRefinementRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateFindingsRefinementRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.findingsRefinement = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.findingsRefinement != null && message.hasOwnProperty("findingsRefinement"))
+                                object.findingsRefinement = $root.google.cloud.chronicle.v1.FindingsRefinement.toObject(message.findingsRefinement, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateFindingsRefinementRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.CreateFindingsRefinementRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateFindingsRefinementRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateFindingsRefinementRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.CreateFindingsRefinementRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateFindingsRefinementRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.CreateFindingsRefinementRequest";
+                        };
+    
+                        return CreateFindingsRefinementRequest;
+                    })();
+    
+                    v1.UpdateFindingsRefinementRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateFindingsRefinementRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IUpdateFindingsRefinementRequest
+                         * @property {google.cloud.chronicle.v1.IFindingsRefinement|null} [findingsRefinement] UpdateFindingsRefinementRequest findingsRefinement
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateFindingsRefinementRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateFindingsRefinementRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents an UpdateFindingsRefinementRequest.
+                         * @implements IUpdateFindingsRefinementRequest
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IUpdateFindingsRefinementRequest=} [properties] Properties to set
+                         */
+                        function UpdateFindingsRefinementRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateFindingsRefinementRequest findingsRefinement.
+                         * @member {google.cloud.chronicle.v1.IFindingsRefinement|null|undefined} findingsRefinement
+                         * @memberof google.cloud.chronicle.v1.UpdateFindingsRefinementRequest
+                         * @instance
+                         */
+                        UpdateFindingsRefinementRequest.prototype.findingsRefinement = null;
+    
+                        /**
+                         * UpdateFindingsRefinementRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.chronicle.v1.UpdateFindingsRefinementRequest
+                         * @instance
+                         */
+                        UpdateFindingsRefinementRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateFindingsRefinementRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.UpdateFindingsRefinementRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IUpdateFindingsRefinementRequest=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.UpdateFindingsRefinementRequest} UpdateFindingsRefinementRequest instance
+                         */
+                        UpdateFindingsRefinementRequest.create = function create(properties) {
+                            return new UpdateFindingsRefinementRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateFindingsRefinementRequest message. Does not implicitly {@link google.cloud.chronicle.v1.UpdateFindingsRefinementRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.UpdateFindingsRefinementRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IUpdateFindingsRefinementRequest} message UpdateFindingsRefinementRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateFindingsRefinementRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.findingsRefinement != null && Object.hasOwnProperty.call(message, "findingsRefinement"))
+                                $root.google.cloud.chronicle.v1.FindingsRefinement.encode(message.findingsRefinement, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateFindingsRefinementRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.UpdateFindingsRefinementRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.UpdateFindingsRefinementRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IUpdateFindingsRefinementRequest} message UpdateFindingsRefinementRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateFindingsRefinementRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateFindingsRefinementRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.UpdateFindingsRefinementRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.UpdateFindingsRefinementRequest} UpdateFindingsRefinementRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateFindingsRefinementRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.UpdateFindingsRefinementRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.findingsRefinement = $root.google.cloud.chronicle.v1.FindingsRefinement.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateFindingsRefinementRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.UpdateFindingsRefinementRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.UpdateFindingsRefinementRequest} UpdateFindingsRefinementRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateFindingsRefinementRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateFindingsRefinementRequest message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.UpdateFindingsRefinementRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateFindingsRefinementRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.findingsRefinement != null && message.hasOwnProperty("findingsRefinement")) {
+                                var error = $root.google.cloud.chronicle.v1.FindingsRefinement.verify(message.findingsRefinement, long + 1);
+                                if (error)
+                                    return "findingsRefinement." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask, long + 1);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateFindingsRefinementRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.UpdateFindingsRefinementRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.UpdateFindingsRefinementRequest} UpdateFindingsRefinementRequest
+                         */
+                        UpdateFindingsRefinementRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.UpdateFindingsRefinementRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.chronicle.v1.UpdateFindingsRefinementRequest();
+                            if (object.findingsRefinement != null) {
+                                if (typeof object.findingsRefinement !== "object")
+                                    throw TypeError(".google.cloud.chronicle.v1.UpdateFindingsRefinementRequest.findingsRefinement: object expected");
+                                message.findingsRefinement = $root.google.cloud.chronicle.v1.FindingsRefinement.fromObject(object.findingsRefinement, long + 1);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.chronicle.v1.UpdateFindingsRefinementRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask, long + 1);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateFindingsRefinementRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.UpdateFindingsRefinementRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.UpdateFindingsRefinementRequest} message UpdateFindingsRefinementRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateFindingsRefinementRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.findingsRefinement = null;
+                                object.updateMask = null;
+                            }
+                            if (message.findingsRefinement != null && message.hasOwnProperty("findingsRefinement"))
+                                object.findingsRefinement = $root.google.cloud.chronicle.v1.FindingsRefinement.toObject(message.findingsRefinement, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateFindingsRefinementRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.UpdateFindingsRefinementRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateFindingsRefinementRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateFindingsRefinementRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.UpdateFindingsRefinementRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateFindingsRefinementRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.UpdateFindingsRefinementRequest";
+                        };
+    
+                        return UpdateFindingsRefinementRequest;
+                    })();
+    
+                    v1.GetFindingsRefinementDeploymentRequest = (function() {
+    
+                        /**
+                         * Properties of a GetFindingsRefinementDeploymentRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IGetFindingsRefinementDeploymentRequest
+                         * @property {string|null} [name] GetFindingsRefinementDeploymentRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetFindingsRefinementDeploymentRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a GetFindingsRefinementDeploymentRequest.
+                         * @implements IGetFindingsRefinementDeploymentRequest
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IGetFindingsRefinementDeploymentRequest=} [properties] Properties to set
+                         */
+                        function GetFindingsRefinementDeploymentRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetFindingsRefinementDeploymentRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.chronicle.v1.GetFindingsRefinementDeploymentRequest
+                         * @instance
+                         */
+                        GetFindingsRefinementDeploymentRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetFindingsRefinementDeploymentRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.GetFindingsRefinementDeploymentRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IGetFindingsRefinementDeploymentRequest=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.GetFindingsRefinementDeploymentRequest} GetFindingsRefinementDeploymentRequest instance
+                         */
+                        GetFindingsRefinementDeploymentRequest.create = function create(properties) {
+                            return new GetFindingsRefinementDeploymentRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetFindingsRefinementDeploymentRequest message. Does not implicitly {@link google.cloud.chronicle.v1.GetFindingsRefinementDeploymentRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.GetFindingsRefinementDeploymentRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IGetFindingsRefinementDeploymentRequest} message GetFindingsRefinementDeploymentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetFindingsRefinementDeploymentRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetFindingsRefinementDeploymentRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.GetFindingsRefinementDeploymentRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.GetFindingsRefinementDeploymentRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IGetFindingsRefinementDeploymentRequest} message GetFindingsRefinementDeploymentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetFindingsRefinementDeploymentRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetFindingsRefinementDeploymentRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.GetFindingsRefinementDeploymentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.GetFindingsRefinementDeploymentRequest} GetFindingsRefinementDeploymentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetFindingsRefinementDeploymentRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.GetFindingsRefinementDeploymentRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetFindingsRefinementDeploymentRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.GetFindingsRefinementDeploymentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.GetFindingsRefinementDeploymentRequest} GetFindingsRefinementDeploymentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetFindingsRefinementDeploymentRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetFindingsRefinementDeploymentRequest message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.GetFindingsRefinementDeploymentRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetFindingsRefinementDeploymentRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetFindingsRefinementDeploymentRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.GetFindingsRefinementDeploymentRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.GetFindingsRefinementDeploymentRequest} GetFindingsRefinementDeploymentRequest
+                         */
+                        GetFindingsRefinementDeploymentRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.GetFindingsRefinementDeploymentRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.chronicle.v1.GetFindingsRefinementDeploymentRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetFindingsRefinementDeploymentRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.GetFindingsRefinementDeploymentRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.GetFindingsRefinementDeploymentRequest} message GetFindingsRefinementDeploymentRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetFindingsRefinementDeploymentRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetFindingsRefinementDeploymentRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.GetFindingsRefinementDeploymentRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetFindingsRefinementDeploymentRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetFindingsRefinementDeploymentRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.GetFindingsRefinementDeploymentRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetFindingsRefinementDeploymentRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.GetFindingsRefinementDeploymentRequest";
+                        };
+    
+                        return GetFindingsRefinementDeploymentRequest;
+                    })();
+    
+                    v1.UpdateFindingsRefinementDeploymentRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateFindingsRefinementDeploymentRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IUpdateFindingsRefinementDeploymentRequest
+                         * @property {google.cloud.chronicle.v1.IFindingsRefinementDeployment|null} [findingsRefinementDeployment] UpdateFindingsRefinementDeploymentRequest findingsRefinementDeployment
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateFindingsRefinementDeploymentRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateFindingsRefinementDeploymentRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents an UpdateFindingsRefinementDeploymentRequest.
+                         * @implements IUpdateFindingsRefinementDeploymentRequest
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IUpdateFindingsRefinementDeploymentRequest=} [properties] Properties to set
+                         */
+                        function UpdateFindingsRefinementDeploymentRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateFindingsRefinementDeploymentRequest findingsRefinementDeployment.
+                         * @member {google.cloud.chronicle.v1.IFindingsRefinementDeployment|null|undefined} findingsRefinementDeployment
+                         * @memberof google.cloud.chronicle.v1.UpdateFindingsRefinementDeploymentRequest
+                         * @instance
+                         */
+                        UpdateFindingsRefinementDeploymentRequest.prototype.findingsRefinementDeployment = null;
+    
+                        /**
+                         * UpdateFindingsRefinementDeploymentRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.chronicle.v1.UpdateFindingsRefinementDeploymentRequest
+                         * @instance
+                         */
+                        UpdateFindingsRefinementDeploymentRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateFindingsRefinementDeploymentRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.UpdateFindingsRefinementDeploymentRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IUpdateFindingsRefinementDeploymentRequest=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.UpdateFindingsRefinementDeploymentRequest} UpdateFindingsRefinementDeploymentRequest instance
+                         */
+                        UpdateFindingsRefinementDeploymentRequest.create = function create(properties) {
+                            return new UpdateFindingsRefinementDeploymentRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateFindingsRefinementDeploymentRequest message. Does not implicitly {@link google.cloud.chronicle.v1.UpdateFindingsRefinementDeploymentRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.UpdateFindingsRefinementDeploymentRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IUpdateFindingsRefinementDeploymentRequest} message UpdateFindingsRefinementDeploymentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateFindingsRefinementDeploymentRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.findingsRefinementDeployment != null && Object.hasOwnProperty.call(message, "findingsRefinementDeployment"))
+                                $root.google.cloud.chronicle.v1.FindingsRefinementDeployment.encode(message.findingsRefinementDeployment, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateFindingsRefinementDeploymentRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.UpdateFindingsRefinementDeploymentRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.UpdateFindingsRefinementDeploymentRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IUpdateFindingsRefinementDeploymentRequest} message UpdateFindingsRefinementDeploymentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateFindingsRefinementDeploymentRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateFindingsRefinementDeploymentRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.UpdateFindingsRefinementDeploymentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.UpdateFindingsRefinementDeploymentRequest} UpdateFindingsRefinementDeploymentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateFindingsRefinementDeploymentRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.UpdateFindingsRefinementDeploymentRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.findingsRefinementDeployment = $root.google.cloud.chronicle.v1.FindingsRefinementDeployment.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateFindingsRefinementDeploymentRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.UpdateFindingsRefinementDeploymentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.UpdateFindingsRefinementDeploymentRequest} UpdateFindingsRefinementDeploymentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateFindingsRefinementDeploymentRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateFindingsRefinementDeploymentRequest message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.UpdateFindingsRefinementDeploymentRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateFindingsRefinementDeploymentRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.findingsRefinementDeployment != null && message.hasOwnProperty("findingsRefinementDeployment")) {
+                                var error = $root.google.cloud.chronicle.v1.FindingsRefinementDeployment.verify(message.findingsRefinementDeployment, long + 1);
+                                if (error)
+                                    return "findingsRefinementDeployment." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask, long + 1);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateFindingsRefinementDeploymentRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.UpdateFindingsRefinementDeploymentRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.UpdateFindingsRefinementDeploymentRequest} UpdateFindingsRefinementDeploymentRequest
+                         */
+                        UpdateFindingsRefinementDeploymentRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.UpdateFindingsRefinementDeploymentRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.chronicle.v1.UpdateFindingsRefinementDeploymentRequest();
+                            if (object.findingsRefinementDeployment != null) {
+                                if (typeof object.findingsRefinementDeployment !== "object")
+                                    throw TypeError(".google.cloud.chronicle.v1.UpdateFindingsRefinementDeploymentRequest.findingsRefinementDeployment: object expected");
+                                message.findingsRefinementDeployment = $root.google.cloud.chronicle.v1.FindingsRefinementDeployment.fromObject(object.findingsRefinementDeployment, long + 1);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.chronicle.v1.UpdateFindingsRefinementDeploymentRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask, long + 1);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateFindingsRefinementDeploymentRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.UpdateFindingsRefinementDeploymentRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.UpdateFindingsRefinementDeploymentRequest} message UpdateFindingsRefinementDeploymentRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateFindingsRefinementDeploymentRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.findingsRefinementDeployment = null;
+                                object.updateMask = null;
+                            }
+                            if (message.findingsRefinementDeployment != null && message.hasOwnProperty("findingsRefinementDeployment"))
+                                object.findingsRefinementDeployment = $root.google.cloud.chronicle.v1.FindingsRefinementDeployment.toObject(message.findingsRefinementDeployment, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateFindingsRefinementDeploymentRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.UpdateFindingsRefinementDeploymentRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateFindingsRefinementDeploymentRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateFindingsRefinementDeploymentRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.UpdateFindingsRefinementDeploymentRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateFindingsRefinementDeploymentRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.UpdateFindingsRefinementDeploymentRequest";
+                        };
+    
+                        return UpdateFindingsRefinementDeploymentRequest;
+                    })();
+    
+                    v1.ListAllFindingsRefinementDeploymentsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListAllFindingsRefinementDeploymentsRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IListAllFindingsRefinementDeploymentsRequest
+                         * @property {string|null} [instance] ListAllFindingsRefinementDeploymentsRequest instance
+                         * @property {number|null} [pageSize] ListAllFindingsRefinementDeploymentsRequest pageSize
+                         * @property {string|null} [pageToken] ListAllFindingsRefinementDeploymentsRequest pageToken
+                         * @property {string|null} [filter] ListAllFindingsRefinementDeploymentsRequest filter
+                         */
+    
+                        /**
+                         * Constructs a new ListAllFindingsRefinementDeploymentsRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a ListAllFindingsRefinementDeploymentsRequest.
+                         * @implements IListAllFindingsRefinementDeploymentsRequest
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IListAllFindingsRefinementDeploymentsRequest=} [properties] Properties to set
+                         */
+                        function ListAllFindingsRefinementDeploymentsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListAllFindingsRefinementDeploymentsRequest instance.
+                         * @member {string} instance
+                         * @memberof google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsRequest
+                         * @instance
+                         */
+                        ListAllFindingsRefinementDeploymentsRequest.prototype.instance = "";
+    
+                        /**
+                         * ListAllFindingsRefinementDeploymentsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsRequest
+                         * @instance
+                         */
+                        ListAllFindingsRefinementDeploymentsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListAllFindingsRefinementDeploymentsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsRequest
+                         * @instance
+                         */
+                        ListAllFindingsRefinementDeploymentsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListAllFindingsRefinementDeploymentsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsRequest
+                         * @instance
+                         */
+                        ListAllFindingsRefinementDeploymentsRequest.prototype.filter = "";
+    
+                        /**
+                         * Creates a new ListAllFindingsRefinementDeploymentsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IListAllFindingsRefinementDeploymentsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsRequest} ListAllFindingsRefinementDeploymentsRequest instance
+                         */
+                        ListAllFindingsRefinementDeploymentsRequest.create = function create(properties) {
+                            return new ListAllFindingsRefinementDeploymentsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListAllFindingsRefinementDeploymentsRequest message. Does not implicitly {@link google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IListAllFindingsRefinementDeploymentsRequest} message ListAllFindingsRefinementDeploymentsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAllFindingsRefinementDeploymentsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.instance != null && Object.hasOwnProperty.call(message, "instance"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.instance);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListAllFindingsRefinementDeploymentsRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IListAllFindingsRefinementDeploymentsRequest} message ListAllFindingsRefinementDeploymentsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAllFindingsRefinementDeploymentsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListAllFindingsRefinementDeploymentsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsRequest} ListAllFindingsRefinementDeploymentsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAllFindingsRefinementDeploymentsRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.instance = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListAllFindingsRefinementDeploymentsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsRequest} ListAllFindingsRefinementDeploymentsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAllFindingsRefinementDeploymentsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListAllFindingsRefinementDeploymentsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListAllFindingsRefinementDeploymentsRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.instance != null && message.hasOwnProperty("instance"))
+                                if (!$util.isString(message.instance))
+                                    return "instance: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListAllFindingsRefinementDeploymentsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsRequest} ListAllFindingsRefinementDeploymentsRequest
+                         */
+                        ListAllFindingsRefinementDeploymentsRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsRequest();
+                            if (object.instance != null)
+                                message.instance = String(object.instance);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListAllFindingsRefinementDeploymentsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsRequest} message ListAllFindingsRefinementDeploymentsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListAllFindingsRefinementDeploymentsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.instance = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                            }
+                            if (message.instance != null && message.hasOwnProperty("instance"))
+                                object.instance = message.instance;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListAllFindingsRefinementDeploymentsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListAllFindingsRefinementDeploymentsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListAllFindingsRefinementDeploymentsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListAllFindingsRefinementDeploymentsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsRequest";
+                        };
+    
+                        return ListAllFindingsRefinementDeploymentsRequest;
+                    })();
+    
+                    v1.ListAllFindingsRefinementDeploymentsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListAllFindingsRefinementDeploymentsResponse.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IListAllFindingsRefinementDeploymentsResponse
+                         * @property {Array.<google.cloud.chronicle.v1.IFindingsRefinementDeployment>|null} [allFindingsRefinementDeployments] ListAllFindingsRefinementDeploymentsResponse allFindingsRefinementDeployments
+                         * @property {string|null} [nextPageToken] ListAllFindingsRefinementDeploymentsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListAllFindingsRefinementDeploymentsResponse.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a ListAllFindingsRefinementDeploymentsResponse.
+                         * @implements IListAllFindingsRefinementDeploymentsResponse
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IListAllFindingsRefinementDeploymentsResponse=} [properties] Properties to set
+                         */
+                        function ListAllFindingsRefinementDeploymentsResponse(properties) {
+                            this.allFindingsRefinementDeployments = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListAllFindingsRefinementDeploymentsResponse allFindingsRefinementDeployments.
+                         * @member {Array.<google.cloud.chronicle.v1.IFindingsRefinementDeployment>} allFindingsRefinementDeployments
+                         * @memberof google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsResponse
+                         * @instance
+                         */
+                        ListAllFindingsRefinementDeploymentsResponse.prototype.allFindingsRefinementDeployments = $util.emptyArray;
+    
+                        /**
+                         * ListAllFindingsRefinementDeploymentsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsResponse
+                         * @instance
+                         */
+                        ListAllFindingsRefinementDeploymentsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListAllFindingsRefinementDeploymentsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IListAllFindingsRefinementDeploymentsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsResponse} ListAllFindingsRefinementDeploymentsResponse instance
+                         */
+                        ListAllFindingsRefinementDeploymentsResponse.create = function create(properties) {
+                            return new ListAllFindingsRefinementDeploymentsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListAllFindingsRefinementDeploymentsResponse message. Does not implicitly {@link google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IListAllFindingsRefinementDeploymentsResponse} message ListAllFindingsRefinementDeploymentsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAllFindingsRefinementDeploymentsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.allFindingsRefinementDeployments != null && message.allFindingsRefinementDeployments.length)
+                                for (var i = 0; i < message.allFindingsRefinementDeployments.length; ++i)
+                                    $root.google.cloud.chronicle.v1.FindingsRefinementDeployment.encode(message.allFindingsRefinementDeployments[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListAllFindingsRefinementDeploymentsResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IListAllFindingsRefinementDeploymentsResponse} message ListAllFindingsRefinementDeploymentsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAllFindingsRefinementDeploymentsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListAllFindingsRefinementDeploymentsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsResponse} ListAllFindingsRefinementDeploymentsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAllFindingsRefinementDeploymentsResponse.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.allFindingsRefinementDeployments && message.allFindingsRefinementDeployments.length))
+                                            message.allFindingsRefinementDeployments = [];
+                                        message.allFindingsRefinementDeployments.push($root.google.cloud.chronicle.v1.FindingsRefinementDeployment.decode(reader, reader.uint32(), undefined, long + 1));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListAllFindingsRefinementDeploymentsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsResponse} ListAllFindingsRefinementDeploymentsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAllFindingsRefinementDeploymentsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListAllFindingsRefinementDeploymentsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListAllFindingsRefinementDeploymentsResponse.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.allFindingsRefinementDeployments != null && message.hasOwnProperty("allFindingsRefinementDeployments")) {
+                                if (!Array.isArray(message.allFindingsRefinementDeployments))
+                                    return "allFindingsRefinementDeployments: array expected";
+                                for (var i = 0; i < message.allFindingsRefinementDeployments.length; ++i) {
+                                    var error = $root.google.cloud.chronicle.v1.FindingsRefinementDeployment.verify(message.allFindingsRefinementDeployments[i], long + 1);
+                                    if (error)
+                                        return "allFindingsRefinementDeployments." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListAllFindingsRefinementDeploymentsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsResponse} ListAllFindingsRefinementDeploymentsResponse
+                         */
+                        ListAllFindingsRefinementDeploymentsResponse.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsResponse)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsResponse();
+                            if (object.allFindingsRefinementDeployments) {
+                                if (!Array.isArray(object.allFindingsRefinementDeployments))
+                                    throw TypeError(".google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsResponse.allFindingsRefinementDeployments: array expected");
+                                message.allFindingsRefinementDeployments = [];
+                                for (var i = 0; i < object.allFindingsRefinementDeployments.length; ++i) {
+                                    if (typeof object.allFindingsRefinementDeployments[i] !== "object")
+                                        throw TypeError(".google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsResponse.allFindingsRefinementDeployments: object expected");
+                                    message.allFindingsRefinementDeployments[i] = $root.google.cloud.chronicle.v1.FindingsRefinementDeployment.fromObject(object.allFindingsRefinementDeployments[i], long + 1);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListAllFindingsRefinementDeploymentsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsResponse} message ListAllFindingsRefinementDeploymentsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListAllFindingsRefinementDeploymentsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.allFindingsRefinementDeployments = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.allFindingsRefinementDeployments && message.allFindingsRefinementDeployments.length) {
+                                object.allFindingsRefinementDeployments = [];
+                                for (var j = 0; j < message.allFindingsRefinementDeployments.length; ++j)
+                                    object.allFindingsRefinementDeployments[j] = $root.google.cloud.chronicle.v1.FindingsRefinementDeployment.toObject(message.allFindingsRefinementDeployments[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListAllFindingsRefinementDeploymentsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListAllFindingsRefinementDeploymentsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListAllFindingsRefinementDeploymentsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListAllFindingsRefinementDeploymentsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsResponse";
+                        };
+    
+                        return ListAllFindingsRefinementDeploymentsResponse;
+                    })();
+    
+                    v1.OutcomeFilter = (function() {
+    
+                        /**
+                         * Properties of an OutcomeFilter.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IOutcomeFilter
+                         * @property {string|null} [outcomeVariable] OutcomeFilter outcomeVariable
+                         * @property {string|null} [outcomeValue] OutcomeFilter outcomeValue
+                         * @property {google.cloud.chronicle.v1.OutcomeFilter.Operator|null} [outcomeFilterOperator] OutcomeFilter outcomeFilterOperator
+                         */
+    
+                        /**
+                         * Constructs a new OutcomeFilter.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents an OutcomeFilter.
+                         * @implements IOutcomeFilter
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IOutcomeFilter=} [properties] Properties to set
+                         */
+                        function OutcomeFilter(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * OutcomeFilter outcomeVariable.
+                         * @member {string} outcomeVariable
+                         * @memberof google.cloud.chronicle.v1.OutcomeFilter
+                         * @instance
+                         */
+                        OutcomeFilter.prototype.outcomeVariable = "";
+    
+                        /**
+                         * OutcomeFilter outcomeValue.
+                         * @member {string} outcomeValue
+                         * @memberof google.cloud.chronicle.v1.OutcomeFilter
+                         * @instance
+                         */
+                        OutcomeFilter.prototype.outcomeValue = "";
+    
+                        /**
+                         * OutcomeFilter outcomeFilterOperator.
+                         * @member {google.cloud.chronicle.v1.OutcomeFilter.Operator} outcomeFilterOperator
+                         * @memberof google.cloud.chronicle.v1.OutcomeFilter
+                         * @instance
+                         */
+                        OutcomeFilter.prototype.outcomeFilterOperator = 0;
+    
+                        /**
+                         * Creates a new OutcomeFilter instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.OutcomeFilter
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IOutcomeFilter=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.OutcomeFilter} OutcomeFilter instance
+                         */
+                        OutcomeFilter.create = function create(properties) {
+                            return new OutcomeFilter(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified OutcomeFilter message. Does not implicitly {@link google.cloud.chronicle.v1.OutcomeFilter.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.OutcomeFilter
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IOutcomeFilter} message OutcomeFilter message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OutcomeFilter.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.outcomeVariable != null && Object.hasOwnProperty.call(message, "outcomeVariable"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.outcomeVariable);
+                            if (message.outcomeValue != null && Object.hasOwnProperty.call(message, "outcomeValue"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.outcomeValue);
+                            if (message.outcomeFilterOperator != null && Object.hasOwnProperty.call(message, "outcomeFilterOperator"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.outcomeFilterOperator);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified OutcomeFilter message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.OutcomeFilter.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.OutcomeFilter
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IOutcomeFilter} message OutcomeFilter message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OutcomeFilter.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an OutcomeFilter message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.OutcomeFilter
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.OutcomeFilter} OutcomeFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OutcomeFilter.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.OutcomeFilter();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.outcomeVariable = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.outcomeValue = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.outcomeFilterOperator = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an OutcomeFilter message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.OutcomeFilter
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.OutcomeFilter} OutcomeFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OutcomeFilter.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an OutcomeFilter message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.OutcomeFilter
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        OutcomeFilter.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.outcomeVariable != null && message.hasOwnProperty("outcomeVariable"))
+                                if (!$util.isString(message.outcomeVariable))
+                                    return "outcomeVariable: string expected";
+                            if (message.outcomeValue != null && message.hasOwnProperty("outcomeValue"))
+                                if (!$util.isString(message.outcomeValue))
+                                    return "outcomeValue: string expected";
+                            if (message.outcomeFilterOperator != null && message.hasOwnProperty("outcomeFilterOperator"))
+                                switch (message.outcomeFilterOperator) {
+                                default:
+                                    return "outcomeFilterOperator: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an OutcomeFilter message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.OutcomeFilter
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.OutcomeFilter} OutcomeFilter
+                         */
+                        OutcomeFilter.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.OutcomeFilter)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.chronicle.v1.OutcomeFilter();
+                            if (object.outcomeVariable != null)
+                                message.outcomeVariable = String(object.outcomeVariable);
+                            if (object.outcomeValue != null)
+                                message.outcomeValue = String(object.outcomeValue);
+                            switch (object.outcomeFilterOperator) {
+                            default:
+                                if (typeof object.outcomeFilterOperator === "number") {
+                                    message.outcomeFilterOperator = object.outcomeFilterOperator;
+                                    break;
+                                }
+                                break;
+                            case "OPERATOR_UNSPECIFIED":
+                            case 0:
+                                message.outcomeFilterOperator = 0;
+                                break;
+                            case "EQUAL":
+                            case 1:
+                                message.outcomeFilterOperator = 1;
+                                break;
+                            case "CONTAINS":
+                            case 2:
+                                message.outcomeFilterOperator = 2;
+                                break;
+                            case "MATCHES_REGEX":
+                            case 3:
+                                message.outcomeFilterOperator = 3;
+                                break;
+                            case "MATCHES_CIDR":
+                            case 4:
+                                message.outcomeFilterOperator = 4;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an OutcomeFilter message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.OutcomeFilter
+                         * @static
+                         * @param {google.cloud.chronicle.v1.OutcomeFilter} message OutcomeFilter
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        OutcomeFilter.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.outcomeVariable = "";
+                                object.outcomeValue = "";
+                                object.outcomeFilterOperator = options.enums === String ? "OPERATOR_UNSPECIFIED" : 0;
+                            }
+                            if (message.outcomeVariable != null && message.hasOwnProperty("outcomeVariable"))
+                                object.outcomeVariable = message.outcomeVariable;
+                            if (message.outcomeValue != null && message.hasOwnProperty("outcomeValue"))
+                                object.outcomeValue = message.outcomeValue;
+                            if (message.outcomeFilterOperator != null && message.hasOwnProperty("outcomeFilterOperator"))
+                                object.outcomeFilterOperator = options.enums === String ? $root.google.cloud.chronicle.v1.OutcomeFilter.Operator[message.outcomeFilterOperator] === undefined ? message.outcomeFilterOperator : $root.google.cloud.chronicle.v1.OutcomeFilter.Operator[message.outcomeFilterOperator] : message.outcomeFilterOperator;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this OutcomeFilter to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.OutcomeFilter
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        OutcomeFilter.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for OutcomeFilter
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.OutcomeFilter
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        OutcomeFilter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.OutcomeFilter";
+                        };
+    
+                        /**
+                         * Operator enum.
+                         * @name google.cloud.chronicle.v1.OutcomeFilter.Operator
+                         * @enum {number}
+                         * @property {number} OPERATOR_UNSPECIFIED=0 OPERATOR_UNSPECIFIED value
+                         * @property {number} EQUAL=1 EQUAL value
+                         * @property {number} CONTAINS=2 CONTAINS value
+                         * @property {number} MATCHES_REGEX=3 MATCHES_REGEX value
+                         * @property {number} MATCHES_CIDR=4 MATCHES_CIDR value
+                         */
+                        OutcomeFilter.Operator = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "OPERATOR_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "EQUAL"] = 1;
+                            values[valuesById[2] = "CONTAINS"] = 2;
+                            values[valuesById[3] = "MATCHES_REGEX"] = 3;
+                            values[valuesById[4] = "MATCHES_CIDR"] = 4;
+                            return values;
+                        })();
+    
+                        return OutcomeFilter;
+                    })();
+    
+                    v1.ComputeFindingsRefinementActivityRequest = (function() {
+    
+                        /**
+                         * Properties of a ComputeFindingsRefinementActivityRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IComputeFindingsRefinementActivityRequest
+                         * @property {string|null} [name] ComputeFindingsRefinementActivityRequest name
+                         * @property {google.type.IInterval|null} [interval] ComputeFindingsRefinementActivityRequest interval
+                         */
+    
+                        /**
+                         * Constructs a new ComputeFindingsRefinementActivityRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a ComputeFindingsRefinementActivityRequest.
+                         * @implements IComputeFindingsRefinementActivityRequest
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IComputeFindingsRefinementActivityRequest=} [properties] Properties to set
+                         */
+                        function ComputeFindingsRefinementActivityRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ComputeFindingsRefinementActivityRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.chronicle.v1.ComputeFindingsRefinementActivityRequest
+                         * @instance
+                         */
+                        ComputeFindingsRefinementActivityRequest.prototype.name = "";
+    
+                        /**
+                         * ComputeFindingsRefinementActivityRequest interval.
+                         * @member {google.type.IInterval|null|undefined} interval
+                         * @memberof google.cloud.chronicle.v1.ComputeFindingsRefinementActivityRequest
+                         * @instance
+                         */
+                        ComputeFindingsRefinementActivityRequest.prototype.interval = null;
+    
+                        /**
+                         * Creates a new ComputeFindingsRefinementActivityRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.ComputeFindingsRefinementActivityRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IComputeFindingsRefinementActivityRequest=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.ComputeFindingsRefinementActivityRequest} ComputeFindingsRefinementActivityRequest instance
+                         */
+                        ComputeFindingsRefinementActivityRequest.create = function create(properties) {
+                            return new ComputeFindingsRefinementActivityRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ComputeFindingsRefinementActivityRequest message. Does not implicitly {@link google.cloud.chronicle.v1.ComputeFindingsRefinementActivityRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.ComputeFindingsRefinementActivityRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IComputeFindingsRefinementActivityRequest} message ComputeFindingsRefinementActivityRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ComputeFindingsRefinementActivityRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.interval != null && Object.hasOwnProperty.call(message, "interval"))
+                                $root.google.type.Interval.encode(message.interval, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ComputeFindingsRefinementActivityRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ComputeFindingsRefinementActivityRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.ComputeFindingsRefinementActivityRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IComputeFindingsRefinementActivityRequest} message ComputeFindingsRefinementActivityRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ComputeFindingsRefinementActivityRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ComputeFindingsRefinementActivityRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.ComputeFindingsRefinementActivityRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.ComputeFindingsRefinementActivityRequest} ComputeFindingsRefinementActivityRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ComputeFindingsRefinementActivityRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.ComputeFindingsRefinementActivityRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.interval = $root.google.type.Interval.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ComputeFindingsRefinementActivityRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.ComputeFindingsRefinementActivityRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.ComputeFindingsRefinementActivityRequest} ComputeFindingsRefinementActivityRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ComputeFindingsRefinementActivityRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ComputeFindingsRefinementActivityRequest message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.ComputeFindingsRefinementActivityRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ComputeFindingsRefinementActivityRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.interval != null && message.hasOwnProperty("interval")) {
+                                var error = $root.google.type.Interval.verify(message.interval, long + 1);
+                                if (error)
+                                    return "interval." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ComputeFindingsRefinementActivityRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.ComputeFindingsRefinementActivityRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.ComputeFindingsRefinementActivityRequest} ComputeFindingsRefinementActivityRequest
+                         */
+                        ComputeFindingsRefinementActivityRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.ComputeFindingsRefinementActivityRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.chronicle.v1.ComputeFindingsRefinementActivityRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.interval != null) {
+                                if (typeof object.interval !== "object")
+                                    throw TypeError(".google.cloud.chronicle.v1.ComputeFindingsRefinementActivityRequest.interval: object expected");
+                                message.interval = $root.google.type.Interval.fromObject(object.interval, long + 1);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ComputeFindingsRefinementActivityRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.ComputeFindingsRefinementActivityRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.ComputeFindingsRefinementActivityRequest} message ComputeFindingsRefinementActivityRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ComputeFindingsRefinementActivityRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.interval = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.interval != null && message.hasOwnProperty("interval"))
+                                object.interval = $root.google.type.Interval.toObject(message.interval, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ComputeFindingsRefinementActivityRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.ComputeFindingsRefinementActivityRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ComputeFindingsRefinementActivityRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ComputeFindingsRefinementActivityRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.ComputeFindingsRefinementActivityRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ComputeFindingsRefinementActivityRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.ComputeFindingsRefinementActivityRequest";
+                        };
+    
+                        return ComputeFindingsRefinementActivityRequest;
+                    })();
+    
+                    v1.ComputeFindingsRefinementActivityResponse = (function() {
+    
+                        /**
+                         * Properties of a ComputeFindingsRefinementActivityResponse.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IComputeFindingsRefinementActivityResponse
+                         * @property {google.cloud.chronicle.v1.IFindingsRefinementActivity|null} [activity] ComputeFindingsRefinementActivityResponse activity
+                         */
+    
+                        /**
+                         * Constructs a new ComputeFindingsRefinementActivityResponse.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a ComputeFindingsRefinementActivityResponse.
+                         * @implements IComputeFindingsRefinementActivityResponse
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IComputeFindingsRefinementActivityResponse=} [properties] Properties to set
+                         */
+                        function ComputeFindingsRefinementActivityResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ComputeFindingsRefinementActivityResponse activity.
+                         * @member {google.cloud.chronicle.v1.IFindingsRefinementActivity|null|undefined} activity
+                         * @memberof google.cloud.chronicle.v1.ComputeFindingsRefinementActivityResponse
+                         * @instance
+                         */
+                        ComputeFindingsRefinementActivityResponse.prototype.activity = null;
+    
+                        /**
+                         * Creates a new ComputeFindingsRefinementActivityResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.ComputeFindingsRefinementActivityResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IComputeFindingsRefinementActivityResponse=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.ComputeFindingsRefinementActivityResponse} ComputeFindingsRefinementActivityResponse instance
+                         */
+                        ComputeFindingsRefinementActivityResponse.create = function create(properties) {
+                            return new ComputeFindingsRefinementActivityResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ComputeFindingsRefinementActivityResponse message. Does not implicitly {@link google.cloud.chronicle.v1.ComputeFindingsRefinementActivityResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.ComputeFindingsRefinementActivityResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IComputeFindingsRefinementActivityResponse} message ComputeFindingsRefinementActivityResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ComputeFindingsRefinementActivityResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.activity != null && Object.hasOwnProperty.call(message, "activity"))
+                                $root.google.cloud.chronicle.v1.FindingsRefinementActivity.encode(message.activity, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ComputeFindingsRefinementActivityResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ComputeFindingsRefinementActivityResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.ComputeFindingsRefinementActivityResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IComputeFindingsRefinementActivityResponse} message ComputeFindingsRefinementActivityResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ComputeFindingsRefinementActivityResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ComputeFindingsRefinementActivityResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.ComputeFindingsRefinementActivityResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.ComputeFindingsRefinementActivityResponse} ComputeFindingsRefinementActivityResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ComputeFindingsRefinementActivityResponse.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.ComputeFindingsRefinementActivityResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.activity = $root.google.cloud.chronicle.v1.FindingsRefinementActivity.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ComputeFindingsRefinementActivityResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.ComputeFindingsRefinementActivityResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.ComputeFindingsRefinementActivityResponse} ComputeFindingsRefinementActivityResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ComputeFindingsRefinementActivityResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ComputeFindingsRefinementActivityResponse message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.ComputeFindingsRefinementActivityResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ComputeFindingsRefinementActivityResponse.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.activity != null && message.hasOwnProperty("activity")) {
+                                var error = $root.google.cloud.chronicle.v1.FindingsRefinementActivity.verify(message.activity, long + 1);
+                                if (error)
+                                    return "activity." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ComputeFindingsRefinementActivityResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.ComputeFindingsRefinementActivityResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.ComputeFindingsRefinementActivityResponse} ComputeFindingsRefinementActivityResponse
+                         */
+                        ComputeFindingsRefinementActivityResponse.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.ComputeFindingsRefinementActivityResponse)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.chronicle.v1.ComputeFindingsRefinementActivityResponse();
+                            if (object.activity != null) {
+                                if (typeof object.activity !== "object")
+                                    throw TypeError(".google.cloud.chronicle.v1.ComputeFindingsRefinementActivityResponse.activity: object expected");
+                                message.activity = $root.google.cloud.chronicle.v1.FindingsRefinementActivity.fromObject(object.activity, long + 1);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ComputeFindingsRefinementActivityResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.ComputeFindingsRefinementActivityResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.ComputeFindingsRefinementActivityResponse} message ComputeFindingsRefinementActivityResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ComputeFindingsRefinementActivityResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.activity = null;
+                            if (message.activity != null && message.hasOwnProperty("activity"))
+                                object.activity = $root.google.cloud.chronicle.v1.FindingsRefinementActivity.toObject(message.activity, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ComputeFindingsRefinementActivityResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.ComputeFindingsRefinementActivityResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ComputeFindingsRefinementActivityResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ComputeFindingsRefinementActivityResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.ComputeFindingsRefinementActivityResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ComputeFindingsRefinementActivityResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.ComputeFindingsRefinementActivityResponse";
+                        };
+    
+                        return ComputeFindingsRefinementActivityResponse;
+                    })();
+    
+                    v1.ComputeAllFindingsRefinementActivitiesRequest = (function() {
+    
+                        /**
+                         * Properties of a ComputeAllFindingsRefinementActivitiesRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IComputeAllFindingsRefinementActivitiesRequest
+                         * @property {string|null} [instance] ComputeAllFindingsRefinementActivitiesRequest instance
+                         * @property {google.type.IInterval|null} [interval] ComputeAllFindingsRefinementActivitiesRequest interval
+                         */
+    
+                        /**
+                         * Constructs a new ComputeAllFindingsRefinementActivitiesRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a ComputeAllFindingsRefinementActivitiesRequest.
+                         * @implements IComputeAllFindingsRefinementActivitiesRequest
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IComputeAllFindingsRefinementActivitiesRequest=} [properties] Properties to set
+                         */
+                        function ComputeAllFindingsRefinementActivitiesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ComputeAllFindingsRefinementActivitiesRequest instance.
+                         * @member {string} instance
+                         * @memberof google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesRequest
+                         * @instance
+                         */
+                        ComputeAllFindingsRefinementActivitiesRequest.prototype.instance = "";
+    
+                        /**
+                         * ComputeAllFindingsRefinementActivitiesRequest interval.
+                         * @member {google.type.IInterval|null|undefined} interval
+                         * @memberof google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesRequest
+                         * @instance
+                         */
+                        ComputeAllFindingsRefinementActivitiesRequest.prototype.interval = null;
+    
+                        /**
+                         * Creates a new ComputeAllFindingsRefinementActivitiesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IComputeAllFindingsRefinementActivitiesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesRequest} ComputeAllFindingsRefinementActivitiesRequest instance
+                         */
+                        ComputeAllFindingsRefinementActivitiesRequest.create = function create(properties) {
+                            return new ComputeAllFindingsRefinementActivitiesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ComputeAllFindingsRefinementActivitiesRequest message. Does not implicitly {@link google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IComputeAllFindingsRefinementActivitiesRequest} message ComputeAllFindingsRefinementActivitiesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ComputeAllFindingsRefinementActivitiesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.instance != null && Object.hasOwnProperty.call(message, "instance"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.instance);
+                            if (message.interval != null && Object.hasOwnProperty.call(message, "interval"))
+                                $root.google.type.Interval.encode(message.interval, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ComputeAllFindingsRefinementActivitiesRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IComputeAllFindingsRefinementActivitiesRequest} message ComputeAllFindingsRefinementActivitiesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ComputeAllFindingsRefinementActivitiesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ComputeAllFindingsRefinementActivitiesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesRequest} ComputeAllFindingsRefinementActivitiesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ComputeAllFindingsRefinementActivitiesRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.instance = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.interval = $root.google.type.Interval.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ComputeAllFindingsRefinementActivitiesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesRequest} ComputeAllFindingsRefinementActivitiesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ComputeAllFindingsRefinementActivitiesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ComputeAllFindingsRefinementActivitiesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ComputeAllFindingsRefinementActivitiesRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.instance != null && message.hasOwnProperty("instance"))
+                                if (!$util.isString(message.instance))
+                                    return "instance: string expected";
+                            if (message.interval != null && message.hasOwnProperty("interval")) {
+                                var error = $root.google.type.Interval.verify(message.interval, long + 1);
+                                if (error)
+                                    return "interval." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ComputeAllFindingsRefinementActivitiesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesRequest} ComputeAllFindingsRefinementActivitiesRequest
+                         */
+                        ComputeAllFindingsRefinementActivitiesRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesRequest();
+                            if (object.instance != null)
+                                message.instance = String(object.instance);
+                            if (object.interval != null) {
+                                if (typeof object.interval !== "object")
+                                    throw TypeError(".google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesRequest.interval: object expected");
+                                message.interval = $root.google.type.Interval.fromObject(object.interval, long + 1);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ComputeAllFindingsRefinementActivitiesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesRequest} message ComputeAllFindingsRefinementActivitiesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ComputeAllFindingsRefinementActivitiesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.instance = "";
+                                object.interval = null;
+                            }
+                            if (message.instance != null && message.hasOwnProperty("instance"))
+                                object.instance = message.instance;
+                            if (message.interval != null && message.hasOwnProperty("interval"))
+                                object.interval = $root.google.type.Interval.toObject(message.interval, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ComputeAllFindingsRefinementActivitiesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ComputeAllFindingsRefinementActivitiesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ComputeAllFindingsRefinementActivitiesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ComputeAllFindingsRefinementActivitiesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesRequest";
+                        };
+    
+                        return ComputeAllFindingsRefinementActivitiesRequest;
+                    })();
+    
+                    v1.ComputeAllFindingsRefinementActivitiesResponse = (function() {
+    
+                        /**
+                         * Properties of a ComputeAllFindingsRefinementActivitiesResponse.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IComputeAllFindingsRefinementActivitiesResponse
+                         * @property {Array.<google.cloud.chronicle.v1.IFindingsRefinementActivity>|null} [activities] ComputeAllFindingsRefinementActivitiesResponse activities
+                         */
+    
+                        /**
+                         * Constructs a new ComputeAllFindingsRefinementActivitiesResponse.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a ComputeAllFindingsRefinementActivitiesResponse.
+                         * @implements IComputeAllFindingsRefinementActivitiesResponse
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IComputeAllFindingsRefinementActivitiesResponse=} [properties] Properties to set
+                         */
+                        function ComputeAllFindingsRefinementActivitiesResponse(properties) {
+                            this.activities = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ComputeAllFindingsRefinementActivitiesResponse activities.
+                         * @member {Array.<google.cloud.chronicle.v1.IFindingsRefinementActivity>} activities
+                         * @memberof google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesResponse
+                         * @instance
+                         */
+                        ComputeAllFindingsRefinementActivitiesResponse.prototype.activities = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ComputeAllFindingsRefinementActivitiesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IComputeAllFindingsRefinementActivitiesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesResponse} ComputeAllFindingsRefinementActivitiesResponse instance
+                         */
+                        ComputeAllFindingsRefinementActivitiesResponse.create = function create(properties) {
+                            return new ComputeAllFindingsRefinementActivitiesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ComputeAllFindingsRefinementActivitiesResponse message. Does not implicitly {@link google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IComputeAllFindingsRefinementActivitiesResponse} message ComputeAllFindingsRefinementActivitiesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ComputeAllFindingsRefinementActivitiesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.activities != null && message.activities.length)
+                                for (var i = 0; i < message.activities.length; ++i)
+                                    $root.google.cloud.chronicle.v1.FindingsRefinementActivity.encode(message.activities[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ComputeAllFindingsRefinementActivitiesResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IComputeAllFindingsRefinementActivitiesResponse} message ComputeAllFindingsRefinementActivitiesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ComputeAllFindingsRefinementActivitiesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ComputeAllFindingsRefinementActivitiesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesResponse} ComputeAllFindingsRefinementActivitiesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ComputeAllFindingsRefinementActivitiesResponse.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.activities && message.activities.length))
+                                            message.activities = [];
+                                        message.activities.push($root.google.cloud.chronicle.v1.FindingsRefinementActivity.decode(reader, reader.uint32(), undefined, long + 1));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ComputeAllFindingsRefinementActivitiesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesResponse} ComputeAllFindingsRefinementActivitiesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ComputeAllFindingsRefinementActivitiesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ComputeAllFindingsRefinementActivitiesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ComputeAllFindingsRefinementActivitiesResponse.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.activities != null && message.hasOwnProperty("activities")) {
+                                if (!Array.isArray(message.activities))
+                                    return "activities: array expected";
+                                for (var i = 0; i < message.activities.length; ++i) {
+                                    var error = $root.google.cloud.chronicle.v1.FindingsRefinementActivity.verify(message.activities[i], long + 1);
+                                    if (error)
+                                        return "activities." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ComputeAllFindingsRefinementActivitiesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesResponse} ComputeAllFindingsRefinementActivitiesResponse
+                         */
+                        ComputeAllFindingsRefinementActivitiesResponse.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesResponse)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesResponse();
+                            if (object.activities) {
+                                if (!Array.isArray(object.activities))
+                                    throw TypeError(".google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesResponse.activities: array expected");
+                                message.activities = [];
+                                for (var i = 0; i < object.activities.length; ++i) {
+                                    if (typeof object.activities[i] !== "object")
+                                        throw TypeError(".google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesResponse.activities: object expected");
+                                    message.activities[i] = $root.google.cloud.chronicle.v1.FindingsRefinementActivity.fromObject(object.activities[i], long + 1);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ComputeAllFindingsRefinementActivitiesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesResponse} message ComputeAllFindingsRefinementActivitiesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ComputeAllFindingsRefinementActivitiesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.activities = [];
+                            if (message.activities && message.activities.length) {
+                                object.activities = [];
+                                for (var j = 0; j < message.activities.length; ++j)
+                                    object.activities[j] = $root.google.cloud.chronicle.v1.FindingsRefinementActivity.toObject(message.activities[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ComputeAllFindingsRefinementActivitiesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ComputeAllFindingsRefinementActivitiesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ComputeAllFindingsRefinementActivitiesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ComputeAllFindingsRefinementActivitiesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesResponse";
+                        };
+    
+                        return ComputeAllFindingsRefinementActivitiesResponse;
+                    })();
+    
                     v1.InstanceService = (function() {
     
                         /**

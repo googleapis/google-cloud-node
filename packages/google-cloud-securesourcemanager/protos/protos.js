@@ -3573,6 +3573,8 @@
                          * @property {string|null} [etag] Repository etag
                          * @property {google.cloud.securesourcemanager.v1.Repository.IURIs|null} [uris] Repository uris
                          * @property {google.cloud.securesourcemanager.v1.Repository.IInitialConfig|null} [initialConfig] Repository initialConfig
+                         * @property {string|null} [serviceAccount] Repository serviceAccount
+                         * @property {google.cloud.securesourcemanager.v1.Repository.IScanConfig|null} [scanConfig] Repository scanConfig
                          */
     
                         /**
@@ -3663,6 +3665,22 @@
                         Repository.prototype.initialConfig = null;
     
                         /**
+                         * Repository serviceAccount.
+                         * @member {string} serviceAccount
+                         * @memberof google.cloud.securesourcemanager.v1.Repository
+                         * @instance
+                         */
+                        Repository.prototype.serviceAccount = "";
+    
+                        /**
+                         * Repository scanConfig.
+                         * @member {google.cloud.securesourcemanager.v1.Repository.IScanConfig|null|undefined} scanConfig
+                         * @memberof google.cloud.securesourcemanager.v1.Repository
+                         * @instance
+                         */
+                        Repository.prototype.scanConfig = null;
+    
+                        /**
                          * Creates a new Repository instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.securesourcemanager.v1.Repository
@@ -3704,6 +3722,10 @@
                                 $root.google.cloud.securesourcemanager.v1.Repository.URIs.encode(message.uris, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             if (message.initialConfig != null && Object.hasOwnProperty.call(message, "initialConfig"))
                                 $root.google.cloud.securesourcemanager.v1.Repository.InitialConfig.encode(message.initialConfig, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
+                                writer.uint32(/* id 11, wireType 2 =*/90).string(message.serviceAccount);
+                            if (message.scanConfig != null && Object.hasOwnProperty.call(message, "scanConfig"))
+                                $root.google.cloud.securesourcemanager.v1.Repository.ScanConfig.encode(message.scanConfig, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                             return writer;
                         };
     
@@ -3780,6 +3802,14 @@
                                         message.initialConfig = $root.google.cloud.securesourcemanager.v1.Repository.InitialConfig.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
+                                case 11: {
+                                        message.serviceAccount = reader.string();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.scanConfig = $root.google.cloud.securesourcemanager.v1.Repository.ScanConfig.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7, long);
                                     break;
@@ -3854,6 +3884,14 @@
                                 if (error)
                                     return "initialConfig." + error;
                             }
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                if (!$util.isString(message.serviceAccount))
+                                    return "serviceAccount: string expected";
+                            if (message.scanConfig != null && message.hasOwnProperty("scanConfig")) {
+                                var error = $root.google.cloud.securesourcemanager.v1.Repository.ScanConfig.verify(message.scanConfig, long + 1);
+                                if (error)
+                                    return "scanConfig." + error;
+                            }
                             return null;
                         };
     
@@ -3903,6 +3941,13 @@
                                     throw TypeError(".google.cloud.securesourcemanager.v1.Repository.initialConfig: object expected");
                                 message.initialConfig = $root.google.cloud.securesourcemanager.v1.Repository.InitialConfig.fromObject(object.initialConfig, long + 1);
                             }
+                            if (object.serviceAccount != null)
+                                message.serviceAccount = String(object.serviceAccount);
+                            if (object.scanConfig != null) {
+                                if (typeof object.scanConfig !== "object")
+                                    throw TypeError(".google.cloud.securesourcemanager.v1.Repository.scanConfig: object expected");
+                                message.scanConfig = $root.google.cloud.securesourcemanager.v1.Repository.ScanConfig.fromObject(object.scanConfig, long + 1);
+                            }
                             return message;
                         };
     
@@ -3929,6 +3974,8 @@
                                 object.etag = "";
                                 object.uris = null;
                                 object.initialConfig = null;
+                                object.serviceAccount = "";
+                                object.scanConfig = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -3948,6 +3995,10 @@
                                 object.uris = $root.google.cloud.securesourcemanager.v1.Repository.URIs.toObject(message.uris, options);
                             if (message.initialConfig != null && message.hasOwnProperty("initialConfig"))
                                 object.initialConfig = $root.google.cloud.securesourcemanager.v1.Repository.InitialConfig.toObject(message.initialConfig, options);
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                object.serviceAccount = message.serviceAccount;
+                            if (message.scanConfig != null && message.hasOwnProperty("scanConfig"))
+                                object.scanConfig = $root.google.cloud.securesourcemanager.v1.Repository.ScanConfig.toObject(message.scanConfig, options);
                             return object;
                         };
     
@@ -4543,6 +4594,469 @@
                             };
     
                             return InitialConfig;
+                        })();
+    
+                        Repository.ScanConfig = (function() {
+    
+                            /**
+                             * Properties of a ScanConfig.
+                             * @memberof google.cloud.securesourcemanager.v1.Repository
+                             * @interface IScanConfig
+                             * @property {google.cloud.securesourcemanager.v1.Repository.ScanConfig.ISecretScanConfig|null} [secretScanConfig] ScanConfig secretScanConfig
+                             */
+    
+                            /**
+                             * Constructs a new ScanConfig.
+                             * @memberof google.cloud.securesourcemanager.v1.Repository
+                             * @classdesc Represents a ScanConfig.
+                             * @implements IScanConfig
+                             * @constructor
+                             * @param {google.cloud.securesourcemanager.v1.Repository.IScanConfig=} [properties] Properties to set
+                             */
+                            function ScanConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ScanConfig secretScanConfig.
+                             * @member {google.cloud.securesourcemanager.v1.Repository.ScanConfig.ISecretScanConfig|null|undefined} secretScanConfig
+                             * @memberof google.cloud.securesourcemanager.v1.Repository.ScanConfig
+                             * @instance
+                             */
+                            ScanConfig.prototype.secretScanConfig = null;
+    
+                            /**
+                             * Creates a new ScanConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.securesourcemanager.v1.Repository.ScanConfig
+                             * @static
+                             * @param {google.cloud.securesourcemanager.v1.Repository.IScanConfig=} [properties] Properties to set
+                             * @returns {google.cloud.securesourcemanager.v1.Repository.ScanConfig} ScanConfig instance
+                             */
+                            ScanConfig.create = function create(properties) {
+                                return new ScanConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ScanConfig message. Does not implicitly {@link google.cloud.securesourcemanager.v1.Repository.ScanConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.securesourcemanager.v1.Repository.ScanConfig
+                             * @static
+                             * @param {google.cloud.securesourcemanager.v1.Repository.IScanConfig} message ScanConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ScanConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.secretScanConfig != null && Object.hasOwnProperty.call(message, "secretScanConfig"))
+                                    $root.google.cloud.securesourcemanager.v1.Repository.ScanConfig.SecretScanConfig.encode(message.secretScanConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ScanConfig message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.Repository.ScanConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.securesourcemanager.v1.Repository.ScanConfig
+                             * @static
+                             * @param {google.cloud.securesourcemanager.v1.Repository.IScanConfig} message ScanConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ScanConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ScanConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.securesourcemanager.v1.Repository.ScanConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.securesourcemanager.v1.Repository.ScanConfig} ScanConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ScanConfig.decode = function decode(reader, length, error, long) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securesourcemanager.v1.Repository.ScanConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.secretScanConfig = $root.google.cloud.securesourcemanager.v1.Repository.ScanConfig.SecretScanConfig.decode(reader, reader.uint32(), undefined, long + 1);
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7, long);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ScanConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.securesourcemanager.v1.Repository.ScanConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.securesourcemanager.v1.Repository.ScanConfig} ScanConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ScanConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ScanConfig message.
+                             * @function verify
+                             * @memberof google.cloud.securesourcemanager.v1.Repository.ScanConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ScanConfig.verify = function verify(message, long) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
+                                if (message.secretScanConfig != null && message.hasOwnProperty("secretScanConfig")) {
+                                    var error = $root.google.cloud.securesourcemanager.v1.Repository.ScanConfig.SecretScanConfig.verify(message.secretScanConfig, long + 1);
+                                    if (error)
+                                        return "secretScanConfig." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ScanConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.securesourcemanager.v1.Repository.ScanConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.securesourcemanager.v1.Repository.ScanConfig} ScanConfig
+                             */
+                            ScanConfig.fromObject = function fromObject(object, long) {
+                                if (object instanceof $root.google.cloud.securesourcemanager.v1.Repository.ScanConfig)
+                                    return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var message = new $root.google.cloud.securesourcemanager.v1.Repository.ScanConfig();
+                                if (object.secretScanConfig != null) {
+                                    if (typeof object.secretScanConfig !== "object")
+                                        throw TypeError(".google.cloud.securesourcemanager.v1.Repository.ScanConfig.secretScanConfig: object expected");
+                                    message.secretScanConfig = $root.google.cloud.securesourcemanager.v1.Repository.ScanConfig.SecretScanConfig.fromObject(object.secretScanConfig, long + 1);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ScanConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.securesourcemanager.v1.Repository.ScanConfig
+                             * @static
+                             * @param {google.cloud.securesourcemanager.v1.Repository.ScanConfig} message ScanConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ScanConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.secretScanConfig = null;
+                                if (message.secretScanConfig != null && message.hasOwnProperty("secretScanConfig"))
+                                    object.secretScanConfig = $root.google.cloud.securesourcemanager.v1.Repository.ScanConfig.SecretScanConfig.toObject(message.secretScanConfig, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ScanConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.securesourcemanager.v1.Repository.ScanConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ScanConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ScanConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.securesourcemanager.v1.Repository.ScanConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ScanConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.securesourcemanager.v1.Repository.ScanConfig";
+                            };
+    
+                            ScanConfig.SecretScanConfig = (function() {
+    
+                                /**
+                                 * Properties of a SecretScanConfig.
+                                 * @memberof google.cloud.securesourcemanager.v1.Repository.ScanConfig
+                                 * @interface ISecretScanConfig
+                                 * @property {boolean|null} [enabled] SecretScanConfig enabled
+                                 * @property {string|null} [inspectTemplate] SecretScanConfig inspectTemplate
+                                 */
+    
+                                /**
+                                 * Constructs a new SecretScanConfig.
+                                 * @memberof google.cloud.securesourcemanager.v1.Repository.ScanConfig
+                                 * @classdesc Represents a SecretScanConfig.
+                                 * @implements ISecretScanConfig
+                                 * @constructor
+                                 * @param {google.cloud.securesourcemanager.v1.Repository.ScanConfig.ISecretScanConfig=} [properties] Properties to set
+                                 */
+                                function SecretScanConfig(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * SecretScanConfig enabled.
+                                 * @member {boolean} enabled
+                                 * @memberof google.cloud.securesourcemanager.v1.Repository.ScanConfig.SecretScanConfig
+                                 * @instance
+                                 */
+                                SecretScanConfig.prototype.enabled = false;
+    
+                                /**
+                                 * SecretScanConfig inspectTemplate.
+                                 * @member {string} inspectTemplate
+                                 * @memberof google.cloud.securesourcemanager.v1.Repository.ScanConfig.SecretScanConfig
+                                 * @instance
+                                 */
+                                SecretScanConfig.prototype.inspectTemplate = "";
+    
+                                /**
+                                 * Creates a new SecretScanConfig instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.securesourcemanager.v1.Repository.ScanConfig.SecretScanConfig
+                                 * @static
+                                 * @param {google.cloud.securesourcemanager.v1.Repository.ScanConfig.ISecretScanConfig=} [properties] Properties to set
+                                 * @returns {google.cloud.securesourcemanager.v1.Repository.ScanConfig.SecretScanConfig} SecretScanConfig instance
+                                 */
+                                SecretScanConfig.create = function create(properties) {
+                                    return new SecretScanConfig(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified SecretScanConfig message. Does not implicitly {@link google.cloud.securesourcemanager.v1.Repository.ScanConfig.SecretScanConfig.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.securesourcemanager.v1.Repository.ScanConfig.SecretScanConfig
+                                 * @static
+                                 * @param {google.cloud.securesourcemanager.v1.Repository.ScanConfig.ISecretScanConfig} message SecretScanConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SecretScanConfig.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                                    if (message.inspectTemplate != null && Object.hasOwnProperty.call(message, "inspectTemplate"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.inspectTemplate);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified SecretScanConfig message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.Repository.ScanConfig.SecretScanConfig.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.securesourcemanager.v1.Repository.ScanConfig.SecretScanConfig
+                                 * @static
+                                 * @param {google.cloud.securesourcemanager.v1.Repository.ScanConfig.ISecretScanConfig} message SecretScanConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SecretScanConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a SecretScanConfig message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.securesourcemanager.v1.Repository.ScanConfig.SecretScanConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.securesourcemanager.v1.Repository.ScanConfig.SecretScanConfig} SecretScanConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SecretScanConfig.decode = function decode(reader, length, error, long) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $Reader.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securesourcemanager.v1.Repository.ScanConfig.SecretScanConfig();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.enabled = reader.bool();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.inspectTemplate = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7, long);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a SecretScanConfig message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.securesourcemanager.v1.Repository.ScanConfig.SecretScanConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.securesourcemanager.v1.Repository.ScanConfig.SecretScanConfig} SecretScanConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SecretScanConfig.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a SecretScanConfig message.
+                                 * @function verify
+                                 * @memberof google.cloud.securesourcemanager.v1.Repository.ScanConfig.SecretScanConfig
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                SecretScanConfig.verify = function verify(message, long) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        return "maximum nesting depth exceeded";
+                                    if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                        if (typeof message.enabled !== "boolean")
+                                            return "enabled: boolean expected";
+                                    if (message.inspectTemplate != null && message.hasOwnProperty("inspectTemplate"))
+                                        if (!$util.isString(message.inspectTemplate))
+                                            return "inspectTemplate: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a SecretScanConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.securesourcemanager.v1.Repository.ScanConfig.SecretScanConfig
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.securesourcemanager.v1.Repository.ScanConfig.SecretScanConfig} SecretScanConfig
+                                 */
+                                SecretScanConfig.fromObject = function fromObject(object, long) {
+                                    if (object instanceof $root.google.cloud.securesourcemanager.v1.Repository.ScanConfig.SecretScanConfig)
+                                        return object;
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
+                                    var message = new $root.google.cloud.securesourcemanager.v1.Repository.ScanConfig.SecretScanConfig();
+                                    if (object.enabled != null)
+                                        message.enabled = Boolean(object.enabled);
+                                    if (object.inspectTemplate != null)
+                                        message.inspectTemplate = String(object.inspectTemplate);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a SecretScanConfig message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.securesourcemanager.v1.Repository.ScanConfig.SecretScanConfig
+                                 * @static
+                                 * @param {google.cloud.securesourcemanager.v1.Repository.ScanConfig.SecretScanConfig} message SecretScanConfig
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                SecretScanConfig.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.enabled = false;
+                                        object.inspectTemplate = "";
+                                    }
+                                    if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                        object.enabled = message.enabled;
+                                    if (message.inspectTemplate != null && message.hasOwnProperty("inspectTemplate"))
+                                        object.inspectTemplate = message.inspectTemplate;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this SecretScanConfig to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.securesourcemanager.v1.Repository.ScanConfig.SecretScanConfig
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                SecretScanConfig.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for SecretScanConfig
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.securesourcemanager.v1.Repository.ScanConfig.SecretScanConfig
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                SecretScanConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.securesourcemanager.v1.Repository.ScanConfig.SecretScanConfig";
+                                };
+    
+                                return SecretScanConfig;
+                            })();
+    
+                            return ScanConfig;
                         })();
     
                         return Repository;
