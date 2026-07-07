@@ -2889,6 +2889,11 @@ describe('Bigtable/Table', () => {
               assert.strictEqual(err.errors.length, 1);
               assert.strictEqual(err.errors[0].code, 3);
               assert.strictEqual(err.errors[0].message, 'not retryable');
+              // Regression test for #8075: the per-entry error must not be
+              // `err` itself, otherwise `err.errors` references `err` and the
+              // error can no longer be serialized (e.g. by pino).
+              assert.notStrictEqual(err.errors[0], err);
+              assert.doesNotThrow(() => JSON.stringify(err));
               done();
             } catch (e) {
               done(e);
