@@ -56,6 +56,7 @@ describe('Bucket', () => {
   let STORAGE: Storage;
   let sandbox: sinon.SinonSandbox;
   let storageTransport: StorageTransport;
+  let originalRetryOptions: any;
   const PROJECT_ID = 'project-id';
   const BUCKET_NAME = 'test-bucket';
 
@@ -65,6 +66,7 @@ describe('Bucket', () => {
     storageTransport = sandbox.createStubInstance(StorageTransport);
     STORAGE.storageTransport = storageTransport;
     STORAGE.retryOptions.autoRetry = true;
+    originalRetryOptions = Object.assign({}, STORAGE.retryOptions);
   });
 
   beforeEach(() => {
@@ -73,6 +75,12 @@ describe('Bucket', () => {
 
   afterEach(() => {
     sandbox.restore();
+    for (const key of Object.keys(STORAGE.retryOptions)) {
+      if (!(key in originalRetryOptions)) {
+        delete (STORAGE.retryOptions as any)[key];
+      }
+    }
+    Object.assign(STORAGE.retryOptions, originalRetryOptions);
   });
 
   describe('instantiation', () => {
@@ -1428,13 +1436,19 @@ describe('Bucket', () => {
       void bucket.disableRequesterPays();
     });
 
-    it('should set autoRetry to false when ifMetagenerationMatch is undefined', async done => {
-      bucket.setMetadata = sandbox.stub().callsFake(() => {
-        assert.strictEqual(bucket.storage.retryOptions.autoRetry, false);
+    it('should set autoRetry to false when ifMetagenerationMatch is undefined', done => {
+      const setMetadataStub = sandbox
+        .stub(Object.getPrototypeOf(Bucket.prototype), 'setMetadata')
+        .callsFake(() => {
+          assert.strictEqual(bucket.storage.retryOptions.autoRetry, false);
+          return Promise.resolve([]);
+        });
+
+      bucket.disableRequesterPays(err => {
+        assert.ifError(err);
+        assert.strictEqual(setMetadataStub.calledOnce, true);
         done();
-        return Promise.resolve();
       });
-      await bucket.disableRequesterPays();
     });
   });
 

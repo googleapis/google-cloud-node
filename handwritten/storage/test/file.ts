@@ -4587,8 +4587,9 @@ describe('File', () => {
       const options = {resumable: false};
 
       sandbox.stub(file, 'createWriteStream').callsFake(options_ => {
-        assert.strictEqual(options_?.resumable, options.resumable);
-        assert.ok(options_?.invocationId);
+        const {invocationId, ...rest} = options_ as any;
+        assert.ok(invocationId);
+        assert.deepStrictEqual(rest, {resumable: false});
         const ws = new PassThrough();
         setImmediate(() => ws.emit('finish'));
         return ws;
@@ -4599,7 +4600,9 @@ describe('File', () => {
 
     it('should not require options', async () => {
       sandbox.stub(file, 'createWriteStream').callsFake(options_ => {
-        assert.ok(options_?.invocationId);
+        const {invocationId, ...rest} = options_ as any;
+        assert.ok(invocationId);
+        assert.deepStrictEqual(rest, {});
         const ws = new PassThrough();
         setImmediate(() => ws.emit('finish'));
         return ws;

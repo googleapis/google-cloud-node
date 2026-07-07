@@ -256,6 +256,8 @@ export interface UploadConfig extends Pick<WritableOptions, 'highWaterMark'> {
    */
   retryOptions: RetryOptions;
 
+  invocationId?: string;
+
   [GCCL_GCS_CMD_KEY]?: string;
 }
 
@@ -331,12 +333,17 @@ export class Upload extends Writable {
   retryOptions: RetryOptions;
   timeOfFirstRequest: number;
   isPartialUpload: boolean;
+  private invocationId?: string;
 
-  private currentInvocationId = {
-    checkUploadStatus: crypto.randomUUID(),
-    chunk: crypto.randomUUID(),
-    uri: crypto.randomUUID(),
-  };
+  private currentInvocationId: {
+    checkUploadStatus: string;
+    chunk: string;
+    uri: string;
+  } = {
+      checkUploadStatus: crypto.randomUUID(),
+      chunk: crypto.randomUUID(),
+      uri: crypto.randomUUID(),
+    };
   /**
    * A cache of buffers written to this instance, ready for consuming
    */
@@ -360,6 +367,15 @@ export class Upload extends Writable {
   constructor(cfg: UploadConfig) {
     super(cfg);
     cfg = cfg || {};
+
+    this.invocationId = cfg.invocationId;
+    if (cfg.invocationId) {
+      this.currentInvocationId = {
+        checkUploadStatus: cfg.invocationId,
+        chunk: cfg.invocationId,
+        uri: cfg.invocationId,
+      };
+    }
 
     if (!cfg.bucket || !cfg.file) {
       throw new Error('A bucket and file name are required');
@@ -805,9 +821,8 @@ export class Upload extends Writable {
       delete metadata.contentType;
     }
 
-    let googAPIClient = `${getRuntimeTrackingString()} gccl/${
-      packageJson.version
-    }-${getModuleFormat()} gccl-invocation-id/${this.currentInvocationId.uri}`;
+    let googAPIClient = `${getRuntimeTrackingString()} gccl/${packageJson.version
+      }-${getModuleFormat()} gccl-invocation-id/${this.currentInvocationId.uri}`;
 
     if (this.#gcclGcsCmd) {
       googAPIClient += ` gccl-gcs-cmd/${this.#gcclGcsCmd}`;
@@ -864,7 +879,8 @@ export class Upload extends Writable {
         try {
           const res = await this.makeRequest(reqOpts);
           // We have successfully got a URI we can now create a new invocation id
-          this.currentInvocationId.uri = crypto.randomUUID();
+          this.currentInvocationId.uri =
+            this.invocationId || crypto.randomUUID();
           return res.headers.get('location');
         } catch (err) {
           const e = err as GaxiosError;
@@ -987,11 +1003,9 @@ export class Upload extends Writable {
       },
     });
 
-    let googAPIClient = `${getRuntimeTrackingString()} gccl/${
-      packageJson.version
-    }-${getModuleFormat()} gccl-invocation-id/${
-      this.currentInvocationId.chunk
-    }`;
+    let googAPIClient = `${getRuntimeTrackingString()} gccl/${packageJson.version
+      }-${getModuleFormat()} gccl-invocation-id/${this.currentInvocationId.chunk
+      }`;
 
     if (this.#gcclGcsCmd) {
       googAPIClient += ` gccl-gcs-cmd/${this.#gcclGcsCmd}`;
@@ -1095,7 +1109,7 @@ export class Upload extends Writable {
 
     const respHeaders = new Headers(resp.headers);
     // At this point we can safely create a new id for the chunk
-    this.currentInvocationId.chunk = crypto.randomUUID();
+    this.currentInvocationId.chunk = this.invocationId || crypto.randomUUID();
 
     const moreDataToUpload = await this.waitForNextChunk();
 
@@ -1200,11 +1214,9 @@ export class Upload extends Writable {
   async checkUploadStatus(
     config: CheckUploadStatusConfig = {},
   ): Promise<GaxiosResponse<FileMetadata | void>> {
-    let googAPIClient = `${getRuntimeTrackingString()} gccl/${
-      packageJson.version
-    }-${getModuleFormat()} gccl-invocation-id/${
-      this.currentInvocationId.checkUploadStatus
-    }`;
+    let googAPIClient = `${getRuntimeTrackingString()} gccl/${packageJson.version
+      }-${getModuleFormat()} gccl-invocation-id/${this.currentInvocationId.checkUploadStatus
+      }`;
 
     if (this.#gcclGcsCmd) {
       googAPIClient += ` gccl-gcs-cmd/${this.#gcclGcsCmd}`;
@@ -1225,7 +1237,8 @@ export class Upload extends Writable {
       const resp = await this.makeRequest(opts);
 
       // Successfully got the offset we can now create a new offset invocation id
-      this.currentInvocationId.checkUploadStatus = crypto.randomUUID();
+      this.currentInvocationId.checkUploadStatus =
+        this.invocationId || crypto.randomUUID();
 
       return resp;
     } catch (e) {
