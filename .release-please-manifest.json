@@ -6,7 +6,7 @@
   "core/generator/gapic-generator-typescript": "4.12.1",
   "core/packages/gapic-node-processing": "0.1.9",
   "core/packages/gax": "5.0.7",
-  "core/packages/gaxios": "7.1.6",
+  "core/packages/gaxios": "7.2.0",
   "core/packages/gcp-metadata": "8.1.3",
   "core/packages/google-auth-library-nodejs": "10.9.0",
   "core/packages/logging-utils": "1.1.4",

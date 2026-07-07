@@ -5,6 +5,23 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "a2415320b9c840f6ae27894451abb561a080ff82",
+          "message": "Consolidate prettierignore and prettierrc files: handwritten",
+          "issues": [
+            "8081"
+          ]
+        }
+      ],
+      "version": "7.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "gaxios",
+      "id": "6b65487d-c5a9-45df-adf7-524481537017",
+      "createTime": "2026-07-07T04:38:13.492Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "3391fd27d1c15e051293207a07c6db00e760d370",
           "message": "Update API sources and regenerate",
           "issues": [
