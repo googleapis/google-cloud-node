@@ -19,7 +19,7 @@ A comprehensive list of changes in each version may be found in
 [the CHANGELOG][homepage_changelog].
 
 * [Dialogflow API Nodejs Client API Reference](https://cloud.google.com/nodejs/docs/reference/cx/latest)
-
+* [Dialogflow API Documentation](https://docs.cloud.google.com/dialogflow/docs)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
