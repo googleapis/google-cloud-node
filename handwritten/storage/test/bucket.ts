@@ -1312,7 +1312,7 @@ describe('Bucket', () => {
       });
     });
 
-    it('should execute callback with queued errors', done => {
+    it('should execute callback with error from deleting file', done => {
       const error = new Error('Error.');
       const files = [new File(bucket, '1'), new File(bucket, '2')];
 

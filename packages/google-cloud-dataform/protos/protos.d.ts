@@ -1873,11 +1873,17 @@ export namespace google {
                         /** GitRemoteSettings defaultBranch */
                         defaultBranch?: (string|null);
 
+                        /** GitRemoteSettings effectiveDefaultBranch */
+                        effectiveDefaultBranch?: (string|null);
+
                         /** GitRemoteSettings authenticationTokenSecretVersion */
                         authenticationTokenSecretVersion?: (string|null);
 
                         /** GitRemoteSettings sshAuthenticationConfig */
                         sshAuthenticationConfig?: (google.cloud.dataform.v1.Repository.GitRemoteSettings.ISshAuthenticationConfig|null);
+
+                        /** GitRemoteSettings gitRepositoryLink */
+                        gitRepositoryLink?: (string|null);
 
                         /** GitRemoteSettings tokenStatus */
                         tokenStatus?: (google.cloud.dataform.v1.Repository.GitRemoteSettings.TokenStatus|keyof typeof google.cloud.dataform.v1.Repository.GitRemoteSettings.TokenStatus|null);
@@ -1898,11 +1904,17 @@ export namespace google {
                         /** GitRemoteSettings defaultBranch. */
                         public defaultBranch: string;
 
+                        /** GitRemoteSettings effectiveDefaultBranch. */
+                        public effectiveDefaultBranch: string;
+
                         /** GitRemoteSettings authenticationTokenSecretVersion. */
                         public authenticationTokenSecretVersion: string;
 
                         /** GitRemoteSettings sshAuthenticationConfig. */
                         public sshAuthenticationConfig?: (google.cloud.dataform.v1.Repository.GitRemoteSettings.ISshAuthenticationConfig|null);
+
+                        /** GitRemoteSettings gitRepositoryLink. */
+                        public gitRepositoryLink?: (string|null);
 
                         /** GitRemoteSettings tokenStatus. */
                         public tokenStatus: (google.cloud.dataform.v1.Repository.GitRemoteSettings.TokenStatus|keyof typeof google.cloud.dataform.v1.Repository.GitRemoteSettings.TokenStatus);
