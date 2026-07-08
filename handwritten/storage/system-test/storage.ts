@@ -2668,10 +2668,8 @@ describe('storage', function () {
       };
       const expectedContents = fs.readFileSync(FILES.html.path, 'utf-8');
       const [file] = await bucket.upload(FILES.html.path, options);
-      const [contents] = await file.download({
-        validation: false,
-        decompress: false,
-      });
+      const [contents] = await file.download(
+      );
       assert.strictEqual(contents.toString(), expectedContents);
       await file.delete();
     });
@@ -2692,7 +2690,7 @@ describe('storage', function () {
       fs.writeFileSync(tmpGzFilePath, gzipSync(expectedContents));
 
       const [file] = await bucket.upload(tmpGzFilePath, options);
-      const [contents] = await file.download({decompress: false});
+      const [contents] = await file.download();
       assert.strictEqual(contents.toString(), expectedContents);
       await file.delete();
     });
@@ -2706,9 +2704,7 @@ describe('storage', function () {
 
       const file = bucket.file(filename);
 
-      const [contents] = await file.download({
-        decompress: false,
-      });
+      const [contents] = await file.download();
       const expectedContents = fs.readFileSync(FILES.logo.path);
       assert.ok(expectedContents.equals(contents));
       await file.delete();
@@ -2884,7 +2880,7 @@ describe('storage', function () {
       });
     });
 
-    describe.only('kms keys', () => {
+    describe('kms keys', () => {
       // Test skipped due to kokoro to GCB migration.
       const FILE_CONTENTS = 'secret data';
 
@@ -3963,7 +3959,7 @@ describe('storage', function () {
         ]);
       });
 
-      it.only('should list all objects matching a prefix', async () => {
+      it('should list all objects matching a prefix', async () => {
         // Test skipped due to kokoro to GCB migration.
         const [files] = await bucket.getFiles();
         assert.strictEqual(files.length, 3);

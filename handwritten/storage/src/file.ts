@@ -1752,6 +1752,7 @@ class File extends ServiceObject<File, FileMetadata> {
         queryParameters: query as unknown as StorageQueryParameters,
         responseType: 'stream',
         decompress: options.decompress,
+        compress: false,
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } as any;
 
