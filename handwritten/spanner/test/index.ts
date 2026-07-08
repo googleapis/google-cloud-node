@@ -2396,4 +2396,108 @@ describe('Spanner', () => {
         .emit('reading');
     });
   });
+
+  describe('close', () => {
+    it('should close all cached clients', async () => {
+      const fakeClient = {
+        close: sandbox.stub().resolves(),
+      };
+      spanner.clients_.set('fake-client', fakeClient);
+
+      await spanner.close();
+
+      assert.strictEqual(fakeClient.close.callCount, 1);
+    });
+
+    it('should close operations client if exists', async () => {
+      const fakeOperationsClient = {
+        close: sandbox.stub().resolves(),
+      };
+      const fakeClient = {
+        close: sandbox.stub().resolves(),
+        operationsClient: fakeOperationsClient,
+      };
+      spanner.clients_.set('fake-client', fakeClient);
+
+      await spanner.close();
+
+      assert.strictEqual(fakeOperationsClient.close.callCount, 1);
+      assert.strictEqual(fakeClient.close.callCount, 1);
+    });
+
+    it('should not throw if callback is omitted', async () => {
+      await spanner.close();
+    });
+
+    it('should pass error to callback if closing a client fails', async () => {
+      const error = new Error('err');
+      const fakeClient = {
+        close: sandbox.stub().rejects(error),
+      };
+      spanner.clients_.set('fake-client', fakeClient);
+
+      await new Promise<void>((resolve, reject) => {
+        spanner.close(err => {
+          try {
+            assert.strictEqual(err, error);
+            resolve();
+          } catch (e) {
+            reject(e);
+          }
+        });
+      });
+    });
+
+    it('should return a rejected promise if closing a client fails and callback is omitted', async () => {
+      const error = new Error('err');
+      const fakeClient = {
+        close: sandbox.stub().rejects(error),
+      };
+      spanner.clients_.set('fake-client', fakeClient);
+
+      try {
+        await spanner.close();
+        assert.fail('Expected promise to be rejected');
+      } catch (err) {
+        assert.strictEqual(err, error);
+      }
+    });
+
+    it('should return a rejected promise if closing a client throws synchronously', async () => {
+      const error = new Error('sync err');
+      const fakeClient = {
+        close: sandbox.stub().throws(error),
+      };
+      spanner.clients_.set('fake-client', fakeClient);
+
+      try {
+        await spanner.close();
+        assert.fail('Expected promise to be rejected');
+      } catch (err) {
+        assert.strictEqual(err, error);
+      }
+    });
+
+    it('should wait for all clients to close and return the first error', async () => {
+      const error1 = new Error('err1');
+      const error2 = new Error('err2');
+      const fakeOperationsClient = {
+        close: sandbox.stub().rejects(error1),
+      };
+      const fakeClient = {
+        close: sandbox.stub().rejects(error2),
+        operationsClient: fakeOperationsClient,
+      };
+      spanner.clients_.set('fake-client', fakeClient);
+
+      try {
+        await spanner.close();
+        assert.fail('Expected promise to be rejected');
+      } catch (err) {
+        assert.strictEqual(err, error1);
+        assert.strictEqual(fakeOperationsClient.close.callCount, 1);
+        assert.strictEqual(fakeClient.close.callCount, 1);
+      }
+    });
+  });
 });

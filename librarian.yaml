@@ -12,12 +12,31 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: nodejs
-version: v0.21.0
+version: v0.24.0
 repo: googleapis/google-cloud-node
 sources:
   googleapis:
-    commit: b6f9ff05aaec18070232a1ab36da98e684bc7909
-    sha256: 91788c6f956a0a409abe89a304c123cff73cb0ebb46b494e56d7ac9ece86f8cf
+    commit: 2b625c91510a2e8320a778bc88af8b65bc4a19a2
+    sha256: 503314c3f49e4de70138d35d5b9b12cca0c74d7c5ba34380895440b83aa45b94
+tools:
+  pnpm:
+    - name: gapic-generator-typescript
+      version: gapic-generator-v4.12.1
+      package: https://github.com/googleapis/google-cloud-node/archive/gapic-generator-v4.12.1.tar.gz
+      checksum: 477e4a9b3442457667846bd5c629d1c059e7caf2d5a3ebce95da626a2d42ea80
+      build:
+        - pnpm install
+        - ./node_modules/.bin/tsc
+        - cp -a templates protos build/
+        - pnpm add -g "$PWD"
+    - name: gapic-node-processing
+      version: 0.1.8
+    - name: gapic-tools
+      version: 1.0.6
+    - name: protobufjs
+      version: 7.5.8
+    - name: protobufjs-cli
+      version: 1.2.0
 default:
   keep:
     - librarian.js
@@ -193,10 +212,10 @@ libraries:
         - omit_common_resources: true
           path: google/cloud/advisorynotifications/v1
   - name: google-cloud-agentregistry
+    version: 0.1.0
     apis:
       - path: google/cloud/agentregistry/v1
     copyright_year: "2026"
-    version: 0.1.0
   - name: google-cloud-aiplatform
     version: 6.8.1
     apis:
@@ -547,11 +566,10 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/binary-authorization'
   - name: google-cloud-capacityplanner
-    version: 0.1.3
+    version: 0.2.0
     apis:
       - path: google/cloud/capacityplanner/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta
   - name: google-cloud-certificatemanager
@@ -825,12 +843,11 @@ libraries:
         nodejs:
           mixins: google.longrunning.Operations;google.cloud.location.Locations
       - path: google/cloud/dialogflow/cx/v3beta1
-        nodejs:
-          mixins: google.longrunning.Operations;google.cloud.location.Locations
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v3
+      metadata_name_override: dialogflow-cx
+      name_pretty_override: Dialogflow CX API
   - name: google-cloud-discoveryengine
     version: 2.8.0
     apis:
@@ -925,7 +942,6 @@ libraries:
         nodejs:
           mixins: google.longrunning.Operations;google.cloud.location.Locations;google.iam.v1.IAMPolicy
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-gdchardwaremanagement
@@ -1131,7 +1147,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-memorystore
-    version: 0.6.1
+    version: 0.7.0
     apis:
       - path: google/cloud/memorystore/v1
       - path: google/cloud/memorystore/v1beta
@@ -1364,7 +1380,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-redis-cluster
-    version: 0.11.0
+    version: 0.12.0
     apis:
       - path: google/cloud/redis/cluster/v1
       - path: google/cloud/redis/cluster/v1beta1
@@ -1532,7 +1548,6 @@ libraries:
       - path: google/cloud/sql/v1
       - path: google/cloud/sql/v1beta4
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-storagebatchoperations
@@ -1676,7 +1691,20 @@ libraries:
       - path: google/cloud/vision/v1p2beta1
       - path: google/cloud/vision/v1p1beta1
     copyright_year: "2026"
-    skip_generate: true
+    keep:
+      - smoke-test/image_annotator_smoke_test.js
+      - src/helpers.ts
+      - src/index.ts
+      - system-test/data/document.jpg
+      - system-test/data/logo.jpg
+      - system-test/data/rushmore.jpg
+      - system-test/data/text.png
+      - system-test/image_annotator_smoke_test.ts
+      - system-test/vision-v1p2beta1.ts
+      - system-test/vision.ts
+      - test/fixtures/image.jpg
+      - test/helpers.test.ts
+      - test/index.test.ts
     nodejs:
       default_version: v1
       dependencies:
@@ -1738,8 +1766,9 @@ libraries:
     apis:
       - path: google/cloud/workflows/v1
       - path: google/cloud/workflows/v1beta
+      - path: google/cloud/workflows/executions/v1
+      - path: google/cloud/workflows/executions/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-workloadmanager
@@ -2109,7 +2138,7 @@ libraries:
       package_name: '@google-shopping/quota'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
   - name: google-shopping-merchant-reports
-    version: 0.15.0
+    version: 0.16.0
     apis:
       - path: google/shopping/merchant/reports/v1
       - path: google/shopping/merchant/reports/v1beta
