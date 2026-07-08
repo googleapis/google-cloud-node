@@ -120,7 +120,7 @@ describe('storage', function () {
       bindings: [
         {
           role: 'roles/pubsub.editor',
-          members: ['serviceAccount:service-920946329098@gs-project-accounts.iam.gserviceaccount.com'],
+          members: ['allUsers'],
         },
       ],
     });
@@ -488,9 +488,9 @@ describe('storage', function () {
           this.skip();
         }
 
-        const validateMakeFilePrivateRejects = (err: GaxiosError) => {
-          assert.strictEqual(err.status, 404);
-          assert.strictEqual(err!.message, 'notFound');
+        const validateMakeFilePrivateRejects = (err: any) => {
+          assert.strictEqual(err.code, 404);
+          assert.strictEqual(err.errors![0].reason, 'notFound');
           return true;
         };
         await assert.doesNotReject(file.makePublic());
@@ -731,7 +731,7 @@ describe('storage', function () {
     ) => {
       // 412: PAP is working
       // 400/404: UBLA Org Policy is working (and blocking the ACL call)
-      const status = err.response ? err.response.status : 0;
+      const status = (err as any).code || 0;
       const isExpectedError = [412, 400, 404].includes(status);
       assert.ok(isExpectedError);
       return true;
@@ -1856,8 +1856,8 @@ describe('storage', function () {
         await bucket.lock(bucket.metadata!.metageneration!.toString());
         await assert.rejects(
           bucket.setRetentionPeriod(RETENTION_DURATION_SECONDS / 2),
-          (err: GaxiosError) => {
-            return err.status === 403;
+          (err: any) => {
+            return err.code === 403;
           },
         );
       });
@@ -4139,10 +4139,9 @@ describe('storage', function () {
         .save('hello1', {resumable: false});
       await assert.rejects(
         bucketWithVersioning.file(fileName, {generation: 0}).save('hello2'),
-        (err: GaxiosError) => {
-          const status = err.response ? err.response.status : Number(err.code);
-          assert.strictEqual(status, 412);
-          assert.ok(err.message.includes('pre-conditions'));
+        (err: any) => {
+          assert.strictEqual(err.code, 412);
+          assert.strictEqual(err.errors![0].reason, 'conditionNotMet');
           return true;
         },
       );
@@ -4208,7 +4207,7 @@ describe('storage', function () {
       await fetch(signedDeleteUrl, {method: 'DELETE'});
       await assert.rejects(
         () => file.getMetadata(),
-        (err: GaxiosError) => err.status === 404,
+        (err: any) => err.code === 404,
       );
     });
   });
@@ -4712,20 +4711,8 @@ describe('storage', function () {
     });
   }
 
-  async function deleteFileAsync(file: File) {
-    try {
-      return await file.delete();
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (err: any) {
-      const status =
-        err.status || (err.response && err.response.status) || err.code;
-
-      if (status === 404 || err.message.includes('No such object')) {
-        return;
-      }
-      // If it's a different error (like a 403 or 500), we still want to know.
-      throw err;
-    }
+  function deleteFileAsync(file: File) {
+    return file.delete();
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
