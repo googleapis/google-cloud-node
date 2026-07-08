@@ -43,9 +43,10 @@ async function run() {
       throw new Error('Linter checks failed. Please fix. To rerun the linter, run: npm run lint');
     }
   } catch (err) {
-    console.error('\n[NON-BLOCKING WARNING] Linter checks failed:', err.message);
-    // Note: Temporarily setting exit code 0 so that linter failures do not block PRs.
-    process.exitCode = 0;
+    console.error('\nLinter failed:', err.message);
+    // Setting exit code 1 to indicate failure. In the CI pipeline,
+    // continue-on-error is used to ensure this does not block PRs.
+    process.exitCode = 1;
   }
 }
 
