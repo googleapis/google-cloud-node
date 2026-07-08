@@ -15,13 +15,10 @@
 import {Client} from './lib/client.js';
 import {Pool} from './lib/pool.js';
 import {Query} from './lib/query.js';
+import {types} from './lib/types.js';
 
-export {Client, Pool, Query};
+export {Client, Pool, Query, types};
 export const native = {Client, Pool};
-export const types = {
-  getTypeParser: (id: number) => (val: string) => val,
-  setTypeParser: (id: number, parser: Function) => {},
-};
 
 export const defaults = {
   host: 'localhost',

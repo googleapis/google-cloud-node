@@ -14,7 +14,13 @@
 
 import * as assert from 'assert';
 import * as pkg from '@google-cloud/spanner/build/protos/protos.js';
-import {encodeValue, decodeValue} from '../src/lib/codec.js';
+import {
+  encodeValue,
+  decodeValue,
+  PgOid,
+  getSpannerType,
+  getPgOid,
+} from '../src/lib/codec.js';
 
 const google = pkg.google || (pkg as any).default?.google;
 const TypeCode = google.spanner.v1.TypeCode;
@@ -151,6 +157,51 @@ describe('Codec Type Transformations', () => {
       };
       const decoded = decodeValue(listVal, type);
       assert.deepStrictEqual(decoded, ['a', 'b']);
+    });
+  });
+
+  describe('TypeConversion & PostgreSQL Array Literals', () => {
+    it('should map PostgreSQL OID to Spanner TypeCode', () => {
+      assert.deepStrictEqual(getSpannerType(PgOid.INT4), {
+        code: TypeCode.INT64,
+      });
+      assert.deepStrictEqual(getSpannerType(PgOid.TEXT_ARRAY), {
+        code: TypeCode.ARRAY,
+        arrayElementType: {code: TypeCode.STRING},
+      });
+      assert.deepStrictEqual(getSpannerType(PgOid.INT8_ARRAY), {
+        code: TypeCode.ARRAY,
+        arrayElementType: {code: TypeCode.INT64},
+      });
+    });
+
+    it('should map Spanner TypeCode to PostgreSQL OID', () => {
+      assert.strictEqual(getPgOid({code: TypeCode.STRING}), PgOid.TEXT);
+      assert.strictEqual(getPgOid({code: TypeCode.INT64}), PgOid.INT8);
+      assert.strictEqual(
+        getPgOid({
+          code: TypeCode.ARRAY,
+          arrayElementType: {code: TypeCode.STRING},
+        }),
+        PgOid.TEXT_ARRAY,
+      );
+      assert.strictEqual(
+        getPgOid({
+          code: TypeCode.ARRAY,
+          arrayElementType: {code: TypeCode.INT64},
+        }),
+        PgOid.INT8_ARRAY,
+      );
+    });
+
+    it('should encode array objects into Spanner ListValue', () => {
+      const encoded = encodeValue([1, 2, 3], PgOid.INT8_ARRAY);
+      assert.strictEqual(encoded.typeProto.code, TypeCode.ARRAY);
+      assert.deepStrictEqual(encoded.valueProto, {
+        listValue: {
+          values: [{stringValue: '1'}, {stringValue: '2'}, {stringValue: '3'}],
+        },
+      });
     });
   });
 });

@@ -14,20 +14,18 @@
 
 import {EventEmitter} from 'events';
 import {resolveDsn} from './config.js';
-import {encodeValue, decodeValue} from './codec.js';
+import {encodeValue, decodeValue, getPgOid} from './codec.js';
 import {Pool as SpannerPool, Connection} from 'spannerlib-node';
 import {Query} from './query.js';
+import {enrichPgError} from './errors.js';
 
 export interface ClientConfig {
   connectionString?: string;
   host?: string;
   port?: number;
-  database?: string;
-  user?: string;
-  password?: string;
-  ssl?: boolean | any;
   project?: string;
   instance?: string;
+  database?: string;
 }
 
 export interface FieldDef {
@@ -101,6 +99,7 @@ export class Client extends EventEmitter {
       this.emit('connect');
       if (callback) callback();
     } catch (err: any) {
+      err = enrichPgError(err);
       this.emit('error', err);
       if (callback) {
         callback(err);
@@ -237,7 +236,7 @@ export class Client extends EventEmitter {
             for (const f of metadata.rowType.fields) {
               fields.push({
                 name: f.name || '',
-                dataTypeID: f.type ? (f.type.code as number) : 0,
+                dataTypeID: f.type ? getPgOid(f.type) : 0,
               });
             }
           }
@@ -331,6 +330,7 @@ export class Client extends EventEmitter {
           }
           return result;
         } catch (err: any) {
+          err = enrichPgError(err);
           if (rows) {
             await rows.close().catch(() => {});
           }
@@ -352,7 +352,8 @@ export class Client extends EventEmitter {
           const res = await originalRun();
           resolve(res);
           return res;
-        } catch (err) {
+        } catch (err: any) {
+          err = enrichPgError(err);
           reject(err);
           throw err;
         }

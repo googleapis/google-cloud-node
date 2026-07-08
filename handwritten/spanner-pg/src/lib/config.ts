@@ -14,110 +14,54 @@
 
 import {ClientConfig} from './client.js';
 
-/**
- * Resolves a pg-compatible config or connection string into a Spanner-compatible DSN.
- */
 export function resolveDsn(config?: string | ClientConfig): string {
-  if (
-    !config ||
-    (typeof config === 'object' && !config.database && !config.connectionString)
-  ) {
-    const pgConnStr = process.env.DATABASE_URL || process.env.PGCONNECTSTRING;
-    if (pgConnStr) {
-      return parseConnectionString(pgConnStr);
-    }
-    if (!config) {
-      throw new Error('No connection configuration specified');
-    }
-  }
+  let resolvedDsn = '';
 
-  if (typeof config === 'string') {
-    return parseConnectionString(config);
-  }
-
-  if (config.connectionString) {
-    return parseConnectionString(config.connectionString);
-  }
-
-  // Build DSN from parts
-  let dbPath = '';
-  if (config.database) {
-    if (
-      config.database.startsWith('postgresql://') ||
-      config.database.startsWith('postgres://')
-    ) {
-      dbPath = parseConnectionString(config.database);
-    } else if (config.database.includes('projects/')) {
-      dbPath = config.database;
-    } else if (config.project && config.instance) {
-      dbPath = `projects/${config.project}/instances/${config.instance}/databases/${config.database}`;
-    } else {
-      throw new Error(
-        'Database must be a full resource path or project/instance must be specified',
-      );
-    }
+  const connectionString =
+    typeof config === 'string'
+      ? config
+      : config?.connectionString || process.env.DATABASE_URL || process.env.PGCONNECTSTRING;
+  if (connectionString) {
+    resolvedDsn = connectionString;
   } else {
-    throw new Error('Database name not specified');
-  }
+    // Build DSN from parts
+    const cfg = config as ClientConfig;
+    const database = (cfg && cfg.database) || process.env.PGDATABASE;
+    const project = (cfg && cfg.project) || process.env.SPANNER_PROJECT_ID || process.env.GOOGLE_CLOUD_PROJECT;
+    const instance = (cfg && cfg.instance) || process.env.SPANNER_INSTANCE_ID;
 
-  if (dbPath.startsWith('/')) {
-    dbPath = dbPath.substring(1);
-  }
-
-  const queryParams: string[] = [];
-
-  if (config.host) {
-    const port = config.port || 5432;
-    if (!(config.host === 'localhost' && port === 5432)) {
-      queryParams.push(`api_endpoint=${config.host}:${port}`);
-    }
-  }
-
-  if (process.env.SPANNER_EMULATOR_HOST) {
-    queryParams.push('auto_config_emulator=true');
-  }
-
-  if (queryParams.length > 0) {
-    return `${dbPath}?${queryParams.join('&')}`;
-  }
-
-  return dbPath;
-}
-
-function parseConnectionString(connStr: string): string {
-  if (
-    connStr.startsWith('postgresql://') ||
-    connStr.startsWith('postgres://')
-  ) {
-    const url = new URL(connStr);
-    let dbPath = url.pathname;
-    if (dbPath.startsWith('/')) {
-      dbPath = dbPath.substring(1);
-    }
-
-    if (!dbPath.includes('projects/')) {
+    if (!database || !project || !instance) {
       throw new Error(
-        `Invalid Spanner database path in connection URL: ${url.pathname}. Expected format: projects/PROJECT/instances/INSTANCE/databases/DATABASE`,
+        'No connection configuration specified. Either connectionString must be provided, or database, project, and instance must all be specified (or provided via env variables)'
       );
     }
 
+    const dbPath = `projects/${project}/instances/${instance}/databases/${database}`;
     const queryParams: string[] = [];
-    url.searchParams.forEach((value, key) => {
-      queryParams.push(`${key}=${value}`);
-    });
 
-    if (
-      process.env.SPANNER_EMULATOR_HOST &&
-      !url.searchParams.has('auto_config_emulator')
-    ) {
-      queryParams.push('auto_config_emulator=true');
+    if (cfg && cfg.host) {
+      const endpoint = cfg.port ? `${cfg.host}:${cfg.port}` : cfg.host;
+      queryParams.push(`api_endpoint=${endpoint}`);
     }
 
     if (queryParams.length > 0) {
-      return `${dbPath}?${queryParams.join('&')}`;
+      resolvedDsn = `${dbPath}?${queryParams.join(';')}`;
+    } else {
+      resolvedDsn = dbPath;
     }
-    return dbPath;
   }
 
-  return connStr;
+  // Unified emulator host parameter injection
+  if (
+    process.env.SPANNER_EMULATOR_HOST &&
+    !resolvedDsn.includes('auto_config_emulator=')
+  ) {
+    const isPostgresUrl = resolvedDsn.startsWith('postgresql://') || resolvedDsn.startsWith('postgres://');
+    const separator = isPostgresUrl ? '&' : ';';
+    resolvedDsn = resolvedDsn.includes('?')
+      ? `${resolvedDsn}${separator}auto_config_emulator=true`
+      : `${resolvedDsn}?auto_config_emulator=true`;
+  }
+
+  return resolvedDsn;
 }

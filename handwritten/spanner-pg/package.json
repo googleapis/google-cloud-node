@@ -39,7 +39,8 @@
     "prepare": "npm run compile",
     "test:esm": "c8 mocha build/esm/test/**/*.js",
     "test:cjs": "c8 mocha build/cjs/test/**/*.cjs",
-    "test": "npm run test:esm && npm run test:cjs"
+    "test": "npm run test:esm && npm run test:cjs",
+    "test:pg-suite": "node test/pg-suite-helper/run_pg_suite.cjs"
   },
   "dependencies": {
     "spannerlib-node": "file:/Users/gargsurbhi/Work/Github/go-sql-spanner/spannerlib/wrappers/spannerlib-node",

@@ -22,27 +22,235 @@ export interface EncodedParam {
 }
 
 /**
+ * Standard PostgreSQL Type OIDs.
+ */
+export const PgOid = {
+  BOOL: 16,
+  BYTEA: 17,
+  INT8: 20,
+  INT2: 21,
+  INT4: 23,
+  TEXT: 25,
+  JSON: 114,
+  FLOAT4: 700,
+  FLOAT8: 701,
+  VARCHAR: 1043,
+  DATE: 1082,
+  TIMESTAMP: 1114,
+  TIMESTAMPTZ: 1184,
+  NUMERIC: 1700,
+  UUID: 2950,
+  JSONB: 3802,
+
+  // Array OIDs
+  BOOL_ARRAY: 1000,
+  BYTEA_ARRAY: 1001,
+  INT2_ARRAY: 1005,
+  INT4_ARRAY: 1007,
+  TEXT_ARRAY: 1009,
+  VARCHAR_ARRAY: 1015,
+  INT8_ARRAY: 1016,
+  FLOAT4_ARRAY: 1021,
+  FLOAT8_ARRAY: 1022,
+  TIMESTAMP_ARRAY: 1115,
+  DATE_ARRAY: 1182,
+  TIMESTAMPTZ_ARRAY: 1185,
+  NUMERIC_ARRAY: 1231,
+  JSONB_ARRAY: 3807,
+};
+
+const PgOidToSpannerTypeMapping = new Map<number, any>([
+  [PgOid.BOOL, {code: TypeCode.BOOL}],
+  [PgOid.BYTEA, {code: TypeCode.BYTES}],
+  [PgOid.INT2, {code: TypeCode.INT64}],
+  [PgOid.INT4, {code: TypeCode.INT64}],
+  [PgOid.INT8, {code: TypeCode.INT64}],
+  [PgOid.TEXT, {code: TypeCode.STRING}],
+  [PgOid.VARCHAR, {code: TypeCode.STRING}],
+  [PgOid.JSON, {code: TypeCode.JSON}],
+  [PgOid.JSONB, {code: TypeCode.JSON}],
+  [PgOid.FLOAT4, {code: TypeCode.FLOAT64}],
+  [PgOid.FLOAT8, {code: TypeCode.FLOAT64}],
+  [PgOid.DATE, {code: TypeCode.DATE}],
+  [PgOid.TIMESTAMP, {code: TypeCode.TIMESTAMP}],
+  [PgOid.TIMESTAMPTZ, {code: TypeCode.TIMESTAMP}],
+  [PgOid.NUMERIC, {code: TypeCode.STRING}],
+  [PgOid.UUID, {code: TypeCode.STRING}],
+
+  // Arrays
+  [
+    PgOid.BOOL_ARRAY,
+    {code: TypeCode.ARRAY, arrayElementType: {code: TypeCode.BOOL}},
+  ],
+  [
+    PgOid.BYTEA_ARRAY,
+    {code: TypeCode.ARRAY, arrayElementType: {code: TypeCode.BYTES}},
+  ],
+  [
+    PgOid.INT2_ARRAY,
+    {code: TypeCode.ARRAY, arrayElementType: {code: TypeCode.INT64}},
+  ],
+  [
+    PgOid.INT4_ARRAY,
+    {code: TypeCode.ARRAY, arrayElementType: {code: TypeCode.INT64}},
+  ],
+  [
+    PgOid.INT8_ARRAY,
+    {code: TypeCode.ARRAY, arrayElementType: {code: TypeCode.INT64}},
+  ],
+  [
+    PgOid.TEXT_ARRAY,
+    {code: TypeCode.ARRAY, arrayElementType: {code: TypeCode.STRING}},
+  ],
+  [
+    PgOid.VARCHAR_ARRAY,
+    {code: TypeCode.ARRAY, arrayElementType: {code: TypeCode.STRING}},
+  ],
+  [
+    PgOid.FLOAT4_ARRAY,
+    {code: TypeCode.ARRAY, arrayElementType: {code: TypeCode.FLOAT64}},
+  ],
+  [
+    PgOid.FLOAT8_ARRAY,
+    {code: TypeCode.ARRAY, arrayElementType: {code: TypeCode.FLOAT64}},
+  ],
+  [
+    PgOid.TIMESTAMP_ARRAY,
+    {code: TypeCode.ARRAY, arrayElementType: {code: TypeCode.TIMESTAMP}},
+  ],
+  [
+    PgOid.DATE_ARRAY,
+    {code: TypeCode.ARRAY, arrayElementType: {code: TypeCode.DATE}},
+  ],
+  [
+    PgOid.TIMESTAMPTZ_ARRAY,
+    {code: TypeCode.ARRAY, arrayElementType: {code: TypeCode.TIMESTAMP}},
+  ],
+  [
+    PgOid.NUMERIC_ARRAY,
+    {code: TypeCode.ARRAY, arrayElementType: {code: TypeCode.STRING}},
+  ],
+  [
+    PgOid.JSONB_ARRAY,
+    {code: TypeCode.ARRAY, arrayElementType: {code: TypeCode.JSON}},
+  ],
+]);
+
+/**
+ * Maps a PostgreSQL Type OID to a Spanner Protobuf Type descriptor.
+ */
+export function getSpannerType(oid?: number): any | null {
+  if (oid === undefined || oid === null) return null;
+  return PgOidToSpannerTypeMapping.get(oid) || null;
+}
+
+/**
+ * Maps a Spanner Protobuf Type descriptor to a PostgreSQL Type OID.
+ */
+export function getPgOid(typeProto: any): number {
+  if (!typeProto) return PgOid.TEXT;
+  let code = typeProto.code;
+  if (typeof code === 'string') {
+    code = (TypeCode as any)[code];
+  }
+  switch (code) {
+    case TypeCode.BOOL:
+      return PgOid.BOOL;
+    case TypeCode.INT64:
+      return PgOid.INT8;
+    case TypeCode.FLOAT64:
+      return PgOid.FLOAT8;
+    case TypeCode.STRING:
+      return PgOid.TEXT;
+    case TypeCode.DATE:
+      return PgOid.DATE;
+    case TypeCode.TIMESTAMP:
+      return PgOid.TIMESTAMPTZ;
+    case TypeCode.BYTES:
+      return PgOid.BYTEA;
+    case TypeCode.JSON:
+      return PgOid.JSONB;
+    case TypeCode.ARRAY: {
+      let elemCode = typeProto.arrayElementType?.code;
+      if (typeof elemCode === 'string') {
+        elemCode = (TypeCode as any)[elemCode];
+      }
+      switch (elemCode) {
+        case TypeCode.BOOL:
+          return PgOid.BOOL_ARRAY;
+        case TypeCode.INT64:
+          return PgOid.INT8_ARRAY;
+        case TypeCode.FLOAT64:
+          return PgOid.FLOAT8_ARRAY;
+        case TypeCode.STRING:
+          return PgOid.TEXT_ARRAY;
+        case TypeCode.DATE:
+          return PgOid.DATE_ARRAY;
+        case TypeCode.TIMESTAMP:
+          return PgOid.TIMESTAMPTZ_ARRAY;
+        case TypeCode.BYTES:
+          return PgOid.BYTEA_ARRAY;
+        case TypeCode.JSON:
+          return PgOid.JSONB_ARRAY;
+        default:
+          return PgOid.TEXT_ARRAY;
+      }
+    }
+    default:
+      return PgOid.TEXT;
+  }
+}
+
+export function getSpannerTypeCodeFromOid(oid: number): string {
+  switch (oid) {
+    case PgOid.BOOL:
+      return 'BOOL';
+    case PgOid.INT8:
+    case PgOid.INT4:
+    case PgOid.INT2:
+      return 'INT64';
+    case PgOid.FLOAT8:
+    case PgOid.FLOAT4:
+      return 'FLOAT64';
+    case PgOid.DATE:
+      return 'DATE';
+    case PgOid.TIMESTAMPTZ:
+    case PgOid.TIMESTAMP:
+      return 'TIMESTAMP';
+    case PgOid.BYTEA:
+      return 'BYTES';
+    case PgOid.JSONB:
+    case PgOid.JSON:
+      return 'JSON';
+    default:
+      return 'STRING';
+  }
+}
+
+/**
  * Encodes a JavaScript value to Spanner Protobuf value and type format.
  */
-export function encodeValue(val: any): EncodedParam {
+export function encodeValue(val: any, oid?: number): EncodedParam {
+
+  const explicitType = getSpannerType(oid);
   if (val === null || val === undefined) {
     return {
       valueProto: {nullValue: 0},
-      typeProto: {code: TypeCode.STRING},
+      typeProto: explicitType || {code: TypeCode.STRING},
     };
   }
 
   if (typeof val === 'string') {
     return {
       valueProto: {stringValue: val},
-      typeProto: {code: TypeCode.STRING},
+      typeProto: explicitType || {code: TypeCode.STRING},
     };
   }
 
   if (typeof val === 'boolean') {
     return {
       valueProto: {boolValue: val},
-      typeProto: {code: TypeCode.BOOL},
+      typeProto: explicitType || {code: TypeCode.BOOL},
     };
   }
 
@@ -109,11 +317,25 @@ export function encodeValue(val: any): EncodedParam {
   );
 }
 
+let customParserHook:
+  | ((oid: number) => ((val: string) => any) | null)
+  | null = null;
+
+export function registerCustomParserHook(
+  hook: (oid: number) => ((val: string) => any) | null
+): void {
+  customParserHook = hook;
+}
+
 /**
  * Decodes a Spanner Protobuf value to a JavaScript native value.
  */
-export function decodeValue(valProto: any, typeProto: any): any {
-  if (!valProto) {
+export function decodeValue(
+  valProto: any,
+  typeProto: any,
+  applyCustomParsers = true
+): any {
+  if (valProto === null || valProto === undefined) {
     return null;
   }
 
@@ -135,14 +357,31 @@ export function decodeValue(valProto: any, typeProto: any): any {
     else rawVal = valProto; // fallback
   }
 
-  let code = typeProto.code;
-  if (typeof code === 'string') {
+  if (applyCustomParsers && customParserHook) {
+    const oid = getPgOid(typeProto);
+    const customParser = customParserHook(oid);
+    if (customParser && rawVal !== null && rawVal !== undefined) {
+      return customParser(String(rawVal));
+    }
+  }
+
+  let code = typeProto?.code;
+  if (typeof code === 'string' && (TypeCode as any)[code] !== undefined) {
     code = (TypeCode as any)[code];
   }
 
+  if (
+    code === 'BOOL' ||
+    code === TypeCode?.BOOL ||
+    code === 1
+  ) {
+    if (typeof rawVal === 'string') {
+      return rawVal === 't' || rawVal === 'true' || rawVal === '1';
+    }
+    return rawVal;
+  }
+
   switch (code) {
-    case TypeCode.BOOL:
-      return rawVal;
 
     case TypeCode.INT64:
       return rawVal;
