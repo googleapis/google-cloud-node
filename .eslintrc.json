@@ -19,6 +19,7 @@
       ],
       "extends": [
         "./node_modules/gts",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking",
         "plugin:import/recommended",
         "plugin:import/typescript",
         "plugin:promise/recommended"
