@@ -114,27 +114,18 @@ async function checkEslint(filesToCheck) {
     }
 
     let hasBlockingErrors = false;
-    let hasFormattingErrors = false;
 
     for (const fileResult of results) {
       for (const message of fileResult.messages) {
         // message.severity === 2 indicates an error-level rule configuration.
         if (message.severity === 2) {
           hasBlockingErrors = true;
-          if (message.ruleId === 'prettier/prettier') {
-            hasFormattingErrors = true;
-          }
         }
       }
     }
 
     if (hasBlockingErrors) {
       console.error('\n[ERROR] Blocking ESLint violations were detected. ESLint errors are blocking and must be fixed.');
-      if (hasFormattingErrors) {
-        console.log(
-          `\nTo fix formatting issues, run:\n  ./node_modules/.bin/eslint --fix ${filesToCheck.map(f => `"${f}"`).join(' ')}`,
-        );
-      }
       return false;
     }
 
