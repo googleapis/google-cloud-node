@@ -51841,6 +51841,21 @@
                         "loggingConfig": {
                           "type": "PredictRequestResponseLoggingConfig",
                           "id": 3
+                        },
+                        "dataSharingEnabledProvider": {
+                          "type": "ModelProvider",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ModelProvider": {
+                          "values": {
+                            "MODEL_PROVIDER_UNSPECIFIED": 0,
+                            "ANTHROPIC": 1
+                          }
                         }
                       }
                     },

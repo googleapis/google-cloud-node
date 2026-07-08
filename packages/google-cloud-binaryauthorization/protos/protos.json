@@ -8,7 +8,6 @@
               "nested": {
                 "v1": {
                   "options": {
-                    "cc_enable_arenas": true,
                     "csharp_namespace": "Google.Cloud.BinaryAuthorization.V1",
                     "go_package": "cloud.google.com/go/binaryauthorization/apiv1/binaryauthorizationpb;binaryauthorizationpb",
                     "java_multiple_files": false,
@@ -96,6 +95,13 @@
                           "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       },
@@ -197,6 +203,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -235,6 +248,13 @@
                         "signatureAlgorithm": {
                           "type": "SignatureAlgorithm",
                           "id": 2
+                        },
+                        "keyId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -245,9 +265,13 @@
                           "values": {
                             "SIGNATURE_ALGORITHM_UNSPECIFIED": 0,
                             "RSA_PSS_2048_SHA256": 1,
+                            "RSA_SIGN_PSS_2048_SHA256": 1,
                             "RSA_PSS_3072_SHA256": 2,
+                            "RSA_SIGN_PSS_3072_SHA256": 2,
                             "RSA_PSS_4096_SHA256": 3,
+                            "RSA_SIGN_PSS_4096_SHA256": 3,
                             "RSA_PSS_4096_SHA512": 4,
+                            "RSA_SIGN_PSS_4096_SHA512": 4,
                             "RSA_SIGN_PKCS1_2048_SHA256": 5,
                             "RSA_SIGN_PKCS1_3072_SHA256": 6,
                             "RSA_SIGN_PKCS1_4096_SHA256": 7,
@@ -257,7 +281,8 @@
                             "ECDSA_P384_SHA384": 10,
                             "EC_SIGN_P384_SHA384": 10,
                             "ECDSA_P521_SHA512": 11,
-                            "EC_SIGN_P521_SHA512": 11
+                            "EC_SIGN_P521_SHA512": 11,
+                            "ML_DSA_65": 13
                           }
                         }
                       }
@@ -940,6 +965,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -1040,6 +1072,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1088,9 +1127,13 @@
                           "values": {
                             "SIGNATURE_ALGORITHM_UNSPECIFIED": 0,
                             "RSA_PSS_2048_SHA256": 1,
+                            "RSA_SIGN_PSS_2048_SHA256": 1,
                             "RSA_PSS_3072_SHA256": 2,
+                            "RSA_SIGN_PSS_3072_SHA256": 2,
                             "RSA_PSS_4096_SHA256": 3,
+                            "RSA_SIGN_PSS_4096_SHA256": 3,
                             "RSA_PSS_4096_SHA512": 4,
+                            "RSA_SIGN_PSS_4096_SHA512": 4,
                             "RSA_SIGN_PKCS1_2048_SHA256": 5,
                             "RSA_SIGN_PKCS1_3072_SHA256": 6,
                             "RSA_SIGN_PKCS1_4096_SHA256": 7,
@@ -1100,7 +1143,8 @@
                             "ECDSA_P384_SHA384": 10,
                             "EC_SIGN_P384_SHA384": 10,
                             "ECDSA_P521_SHA512": 11,
-                            "EC_SIGN_P521_SHA512": 11
+                            "EC_SIGN_P521_SHA512": 11,
+                            "ML_DSA_65": 13
                           }
                         }
                       }
@@ -1276,18 +1320,6 @@
                         }
                       }
                     },
-                    "GetPolicyRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "binaryauthorization.googleapis.com/Policy"
-                          }
-                        }
-                      }
-                    },
                     "SystemPolicyV1Beta1": {
                       "options": {
                         "(google.api.default_host)": "binaryauthorization.googleapis.com",
@@ -1311,6 +1343,18 @@
                               "(google.api.method_signature)": "name"
                             }
                           ]
+                        }
+                      }
+                    },
+                    "GetPolicyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "binaryauthorization.googleapis.com/Policy"
+                          }
                         }
                       }
                     },

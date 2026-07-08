@@ -7744,6 +7744,9 @@ export namespace google {
                     /** ImportJob publicKey */
                     publicKey?: (google.cloud.kms.v1.ImportJob.IWrappingPublicKey|null);
 
+                    /** ImportJob publicKeyFormat */
+                    publicKeyFormat?: (google.cloud.kms.v1.PublicKey.PublicKeyFormat|keyof typeof google.cloud.kms.v1.PublicKey.PublicKeyFormat|null);
+
                     /** ImportJob attestation */
                     attestation?: (google.cloud.kms.v1.IKeyOperationAttestation|null);
 
@@ -7786,6 +7789,9 @@ export namespace google {
 
                     /** ImportJob publicKey. */
                     public publicKey?: (google.cloud.kms.v1.ImportJob.IWrappingPublicKey|null);
+
+                    /** ImportJob publicKeyFormat. */
+                    public publicKeyFormat: (google.cloud.kms.v1.PublicKey.PublicKeyFormat|keyof typeof google.cloud.kms.v1.PublicKey.PublicKeyFormat);
 
                     /** ImportJob attestation. */
                     public attestation?: (google.cloud.kms.v1.IKeyOperationAttestation|null);
@@ -7881,7 +7887,10 @@ export namespace google {
                         RSA_OAEP_3072_SHA256_AES_256 = 3,
                         RSA_OAEP_4096_SHA256_AES_256 = 4,
                         RSA_OAEP_3072_SHA256 = 5,
-                        RSA_OAEP_4096_SHA256 = 6
+                        RSA_OAEP_4096_SHA256 = 6,
+                        HPKE_KEM_ML_KEM_768_HKDF_SHA256_AES_256_GCM = 8,
+                        HPKE_KEM_ML_KEM_1024_HKDF_SHA256_AES_256_GCM = 9,
+                        HPKE_KEM_XWING_HKDF_SHA256_AES_256_GCM = 10
                     }
 
                     /** ImportJobState enum. */
@@ -7897,6 +7906,9 @@ export namespace google {
 
                         /** WrappingPublicKey pem */
                         pem?: (string|null);
+
+                        /** WrappingPublicKey data */
+                        data?: (Uint8Array|Buffer|string|null);
                     }
 
                     /** Represents a WrappingPublicKey. */
@@ -7910,6 +7922,9 @@ export namespace google {
 
                         /** WrappingPublicKey pem. */
                         public pem: string;
+
+                        /** WrappingPublicKey data. */
+                        public data: (Uint8Array|Buffer|string);
 
                         /**
                          * Creates a new WrappingPublicKey instance using the specified properties.
@@ -10597,6 +10612,9 @@ export namespace google {
 
                     /** GetImportJobRequest name */
                     name?: (string|null);
+
+                    /** GetImportJobRequest publicKeyFormat */
+                    publicKeyFormat?: (google.cloud.kms.v1.PublicKey.PublicKeyFormat|keyof typeof google.cloud.kms.v1.PublicKey.PublicKeyFormat|null);
                 }
 
                 /** Represents a GetImportJobRequest. */
@@ -10610,6 +10628,9 @@ export namespace google {
 
                     /** GetImportJobRequest name. */
                     public name: string;
+
+                    /** GetImportJobRequest publicKeyFormat. */
+                    public publicKeyFormat: (google.cloud.kms.v1.PublicKey.PublicKeyFormat|keyof typeof google.cloud.kms.v1.PublicKey.PublicKeyFormat);
 
                     /**
                      * Creates a new GetImportJobRequest instance using the specified properties.
