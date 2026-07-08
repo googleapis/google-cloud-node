@@ -362,8 +362,8 @@ describe('Spanner with mock server', () => {
     instance = spanner.instance('instance');
   });
 
-  after(() => {
-    spanner.close();
+  after(async () => {
+    await spanner.close();
     server.tryShutdown(() => {});
     delete process.env.SPANNER_EMULATOR_HOST;
     sandbox.restore();
@@ -2146,7 +2146,7 @@ describe('Spanner with mock server', () => {
         process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'false';
       });
 
-      after(() => {
+      after(async () => {
         delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS;
       });
       it('should make a request to BatchCreateSessions', async () => {
@@ -2253,7 +2253,7 @@ describe('Spanner with mock server', () => {
         process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'false';
       });
 
-      after(() => {
+      after(async () => {
         delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS;
       });
 
@@ -2280,7 +2280,7 @@ describe('Spanner with mock server', () => {
           'false';
       });
 
-      after(() => {
+      after(async () => {
         delete process.env
           .GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_PARTITIONED_OPS;
       });
@@ -2309,7 +2309,7 @@ describe('Spanner with mock server', () => {
           'false';
       });
 
-      after(() => {
+      after(async () => {
         delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS;
         delete process.env
           .GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_PARTITIONED_OPS;
@@ -2374,7 +2374,7 @@ describe('Spanner with mock server', () => {
         process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'false';
       });
 
-      after(() => {
+      after(async () => {
         delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS;
       });
 
@@ -2412,7 +2412,7 @@ describe('Spanner with mock server', () => {
         process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_FOR_RW = 'false';
       });
 
-      after(() => {
+      after(async () => {
         delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_FOR_RW;
       });
 
@@ -2451,7 +2451,7 @@ describe('Spanner with mock server', () => {
         process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_FOR_RW = 'false';
       });
 
-      after(() => {
+      after(async () => {
         delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS;
         delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_FOR_RW;
       });
@@ -2625,7 +2625,7 @@ describe('Spanner with mock server', () => {
         instanceWithEnvVar = spannerWithEnvVar.instance('instance');
       });
 
-      after(() => {
+      after(async () => {
         delete process.env.SPANNER_OPTIMIZER_VERSION;
         delete process.env.SPANNER_OPTIMIZER_STATISTICS_PACKAGE;
       });
@@ -2879,7 +2879,7 @@ describe('Spanner with mock server', () => {
       process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_FOR_RW = 'false';
     });
 
-    after(() => {
+    after(async () => {
       delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS;
       delete process.env
         .GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_PARTITIONED_OPS;
@@ -3320,7 +3320,7 @@ describe('Spanner with mock server', () => {
       process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_FOR_RW = 'false';
     });
 
-    after(() => {
+    after(async () => {
       delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS;
       delete process.env
         .GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_PARTITIONED_OPS;
@@ -4248,7 +4248,7 @@ describe('Spanner with mock server', () => {
         before(() => {
           process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'false';
         });
-        after(() => {
+        after(async () => {
           delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS;
         });
         it('should use session from pool', async () => {
@@ -7368,7 +7368,7 @@ describe('Spanner with mock server', () => {
         .callsFake(() => originalNow.call(Date) + warpOffset);
     });
 
-    afterEach(() => {
+    afterEach(async () => {
       ttlSandbox.restore();
     });
 
@@ -7507,7 +7507,7 @@ describe('Spanner with mock server', () => {
 
       // Cleanup
       await provider.shutdown();
-      localSpanner.close();
+      await localSpanner.close();
     });
   });
 });
