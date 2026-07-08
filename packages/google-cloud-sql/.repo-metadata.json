@@ -1,5 +1,5 @@
 {
-    "api_description": "API for Cloud SQL database instance management",
+    "api_description": "Cloud SQL Admin API",
     "api_id": "sqladmin.googleapis.com",
     "api_shortname": "sqladmin",
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/sql/latest",
