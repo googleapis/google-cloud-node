@@ -88,8 +88,6 @@ async function renderFile(
         singleQuote: true,
         trailingComma: 'all',
         semi: true,
-        bracketSpacing: false,
-        arrowParens: 'avoid',
       });
     } catch (err) {
       if (err instanceof Error) {
