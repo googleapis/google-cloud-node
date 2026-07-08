@@ -27,8 +27,7 @@
         "import/no-unresolved": "off",
         "import/no-extraneous-dependencies": "error",
         "promise/catch-or-return": "error",
-        "promise/always-return": "error",
-        "prettier/prettier": "off"
+        "promise/always-return": "error"
       },
       "parserOptions": {
         "project": true
