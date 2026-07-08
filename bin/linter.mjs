@@ -123,7 +123,7 @@ async function checkEslint(filesToCheck) {
     }
 
     if (hasBlockingErrors) {
-      console.error('\n[ERROR] Blocking ESLint violations were detected. ESLint errors are blocking and must be fixed.');
+      console.error('\n[ERROR] ESLint violations were detected.');
       return false;
     }
 
