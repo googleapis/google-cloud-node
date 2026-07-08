@@ -120,7 +120,7 @@ describe('storage', function () {
       bindings: [
         {
           role: 'roles/pubsub.editor',
-          members: ['allUsers'],
+          members: ['serviceAccount:service-920946329098@gs-project-accounts.iam.gserviceaccount.com'],
         },
       ],
     });
@@ -1187,9 +1187,7 @@ describe('storage', function () {
       const validateUniformBucketLevelAccessEnabledError = (
         err: GaxiosError,
       ) => {
-        const status = err.response ? err.response.status : Number(err.code);
-        const isExpected = [400, 404].includes(status);
-        assert.ok(isExpected);
+        assert.strictEqual(err.code, 400);
         return true;
       };
 
