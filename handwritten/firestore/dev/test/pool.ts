@@ -166,6 +166,66 @@ describe('Client pool', () => {
     expect(instanceCount).to.equal(1);
   });
 
+  it('re-uses idle instances when preferIdleClients is enabled', async () => {
+    let instanceCount = 0;
+    const clientPool = new ClientPool<{}>(10, 1, () => {
+      ++instanceCount;
+      return {};
+    });
+
+    const operationPromises = deferredPromises(2);
+
+    let completionPromise = clientPool.run(
+      REQUEST_TAG,
+      USE_REST,
+      () => operationPromises[0].promise,
+      /* preferIdleClients= */ true,
+    );
+    expect(clientPool.size).to.equal(1);
+    operationPromises[0].resolve();
+    await completionPromise;
+
+    completionPromise = clientPool.run(
+      REQUEST_TAG,
+      USE_REST,
+      () => operationPromises[1].promise,
+      /* preferIdleClients= */ true,
+    );
+    expect(clientPool.size).to.equal(1);
+    operationPromises[1].resolve();
+    await completionPromise;
+
+    expect(instanceCount).to.equal(1);
+  });
+
+  it('creates a new client when preferIdleClients is enabled and all clients are busy', () => {
+    const clientPool = new ClientPool<{}>(10, 1, () => {
+      return {};
+    });
+
+    const operationPromises = deferredPromises(2);
+
+    void clientPool.run(
+      REQUEST_TAG,
+      USE_REST,
+      () => operationPromises[0].promise,
+      /* preferIdleClients= */ true,
+    );
+    expect(clientPool.size).to.equal(1);
+
+    void clientPool.run(
+      REQUEST_TAG,
+      USE_REST,
+      () => operationPromises[1].promise,
+      /* preferIdleClients= */ true,
+    );
+
+    expect(clientPool.size).to.equal(2);
+
+    operationPromises[0].resolve();
+    operationPromises[1].resolve();
+  });
+
   it('does not re-use rest instance for grpc call', async () => {
     const clientPool = new ClientPool<{}>(10, 1, () => {
       return {};

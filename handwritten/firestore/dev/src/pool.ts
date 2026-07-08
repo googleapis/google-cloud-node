@@ -114,7 +114,11 @@ export class ClientPool<T extends object> {
    * @private
    * @internal
    */
-  private acquire(requestTag: string, requiresGrpc: boolean): T {
+  private acquire(
+    requestTag: string,
+    requiresGrpc: boolean,
+    preferIdleClients = false,
+  ): T {
     let selectedClient: T | null = null;
     let selectedClientRequestCount = -1;
 
@@ -125,15 +129,27 @@ export class ClientPool<T extends object> {
     requiresGrpc = requiresGrpc || this.grpcEnabled;
 
     for (const [client, metadata] of this.activeClients) {
+      if (
+        this.failedClients.has(client) ||
+        metadata.activeRequestCount >= this.concurrentOperationLimit ||
+        (!metadata.grpcEnabled && requiresGrpc)
+      ) {
+        continue;
+      }
+
+      if (preferIdleClients) {
+        if (metadata.activeRequestCount === 0) {
+          selectedClient = client;
+          selectedClientRequestCount = metadata.activeRequestCount;
+          break;
+        }
+        continue;
+      }
+
       // Use the "most-full" client that can still accommodate the request
       // in order to maximize the number of idle clients as operations start to
       // complete.
-      if (
-        !this.failedClients.has(client) &&
-        metadata.activeRequestCount > selectedClientRequestCount &&
-        metadata.activeRequestCount < this.concurrentOperationLimit &&
-        (metadata.grpcEnabled || !requiresGrpc)
-      ) {
+      if (metadata.activeRequestCount > selectedClientRequestCount) {
         selectedClient = client;
         selectedClientRequestCount = metadata.activeRequestCount;
       }
@@ -345,11 +361,12 @@ export class ClientPool<T extends object> {
     requestTag: string,
     requiresGrpc: boolean,
     op: (client: T) => Promise<V>,
+    preferIdleClients = false,
   ): Promise<V> {
     if (this.terminated) {
       return Promise.reject(new Error(CLIENT_TERMINATED_ERROR_MSG));
     }
-    const client = this.acquire(requestTag, requiresGrpc);
+    const client = this.acquire(requestTag, requiresGrpc, preferIdleClients);
 
     return op(client)
       .catch(async (err: GoogleError) => {
