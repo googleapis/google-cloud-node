@@ -123,8 +123,8 @@ describe('Log', () => {
       assert(
         callbackifyFake.callbackifyAll.calledWithExactly(
           Log,
-          sinon.match({exclude: ['entry', 'getEntriesStream']})
-        )
+          sinon.match({exclude: ['entry', 'getEntriesStream']}),
+        ),
       );
     });
 
@@ -140,7 +140,7 @@ describe('Log', () => {
       const log = new Log(LOGGING, LOG_NAME);
       assert.strictEqual(
         log.formattedName_,
-        logCommon.formatLogName('{{project-id}}', LOG_NAME)
+        logCommon.formatLogName('{{project-id}}', LOG_NAME),
       );
     });
 
@@ -172,8 +172,8 @@ describe('Log', () => {
             logName: log.formattedName_,
           },
           undefined,
-          undefined
-        )
+          undefined,
+        ),
       );
     });
 
@@ -186,8 +186,8 @@ describe('Log', () => {
             logName: log.formattedName_,
           },
           undefined,
-          log.defaultWriteDeleteCallback
-        )
+          log.defaultWriteDeleteCallback,
+        ),
       );
       log.defaultWriteDeleteCallback = undefined;
     });
@@ -195,7 +195,7 @@ describe('Log', () => {
     it('should accept gaxOptions', async () => {
       await log.delete({});
       assert(
-        log.logging.loggingService.deleteLog.calledWith(sinon.match.any, {})
+        log.logging.loggingService.deleteLog.calledWith(sinon.match.any, {}),
       );
     });
   });
@@ -235,7 +235,7 @@ describe('Log', () => {
       assert(
         log.logging.getEntries.calledWithExactly({
           filter: `logName="${LOG_NAME_FORMATTED}"`,
-        })
+        }),
       );
     });
 
@@ -273,7 +273,7 @@ describe('Log', () => {
       assert(
         log.logging.getEntriesStream.calledWithExactly({
           log: LOG_NAME_ENCODED,
-        })
+        }),
       );
     });
 
@@ -292,9 +292,9 @@ describe('Log', () => {
             {
               log: LOG_NAME_ENCODED,
             },
-            options
-          )
-        )
+            options,
+          ),
+        ),
       );
     });
   });
@@ -312,7 +312,7 @@ describe('Log', () => {
       assert(
         log.logging.tailEntries.calledWithExactly({
           log: LOG_NAME_ENCODED,
-        })
+        }),
       );
     });
 
@@ -331,9 +331,9 @@ describe('Log', () => {
             {
               log: LOG_NAME_ENCODED,
             },
-            options
-          )
-        )
+            options,
+          ),
+        ),
       );
     });
   });
@@ -388,8 +388,8 @@ describe('Log', () => {
             },
           },
           undefined,
-          undefined
-        )
+          undefined,
+        ),
       );
     });
 
@@ -424,8 +424,8 @@ describe('Log', () => {
         log.logging.loggingService.writeLogEntries.calledOnceWith(
           sinon.match({
             resource: reusableDetectedResource,
-          })
-        )
+          }),
+        ),
       );
     });
 
@@ -454,8 +454,8 @@ describe('Log', () => {
             resource: EXPECTED_RESOURCE,
           },
           undefined,
-          undefined
-        )
+          undefined,
+        ),
       );
     });
 
@@ -470,8 +470,8 @@ describe('Log', () => {
             resource: FAKE_RESOURCE,
           },
           undefined,
-          undefined
-        )
+          undefined,
+        ),
       );
     });
 
@@ -487,8 +487,8 @@ describe('Log', () => {
             resource: FAKE_RESOURCE,
           },
           undefined,
-          log.defaultWriteDeleteCallback
-        )
+          log.defaultWriteDeleteCallback,
+        ),
       );
       log.defaultWriteDeleteCallback = undefined;
     });
@@ -503,8 +503,8 @@ describe('Log', () => {
         log.logging.loggingService.writeLogEntries.calledOnceWith(
           sinon.match({
             entries: 'decorated entries',
-          })
-        )
+          }),
+        ),
       );
     });
 
@@ -517,8 +517,8 @@ describe('Log', () => {
         log.logging.loggingService.writeLogEntries.calledOnceWith(
           sinon.match({
             entries: arrifiedEntries,
-          })
-        )
+          }),
+        ),
       );
     });
 
@@ -530,8 +530,8 @@ describe('Log', () => {
         log.logging.loggingService.writeLogEntries.calledOnceWith(
           sinon.match({
             entries: ENTRIES,
-          })
-        )
+          }),
+        ),
       );
     });
 
@@ -541,8 +541,8 @@ describe('Log', () => {
         log.logging.loggingService.writeLogEntries.calledOnceWith(
           sinon.match({
             partialSuccess: true,
-          })
-        )
+          }),
+        ),
       );
     });
 
@@ -553,8 +553,8 @@ describe('Log', () => {
           sinon.match({
             dryRun: true,
             partialSuccess: false,
-          })
-        )
+          }),
+        ),
       );
     });
 
@@ -567,8 +567,8 @@ describe('Log', () => {
         log.logging.loggingService.writeLogEntries.calledOnceWith(
           sinon.match({
             partialSuccess: true,
-          })
-        )
+          }),
+        ),
       );
       instrumentation.setInstrumentationStatus(true);
     });
@@ -582,8 +582,8 @@ describe('Log', () => {
         log.logging.loggingService.writeLogEntries.calledOnceWith(
           sinon.match({
             partialSuccess: true,
-          })
-        )
+          }),
+        ),
       );
     });
 
@@ -597,8 +597,8 @@ describe('Log', () => {
           {
             maxRetries: 1,
           },
-          sinon.match.any
-        )
+          sinon.match.any,
+        ),
       );
       log.logging.loggingService.writeLogEntries.reset();
       await log.write(ENTRIES, {gaxOptions: {maxRetries: 10}});
@@ -608,8 +608,8 @@ describe('Log', () => {
           {
             maxRetries: 10,
           },
-          sinon.match.any
-        )
+          sinon.match.any,
+        ),
       );
     });
   });
@@ -656,7 +656,7 @@ describe('Log', () => {
         .returns({} as EntryJson);
       log.decorateEntries([entry]);
       assert(
-        localJSONStub.calledWithExactly({removeCircular: true}, PROJECT_ID)
+        localJSONStub.calledWithExactly({removeCircular: true}, PROJECT_ID),
       );
     });
 
@@ -749,11 +749,11 @@ describe('Log', () => {
       assert.ok(log.jsonFieldsToTruncate.length > 1);
       assert.ok(log.jsonFieldsToTruncate[0] === TRUNCATE_FIELD);
       const notExists = log.jsonFieldsToTruncate.filter(
-        (str: string) => str === INVALID_TRUNCATE_FIELD
+        (str: string) => str === INVALID_TRUNCATE_FIELD,
       );
       assert.strictEqual(notExists.length, 0);
       const existOnce = log.jsonFieldsToTruncate.filter(
-        (str: string) => str === TRUNCATE_FIELD
+        (str: string) => str === TRUNCATE_FIELD,
       );
       assert.strictEqual(existOnce.length, 1);
     });

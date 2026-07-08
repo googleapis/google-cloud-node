@@ -67,7 +67,7 @@ describe('CRC32C', () => {
           assert.equal(
             result,
             expected,
-            `Expected '${input}' to produce \`${expected}\` - not \`${result}\``,
+            `Expected '${input}' to produce \`${expected}\` - not \`${result}\``
           );
         }
       });
@@ -87,7 +87,7 @@ describe('CRC32C', () => {
           assert.equal(
             result,
             expected,
-            `Expected '${input}' to produce \`${expected}\` - not \`${result}\``,
+            `Expected '${input}' to produce \`${expected}\` - not \`${result}\``
           );
         }
       });
@@ -324,7 +324,7 @@ describe('CRC32C', () => {
 
             assert.throws(
               () => CRC32C.from(arrayBufferView.buffer),
-              expectedError,
+              expectedError
             );
           }
         });

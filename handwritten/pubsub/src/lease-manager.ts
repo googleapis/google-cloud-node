@@ -28,16 +28,10 @@ import {logs as baseLogs, LoggingFunction} from './logs';
  * @private
  */
 export const logs = {
-  callbackDelivery: baseLogs.pubsub.sublog(
-    'callback-delivery',
-  ) as LoggingFunction,
-  callbackExceptions: baseLogs.pubsub.sublog(
-    'callback-exceptions',
-  ) as LoggingFunction,
+  callbackDelivery: baseLogs.pubsub.sublog('callback-delivery') as LoggingFunction,
+  callbackExceptions: baseLogs.pubsub.sublog('callback-exceptions') as LoggingFunction,
   expiry: baseLogs.pubsub.sublog('expiry') as LoggingFunction,
-  subscriberFlowControl: baseLogs.pubsub.sublog(
-    'subscriber-flow-control',
-  ) as LoggingFunction,
+  subscriberFlowControl: baseLogs.pubsub.sublog('subscriber-flow-control') as LoggingFunction,
 };
 
 export interface FlowControlOptions {

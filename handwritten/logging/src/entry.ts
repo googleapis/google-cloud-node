@@ -183,7 +183,7 @@ class Entry {
       {
         timestamp: new Date(),
       },
-      metadata
+      metadata,
     );
     // JavaScript date has a very coarse granularity (millisecond), which makes
     // it quite likely that multiple log entries would have the same timestamp.

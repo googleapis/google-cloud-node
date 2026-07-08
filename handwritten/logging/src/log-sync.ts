@@ -74,7 +74,7 @@ class LogSync implements LogSeverityFunctions {
     logging: Logging,
     name: string,
     transport?: Writable,
-    options?: LogSyncOptions
+    options?: LogSyncOptions,
   ) {
     options = options || {};
     this.formattedName_ = formatLogName(logging.projectId, name);
@@ -113,7 +113,7 @@ class LogSync implements LogSeverityFunctions {
   alert(entry: Entry | Entry[], options?: WriteOptions) {
     this.write(
       assignSeverityToEntries(entry, 'ALERT'),
-      options! as WriteOptions
+      options! as WriteOptions,
     );
   }
 
@@ -141,7 +141,7 @@ class LogSync implements LogSeverityFunctions {
   critical(entry: Entry | Entry[], options?: WriteOptions) {
     this.write(
       assignSeverityToEntries(entry, 'CRITICAL'),
-      options! as WriteOptions
+      options! as WriteOptions,
     );
   }
 
@@ -169,7 +169,7 @@ class LogSync implements LogSeverityFunctions {
   debug(entry: Entry | Entry[], options?: WriteOptions) {
     this.write(
       assignSeverityToEntries(entry, 'DEBUG'),
-      options! as WriteOptions
+      options! as WriteOptions,
     );
   }
 
@@ -197,7 +197,7 @@ class LogSync implements LogSeverityFunctions {
   emergency(entry: Entry | Entry[], options?: WriteOptions) {
     this.write(
       assignSeverityToEntries(entry, 'EMERGENCY'),
-      options as WriteOptions
+      options as WriteOptions,
     );
   }
 
@@ -285,7 +285,7 @@ class LogSync implements LogSeverityFunctions {
   error(entry: Entry | Entry[], options?: WriteOptions) {
     this.write(
       assignSeverityToEntries(entry, 'ERROR'),
-      options! as WriteOptions
+      options! as WriteOptions,
     );
   }
 
@@ -313,7 +313,7 @@ class LogSync implements LogSeverityFunctions {
   info(entry: Entry | Entry[], options?: WriteOptions) {
     this.write(
       assignSeverityToEntries(entry, 'INFO'),
-      options! as WriteOptions
+      options! as WriteOptions,
     );
   }
 
@@ -341,7 +341,7 @@ class LogSync implements LogSeverityFunctions {
   notice(entry: Entry | Entry[], options?: WriteOptions) {
     this.write(
       assignSeverityToEntries(entry, 'NOTICE'),
-      options! as WriteOptions
+      options! as WriteOptions,
     );
   }
 
@@ -369,7 +369,7 @@ class LogSync implements LogSeverityFunctions {
   warning(entry: Entry | Entry[], options?: WriteOptions) {
     this.write(
       assignSeverityToEntries(entry, 'WARNING'),
-      options as WriteOptions
+      options as WriteOptions,
     );
   }
 
@@ -433,7 +433,7 @@ class LogSync implements LogSeverityFunctions {
         }
         return entry.toStructuredJSON(
           this.logging.projectId,
-          this.useMessageField_
+          this.useMessageField_,
         );
       });
       for (const entry of structuredEntries) {

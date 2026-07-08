@@ -142,7 +142,7 @@ describe('ObjectToStructConverter', () => {
 
       assert.strictEqual(
         objectToStructConverter.encodeValue_(buffer).blobValue.toString(),
-        'Value'
+        'Value',
       );
     });
 
@@ -210,7 +210,7 @@ describe('ObjectToStructConverter', () => {
           it('should replace circular reference with [Circular]', () => {
             assert.deepStrictEqual(
               objectToStructConverter.encodeValue_(VALUE),
-              {stringValue: '[Circular]'}
+              {stringValue: '[Circular]'},
             );
           });
         });

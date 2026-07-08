@@ -33,7 +33,7 @@ describe('nodeVersionOkay', () => {
   it('should accept nightly versions', () => {
     assert.strictEqual(
       true,
-      nodeVersionOkay(`v${version}.0.0-nightly2018000000`),
+      nodeVersionOkay(`v${version}.0.0-nightly2018000000`)
     );
   });
   it('should accept pre-release versions', () => {
@@ -118,7 +118,7 @@ describe('createProfiler', () => {
         zone: 'zone',
         projectId: 'fake-projectId',
       },
-      disableSourceMapParams,
+      disableSourceMapParams
     );
 
     const profiler: Profiler = await createProfiler(config);
@@ -146,7 +146,7 @@ describe('createProfiler', () => {
         zone: 'zone',
         projectId: 'fake-projectId',
       },
-      disableSourceMapParams,
+      disableSourceMapParams
     );
     const profiler: Profiler = await createProfiler(config);
     const expConfig = Object.assign({}, defaultConfig, config);
@@ -169,7 +169,7 @@ describe('createProfiler', () => {
         disableHeap: true,
         disableTime: true,
       },
-      disableSourceMapParams,
+      disableSourceMapParams
     );
     const expConfigParams = {
       projectId: 'gce-project',
@@ -185,7 +185,7 @@ describe('createProfiler', () => {
       {},
       defaultConfig,
       disableSourceMapParams,
-      expConfigParams,
+      expConfigParams
     );
     assert.deepStrictEqual(profiler.config, expConfig);
   });
@@ -200,7 +200,7 @@ describe('createProfiler', () => {
         projectId: 'fake-projectId',
         serviceContext: {service: 'fake-service'},
       },
-      disableSourceMapParams,
+      disableSourceMapParams
     );
     const expConfigParams = {
       logLevel: 2,
@@ -214,7 +214,7 @@ describe('createProfiler', () => {
       {},
       defaultConfig,
       disableSourceMapParams,
-      expConfigParams,
+      expConfigParams
     );
     assert.deepStrictEqual(profiler.config, expConfig);
   });
@@ -231,7 +231,7 @@ describe('createProfiler', () => {
         disableHeap: true,
         disableTime: true,
       },
-      disableSourceMapParams,
+      disableSourceMapParams
     );
     await createProfiler(config)
       .then(() => {
@@ -240,7 +240,7 @@ describe('createProfiler', () => {
       .catch((e: Error) => {
         assert.strictEqual(
           e.message,
-          'Service must be specified in the configuration',
+          'Service must be specified in the configuration'
         );
       });
   });
@@ -262,7 +262,7 @@ describe('createProfiler', () => {
     } catch (e) {
       assert.strictEqual(
         (e as Error).message,
-        'Service serviceName does not match regular expression "/^[a-z0-9]([-a-z0-9_.]{0,253}[a-z0-9])?$/"',
+        'Service serviceName does not match regular expression "/^[a-z0-9]([-a-z0-9_.]{0,253}[a-z0-9])?$/"'
       );
     }
   });
@@ -281,7 +281,7 @@ describe('createProfiler', () => {
         instance: 'instance',
         zone: 'zone',
       },
-      disableSourceMapParams,
+      disableSourceMapParams
     );
     try {
       await createProfiler(config);
@@ -289,7 +289,7 @@ describe('createProfiler', () => {
     } catch (e) {
       assert.strictEqual(
         (e as Error).message,
-        'Project ID must be specified in the configuration',
+        'Project ID must be specified in the configuration'
       );
     }
   });
@@ -310,14 +310,14 @@ describe('createProfiler', () => {
         zone: 'zone',
         sourceMapSearchPath: ['path'],
       },
-      disableSourceMapParams,
+      disableSourceMapParams
     );
     const profiler: Profiler = await createProfiler(config);
     const expConfig = Object.assign(
       {},
       config,
       disableSourceMapParams,
-      defaultConfig,
+      defaultConfig
     );
     assert.deepStrictEqual(profiler.config, expConfig);
   });
@@ -342,7 +342,7 @@ describe('createProfiler', () => {
       assert.strictEqual(
         (e as Error).message,
         'serviceMapSearchPath is an empty array. Use disableSourceMaps ' +
-          'to disable source map support instead.',
+          'to disable source map support instead.'
       );
     }
   });
@@ -359,7 +359,7 @@ describe('createProfiler', () => {
         apiEndpoint: 'test-cloudprofiler.sandbox.googleapis.com',
         serviceContext: {version: '', service: 'fake-service'},
       },
-      disableSourceMapParams,
+      disableSourceMapParams
     );
     const expConfigParams = {
       projectId: 'project',
@@ -373,7 +373,7 @@ describe('createProfiler', () => {
       {},
       defaultConfig,
       disableSourceMapParams,
-      expConfigParams,
+      expConfigParams
     );
     const profiler: Profiler = await createProfiler(config);
     assert.deepStrictEqual(profiler.config, expConfig);
@@ -421,7 +421,7 @@ describe('createProfiler', () => {
     projectMetadataStub.throwsException('cannot access metadata');
     const config = Object.assign(
       {projectId: 'project'},
-      disableSourceMapParams,
+      disableSourceMapParams
     );
     const expConfigParams = {
       serviceContext: {version: 'k-version', service: 'k-service'},
@@ -445,7 +445,7 @@ describe('createProfiler', () => {
     projectMetadataStub.throwsException('cannot access metadata');
     const config = Object.assign(
       {projectId: 'project'},
-      disableSourceMapParams,
+      disableSourceMapParams
     );
     const expConfigParams = {
       serviceContext: {
@@ -489,7 +489,7 @@ describe('createProfiler', () => {
         instance: 'instance',
         zone: 'zone',
       },
-      disableSourceMapParams,
+      disableSourceMapParams
     );
     const profiler: Profiler = await createProfiler(config);
     const expConfig = Object.assign({}, config, defaultConfig);
@@ -530,12 +530,12 @@ describe('createProfiler', () => {
         instance: 'envConfig-instance',
         zone: 'envConfig-zone',
       },
-      disableSourceMapParams,
+      disableSourceMapParams
     );
     await createProfiler(config);
     assert.ok(
       startStub.calledWith(1024 * 512, 64),
-      'expected heap profiler to be started',
+      'expected heap profiler to be started'
     );
   });
   it('should start not heap profiler when disableHeap is true', async () => {
@@ -547,7 +547,7 @@ describe('createProfiler', () => {
         instance: 'envConfig-instance',
         zone: 'envConfig-zone',
       },
-      disableSourceMapParams,
+      disableSourceMapParams
     );
     await createProfiler(config);
     assert.ok(!startStub.called, 'expected heap profiler to not be started');

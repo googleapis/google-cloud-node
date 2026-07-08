@@ -298,7 +298,7 @@ describe('metadata', () => {
       };
       await assert.rejects(
         metadata.getGKEDescriptor(),
-        (err: Error) => err === FAKE_ERROR
+        (err: Error) => err === FAKE_ERROR,
       );
     });
 
@@ -306,7 +306,7 @@ describe('metadata', () => {
       readFileShouldError = true;
 
       await assert.doesNotReject(metadata.getGKEDescriptor(), (err: Error) =>
-        err.message.includes(FAKE_READFILE_ERROR_MESSAGE)
+        err.message.includes(FAKE_READFILE_ERROR_MESSAGE),
       );
     });
   });

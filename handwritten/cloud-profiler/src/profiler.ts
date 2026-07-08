@@ -84,7 +84,7 @@ export interface RequestProfile {
 function getResponseErrorMessage(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   response: r.Response<any>,
-  err: Error | null,
+  err: Error | null
 ): string | undefined {
   if (err && err.message) {
     return err.message;
@@ -180,7 +180,7 @@ async function profileBytes(p: perftools.profiles.IProfile): Promise<string> {
 export class BackoffResponseError extends Error {
   constructor(
     message: string | undefined,
-    readonly backoffMillis: number,
+    readonly backoffMillis: number
   ) {
     super(message);
   }
@@ -207,7 +207,7 @@ export class Retryer {
     readonly initialBackoffMillis: number,
     readonly backoffCapMillis: number,
     readonly backoffMultiplier: number,
-    random = Math.random,
+    random = Math.random
   ) {
     this.nextBackoffMillis = this.initialBackoffMillis;
     this.random = random;
@@ -216,7 +216,7 @@ export class Retryer {
     const curBackoff = this.random() * this.nextBackoffMillis;
     this.nextBackoffMillis = Math.min(
       this.backoffMultiplier * this.nextBackoffMillis,
-      this.backoffCapMillis,
+      this.backoffCapMillis
     );
     return curBackoff;
   }
@@ -235,7 +235,7 @@ function responseToProfileOrError(
   err: Error | null,
   body?: object,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  response?: r.Response<any>,
+  response?: r.Response<any>
 ): RequestProfile {
   // response.statusCode is guaranteed to exist on client requests.
   if (response && isErrorResponseStatusCode(response.statusCode!)) {
@@ -324,7 +324,7 @@ export class Profiler extends ServiceObject {
     this.retryer = new Retryer(
       this.config.initialBackoffMillis,
       this.config.backoffCapMillis,
-      this.config.backoffMultiplier,
+      this.config.backoffMultiplier
     );
   }
 
@@ -342,11 +342,11 @@ export class Profiler extends ServiceObject {
     if (!this.config.disableSourceMaps) {
       try {
         this.sourceMapper = await SourceMapper.create(
-          this.config.sourceMapSearchPath,
+          this.config.sourceMapSearchPath
         );
       } catch (err) {
         this.logger.error(
-          `Failed to initialize SourceMapper. Source map support has been disabled: ${err}`,
+          `Failed to initialize SourceMapper. Source map support has been disabled: ${err}`
         );
         this.config.disableSourceMaps = true;
       }
@@ -379,19 +379,19 @@ export class Profiler extends ServiceObject {
       if (isBackoffResponseError(err as BackoffResponseError)) {
         this.logger.debug(
           `Must wait ${msToStr(
-            (err as BackoffResponseError).backoffMillis,
-          )} to create profile: ${err}`,
+            (err as BackoffResponseError).backoffMillis
+          )} to create profile: ${err}`
         );
         return Math.min(
           (err as BackoffResponseError).backoffMillis,
-          this.config.serverBackoffCapMillis,
+          this.config.serverBackoffCapMillis
         );
       }
       const backoff = this.retryer.getBackoff();
       this.logger.warn(
         `Failed to create profile, waiting ${msToStr(
-          backoff,
-        )} to try again: ${err}`,
+          backoff
+        )} to try again: ${err}`
       );
       return backoff;
     }
@@ -444,18 +444,18 @@ export class Profiler extends ServiceObject {
           err: Error | ApiError | null,
           body?: object,
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          response?: r.Response<any>,
+          response?: r.Response<any>
         ) => {
           try {
             const prof = responseToProfileOrError(err, body, response);
             this.logger.debug(
-              `Successfully created profile ${prof.profileType}.`,
+              `Successfully created profile ${prof.profileType}.`
             );
             resolve(prof);
           } catch (err) {
             reject(err);
           }
-        },
+        }
       );
     });
   }
@@ -536,7 +536,7 @@ export class Profiler extends ServiceObject {
     if (!durationMillis) {
       throw Error(
         `Cannot collect time profile, duration "${prof.duration}" cannot` +
-          ' be parsed.',
+          ' be parsed.'
       );
     }
     const options = {
@@ -562,7 +562,7 @@ export class Profiler extends ServiceObject {
     }
     const p = heapProfiler.profile(
       this.config.ignoreHeapSamplesPath,
-      this.sourceMapper,
+      this.sourceMapper
     );
     prof.profileBytes = await profileBytes(p);
     return prof;

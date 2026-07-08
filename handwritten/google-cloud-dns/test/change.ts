@@ -119,7 +119,7 @@ describe('Change', () => {
             assert.strictEqual(change, null);
             assert.strictEqual(apiResponse_, apiResponse);
             done();
-          },
+          }
         );
       });
     });
@@ -145,7 +145,7 @@ describe('Change', () => {
             assert.strictEqual(change_, change);
             assert.strictEqual(apiResponse_, apiResponse);
             done();
-          },
+          }
         );
       });
 

@@ -169,7 +169,7 @@ describe('Logging', () => {
       // tests are being run, so let's not care about that.
       apiResponse.destination = apiResponse.destination!.replace(
         /projects\/[^/]*\//,
-        ''
+        '',
       );
       assert.strictEqual(apiResponse.destination, destination);
     });
@@ -186,7 +186,7 @@ describe('Logging', () => {
       // tests are being run, so let's not care about that.
       assert.strictEqual(
         apiResponse.destination!.replace(/projects\/[^/]*\//, ''),
-        destination.replace(/projects\/[^/]*\//, '')
+        destination.replace(/projects\/[^/]*\//, ''),
       );
     });
 
@@ -324,7 +324,7 @@ describe('Logging', () => {
     function getEntriesFromLog(
       log: Log,
       config: {numExpectedMessages: number},
-      callback: (err: Error | null, entries?: Entry[]) => void
+      callback: (err: Error | null, entries?: Entry[]) => void,
     ) {
       let numAttempts = 0;
 
@@ -352,7 +352,7 @@ describe('Logging', () => {
             }
 
             callback(null, entries);
-          }
+          },
         );
       }
     }
@@ -422,10 +422,10 @@ describe('Logging', () => {
               entry.data?.[instrumentation.DIAGNOSTIC_INFO_KEY]?.[
                 instrumentation.INSTRUMENTATION_SOURCE_KEY
               ]?.[0]?.['name'],
-              instrumentation.NODEJS_LIBRARY_NAME_PREFIX
+              instrumentation.NODEJS_LIBRARY_NAME_PREFIX,
             );
             done();
-          }
+          },
         );
       });
     });
@@ -469,7 +469,7 @@ describe('Logging', () => {
           assert.strictEqual(
             resp.entries.length,
             1,
-            `Expected 1 tailed entry; Got ${resp.entries.length}.`
+            `Expected 1 tailed entry; Got ${resp.entries.length}.`,
           );
           clearInterval(logInterval);
           stream.end();
@@ -498,7 +498,7 @@ describe('Logging', () => {
             assert.ifError(err);
             assert.strictEqual(entries!.length, logEntriesExpected.length);
             done();
-          }
+          },
         );
       });
 
@@ -577,7 +577,7 @@ describe('Logging', () => {
             ]);
 
             done();
-          }
+          },
         );
       });
     });
@@ -601,7 +601,7 @@ describe('Logging', () => {
             assert.ifError(err);
             assert.deepStrictEqual(
               entries!.map(x => x.data),
-              ['3', '2', '1']
+              ['3', '2', '1'],
             );
             done();
           });
@@ -627,10 +627,10 @@ describe('Logging', () => {
             assert.ifError(err);
             assert.deepStrictEqual(
               entries!.reverse().map(x => x.data),
-              messages
+              messages,
             );
             done();
-          }
+          },
         );
       })();
     });
@@ -711,7 +711,7 @@ describe('Logging', () => {
           const entry = entries![0];
           assert.strictEqual(
             entry.metadata.httpRequest?.status,
-            metadata.httpRequest.status
+            metadata.httpRequest.status,
           );
           assert.deepStrictEqual(entry.data, {});
           done();
@@ -742,7 +742,7 @@ describe('Logging', () => {
             assert.strictEqual(entry.metadata.httpRequest?.protocol, 'http:');
             assert.strictEqual(
               entry.metadata.trace,
-              `projects/${PROJECT_ID}/traces/1`
+              `projects/${PROJECT_ID}/traces/1`,
             );
             assert.strictEqual(entry.metadata.spanId, '2');
             assert.strictEqual(entry.metadata.traceSampled, true);
@@ -776,7 +776,7 @@ describe('Logging', () => {
             assert.strictEqual(entry.metadata.httpRequest?.protocol, 'http:');
             assert.strictEqual(
               entry.metadata.trace,
-              `projects/${PROJECT_ID}/traces/0af7651916cd43dd8448eb211c80319c`
+              `projects/${PROJECT_ID}/traces/0af7651916cd43dd8448eb211c80319c`,
             );
             assert.strictEqual(entry.metadata.spanId, 'b7ad6b7169203331');
             assert.strictEqual(entry.metadata.traceSampled, true);
@@ -825,7 +825,7 @@ describe('Logging', () => {
               assert.strictEqual(entry.metadata.spanId, metadata.spanId);
               assert.strictEqual(
                 entry.metadata.traceSampled,
-                metadata.traceSampled
+                metadata.traceSampled,
               );
             });
           });
@@ -850,7 +850,7 @@ describe('Logging', () => {
               assert.strictEqual(entry.data, spanTestMessage);
               assert.strictEqual(
                 entry.metadata.trace,
-                `projects/${PROJECT_ID}/traces/${traceId}`
+                `projects/${PROJECT_ID}/traces/${traceId}`,
               );
               assert.strictEqual(entry.metadata.spanId, spanId);
               assert.strictEqual(entry.metadata.traceSampled, traceSampled);
@@ -890,19 +890,19 @@ describe('Logging', () => {
                   assert.strictEqual(entry.data, 'some log message');
                   assert.strictEqual(
                     entry.metadata.httpRequest?.requestUrl,
-                    URL
+                    URL,
                   );
                   assert.strictEqual(
                     entry.metadata.httpRequest?.protocol,
-                    'http:'
+                    'http:',
                   );
                   assert.strictEqual(
                     entry.metadata.trace,
-                    `projects/${PROJECT_ID}/traces/${traceId}`
+                    `projects/${PROJECT_ID}/traces/${traceId}`,
                   );
                   assert.strictEqual(entry.metadata.spanId, spanId);
                   assert.strictEqual(entry.metadata.traceSampled, traceSampled);
-                }
+                },
               );
             });
           });
@@ -937,19 +937,19 @@ describe('Logging', () => {
                   assert.strictEqual(entry.data, 'some log message');
                   assert.strictEqual(
                     entry.metadata.httpRequest?.requestUrl,
-                    URL
+                    URL,
                   );
                   assert.strictEqual(
                     entry.metadata.httpRequest?.protocol,
-                    'http:'
+                    'http:',
                   );
                   assert.strictEqual(
                     entry.metadata.trace,
-                    `projects/${PROJECT_ID}/traces/${traceId}`
+                    `projects/${PROJECT_ID}/traces/${traceId}`,
                   );
                   assert.strictEqual(entry.metadata.spanId, spanId);
                   assert.strictEqual(entry.metadata.traceSampled, traceSampled);
-                }
+                },
               );
             });
           });
@@ -999,7 +999,7 @@ describe('Logging', () => {
             },
           },
         },
-        done
+        done,
       );
     });
 
@@ -1068,8 +1068,8 @@ describe('Logging', () => {
       await log.write(logEntries[0], options);
       assert.ok(
         /gax\/[0-9]+\.[\w.-]+ gapic\/[0-9]+\.[\w.-]+ gl-node\/[0-9]+\.[\w.-]+ grpc\/[0-9]+\.[\w.-]+ gccl\/[0-9]+\.[\w.-]+/.test(
-          http2spy.requests[0]['x-goog-api-client'][0]
-        )
+          http2spy.requests[0]['x-goog-api-client'][0],
+        ),
       );
     });
   });

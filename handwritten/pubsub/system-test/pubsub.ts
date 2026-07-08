@@ -61,11 +61,7 @@ describe('pubsub', () => {
     return {name, topic, fullName};
   }
 
-  async function generateSub(
-    test: string,
-    topicName: string,
-    opts: SubscriptionOptions = {},
-  ): Promise<UsedSub> {
+  async function generateSub(test: string, topicName: string, opts: SubscriptionOptions = {}): Promise<UsedSub> {
     const name = resources.generateName(test);
     const sub = pubsub.topic(topicName).subscription(name, opts);
     await sub.create();
@@ -101,18 +97,22 @@ describe('pubsub', () => {
       schemas.push(pubsub.schema(s.name!));
     }
     await Promise.all(
-      resources.filterForCleanup(schemas).map(x => x.delete?.()),
+      resources.filterForCleanup(schemas).map(x => x.delete?.())
     );
 
     // Snapshots.
-    await Promise.all(resources.filterForCleanup(snaps).map(x => x.delete?.()));
+    await Promise.all(
+      resources.filterForCleanup(snaps).map(x => x.delete?.())
+    )
 
     // Subscriptions next.
-    await Promise.all(resources.filterForCleanup(subs).map(x => x.delete?.()));
+    await Promise.all(
+      resources.filterForCleanup(subs).map(x => x.delete?.())
+    );
 
     // Finally topics.
     await Promise.all(
-      resources.filterForCleanup(topics).map(x => x.delete?.()),
+      resources.filterForCleanup(topics).map(x => x.delete?.())
     );
   }
 
@@ -212,7 +212,7 @@ describe('pubsub', () => {
           assert.ifError(err);
           assert.strictEqual(exists, false);
           done();
-        },
+        }
       );
     });
 
@@ -283,7 +283,7 @@ describe('pubsub', () => {
           generateSubName('ordered'),
           {
             enableMessageOrdering: true,
-          },
+          }
         );
         const {
           input,
@@ -313,9 +313,9 @@ describe('pubsub', () => {
                   `Unknown key "${key}" for test data: ${JSON.stringify(
                     pending,
                     null,
-                    4,
-                  )}`,
-                ),
+                    4
+                  )}`
+                )
               );
               subscription.close();
               return;
@@ -326,8 +326,8 @@ describe('pubsub', () => {
             if (key && data !== expected) {
               deferred.reject(
                 new Error(
-                  `Expected "${expected}" but received "${data}" for key "${key}"`,
-                ),
+                  `Expected "${expected}" but received "${data}" for key "${key}"`
+                )
               );
               subscription.close();
               return;
@@ -367,12 +367,10 @@ describe('pubsub', () => {
 
       const testSubProms: Promise<UsedSub>[] = [];
       for (let i = 0; i < count; i++) {
-        testSubProms.push(
-          generateSub(testName, testTopic.name, {
-            minAckDeadline: Duration.from({seconds: 60}),
-            maxAckDeadline: Duration.from({seconds: 60}),
-          }),
-        );
+        testSubProms.push(generateSub(testName, testTopic.name, {
+          minAckDeadline: Duration.from({seconds: 60}),
+          maxAckDeadline: Duration.from({seconds: 60}),
+        }));
       }
       const testSubs = await Promise.all(testSubProms);
       const subs = testSubs.map(t => t.sub);
@@ -506,23 +504,21 @@ describe('pubsub', () => {
       };
 
       const testTopic = await generateTopic('msg-ret');
-      const [sub] = await testTopic.topic.createSubscription(
-        subName,
-        callOptions,
-      );
+      const [sub] = await testTopic.topic.createSubscription(subName, callOptions);
       const [metadata] = await sub.getMetadata();
       assert.strictEqual(
         Number(metadata!.messageRetentionDuration!.seconds),
-        threeDaysInSeconds,
+        threeDaysInSeconds
       );
-      assert.strictEqual(Number(metadata!.messageRetentionDuration!.nanos), 0);
+      assert.strictEqual(
+        Number(metadata!.messageRetentionDuration!.nanos),
+        0
+      );
     });
 
     it('should set metadata for a subscription', async () => {
       const testTopic = await generateTopic('met-sub');
-      const subscription = testTopic.topic.subscription(
-        generateSubName('met-sub'),
-      );
+      const subscription = testTopic.topic.subscription(generateSubName('met-sub'));
       const threeDaysInSeconds = 3 * 24 * 60 * 60;
 
       await subscription.create();
@@ -538,9 +534,7 @@ describe('pubsub', () => {
 
     it('should error when using a non-existent subscription', async () => {
       const testTopic = await generateTopic('dne-sub');
-      const subscription = testTopic.topic.subscription(
-        generateSubName('dne-sub'),
-      );
+      const subscription = testTopic.topic.subscription(generateSubName('dne-sub'));
 
       await new Promise((res, rej) => {
         subscription.on('error', (err: {code: number}) => {
@@ -777,7 +771,7 @@ describe('pubsub', () => {
 
       const [newPolicy] = await topic.iam.setPolicy(policy);
       const expectedBindings = policy.bindings.map(binding =>
-        Object.assign({condition: null}, binding),
+        Object.assign({condition: null}, binding)
       );
       assert.deepStrictEqual(newPolicy!.bindings, expectedBindings);
     });
@@ -798,8 +792,7 @@ describe('pubsub', () => {
   describe('Snapshot', () => {
     async function snapshotPop(test: string) {
       const topic: Topic = (await generateTopic('snap')).topic;
-      const subscription: Subscription = (await generateSub('snap', topic.name))
-        .sub;
+      const subscription: Subscription = (await generateSub('snap', topic.name)).sub;
       const snapshotId: string = generateSnapshotName('snap');
       const snapshot: Snapshot = subscription.snapshot(snapshotId);
 
@@ -812,6 +805,7 @@ describe('pubsub', () => {
         snapshot,
       };
     }
+
 
     function getSnapshotName({name}: {name: string}) {
       return name.split('/').pop();
@@ -854,7 +848,7 @@ describe('pubsub', () => {
       async function seekPop(test: string) {
         const pop = await snapshotPop(test);
         const errorPromise = new Promise((_, reject) =>
-          pop.subscription.on('error', reject),
+          pop.subscription.on('error', reject)
         );
 
         return {
@@ -866,10 +860,7 @@ describe('pubsub', () => {
       // This creates a Promise that hooks the 'message' callback of the
       // subscription above, and resolves when that callback calls `resolve`.
       type WorkCallback = (arg: Message, resolve: Function) => void;
-      function makeMessagePromise(
-        subscription: Subscription,
-        workCallback: WorkCallback,
-      ): Promise<void> {
+      function makeMessagePromise(subscription: Subscription, workCallback: WorkCallback): Promise<void> {
         return new Promise(resolve => {
           subscription.on('message', (arg: Message) => {
             workCallback(arg, resolve);
@@ -904,7 +895,7 @@ describe('pubsub', () => {
             await pop.subscription.close();
 
             resolve();
-          },
+          }
         );
 
         messageId = await publishTestMessage(pop.topic);
@@ -932,7 +923,7 @@ describe('pubsub', () => {
                 message.publishTime,
                 (err: ServiceError | null) => {
                   assert.ifError(err);
-                },
+                }
               );
               return;
             }
@@ -941,7 +932,7 @@ describe('pubsub', () => {
             await pop.subscription.close();
 
             resolve();
-          },
+          }
         );
 
         messageId = await publishTestMessage(pop.topic);
@@ -973,7 +964,7 @@ describe('pubsub', () => {
             await pop.subscription.close();
 
             resolve();
-          },
+          }
         );
 
         await Promise.race([pop.errorPromise, messagePromise]);
@@ -985,7 +976,7 @@ describe('pubsub', () => {
     // This should really be handled by a standard method of Array(), imo, but it's not.
     async function aiToArray(
       iterator: AsyncIterable<ISchema>,
-      nameFilter?: string,
+      nameFilter?: string
     ): Promise<ISchema[]> {
       const result = [] as ISchema[];
       for await (const i of iterator) {
@@ -1037,14 +1028,14 @@ describe('pubsub', () => {
 
       const basicList = await aiToArray(
         pubsub.listSchemas(SchemaViews.Basic),
-        schemaId,
+        schemaId
       );
       assert.strictEqual(basicList.length, 1);
       assert.strictEqual(basicList[0].definition, '');
 
       const fullList = await aiToArray(
         pubsub.listSchemas(SchemaViews.Full),
-        schemaId,
+        schemaId
       );
       assert.strictEqual(fullList.length, 1);
       assert.ok(fullList[0].definition);

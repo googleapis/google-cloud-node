@@ -2203,9 +2203,7 @@ class File extends ServiceObject<File, FileMetadata> {
           if (!callbackCalled) {
             callbackCalled = true;
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const err =
-              (fileWriteStream as any).errored ||
-              new Error('Write stream destroyed');
+            const err = (fileWriteStream as any).errored || new Error('Write stream destroyed');
             pipelineCallback(err);
           }
         });

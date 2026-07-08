@@ -134,7 +134,7 @@ describe('context', () => {
               (parentSpan.spanContext().traceFlags & 1) !== 0;
             assert.strictEqual(
               context.trace,
-              `projects/${projectId}/traces/${traceId}`
+              `projects/${projectId}/traces/${traceId}`,
             );
             assert.strictEqual(context.spanId, spanId);
             assert.strictEqual(context.traceSampled, traceSampled);
@@ -154,7 +154,7 @@ describe('context', () => {
               (parentSpan.spanContext().traceFlags & 1) !== 0;
             assert.strictEqual(
               context.trace,
-              `projects/${projectId}/traces/${traceId}`
+              `projects/${projectId}/traces/${traceId}`,
             );
             assert.strictEqual(context.spanId, spanId);
             assert.strictEqual(context.traceSampled, traceSampled);
@@ -179,7 +179,7 @@ describe('context', () => {
               (parentSpan.spanContext().traceFlags & 1) !== 0;
             assert.strictEqual(
               context.trace,
-              `projects/${projectId}/traces/${traceId}`
+              `projects/${projectId}/traces/${traceId}`,
             );
             assert.strictEqual(context.spanId, spanId);
             assert.strictEqual(context.traceSampled, traceSampled);
@@ -201,7 +201,7 @@ describe('context', () => {
               (parentSpan.spanContext().traceFlags & 1) !== 0;
             assert.strictEqual(
               context.trace,
-              `projects/${projectId}/traces/${traceId}`
+              `projects/${projectId}/traces/${traceId}`,
             );
             assert.strictEqual(context.spanId, spanId);
             assert.strictEqual(context.traceSampled, traceSampled);
@@ -221,7 +221,7 @@ describe('context', () => {
               (parentSpan.spanContext().traceFlags & 1) !== 0;
             assert.strictEqual(
               context.trace,
-              `projects/${projectId}/traces/${traceId}`
+              `projects/${projectId}/traces/${traceId}`,
             );
             assert.strictEqual(context.spanId, spanId);
             assert.strictEqual(context.traceSampled, traceSampled);
@@ -300,17 +300,17 @@ describe('context', () => {
             assert.strictEqual(
               context.trace,
               test.expected.trace,
-              `From ${test.header}; Expected trace: ${test.expected.trace}; Got: ${context.trace}`
+              `From ${test.header}; Expected trace: ${test.expected.trace}; Got: ${context.trace}`,
             );
             assert.strictEqual(
               context.spanId,
               test.expected.spanId,
-              `From ${test.header}; Expected spanId: ${test.expected.spanId}; Got: ${context.spanId}`
+              `From ${test.header}; Expected spanId: ${test.expected.spanId}; Got: ${context.spanId}`,
             );
             assert.strictEqual(
               context.traceSampled,
               test.expected.traceSampled,
-              `From ${test.header}; Expected traceSampled: ${test.expected.traceSampled}; Got: ${context.traceSampled}`
+              `From ${test.header}; Expected traceSampled: ${test.expected.traceSampled}; Got: ${context.traceSampled}`,
             );
           } else {
             assert.fail();
@@ -349,7 +349,7 @@ describe('context', () => {
               (parentSpan.spanContext().traceFlags & 1) !== 0;
             assert.strictEqual(
               context.trace,
-              `projects/${projectId}/traces/${traceId}`
+              `projects/${projectId}/traces/${traceId}`,
             );
             assert.strictEqual(context.spanId, spanId);
             assert.strictEqual(context.traceSampled, traceSampled);
@@ -401,17 +401,17 @@ describe('context', () => {
             assert.strictEqual(
               context.trace,
               test.expected.trace,
-              `From ${test.header}; Expected trace: ${test.expected.trace}; Got: ${context.trace}`
+              `From ${test.header}; Expected trace: ${test.expected.trace}; Got: ${context.trace}`,
             );
             assert.strictEqual(
               context.spanId,
               test.expected.spanId,
-              `From ${test.header}; Expected spanId: ${test.expected.spanId}; Got: ${context.spanId}`
+              `From ${test.header}; Expected spanId: ${test.expected.spanId}; Got: ${context.spanId}`,
             );
             assert.strictEqual(
               context.traceSampled,
               test.expected.traceSampled,
-              `From ${test.header}; Expected traceSampled: ${test.expected.traceSampled}; Got: ${context.traceSampled}`
+              `From ${test.header}; Expected traceSampled: ${test.expected.traceSampled}; Got: ${context.traceSampled}`,
             );
           } else {
             // This is the header: '' test case;

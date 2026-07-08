@@ -41,7 +41,7 @@ export interface GetZonesCallback {
     err: Error | null,
     zones: Zone[] | null,
     nextQuery?: GetZonesRequest | null,
-    apiResponse?: Metadata,
+    apiResponse?: Metadata
   ): void;
 }
 
@@ -208,12 +208,12 @@ class DNS extends Service {
 
   createZone(
     name: string,
-    config: CreateZoneRequest,
+    config: CreateZoneRequest
   ): Promise<CreateZoneResponse>;
   createZone(
     name: string,
     config: CreateZoneRequest,
-    callback: GetZoneCallback,
+    callback: GetZoneCallback
   ): void;
   /**
    * Config to set for the zone.
@@ -275,7 +275,7 @@ class DNS extends Service {
   createZone(
     name: string,
     config: CreateZoneRequest,
-    callback?: GetZoneCallback,
+    callback?: GetZoneCallback
   ): void | Promise<CreateZoneResponse> {
     if (!name) {
       throw new Error('A zone name is required.');
@@ -300,7 +300,7 @@ class DNS extends Service {
         const zone = this.zone(resp.name);
         zone.metadata = resp;
         callback!(null, zone, resp);
-      },
+      }
     );
   }
 
@@ -355,7 +355,7 @@ class DNS extends Service {
    */
   getZones(
     queryOrCallback?: GetZonesRequest | GetZonesCallback,
-    callback?: GetZonesCallback,
+    callback?: GetZonesCallback
   ): void | Promise<GetZonesResponse> {
     const query = typeof queryOrCallback === 'object' ? queryOrCallback : {};
     callback =
@@ -383,7 +383,7 @@ class DNS extends Service {
           });
         }
         callback!(null, zones, nextQuery, resp);
-      },
+      }
     );
   }
 

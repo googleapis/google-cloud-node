@@ -128,7 +128,7 @@ describe.skip('dns', () => {
         if (hoursOld > 1) {
           await zone.delete({force: true});
         }
-      }),
+      })
     );
     await ZONE.create({
       dnsName: DNS_DOMAIN,
@@ -179,7 +179,7 @@ describe.skip('dns', () => {
 
     it('should import records from a zone file', done => {
       const zoneFilename = require.resolve(
-        '../../system-test/data/zonefile.zone',
+        '../../system-test/data/zonefile.zone'
       );
       let zoneFileTemplate = fs.readFileSync(zoneFilename, 'utf-8');
       zoneFileTemplate = format(zoneFileTemplate, {
@@ -204,7 +204,7 @@ describe.skip('dns', () => {
 
               assert.strictEqual(
                 spfRecord.toJSON().rrdatas![0],
-                '"v=spf1" "mx:' + DNS_DOMAIN + '" "-all"',
+                '"v=spf1" "mx:' + DNS_DOMAIN + '" "-all"'
               );
 
               const txtRecord = records!.filter(record => {
@@ -213,7 +213,7 @@ describe.skip('dns', () => {
 
               assert.strictEqual(
                 txtRecord.toJSON().rrdatas![0],
-                '"google-site-verification=xxxxxxxxxxxxYYYYYYXXX"',
+                '"google-site-verification=xxxxxxxxxxxxYYYYYYXXX"'
               );
 
               done();
@@ -303,7 +303,7 @@ describe.skip('dns', () => {
         const onRecordsReceived = (
           err?: Error | null,
           records?: Record[] | null,
-          nextQuery?: {} | null,
+          nextQuery?: {} | null
         ) => {
           if (nextQuery) {
             ZONE.getRecords(nextQuery, onRecordsReceived);
@@ -316,7 +316,7 @@ describe.skip('dns', () => {
             type: 'cname',
             maxResults: 2,
           },
-          onRecordsReceived,
+          onRecordsReceived
         );
       });
     });

@@ -61,7 +61,7 @@ describe('LogSync', () => {
       const log = new LogSync(LOGGING, LOG_NAME);
       assert.strictEqual(
         log.formattedName_,
-        logCommon.formatLogName('{{project-id}}', LOG_NAME)
+        logCommon.formatLogName('{{project-id}}', LOG_NAME),
       );
     });
 
@@ -122,7 +122,7 @@ describe('LogSync', () => {
         const result = JSON.parse(fs.readFileSync(TEST_FILE, 'utf8'));
         assert.strictEqual(
           result.logName,
-          'projects/{{project-id}}/logs/escaping%2Frequired%2Ffor%2Fthis%2Flog-name'
+          'projects/{{project-id}}/logs/escaping%2Frequired%2Ffor%2Fthis%2Flog-name',
         );
         done();
       });

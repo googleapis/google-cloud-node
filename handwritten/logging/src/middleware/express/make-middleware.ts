@@ -48,14 +48,14 @@ export function makeMiddleware<LoggerType>(
   makeChildLogger: (
     trace: string,
     span?: string,
-    traceSampled?: boolean
+    traceSampled?: boolean,
   ) => LoggerType,
   emitRequestLog?: (
     httpRequest: CloudLoggingHttpRequest,
     trace: string,
     span?: string,
-    traceSampled?: boolean
-  ) => void
+    traceSampled?: boolean,
+  ) => void,
 ) {
   return (req: ServerRequest, res: http.ServerResponse, next: Function) => {
     // TODO(ofrobots): use high-resolution timer.
@@ -70,7 +70,7 @@ export function makeMiddleware<LoggerType>(
     (req as AnnotatedRequestType<LoggerType>).log = makeChildLogger(
       traceContext.trace,
       traceContext.spanId,
-      traceContext.traceSampled
+      traceContext.traceSampled,
     );
 
     // Emit a 'Request Log' on the parent logger, with detected trace and
@@ -83,7 +83,7 @@ export function makeMiddleware<LoggerType>(
           httpRequest,
           traceContext.trace,
           traceContext.spanId,
-          traceContext.traceSampled
+          traceContext.traceSampled,
         );
       });
     }

@@ -222,7 +222,7 @@ describe('Entry', () => {
     it('should pass removeCircular to objToStruct_', done => {
       fakeObjToStruct = (
         obj: {},
-        options: common.ObjectToStructConverterConfig
+        options: common.ObjectToStructConverterConfig,
       ) => {
         assert.strictEqual(options.removeCircular, true);
         done();
@@ -335,12 +335,12 @@ describe('Entry', () => {
             const json = entry.toJSON();
             assert.strictEqual(
               json.trace,
-              `projects//traces/${span.spanContext().traceId}`
+              `projects//traces/${span.spanContext().traceId}`,
             );
             assert.strictEqual(json.spanId, span.spanContext().spanId);
             assert.strictEqual(
               json.traceSampled,
-              (span.spanContext().traceFlags & 1) !== 0
+              (span.spanContext().traceFlags & 1) !== 0,
             );
           });
       });
@@ -360,12 +360,12 @@ describe('Entry', () => {
             const json = entry.toJSON();
             assert.strictEqual(
               json.trace,
-              `projects//traces/${span.spanContext().traceId}`
+              `projects//traces/${span.spanContext().traceId}`,
             );
             assert.strictEqual(json.spanId, span.spanContext().spanId);
             assert.strictEqual(
               json.traceSampled,
-              (span.spanContext().traceFlags & 1) !== 0
+              (span.spanContext().traceFlags & 1) !== 0,
             );
           });
       });
@@ -413,7 +413,7 @@ describe('Entry', () => {
       entry.data = 'this is a log';
       const json = entry.toStructuredJSON();
       assert(
-        withinExpectedTimeBoundaries(nanosAndSecondsToDate(json.timestamp!))
+        withinExpectedTimeBoundaries(nanosAndSecondsToDate(json.timestamp!)),
       );
       delete json.timestamp;
       const expectedJSON = {
@@ -441,7 +441,7 @@ describe('Entry', () => {
       entry.metadata.timestamp = new Date();
       const json = entry.toStructuredJSON();
       assert(
-        withinExpectedTimeBoundaries(nanosAndSecondsToDate(json.timestamp!))
+        withinExpectedTimeBoundaries(nanosAndSecondsToDate(json.timestamp!)),
       );
     });
 
@@ -513,15 +513,15 @@ describe('Entry', () => {
             const json = entry.toStructuredJSON();
             assert.strictEqual(
               json[entryTypes.TRACE_KEY],
-              `projects//traces/${span.spanContext().traceId}`
+              `projects//traces/${span.spanContext().traceId}`,
             );
             assert.strictEqual(
               json[entryTypes.SPAN_ID_KEY],
-              span.spanContext().spanId
+              span.spanContext().spanId,
             );
             assert.strictEqual(
               json[entryTypes.TRACE_SAMPLED_KEY],
-              (span.spanContext().traceFlags & 1) !== 0
+              (span.spanContext().traceFlags & 1) !== 0,
             );
           });
       });
@@ -541,15 +541,15 @@ describe('Entry', () => {
             const json = entry.toStructuredJSON();
             assert.strictEqual(
               json[entryTypes.TRACE_KEY],
-              `projects//traces/${span.spanContext().traceId}`
+              `projects//traces/${span.spanContext().traceId}`,
             );
             assert.strictEqual(
               json[entryTypes.SPAN_ID_KEY],
-              span.spanContext().spanId
+              span.spanContext().spanId,
             );
             assert.strictEqual(
               json[entryTypes.TRACE_SAMPLED_KEY],
-              (span.spanContext().traceFlags & 1) !== 0
+              (span.spanContext().traceFlags & 1) !== 0,
             );
           });
       });
@@ -571,7 +571,7 @@ describe('Entry', () => {
             assert.strictEqual(json[entryTypes.SPAN_ID_KEY], expected.spanId);
             assert.strictEqual(
               json[entryTypes.TRACE_SAMPLED_KEY],
-              expected.traceSampled
+              expected.traceSampled,
             );
           });
       });

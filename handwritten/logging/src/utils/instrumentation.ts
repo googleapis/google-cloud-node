@@ -50,7 +50,7 @@ export type InstrumentationInfo = {name: string; version: string};
  * instrumentation info and boolean flag indicating if instrumentation was added or not in this call
  */
 export function populateInstrumentationInfo(
-  entry: Entry | Entry[]
+  entry: Entry | Entry[],
 ): [Entry[], boolean] {
   // Check if instrumentation data was already written once. This prevents also inspection of
   // the entries for instrumentation data to prevent perf degradation
@@ -102,7 +102,7 @@ export function populateInstrumentationInfo(
  */
 export function createDiagnosticEntry(
   libraryName: string | undefined,
-  libraryVersion: string | undefined
+  libraryVersion: string | undefined,
 ): Entry {
   // Validate the libraryName first and make sure it starts with 'nodejs' prefix.
   if (!libraryName || !libraryName.startsWith(NODEJS_LIBRARY_NAME_PREFIX)) {
@@ -116,7 +116,7 @@ export function createDiagnosticEntry(
           name: truncateValue(libraryName, maxDiagnosticValueLen),
           version: truncateValue(
             libraryVersion ?? getNodejsLibraryVersion(),
-            maxDiagnosticValueLen
+            maxDiagnosticValueLen,
           ),
         },
       ],
@@ -131,7 +131,7 @@ export function createDiagnosticEntry(
  * @returns {InstrumentationInfo} The updated list of InstrumentationInfo.
  */
 function validateAndUpdateInstrumentation(
-  infoList: InstrumentationInfo[]
+  infoList: InstrumentationInfo[],
 ): InstrumentationInfo[] {
   const finalInfo: InstrumentationInfo[] = [];
   // First, iterate through given list of libraries and for each entry perform validations and transformations.

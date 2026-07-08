@@ -184,7 +184,7 @@ export const timeProfile: perftools.profiles.IProfile = Object.freeze({
 const encodedTimeProfile =
   perftools.profiles.Profile.encode(timeProfile).finish();
 export const decodedTimeProfile = Object.freeze(
-  perftools.profiles.Profile.decode(encodedTimeProfile),
+  perftools.profiles.Profile.decode(encodedTimeProfile)
 );
 
 const heapLeaf1 = {
@@ -340,7 +340,7 @@ export const heapProfile: perftools.profiles.IProfile = Object.freeze({
 const encodedHeapProfile =
   perftools.profiles.Profile.encode(heapProfile).finish();
 export const decodedHeapProfile = Object.freeze(
-  perftools.profiles.Profile.decode(encodedHeapProfile),
+  perftools.profiles.Profile.decode(encodedHeapProfile)
 );
 
 const heapLinesWithExternal = [
@@ -453,7 +453,7 @@ export const heapProfileWithExternal: perftools.profiles.IProfile =
 // heapProfile is encoded then decoded to convert numbers to longs, in
 // decodedHeapProfile
 export const decodedHeapProfileWithExternal = Object.freeze(
-  perftools.profiles.Profile.decode(encodedHeapProfile),
+  perftools.profiles.Profile.decode(encodedHeapProfile)
 );
 
 const anonymousHeapNode = {
@@ -759,10 +759,10 @@ export const heapProfileIncludePath: perftools.profiles.IProfile =
 // heapProfile is encoded then decoded to convert numbers to longs, in
 // decodedHeapProfile
 const encodedHeapProfileIncludePath = perftools.profiles.Profile.encode(
-  heapProfileIncludePath,
+  heapProfileIncludePath
 ).finish();
 export const decodedHeapProfileIncludePath = Object.freeze(
-  perftools.profiles.Profile.decode(encodedHeapProfileIncludePath),
+  perftools.profiles.Profile.decode(encodedHeapProfileIncludePath)
 );
 
 const heapExcludePathFunctions = [
@@ -824,10 +824,10 @@ export const heapProfileExcludePath: perftools.profiles.IProfile =
 // heapProfile is encoded then decoded to convert numbers to longs, in
 // decodedHeapProfile
 const encodedHeapProfileExcludePath = perftools.profiles.Profile.encode(
-  heapProfileExcludePath,
+  heapProfileExcludePath
 ).finish();
 export const decodedHeapProfileExcludePath = Object.freeze(
-  perftools.profiles.Profile.decode(encodedHeapProfileExcludePath),
+  perftools.profiles.Profile.decode(encodedHeapProfileExcludePath)
 );
 
 const mapDir = tmp.dirSync();

@@ -61,7 +61,7 @@ export interface ServerRequest extends http.IncomingMessage {
 export function makeHttpRequestData(
   req: ServerRequest | http.IncomingMessage,
   res?: http.ServerResponse,
-  latencyMilliseconds?: number
+  latencyMilliseconds?: number,
 ): CloudLoggingHttpRequest {
   let requestUrl,
     protocol,
@@ -112,7 +112,7 @@ export function makeHttpRequestData(
     referer ? {referer} : null,
     responseSize ? {responseSize} : null,
     status ? {status} : null,
-    latency ? {latency} : null
+    latency ? {latency} : null,
   );
 }
 

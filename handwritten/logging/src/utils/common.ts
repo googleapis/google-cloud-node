@@ -141,7 +141,7 @@ export class ObjectToStructConverter {
             [
               'This object contains a circular reference. To automatically',
               'remove it, set the `removeCircular` option to true.',
-            ].join(' ')
+            ].join(' '),
           );
         }
         convertedValue = {

@@ -211,7 +211,7 @@ export async function getDefaultResource(auth: GoogleAuth) {
  * https://cloud.google.com/error-reporting/reference/rest/v1beta1/ServiceContext}.
  */
 export async function detectServiceContext(
-  auth: GoogleAuth
+  auth: GoogleAuth,
 ): Promise<ServiceContext | null> {
   const env = await auth.getEnv();
   switch (env) {

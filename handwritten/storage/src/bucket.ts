@@ -208,7 +208,7 @@ export class ComposeCleanupError extends Error {
     message: string,
     errors: Error[],
     newFile: File,
-    apiResponse: unknown,
+    apiResponse: unknown
   ) {
     super(message);
     this.name = 'ComposeCleanupError';
@@ -1599,9 +1599,9 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    * metadata's `kms_key_name` value, if any.
    * @property {string} [userProject] The ID of the project which will be
    *     billed for the request.
-   * @property {boolean} [deleteSourceObjects] If true, the source objects
-   *     will be permanently deleted after a successful compose operation.
-   */
+    * @property {boolean} [deleteSourceObjects] If true, the source objects
+    *     will be permanently deleted after a successful compose operation.
+    */
   /**
    * @callback CombineCallback
    * @param {?Error} err Request error, if any.
@@ -1741,7 +1741,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
       Object.assign(
         requestQueryObject,
         destinationFile.instancePreconditionOpts,
-        requestQueryObject,
+        requestQueryObject
       );
     }
 
@@ -1799,7 +1799,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
 
           Promise.all(deletePromises).then(results => {
             const errors = results.filter(
-              (res): res is Error => res instanceof Error,
+              (res): res is Error => res instanceof Error
             );
 
             if (errors.length > 0) {
@@ -1807,7 +1807,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
                 `Compose operation succeeded, but cleaning up source objects failed. Failed to delete ${errors.length} source object(s).`,
                 errors,
                 destinationFile,
-                resp,
+                resp
               );
               callback!(cleanupErr, destinationFile, resp);
               return;
@@ -1818,7 +1818,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
         } else {
           callback!(null, destinationFile, resp);
         }
-      },
+      }
     );
   }
 

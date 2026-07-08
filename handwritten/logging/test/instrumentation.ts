@@ -37,19 +37,19 @@ describe('instrumentation_info', () => {
   it('should generate library info properly by default', () => {
     const entry = instrumentation.createDiagnosticEntry(
       undefined,
-      undefined
+      undefined,
     ) as Entry;
     assert.equal(
       entry.data?.[instrumentation.DIAGNOSTIC_INFO_KEY]?.[
         instrumentation.INSTRUMENTATION_SOURCE_KEY
       ]?.[0]?.[NAME],
-      instrumentation.NODEJS_LIBRARY_NAME_PREFIX
+      instrumentation.NODEJS_LIBRARY_NAME_PREFIX,
     );
     assert.equal(
       entry.data?.[instrumentation.DIAGNOSTIC_INFO_KEY]?.[
         instrumentation.INSTRUMENTATION_SOURCE_KEY
       ]?.[0]?.[VERSION],
-      instrumentation.getNodejsLibraryVersion()
+      instrumentation.getNodejsLibraryVersion(),
     );
   });
 
@@ -58,19 +58,19 @@ describe('instrumentation_info', () => {
     const entry = instrumentation.createDiagnosticEntry(
       undefined,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      data as any
+      data as any,
     ) as Entry;
     assert.equal(
       entry.data?.[instrumentation.DIAGNOSTIC_INFO_KEY]?.[
         instrumentation.INSTRUMENTATION_SOURCE_KEY
       ]?.[0]?.[NAME],
-      instrumentation.NODEJS_LIBRARY_NAME_PREFIX
+      instrumentation.NODEJS_LIBRARY_NAME_PREFIX,
     );
     assert.equal(
       entry.data?.[instrumentation.DIAGNOSTIC_INFO_KEY]?.[
         instrumentation.INSTRUMENTATION_SOURCE_KEY
       ]?.[0]?.[VERSION],
-      instrumentation.NODEJS_DEFAULT_LIBRARY_VERSION
+      instrumentation.NODEJS_DEFAULT_LIBRARY_VERSION,
     );
   });
 
@@ -84,7 +84,7 @@ describe('instrumentation_info', () => {
       entries[0][1].data?.[instrumentation.DIAGNOSTIC_INFO_KEY]?.[
         instrumentation.INSTRUMENTATION_SOURCE_KEY
       ]?.[0]?.[NAME],
-      instrumentation.NODEJS_LIBRARY_NAME_PREFIX
+      instrumentation.NODEJS_LIBRARY_NAME_PREFIX,
     );
   });
 
@@ -97,25 +97,25 @@ describe('instrumentation_info', () => {
       entries[0][0].data?.[instrumentation.DIAGNOSTIC_INFO_KEY]?.[
         instrumentation.INSTRUMENTATION_SOURCE_KEY
       ]?.length,
-      2
+      2,
     );
     assert.equal(
       entries[0][0].data?.[instrumentation.DIAGNOSTIC_INFO_KEY]?.[
         instrumentation.INSTRUMENTATION_SOURCE_KEY
       ]?.[1]?.[NAME],
-      instrumentation.NODEJS_LIBRARY_NAME_PREFIX
+      instrumentation.NODEJS_LIBRARY_NAME_PREFIX,
     );
     assert.equal(
       entries[0][0].data?.[instrumentation.DIAGNOSTIC_INFO_KEY]?.[
         instrumentation.INSTRUMENTATION_SOURCE_KEY
       ]?.[0]?.[NAME],
-      NODEJS_TEST
+      NODEJS_TEST,
     );
     assert.equal(
       entries[0][0].data?.[instrumentation.DIAGNOSTIC_INFO_KEY]?.[
         instrumentation.INSTRUMENTATION_SOURCE_KEY
       ]?.[0]?.[VERSION],
-      VERSION_TEST
+      VERSION_TEST,
     );
   });
 
@@ -128,19 +128,19 @@ describe('instrumentation_info', () => {
       entries[0][0].data?.[instrumentation.DIAGNOSTIC_INFO_KEY]?.[
         instrumentation.INSTRUMENTATION_SOURCE_KEY
       ]?.length,
-      1
+      1,
     );
     assert.equal(
       entries[0][0].data?.[instrumentation.DIAGNOSTIC_INFO_KEY]?.[
         instrumentation.INSTRUMENTATION_SOURCE_KEY
       ]?.[0]?.[NAME],
-      instrumentation.NODEJS_LIBRARY_NAME_PREFIX
+      instrumentation.NODEJS_LIBRARY_NAME_PREFIX,
     );
   });
 
   it('should truncate instrumentation info in log entry', () => {
     const entries = instrumentation.populateInstrumentationInfo(
-      createEntry(LONG_NODEJS_TEST, LONG_VERSION_TEST)
+      createEntry(LONG_NODEJS_TEST, LONG_VERSION_TEST),
     );
     assert.equal(entries[0].length, 1);
     assert.equal(true, entries[1]);
@@ -148,13 +148,13 @@ describe('instrumentation_info', () => {
       entries[0][0].data?.[instrumentation.DIAGNOSTIC_INFO_KEY]?.[
         instrumentation.INSTRUMENTATION_SOURCE_KEY
       ]?.[0]?.[NAME],
-      NODEJS_TEST + '-oo*'
+      NODEJS_TEST + '-oo*',
     );
     assert.equal(
       entries[0][0].data?.[instrumentation.DIAGNOSTIC_INFO_KEY]?.[
         instrumentation.INSTRUMENTATION_SOURCE_KEY
       ]?.[0]?.[VERSION],
-      VERSION_TEST + '.0.0.0.0.*'
+      VERSION_TEST + '.0.0.0.0.*',
     );
   });
 
@@ -168,7 +168,7 @@ describe('instrumentation_info', () => {
       entries[0][1].data?.[instrumentation.DIAGNOSTIC_INFO_KEY]?.[
         instrumentation.INSTRUMENTATION_SOURCE_KEY
       ]?.[0]?.[NAME],
-      instrumentation.NODEJS_LIBRARY_NAME_PREFIX
+      instrumentation.NODEJS_LIBRARY_NAME_PREFIX,
     );
     entries = instrumentation.populateInstrumentationInfo(dummyEntry);
     assert.equal(entries[0].length, 1);
@@ -180,7 +180,7 @@ describe('instrumentation_info', () => {
     // library version is always added as a third one
     const dummy = createEntry(
       instrumentation.NODEJS_LIBRARY_NAME_PREFIX + '-one',
-      'v1'
+      'v1',
     );
     dummy.data?.[instrumentation.DIAGNOSTIC_INFO_KEY][
       instrumentation.INSTRUMENTATION_SOURCE_KEY
@@ -206,26 +206,26 @@ describe('instrumentation_info', () => {
       entries[0][0].data?.[instrumentation.DIAGNOSTIC_INFO_KEY]?.[
         instrumentation.INSTRUMENTATION_SOURCE_KEY
       ]?.length,
-      3
+      3,
     );
     assert.equal(true, entries[1]);
     assert.equal(
       entries[0][0].data?.[instrumentation.DIAGNOSTIC_INFO_KEY]?.[
         instrumentation.INSTRUMENTATION_SOURCE_KEY
       ]?.[0]?.[NAME],
-      instrumentation.NODEJS_LIBRARY_NAME_PREFIX + '-one'
+      instrumentation.NODEJS_LIBRARY_NAME_PREFIX + '-one',
     );
     assert.equal(
       entries[0][0].data?.[instrumentation.DIAGNOSTIC_INFO_KEY]?.[
         instrumentation.INSTRUMENTATION_SOURCE_KEY
       ]?.[1]?.[NAME],
-      instrumentation.NODEJS_LIBRARY_NAME_PREFIX + '-two'
+      instrumentation.NODEJS_LIBRARY_NAME_PREFIX + '-two',
     );
     assert.equal(
       entries[0][0].data?.[instrumentation.DIAGNOSTIC_INFO_KEY]?.[
         instrumentation.INSTRUMENTATION_SOURCE_KEY
       ]?.[2]?.[NAME],
-      instrumentation.NODEJS_LIBRARY_NAME_PREFIX
+      instrumentation.NODEJS_LIBRARY_NAME_PREFIX,
     );
   });
 });
@@ -235,7 +235,7 @@ function createEntry(name: string | undefined, version: string | undefined) {
     {
       severity: google.logging.type.LogSeverity.DEBUG,
     },
-    undefined
+    undefined,
   );
   if (name || version) {
     entry.data = {

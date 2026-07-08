@@ -40,7 +40,7 @@ describe('Log Common', () => {
         assignSeverityToEntries(ENTRIES[0], SEVERITY)
           .map(x => x.metadata)
           .map(x => x.severity),
-        [SEVERITY]
+        [SEVERITY],
       );
     });
 
@@ -49,7 +49,7 @@ describe('Log Common', () => {
         assignSeverityToEntries(ENTRIES, SEVERITY)
           .map(x => x.metadata)
           .map(x => x.severity),
-        [SEVERITY, SEVERITY, SEVERITY]
+        [SEVERITY, SEVERITY, SEVERITY],
       );
     });
 

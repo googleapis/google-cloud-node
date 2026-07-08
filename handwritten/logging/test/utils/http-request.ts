@@ -105,14 +105,14 @@ describe('http-request', () => {
       const h1 = makeHttpRequestData(
         fakeRequest as ServerRequest,
         fakeResponse as ServerResponse,
-        1003
+        1003,
       );
       assert.deepStrictEqual(h1.latency, {seconds: 1, nanos: 3e6});
 
       const h2 = makeHttpRequestData(
         fakeRequest as ServerRequest,
         fakeResponse as ServerResponse,
-        9003.1
+        9003.1,
       );
       assert.deepStrictEqual(h2.latency, {seconds: 9, nanos: 3.1e6});
 
@@ -120,7 +120,7 @@ describe('http-request', () => {
       const h3 = makeHttpRequestData(
         fakeRequest as ServerRequest,
         fakeResponse as ServerResponse,
-        1.0000000001
+        1.0000000001,
       );
       assert.deepStrictEqual(h3.latency, {seconds: 0, nanos: 1e6});
     });
@@ -135,7 +135,7 @@ describe('http-request', () => {
 
     it('should be false on invalid objects', () => {
       assert(
-        !isRawHttpRequest({requestMethod: 'POST'} as CloudLoggingHttpRequest)
+        !isRawHttpRequest({requestMethod: 'POST'} as CloudLoggingHttpRequest),
       );
       assert(!isRawHttpRequest({}));
       assert(!isRawHttpRequest(null));

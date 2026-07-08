@@ -96,7 +96,7 @@ export interface GetRecordsCallback {
     err: Error | null,
     records?: Record[] | null,
     nextQuery?: {} | null,
-    apiResponse?: Metadata,
+    apiResponse?: Metadata
   ): void;
 }
 
@@ -155,7 +155,7 @@ export interface GetChangesCallback {
     err: Error | null,
     changes?: Change[] | null,
     nextQuery?: {} | null,
-    apiResponse?: Metadata,
+    apiResponse?: Metadata
   ): void;
 }
 
@@ -184,7 +184,7 @@ type Without<T, K> = {
 // Using the Without type, we essentially make a new ServiceObject type that
 // doesn't contain any of the methods that have signatures we wish to override.
 type ZoneServiceObject = new (
-  config: ServiceObjectConfig,
+  config: ServiceObjectConfig
 ) => Without<ServiceObject<Zone>, 'create' | 'delete' | 'get'>;
 
 // This is used purely for making TypeScript think that the object we are
@@ -390,7 +390,7 @@ class Zone extends ZoneServiceObject {
   create(config: CreateZoneRequest, callback: CreateZoneCallback): void;
   create(
     config: CreateZoneRequest,
-    callback?: CreateZoneCallback,
+    callback?: CreateZoneCallback
   ): void | Promise<CreateZoneResponse> {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const args = [config, callback!] as any;
@@ -402,7 +402,7 @@ class Zone extends ZoneServiceObject {
   get(config: GetZoneRequest, callback: InstanceResponseCallback<Zone>): void;
   get(
     configOrCallback?: GetZoneRequest | InstanceResponseCallback<Zone>,
-    callback?: InstanceResponseCallback<Zone>,
+    callback?: InstanceResponseCallback<Zone>
   ): void | Promise<GetResponse<Zone>> {
     const config = typeof configOrCallback === 'object' ? configOrCallback : {};
     callback =
@@ -424,7 +424,7 @@ class Zone extends ZoneServiceObject {
    */
   addRecords(
     records: Record | Record[],
-    callback?: CreateChangeCallback,
+    callback?: CreateChangeCallback
   ): void | Promise<CreateChangeResponse> {
     this.createChange({add: records}, callback!);
   }
@@ -447,7 +447,7 @@ class Zone extends ZoneServiceObject {
   createChange(config: CreateChangeRequest): Promise<CreateChangeResponse>;
   createChange(
     config: CreateChangeRequest,
-    callback: CreateChangeCallback,
+    callback: CreateChangeCallback
   ): void;
   /**
    * Create a change of resource record sets for the zone.
@@ -496,7 +496,7 @@ class Zone extends ZoneServiceObject {
    */
   createChange(
     config: CreateChangeRequest,
-    callback?: CreateChangeCallback,
+    callback?: CreateChangeCallback
   ): void | Promise<CreateChangeResponse> {
     if (!config || (!config.add && !config.delete)) {
       throw new Error('Cannot create a change with no additions or deletions.');
@@ -525,13 +525,13 @@ class Zone extends ZoneServiceObject {
     const body = Object.assign(
       {
         additions: groupByType(
-          (arrify(config.add) as Record[]).map(x => x.toJSON()),
+          (arrify(config.add) as Record[]).map(x => x.toJSON())
         ),
         deletions: groupByType(
-          (arrify(config.delete) as Record[]).map(x => x.toJSON()),
+          (arrify(config.delete) as Record[]).map(x => x.toJSON())
         ),
       },
-      config,
+      config
     );
     delete body.add;
     delete body.delete;
@@ -549,7 +549,7 @@ class Zone extends ZoneServiceObject {
         const change = this.change(resp.id);
         change.metadata = resp;
         callback!(null, change, resp);
-      },
+      }
     );
   }
 
@@ -602,7 +602,7 @@ class Zone extends ZoneServiceObject {
    */
   delete(
     optionsOrCallback?: DeleteZoneConfig | DeleteZoneCallback,
-    callback?: DeleteZoneCallback,
+    callback?: DeleteZoneCallback
   ): void | Promise<DeleteZoneResponse> {
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
@@ -623,12 +623,12 @@ class Zone extends ZoneServiceObject {
   }
 
   deleteRecords(
-    records?: Record | Record[] | string,
+    records?: Record | Record[] | string
   ): Promise<CreateChangeResponse>;
   deleteRecords(callback: CreateChangeCallback): void;
   deleteRecords(
     records: Record | Record[] | string,
-    callback: CreateChangeCallback,
+    callback: CreateChangeCallback
   ): void;
   /**
    * Delete records from this zone. This is a convenience wrapper around
@@ -710,7 +710,7 @@ class Zone extends ZoneServiceObject {
    */
   deleteRecords(
     recordsOrCallback?: Record | Record[] | string | CreateChangeCallback,
-    callback?: CreateChangeCallback,
+    callback?: CreateChangeCallback
   ): void | Promise<CreateChangeResponse> {
     let records: Array<Record | string>;
     if (typeof recordsOrCallback === 'function') {
@@ -741,7 +741,7 @@ class Zone extends ZoneServiceObject {
    * @returns {Promise<CreateChangeResponse>}
    */
   empty(
-    callback?: CreateChangeCallback,
+    callback?: CreateChangeCallback
   ): void | Promise<CreateChangeResponse | []> {
     this.getRecords((err, records) => {
       if (err) {
@@ -790,7 +790,7 @@ class Zone extends ZoneServiceObject {
    */
   export(
     localPath: string,
-    callback?: ZoneExportCallback,
+    callback?: ZoneExportCallback
   ): void | Promise<ZoneExportResponse> {
     this.getRecords((err, records) => {
       if (err) {
@@ -848,7 +848,7 @@ class Zone extends ZoneServiceObject {
    */
   getChanges(
     queryOrCallback?: GetChangesRequest | GetChangesCallback,
-    callback?: GetChangesCallback,
+    callback?: GetChangesCallback
   ): void | Promise<GetChangesResponse> {
     let query = queryOrCallback as GetChangesRequest;
     if (typeof query === 'function') {
@@ -881,17 +881,17 @@ class Zone extends ZoneServiceObject {
           });
         }
         callback!(null, changes, nextQuery, resp);
-      },
+      }
     );
   }
 
   getRecords(
-    query?: GetRecordsRequest | string | string[],
+    query?: GetRecordsRequest | string | string[]
   ): Promise<GetRecordsResponse>;
   getRecords(callback: GetRecordsCallback): void;
   getRecords(
     query: GetRecordsRequest | string | string[],
-    callback: GetRecordsCallback,
+    callback: GetRecordsCallback
   ): void;
   /**
    * Query object for listing records.
@@ -990,7 +990,7 @@ class Zone extends ZoneServiceObject {
       | GetRecordsCallback
       | string
       | string[],
-    callback?: GetRecordsCallback,
+    callback?: GetRecordsCallback
   ): void | Promise<GetRecordsResponse> {
     let query: string | string[] | GetRecordsRequest;
     if (typeof queryOrCallback === 'function') {
@@ -1037,7 +1037,7 @@ class Zone extends ZoneServiceObject {
           });
         }
         callback!(null, records, nextQuery, resp);
-      },
+      }
     );
   }
 
@@ -1074,7 +1074,7 @@ class Zone extends ZoneServiceObject {
    */
   import(
     localPath: string,
-    callback?: CreateChangeCallback,
+    callback?: CreateChangeCallback
   ): void | Promise<CreateChangeResponse> {
     fs.readFile(localPath, 'utf-8', (err, file) => {
       if (err) {
@@ -1092,7 +1092,7 @@ class Zone extends ZoneServiceObject {
         recordTypeSet.forEach((record: any) => {
           record.ttl = record.ttl || defaultTTL;
           recordsToCreate.push(
-            Record.fromZoneRecord_(this, recordType, record),
+            Record.fromZoneRecord_(this, recordType, record)
           );
         });
       });
@@ -1157,12 +1157,12 @@ class Zone extends ZoneServiceObject {
 
   replaceRecords(
     recordType: string | string[],
-    newRecords: Record | Record[],
+    newRecords: Record | Record[]
   ): Promise<CreateChangeResponse>;
   replaceRecords(
     recordType: string | string[],
     newRecords: Record | Record[],
-    callback: CreateChangeCallback,
+    callback: CreateChangeCallback
   ): void;
   /**
    * Provide a record type that should be deleted and replaced with other
@@ -1220,7 +1220,7 @@ class Zone extends ZoneServiceObject {
   replaceRecords(
     recordType: string | string[],
     newRecords: Record | Record[],
-    callback?: CreateChangeCallback,
+    callback?: CreateChangeCallback
   ): void | Promise<CreateChangeResponse> {
     this.getRecords(recordType, (err, recordsToDelete) => {
       if (err) {
@@ -1232,7 +1232,7 @@ class Zone extends ZoneServiceObject {
           add: newRecords,
           delete: recordsToDelete!,
         },
-        callback!,
+        callback!
       );
     });
   }
@@ -1240,7 +1240,7 @@ class Zone extends ZoneServiceObject {
   deleteRecordsByType_(recordTypes: string[]): Promise<CreateChangeResponse>;
   deleteRecordsByType_(
     recordTypes: string[],
-    callback: CreateChangeCallback,
+    callback: CreateChangeCallback
   ): void;
   /**
    * Delete records from the zone matching an array of types.
@@ -1262,7 +1262,7 @@ class Zone extends ZoneServiceObject {
    */
   deleteRecordsByType_(
     recordTypes: string[],
-    callback?: CreateChangeCallback,
+    callback?: CreateChangeCallback
   ): void | Promise<CreateChangeResponse> {
     this.getRecords(recordTypes, (err, records) => {
       if (err) {

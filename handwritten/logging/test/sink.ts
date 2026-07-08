@@ -75,7 +75,7 @@ describe('Sink', () => {
     it('should localize the formatted name', () => {
       assert.strictEqual(
         sink.formattedName_,
-        'projects/' + LOGGING.projectId + '/sinks/' + SINK_NAME
+        'projects/' + LOGGING.projectId + '/sinks/' + SINK_NAME,
       );
     });
   });
@@ -98,7 +98,7 @@ describe('Sink', () => {
       sink.logging.auth.getProjectId = async () => PROJECT_ID;
       sink.logging.configService.deleteSink = async (
         reqOpts: {},
-        gaxOpts: {}
+        gaxOpts: {},
       ) => {
         assert.deepStrictEqual(reqOpts, {
           sinkName: sink.formattedName_,
@@ -113,7 +113,7 @@ describe('Sink', () => {
       const gaxOptions = {};
       sink.logging.configService.deleteSink = async (
         reqOpts: {},
-        gaxOpts: {}
+        gaxOpts: {},
       ) => {
         assert.deepStrictEqual(gaxOpts, gaxOptions);
       };
@@ -203,7 +203,7 @@ describe('Sink', () => {
       };
       sink.setMetadata(METADATA).then(
         () => {},
-        err => assert.strictEqual(err, error)
+        err => assert.strictEqual(err, error),
       );
     });
 
@@ -213,7 +213,7 @@ describe('Sink', () => {
       sink.getMetadata = async () => [currentMetadata] as any;
       sink.logging.configService.updateSink = async (
         reqOpts: {},
-        gaxOpts: {}
+        gaxOpts: {},
       ) => {
         assert.deepStrictEqual(reqOpts, {
           sinkName: sink.formattedName_,

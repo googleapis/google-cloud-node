@@ -30,7 +30,7 @@ import {protobuf, LROperation, operationsProtos} from 'google-gax';
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
 const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
+  require('../protos/protos.json'),
 ).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -47,7 +47,7 @@ function generateSampleMessage<T extends object>(instance: T) {
     instance.constructor as typeof protobuf.Message
   ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
+    filledObject,
   ) as T;
 }
 
@@ -59,7 +59,7 @@ function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
 
 function stubSimpleCallWithCallback<ResponseType>(
   response?: ResponseType,
-  error?: Error
+  error?: Error,
 ) {
   return error
     ? sinon.stub().callsArgWith(2, error)
@@ -69,7 +69,7 @@ function stubSimpleCallWithCallback<ResponseType>(
 function stubLongRunningCall<ResponseType>(
   response?: ResponseType,
   callError?: Error,
-  lroError?: Error
+  lroError?: Error,
 ) {
   const innerStub = lroError
     ? sinon.stub().rejects(lroError)
@@ -85,7 +85,7 @@ function stubLongRunningCall<ResponseType>(
 function stubLongRunningCallWithCallback<ResponseType>(
   response?: ResponseType,
   callError?: Error,
-  lroError?: Error
+  lroError?: Error,
 ) {
   const innerStub = lroError
     ? sinon.stub().rejects(lroError)
@@ -100,7 +100,7 @@ function stubLongRunningCallWithCallback<ResponseType>(
 
 function stubPageStreamingCall<ResponseType>(
   responses?: ResponseType[],
-  error?: Error
+  error?: Error,
 ) {
   const pagingStub = sinon.stub();
   if (responses) {
@@ -138,7 +138,7 @@ function stubPageStreamingCall<ResponseType>(
 
 function stubAsyncIterationCall<ResponseType>(
   responses?: ResponseType[],
-  error?: Error
+  error?: Error,
 ) {
   let counter = 0;
   const asyncIterable = {
@@ -345,16 +345,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.GetBucketRequest()
+        new protos.google.logging.v2.GetBucketRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.GetBucketRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.logging.v2.LogBucket()
+        new protos.google.logging.v2.LogBucket(),
       );
       client.innerApiCalls.getBucket = stubSimpleCall(expectedResponse);
       const [response] = await client.getBucket(request);
@@ -376,16 +376,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.GetBucketRequest()
+        new protos.google.logging.v2.GetBucketRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.GetBucketRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.logging.v2.LogBucket()
+        new protos.google.logging.v2.LogBucket(),
       );
       client.innerApiCalls.getBucket =
         stubSimpleCallWithCallback(expectedResponse);
@@ -394,14 +394,14 @@ describe('v2.ConfigServiceV2Client', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.logging.v2.ILogBucket | null
+            result?: protos.google.logging.v2.ILogBucket | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -423,11 +423,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.GetBucketRequest()
+        new protos.google.logging.v2.GetBucketRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.GetBucketRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
@@ -451,11 +451,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.GetBucketRequest()
+        new protos.google.logging.v2.GetBucketRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.GetBucketRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -472,16 +472,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.CreateBucketRequest()
+        new protos.google.logging.v2.CreateBucketRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.CreateBucketRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.logging.v2.LogBucket()
+        new protos.google.logging.v2.LogBucket(),
       );
       client.innerApiCalls.createBucket = stubSimpleCall(expectedResponse);
       const [response] = await client.createBucket(request);
@@ -503,16 +503,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.CreateBucketRequest()
+        new protos.google.logging.v2.CreateBucketRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.CreateBucketRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.logging.v2.LogBucket()
+        new protos.google.logging.v2.LogBucket(),
       );
       client.innerApiCalls.createBucket =
         stubSimpleCallWithCallback(expectedResponse);
@@ -521,14 +521,14 @@ describe('v2.ConfigServiceV2Client', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.logging.v2.ILogBucket | null
+            result?: protos.google.logging.v2.ILogBucket | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -550,18 +550,18 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.CreateBucketRequest()
+        new protos.google.logging.v2.CreateBucketRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.CreateBucketRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createBucket = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.createBucket(request), expectedError);
       const actualRequest = (
@@ -581,11 +581,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.CreateBucketRequest()
+        new protos.google.logging.v2.CreateBucketRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.CreateBucketRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -602,16 +602,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.UpdateBucketRequest()
+        new protos.google.logging.v2.UpdateBucketRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.UpdateBucketRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.logging.v2.LogBucket()
+        new protos.google.logging.v2.LogBucket(),
       );
       client.innerApiCalls.updateBucket = stubSimpleCall(expectedResponse);
       const [response] = await client.updateBucket(request);
@@ -633,16 +633,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.UpdateBucketRequest()
+        new protos.google.logging.v2.UpdateBucketRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.UpdateBucketRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.logging.v2.LogBucket()
+        new protos.google.logging.v2.LogBucket(),
       );
       client.innerApiCalls.updateBucket =
         stubSimpleCallWithCallback(expectedResponse);
@@ -651,14 +651,14 @@ describe('v2.ConfigServiceV2Client', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.logging.v2.ILogBucket | null
+            result?: protos.google.logging.v2.ILogBucket | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -680,18 +680,18 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.UpdateBucketRequest()
+        new protos.google.logging.v2.UpdateBucketRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.UpdateBucketRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateBucket = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.updateBucket(request), expectedError);
       const actualRequest = (
@@ -711,11 +711,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.UpdateBucketRequest()
+        new protos.google.logging.v2.UpdateBucketRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.UpdateBucketRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -732,16 +732,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.DeleteBucketRequest()
+        new protos.google.logging.v2.DeleteBucketRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.DeleteBucketRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
+        new protos.google.protobuf.Empty(),
       );
       client.innerApiCalls.deleteBucket = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteBucket(request);
@@ -763,16 +763,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.DeleteBucketRequest()
+        new protos.google.logging.v2.DeleteBucketRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.DeleteBucketRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
+        new protos.google.protobuf.Empty(),
       );
       client.innerApiCalls.deleteBucket =
         stubSimpleCallWithCallback(expectedResponse);
@@ -781,14 +781,14 @@ describe('v2.ConfigServiceV2Client', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
+            result?: protos.google.protobuf.IEmpty | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -810,18 +810,18 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.DeleteBucketRequest()
+        new protos.google.logging.v2.DeleteBucketRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.DeleteBucketRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteBucket = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.deleteBucket(request), expectedError);
       const actualRequest = (
@@ -841,11 +841,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.DeleteBucketRequest()
+        new protos.google.logging.v2.DeleteBucketRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.DeleteBucketRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -862,16 +862,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.UndeleteBucketRequest()
+        new protos.google.logging.v2.UndeleteBucketRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.UndeleteBucketRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
+        new protos.google.protobuf.Empty(),
       );
       client.innerApiCalls.undeleteBucket = stubSimpleCall(expectedResponse);
       const [response] = await client.undeleteBucket(request);
@@ -893,16 +893,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.UndeleteBucketRequest()
+        new protos.google.logging.v2.UndeleteBucketRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.UndeleteBucketRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
+        new protos.google.protobuf.Empty(),
       );
       client.innerApiCalls.undeleteBucket =
         stubSimpleCallWithCallback(expectedResponse);
@@ -911,14 +911,14 @@ describe('v2.ConfigServiceV2Client', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
+            result?: protos.google.protobuf.IEmpty | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -940,18 +940,18 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.UndeleteBucketRequest()
+        new protos.google.logging.v2.UndeleteBucketRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.UndeleteBucketRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeleteBucket = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.undeleteBucket(request), expectedError);
       const actualRequest = (
@@ -971,11 +971,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.UndeleteBucketRequest()
+        new protos.google.logging.v2.UndeleteBucketRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.UndeleteBucketRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -992,22 +992,22 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.GetViewRequest()
+        new protos.google.logging.v2.GetViewRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.GetViewRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.logging.v2.LogView()
+        new protos.google.logging.v2.LogView(),
       );
       client.innerApiCalls.getView = stubSimpleCall(expectedResponse);
       const [response] = await client.getView(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (client.innerApiCalls.getView as SinonStub).getCall(
-        0
+        0,
       ).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
@@ -1023,16 +1023,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.GetViewRequest()
+        new protos.google.logging.v2.GetViewRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.GetViewRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.logging.v2.LogView()
+        new protos.google.logging.v2.LogView(),
       );
       client.innerApiCalls.getView =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1041,20 +1041,20 @@ describe('v2.ConfigServiceV2Client', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.logging.v2.ILogView | null
+            result?: protos.google.logging.v2.ILogView | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (client.innerApiCalls.getView as SinonStub).getCall(
-        0
+        0,
       ).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
@@ -1070,11 +1070,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.GetViewRequest()
+        new protos.google.logging.v2.GetViewRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.GetViewRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
@@ -1082,7 +1082,7 @@ describe('v2.ConfigServiceV2Client', () => {
       client.innerApiCalls.getView = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getView(request), expectedError);
       const actualRequest = (client.innerApiCalls.getView as SinonStub).getCall(
-        0
+        0,
       ).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
@@ -1098,11 +1098,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.GetViewRequest()
+        new protos.google.logging.v2.GetViewRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.GetViewRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -1119,16 +1119,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.CreateViewRequest()
+        new protos.google.logging.v2.CreateViewRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.CreateViewRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.logging.v2.LogView()
+        new protos.google.logging.v2.LogView(),
       );
       client.innerApiCalls.createView = stubSimpleCall(expectedResponse);
       const [response] = await client.createView(request);
@@ -1150,16 +1150,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.CreateViewRequest()
+        new protos.google.logging.v2.CreateViewRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.CreateViewRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.logging.v2.LogView()
+        new protos.google.logging.v2.LogView(),
       );
       client.innerApiCalls.createView =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1168,14 +1168,14 @@ describe('v2.ConfigServiceV2Client', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.logging.v2.ILogView | null
+            result?: protos.google.logging.v2.ILogView | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -1197,18 +1197,18 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.CreateViewRequest()
+        new protos.google.logging.v2.CreateViewRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.CreateViewRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createView = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.createView(request), expectedError);
       const actualRequest = (
@@ -1228,11 +1228,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.CreateViewRequest()
+        new protos.google.logging.v2.CreateViewRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.CreateViewRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -1249,16 +1249,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.UpdateViewRequest()
+        new protos.google.logging.v2.UpdateViewRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.UpdateViewRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.logging.v2.LogView()
+        new protos.google.logging.v2.LogView(),
       );
       client.innerApiCalls.updateView = stubSimpleCall(expectedResponse);
       const [response] = await client.updateView(request);
@@ -1280,16 +1280,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.UpdateViewRequest()
+        new protos.google.logging.v2.UpdateViewRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.UpdateViewRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.logging.v2.LogView()
+        new protos.google.logging.v2.LogView(),
       );
       client.innerApiCalls.updateView =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1298,14 +1298,14 @@ describe('v2.ConfigServiceV2Client', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.logging.v2.ILogView | null
+            result?: protos.google.logging.v2.ILogView | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -1327,18 +1327,18 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.UpdateViewRequest()
+        new protos.google.logging.v2.UpdateViewRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.UpdateViewRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateView = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.updateView(request), expectedError);
       const actualRequest = (
@@ -1358,11 +1358,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.UpdateViewRequest()
+        new protos.google.logging.v2.UpdateViewRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.UpdateViewRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -1379,16 +1379,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.DeleteViewRequest()
+        new protos.google.logging.v2.DeleteViewRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.DeleteViewRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
+        new protos.google.protobuf.Empty(),
       );
       client.innerApiCalls.deleteView = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteView(request);
@@ -1410,16 +1410,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.DeleteViewRequest()
+        new protos.google.logging.v2.DeleteViewRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.DeleteViewRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
+        new protos.google.protobuf.Empty(),
       );
       client.innerApiCalls.deleteView =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1428,14 +1428,14 @@ describe('v2.ConfigServiceV2Client', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
+            result?: protos.google.protobuf.IEmpty | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -1457,18 +1457,18 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.DeleteViewRequest()
+        new protos.google.logging.v2.DeleteViewRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.DeleteViewRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteView = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.deleteView(request), expectedError);
       const actualRequest = (
@@ -1488,11 +1488,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.DeleteViewRequest()
+        new protos.google.logging.v2.DeleteViewRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.DeleteViewRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -1509,22 +1509,22 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.GetSinkRequest()
+        new protos.google.logging.v2.GetSinkRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.GetSinkRequest',
-        ['sinkName']
+        ['sinkName'],
       );
       request.sinkName = defaultValue1;
       const expectedHeaderRequestParams = `sink_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.logging.v2.LogSink()
+        new protos.google.logging.v2.LogSink(),
       );
       client.innerApiCalls.getSink = stubSimpleCall(expectedResponse);
       const [response] = await client.getSink(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (client.innerApiCalls.getSink as SinonStub).getCall(
-        0
+        0,
       ).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
@@ -1540,16 +1540,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.GetSinkRequest()
+        new protos.google.logging.v2.GetSinkRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.GetSinkRequest',
-        ['sinkName']
+        ['sinkName'],
       );
       request.sinkName = defaultValue1;
       const expectedHeaderRequestParams = `sink_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.logging.v2.LogSink()
+        new protos.google.logging.v2.LogSink(),
       );
       client.innerApiCalls.getSink =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1558,20 +1558,20 @@ describe('v2.ConfigServiceV2Client', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.logging.v2.ILogSink | null
+            result?: protos.google.logging.v2.ILogSink | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (client.innerApiCalls.getSink as SinonStub).getCall(
-        0
+        0,
       ).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
@@ -1587,11 +1587,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.GetSinkRequest()
+        new protos.google.logging.v2.GetSinkRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.GetSinkRequest',
-        ['sinkName']
+        ['sinkName'],
       );
       request.sinkName = defaultValue1;
       const expectedHeaderRequestParams = `sink_name=${defaultValue1}`;
@@ -1599,7 +1599,7 @@ describe('v2.ConfigServiceV2Client', () => {
       client.innerApiCalls.getSink = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getSink(request), expectedError);
       const actualRequest = (client.innerApiCalls.getSink as SinonStub).getCall(
-        0
+        0,
       ).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
@@ -1615,11 +1615,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.GetSinkRequest()
+        new protos.google.logging.v2.GetSinkRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.GetSinkRequest',
-        ['sinkName']
+        ['sinkName'],
       );
       request.sinkName = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -1636,16 +1636,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.CreateSinkRequest()
+        new protos.google.logging.v2.CreateSinkRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.CreateSinkRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.logging.v2.LogSink()
+        new protos.google.logging.v2.LogSink(),
       );
       client.innerApiCalls.createSink = stubSimpleCall(expectedResponse);
       const [response] = await client.createSink(request);
@@ -1667,16 +1667,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.CreateSinkRequest()
+        new protos.google.logging.v2.CreateSinkRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.CreateSinkRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.logging.v2.LogSink()
+        new protos.google.logging.v2.LogSink(),
       );
       client.innerApiCalls.createSink =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1685,14 +1685,14 @@ describe('v2.ConfigServiceV2Client', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.logging.v2.ILogSink | null
+            result?: protos.google.logging.v2.ILogSink | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -1714,18 +1714,18 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.CreateSinkRequest()
+        new protos.google.logging.v2.CreateSinkRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.CreateSinkRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createSink = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.createSink(request), expectedError);
       const actualRequest = (
@@ -1745,11 +1745,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.CreateSinkRequest()
+        new protos.google.logging.v2.CreateSinkRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.CreateSinkRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -1766,16 +1766,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.UpdateSinkRequest()
+        new protos.google.logging.v2.UpdateSinkRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.UpdateSinkRequest',
-        ['sinkName']
+        ['sinkName'],
       );
       request.sinkName = defaultValue1;
       const expectedHeaderRequestParams = `sink_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.logging.v2.LogSink()
+        new protos.google.logging.v2.LogSink(),
       );
       client.innerApiCalls.updateSink = stubSimpleCall(expectedResponse);
       const [response] = await client.updateSink(request);
@@ -1797,16 +1797,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.UpdateSinkRequest()
+        new protos.google.logging.v2.UpdateSinkRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.UpdateSinkRequest',
-        ['sinkName']
+        ['sinkName'],
       );
       request.sinkName = defaultValue1;
       const expectedHeaderRequestParams = `sink_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.logging.v2.LogSink()
+        new protos.google.logging.v2.LogSink(),
       );
       client.innerApiCalls.updateSink =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1815,14 +1815,14 @@ describe('v2.ConfigServiceV2Client', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.logging.v2.ILogSink | null
+            result?: protos.google.logging.v2.ILogSink | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -1844,18 +1844,18 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.UpdateSinkRequest()
+        new protos.google.logging.v2.UpdateSinkRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.UpdateSinkRequest',
-        ['sinkName']
+        ['sinkName'],
       );
       request.sinkName = defaultValue1;
       const expectedHeaderRequestParams = `sink_name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSink = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.updateSink(request), expectedError);
       const actualRequest = (
@@ -1875,11 +1875,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.UpdateSinkRequest()
+        new protos.google.logging.v2.UpdateSinkRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.UpdateSinkRequest',
-        ['sinkName']
+        ['sinkName'],
       );
       request.sinkName = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -1896,16 +1896,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.DeleteSinkRequest()
+        new protos.google.logging.v2.DeleteSinkRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.DeleteSinkRequest',
-        ['sinkName']
+        ['sinkName'],
       );
       request.sinkName = defaultValue1;
       const expectedHeaderRequestParams = `sink_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
+        new protos.google.protobuf.Empty(),
       );
       client.innerApiCalls.deleteSink = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteSink(request);
@@ -1927,16 +1927,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.DeleteSinkRequest()
+        new protos.google.logging.v2.DeleteSinkRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.DeleteSinkRequest',
-        ['sinkName']
+        ['sinkName'],
       );
       request.sinkName = defaultValue1;
       const expectedHeaderRequestParams = `sink_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
+        new protos.google.protobuf.Empty(),
       );
       client.innerApiCalls.deleteSink =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1945,14 +1945,14 @@ describe('v2.ConfigServiceV2Client', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
+            result?: protos.google.protobuf.IEmpty | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -1974,18 +1974,18 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.DeleteSinkRequest()
+        new protos.google.logging.v2.DeleteSinkRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.DeleteSinkRequest',
-        ['sinkName']
+        ['sinkName'],
       );
       request.sinkName = defaultValue1;
       const expectedHeaderRequestParams = `sink_name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteSink = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.deleteSink(request), expectedError);
       const actualRequest = (
@@ -2005,11 +2005,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.DeleteSinkRequest()
+        new protos.google.logging.v2.DeleteSinkRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.DeleteSinkRequest',
-        ['sinkName']
+        ['sinkName'],
       );
       request.sinkName = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -2026,22 +2026,22 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.GetLinkRequest()
+        new protos.google.logging.v2.GetLinkRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.GetLinkRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.logging.v2.Link()
+        new protos.google.logging.v2.Link(),
       );
       client.innerApiCalls.getLink = stubSimpleCall(expectedResponse);
       const [response] = await client.getLink(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (client.innerApiCalls.getLink as SinonStub).getCall(
-        0
+        0,
       ).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
@@ -2057,16 +2057,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.GetLinkRequest()
+        new protos.google.logging.v2.GetLinkRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.GetLinkRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.logging.v2.Link()
+        new protos.google.logging.v2.Link(),
       );
       client.innerApiCalls.getLink =
         stubSimpleCallWithCallback(expectedResponse);
@@ -2075,20 +2075,20 @@ describe('v2.ConfigServiceV2Client', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.logging.v2.ILink | null
+            result?: protos.google.logging.v2.ILink | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (client.innerApiCalls.getLink as SinonStub).getCall(
-        0
+        0,
       ).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
@@ -2104,11 +2104,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.GetLinkRequest()
+        new protos.google.logging.v2.GetLinkRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.GetLinkRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
@@ -2116,7 +2116,7 @@ describe('v2.ConfigServiceV2Client', () => {
       client.innerApiCalls.getLink = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getLink(request), expectedError);
       const actualRequest = (client.innerApiCalls.getLink as SinonStub).getCall(
-        0
+        0,
       ).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
@@ -2132,11 +2132,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.GetLinkRequest()
+        new protos.google.logging.v2.GetLinkRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.GetLinkRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -2153,16 +2153,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.GetExclusionRequest()
+        new protos.google.logging.v2.GetExclusionRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.GetExclusionRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.logging.v2.LogExclusion()
+        new protos.google.logging.v2.LogExclusion(),
       );
       client.innerApiCalls.getExclusion = stubSimpleCall(expectedResponse);
       const [response] = await client.getExclusion(request);
@@ -2184,16 +2184,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.GetExclusionRequest()
+        new protos.google.logging.v2.GetExclusionRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.GetExclusionRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.logging.v2.LogExclusion()
+        new protos.google.logging.v2.LogExclusion(),
       );
       client.innerApiCalls.getExclusion =
         stubSimpleCallWithCallback(expectedResponse);
@@ -2202,14 +2202,14 @@ describe('v2.ConfigServiceV2Client', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.logging.v2.ILogExclusion | null
+            result?: protos.google.logging.v2.ILogExclusion | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -2231,18 +2231,18 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.GetExclusionRequest()
+        new protos.google.logging.v2.GetExclusionRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.GetExclusionRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getExclusion = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.getExclusion(request), expectedError);
       const actualRequest = (
@@ -2262,11 +2262,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.GetExclusionRequest()
+        new protos.google.logging.v2.GetExclusionRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.GetExclusionRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -2283,16 +2283,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.CreateExclusionRequest()
+        new protos.google.logging.v2.CreateExclusionRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.CreateExclusionRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.logging.v2.LogExclusion()
+        new protos.google.logging.v2.LogExclusion(),
       );
       client.innerApiCalls.createExclusion = stubSimpleCall(expectedResponse);
       const [response] = await client.createExclusion(request);
@@ -2314,16 +2314,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.CreateExclusionRequest()
+        new protos.google.logging.v2.CreateExclusionRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.CreateExclusionRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.logging.v2.LogExclusion()
+        new protos.google.logging.v2.LogExclusion(),
       );
       client.innerApiCalls.createExclusion =
         stubSimpleCallWithCallback(expectedResponse);
@@ -2332,14 +2332,14 @@ describe('v2.ConfigServiceV2Client', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.logging.v2.ILogExclusion | null
+            result?: protos.google.logging.v2.ILogExclusion | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -2361,18 +2361,18 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.CreateExclusionRequest()
+        new protos.google.logging.v2.CreateExclusionRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.CreateExclusionRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createExclusion = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.createExclusion(request), expectedError);
       const actualRequest = (
@@ -2392,11 +2392,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.CreateExclusionRequest()
+        new protos.google.logging.v2.CreateExclusionRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.CreateExclusionRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -2413,16 +2413,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.UpdateExclusionRequest()
+        new protos.google.logging.v2.UpdateExclusionRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.UpdateExclusionRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.logging.v2.LogExclusion()
+        new protos.google.logging.v2.LogExclusion(),
       );
       client.innerApiCalls.updateExclusion = stubSimpleCall(expectedResponse);
       const [response] = await client.updateExclusion(request);
@@ -2444,16 +2444,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.UpdateExclusionRequest()
+        new protos.google.logging.v2.UpdateExclusionRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.UpdateExclusionRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.logging.v2.LogExclusion()
+        new protos.google.logging.v2.LogExclusion(),
       );
       client.innerApiCalls.updateExclusion =
         stubSimpleCallWithCallback(expectedResponse);
@@ -2462,14 +2462,14 @@ describe('v2.ConfigServiceV2Client', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.logging.v2.ILogExclusion | null
+            result?: protos.google.logging.v2.ILogExclusion | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -2491,18 +2491,18 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.UpdateExclusionRequest()
+        new protos.google.logging.v2.UpdateExclusionRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.UpdateExclusionRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateExclusion = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.updateExclusion(request), expectedError);
       const actualRequest = (
@@ -2522,11 +2522,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.UpdateExclusionRequest()
+        new protos.google.logging.v2.UpdateExclusionRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.UpdateExclusionRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -2543,16 +2543,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.DeleteExclusionRequest()
+        new protos.google.logging.v2.DeleteExclusionRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.DeleteExclusionRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
+        new protos.google.protobuf.Empty(),
       );
       client.innerApiCalls.deleteExclusion = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteExclusion(request);
@@ -2574,16 +2574,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.DeleteExclusionRequest()
+        new protos.google.logging.v2.DeleteExclusionRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.DeleteExclusionRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
+        new protos.google.protobuf.Empty(),
       );
       client.innerApiCalls.deleteExclusion =
         stubSimpleCallWithCallback(expectedResponse);
@@ -2592,14 +2592,14 @@ describe('v2.ConfigServiceV2Client', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
+            result?: protos.google.protobuf.IEmpty | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -2621,18 +2621,18 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.DeleteExclusionRequest()
+        new protos.google.logging.v2.DeleteExclusionRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.DeleteExclusionRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteExclusion = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.deleteExclusion(request), expectedError);
       const actualRequest = (
@@ -2652,11 +2652,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.DeleteExclusionRequest()
+        new protos.google.logging.v2.DeleteExclusionRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.DeleteExclusionRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -2673,16 +2673,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.GetCmekSettingsRequest()
+        new protos.google.logging.v2.GetCmekSettingsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.GetCmekSettingsRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.logging.v2.CmekSettings()
+        new protos.google.logging.v2.CmekSettings(),
       );
       client.innerApiCalls.getCmekSettings = stubSimpleCall(expectedResponse);
       const [response] = await client.getCmekSettings(request);
@@ -2704,16 +2704,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.GetCmekSettingsRequest()
+        new protos.google.logging.v2.GetCmekSettingsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.GetCmekSettingsRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.logging.v2.CmekSettings()
+        new protos.google.logging.v2.CmekSettings(),
       );
       client.innerApiCalls.getCmekSettings =
         stubSimpleCallWithCallback(expectedResponse);
@@ -2722,14 +2722,14 @@ describe('v2.ConfigServiceV2Client', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.logging.v2.ICmekSettings | null
+            result?: protos.google.logging.v2.ICmekSettings | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -2751,18 +2751,18 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.GetCmekSettingsRequest()
+        new protos.google.logging.v2.GetCmekSettingsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.GetCmekSettingsRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCmekSettings = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.getCmekSettings(request), expectedError);
       const actualRequest = (
@@ -2782,11 +2782,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.GetCmekSettingsRequest()
+        new protos.google.logging.v2.GetCmekSettingsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.GetCmekSettingsRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -2803,16 +2803,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.UpdateCmekSettingsRequest()
+        new protos.google.logging.v2.UpdateCmekSettingsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.UpdateCmekSettingsRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.logging.v2.CmekSettings()
+        new protos.google.logging.v2.CmekSettings(),
       );
       client.innerApiCalls.updateCmekSettings =
         stubSimpleCall(expectedResponse);
@@ -2835,16 +2835,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.UpdateCmekSettingsRequest()
+        new protos.google.logging.v2.UpdateCmekSettingsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.UpdateCmekSettingsRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.logging.v2.CmekSettings()
+        new protos.google.logging.v2.CmekSettings(),
       );
       client.innerApiCalls.updateCmekSettings =
         stubSimpleCallWithCallback(expectedResponse);
@@ -2853,14 +2853,14 @@ describe('v2.ConfigServiceV2Client', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.logging.v2.ICmekSettings | null
+            result?: protos.google.logging.v2.ICmekSettings | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -2882,18 +2882,18 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.UpdateCmekSettingsRequest()
+        new protos.google.logging.v2.UpdateCmekSettingsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.UpdateCmekSettingsRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCmekSettings = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.updateCmekSettings(request), expectedError);
       const actualRequest = (
@@ -2913,11 +2913,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.UpdateCmekSettingsRequest()
+        new protos.google.logging.v2.UpdateCmekSettingsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.UpdateCmekSettingsRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -2934,16 +2934,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.GetSettingsRequest()
+        new protos.google.logging.v2.GetSettingsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.GetSettingsRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.logging.v2.Settings()
+        new protos.google.logging.v2.Settings(),
       );
       client.innerApiCalls.getSettings = stubSimpleCall(expectedResponse);
       const [response] = await client.getSettings(request);
@@ -2965,16 +2965,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.GetSettingsRequest()
+        new protos.google.logging.v2.GetSettingsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.GetSettingsRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.logging.v2.Settings()
+        new protos.google.logging.v2.Settings(),
       );
       client.innerApiCalls.getSettings =
         stubSimpleCallWithCallback(expectedResponse);
@@ -2983,14 +2983,14 @@ describe('v2.ConfigServiceV2Client', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.logging.v2.ISettings | null
+            result?: protos.google.logging.v2.ISettings | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -3012,18 +3012,18 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.GetSettingsRequest()
+        new protos.google.logging.v2.GetSettingsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.GetSettingsRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSettings = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.getSettings(request), expectedError);
       const actualRequest = (
@@ -3043,11 +3043,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.GetSettingsRequest()
+        new protos.google.logging.v2.GetSettingsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.GetSettingsRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -3064,16 +3064,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.UpdateSettingsRequest()
+        new protos.google.logging.v2.UpdateSettingsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.UpdateSettingsRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.logging.v2.Settings()
+        new protos.google.logging.v2.Settings(),
       );
       client.innerApiCalls.updateSettings = stubSimpleCall(expectedResponse);
       const [response] = await client.updateSettings(request);
@@ -3095,16 +3095,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.UpdateSettingsRequest()
+        new protos.google.logging.v2.UpdateSettingsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.UpdateSettingsRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.logging.v2.Settings()
+        new protos.google.logging.v2.Settings(),
       );
       client.innerApiCalls.updateSettings =
         stubSimpleCallWithCallback(expectedResponse);
@@ -3113,14 +3113,14 @@ describe('v2.ConfigServiceV2Client', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.logging.v2.ISettings | null
+            result?: protos.google.logging.v2.ISettings | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -3142,18 +3142,18 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.UpdateSettingsRequest()
+        new protos.google.logging.v2.UpdateSettingsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.UpdateSettingsRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSettings = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.updateSettings(request), expectedError);
       const actualRequest = (
@@ -3173,11 +3173,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.UpdateSettingsRequest()
+        new protos.google.logging.v2.UpdateSettingsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.UpdateSettingsRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -3194,16 +3194,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.CreateBucketRequest()
+        new protos.google.logging.v2.CreateBucketRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.CreateBucketRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
+        new protos.google.longrunning.Operation(),
       );
       client.innerApiCalls.createBucketAsync =
         stubLongRunningCall(expectedResponse);
@@ -3227,16 +3227,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.CreateBucketRequest()
+        new protos.google.logging.v2.CreateBucketRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.CreateBucketRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
+        new protos.google.longrunning.Operation(),
       );
       client.innerApiCalls.createBucketAsync =
         stubLongRunningCallWithCallback(expectedResponse);
@@ -3248,14 +3248,14 @@ describe('v2.ConfigServiceV2Client', () => {
             result?: LROperation<
               protos.google.logging.v2.ILogBucket,
               protos.google.logging.v2.IBucketMetadata
-            > | null
+            > | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const operation = (await promise) as LROperation<
@@ -3281,18 +3281,18 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.CreateBucketRequest()
+        new protos.google.logging.v2.CreateBucketRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.CreateBucketRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createBucketAsync = stubLongRunningCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.createBucketAsync(request), expectedError);
       const actualRequest = (
@@ -3312,11 +3312,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.CreateBucketRequest()
+        new protos.google.logging.v2.CreateBucketRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.CreateBucketRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
@@ -3324,7 +3324,7 @@ describe('v2.ConfigServiceV2Client', () => {
       client.innerApiCalls.createBucketAsync = stubLongRunningCall(
         undefined,
         undefined,
-        expectedError
+        expectedError,
       );
       const [operation] = await client.createBucketAsync(request);
       await assert.rejects(operation.promise(), expectedError);
@@ -3345,7 +3345,7 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
+        new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
       expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
@@ -3353,7 +3353,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateBucketAsyncProgress(
-        expectedResponse.name
+        expectedResponse.name,
       );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
@@ -3370,11 +3370,11 @@ describe('v2.ConfigServiceV2Client', () => {
 
       client.operationsClient.getOperation = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(
         client.checkCreateBucketAsyncProgress(''),
-        expectedError
+        expectedError,
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
@@ -3388,16 +3388,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.UpdateBucketRequest()
+        new protos.google.logging.v2.UpdateBucketRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.UpdateBucketRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
+        new protos.google.longrunning.Operation(),
       );
       client.innerApiCalls.updateBucketAsync =
         stubLongRunningCall(expectedResponse);
@@ -3421,16 +3421,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.UpdateBucketRequest()
+        new protos.google.logging.v2.UpdateBucketRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.UpdateBucketRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
+        new protos.google.longrunning.Operation(),
       );
       client.innerApiCalls.updateBucketAsync =
         stubLongRunningCallWithCallback(expectedResponse);
@@ -3442,14 +3442,14 @@ describe('v2.ConfigServiceV2Client', () => {
             result?: LROperation<
               protos.google.logging.v2.ILogBucket,
               protos.google.logging.v2.IBucketMetadata
-            > | null
+            > | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const operation = (await promise) as LROperation<
@@ -3475,18 +3475,18 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.UpdateBucketRequest()
+        new protos.google.logging.v2.UpdateBucketRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.UpdateBucketRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateBucketAsync = stubLongRunningCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.updateBucketAsync(request), expectedError);
       const actualRequest = (
@@ -3506,11 +3506,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.UpdateBucketRequest()
+        new protos.google.logging.v2.UpdateBucketRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.UpdateBucketRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
@@ -3518,7 +3518,7 @@ describe('v2.ConfigServiceV2Client', () => {
       client.innerApiCalls.updateBucketAsync = stubLongRunningCall(
         undefined,
         undefined,
-        expectedError
+        expectedError,
       );
       const [operation] = await client.updateBucketAsync(request);
       await assert.rejects(operation.promise(), expectedError);
@@ -3539,7 +3539,7 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
+        new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
       expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
@@ -3547,7 +3547,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateBucketAsyncProgress(
-        expectedResponse.name
+        expectedResponse.name,
       );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
@@ -3564,11 +3564,11 @@ describe('v2.ConfigServiceV2Client', () => {
 
       client.operationsClient.getOperation = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(
         client.checkUpdateBucketAsyncProgress(''),
-        expectedError
+        expectedError,
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
@@ -3582,16 +3582,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.CreateLinkRequest()
+        new protos.google.logging.v2.CreateLinkRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.CreateLinkRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
+        new protos.google.longrunning.Operation(),
       );
       client.innerApiCalls.createLink = stubLongRunningCall(expectedResponse);
       const [operation] = await client.createLink(request);
@@ -3614,16 +3614,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.CreateLinkRequest()
+        new protos.google.logging.v2.CreateLinkRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.CreateLinkRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
+        new protos.google.longrunning.Operation(),
       );
       client.innerApiCalls.createLink =
         stubLongRunningCallWithCallback(expectedResponse);
@@ -3635,14 +3635,14 @@ describe('v2.ConfigServiceV2Client', () => {
             result?: LROperation<
               protos.google.logging.v2.ILink,
               protos.google.logging.v2.ILinkMetadata
-            > | null
+            > | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const operation = (await promise) as LROperation<
@@ -3668,18 +3668,18 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.CreateLinkRequest()
+        new protos.google.logging.v2.CreateLinkRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.CreateLinkRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createLink = stubLongRunningCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.createLink(request), expectedError);
       const actualRequest = (
@@ -3699,11 +3699,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.CreateLinkRequest()
+        new protos.google.logging.v2.CreateLinkRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.CreateLinkRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
@@ -3711,7 +3711,7 @@ describe('v2.ConfigServiceV2Client', () => {
       client.innerApiCalls.createLink = stubLongRunningCall(
         undefined,
         undefined,
-        expectedError
+        expectedError,
       );
       const [operation] = await client.createLink(request);
       await assert.rejects(operation.promise(), expectedError);
@@ -3732,7 +3732,7 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
+        new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
       expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
@@ -3740,7 +3740,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateLinkProgress(
-        expectedResponse.name
+        expectedResponse.name,
       );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
@@ -3757,7 +3757,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
       client.operationsClient.getOperation = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.checkCreateLinkProgress(''), expectedError);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -3772,16 +3772,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.DeleteLinkRequest()
+        new protos.google.logging.v2.DeleteLinkRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.DeleteLinkRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
+        new protos.google.longrunning.Operation(),
       );
       client.innerApiCalls.deleteLink = stubLongRunningCall(expectedResponse);
       const [operation] = await client.deleteLink(request);
@@ -3804,16 +3804,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.DeleteLinkRequest()
+        new protos.google.logging.v2.DeleteLinkRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.DeleteLinkRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
+        new protos.google.longrunning.Operation(),
       );
       client.innerApiCalls.deleteLink =
         stubLongRunningCallWithCallback(expectedResponse);
@@ -3825,14 +3825,14 @@ describe('v2.ConfigServiceV2Client', () => {
             result?: LROperation<
               protos.google.protobuf.IEmpty,
               protos.google.logging.v2.ILinkMetadata
-            > | null
+            > | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const operation = (await promise) as LROperation<
@@ -3858,18 +3858,18 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.DeleteLinkRequest()
+        new protos.google.logging.v2.DeleteLinkRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.DeleteLinkRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteLink = stubLongRunningCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.deleteLink(request), expectedError);
       const actualRequest = (
@@ -3889,11 +3889,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.DeleteLinkRequest()
+        new protos.google.logging.v2.DeleteLinkRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.DeleteLinkRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
@@ -3901,7 +3901,7 @@ describe('v2.ConfigServiceV2Client', () => {
       client.innerApiCalls.deleteLink = stubLongRunningCall(
         undefined,
         undefined,
-        expectedError
+        expectedError,
       );
       const [operation] = await client.deleteLink(request);
       await assert.rejects(operation.promise(), expectedError);
@@ -3922,7 +3922,7 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
+        new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
       expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
@@ -3930,7 +3930,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteLinkProgress(
-        expectedResponse.name
+        expectedResponse.name,
       );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
@@ -3947,7 +3947,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
       client.operationsClient.getOperation = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.checkDeleteLinkProgress(''), expectedError);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -3962,10 +3962,10 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.CopyLogEntriesRequest()
+        new protos.google.logging.v2.CopyLogEntriesRequest(),
       );
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
+        new protos.google.longrunning.Operation(),
       );
       client.innerApiCalls.copyLogEntries =
         stubLongRunningCall(expectedResponse);
@@ -3981,10 +3981,10 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.CopyLogEntriesRequest()
+        new protos.google.logging.v2.CopyLogEntriesRequest(),
       );
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
+        new protos.google.longrunning.Operation(),
       );
       client.innerApiCalls.copyLogEntries =
         stubLongRunningCallWithCallback(expectedResponse);
@@ -3996,14 +3996,14 @@ describe('v2.ConfigServiceV2Client', () => {
             result?: LROperation<
               protos.google.logging.v2.ICopyLogEntriesResponse,
               protos.google.logging.v2.ICopyLogEntriesMetadata
-            > | null
+            > | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const operation = (await promise) as LROperation<
@@ -4021,12 +4021,12 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.CopyLogEntriesRequest()
+        new protos.google.logging.v2.CopyLogEntriesRequest(),
       );
       const expectedError = new Error('expected');
       client.innerApiCalls.copyLogEntries = stubLongRunningCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.copyLogEntries(request), expectedError);
     });
@@ -4038,13 +4038,13 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.CopyLogEntriesRequest()
+        new protos.google.logging.v2.CopyLogEntriesRequest(),
       );
       const expectedError = new Error('expected');
       client.innerApiCalls.copyLogEntries = stubLongRunningCall(
         undefined,
         undefined,
-        expectedError
+        expectedError,
       );
       const [operation] = await client.copyLogEntries(request);
       await assert.rejects(operation.promise(), expectedError);
@@ -4057,7 +4057,7 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
+        new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
       expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
@@ -4065,7 +4065,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCopyLogEntriesProgress(
-        expectedResponse.name
+        expectedResponse.name,
       );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
@@ -4082,11 +4082,11 @@ describe('v2.ConfigServiceV2Client', () => {
 
       client.operationsClient.getOperation = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(
         client.checkCopyLogEntriesProgress(''),
-        expectedError
+        expectedError,
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
@@ -4100,11 +4100,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListBucketsRequest()
+        new protos.google.logging.v2.ListBucketsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListBucketsRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
@@ -4133,11 +4133,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListBucketsRequest()
+        new protos.google.logging.v2.ListBucketsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListBucketsRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
@@ -4153,14 +4153,14 @@ describe('v2.ConfigServiceV2Client', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.logging.v2.ILogBucket[] | null
+            result?: protos.google.logging.v2.ILogBucket[] | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -4182,18 +4182,18 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListBucketsRequest()
+        new protos.google.logging.v2.ListBucketsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListBucketsRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listBuckets = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.listBuckets(request), expectedError);
       const actualRequest = (
@@ -4213,11 +4213,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListBucketsRequest()
+        new protos.google.logging.v2.ListBucketsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListBucketsRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
@@ -4246,14 +4246,14 @@ describe('v2.ConfigServiceV2Client', () => {
       assert(
         (client.descriptors.page.listBuckets.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listBuckets, request)
+          .calledWith(client.innerApiCalls.listBuckets, request),
       );
       assert(
         (client.descriptors.page.listBuckets.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
     });
 
@@ -4264,18 +4264,18 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListBucketsRequest()
+        new protos.google.logging.v2.ListBucketsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListBucketsRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listBuckets.createStream = stubPageStreamingCall(
         undefined,
-        expectedError
+        expectedError,
       );
       const stream = client.listBucketsStream(request);
       const promise = new Promise((resolve, reject) => {
@@ -4294,14 +4294,14 @@ describe('v2.ConfigServiceV2Client', () => {
       assert(
         (client.descriptors.page.listBuckets.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listBuckets, request)
+          .calledWith(client.innerApiCalls.listBuckets, request),
       );
       assert(
         (client.descriptors.page.listBuckets.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
     });
 
@@ -4312,11 +4312,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListBucketsRequest()
+        new protos.google.logging.v2.ListBucketsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListBucketsRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
@@ -4335,16 +4335,16 @@ describe('v2.ConfigServiceV2Client', () => {
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
         (client.descriptors.page.listBuckets.asyncIterate as SinonStub).getCall(
-          0
+          0,
         ).args[1],
-        request
+        request,
       );
       assert(
         (client.descriptors.page.listBuckets.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
     });
 
@@ -4355,18 +4355,18 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListBucketsRequest()
+        new protos.google.logging.v2.ListBucketsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListBucketsRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listBuckets.asyncIterate = stubAsyncIterationCall(
         undefined,
-        expectedError
+        expectedError,
       );
       const iterable = client.listBucketsAsync(request);
       await assert.rejects(async () => {
@@ -4377,16 +4377,16 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       assert.deepStrictEqual(
         (client.descriptors.page.listBuckets.asyncIterate as SinonStub).getCall(
-          0
+          0,
         ).args[1],
-        request
+        request,
       );
       assert(
         (client.descriptors.page.listBuckets.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
     });
   });
@@ -4399,11 +4399,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListViewsRequest()
+        new protos.google.logging.v2.ListViewsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListViewsRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
@@ -4432,11 +4432,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListViewsRequest()
+        new protos.google.logging.v2.ListViewsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListViewsRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
@@ -4452,14 +4452,14 @@ describe('v2.ConfigServiceV2Client', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.logging.v2.ILogView[] | null
+            result?: protos.google.logging.v2.ILogView[] | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -4481,11 +4481,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListViewsRequest()
+        new protos.google.logging.v2.ListViewsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListViewsRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
@@ -4509,11 +4509,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListViewsRequest()
+        new protos.google.logging.v2.ListViewsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListViewsRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
@@ -4542,14 +4542,14 @@ describe('v2.ConfigServiceV2Client', () => {
       assert(
         (client.descriptors.page.listViews.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listViews, request)
+          .calledWith(client.innerApiCalls.listViews, request),
       );
       assert(
         (client.descriptors.page.listViews.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
     });
 
@@ -4560,18 +4560,18 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListViewsRequest()
+        new protos.google.logging.v2.ListViewsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListViewsRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listViews.createStream = stubPageStreamingCall(
         undefined,
-        expectedError
+        expectedError,
       );
       const stream = client.listViewsStream(request);
       const promise = new Promise((resolve, reject) => {
@@ -4590,14 +4590,14 @@ describe('v2.ConfigServiceV2Client', () => {
       assert(
         (client.descriptors.page.listViews.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listViews, request)
+          .calledWith(client.innerApiCalls.listViews, request),
       );
       assert(
         (client.descriptors.page.listViews.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
     });
 
@@ -4608,11 +4608,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListViewsRequest()
+        new protos.google.logging.v2.ListViewsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListViewsRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
@@ -4632,14 +4632,14 @@ describe('v2.ConfigServiceV2Client', () => {
       assert.deepStrictEqual(
         (client.descriptors.page.listViews.asyncIterate as SinonStub).getCall(0)
           .args[1],
-        request
+        request,
       );
       assert(
         (client.descriptors.page.listViews.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
     });
 
@@ -4650,18 +4650,18 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListViewsRequest()
+        new protos.google.logging.v2.ListViewsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListViewsRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listViews.asyncIterate = stubAsyncIterationCall(
         undefined,
-        expectedError
+        expectedError,
       );
       const iterable = client.listViewsAsync(request);
       await assert.rejects(async () => {
@@ -4673,14 +4673,14 @@ describe('v2.ConfigServiceV2Client', () => {
       assert.deepStrictEqual(
         (client.descriptors.page.listViews.asyncIterate as SinonStub).getCall(0)
           .args[1],
-        request
+        request,
       );
       assert(
         (client.descriptors.page.listViews.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
     });
   });
@@ -4693,11 +4693,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListSinksRequest()
+        new protos.google.logging.v2.ListSinksRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListSinksRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
@@ -4726,11 +4726,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListSinksRequest()
+        new protos.google.logging.v2.ListSinksRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListSinksRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
@@ -4746,14 +4746,14 @@ describe('v2.ConfigServiceV2Client', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.logging.v2.ILogSink[] | null
+            result?: protos.google.logging.v2.ILogSink[] | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -4775,11 +4775,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListSinksRequest()
+        new protos.google.logging.v2.ListSinksRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListSinksRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
@@ -4803,11 +4803,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListSinksRequest()
+        new protos.google.logging.v2.ListSinksRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListSinksRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
@@ -4836,14 +4836,14 @@ describe('v2.ConfigServiceV2Client', () => {
       assert(
         (client.descriptors.page.listSinks.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listSinks, request)
+          .calledWith(client.innerApiCalls.listSinks, request),
       );
       assert(
         (client.descriptors.page.listSinks.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
     });
 
@@ -4854,18 +4854,18 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListSinksRequest()
+        new protos.google.logging.v2.ListSinksRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListSinksRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSinks.createStream = stubPageStreamingCall(
         undefined,
-        expectedError
+        expectedError,
       );
       const stream = client.listSinksStream(request);
       const promise = new Promise((resolve, reject) => {
@@ -4884,14 +4884,14 @@ describe('v2.ConfigServiceV2Client', () => {
       assert(
         (client.descriptors.page.listSinks.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listSinks, request)
+          .calledWith(client.innerApiCalls.listSinks, request),
       );
       assert(
         (client.descriptors.page.listSinks.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
     });
 
@@ -4902,11 +4902,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListSinksRequest()
+        new protos.google.logging.v2.ListSinksRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListSinksRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
@@ -4926,14 +4926,14 @@ describe('v2.ConfigServiceV2Client', () => {
       assert.deepStrictEqual(
         (client.descriptors.page.listSinks.asyncIterate as SinonStub).getCall(0)
           .args[1],
-        request
+        request,
       );
       assert(
         (client.descriptors.page.listSinks.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
     });
 
@@ -4944,18 +4944,18 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListSinksRequest()
+        new protos.google.logging.v2.ListSinksRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListSinksRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSinks.asyncIterate = stubAsyncIterationCall(
         undefined,
-        expectedError
+        expectedError,
       );
       const iterable = client.listSinksAsync(request);
       await assert.rejects(async () => {
@@ -4967,14 +4967,14 @@ describe('v2.ConfigServiceV2Client', () => {
       assert.deepStrictEqual(
         (client.descriptors.page.listSinks.asyncIterate as SinonStub).getCall(0)
           .args[1],
-        request
+        request,
       );
       assert(
         (client.descriptors.page.listSinks.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
     });
   });
@@ -4987,11 +4987,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListLinksRequest()
+        new protos.google.logging.v2.ListLinksRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListLinksRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
@@ -5020,11 +5020,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListLinksRequest()
+        new protos.google.logging.v2.ListLinksRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListLinksRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
@@ -5040,14 +5040,14 @@ describe('v2.ConfigServiceV2Client', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.logging.v2.ILink[] | null
+            result?: protos.google.logging.v2.ILink[] | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -5069,11 +5069,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListLinksRequest()
+        new protos.google.logging.v2.ListLinksRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListLinksRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
@@ -5097,11 +5097,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListLinksRequest()
+        new protos.google.logging.v2.ListLinksRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListLinksRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
@@ -5130,14 +5130,14 @@ describe('v2.ConfigServiceV2Client', () => {
       assert(
         (client.descriptors.page.listLinks.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listLinks, request)
+          .calledWith(client.innerApiCalls.listLinks, request),
       );
       assert(
         (client.descriptors.page.listLinks.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
     });
 
@@ -5148,18 +5148,18 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListLinksRequest()
+        new protos.google.logging.v2.ListLinksRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListLinksRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listLinks.createStream = stubPageStreamingCall(
         undefined,
-        expectedError
+        expectedError,
       );
       const stream = client.listLinksStream(request);
       const promise = new Promise((resolve, reject) => {
@@ -5178,14 +5178,14 @@ describe('v2.ConfigServiceV2Client', () => {
       assert(
         (client.descriptors.page.listLinks.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listLinks, request)
+          .calledWith(client.innerApiCalls.listLinks, request),
       );
       assert(
         (client.descriptors.page.listLinks.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
     });
 
@@ -5196,11 +5196,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListLinksRequest()
+        new protos.google.logging.v2.ListLinksRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListLinksRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
@@ -5220,14 +5220,14 @@ describe('v2.ConfigServiceV2Client', () => {
       assert.deepStrictEqual(
         (client.descriptors.page.listLinks.asyncIterate as SinonStub).getCall(0)
           .args[1],
-        request
+        request,
       );
       assert(
         (client.descriptors.page.listLinks.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
     });
 
@@ -5238,18 +5238,18 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListLinksRequest()
+        new protos.google.logging.v2.ListLinksRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListLinksRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listLinks.asyncIterate = stubAsyncIterationCall(
         undefined,
-        expectedError
+        expectedError,
       );
       const iterable = client.listLinksAsync(request);
       await assert.rejects(async () => {
@@ -5261,14 +5261,14 @@ describe('v2.ConfigServiceV2Client', () => {
       assert.deepStrictEqual(
         (client.descriptors.page.listLinks.asyncIterate as SinonStub).getCall(0)
           .args[1],
-        request
+        request,
       );
       assert(
         (client.descriptors.page.listLinks.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
     });
   });
@@ -5281,11 +5281,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListExclusionsRequest()
+        new protos.google.logging.v2.ListExclusionsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListExclusionsRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
@@ -5314,11 +5314,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListExclusionsRequest()
+        new protos.google.logging.v2.ListExclusionsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListExclusionsRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
@@ -5334,14 +5334,14 @@ describe('v2.ConfigServiceV2Client', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.logging.v2.ILogExclusion[] | null
+            result?: protos.google.logging.v2.ILogExclusion[] | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -5363,18 +5363,18 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListExclusionsRequest()
+        new protos.google.logging.v2.ListExclusionsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListExclusionsRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listExclusions = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.listExclusions(request), expectedError);
       const actualRequest = (
@@ -5394,11 +5394,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListExclusionsRequest()
+        new protos.google.logging.v2.ListExclusionsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListExclusionsRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
@@ -5427,14 +5427,14 @@ describe('v2.ConfigServiceV2Client', () => {
       assert(
         (client.descriptors.page.listExclusions.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listExclusions, request)
+          .calledWith(client.innerApiCalls.listExclusions, request),
       );
       assert(
         (client.descriptors.page.listExclusions.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
     });
 
@@ -5445,11 +5445,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListExclusionsRequest()
+        new protos.google.logging.v2.ListExclusionsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListExclusionsRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
@@ -5473,14 +5473,14 @@ describe('v2.ConfigServiceV2Client', () => {
       assert(
         (client.descriptors.page.listExclusions.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listExclusions, request)
+          .calledWith(client.innerApiCalls.listExclusions, request),
       );
       assert(
         (client.descriptors.page.listExclusions.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
     });
 
@@ -5491,11 +5491,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListExclusionsRequest()
+        new protos.google.logging.v2.ListExclusionsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListExclusionsRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
@@ -5516,14 +5516,14 @@ describe('v2.ConfigServiceV2Client', () => {
         (
           client.descriptors.page.listExclusions.asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request
+        request,
       );
       assert(
         (client.descriptors.page.listExclusions.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
     });
 
@@ -5534,11 +5534,11 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListExclusionsRequest()
+        new protos.google.logging.v2.ListExclusionsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListExclusionsRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
@@ -5556,14 +5556,14 @@ describe('v2.ConfigServiceV2Client', () => {
         (
           client.descriptors.page.listExclusions.asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request
+        request,
       );
       assert(
         (client.descriptors.page.listExclusions.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
     });
   });
@@ -5575,10 +5575,10 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
+        new operationsProtos.google.longrunning.GetOperationRequest(),
       );
       const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
+        new operationsProtos.google.longrunning.Operation(),
       );
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const response = await client.getOperation(request);
@@ -5586,7 +5586,7 @@ describe('v2.ConfigServiceV2Client', () => {
       assert(
         (client.operationsClient.getOperation as SinonStub)
           .getCall(0)
-          .calledWith(request)
+          .calledWith(request),
       );
     });
     it('invokes getOperation without error using callback', async () => {
@@ -5595,10 +5595,10 @@ describe('v2.ConfigServiceV2Client', () => {
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
+        new operationsProtos.google.longrunning.GetOperationRequest(),
       );
       const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
+        new operationsProtos.google.longrunning.Operation(),
       );
       client.operationsClient.getOperation = sinon
         .stub()
@@ -5609,14 +5609,14 @@ describe('v2.ConfigServiceV2Client', () => {
           undefined,
           (
             err?: Error | null,
-            result?: operationsProtos.google.longrunning.Operation | null
+            result?: operationsProtos.google.longrunning.Operation | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -5629,12 +5629,12 @@ describe('v2.ConfigServiceV2Client', () => {
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
+        new operationsProtos.google.longrunning.GetOperationRequest(),
       );
       const expectedError = new Error('expected');
       client.operationsClient.getOperation = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(async () => {
         await client.getOperation(request);
@@ -5642,7 +5642,7 @@ describe('v2.ConfigServiceV2Client', () => {
       assert(
         (client.operationsClient.getOperation as SinonStub)
           .getCall(0)
-          .calledWith(request)
+          .calledWith(request),
       );
     });
   });
@@ -5654,10 +5654,10 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
+        new operationsProtos.google.longrunning.CancelOperationRequest(),
       );
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
+        new protos.google.protobuf.Empty(),
       );
       client.operationsClient.cancelOperation =
         stubSimpleCall(expectedResponse);
@@ -5666,7 +5666,7 @@ describe('v2.ConfigServiceV2Client', () => {
       assert(
         (client.operationsClient.cancelOperation as SinonStub)
           .getCall(0)
-          .calledWith(request)
+          .calledWith(request),
       );
     });
     it('invokes cancelOperation without error using callback', async () => {
@@ -5675,10 +5675,10 @@ describe('v2.ConfigServiceV2Client', () => {
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
+        new operationsProtos.google.longrunning.CancelOperationRequest(),
       );
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
+        new protos.google.protobuf.Empty(),
       );
       client.operationsClient.cancelOperation = sinon
         .stub()
@@ -5689,14 +5689,14 @@ describe('v2.ConfigServiceV2Client', () => {
           undefined,
           (
             err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
+            result?: protos.google.protobuf.Empty | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -5709,12 +5709,12 @@ describe('v2.ConfigServiceV2Client', () => {
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
+        new operationsProtos.google.longrunning.CancelOperationRequest(),
       );
       const expectedError = new Error('expected');
       client.operationsClient.cancelOperation = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(async () => {
         await client.cancelOperation(request);
@@ -5722,7 +5722,7 @@ describe('v2.ConfigServiceV2Client', () => {
       assert(
         (client.operationsClient.cancelOperation as SinonStub)
           .getCall(0)
-          .calledWith(request)
+          .calledWith(request),
       );
     });
   });
@@ -5734,10 +5734,10 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
+        new operationsProtos.google.longrunning.DeleteOperationRequest(),
       );
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
+        new protos.google.protobuf.Empty(),
       );
       client.operationsClient.deleteOperation =
         stubSimpleCall(expectedResponse);
@@ -5746,7 +5746,7 @@ describe('v2.ConfigServiceV2Client', () => {
       assert(
         (client.operationsClient.deleteOperation as SinonStub)
           .getCall(0)
-          .calledWith(request)
+          .calledWith(request),
       );
     });
     it('invokes deleteOperation without error using callback', async () => {
@@ -5755,10 +5755,10 @@ describe('v2.ConfigServiceV2Client', () => {
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
+        new operationsProtos.google.longrunning.DeleteOperationRequest(),
       );
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
+        new protos.google.protobuf.Empty(),
       );
       client.operationsClient.deleteOperation = sinon
         .stub()
@@ -5769,14 +5769,14 @@ describe('v2.ConfigServiceV2Client', () => {
           undefined,
           (
             err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
+            result?: protos.google.protobuf.Empty | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -5789,12 +5789,12 @@ describe('v2.ConfigServiceV2Client', () => {
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
+        new operationsProtos.google.longrunning.DeleteOperationRequest(),
       );
       const expectedError = new Error('expected');
       client.operationsClient.deleteOperation = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(async () => {
         await client.deleteOperation(request);
@@ -5802,7 +5802,7 @@ describe('v2.ConfigServiceV2Client', () => {
       assert(
         (client.operationsClient.deleteOperation as SinonStub)
           .getCall(0)
-          .calledWith(request)
+          .calledWith(request),
       );
     });
   });
@@ -5813,17 +5813,17 @@ describe('v2.ConfigServiceV2Client', () => {
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
+        new operationsProtos.google.longrunning.ListOperationsRequest(),
       );
       const expectedResponse = [
         generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
+          new operationsProtos.google.longrunning.ListOperationsResponse(),
         ),
         generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
+          new operationsProtos.google.longrunning.ListOperationsResponse(),
         ),
         generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
+          new operationsProtos.google.longrunning.ListOperationsResponse(),
         ),
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
@@ -5840,7 +5840,7 @@ describe('v2.ConfigServiceV2Client', () => {
           client.operationsClient.descriptor.listOperations
             .asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request
+        request,
       );
     });
     it('uses async iteration with listOperations with error', async () => {
@@ -5850,7 +5850,7 @@ describe('v2.ConfigServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
+        new operationsProtos.google.longrunning.ListOperationsRequest(),
       );
       const expectedError = new Error('expected');
       client.operationsClient.descriptor.listOperations.asyncIterate =
@@ -5868,7 +5868,7 @@ describe('v2.ConfigServiceV2Client', () => {
           client.operationsClient.descriptor.listOperations
             .asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request
+        request,
       );
     });
   });
@@ -5893,7 +5893,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
       it('billingAccountCmekSettingsPath', () => {
         const result = client.billingAccountCmekSettingsPath(
-          'billingAccountValue'
+          'billingAccountValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -5902,14 +5902,14 @@ describe('v2.ConfigServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
       it('matchBillingAccountFromBillingAccountCmekSettingsName', () => {
         const result =
           client.matchBillingAccountFromBillingAccountCmekSettingsName(
-            fakePath
+            fakePath,
           );
         assert.strictEqual(result, 'billingAccountValue');
         assert(
@@ -5918,7 +5918,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -5944,7 +5944,7 @@ describe('v2.ConfigServiceV2Client', () => {
       it('billingAccountExclusionPath', () => {
         const result = client.billingAccountExclusionPath(
           'billingAccountValue',
-          'exclusionValue'
+          'exclusionValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -5953,7 +5953,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -5967,7 +5967,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -5981,7 +5981,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -6007,7 +6007,7 @@ describe('v2.ConfigServiceV2Client', () => {
         const result = client.billingAccountLocationBucketPath(
           'billingAccountValue',
           'locationValue',
-          'bucketValue'
+          'bucketValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -6016,14 +6016,14 @@ describe('v2.ConfigServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
       it('matchBillingAccountFromBillingAccountLocationBucketName', () => {
         const result =
           client.matchBillingAccountFromBillingAccountLocationBucketName(
-            fakePath
+            fakePath,
           );
         assert.strictEqual(result, 'billingAccountValue');
         assert(
@@ -6032,7 +6032,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -6046,7 +6046,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -6060,7 +6060,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -6088,7 +6088,7 @@ describe('v2.ConfigServiceV2Client', () => {
           'billingAccountValue',
           'locationValue',
           'bucketValue',
-          'linkValue'
+          'linkValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -6097,14 +6097,14 @@ describe('v2.ConfigServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
       it('matchBillingAccountFromBillingAccountLocationBucketLinkName', () => {
         const result =
           client.matchBillingAccountFromBillingAccountLocationBucketLinkName(
-            fakePath
+            fakePath,
           );
         assert.strictEqual(result, 'billingAccountValue');
         assert(
@@ -6113,14 +6113,14 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
       it('matchLocationFromBillingAccountLocationBucketLinkName', () => {
         const result =
           client.matchLocationFromBillingAccountLocationBucketLinkName(
-            fakePath
+            fakePath,
           );
         assert.strictEqual(result, 'locationValue');
         assert(
@@ -6129,7 +6129,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -6143,7 +6143,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -6157,7 +6157,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -6185,7 +6185,7 @@ describe('v2.ConfigServiceV2Client', () => {
           'billingAccountValue',
           'locationValue',
           'bucketValue',
-          'viewValue'
+          'viewValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -6194,14 +6194,14 @@ describe('v2.ConfigServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
       it('matchBillingAccountFromBillingAccountLocationBucketViewName', () => {
         const result =
           client.matchBillingAccountFromBillingAccountLocationBucketViewName(
-            fakePath
+            fakePath,
           );
         assert.strictEqual(result, 'billingAccountValue');
         assert(
@@ -6210,14 +6210,14 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
       it('matchLocationFromBillingAccountLocationBucketViewName', () => {
         const result =
           client.matchLocationFromBillingAccountLocationBucketViewName(
-            fakePath
+            fakePath,
           );
         assert.strictEqual(result, 'locationValue');
         assert(
@@ -6226,7 +6226,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -6240,7 +6240,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -6254,7 +6254,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -6280,7 +6280,7 @@ describe('v2.ConfigServiceV2Client', () => {
       it('billingAccountLogPath', () => {
         const result = client.billingAccountLogPath(
           'billingAccountValue',
-          'logValue'
+          'logValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -6289,7 +6289,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -6303,7 +6303,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -6316,7 +6316,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -6347,7 +6347,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -6361,7 +6361,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -6387,7 +6387,7 @@ describe('v2.ConfigServiceV2Client', () => {
       it('billingAccountSinkPath', () => {
         const result = client.billingAccountSinkPath(
           'billingAccountValue',
-          'sinkValue'
+          'sinkValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -6396,7 +6396,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -6410,7 +6410,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -6423,7 +6423,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -6454,7 +6454,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -6467,7 +6467,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -6493,13 +6493,13 @@ describe('v2.ConfigServiceV2Client', () => {
       it('folderExclusionPath', () => {
         const result = client.folderExclusionPath(
           'folderValue',
-          'exclusionValue'
+          'exclusionValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.folderExclusionPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -6509,7 +6509,7 @@ describe('v2.ConfigServiceV2Client', () => {
         assert(
           (client.pathTemplates.folderExclusionPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -6519,7 +6519,7 @@ describe('v2.ConfigServiceV2Client', () => {
         assert(
           (client.pathTemplates.folderExclusionPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -6547,7 +6547,7 @@ describe('v2.ConfigServiceV2Client', () => {
         const result = client.folderLocationBucketPath(
           'folderValue',
           'locationValue',
-          'bucketValue'
+          'bucketValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -6556,7 +6556,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -6569,7 +6569,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -6583,7 +6583,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -6596,7 +6596,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -6626,7 +6626,7 @@ describe('v2.ConfigServiceV2Client', () => {
           'folderValue',
           'locationValue',
           'bucketValue',
-          'linkValue'
+          'linkValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -6635,7 +6635,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -6649,7 +6649,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -6663,7 +6663,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -6677,7 +6677,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -6691,7 +6691,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -6721,7 +6721,7 @@ describe('v2.ConfigServiceV2Client', () => {
           'folderValue',
           'locationValue',
           'bucketValue',
-          'viewValue'
+          'viewValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -6730,7 +6730,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -6744,7 +6744,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -6758,7 +6758,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -6772,7 +6772,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -6786,7 +6786,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -6815,7 +6815,7 @@ describe('v2.ConfigServiceV2Client', () => {
         assert(
           (client.pathTemplates.folderLogPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -6825,7 +6825,7 @@ describe('v2.ConfigServiceV2Client', () => {
         assert(
           (client.pathTemplates.folderLogPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -6835,7 +6835,7 @@ describe('v2.ConfigServiceV2Client', () => {
         assert(
           (client.pathTemplates.folderLogPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -6863,7 +6863,7 @@ describe('v2.ConfigServiceV2Client', () => {
         assert(
           (client.pathTemplates.folderSettingsPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -6873,7 +6873,7 @@ describe('v2.ConfigServiceV2Client', () => {
         assert(
           (client.pathTemplates.folderSettingsPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -6902,7 +6902,7 @@ describe('v2.ConfigServiceV2Client', () => {
         assert(
           (client.pathTemplates.folderSinkPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -6912,7 +6912,7 @@ describe('v2.ConfigServiceV2Client', () => {
         assert(
           (client.pathTemplates.folderSinkPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -6922,7 +6922,7 @@ describe('v2.ConfigServiceV2Client', () => {
         assert(
           (client.pathTemplates.folderSinkPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -6951,7 +6951,7 @@ describe('v2.ConfigServiceV2Client', () => {
         assert(
           (client.pathTemplates.locationPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -6961,7 +6961,7 @@ describe('v2.ConfigServiceV2Client', () => {
         assert(
           (client.pathTemplates.locationPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -6971,7 +6971,7 @@ describe('v2.ConfigServiceV2Client', () => {
         assert(
           (client.pathTemplates.locationPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -7000,7 +7000,7 @@ describe('v2.ConfigServiceV2Client', () => {
         assert(
           (client.pathTemplates.logMetricPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -7010,7 +7010,7 @@ describe('v2.ConfigServiceV2Client', () => {
         assert(
           (client.pathTemplates.logMetricPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -7020,7 +7020,7 @@ describe('v2.ConfigServiceV2Client', () => {
         assert(
           (client.pathTemplates.logMetricPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -7051,7 +7051,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -7065,7 +7065,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -7091,7 +7091,7 @@ describe('v2.ConfigServiceV2Client', () => {
       it('organizationExclusionPath', () => {
         const result = client.organizationExclusionPath(
           'organizationValue',
-          'exclusionValue'
+          'exclusionValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -7100,7 +7100,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -7114,7 +7114,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -7128,7 +7128,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -7156,7 +7156,7 @@ describe('v2.ConfigServiceV2Client', () => {
         const result = client.organizationLocationBucketPath(
           'organizationValue',
           'locationValue',
-          'bucketValue'
+          'bucketValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -7165,7 +7165,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -7179,7 +7179,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -7193,7 +7193,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -7207,7 +7207,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -7235,7 +7235,7 @@ describe('v2.ConfigServiceV2Client', () => {
           'organizationValue',
           'locationValue',
           'bucketValue',
-          'linkValue'
+          'linkValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -7244,14 +7244,14 @@ describe('v2.ConfigServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
       it('matchOrganizationFromOrganizationLocationBucketLinkName', () => {
         const result =
           client.matchOrganizationFromOrganizationLocationBucketLinkName(
-            fakePath
+            fakePath,
           );
         assert.strictEqual(result, 'organizationValue');
         assert(
@@ -7260,7 +7260,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -7274,7 +7274,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -7288,7 +7288,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -7302,7 +7302,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -7330,7 +7330,7 @@ describe('v2.ConfigServiceV2Client', () => {
           'organizationValue',
           'locationValue',
           'bucketValue',
-          'viewValue'
+          'viewValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -7339,14 +7339,14 @@ describe('v2.ConfigServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
       it('matchOrganizationFromOrganizationLocationBucketViewName', () => {
         const result =
           client.matchOrganizationFromOrganizationLocationBucketViewName(
-            fakePath
+            fakePath,
           );
         assert.strictEqual(result, 'organizationValue');
         assert(
@@ -7355,7 +7355,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -7369,7 +7369,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -7383,7 +7383,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -7397,7 +7397,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -7423,13 +7423,13 @@ describe('v2.ConfigServiceV2Client', () => {
       it('organizationLogPath', () => {
         const result = client.organizationLogPath(
           'organizationValue',
-          'logValue'
+          'logValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.organizationLogPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -7440,7 +7440,7 @@ describe('v2.ConfigServiceV2Client', () => {
         assert(
           (client.pathTemplates.organizationLogPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -7450,7 +7450,7 @@ describe('v2.ConfigServiceV2Client', () => {
         assert(
           (client.pathTemplates.organizationLogPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -7481,7 +7481,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -7495,7 +7495,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -7521,7 +7521,7 @@ describe('v2.ConfigServiceV2Client', () => {
       it('organizationSinkPath', () => {
         const result = client.organizationSinkPath(
           'organizationValue',
-          'sinkValue'
+          'sinkValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -7530,7 +7530,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -7541,7 +7541,7 @@ describe('v2.ConfigServiceV2Client', () => {
         assert(
           (client.pathTemplates.organizationSinkPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -7551,7 +7551,7 @@ describe('v2.ConfigServiceV2Client', () => {
         assert(
           (client.pathTemplates.organizationSinkPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -7579,7 +7579,7 @@ describe('v2.ConfigServiceV2Client', () => {
         assert(
           (client.pathTemplates.projectPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -7589,7 +7589,7 @@ describe('v2.ConfigServiceV2Client', () => {
         assert(
           (client.pathTemplates.projectPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -7620,7 +7620,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -7633,7 +7633,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -7659,7 +7659,7 @@ describe('v2.ConfigServiceV2Client', () => {
       it('projectExclusionPath', () => {
         const result = client.projectExclusionPath(
           'projectValue',
-          'exclusionValue'
+          'exclusionValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -7668,7 +7668,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -7678,7 +7678,7 @@ describe('v2.ConfigServiceV2Client', () => {
         assert(
           (client.pathTemplates.projectExclusionPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -7688,7 +7688,7 @@ describe('v2.ConfigServiceV2Client', () => {
         assert(
           (client.pathTemplates.projectExclusionPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -7716,7 +7716,7 @@ describe('v2.ConfigServiceV2Client', () => {
         const result = client.projectLocationBucketPath(
           'projectValue',
           'locationValue',
-          'bucketValue'
+          'bucketValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -7725,7 +7725,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -7739,7 +7739,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -7753,7 +7753,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -7767,7 +7767,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -7797,7 +7797,7 @@ describe('v2.ConfigServiceV2Client', () => {
           'projectValue',
           'locationValue',
           'bucketValue',
-          'linkValue'
+          'linkValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -7806,7 +7806,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -7820,7 +7820,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -7834,7 +7834,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -7848,7 +7848,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -7862,7 +7862,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -7892,7 +7892,7 @@ describe('v2.ConfigServiceV2Client', () => {
           'projectValue',
           'locationValue',
           'bucketValue',
-          'viewValue'
+          'viewValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -7901,7 +7901,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -7915,7 +7915,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -7929,7 +7929,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -7943,7 +7943,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -7957,7 +7957,7 @@ describe('v2.ConfigServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -7986,7 +7986,7 @@ describe('v2.ConfigServiceV2Client', () => {
         assert(
           (client.pathTemplates.projectLogPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -7996,7 +7996,7 @@ describe('v2.ConfigServiceV2Client', () => {
         assert(
           (client.pathTemplates.projectLogPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -8006,7 +8006,7 @@ describe('v2.ConfigServiceV2Client', () => {
         assert(
           (client.pathTemplates.projectLogPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -8034,7 +8034,7 @@ describe('v2.ConfigServiceV2Client', () => {
         assert(
           (client.pathTemplates.projectSettingsPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -8044,7 +8044,7 @@ describe('v2.ConfigServiceV2Client', () => {
         assert(
           (client.pathTemplates.projectSettingsPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -8073,7 +8073,7 @@ describe('v2.ConfigServiceV2Client', () => {
         assert(
           (client.pathTemplates.projectSinkPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -8083,7 +8083,7 @@ describe('v2.ConfigServiceV2Client', () => {
         assert(
           (client.pathTemplates.projectSinkPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -8093,7 +8093,7 @@ describe('v2.ConfigServiceV2Client', () => {
         assert(
           (client.pathTemplates.projectSinkPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });

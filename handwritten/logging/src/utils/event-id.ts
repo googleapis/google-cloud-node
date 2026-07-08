@@ -16,8 +16,7 @@
 
 import * as crypto from 'crypto';
 
-const chars =
-  '.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz';
+const chars = '.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz';
 
 function encode(data: Uint8Array): string {
   // Code for this encode method is copied verbatim from the eventid package.

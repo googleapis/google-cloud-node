@@ -34,9 +34,7 @@ import {logs as baseLogs, LoggingFunction} from './logs';
  * @private
  */
 export const logs = {
-  subscriberStreams: baseLogs.pubsub.sublog(
-    'subscriber-streams',
-  ) as LoggingFunction,
+  subscriberStreams: baseLogs.pubsub.sublog('subscriber-streams') as LoggingFunction,
 };
 
 /*!

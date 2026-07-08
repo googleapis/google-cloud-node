@@ -54,17 +54,17 @@ export type LogSeverityFunctions = {
  * @param labels
  */
 export function snakecaseKeys(
-  labels: {[p: string]: string} | null | undefined
+  labels: {[p: string]: string} | null | undefined,
 ) {
   for (const key in labels) {
     const replaced = key.replace(
       /[A-Z]/g,
-      letter => `_${letter.toLowerCase()}`
+      letter => `_${letter.toLowerCase()}`,
     );
     Object.defineProperty(
       labels,
       replaced,
-      Object.getOwnPropertyDescriptor(labels, key) as PropertyDescriptor
+      Object.getOwnPropertyDescriptor(labels, key) as PropertyDescriptor,
     );
     if (replaced !== key) {
       delete labels[key];
@@ -83,7 +83,7 @@ export function snakecaseKeys(
  */
 export function assignSeverityToEntries(
   entries: Entry | Entry[],
-  severity: string
+  severity: string,
 ): Entry[] {
   return (arrify(entries) as Entry[]).map(entry => {
     const metadata = extend(true, {}, entry.metadata, {

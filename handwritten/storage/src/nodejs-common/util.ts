@@ -982,11 +982,11 @@ export class Util {
         reqOpts.headers = headers;
       } else {
         const hasContentType = Object.keys(headers).some(
-          key => key.toLowerCase() === 'content-type',
+          key => key.toLowerCase() === 'content-type'
         );
         reqOpts.headers = hasContentType
           ? headers
-          : {...headers, 'Content-Type': 'application/json'};
+          : { ...headers, 'Content-Type': 'application/json' };
       }
     }
 

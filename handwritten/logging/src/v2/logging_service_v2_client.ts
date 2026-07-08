@@ -106,7 +106,7 @@ export class LoggingServiceV2Client {
    */
   constructor(
     opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
+    gaxInstance?: typeof gax | typeof gax.fallback,
   ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof LoggingServiceV2Client;
@@ -116,7 +116,7 @@ export class LoggingServiceV2Client {
       opts?.universe_domain !== opts?.universeDomain
     ) {
       throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
+        'Please set either universe_domain or universeDomain, but not both.',
       );
     }
     const universeDomainEnvVar =
@@ -200,111 +200,111 @@ export class LoggingServiceV2Client {
     // Create useful helper objects for these.
     this.pathTemplates = {
       billingAccountCmekSettingsPathTemplate: new this._gaxModule.PathTemplate(
-        'billingAccounts/{billing_account}/cmekSettings'
+        'billingAccounts/{billing_account}/cmekSettings',
       ),
       billingAccountExclusionPathTemplate: new this._gaxModule.PathTemplate(
-        'billingAccounts/{billing_account}/exclusions/{exclusion}'
+        'billingAccounts/{billing_account}/exclusions/{exclusion}',
       ),
       billingAccountLocationBucketPathTemplate:
         new this._gaxModule.PathTemplate(
-          'billingAccounts/{billing_account}/locations/{location}/buckets/{bucket}'
+          'billingAccounts/{billing_account}/locations/{location}/buckets/{bucket}',
         ),
       billingAccountLocationBucketLinkPathTemplate:
         new this._gaxModule.PathTemplate(
-          'billingAccounts/{billing_account}/locations/{location}/buckets/{bucket}/links/{link}'
+          'billingAccounts/{billing_account}/locations/{location}/buckets/{bucket}/links/{link}',
         ),
       billingAccountLocationBucketViewPathTemplate:
         new this._gaxModule.PathTemplate(
-          'billingAccounts/{billing_account}/locations/{location}/buckets/{bucket}/views/{view}'
+          'billingAccounts/{billing_account}/locations/{location}/buckets/{bucket}/views/{view}',
         ),
       billingAccountLogPathTemplate: new this._gaxModule.PathTemplate(
-        'billingAccounts/{billing_account}/logs/{log}'
+        'billingAccounts/{billing_account}/logs/{log}',
       ),
       billingAccountSettingsPathTemplate: new this._gaxModule.PathTemplate(
-        'billingAccounts/{billing_account}/settings'
+        'billingAccounts/{billing_account}/settings',
       ),
       billingAccountSinkPathTemplate: new this._gaxModule.PathTemplate(
-        'billingAccounts/{billing_account}/sinks/{sink}'
+        'billingAccounts/{billing_account}/sinks/{sink}',
       ),
       folderCmekSettingsPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/cmekSettings'
+        'folders/{folder}/cmekSettings',
       ),
       folderExclusionPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/exclusions/{exclusion}'
+        'folders/{folder}/exclusions/{exclusion}',
       ),
       folderLocationBucketPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/locations/{location}/buckets/{bucket}'
+        'folders/{folder}/locations/{location}/buckets/{bucket}',
       ),
       folderLocationBucketLinkPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/locations/{location}/buckets/{bucket}/links/{link}'
+        'folders/{folder}/locations/{location}/buckets/{bucket}/links/{link}',
       ),
       folderLocationBucketViewPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/locations/{location}/buckets/{bucket}/views/{view}'
+        'folders/{folder}/locations/{location}/buckets/{bucket}/views/{view}',
       ),
       folderLogPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/logs/{log}'
+        'folders/{folder}/logs/{log}',
       ),
       folderSettingsPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/settings'
+        'folders/{folder}/settings',
       ),
       folderSinkPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/sinks/{sink}'
+        'folders/{folder}/sinks/{sink}',
       ),
       logMetricPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/metrics/{metric}'
+        'projects/{project}/metrics/{metric}',
       ),
       organizationCmekSettingsPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/cmekSettings'
+        'organizations/{organization}/cmekSettings',
       ),
       organizationExclusionPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/exclusions/{exclusion}'
+        'organizations/{organization}/exclusions/{exclusion}',
       ),
       organizationLocationBucketPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/buckets/{bucket}'
+        'organizations/{organization}/locations/{location}/buckets/{bucket}',
       ),
       organizationLocationBucketLinkPathTemplate:
         new this._gaxModule.PathTemplate(
-          'organizations/{organization}/locations/{location}/buckets/{bucket}/links/{link}'
+          'organizations/{organization}/locations/{location}/buckets/{bucket}/links/{link}',
         ),
       organizationLocationBucketViewPathTemplate:
         new this._gaxModule.PathTemplate(
-          'organizations/{organization}/locations/{location}/buckets/{bucket}/views/{view}'
+          'organizations/{organization}/locations/{location}/buckets/{bucket}/views/{view}',
         ),
       organizationLogPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/logs/{log}'
+        'organizations/{organization}/logs/{log}',
       ),
       organizationSettingsPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/settings'
+        'organizations/{organization}/settings',
       ),
       organizationSinkPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/sinks/{sink}'
+        'organizations/{organization}/sinks/{sink}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
       projectCmekSettingsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/cmekSettings'
+        'projects/{project}/cmekSettings',
       ),
       projectExclusionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/exclusions/{exclusion}'
+        'projects/{project}/exclusions/{exclusion}',
       ),
       projectLocationBucketPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/buckets/{bucket}'
+        'projects/{project}/locations/{location}/buckets/{bucket}',
       ),
       projectLocationBucketLinkPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/buckets/{bucket}/links/{link}'
+        'projects/{project}/locations/{location}/buckets/{bucket}/links/{link}',
       ),
       projectLocationBucketViewPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/buckets/{bucket}/views/{view}'
+        'projects/{project}/locations/{location}/buckets/{bucket}/views/{view}',
       ),
       projectLogPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/logs/{log}'
+        'projects/{project}/logs/{log}',
       ),
       projectSettingsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/settings'
+        'projects/{project}/settings',
       ),
       projectSinkPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/sinks/{sink}'
+        'projects/{project}/sinks/{sink}',
       ),
     };
 
@@ -315,17 +315,17 @@ export class LoggingServiceV2Client {
       listLogEntries: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'entries'
+        'entries',
       ),
       listMonitoredResourceDescriptors: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'resourceDescriptors'
+        'resourceDescriptors',
       ),
       listLogs: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'logNames'
+        'logNames',
       ),
     };
 
@@ -335,7 +335,7 @@ export class LoggingServiceV2Client {
       tailLogEntries: new this._gaxModule.StreamDescriptor(
         this._gaxModule.StreamType.BIDI_STREAMING,
         !!opts.fallback,
-        !!opts.gaxServerStreamingRetries
+        !!opts.gaxServerStreamingRetries,
       ),
     };
 
@@ -350,8 +350,8 @@ export class LoggingServiceV2Client {
         null,
         this._gaxModule.GrpcClient.createByteLengthFunction(
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          protoFilesRoot.lookupType('google.logging.v2.LogEntry') as any
-        )
+          protoFilesRoot.lookupType('google.logging.v2.LogEntry') as any,
+        ),
       ),
     };
 
@@ -360,7 +360,7 @@ export class LoggingServiceV2Client {
       'google.logging.v2.LoggingServiceV2',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -394,12 +394,12 @@ export class LoggingServiceV2Client {
     this.loggingServiceV2Stub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.logging.v2.LoggingServiceV2'
+            'google.logging.v2.LoggingServiceV2',
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.logging.v2.LoggingServiceV2,
       this._opts,
-      this._providedCustomServicePath
+      this._providedCustomServicePath,
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -423,8 +423,8 @@ export class LoggingServiceV2Client {
                   stream.emit(
                     'error',
                     new this._gaxModule.GoogleError(
-                      'The client has already been closed.'
-                    )
+                      'The client has already been closed.',
+                    ),
                   );
                 });
                 return stream;
@@ -436,7 +436,7 @@ export class LoggingServiceV2Client {
           },
         (err: Error | null | undefined) => () => {
           throw err;
-        }
+        },
       );
 
       const descriptor =
@@ -448,7 +448,7 @@ export class LoggingServiceV2Client {
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -469,7 +469,7 @@ export class LoggingServiceV2Client {
     ) {
       process.emitWarning(
         'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
+        'DeprecationWarning',
       );
     }
     return 'logging.googleapis.com';
@@ -487,7 +487,7 @@ export class LoggingServiceV2Client {
     ) {
       process.emitWarning(
         'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
+        'DeprecationWarning',
       );
     }
     return 'logging.googleapis.com';
@@ -535,7 +535,7 @@ export class LoggingServiceV2Client {
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
   getProjectId(
-    callback?: Callback<string, undefined, undefined>
+    callback?: Callback<string, undefined, undefined>,
   ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
@@ -580,7 +580,7 @@ export class LoggingServiceV2Client {
    */
   deleteLog(
     request?: protos.google.logging.v2.IDeleteLogRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -595,7 +595,7 @@ export class LoggingServiceV2Client {
       protos.google.protobuf.IEmpty,
       protos.google.logging.v2.IDeleteLogRequest | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   deleteLog(
     request: protos.google.logging.v2.IDeleteLogRequest,
@@ -603,7 +603,7 @@ export class LoggingServiceV2Client {
       protos.google.protobuf.IEmpty,
       protos.google.logging.v2.IDeleteLogRequest | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   deleteLog(
     request?: protos.google.logging.v2.IDeleteLogRequest,
@@ -618,7 +618,7 @@ export class LoggingServiceV2Client {
       protos.google.protobuf.IEmpty,
       protos.google.logging.v2.IDeleteLogRequest | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -735,7 +735,7 @@ export class LoggingServiceV2Client {
    */
   writeLogEntries(
     request?: protos.google.logging.v2.IWriteLogEntriesRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Promise<
     [
       protos.google.logging.v2.IWriteLogEntriesResponse,
@@ -750,7 +750,7 @@ export class LoggingServiceV2Client {
       protos.google.logging.v2.IWriteLogEntriesResponse,
       protos.google.logging.v2.IWriteLogEntriesRequest | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   writeLogEntries(
     request: protos.google.logging.v2.IWriteLogEntriesRequest,
@@ -758,7 +758,7 @@ export class LoggingServiceV2Client {
       protos.google.logging.v2.IWriteLogEntriesResponse,
       protos.google.logging.v2.IWriteLogEntriesRequest | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   writeLogEntries(
     request?: protos.google.logging.v2.IWriteLogEntriesRequest,
@@ -773,7 +773,7 @@ export class LoggingServiceV2Client {
       protos.google.logging.v2.IWriteLogEntriesResponse,
       protos.google.logging.v2.IWriteLogEntriesRequest | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<
     [
       protos.google.logging.v2.IWriteLogEntriesResponse,
@@ -879,7 +879,7 @@ export class LoggingServiceV2Client {
    */
   listLogEntries(
     request?: protos.google.logging.v2.IListLogEntriesRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Promise<
     [
       protos.google.logging.v2.ILogEntry[],
@@ -894,7 +894,7 @@ export class LoggingServiceV2Client {
       protos.google.logging.v2.IListLogEntriesRequest,
       protos.google.logging.v2.IListLogEntriesResponse | null | undefined,
       protos.google.logging.v2.ILogEntry
-    >
+    >,
   ): void;
   listLogEntries(
     request: protos.google.logging.v2.IListLogEntriesRequest,
@@ -902,7 +902,7 @@ export class LoggingServiceV2Client {
       protos.google.logging.v2.IListLogEntriesRequest,
       protos.google.logging.v2.IListLogEntriesResponse | null | undefined,
       protos.google.logging.v2.ILogEntry
-    >
+    >,
   ): void;
   listLogEntries(
     request?: protos.google.logging.v2.IListLogEntriesRequest,
@@ -917,7 +917,7 @@ export class LoggingServiceV2Client {
       protos.google.logging.v2.IListLogEntriesRequest,
       protos.google.logging.v2.IListLogEntriesResponse | null | undefined,
       protos.google.logging.v2.ILogEntry
-    >
+    >,
   ): Promise<
     [
       protos.google.logging.v2.ILogEntry[],
@@ -998,7 +998,7 @@ export class LoggingServiceV2Client {
    */
   listLogEntriesStream(
     request?: protos.google.logging.v2.IListLogEntriesRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Transform {
     request = request || {};
     options = options || {};
@@ -1010,7 +1010,7 @@ export class LoggingServiceV2Client {
     return this.descriptors.page.listLogEntries.createStream(
       this.innerApiCalls.listLogEntries as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
@@ -1075,7 +1075,7 @@ export class LoggingServiceV2Client {
    */
   listLogEntriesAsync(
     request?: protos.google.logging.v2.IListLogEntriesRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<protos.google.logging.v2.ILogEntry> {
     request = request || {};
     options = options || {};
@@ -1087,7 +1087,7 @@ export class LoggingServiceV2Client {
     return this.descriptors.page.listLogEntries.asyncIterate(
       this.innerApiCalls['listLogEntries'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.logging.v2.ILogEntry>;
   }
   /**
@@ -1118,7 +1118,7 @@ export class LoggingServiceV2Client {
    */
   listMonitoredResourceDescriptors(
     request?: protos.google.logging.v2.IListMonitoredResourceDescriptorsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Promise<
     [
       protos.google.api.IMonitoredResourceDescriptor[],
@@ -1135,7 +1135,7 @@ export class LoggingServiceV2Client {
       | null
       | undefined,
       protos.google.api.IMonitoredResourceDescriptor
-    >
+    >,
   ): void;
   listMonitoredResourceDescriptors(
     request: protos.google.logging.v2.IListMonitoredResourceDescriptorsRequest,
@@ -1145,7 +1145,7 @@ export class LoggingServiceV2Client {
       | null
       | undefined,
       protos.google.api.IMonitoredResourceDescriptor
-    >
+    >,
   ): void;
   listMonitoredResourceDescriptors(
     request?: protos.google.logging.v2.IListMonitoredResourceDescriptorsRequest,
@@ -1164,7 +1164,7 @@ export class LoggingServiceV2Client {
       | null
       | undefined,
       protos.google.api.IMonitoredResourceDescriptor
-    >
+    >,
   ): Promise<
     [
       protos.google.api.IMonitoredResourceDescriptor[],
@@ -1187,7 +1187,7 @@ export class LoggingServiceV2Client {
     return this.innerApiCalls.listMonitoredResourceDescriptors(
       request,
       options,
-      callback
+      callback,
     );
   }
 
@@ -1217,7 +1217,7 @@ export class LoggingServiceV2Client {
    */
   listMonitoredResourceDescriptorsStream(
     request?: protos.google.logging.v2.IListMonitoredResourceDescriptorsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Transform {
     request = request || {};
     options = options || {};
@@ -1230,7 +1230,7 @@ export class LoggingServiceV2Client {
     return this.descriptors.page.listMonitoredResourceDescriptors.createStream(
       this.innerApiCalls.listMonitoredResourceDescriptors as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
@@ -1263,7 +1263,7 @@ export class LoggingServiceV2Client {
    */
   listMonitoredResourceDescriptorsAsync(
     request?: protos.google.logging.v2.IListMonitoredResourceDescriptorsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<protos.google.api.IMonitoredResourceDescriptor> {
     request = request || {};
     options = options || {};
@@ -1276,7 +1276,7 @@ export class LoggingServiceV2Client {
     return this.descriptors.page.listMonitoredResourceDescriptors.asyncIterate(
       this.innerApiCalls['listMonitoredResourceDescriptors'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.api.IMonitoredResourceDescriptor>;
   }
   /**
@@ -1331,7 +1331,7 @@ export class LoggingServiceV2Client {
    */
   listLogs(
     request?: protos.google.logging.v2.IListLogsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Promise<
     [
       string[],
@@ -1346,7 +1346,7 @@ export class LoggingServiceV2Client {
       protos.google.logging.v2.IListLogsRequest,
       protos.google.logging.v2.IListLogsResponse | null | undefined,
       string
-    >
+    >,
   ): void;
   listLogs(
     request: protos.google.logging.v2.IListLogsRequest,
@@ -1354,7 +1354,7 @@ export class LoggingServiceV2Client {
       protos.google.logging.v2.IListLogsRequest,
       protos.google.logging.v2.IListLogsResponse | null | undefined,
       string
-    >
+    >,
   ): void;
   listLogs(
     request?: protos.google.logging.v2.IListLogsRequest,
@@ -1369,7 +1369,7 @@ export class LoggingServiceV2Client {
       protos.google.logging.v2.IListLogsRequest,
       protos.google.logging.v2.IListLogsResponse | null | undefined,
       string
-    >
+    >,
   ): Promise<
     [
       string[],
@@ -1445,7 +1445,7 @@ export class LoggingServiceV2Client {
    */
   listLogsStream(
     request?: protos.google.logging.v2.IListLogsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Transform {
     request = request || {};
     options = options || {};
@@ -1461,7 +1461,7 @@ export class LoggingServiceV2Client {
     return this.descriptors.page.listLogs.createStream(
       this.innerApiCalls.listLogs as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
@@ -1517,7 +1517,7 @@ export class LoggingServiceV2Client {
    */
   listLogsAsync(
     request?: protos.google.logging.v2.IListLogsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<string> {
     request = request || {};
     options = options || {};
@@ -1533,7 +1533,7 @@ export class LoggingServiceV2Client {
     return this.descriptors.page.listLogs.asyncIterate(
       this.innerApiCalls['listLogs'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<string>;
   }
   // --------------------
@@ -1560,10 +1560,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the billing_account.
    */
   matchBillingAccountFromBillingAccountCmekSettingsName(
-    billingAccountCmekSettingsName: string
+    billingAccountCmekSettingsName: string,
   ) {
     return this.pathTemplates.billingAccountCmekSettingsPathTemplate.match(
-      billingAccountCmekSettingsName
+      billingAccountCmekSettingsName,
     ).billing_account;
   }
 
@@ -1589,10 +1589,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the billing_account.
    */
   matchBillingAccountFromBillingAccountExclusionName(
-    billingAccountExclusionName: string
+    billingAccountExclusionName: string,
   ) {
     return this.pathTemplates.billingAccountExclusionPathTemplate.match(
-      billingAccountExclusionName
+      billingAccountExclusionName,
     ).billing_account;
   }
 
@@ -1604,10 +1604,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the exclusion.
    */
   matchExclusionFromBillingAccountExclusionName(
-    billingAccountExclusionName: string
+    billingAccountExclusionName: string,
   ) {
     return this.pathTemplates.billingAccountExclusionPathTemplate.match(
-      billingAccountExclusionName
+      billingAccountExclusionName,
     ).exclusion;
   }
 
@@ -1622,7 +1622,7 @@ export class LoggingServiceV2Client {
   billingAccountLocationBucketPath(
     billingAccount: string,
     location: string,
-    bucket: string
+    bucket: string,
   ) {
     return this.pathTemplates.billingAccountLocationBucketPathTemplate.render({
       billing_account: billingAccount,
@@ -1639,10 +1639,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the billing_account.
    */
   matchBillingAccountFromBillingAccountLocationBucketName(
-    billingAccountLocationBucketName: string
+    billingAccountLocationBucketName: string,
   ) {
     return this.pathTemplates.billingAccountLocationBucketPathTemplate.match(
-      billingAccountLocationBucketName
+      billingAccountLocationBucketName,
     ).billing_account;
   }
 
@@ -1654,10 +1654,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the location.
    */
   matchLocationFromBillingAccountLocationBucketName(
-    billingAccountLocationBucketName: string
+    billingAccountLocationBucketName: string,
   ) {
     return this.pathTemplates.billingAccountLocationBucketPathTemplate.match(
-      billingAccountLocationBucketName
+      billingAccountLocationBucketName,
     ).location;
   }
 
@@ -1669,10 +1669,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the bucket.
    */
   matchBucketFromBillingAccountLocationBucketName(
-    billingAccountLocationBucketName: string
+    billingAccountLocationBucketName: string,
   ) {
     return this.pathTemplates.billingAccountLocationBucketPathTemplate.match(
-      billingAccountLocationBucketName
+      billingAccountLocationBucketName,
     ).bucket;
   }
 
@@ -1689,7 +1689,7 @@ export class LoggingServiceV2Client {
     billingAccount: string,
     location: string,
     bucket: string,
-    link: string
+    link: string,
   ) {
     return this.pathTemplates.billingAccountLocationBucketLinkPathTemplate.render(
       {
@@ -1697,7 +1697,7 @@ export class LoggingServiceV2Client {
         location: location,
         bucket: bucket,
         link: link,
-      }
+      },
     );
   }
 
@@ -1709,10 +1709,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the billing_account.
    */
   matchBillingAccountFromBillingAccountLocationBucketLinkName(
-    billingAccountLocationBucketLinkName: string
+    billingAccountLocationBucketLinkName: string,
   ) {
     return this.pathTemplates.billingAccountLocationBucketLinkPathTemplate.match(
-      billingAccountLocationBucketLinkName
+      billingAccountLocationBucketLinkName,
     ).billing_account;
   }
 
@@ -1724,10 +1724,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the location.
    */
   matchLocationFromBillingAccountLocationBucketLinkName(
-    billingAccountLocationBucketLinkName: string
+    billingAccountLocationBucketLinkName: string,
   ) {
     return this.pathTemplates.billingAccountLocationBucketLinkPathTemplate.match(
-      billingAccountLocationBucketLinkName
+      billingAccountLocationBucketLinkName,
     ).location;
   }
 
@@ -1739,10 +1739,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the bucket.
    */
   matchBucketFromBillingAccountLocationBucketLinkName(
-    billingAccountLocationBucketLinkName: string
+    billingAccountLocationBucketLinkName: string,
   ) {
     return this.pathTemplates.billingAccountLocationBucketLinkPathTemplate.match(
-      billingAccountLocationBucketLinkName
+      billingAccountLocationBucketLinkName,
     ).bucket;
   }
 
@@ -1754,10 +1754,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the link.
    */
   matchLinkFromBillingAccountLocationBucketLinkName(
-    billingAccountLocationBucketLinkName: string
+    billingAccountLocationBucketLinkName: string,
   ) {
     return this.pathTemplates.billingAccountLocationBucketLinkPathTemplate.match(
-      billingAccountLocationBucketLinkName
+      billingAccountLocationBucketLinkName,
     ).link;
   }
 
@@ -1774,7 +1774,7 @@ export class LoggingServiceV2Client {
     billingAccount: string,
     location: string,
     bucket: string,
-    view: string
+    view: string,
   ) {
     return this.pathTemplates.billingAccountLocationBucketViewPathTemplate.render(
       {
@@ -1782,7 +1782,7 @@ export class LoggingServiceV2Client {
         location: location,
         bucket: bucket,
         view: view,
-      }
+      },
     );
   }
 
@@ -1794,10 +1794,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the billing_account.
    */
   matchBillingAccountFromBillingAccountLocationBucketViewName(
-    billingAccountLocationBucketViewName: string
+    billingAccountLocationBucketViewName: string,
   ) {
     return this.pathTemplates.billingAccountLocationBucketViewPathTemplate.match(
-      billingAccountLocationBucketViewName
+      billingAccountLocationBucketViewName,
     ).billing_account;
   }
 
@@ -1809,10 +1809,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the location.
    */
   matchLocationFromBillingAccountLocationBucketViewName(
-    billingAccountLocationBucketViewName: string
+    billingAccountLocationBucketViewName: string,
   ) {
     return this.pathTemplates.billingAccountLocationBucketViewPathTemplate.match(
-      billingAccountLocationBucketViewName
+      billingAccountLocationBucketViewName,
     ).location;
   }
 
@@ -1824,10 +1824,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the bucket.
    */
   matchBucketFromBillingAccountLocationBucketViewName(
-    billingAccountLocationBucketViewName: string
+    billingAccountLocationBucketViewName: string,
   ) {
     return this.pathTemplates.billingAccountLocationBucketViewPathTemplate.match(
-      billingAccountLocationBucketViewName
+      billingAccountLocationBucketViewName,
     ).bucket;
   }
 
@@ -1839,10 +1839,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the view.
    */
   matchViewFromBillingAccountLocationBucketViewName(
-    billingAccountLocationBucketViewName: string
+    billingAccountLocationBucketViewName: string,
   ) {
     return this.pathTemplates.billingAccountLocationBucketViewPathTemplate.match(
-      billingAccountLocationBucketViewName
+      billingAccountLocationBucketViewName,
     ).view;
   }
 
@@ -1869,7 +1869,7 @@ export class LoggingServiceV2Client {
    */
   matchBillingAccountFromBillingAccountLogName(billingAccountLogName: string) {
     return this.pathTemplates.billingAccountLogPathTemplate.match(
-      billingAccountLogName
+      billingAccountLogName,
     ).billing_account;
   }
 
@@ -1882,7 +1882,7 @@ export class LoggingServiceV2Client {
    */
   matchLogFromBillingAccountLogName(billingAccountLogName: string) {
     return this.pathTemplates.billingAccountLogPathTemplate.match(
-      billingAccountLogName
+      billingAccountLogName,
     ).log;
   }
 
@@ -1906,10 +1906,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the billing_account.
    */
   matchBillingAccountFromBillingAccountSettingsName(
-    billingAccountSettingsName: string
+    billingAccountSettingsName: string,
   ) {
     return this.pathTemplates.billingAccountSettingsPathTemplate.match(
-      billingAccountSettingsName
+      billingAccountSettingsName,
     ).billing_account;
   }
 
@@ -1935,10 +1935,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the billing_account.
    */
   matchBillingAccountFromBillingAccountSinkName(
-    billingAccountSinkName: string
+    billingAccountSinkName: string,
   ) {
     return this.pathTemplates.billingAccountSinkPathTemplate.match(
-      billingAccountSinkName
+      billingAccountSinkName,
     ).billing_account;
   }
 
@@ -1951,7 +1951,7 @@ export class LoggingServiceV2Client {
    */
   matchSinkFromBillingAccountSinkName(billingAccountSinkName: string) {
     return this.pathTemplates.billingAccountSinkPathTemplate.match(
-      billingAccountSinkName
+      billingAccountSinkName,
     ).sink;
   }
 
@@ -1976,7 +1976,7 @@ export class LoggingServiceV2Client {
    */
   matchFolderFromFolderCmekSettingsName(folderCmekSettingsName: string) {
     return this.pathTemplates.folderCmekSettingsPathTemplate.match(
-      folderCmekSettingsName
+      folderCmekSettingsName,
     ).folder;
   }
 
@@ -2003,7 +2003,7 @@ export class LoggingServiceV2Client {
    */
   matchFolderFromFolderExclusionName(folderExclusionName: string) {
     return this.pathTemplates.folderExclusionPathTemplate.match(
-      folderExclusionName
+      folderExclusionName,
     ).folder;
   }
 
@@ -2016,7 +2016,7 @@ export class LoggingServiceV2Client {
    */
   matchExclusionFromFolderExclusionName(folderExclusionName: string) {
     return this.pathTemplates.folderExclusionPathTemplate.match(
-      folderExclusionName
+      folderExclusionName,
     ).exclusion;
   }
 
@@ -2045,7 +2045,7 @@ export class LoggingServiceV2Client {
    */
   matchFolderFromFolderLocationBucketName(folderLocationBucketName: string) {
     return this.pathTemplates.folderLocationBucketPathTemplate.match(
-      folderLocationBucketName
+      folderLocationBucketName,
     ).folder;
   }
 
@@ -2058,7 +2058,7 @@ export class LoggingServiceV2Client {
    */
   matchLocationFromFolderLocationBucketName(folderLocationBucketName: string) {
     return this.pathTemplates.folderLocationBucketPathTemplate.match(
-      folderLocationBucketName
+      folderLocationBucketName,
     ).location;
   }
 
@@ -2071,7 +2071,7 @@ export class LoggingServiceV2Client {
    */
   matchBucketFromFolderLocationBucketName(folderLocationBucketName: string) {
     return this.pathTemplates.folderLocationBucketPathTemplate.match(
-      folderLocationBucketName
+      folderLocationBucketName,
     ).bucket;
   }
 
@@ -2088,7 +2088,7 @@ export class LoggingServiceV2Client {
     folder: string,
     location: string,
     bucket: string,
-    link: string
+    link: string,
   ) {
     return this.pathTemplates.folderLocationBucketLinkPathTemplate.render({
       folder: folder,
@@ -2106,10 +2106,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the folder.
    */
   matchFolderFromFolderLocationBucketLinkName(
-    folderLocationBucketLinkName: string
+    folderLocationBucketLinkName: string,
   ) {
     return this.pathTemplates.folderLocationBucketLinkPathTemplate.match(
-      folderLocationBucketLinkName
+      folderLocationBucketLinkName,
     ).folder;
   }
 
@@ -2121,10 +2121,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the location.
    */
   matchLocationFromFolderLocationBucketLinkName(
-    folderLocationBucketLinkName: string
+    folderLocationBucketLinkName: string,
   ) {
     return this.pathTemplates.folderLocationBucketLinkPathTemplate.match(
-      folderLocationBucketLinkName
+      folderLocationBucketLinkName,
     ).location;
   }
 
@@ -2136,10 +2136,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the bucket.
    */
   matchBucketFromFolderLocationBucketLinkName(
-    folderLocationBucketLinkName: string
+    folderLocationBucketLinkName: string,
   ) {
     return this.pathTemplates.folderLocationBucketLinkPathTemplate.match(
-      folderLocationBucketLinkName
+      folderLocationBucketLinkName,
     ).bucket;
   }
 
@@ -2151,10 +2151,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the link.
    */
   matchLinkFromFolderLocationBucketLinkName(
-    folderLocationBucketLinkName: string
+    folderLocationBucketLinkName: string,
   ) {
     return this.pathTemplates.folderLocationBucketLinkPathTemplate.match(
-      folderLocationBucketLinkName
+      folderLocationBucketLinkName,
     ).link;
   }
 
@@ -2171,7 +2171,7 @@ export class LoggingServiceV2Client {
     folder: string,
     location: string,
     bucket: string,
-    view: string
+    view: string,
   ) {
     return this.pathTemplates.folderLocationBucketViewPathTemplate.render({
       folder: folder,
@@ -2189,10 +2189,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the folder.
    */
   matchFolderFromFolderLocationBucketViewName(
-    folderLocationBucketViewName: string
+    folderLocationBucketViewName: string,
   ) {
     return this.pathTemplates.folderLocationBucketViewPathTemplate.match(
-      folderLocationBucketViewName
+      folderLocationBucketViewName,
     ).folder;
   }
 
@@ -2204,10 +2204,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the location.
    */
   matchLocationFromFolderLocationBucketViewName(
-    folderLocationBucketViewName: string
+    folderLocationBucketViewName: string,
   ) {
     return this.pathTemplates.folderLocationBucketViewPathTemplate.match(
-      folderLocationBucketViewName
+      folderLocationBucketViewName,
     ).location;
   }
 
@@ -2219,10 +2219,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the bucket.
    */
   matchBucketFromFolderLocationBucketViewName(
-    folderLocationBucketViewName: string
+    folderLocationBucketViewName: string,
   ) {
     return this.pathTemplates.folderLocationBucketViewPathTemplate.match(
-      folderLocationBucketViewName
+      folderLocationBucketViewName,
     ).bucket;
   }
 
@@ -2234,10 +2234,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the view.
    */
   matchViewFromFolderLocationBucketViewName(
-    folderLocationBucketViewName: string
+    folderLocationBucketViewName: string,
   ) {
     return this.pathTemplates.folderLocationBucketViewPathTemplate.match(
-      folderLocationBucketViewName
+      folderLocationBucketViewName,
     ).view;
   }
 
@@ -2298,7 +2298,7 @@ export class LoggingServiceV2Client {
    */
   matchFolderFromFolderSettingsName(folderSettingsName: string) {
     return this.pathTemplates.folderSettingsPathTemplate.match(
-      folderSettingsName
+      folderSettingsName,
     ).folder;
   }
 
@@ -2396,10 +2396,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationCmekSettingsName(
-    organizationCmekSettingsName: string
+    organizationCmekSettingsName: string,
   ) {
     return this.pathTemplates.organizationCmekSettingsPathTemplate.match(
-      organizationCmekSettingsName
+      organizationCmekSettingsName,
     ).organization;
   }
 
@@ -2425,10 +2425,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationExclusionName(
-    organizationExclusionName: string
+    organizationExclusionName: string,
   ) {
     return this.pathTemplates.organizationExclusionPathTemplate.match(
-      organizationExclusionName
+      organizationExclusionName,
     ).organization;
   }
 
@@ -2440,10 +2440,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the exclusion.
    */
   matchExclusionFromOrganizationExclusionName(
-    organizationExclusionName: string
+    organizationExclusionName: string,
   ) {
     return this.pathTemplates.organizationExclusionPathTemplate.match(
-      organizationExclusionName
+      organizationExclusionName,
     ).exclusion;
   }
 
@@ -2458,7 +2458,7 @@ export class LoggingServiceV2Client {
   organizationLocationBucketPath(
     organization: string,
     location: string,
-    bucket: string
+    bucket: string,
   ) {
     return this.pathTemplates.organizationLocationBucketPathTemplate.render({
       organization: organization,
@@ -2475,10 +2475,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationLocationBucketName(
-    organizationLocationBucketName: string
+    organizationLocationBucketName: string,
   ) {
     return this.pathTemplates.organizationLocationBucketPathTemplate.match(
-      organizationLocationBucketName
+      organizationLocationBucketName,
     ).organization;
   }
 
@@ -2490,10 +2490,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the location.
    */
   matchLocationFromOrganizationLocationBucketName(
-    organizationLocationBucketName: string
+    organizationLocationBucketName: string,
   ) {
     return this.pathTemplates.organizationLocationBucketPathTemplate.match(
-      organizationLocationBucketName
+      organizationLocationBucketName,
     ).location;
   }
 
@@ -2505,10 +2505,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the bucket.
    */
   matchBucketFromOrganizationLocationBucketName(
-    organizationLocationBucketName: string
+    organizationLocationBucketName: string,
   ) {
     return this.pathTemplates.organizationLocationBucketPathTemplate.match(
-      organizationLocationBucketName
+      organizationLocationBucketName,
     ).bucket;
   }
 
@@ -2525,7 +2525,7 @@ export class LoggingServiceV2Client {
     organization: string,
     location: string,
     bucket: string,
-    link: string
+    link: string,
   ) {
     return this.pathTemplates.organizationLocationBucketLinkPathTemplate.render(
       {
@@ -2533,7 +2533,7 @@ export class LoggingServiceV2Client {
         location: location,
         bucket: bucket,
         link: link,
-      }
+      },
     );
   }
 
@@ -2545,10 +2545,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationLocationBucketLinkName(
-    organizationLocationBucketLinkName: string
+    organizationLocationBucketLinkName: string,
   ) {
     return this.pathTemplates.organizationLocationBucketLinkPathTemplate.match(
-      organizationLocationBucketLinkName
+      organizationLocationBucketLinkName,
     ).organization;
   }
 
@@ -2560,10 +2560,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the location.
    */
   matchLocationFromOrganizationLocationBucketLinkName(
-    organizationLocationBucketLinkName: string
+    organizationLocationBucketLinkName: string,
   ) {
     return this.pathTemplates.organizationLocationBucketLinkPathTemplate.match(
-      organizationLocationBucketLinkName
+      organizationLocationBucketLinkName,
     ).location;
   }
 
@@ -2575,10 +2575,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the bucket.
    */
   matchBucketFromOrganizationLocationBucketLinkName(
-    organizationLocationBucketLinkName: string
+    organizationLocationBucketLinkName: string,
   ) {
     return this.pathTemplates.organizationLocationBucketLinkPathTemplate.match(
-      organizationLocationBucketLinkName
+      organizationLocationBucketLinkName,
     ).bucket;
   }
 
@@ -2590,10 +2590,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the link.
    */
   matchLinkFromOrganizationLocationBucketLinkName(
-    organizationLocationBucketLinkName: string
+    organizationLocationBucketLinkName: string,
   ) {
     return this.pathTemplates.organizationLocationBucketLinkPathTemplate.match(
-      organizationLocationBucketLinkName
+      organizationLocationBucketLinkName,
     ).link;
   }
 
@@ -2610,7 +2610,7 @@ export class LoggingServiceV2Client {
     organization: string,
     location: string,
     bucket: string,
-    view: string
+    view: string,
   ) {
     return this.pathTemplates.organizationLocationBucketViewPathTemplate.render(
       {
@@ -2618,7 +2618,7 @@ export class LoggingServiceV2Client {
         location: location,
         bucket: bucket,
         view: view,
-      }
+      },
     );
   }
 
@@ -2630,10 +2630,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationLocationBucketViewName(
-    organizationLocationBucketViewName: string
+    organizationLocationBucketViewName: string,
   ) {
     return this.pathTemplates.organizationLocationBucketViewPathTemplate.match(
-      organizationLocationBucketViewName
+      organizationLocationBucketViewName,
     ).organization;
   }
 
@@ -2645,10 +2645,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the location.
    */
   matchLocationFromOrganizationLocationBucketViewName(
-    organizationLocationBucketViewName: string
+    organizationLocationBucketViewName: string,
   ) {
     return this.pathTemplates.organizationLocationBucketViewPathTemplate.match(
-      organizationLocationBucketViewName
+      organizationLocationBucketViewName,
     ).location;
   }
 
@@ -2660,10 +2660,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the bucket.
    */
   matchBucketFromOrganizationLocationBucketViewName(
-    organizationLocationBucketViewName: string
+    organizationLocationBucketViewName: string,
   ) {
     return this.pathTemplates.organizationLocationBucketViewPathTemplate.match(
-      organizationLocationBucketViewName
+      organizationLocationBucketViewName,
     ).bucket;
   }
 
@@ -2675,10 +2675,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the view.
    */
   matchViewFromOrganizationLocationBucketViewName(
-    organizationLocationBucketViewName: string
+    organizationLocationBucketViewName: string,
   ) {
     return this.pathTemplates.organizationLocationBucketViewPathTemplate.match(
-      organizationLocationBucketViewName
+      organizationLocationBucketViewName,
     ).view;
   }
 
@@ -2705,7 +2705,7 @@ export class LoggingServiceV2Client {
    */
   matchOrganizationFromOrganizationLogName(organizationLogName: string) {
     return this.pathTemplates.organizationLogPathTemplate.match(
-      organizationLogName
+      organizationLogName,
     ).organization;
   }
 
@@ -2718,7 +2718,7 @@ export class LoggingServiceV2Client {
    */
   matchLogFromOrganizationLogName(organizationLogName: string) {
     return this.pathTemplates.organizationLogPathTemplate.match(
-      organizationLogName
+      organizationLogName,
     ).log;
   }
 
@@ -2742,10 +2742,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationSettingsName(
-    organizationSettingsName: string
+    organizationSettingsName: string,
   ) {
     return this.pathTemplates.organizationSettingsPathTemplate.match(
-      organizationSettingsName
+      organizationSettingsName,
     ).organization;
   }
 
@@ -2772,7 +2772,7 @@ export class LoggingServiceV2Client {
    */
   matchOrganizationFromOrganizationSinkName(organizationSinkName: string) {
     return this.pathTemplates.organizationSinkPathTemplate.match(
-      organizationSinkName
+      organizationSinkName,
     ).organization;
   }
 
@@ -2785,7 +2785,7 @@ export class LoggingServiceV2Client {
    */
   matchSinkFromOrganizationSinkName(organizationSinkName: string) {
     return this.pathTemplates.organizationSinkPathTemplate.match(
-      organizationSinkName
+      organizationSinkName,
     ).sink;
   }
 
@@ -2833,7 +2833,7 @@ export class LoggingServiceV2Client {
    */
   matchProjectFromProjectCmekSettingsName(projectCmekSettingsName: string) {
     return this.pathTemplates.projectCmekSettingsPathTemplate.match(
-      projectCmekSettingsName
+      projectCmekSettingsName,
     ).project;
   }
 
@@ -2860,7 +2860,7 @@ export class LoggingServiceV2Client {
    */
   matchProjectFromProjectExclusionName(projectExclusionName: string) {
     return this.pathTemplates.projectExclusionPathTemplate.match(
-      projectExclusionName
+      projectExclusionName,
     ).project;
   }
 
@@ -2873,7 +2873,7 @@ export class LoggingServiceV2Client {
    */
   matchExclusionFromProjectExclusionName(projectExclusionName: string) {
     return this.pathTemplates.projectExclusionPathTemplate.match(
-      projectExclusionName
+      projectExclusionName,
     ).exclusion;
   }
 
@@ -2902,7 +2902,7 @@ export class LoggingServiceV2Client {
    */
   matchProjectFromProjectLocationBucketName(projectLocationBucketName: string) {
     return this.pathTemplates.projectLocationBucketPathTemplate.match(
-      projectLocationBucketName
+      projectLocationBucketName,
     ).project;
   }
 
@@ -2914,10 +2914,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the location.
    */
   matchLocationFromProjectLocationBucketName(
-    projectLocationBucketName: string
+    projectLocationBucketName: string,
   ) {
     return this.pathTemplates.projectLocationBucketPathTemplate.match(
-      projectLocationBucketName
+      projectLocationBucketName,
     ).location;
   }
 
@@ -2930,7 +2930,7 @@ export class LoggingServiceV2Client {
    */
   matchBucketFromProjectLocationBucketName(projectLocationBucketName: string) {
     return this.pathTemplates.projectLocationBucketPathTemplate.match(
-      projectLocationBucketName
+      projectLocationBucketName,
     ).bucket;
   }
 
@@ -2947,7 +2947,7 @@ export class LoggingServiceV2Client {
     project: string,
     location: string,
     bucket: string,
-    link: string
+    link: string,
   ) {
     return this.pathTemplates.projectLocationBucketLinkPathTemplate.render({
       project: project,
@@ -2965,10 +2965,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectLocationBucketLinkName(
-    projectLocationBucketLinkName: string
+    projectLocationBucketLinkName: string,
   ) {
     return this.pathTemplates.projectLocationBucketLinkPathTemplate.match(
-      projectLocationBucketLinkName
+      projectLocationBucketLinkName,
     ).project;
   }
 
@@ -2980,10 +2980,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the location.
    */
   matchLocationFromProjectLocationBucketLinkName(
-    projectLocationBucketLinkName: string
+    projectLocationBucketLinkName: string,
   ) {
     return this.pathTemplates.projectLocationBucketLinkPathTemplate.match(
-      projectLocationBucketLinkName
+      projectLocationBucketLinkName,
     ).location;
   }
 
@@ -2995,10 +2995,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the bucket.
    */
   matchBucketFromProjectLocationBucketLinkName(
-    projectLocationBucketLinkName: string
+    projectLocationBucketLinkName: string,
   ) {
     return this.pathTemplates.projectLocationBucketLinkPathTemplate.match(
-      projectLocationBucketLinkName
+      projectLocationBucketLinkName,
     ).bucket;
   }
 
@@ -3010,10 +3010,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the link.
    */
   matchLinkFromProjectLocationBucketLinkName(
-    projectLocationBucketLinkName: string
+    projectLocationBucketLinkName: string,
   ) {
     return this.pathTemplates.projectLocationBucketLinkPathTemplate.match(
-      projectLocationBucketLinkName
+      projectLocationBucketLinkName,
     ).link;
   }
 
@@ -3030,7 +3030,7 @@ export class LoggingServiceV2Client {
     project: string,
     location: string,
     bucket: string,
-    view: string
+    view: string,
   ) {
     return this.pathTemplates.projectLocationBucketViewPathTemplate.render({
       project: project,
@@ -3048,10 +3048,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectLocationBucketViewName(
-    projectLocationBucketViewName: string
+    projectLocationBucketViewName: string,
   ) {
     return this.pathTemplates.projectLocationBucketViewPathTemplate.match(
-      projectLocationBucketViewName
+      projectLocationBucketViewName,
     ).project;
   }
 
@@ -3063,10 +3063,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the location.
    */
   matchLocationFromProjectLocationBucketViewName(
-    projectLocationBucketViewName: string
+    projectLocationBucketViewName: string,
   ) {
     return this.pathTemplates.projectLocationBucketViewPathTemplate.match(
-      projectLocationBucketViewName
+      projectLocationBucketViewName,
     ).location;
   }
 
@@ -3078,10 +3078,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the bucket.
    */
   matchBucketFromProjectLocationBucketViewName(
-    projectLocationBucketViewName: string
+    projectLocationBucketViewName: string,
   ) {
     return this.pathTemplates.projectLocationBucketViewPathTemplate.match(
-      projectLocationBucketViewName
+      projectLocationBucketViewName,
     ).bucket;
   }
 
@@ -3093,10 +3093,10 @@ export class LoggingServiceV2Client {
    * @returns {string} A string representing the view.
    */
   matchViewFromProjectLocationBucketViewName(
-    projectLocationBucketViewName: string
+    projectLocationBucketViewName: string,
   ) {
     return this.pathTemplates.projectLocationBucketViewPathTemplate.match(
-      projectLocationBucketViewName
+      projectLocationBucketViewName,
     ).view;
   }
 
@@ -3158,7 +3158,7 @@ export class LoggingServiceV2Client {
    */
   matchProjectFromProjectSettingsName(projectSettingsName: string) {
     return this.pathTemplates.projectSettingsPathTemplate.match(
-      projectSettingsName
+      projectSettingsName,
     ).project;
   }
 

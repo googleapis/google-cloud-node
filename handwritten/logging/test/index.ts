@@ -215,8 +215,8 @@ describe('Logging', () => {
               libVersion: version,
               scopes: EXPECTED_SCOPES,
             },
-            options
-          )
+            options,
+          ),
         );
         return fakeGoogleAuthInstance;
       };
@@ -245,8 +245,8 @@ describe('Logging', () => {
             libVersion: version,
             scopes: EXPECTED_SCOPES,
           },
-          options
-        )
+          options,
+        ),
       );
     });
 
@@ -354,7 +354,7 @@ describe('Logging', () => {
         logging.configService.createSink = async (
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           reqOpts: any,
-          gaxOpts: {}
+          gaxOpts: {},
         ) => {
           const expectedParent = 'projects/' + logging.projectId;
           assert.strictEqual(reqOpts.parent, expectedParent);
@@ -376,11 +376,11 @@ describe('Logging', () => {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           reqOpts: any,
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          gaxOpts: {}
+          gaxOpts: {},
         ) => {
           assert.strictEqual(
             reqOpts.uniqueWriterIdentity,
-            config.uniqueWriterIdentity
+            config.uniqueWriterIdentity,
           );
           assert.strictEqual(reqOpts.sink.uniqueWriterIdentity, undefined);
           return [{}];
@@ -399,7 +399,7 @@ describe('Logging', () => {
         logging.configService.createSink = async (
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           reqOpts: any,
-          gaxOpts: {}
+          gaxOpts: {},
         ) => {
           assert.strictEqual(reqOpts.sink.gaxOptions, undefined);
           assert.strictEqual(gaxOpts, config.gaxOptions);
@@ -455,7 +455,7 @@ describe('Logging', () => {
 
           const [sink_, apiResponse_] = await logging.createSink(
             SINK_NAME,
-            {} as CreateSinkRequest
+            {} as CreateSinkRequest,
           );
           assert.strictEqual(sink_, sink);
           assert.strictEqual(sink_.metadata, apiResponse);
@@ -487,7 +487,7 @@ describe('Logging', () => {
       logging.loggingService.listLogEntries = async (
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         reqOpts: any,
-        gaxOpts: {}
+        gaxOpts: {},
       ) => {
         assert.deepStrictEqual(reqOpts, {
           filter: reqOpts?.filter,
@@ -512,7 +512,7 @@ describe('Logging', () => {
 
       logging.loggingService.listLogEntries = async (
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        reqOpts: any
+        reqOpts: any,
       ) => {
         assert.deepStrictEqual(reqOpts.resourceNames, resourceNames);
         return [[]];
@@ -526,7 +526,7 @@ describe('Logging', () => {
 
       logging.loggingService.listLogEntries = async (
         reqOpts: {},
-        gaxOpts: {}
+        gaxOpts: {},
       ) => {
         assert.deepStrictEqual(
           reqOpts,
@@ -534,7 +534,7 @@ describe('Logging', () => {
             filter: 'timestamp > "2020-11-11T15:01:23.045123456Z"',
             orderBy: 'timestamp desc',
             resourceNames: ['projects/' + logging.projectId],
-          })
+          }),
         );
 
         assert.deepStrictEqual(gaxOpts, {
@@ -552,7 +552,7 @@ describe('Logging', () => {
       logging.loggingService.listLogEntries = async (
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         reqOpts: any,
-        gaxOpts: {}
+        gaxOpts: {},
       ) => {
         assert.deepStrictEqual(
           reqOpts,
@@ -560,7 +560,7 @@ describe('Logging', () => {
             filter: reqOpts?.filter,
             orderBy: 'timestamp desc',
             resourceNames: ['projects/' + logging.projectId],
-          })
+          }),
         );
         assert.deepStrictEqual(gaxOpts, {
           autoPaginate: undefined,
@@ -614,7 +614,7 @@ describe('Logging', () => {
       logging.loggingService.listLogEntries = async (
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         reqOpts: any,
-        gaxOpts: {}
+        gaxOpts: {},
       ) => {
         assert.deepStrictEqual(reqOpts, {
           a: 'b',
@@ -692,7 +692,7 @@ describe('Logging', () => {
     it('should make request once reading', done => {
       logging.loggingService.listLogEntriesStream = (
         reqOpts: {},
-        gaxOpts: {}
+        gaxOpts: {},
       ) => {
         assert.deepStrictEqual(reqOpts, {
           resourceNames: ['projects/' + logging.projectId],
@@ -721,7 +721,7 @@ describe('Logging', () => {
       logging = new LOGGING({projectId: PROJECT_ID});
       logging.loggingService.listLogEntriesStream = (
         reqOpts: {},
-        gaxOpts: {}
+        gaxOpts: {},
       ) => {
         assert.deepStrictEqual(reqOpts, {
           resourceNames: ['projects/' + logging.projectId],
@@ -758,12 +758,12 @@ describe('Logging', () => {
         {
           filter: 'custom filter',
         },
-        OPTIONS
+        OPTIONS,
       );
       logging = new LOGGING({projectId: PROJECT_ID});
       logging.loggingService.listLogEntriesStream = (
         reqOpts: {},
-        gaxOpts: {}
+        gaxOpts: {},
       ) => {
         assert.deepStrictEqual(reqOpts, {
           resourceNames: ['projects/' + logging.projectId],

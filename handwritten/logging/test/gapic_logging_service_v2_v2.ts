@@ -30,7 +30,7 @@ import {protobuf} from 'google-gax';
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
 const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
+  require('../protos/protos.json'),
 ).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -47,7 +47,7 @@ function generateSampleMessage<T extends object>(instance: T) {
     instance.constructor as typeof protobuf.Message
   ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
+    filledObject,
   ) as T;
 }
 
@@ -59,7 +59,7 @@ function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
 
 function stubSimpleCallWithCallback<ResponseType>(
   response?: ResponseType,
-  error?: Error
+  error?: Error,
 ) {
   return error
     ? sinon.stub().callsArgWith(2, error)
@@ -68,7 +68,7 @@ function stubSimpleCallWithCallback<ResponseType>(
 
 function stubBidiStreamingCall<ResponseType>(
   response?: ResponseType,
-  error?: Error
+  error?: Error,
 ) {
   const transformStub = error
     ? sinon.stub().callsArgWith(2, error)
@@ -82,7 +82,7 @@ function stubBidiStreamingCall<ResponseType>(
 
 function stubPageStreamingCall<ResponseType>(
   responses?: ResponseType[],
-  error?: Error
+  error?: Error,
 ) {
   const pagingStub = sinon.stub();
   if (responses) {
@@ -120,7 +120,7 @@ function stubPageStreamingCall<ResponseType>(
 
 function stubAsyncIterationCall<ResponseType>(
   responses?: ResponseType[],
-  error?: Error
+  error?: Error,
 ) {
   let counter = 0;
   const asyncIterable = {
@@ -327,16 +327,16 @@ describe('v2.LoggingServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.DeleteLogRequest()
+        new protos.google.logging.v2.DeleteLogRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.DeleteLogRequest',
-        ['logName']
+        ['logName'],
       );
       request.logName = defaultValue1;
       const expectedHeaderRequestParams = `log_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
+        new protos.google.protobuf.Empty(),
       );
       client.innerApiCalls.deleteLog = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteLog(request);
@@ -358,16 +358,16 @@ describe('v2.LoggingServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.DeleteLogRequest()
+        new protos.google.logging.v2.DeleteLogRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.DeleteLogRequest',
-        ['logName']
+        ['logName'],
       );
       request.logName = defaultValue1;
       const expectedHeaderRequestParams = `log_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
+        new protos.google.protobuf.Empty(),
       );
       client.innerApiCalls.deleteLog =
         stubSimpleCallWithCallback(expectedResponse);
@@ -376,14 +376,14 @@ describe('v2.LoggingServiceV2Client', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
+            result?: protos.google.protobuf.IEmpty | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -405,11 +405,11 @@ describe('v2.LoggingServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.DeleteLogRequest()
+        new protos.google.logging.v2.DeleteLogRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.DeleteLogRequest',
-        ['logName']
+        ['logName'],
       );
       request.logName = defaultValue1;
       const expectedHeaderRequestParams = `log_name=${defaultValue1}`;
@@ -433,11 +433,11 @@ describe('v2.LoggingServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.DeleteLogRequest()
+        new protos.google.logging.v2.DeleteLogRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.DeleteLogRequest',
-        ['logName']
+        ['logName'],
       );
       request.logName = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -454,10 +454,10 @@ describe('v2.LoggingServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.WriteLogEntriesRequest()
+        new protos.google.logging.v2.WriteLogEntriesRequest(),
       );
       const expectedResponse = generateSampleMessage(
-        new protos.google.logging.v2.WriteLogEntriesResponse()
+        new protos.google.logging.v2.WriteLogEntriesResponse(),
       );
       client.innerApiCalls.writeLogEntries = stubSimpleCall(expectedResponse);
       const [response] = await client.writeLogEntries(request);
@@ -471,10 +471,10 @@ describe('v2.LoggingServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.WriteLogEntriesRequest()
+        new protos.google.logging.v2.WriteLogEntriesRequest(),
       );
       const expectedResponse = generateSampleMessage(
-        new protos.google.logging.v2.WriteLogEntriesResponse()
+        new protos.google.logging.v2.WriteLogEntriesResponse(),
       );
       client.innerApiCalls.writeLogEntries =
         stubSimpleCallWithCallback(expectedResponse);
@@ -483,14 +483,14 @@ describe('v2.LoggingServiceV2Client', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.logging.v2.IWriteLogEntriesResponse | null
+            result?: protos.google.logging.v2.IWriteLogEntriesResponse | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -504,12 +504,12 @@ describe('v2.LoggingServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.WriteLogEntriesRequest()
+        new protos.google.logging.v2.WriteLogEntriesRequest(),
       );
       const expectedError = new Error('expected');
       client.innerApiCalls.writeLogEntries = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.writeLogEntries(request), expectedError);
     });
@@ -521,7 +521,7 @@ describe('v2.LoggingServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.WriteLogEntriesRequest()
+        new protos.google.logging.v2.WriteLogEntriesRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -537,11 +537,11 @@ describe('v2.LoggingServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.TailLogEntriesRequest()
+        new protos.google.logging.v2.TailLogEntriesRequest(),
       );
 
       const expectedResponse = generateSampleMessage(
-        new protos.google.logging.v2.TailLogEntriesResponse()
+        new protos.google.logging.v2.TailLogEntriesResponse(),
       );
       client.innerApiCalls.tailLogEntries =
         stubBidiStreamingCall(expectedResponse);
@@ -551,7 +551,7 @@ describe('v2.LoggingServiceV2Client', () => {
           'data',
           (response: protos.google.logging.v2.TailLogEntriesResponse) => {
             resolve(response);
-          }
+          },
         );
         stream.on('error', (err: Error) => {
           reject(err);
@@ -564,12 +564,12 @@ describe('v2.LoggingServiceV2Client', () => {
       assert(
         (client.innerApiCalls.tailLogEntries as SinonStub)
           .getCall(0)
-          .calledWith(null)
+          .calledWith(null),
       );
       assert.deepStrictEqual(
         ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
           .args[0],
-        request
+        request,
       );
     });
 
@@ -580,12 +580,12 @@ describe('v2.LoggingServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.TailLogEntriesRequest()
+        new protos.google.logging.v2.TailLogEntriesRequest(),
       );
       const expectedError = new Error('expected');
       client.innerApiCalls.tailLogEntries = stubBidiStreamingCall(
         undefined,
-        expectedError
+        expectedError,
       );
       const stream = client.tailLogEntries();
       const promise = new Promise((resolve, reject) => {
@@ -593,7 +593,7 @@ describe('v2.LoggingServiceV2Client', () => {
           'data',
           (response: protos.google.logging.v2.TailLogEntriesResponse) => {
             resolve(response);
-          }
+          },
         );
         stream.on('error', (err: Error) => {
           reject(err);
@@ -605,12 +605,12 @@ describe('v2.LoggingServiceV2Client', () => {
       assert(
         (client.innerApiCalls.tailLogEntries as SinonStub)
           .getCall(0)
-          .calledWith(null)
+          .calledWith(null),
       );
       assert.deepStrictEqual(
         ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
           .args[0],
-        request
+        request,
       );
     });
   });
@@ -623,7 +623,7 @@ describe('v2.LoggingServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListLogEntriesRequest()
+        new protos.google.logging.v2.ListLogEntriesRequest(),
       );
       const expectedResponse = [
         generateSampleMessage(new protos.google.logging.v2.LogEntry()),
@@ -642,7 +642,7 @@ describe('v2.LoggingServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListLogEntriesRequest()
+        new protos.google.logging.v2.ListLogEntriesRequest(),
       );
       const expectedResponse = [
         generateSampleMessage(new protos.google.logging.v2.LogEntry()),
@@ -656,14 +656,14 @@ describe('v2.LoggingServiceV2Client', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.logging.v2.ILogEntry[] | null
+            result?: protos.google.logging.v2.ILogEntry[] | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -677,12 +677,12 @@ describe('v2.LoggingServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListLogEntriesRequest()
+        new protos.google.logging.v2.ListLogEntriesRequest(),
       );
       const expectedError = new Error('expected');
       client.innerApiCalls.listLogEntries = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.listLogEntries(request), expectedError);
     });
@@ -694,7 +694,7 @@ describe('v2.LoggingServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListLogEntriesRequest()
+        new protos.google.logging.v2.ListLogEntriesRequest(),
       );
       const expectedResponse = [
         generateSampleMessage(new protos.google.logging.v2.LogEntry()),
@@ -721,7 +721,7 @@ describe('v2.LoggingServiceV2Client', () => {
       assert(
         (client.descriptors.page.listLogEntries.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listLogEntries, request)
+          .calledWith(client.innerApiCalls.listLogEntries, request),
       );
     });
 
@@ -732,7 +732,7 @@ describe('v2.LoggingServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListLogEntriesRequest()
+        new protos.google.logging.v2.ListLogEntriesRequest(),
       );
       const expectedError = new Error('expected');
       client.descriptors.page.listLogEntries.createStream =
@@ -754,7 +754,7 @@ describe('v2.LoggingServiceV2Client', () => {
       assert(
         (client.descriptors.page.listLogEntries.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listLogEntries, request)
+          .calledWith(client.innerApiCalls.listLogEntries, request),
       );
     });
 
@@ -765,7 +765,7 @@ describe('v2.LoggingServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListLogEntriesRequest()
+        new protos.google.logging.v2.ListLogEntriesRequest(),
       );
       const expectedResponse = [
         generateSampleMessage(new protos.google.logging.v2.LogEntry()),
@@ -784,7 +784,7 @@ describe('v2.LoggingServiceV2Client', () => {
         (
           client.descriptors.page.listLogEntries.asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request
+        request,
       );
     });
 
@@ -795,7 +795,7 @@ describe('v2.LoggingServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListLogEntriesRequest()
+        new protos.google.logging.v2.ListLogEntriesRequest(),
       );
       const expectedError = new Error('expected');
       client.descriptors.page.listLogEntries.asyncIterate =
@@ -811,7 +811,7 @@ describe('v2.LoggingServiceV2Client', () => {
         (
           client.descriptors.page.listLogEntries.asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request
+        request,
       );
     });
   });
@@ -824,17 +824,17 @@ describe('v2.LoggingServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListMonitoredResourceDescriptorsRequest()
+        new protos.google.logging.v2.ListMonitoredResourceDescriptorsRequest(),
       );
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.api.MonitoredResourceDescriptor()
+          new protos.google.api.MonitoredResourceDescriptor(),
         ),
         generateSampleMessage(
-          new protos.google.api.MonitoredResourceDescriptor()
+          new protos.google.api.MonitoredResourceDescriptor(),
         ),
         generateSampleMessage(
-          new protos.google.api.MonitoredResourceDescriptor()
+          new protos.google.api.MonitoredResourceDescriptor(),
         ),
       ];
       client.innerApiCalls.listMonitoredResourceDescriptors =
@@ -850,17 +850,17 @@ describe('v2.LoggingServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListMonitoredResourceDescriptorsRequest()
+        new protos.google.logging.v2.ListMonitoredResourceDescriptorsRequest(),
       );
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.api.MonitoredResourceDescriptor()
+          new protos.google.api.MonitoredResourceDescriptor(),
         ),
         generateSampleMessage(
-          new protos.google.api.MonitoredResourceDescriptor()
+          new protos.google.api.MonitoredResourceDescriptor(),
         ),
         generateSampleMessage(
-          new protos.google.api.MonitoredResourceDescriptor()
+          new protos.google.api.MonitoredResourceDescriptor(),
         ),
       ];
       client.innerApiCalls.listMonitoredResourceDescriptors =
@@ -870,14 +870,14 @@ describe('v2.LoggingServiceV2Client', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.api.IMonitoredResourceDescriptor[] | null
+            result?: protos.google.api.IMonitoredResourceDescriptor[] | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -891,16 +891,16 @@ describe('v2.LoggingServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListMonitoredResourceDescriptorsRequest()
+        new protos.google.logging.v2.ListMonitoredResourceDescriptorsRequest(),
       );
       const expectedError = new Error('expected');
       client.innerApiCalls.listMonitoredResourceDescriptors = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(
         client.listMonitoredResourceDescriptors(request),
-        expectedError
+        expectedError,
       );
     });
 
@@ -911,17 +911,17 @@ describe('v2.LoggingServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListMonitoredResourceDescriptorsRequest()
+        new protos.google.logging.v2.ListMonitoredResourceDescriptorsRequest(),
       );
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.api.MonitoredResourceDescriptor()
+          new protos.google.api.MonitoredResourceDescriptor(),
         ),
         generateSampleMessage(
-          new protos.google.api.MonitoredResourceDescriptor()
+          new protos.google.api.MonitoredResourceDescriptor(),
         ),
         generateSampleMessage(
-          new protos.google.api.MonitoredResourceDescriptor()
+          new protos.google.api.MonitoredResourceDescriptor(),
         ),
       ];
       client.descriptors.page.listMonitoredResourceDescriptors.createStream =
@@ -933,7 +933,7 @@ describe('v2.LoggingServiceV2Client', () => {
           'data',
           (response: protos.google.api.MonitoredResourceDescriptor) => {
             responses.push(response);
-          }
+          },
         );
         stream.on('end', () => {
           resolve(responses);
@@ -952,8 +952,8 @@ describe('v2.LoggingServiceV2Client', () => {
           .getCall(0)
           .calledWith(
             client.innerApiCalls.listMonitoredResourceDescriptors,
-            request
-          )
+            request,
+          ),
       );
     });
 
@@ -964,7 +964,7 @@ describe('v2.LoggingServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListMonitoredResourceDescriptorsRequest()
+        new protos.google.logging.v2.ListMonitoredResourceDescriptorsRequest(),
       );
       const expectedError = new Error('expected');
       client.descriptors.page.listMonitoredResourceDescriptors.createStream =
@@ -976,7 +976,7 @@ describe('v2.LoggingServiceV2Client', () => {
           'data',
           (response: protos.google.api.MonitoredResourceDescriptor) => {
             responses.push(response);
-          }
+          },
         );
         stream.on('end', () => {
           resolve(responses);
@@ -994,8 +994,8 @@ describe('v2.LoggingServiceV2Client', () => {
           .getCall(0)
           .calledWith(
             client.innerApiCalls.listMonitoredResourceDescriptors,
-            request
-          )
+            request,
+          ),
       );
     });
 
@@ -1006,17 +1006,17 @@ describe('v2.LoggingServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListMonitoredResourceDescriptorsRequest()
+        new protos.google.logging.v2.ListMonitoredResourceDescriptorsRequest(),
       );
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.api.MonitoredResourceDescriptor()
+          new protos.google.api.MonitoredResourceDescriptor(),
         ),
         generateSampleMessage(
-          new protos.google.api.MonitoredResourceDescriptor()
+          new protos.google.api.MonitoredResourceDescriptor(),
         ),
         generateSampleMessage(
-          new protos.google.api.MonitoredResourceDescriptor()
+          new protos.google.api.MonitoredResourceDescriptor(),
         ),
       ];
       client.descriptors.page.listMonitoredResourceDescriptors.asyncIterate =
@@ -1032,7 +1032,7 @@ describe('v2.LoggingServiceV2Client', () => {
           client.descriptors.page.listMonitoredResourceDescriptors
             .asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request
+        request,
       );
     });
 
@@ -1043,7 +1043,7 @@ describe('v2.LoggingServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListMonitoredResourceDescriptorsRequest()
+        new protos.google.logging.v2.ListMonitoredResourceDescriptorsRequest(),
       );
       const expectedError = new Error('expected');
       client.descriptors.page.listMonitoredResourceDescriptors.asyncIterate =
@@ -1060,7 +1060,7 @@ describe('v2.LoggingServiceV2Client', () => {
           client.descriptors.page.listMonitoredResourceDescriptors
             .asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request
+        request,
       );
     });
   });
@@ -1073,11 +1073,11 @@ describe('v2.LoggingServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListLogsRequest()
+        new protos.google.logging.v2.ListLogsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListLogsRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
@@ -1102,11 +1102,11 @@ describe('v2.LoggingServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListLogsRequest()
+        new protos.google.logging.v2.ListLogsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListLogsRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
@@ -1122,7 +1122,7 @@ describe('v2.LoggingServiceV2Client', () => {
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -1144,11 +1144,11 @@ describe('v2.LoggingServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListLogsRequest()
+        new protos.google.logging.v2.ListLogsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListLogsRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
@@ -1172,11 +1172,11 @@ describe('v2.LoggingServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListLogsRequest()
+        new protos.google.logging.v2.ListLogsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListLogsRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
@@ -1201,14 +1201,14 @@ describe('v2.LoggingServiceV2Client', () => {
       assert(
         (client.descriptors.page.listLogs.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listLogs, request)
+          .calledWith(client.innerApiCalls.listLogs, request),
       );
       assert(
         (client.descriptors.page.listLogs.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
     });
 
@@ -1219,18 +1219,18 @@ describe('v2.LoggingServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListLogsRequest()
+        new protos.google.logging.v2.ListLogsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListLogsRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listLogs.createStream = stubPageStreamingCall(
         undefined,
-        expectedError
+        expectedError,
       );
       const stream = client.listLogsStream(request);
       const promise = new Promise((resolve, reject) => {
@@ -1249,14 +1249,14 @@ describe('v2.LoggingServiceV2Client', () => {
       assert(
         (client.descriptors.page.listLogs.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listLogs, request)
+          .calledWith(client.innerApiCalls.listLogs, request),
       );
       assert(
         (client.descriptors.page.listLogs.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
     });
 
@@ -1267,11 +1267,11 @@ describe('v2.LoggingServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListLogsRequest()
+        new protos.google.logging.v2.ListLogsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListLogsRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
@@ -1287,14 +1287,14 @@ describe('v2.LoggingServiceV2Client', () => {
       assert.deepStrictEqual(
         (client.descriptors.page.listLogs.asyncIterate as SinonStub).getCall(0)
           .args[1],
-        request
+        request,
       );
       assert(
         (client.descriptors.page.listLogs.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
     });
 
@@ -1305,18 +1305,18 @@ describe('v2.LoggingServiceV2Client', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.logging.v2.ListLogsRequest()
+        new protos.google.logging.v2.ListLogsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.logging.v2.ListLogsRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listLogs.asyncIterate = stubAsyncIterationCall(
         undefined,
-        expectedError
+        expectedError,
       );
       const iterable = client.listLogsAsync(request);
       await assert.rejects(async () => {
@@ -1328,14 +1328,14 @@ describe('v2.LoggingServiceV2Client', () => {
       assert.deepStrictEqual(
         (client.descriptors.page.listLogs.asyncIterate as SinonStub).getCall(0)
           .args[1],
-        request
+        request,
       );
       assert(
         (client.descriptors.page.listLogs.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
     });
   });
@@ -1360,7 +1360,7 @@ describe('v2.LoggingServiceV2Client', () => {
 
       it('billingAccountCmekSettingsPath', () => {
         const result = client.billingAccountCmekSettingsPath(
-          'billingAccountValue'
+          'billingAccountValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -1369,14 +1369,14 @@ describe('v2.LoggingServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
       it('matchBillingAccountFromBillingAccountCmekSettingsName', () => {
         const result =
           client.matchBillingAccountFromBillingAccountCmekSettingsName(
-            fakePath
+            fakePath,
           );
         assert.strictEqual(result, 'billingAccountValue');
         assert(
@@ -1385,7 +1385,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -1411,7 +1411,7 @@ describe('v2.LoggingServiceV2Client', () => {
       it('billingAccountExclusionPath', () => {
         const result = client.billingAccountExclusionPath(
           'billingAccountValue',
-          'exclusionValue'
+          'exclusionValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -1420,7 +1420,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -1434,7 +1434,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -1448,7 +1448,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -1474,7 +1474,7 @@ describe('v2.LoggingServiceV2Client', () => {
         const result = client.billingAccountLocationBucketPath(
           'billingAccountValue',
           'locationValue',
-          'bucketValue'
+          'bucketValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -1483,14 +1483,14 @@ describe('v2.LoggingServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
       it('matchBillingAccountFromBillingAccountLocationBucketName', () => {
         const result =
           client.matchBillingAccountFromBillingAccountLocationBucketName(
-            fakePath
+            fakePath,
           );
         assert.strictEqual(result, 'billingAccountValue');
         assert(
@@ -1499,7 +1499,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -1513,7 +1513,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -1527,7 +1527,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -1555,7 +1555,7 @@ describe('v2.LoggingServiceV2Client', () => {
           'billingAccountValue',
           'locationValue',
           'bucketValue',
-          'linkValue'
+          'linkValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -1564,14 +1564,14 @@ describe('v2.LoggingServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
       it('matchBillingAccountFromBillingAccountLocationBucketLinkName', () => {
         const result =
           client.matchBillingAccountFromBillingAccountLocationBucketLinkName(
-            fakePath
+            fakePath,
           );
         assert.strictEqual(result, 'billingAccountValue');
         assert(
@@ -1580,14 +1580,14 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
       it('matchLocationFromBillingAccountLocationBucketLinkName', () => {
         const result =
           client.matchLocationFromBillingAccountLocationBucketLinkName(
-            fakePath
+            fakePath,
           );
         assert.strictEqual(result, 'locationValue');
         assert(
@@ -1596,7 +1596,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -1610,7 +1610,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -1624,7 +1624,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -1652,7 +1652,7 @@ describe('v2.LoggingServiceV2Client', () => {
           'billingAccountValue',
           'locationValue',
           'bucketValue',
-          'viewValue'
+          'viewValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -1661,14 +1661,14 @@ describe('v2.LoggingServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
       it('matchBillingAccountFromBillingAccountLocationBucketViewName', () => {
         const result =
           client.matchBillingAccountFromBillingAccountLocationBucketViewName(
-            fakePath
+            fakePath,
           );
         assert.strictEqual(result, 'billingAccountValue');
         assert(
@@ -1677,14 +1677,14 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
       it('matchLocationFromBillingAccountLocationBucketViewName', () => {
         const result =
           client.matchLocationFromBillingAccountLocationBucketViewName(
-            fakePath
+            fakePath,
           );
         assert.strictEqual(result, 'locationValue');
         assert(
@@ -1693,7 +1693,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -1707,7 +1707,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -1721,7 +1721,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -1747,7 +1747,7 @@ describe('v2.LoggingServiceV2Client', () => {
       it('billingAccountLogPath', () => {
         const result = client.billingAccountLogPath(
           'billingAccountValue',
-          'logValue'
+          'logValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -1756,7 +1756,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -1770,7 +1770,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -1783,7 +1783,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -1814,7 +1814,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -1828,7 +1828,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -1854,7 +1854,7 @@ describe('v2.LoggingServiceV2Client', () => {
       it('billingAccountSinkPath', () => {
         const result = client.billingAccountSinkPath(
           'billingAccountValue',
-          'sinkValue'
+          'sinkValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -1863,7 +1863,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -1877,7 +1877,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -1890,7 +1890,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -1921,7 +1921,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -1934,7 +1934,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -1960,13 +1960,13 @@ describe('v2.LoggingServiceV2Client', () => {
       it('folderExclusionPath', () => {
         const result = client.folderExclusionPath(
           'folderValue',
-          'exclusionValue'
+          'exclusionValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.folderExclusionPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -1976,7 +1976,7 @@ describe('v2.LoggingServiceV2Client', () => {
         assert(
           (client.pathTemplates.folderExclusionPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -1986,7 +1986,7 @@ describe('v2.LoggingServiceV2Client', () => {
         assert(
           (client.pathTemplates.folderExclusionPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -2014,7 +2014,7 @@ describe('v2.LoggingServiceV2Client', () => {
         const result = client.folderLocationBucketPath(
           'folderValue',
           'locationValue',
-          'bucketValue'
+          'bucketValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -2023,7 +2023,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -2036,7 +2036,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -2050,7 +2050,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -2063,7 +2063,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -2093,7 +2093,7 @@ describe('v2.LoggingServiceV2Client', () => {
           'folderValue',
           'locationValue',
           'bucketValue',
-          'linkValue'
+          'linkValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -2102,7 +2102,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -2116,7 +2116,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -2130,7 +2130,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -2144,7 +2144,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -2158,7 +2158,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -2188,7 +2188,7 @@ describe('v2.LoggingServiceV2Client', () => {
           'folderValue',
           'locationValue',
           'bucketValue',
-          'viewValue'
+          'viewValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -2197,7 +2197,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -2211,7 +2211,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -2225,7 +2225,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -2239,7 +2239,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -2253,7 +2253,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -2282,7 +2282,7 @@ describe('v2.LoggingServiceV2Client', () => {
         assert(
           (client.pathTemplates.folderLogPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -2292,7 +2292,7 @@ describe('v2.LoggingServiceV2Client', () => {
         assert(
           (client.pathTemplates.folderLogPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -2302,7 +2302,7 @@ describe('v2.LoggingServiceV2Client', () => {
         assert(
           (client.pathTemplates.folderLogPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -2330,7 +2330,7 @@ describe('v2.LoggingServiceV2Client', () => {
         assert(
           (client.pathTemplates.folderSettingsPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -2340,7 +2340,7 @@ describe('v2.LoggingServiceV2Client', () => {
         assert(
           (client.pathTemplates.folderSettingsPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -2369,7 +2369,7 @@ describe('v2.LoggingServiceV2Client', () => {
         assert(
           (client.pathTemplates.folderSinkPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -2379,7 +2379,7 @@ describe('v2.LoggingServiceV2Client', () => {
         assert(
           (client.pathTemplates.folderSinkPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -2389,7 +2389,7 @@ describe('v2.LoggingServiceV2Client', () => {
         assert(
           (client.pathTemplates.folderSinkPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -2418,7 +2418,7 @@ describe('v2.LoggingServiceV2Client', () => {
         assert(
           (client.pathTemplates.logMetricPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -2428,7 +2428,7 @@ describe('v2.LoggingServiceV2Client', () => {
         assert(
           (client.pathTemplates.logMetricPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -2438,7 +2438,7 @@ describe('v2.LoggingServiceV2Client', () => {
         assert(
           (client.pathTemplates.logMetricPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -2469,7 +2469,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -2483,7 +2483,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -2509,7 +2509,7 @@ describe('v2.LoggingServiceV2Client', () => {
       it('organizationExclusionPath', () => {
         const result = client.organizationExclusionPath(
           'organizationValue',
-          'exclusionValue'
+          'exclusionValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -2518,7 +2518,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -2532,7 +2532,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -2546,7 +2546,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -2574,7 +2574,7 @@ describe('v2.LoggingServiceV2Client', () => {
         const result = client.organizationLocationBucketPath(
           'organizationValue',
           'locationValue',
-          'bucketValue'
+          'bucketValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -2583,7 +2583,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -2597,7 +2597,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -2611,7 +2611,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -2625,7 +2625,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -2653,7 +2653,7 @@ describe('v2.LoggingServiceV2Client', () => {
           'organizationValue',
           'locationValue',
           'bucketValue',
-          'linkValue'
+          'linkValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -2662,14 +2662,14 @@ describe('v2.LoggingServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
       it('matchOrganizationFromOrganizationLocationBucketLinkName', () => {
         const result =
           client.matchOrganizationFromOrganizationLocationBucketLinkName(
-            fakePath
+            fakePath,
           );
         assert.strictEqual(result, 'organizationValue');
         assert(
@@ -2678,7 +2678,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -2692,7 +2692,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -2706,7 +2706,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -2720,7 +2720,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -2748,7 +2748,7 @@ describe('v2.LoggingServiceV2Client', () => {
           'organizationValue',
           'locationValue',
           'bucketValue',
-          'viewValue'
+          'viewValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -2757,14 +2757,14 @@ describe('v2.LoggingServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
       it('matchOrganizationFromOrganizationLocationBucketViewName', () => {
         const result =
           client.matchOrganizationFromOrganizationLocationBucketViewName(
-            fakePath
+            fakePath,
           );
         assert.strictEqual(result, 'organizationValue');
         assert(
@@ -2773,7 +2773,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -2787,7 +2787,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -2801,7 +2801,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -2815,7 +2815,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -2841,13 +2841,13 @@ describe('v2.LoggingServiceV2Client', () => {
       it('organizationLogPath', () => {
         const result = client.organizationLogPath(
           'organizationValue',
-          'logValue'
+          'logValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.organizationLogPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -2858,7 +2858,7 @@ describe('v2.LoggingServiceV2Client', () => {
         assert(
           (client.pathTemplates.organizationLogPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -2868,7 +2868,7 @@ describe('v2.LoggingServiceV2Client', () => {
         assert(
           (client.pathTemplates.organizationLogPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -2899,7 +2899,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -2913,7 +2913,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -2939,7 +2939,7 @@ describe('v2.LoggingServiceV2Client', () => {
       it('organizationSinkPath', () => {
         const result = client.organizationSinkPath(
           'organizationValue',
-          'sinkValue'
+          'sinkValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -2948,7 +2948,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -2959,7 +2959,7 @@ describe('v2.LoggingServiceV2Client', () => {
         assert(
           (client.pathTemplates.organizationSinkPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -2969,7 +2969,7 @@ describe('v2.LoggingServiceV2Client', () => {
         assert(
           (client.pathTemplates.organizationSinkPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -2997,7 +2997,7 @@ describe('v2.LoggingServiceV2Client', () => {
         assert(
           (client.pathTemplates.projectPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -3007,7 +3007,7 @@ describe('v2.LoggingServiceV2Client', () => {
         assert(
           (client.pathTemplates.projectPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -3038,7 +3038,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -3051,7 +3051,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -3077,7 +3077,7 @@ describe('v2.LoggingServiceV2Client', () => {
       it('projectExclusionPath', () => {
         const result = client.projectExclusionPath(
           'projectValue',
-          'exclusionValue'
+          'exclusionValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -3086,7 +3086,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -3096,7 +3096,7 @@ describe('v2.LoggingServiceV2Client', () => {
         assert(
           (client.pathTemplates.projectExclusionPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -3106,7 +3106,7 @@ describe('v2.LoggingServiceV2Client', () => {
         assert(
           (client.pathTemplates.projectExclusionPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -3134,7 +3134,7 @@ describe('v2.LoggingServiceV2Client', () => {
         const result = client.projectLocationBucketPath(
           'projectValue',
           'locationValue',
-          'bucketValue'
+          'bucketValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -3143,7 +3143,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -3157,7 +3157,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -3171,7 +3171,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -3185,7 +3185,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -3215,7 +3215,7 @@ describe('v2.LoggingServiceV2Client', () => {
           'projectValue',
           'locationValue',
           'bucketValue',
-          'linkValue'
+          'linkValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -3224,7 +3224,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -3238,7 +3238,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -3252,7 +3252,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -3266,7 +3266,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -3280,7 +3280,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -3310,7 +3310,7 @@ describe('v2.LoggingServiceV2Client', () => {
           'projectValue',
           'locationValue',
           'bucketValue',
-          'viewValue'
+          'viewValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -3319,7 +3319,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -3333,7 +3333,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -3347,7 +3347,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -3361,7 +3361,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -3375,7 +3375,7 @@ describe('v2.LoggingServiceV2Client', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -3404,7 +3404,7 @@ describe('v2.LoggingServiceV2Client', () => {
         assert(
           (client.pathTemplates.projectLogPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -3414,7 +3414,7 @@ describe('v2.LoggingServiceV2Client', () => {
         assert(
           (client.pathTemplates.projectLogPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -3424,7 +3424,7 @@ describe('v2.LoggingServiceV2Client', () => {
         assert(
           (client.pathTemplates.projectLogPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -3452,7 +3452,7 @@ describe('v2.LoggingServiceV2Client', () => {
         assert(
           (client.pathTemplates.projectSettingsPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -3462,7 +3462,7 @@ describe('v2.LoggingServiceV2Client', () => {
         assert(
           (client.pathTemplates.projectSettingsPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -3491,7 +3491,7 @@ describe('v2.LoggingServiceV2Client', () => {
         assert(
           (client.pathTemplates.projectSinkPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -3501,7 +3501,7 @@ describe('v2.LoggingServiceV2Client', () => {
         assert(
           (client.pathTemplates.projectSinkPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -3511,7 +3511,7 @@ describe('v2.LoggingServiceV2Client', () => {
         assert(
           (client.pathTemplates.projectSinkPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });

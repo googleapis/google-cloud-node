@@ -154,7 +154,7 @@ export class Record implements RecordObject {
    * });
    */
   delete(
-    callback?: CreateChangeCallback,
+    callback?: CreateChangeCallback
   ): void | Promise<DeleteRecordResponse> {
     this.zone_.deleteRecords(this, callback!);
   }
