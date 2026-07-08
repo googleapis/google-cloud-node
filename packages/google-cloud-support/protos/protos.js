@@ -7325,6 +7325,2452 @@
                         return GetCommentRequest;
                     })();
     
+                    v2.SupportEventSubscription = (function() {
+    
+                        /**
+                         * Properties of a SupportEventSubscription.
+                         * @memberof google.cloud.support.v2
+                         * @interface ISupportEventSubscription
+                         * @property {string|null} [name] SupportEventSubscription name
+                         * @property {string|null} [pubSubTopic] SupportEventSubscription pubSubTopic
+                         * @property {google.cloud.support.v2.SupportEventSubscription.State|null} [state] SupportEventSubscription state
+                         * @property {google.cloud.support.v2.SupportEventSubscription.FailureReason|null} [failureReason] SupportEventSubscription failureReason
+                         * @property {google.protobuf.ITimestamp|null} [createTime] SupportEventSubscription createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] SupportEventSubscription updateTime
+                         * @property {google.protobuf.ITimestamp|null} [deleteTime] SupportEventSubscription deleteTime
+                         * @property {google.protobuf.ITimestamp|null} [purgeTime] SupportEventSubscription purgeTime
+                         */
+    
+                        /**
+                         * Constructs a new SupportEventSubscription.
+                         * @memberof google.cloud.support.v2
+                         * @classdesc Represents a SupportEventSubscription.
+                         * @implements ISupportEventSubscription
+                         * @constructor
+                         * @param {google.cloud.support.v2.ISupportEventSubscription=} [properties] Properties to set
+                         */
+                        function SupportEventSubscription(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SupportEventSubscription name.
+                         * @member {string} name
+                         * @memberof google.cloud.support.v2.SupportEventSubscription
+                         * @instance
+                         */
+                        SupportEventSubscription.prototype.name = "";
+    
+                        /**
+                         * SupportEventSubscription pubSubTopic.
+                         * @member {string} pubSubTopic
+                         * @memberof google.cloud.support.v2.SupportEventSubscription
+                         * @instance
+                         */
+                        SupportEventSubscription.prototype.pubSubTopic = "";
+    
+                        /**
+                         * SupportEventSubscription state.
+                         * @member {google.cloud.support.v2.SupportEventSubscription.State} state
+                         * @memberof google.cloud.support.v2.SupportEventSubscription
+                         * @instance
+                         */
+                        SupportEventSubscription.prototype.state = 0;
+    
+                        /**
+                         * SupportEventSubscription failureReason.
+                         * @member {google.cloud.support.v2.SupportEventSubscription.FailureReason} failureReason
+                         * @memberof google.cloud.support.v2.SupportEventSubscription
+                         * @instance
+                         */
+                        SupportEventSubscription.prototype.failureReason = 0;
+    
+                        /**
+                         * SupportEventSubscription createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.support.v2.SupportEventSubscription
+                         * @instance
+                         */
+                        SupportEventSubscription.prototype.createTime = null;
+    
+                        /**
+                         * SupportEventSubscription updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.support.v2.SupportEventSubscription
+                         * @instance
+                         */
+                        SupportEventSubscription.prototype.updateTime = null;
+    
+                        /**
+                         * SupportEventSubscription deleteTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} deleteTime
+                         * @memberof google.cloud.support.v2.SupportEventSubscription
+                         * @instance
+                         */
+                        SupportEventSubscription.prototype.deleteTime = null;
+    
+                        /**
+                         * SupportEventSubscription purgeTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} purgeTime
+                         * @memberof google.cloud.support.v2.SupportEventSubscription
+                         * @instance
+                         */
+                        SupportEventSubscription.prototype.purgeTime = null;
+    
+                        /**
+                         * Creates a new SupportEventSubscription instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.support.v2.SupportEventSubscription
+                         * @static
+                         * @param {google.cloud.support.v2.ISupportEventSubscription=} [properties] Properties to set
+                         * @returns {google.cloud.support.v2.SupportEventSubscription} SupportEventSubscription instance
+                         */
+                        SupportEventSubscription.create = function create(properties) {
+                            return new SupportEventSubscription(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SupportEventSubscription message. Does not implicitly {@link google.cloud.support.v2.SupportEventSubscription.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.support.v2.SupportEventSubscription
+                         * @static
+                         * @param {google.cloud.support.v2.ISupportEventSubscription} message SupportEventSubscription message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SupportEventSubscription.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.pubSubTopic != null && Object.hasOwnProperty.call(message, "pubSubTopic"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.pubSubTopic);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.state);
+                            if (message.failureReason != null && Object.hasOwnProperty.call(message, "failureReason"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.failureReason);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.deleteTime != null && Object.hasOwnProperty.call(message, "deleteTime"))
+                                $root.google.protobuf.Timestamp.encode(message.deleteTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.purgeTime != null && Object.hasOwnProperty.call(message, "purgeTime"))
+                                $root.google.protobuf.Timestamp.encode(message.purgeTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SupportEventSubscription message, length delimited. Does not implicitly {@link google.cloud.support.v2.SupportEventSubscription.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.support.v2.SupportEventSubscription
+                         * @static
+                         * @param {google.cloud.support.v2.ISupportEventSubscription} message SupportEventSubscription message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SupportEventSubscription.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SupportEventSubscription message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.support.v2.SupportEventSubscription
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.support.v2.SupportEventSubscription} SupportEventSubscription
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SupportEventSubscription.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.support.v2.SupportEventSubscription();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pubSubTopic = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.failureReason = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 6: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 7: {
+                                        message.deleteTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 8: {
+                                        message.purgeTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SupportEventSubscription message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.support.v2.SupportEventSubscription
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.support.v2.SupportEventSubscription} SupportEventSubscription
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SupportEventSubscription.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SupportEventSubscription message.
+                         * @function verify
+                         * @memberof google.cloud.support.v2.SupportEventSubscription
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SupportEventSubscription.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.pubSubTopic != null && message.hasOwnProperty("pubSubTopic"))
+                                if (!$util.isString(message.pubSubTopic))
+                                    return "pubSubTopic: string expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.failureReason != null && message.hasOwnProperty("failureReason"))
+                                switch (message.failureReason) {
+                                default:
+                                    return "failureReason: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime, long + 1);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime, long + 1);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.deleteTime != null && message.hasOwnProperty("deleteTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.deleteTime, long + 1);
+                                if (error)
+                                    return "deleteTime." + error;
+                            }
+                            if (message.purgeTime != null && message.hasOwnProperty("purgeTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.purgeTime, long + 1);
+                                if (error)
+                                    return "purgeTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SupportEventSubscription message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.support.v2.SupportEventSubscription
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.support.v2.SupportEventSubscription} SupportEventSubscription
+                         */
+                        SupportEventSubscription.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.support.v2.SupportEventSubscription)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.support.v2.SupportEventSubscription();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.pubSubTopic != null)
+                                message.pubSubTopic = String(object.pubSubTopic);
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "WORKING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "FAILING":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "DELETED":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            }
+                            switch (object.failureReason) {
+                            default:
+                                if (typeof object.failureReason === "number") {
+                                    message.failureReason = object.failureReason;
+                                    break;
+                                }
+                                break;
+                            case "FAILURE_REASON_UNSPECIFIED":
+                            case 0:
+                                message.failureReason = 0;
+                                break;
+                            case "PERMISSION_DENIED":
+                            case 1:
+                                message.failureReason = 1;
+                                break;
+                            case "TOPIC_NOT_FOUND":
+                            case 2:
+                                message.failureReason = 2;
+                                break;
+                            case "OTHER":
+                            case 3:
+                                message.failureReason = 3;
+                                break;
+                            }
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.support.v2.SupportEventSubscription.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime, long + 1);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.support.v2.SupportEventSubscription.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime, long + 1);
+                            }
+                            if (object.deleteTime != null) {
+                                if (typeof object.deleteTime !== "object")
+                                    throw TypeError(".google.cloud.support.v2.SupportEventSubscription.deleteTime: object expected");
+                                message.deleteTime = $root.google.protobuf.Timestamp.fromObject(object.deleteTime, long + 1);
+                            }
+                            if (object.purgeTime != null) {
+                                if (typeof object.purgeTime !== "object")
+                                    throw TypeError(".google.cloud.support.v2.SupportEventSubscription.purgeTime: object expected");
+                                message.purgeTime = $root.google.protobuf.Timestamp.fromObject(object.purgeTime, long + 1);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SupportEventSubscription message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.support.v2.SupportEventSubscription
+                         * @static
+                         * @param {google.cloud.support.v2.SupportEventSubscription} message SupportEventSubscription
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SupportEventSubscription.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.pubSubTopic = "";
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.failureReason = options.enums === String ? "FAILURE_REASON_UNSPECIFIED" : 0;
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.deleteTime = null;
+                                object.purgeTime = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.pubSubTopic != null && message.hasOwnProperty("pubSubTopic"))
+                                object.pubSubTopic = message.pubSubTopic;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.support.v2.SupportEventSubscription.State[message.state] === undefined ? message.state : $root.google.cloud.support.v2.SupportEventSubscription.State[message.state] : message.state;
+                            if (message.failureReason != null && message.hasOwnProperty("failureReason"))
+                                object.failureReason = options.enums === String ? $root.google.cloud.support.v2.SupportEventSubscription.FailureReason[message.failureReason] === undefined ? message.failureReason : $root.google.cloud.support.v2.SupportEventSubscription.FailureReason[message.failureReason] : message.failureReason;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.deleteTime != null && message.hasOwnProperty("deleteTime"))
+                                object.deleteTime = $root.google.protobuf.Timestamp.toObject(message.deleteTime, options);
+                            if (message.purgeTime != null && message.hasOwnProperty("purgeTime"))
+                                object.purgeTime = $root.google.protobuf.Timestamp.toObject(message.purgeTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SupportEventSubscription to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.support.v2.SupportEventSubscription
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SupportEventSubscription.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SupportEventSubscription
+                         * @function getTypeUrl
+                         * @memberof google.cloud.support.v2.SupportEventSubscription
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SupportEventSubscription.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.support.v2.SupportEventSubscription";
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.support.v2.SupportEventSubscription.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} WORKING=1 WORKING value
+                         * @property {number} FAILING=2 FAILING value
+                         * @property {number} DELETED=3 DELETED value
+                         */
+                        SupportEventSubscription.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "WORKING"] = 1;
+                            values[valuesById[2] = "FAILING"] = 2;
+                            values[valuesById[3] = "DELETED"] = 3;
+                            return values;
+                        })();
+    
+                        /**
+                         * FailureReason enum.
+                         * @name google.cloud.support.v2.SupportEventSubscription.FailureReason
+                         * @enum {number}
+                         * @property {number} FAILURE_REASON_UNSPECIFIED=0 FAILURE_REASON_UNSPECIFIED value
+                         * @property {number} PERMISSION_DENIED=1 PERMISSION_DENIED value
+                         * @property {number} TOPIC_NOT_FOUND=2 TOPIC_NOT_FOUND value
+                         * @property {number} OTHER=3 OTHER value
+                         */
+                        SupportEventSubscription.FailureReason = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "FAILURE_REASON_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PERMISSION_DENIED"] = 1;
+                            values[valuesById[2] = "TOPIC_NOT_FOUND"] = 2;
+                            values[valuesById[3] = "OTHER"] = 3;
+                            return values;
+                        })();
+    
+                        return SupportEventSubscription;
+                    })();
+    
+                    v2.SupportEventSubscriptionService = (function() {
+    
+                        /**
+                         * Constructs a new SupportEventSubscriptionService service.
+                         * @memberof google.cloud.support.v2
+                         * @classdesc Represents a SupportEventSubscriptionService
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function SupportEventSubscriptionService(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (SupportEventSubscriptionService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = SupportEventSubscriptionService;
+    
+                        /**
+                         * Creates new SupportEventSubscriptionService service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.support.v2.SupportEventSubscriptionService
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {SupportEventSubscriptionService} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        SupportEventSubscriptionService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.support.v2.SupportEventSubscriptionService|createSupportEventSubscription}.
+                         * @memberof google.cloud.support.v2.SupportEventSubscriptionService
+                         * @typedef CreateSupportEventSubscriptionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.support.v2.SupportEventSubscription} [response] SupportEventSubscription
+                         */
+    
+                        /**
+                         * Calls CreateSupportEventSubscription.
+                         * @function createSupportEventSubscription
+                         * @memberof google.cloud.support.v2.SupportEventSubscriptionService
+                         * @instance
+                         * @param {google.cloud.support.v2.ICreateSupportEventSubscriptionRequest} request CreateSupportEventSubscriptionRequest message or plain object
+                         * @param {google.cloud.support.v2.SupportEventSubscriptionService.CreateSupportEventSubscriptionCallback} callback Node-style callback called with the error, if any, and SupportEventSubscription
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SupportEventSubscriptionService.prototype.createSupportEventSubscription = function createSupportEventSubscription(request, callback) {
+                            return this.rpcCall(createSupportEventSubscription, $root.google.cloud.support.v2.CreateSupportEventSubscriptionRequest, $root.google.cloud.support.v2.SupportEventSubscription, request, callback);
+                        }, "name", { value: "CreateSupportEventSubscription" });
+    
+                        /**
+                         * Calls CreateSupportEventSubscription.
+                         * @function createSupportEventSubscription
+                         * @memberof google.cloud.support.v2.SupportEventSubscriptionService
+                         * @instance
+                         * @param {google.cloud.support.v2.ICreateSupportEventSubscriptionRequest} request CreateSupportEventSubscriptionRequest message or plain object
+                         * @returns {Promise<google.cloud.support.v2.SupportEventSubscription>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.support.v2.SupportEventSubscriptionService|getSupportEventSubscription}.
+                         * @memberof google.cloud.support.v2.SupportEventSubscriptionService
+                         * @typedef GetSupportEventSubscriptionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.support.v2.SupportEventSubscription} [response] SupportEventSubscription
+                         */
+    
+                        /**
+                         * Calls GetSupportEventSubscription.
+                         * @function getSupportEventSubscription
+                         * @memberof google.cloud.support.v2.SupportEventSubscriptionService
+                         * @instance
+                         * @param {google.cloud.support.v2.IGetSupportEventSubscriptionRequest} request GetSupportEventSubscriptionRequest message or plain object
+                         * @param {google.cloud.support.v2.SupportEventSubscriptionService.GetSupportEventSubscriptionCallback} callback Node-style callback called with the error, if any, and SupportEventSubscription
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SupportEventSubscriptionService.prototype.getSupportEventSubscription = function getSupportEventSubscription(request, callback) {
+                            return this.rpcCall(getSupportEventSubscription, $root.google.cloud.support.v2.GetSupportEventSubscriptionRequest, $root.google.cloud.support.v2.SupportEventSubscription, request, callback);
+                        }, "name", { value: "GetSupportEventSubscription" });
+    
+                        /**
+                         * Calls GetSupportEventSubscription.
+                         * @function getSupportEventSubscription
+                         * @memberof google.cloud.support.v2.SupportEventSubscriptionService
+                         * @instance
+                         * @param {google.cloud.support.v2.IGetSupportEventSubscriptionRequest} request GetSupportEventSubscriptionRequest message or plain object
+                         * @returns {Promise<google.cloud.support.v2.SupportEventSubscription>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.support.v2.SupportEventSubscriptionService|listSupportEventSubscriptions}.
+                         * @memberof google.cloud.support.v2.SupportEventSubscriptionService
+                         * @typedef ListSupportEventSubscriptionsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.support.v2.ListSupportEventSubscriptionsResponse} [response] ListSupportEventSubscriptionsResponse
+                         */
+    
+                        /**
+                         * Calls ListSupportEventSubscriptions.
+                         * @function listSupportEventSubscriptions
+                         * @memberof google.cloud.support.v2.SupportEventSubscriptionService
+                         * @instance
+                         * @param {google.cloud.support.v2.IListSupportEventSubscriptionsRequest} request ListSupportEventSubscriptionsRequest message or plain object
+                         * @param {google.cloud.support.v2.SupportEventSubscriptionService.ListSupportEventSubscriptionsCallback} callback Node-style callback called with the error, if any, and ListSupportEventSubscriptionsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SupportEventSubscriptionService.prototype.listSupportEventSubscriptions = function listSupportEventSubscriptions(request, callback) {
+                            return this.rpcCall(listSupportEventSubscriptions, $root.google.cloud.support.v2.ListSupportEventSubscriptionsRequest, $root.google.cloud.support.v2.ListSupportEventSubscriptionsResponse, request, callback);
+                        }, "name", { value: "ListSupportEventSubscriptions" });
+    
+                        /**
+                         * Calls ListSupportEventSubscriptions.
+                         * @function listSupportEventSubscriptions
+                         * @memberof google.cloud.support.v2.SupportEventSubscriptionService
+                         * @instance
+                         * @param {google.cloud.support.v2.IListSupportEventSubscriptionsRequest} request ListSupportEventSubscriptionsRequest message or plain object
+                         * @returns {Promise<google.cloud.support.v2.ListSupportEventSubscriptionsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.support.v2.SupportEventSubscriptionService|updateSupportEventSubscription}.
+                         * @memberof google.cloud.support.v2.SupportEventSubscriptionService
+                         * @typedef UpdateSupportEventSubscriptionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.support.v2.SupportEventSubscription} [response] SupportEventSubscription
+                         */
+    
+                        /**
+                         * Calls UpdateSupportEventSubscription.
+                         * @function updateSupportEventSubscription
+                         * @memberof google.cloud.support.v2.SupportEventSubscriptionService
+                         * @instance
+                         * @param {google.cloud.support.v2.IUpdateSupportEventSubscriptionRequest} request UpdateSupportEventSubscriptionRequest message or plain object
+                         * @param {google.cloud.support.v2.SupportEventSubscriptionService.UpdateSupportEventSubscriptionCallback} callback Node-style callback called with the error, if any, and SupportEventSubscription
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SupportEventSubscriptionService.prototype.updateSupportEventSubscription = function updateSupportEventSubscription(request, callback) {
+                            return this.rpcCall(updateSupportEventSubscription, $root.google.cloud.support.v2.UpdateSupportEventSubscriptionRequest, $root.google.cloud.support.v2.SupportEventSubscription, request, callback);
+                        }, "name", { value: "UpdateSupportEventSubscription" });
+    
+                        /**
+                         * Calls UpdateSupportEventSubscription.
+                         * @function updateSupportEventSubscription
+                         * @memberof google.cloud.support.v2.SupportEventSubscriptionService
+                         * @instance
+                         * @param {google.cloud.support.v2.IUpdateSupportEventSubscriptionRequest} request UpdateSupportEventSubscriptionRequest message or plain object
+                         * @returns {Promise<google.cloud.support.v2.SupportEventSubscription>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.support.v2.SupportEventSubscriptionService|deleteSupportEventSubscription}.
+                         * @memberof google.cloud.support.v2.SupportEventSubscriptionService
+                         * @typedef DeleteSupportEventSubscriptionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.support.v2.SupportEventSubscription} [response] SupportEventSubscription
+                         */
+    
+                        /**
+                         * Calls DeleteSupportEventSubscription.
+                         * @function deleteSupportEventSubscription
+                         * @memberof google.cloud.support.v2.SupportEventSubscriptionService
+                         * @instance
+                         * @param {google.cloud.support.v2.IDeleteSupportEventSubscriptionRequest} request DeleteSupportEventSubscriptionRequest message or plain object
+                         * @param {google.cloud.support.v2.SupportEventSubscriptionService.DeleteSupportEventSubscriptionCallback} callback Node-style callback called with the error, if any, and SupportEventSubscription
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SupportEventSubscriptionService.prototype.deleteSupportEventSubscription = function deleteSupportEventSubscription(request, callback) {
+                            return this.rpcCall(deleteSupportEventSubscription, $root.google.cloud.support.v2.DeleteSupportEventSubscriptionRequest, $root.google.cloud.support.v2.SupportEventSubscription, request, callback);
+                        }, "name", { value: "DeleteSupportEventSubscription" });
+    
+                        /**
+                         * Calls DeleteSupportEventSubscription.
+                         * @function deleteSupportEventSubscription
+                         * @memberof google.cloud.support.v2.SupportEventSubscriptionService
+                         * @instance
+                         * @param {google.cloud.support.v2.IDeleteSupportEventSubscriptionRequest} request DeleteSupportEventSubscriptionRequest message or plain object
+                         * @returns {Promise<google.cloud.support.v2.SupportEventSubscription>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.support.v2.SupportEventSubscriptionService|undeleteSupportEventSubscription}.
+                         * @memberof google.cloud.support.v2.SupportEventSubscriptionService
+                         * @typedef UndeleteSupportEventSubscriptionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.support.v2.SupportEventSubscription} [response] SupportEventSubscription
+                         */
+    
+                        /**
+                         * Calls UndeleteSupportEventSubscription.
+                         * @function undeleteSupportEventSubscription
+                         * @memberof google.cloud.support.v2.SupportEventSubscriptionService
+                         * @instance
+                         * @param {google.cloud.support.v2.IUndeleteSupportEventSubscriptionRequest} request UndeleteSupportEventSubscriptionRequest message or plain object
+                         * @param {google.cloud.support.v2.SupportEventSubscriptionService.UndeleteSupportEventSubscriptionCallback} callback Node-style callback called with the error, if any, and SupportEventSubscription
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SupportEventSubscriptionService.prototype.undeleteSupportEventSubscription = function undeleteSupportEventSubscription(request, callback) {
+                            return this.rpcCall(undeleteSupportEventSubscription, $root.google.cloud.support.v2.UndeleteSupportEventSubscriptionRequest, $root.google.cloud.support.v2.SupportEventSubscription, request, callback);
+                        }, "name", { value: "UndeleteSupportEventSubscription" });
+    
+                        /**
+                         * Calls UndeleteSupportEventSubscription.
+                         * @function undeleteSupportEventSubscription
+                         * @memberof google.cloud.support.v2.SupportEventSubscriptionService
+                         * @instance
+                         * @param {google.cloud.support.v2.IUndeleteSupportEventSubscriptionRequest} request UndeleteSupportEventSubscriptionRequest message or plain object
+                         * @returns {Promise<google.cloud.support.v2.SupportEventSubscription>} Promise
+                         * @variation 2
+                         */
+    
+                        return SupportEventSubscriptionService;
+                    })();
+    
+                    v2.CreateSupportEventSubscriptionRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateSupportEventSubscriptionRequest.
+                         * @memberof google.cloud.support.v2
+                         * @interface ICreateSupportEventSubscriptionRequest
+                         * @property {string|null} [parent] CreateSupportEventSubscriptionRequest parent
+                         * @property {google.cloud.support.v2.ISupportEventSubscription|null} [supportEventSubscription] CreateSupportEventSubscriptionRequest supportEventSubscription
+                         */
+    
+                        /**
+                         * Constructs a new CreateSupportEventSubscriptionRequest.
+                         * @memberof google.cloud.support.v2
+                         * @classdesc Represents a CreateSupportEventSubscriptionRequest.
+                         * @implements ICreateSupportEventSubscriptionRequest
+                         * @constructor
+                         * @param {google.cloud.support.v2.ICreateSupportEventSubscriptionRequest=} [properties] Properties to set
+                         */
+                        function CreateSupportEventSubscriptionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateSupportEventSubscriptionRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.support.v2.CreateSupportEventSubscriptionRequest
+                         * @instance
+                         */
+                        CreateSupportEventSubscriptionRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateSupportEventSubscriptionRequest supportEventSubscription.
+                         * @member {google.cloud.support.v2.ISupportEventSubscription|null|undefined} supportEventSubscription
+                         * @memberof google.cloud.support.v2.CreateSupportEventSubscriptionRequest
+                         * @instance
+                         */
+                        CreateSupportEventSubscriptionRequest.prototype.supportEventSubscription = null;
+    
+                        /**
+                         * Creates a new CreateSupportEventSubscriptionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.support.v2.CreateSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2.ICreateSupportEventSubscriptionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.support.v2.CreateSupportEventSubscriptionRequest} CreateSupportEventSubscriptionRequest instance
+                         */
+                        CreateSupportEventSubscriptionRequest.create = function create(properties) {
+                            return new CreateSupportEventSubscriptionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSupportEventSubscriptionRequest message. Does not implicitly {@link google.cloud.support.v2.CreateSupportEventSubscriptionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.support.v2.CreateSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2.ICreateSupportEventSubscriptionRequest} message CreateSupportEventSubscriptionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSupportEventSubscriptionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.supportEventSubscription != null && Object.hasOwnProperty.call(message, "supportEventSubscription"))
+                                $root.google.cloud.support.v2.SupportEventSubscription.encode(message.supportEventSubscription, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSupportEventSubscriptionRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2.CreateSupportEventSubscriptionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.support.v2.CreateSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2.ICreateSupportEventSubscriptionRequest} message CreateSupportEventSubscriptionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSupportEventSubscriptionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateSupportEventSubscriptionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.support.v2.CreateSupportEventSubscriptionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.support.v2.CreateSupportEventSubscriptionRequest} CreateSupportEventSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSupportEventSubscriptionRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.support.v2.CreateSupportEventSubscriptionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.supportEventSubscription = $root.google.cloud.support.v2.SupportEventSubscription.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateSupportEventSubscriptionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.support.v2.CreateSupportEventSubscriptionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.support.v2.CreateSupportEventSubscriptionRequest} CreateSupportEventSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSupportEventSubscriptionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateSupportEventSubscriptionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.support.v2.CreateSupportEventSubscriptionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateSupportEventSubscriptionRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.supportEventSubscription != null && message.hasOwnProperty("supportEventSubscription")) {
+                                var error = $root.google.cloud.support.v2.SupportEventSubscription.verify(message.supportEventSubscription, long + 1);
+                                if (error)
+                                    return "supportEventSubscription." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateSupportEventSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.support.v2.CreateSupportEventSubscriptionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.support.v2.CreateSupportEventSubscriptionRequest} CreateSupportEventSubscriptionRequest
+                         */
+                        CreateSupportEventSubscriptionRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.support.v2.CreateSupportEventSubscriptionRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.support.v2.CreateSupportEventSubscriptionRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.supportEventSubscription != null) {
+                                if (typeof object.supportEventSubscription !== "object")
+                                    throw TypeError(".google.cloud.support.v2.CreateSupportEventSubscriptionRequest.supportEventSubscription: object expected");
+                                message.supportEventSubscription = $root.google.cloud.support.v2.SupportEventSubscription.fromObject(object.supportEventSubscription, long + 1);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateSupportEventSubscriptionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.support.v2.CreateSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2.CreateSupportEventSubscriptionRequest} message CreateSupportEventSubscriptionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateSupportEventSubscriptionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.supportEventSubscription = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.supportEventSubscription != null && message.hasOwnProperty("supportEventSubscription"))
+                                object.supportEventSubscription = $root.google.cloud.support.v2.SupportEventSubscription.toObject(message.supportEventSubscription, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateSupportEventSubscriptionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.support.v2.CreateSupportEventSubscriptionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateSupportEventSubscriptionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateSupportEventSubscriptionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.support.v2.CreateSupportEventSubscriptionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateSupportEventSubscriptionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.support.v2.CreateSupportEventSubscriptionRequest";
+                        };
+    
+                        return CreateSupportEventSubscriptionRequest;
+                    })();
+    
+                    v2.GetSupportEventSubscriptionRequest = (function() {
+    
+                        /**
+                         * Properties of a GetSupportEventSubscriptionRequest.
+                         * @memberof google.cloud.support.v2
+                         * @interface IGetSupportEventSubscriptionRequest
+                         * @property {string|null} [name] GetSupportEventSubscriptionRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetSupportEventSubscriptionRequest.
+                         * @memberof google.cloud.support.v2
+                         * @classdesc Represents a GetSupportEventSubscriptionRequest.
+                         * @implements IGetSupportEventSubscriptionRequest
+                         * @constructor
+                         * @param {google.cloud.support.v2.IGetSupportEventSubscriptionRequest=} [properties] Properties to set
+                         */
+                        function GetSupportEventSubscriptionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetSupportEventSubscriptionRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.support.v2.GetSupportEventSubscriptionRequest
+                         * @instance
+                         */
+                        GetSupportEventSubscriptionRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetSupportEventSubscriptionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.support.v2.GetSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2.IGetSupportEventSubscriptionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.support.v2.GetSupportEventSubscriptionRequest} GetSupportEventSubscriptionRequest instance
+                         */
+                        GetSupportEventSubscriptionRequest.create = function create(properties) {
+                            return new GetSupportEventSubscriptionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetSupportEventSubscriptionRequest message. Does not implicitly {@link google.cloud.support.v2.GetSupportEventSubscriptionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.support.v2.GetSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2.IGetSupportEventSubscriptionRequest} message GetSupportEventSubscriptionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSupportEventSubscriptionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetSupportEventSubscriptionRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2.GetSupportEventSubscriptionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.support.v2.GetSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2.IGetSupportEventSubscriptionRequest} message GetSupportEventSubscriptionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSupportEventSubscriptionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetSupportEventSubscriptionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.support.v2.GetSupportEventSubscriptionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.support.v2.GetSupportEventSubscriptionRequest} GetSupportEventSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSupportEventSubscriptionRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.support.v2.GetSupportEventSubscriptionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetSupportEventSubscriptionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.support.v2.GetSupportEventSubscriptionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.support.v2.GetSupportEventSubscriptionRequest} GetSupportEventSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSupportEventSubscriptionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetSupportEventSubscriptionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.support.v2.GetSupportEventSubscriptionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetSupportEventSubscriptionRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetSupportEventSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.support.v2.GetSupportEventSubscriptionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.support.v2.GetSupportEventSubscriptionRequest} GetSupportEventSubscriptionRequest
+                         */
+                        GetSupportEventSubscriptionRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.support.v2.GetSupportEventSubscriptionRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.support.v2.GetSupportEventSubscriptionRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetSupportEventSubscriptionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.support.v2.GetSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2.GetSupportEventSubscriptionRequest} message GetSupportEventSubscriptionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetSupportEventSubscriptionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetSupportEventSubscriptionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.support.v2.GetSupportEventSubscriptionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetSupportEventSubscriptionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetSupportEventSubscriptionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.support.v2.GetSupportEventSubscriptionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetSupportEventSubscriptionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.support.v2.GetSupportEventSubscriptionRequest";
+                        };
+    
+                        return GetSupportEventSubscriptionRequest;
+                    })();
+    
+                    v2.ListSupportEventSubscriptionsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListSupportEventSubscriptionsRequest.
+                         * @memberof google.cloud.support.v2
+                         * @interface IListSupportEventSubscriptionsRequest
+                         * @property {string|null} [parent] ListSupportEventSubscriptionsRequest parent
+                         * @property {string|null} [filter] ListSupportEventSubscriptionsRequest filter
+                         * @property {boolean|null} [showDeleted] ListSupportEventSubscriptionsRequest showDeleted
+                         * @property {number|null} [pageSize] ListSupportEventSubscriptionsRequest pageSize
+                         * @property {string|null} [pageToken] ListSupportEventSubscriptionsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListSupportEventSubscriptionsRequest.
+                         * @memberof google.cloud.support.v2
+                         * @classdesc Represents a ListSupportEventSubscriptionsRequest.
+                         * @implements IListSupportEventSubscriptionsRequest
+                         * @constructor
+                         * @param {google.cloud.support.v2.IListSupportEventSubscriptionsRequest=} [properties] Properties to set
+                         */
+                        function ListSupportEventSubscriptionsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListSupportEventSubscriptionsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.support.v2.ListSupportEventSubscriptionsRequest
+                         * @instance
+                         */
+                        ListSupportEventSubscriptionsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListSupportEventSubscriptionsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.support.v2.ListSupportEventSubscriptionsRequest
+                         * @instance
+                         */
+                        ListSupportEventSubscriptionsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListSupportEventSubscriptionsRequest showDeleted.
+                         * @member {boolean} showDeleted
+                         * @memberof google.cloud.support.v2.ListSupportEventSubscriptionsRequest
+                         * @instance
+                         */
+                        ListSupportEventSubscriptionsRequest.prototype.showDeleted = false;
+    
+                        /**
+                         * ListSupportEventSubscriptionsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.support.v2.ListSupportEventSubscriptionsRequest
+                         * @instance
+                         */
+                        ListSupportEventSubscriptionsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListSupportEventSubscriptionsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.support.v2.ListSupportEventSubscriptionsRequest
+                         * @instance
+                         */
+                        ListSupportEventSubscriptionsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListSupportEventSubscriptionsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.support.v2.ListSupportEventSubscriptionsRequest
+                         * @static
+                         * @param {google.cloud.support.v2.IListSupportEventSubscriptionsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.support.v2.ListSupportEventSubscriptionsRequest} ListSupportEventSubscriptionsRequest instance
+                         */
+                        ListSupportEventSubscriptionsRequest.create = function create(properties) {
+                            return new ListSupportEventSubscriptionsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListSupportEventSubscriptionsRequest message. Does not implicitly {@link google.cloud.support.v2.ListSupportEventSubscriptionsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.support.v2.ListSupportEventSubscriptionsRequest
+                         * @static
+                         * @param {google.cloud.support.v2.IListSupportEventSubscriptionsRequest} message ListSupportEventSubscriptionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSupportEventSubscriptionsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.filter);
+                            if (message.showDeleted != null && Object.hasOwnProperty.call(message, "showDeleted"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.showDeleted);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListSupportEventSubscriptionsRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2.ListSupportEventSubscriptionsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.support.v2.ListSupportEventSubscriptionsRequest
+                         * @static
+                         * @param {google.cloud.support.v2.IListSupportEventSubscriptionsRequest} message ListSupportEventSubscriptionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSupportEventSubscriptionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListSupportEventSubscriptionsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.support.v2.ListSupportEventSubscriptionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.support.v2.ListSupportEventSubscriptionsRequest} ListSupportEventSubscriptionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSupportEventSubscriptionsRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.support.v2.ListSupportEventSubscriptionsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.showDeleted = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListSupportEventSubscriptionsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.support.v2.ListSupportEventSubscriptionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.support.v2.ListSupportEventSubscriptionsRequest} ListSupportEventSubscriptionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSupportEventSubscriptionsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListSupportEventSubscriptionsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.support.v2.ListSupportEventSubscriptionsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListSupportEventSubscriptionsRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.showDeleted != null && message.hasOwnProperty("showDeleted"))
+                                if (typeof message.showDeleted !== "boolean")
+                                    return "showDeleted: boolean expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListSupportEventSubscriptionsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.support.v2.ListSupportEventSubscriptionsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.support.v2.ListSupportEventSubscriptionsRequest} ListSupportEventSubscriptionsRequest
+                         */
+                        ListSupportEventSubscriptionsRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.support.v2.ListSupportEventSubscriptionsRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.support.v2.ListSupportEventSubscriptionsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.showDeleted != null)
+                                message.showDeleted = Boolean(object.showDeleted);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListSupportEventSubscriptionsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.support.v2.ListSupportEventSubscriptionsRequest
+                         * @static
+                         * @param {google.cloud.support.v2.ListSupportEventSubscriptionsRequest} message ListSupportEventSubscriptionsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListSupportEventSubscriptionsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.filter = "";
+                                object.showDeleted = false;
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.showDeleted != null && message.hasOwnProperty("showDeleted"))
+                                object.showDeleted = message.showDeleted;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListSupportEventSubscriptionsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.support.v2.ListSupportEventSubscriptionsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListSupportEventSubscriptionsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListSupportEventSubscriptionsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.support.v2.ListSupportEventSubscriptionsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListSupportEventSubscriptionsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.support.v2.ListSupportEventSubscriptionsRequest";
+                        };
+    
+                        return ListSupportEventSubscriptionsRequest;
+                    })();
+    
+                    v2.ListSupportEventSubscriptionsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListSupportEventSubscriptionsResponse.
+                         * @memberof google.cloud.support.v2
+                         * @interface IListSupportEventSubscriptionsResponse
+                         * @property {Array.<google.cloud.support.v2.ISupportEventSubscription>|null} [supportEventSubscriptions] ListSupportEventSubscriptionsResponse supportEventSubscriptions
+                         * @property {string|null} [nextPageToken] ListSupportEventSubscriptionsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListSupportEventSubscriptionsResponse.
+                         * @memberof google.cloud.support.v2
+                         * @classdesc Represents a ListSupportEventSubscriptionsResponse.
+                         * @implements IListSupportEventSubscriptionsResponse
+                         * @constructor
+                         * @param {google.cloud.support.v2.IListSupportEventSubscriptionsResponse=} [properties] Properties to set
+                         */
+                        function ListSupportEventSubscriptionsResponse(properties) {
+                            this.supportEventSubscriptions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListSupportEventSubscriptionsResponse supportEventSubscriptions.
+                         * @member {Array.<google.cloud.support.v2.ISupportEventSubscription>} supportEventSubscriptions
+                         * @memberof google.cloud.support.v2.ListSupportEventSubscriptionsResponse
+                         * @instance
+                         */
+                        ListSupportEventSubscriptionsResponse.prototype.supportEventSubscriptions = $util.emptyArray;
+    
+                        /**
+                         * ListSupportEventSubscriptionsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.support.v2.ListSupportEventSubscriptionsResponse
+                         * @instance
+                         */
+                        ListSupportEventSubscriptionsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListSupportEventSubscriptionsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.support.v2.ListSupportEventSubscriptionsResponse
+                         * @static
+                         * @param {google.cloud.support.v2.IListSupportEventSubscriptionsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.support.v2.ListSupportEventSubscriptionsResponse} ListSupportEventSubscriptionsResponse instance
+                         */
+                        ListSupportEventSubscriptionsResponse.create = function create(properties) {
+                            return new ListSupportEventSubscriptionsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListSupportEventSubscriptionsResponse message. Does not implicitly {@link google.cloud.support.v2.ListSupportEventSubscriptionsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.support.v2.ListSupportEventSubscriptionsResponse
+                         * @static
+                         * @param {google.cloud.support.v2.IListSupportEventSubscriptionsResponse} message ListSupportEventSubscriptionsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSupportEventSubscriptionsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.supportEventSubscriptions != null && message.supportEventSubscriptions.length)
+                                for (var i = 0; i < message.supportEventSubscriptions.length; ++i)
+                                    $root.google.cloud.support.v2.SupportEventSubscription.encode(message.supportEventSubscriptions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListSupportEventSubscriptionsResponse message, length delimited. Does not implicitly {@link google.cloud.support.v2.ListSupportEventSubscriptionsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.support.v2.ListSupportEventSubscriptionsResponse
+                         * @static
+                         * @param {google.cloud.support.v2.IListSupportEventSubscriptionsResponse} message ListSupportEventSubscriptionsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSupportEventSubscriptionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListSupportEventSubscriptionsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.support.v2.ListSupportEventSubscriptionsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.support.v2.ListSupportEventSubscriptionsResponse} ListSupportEventSubscriptionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSupportEventSubscriptionsResponse.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.support.v2.ListSupportEventSubscriptionsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.supportEventSubscriptions && message.supportEventSubscriptions.length))
+                                            message.supportEventSubscriptions = [];
+                                        message.supportEventSubscriptions.push($root.google.cloud.support.v2.SupportEventSubscription.decode(reader, reader.uint32(), undefined, long + 1));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListSupportEventSubscriptionsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.support.v2.ListSupportEventSubscriptionsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.support.v2.ListSupportEventSubscriptionsResponse} ListSupportEventSubscriptionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSupportEventSubscriptionsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListSupportEventSubscriptionsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.support.v2.ListSupportEventSubscriptionsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListSupportEventSubscriptionsResponse.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.supportEventSubscriptions != null && message.hasOwnProperty("supportEventSubscriptions")) {
+                                if (!Array.isArray(message.supportEventSubscriptions))
+                                    return "supportEventSubscriptions: array expected";
+                                for (var i = 0; i < message.supportEventSubscriptions.length; ++i) {
+                                    var error = $root.google.cloud.support.v2.SupportEventSubscription.verify(message.supportEventSubscriptions[i], long + 1);
+                                    if (error)
+                                        return "supportEventSubscriptions." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListSupportEventSubscriptionsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.support.v2.ListSupportEventSubscriptionsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.support.v2.ListSupportEventSubscriptionsResponse} ListSupportEventSubscriptionsResponse
+                         */
+                        ListSupportEventSubscriptionsResponse.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.support.v2.ListSupportEventSubscriptionsResponse)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.support.v2.ListSupportEventSubscriptionsResponse();
+                            if (object.supportEventSubscriptions) {
+                                if (!Array.isArray(object.supportEventSubscriptions))
+                                    throw TypeError(".google.cloud.support.v2.ListSupportEventSubscriptionsResponse.supportEventSubscriptions: array expected");
+                                message.supportEventSubscriptions = [];
+                                for (var i = 0; i < object.supportEventSubscriptions.length; ++i) {
+                                    if (typeof object.supportEventSubscriptions[i] !== "object")
+                                        throw TypeError(".google.cloud.support.v2.ListSupportEventSubscriptionsResponse.supportEventSubscriptions: object expected");
+                                    message.supportEventSubscriptions[i] = $root.google.cloud.support.v2.SupportEventSubscription.fromObject(object.supportEventSubscriptions[i], long + 1);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListSupportEventSubscriptionsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.support.v2.ListSupportEventSubscriptionsResponse
+                         * @static
+                         * @param {google.cloud.support.v2.ListSupportEventSubscriptionsResponse} message ListSupportEventSubscriptionsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListSupportEventSubscriptionsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.supportEventSubscriptions = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.supportEventSubscriptions && message.supportEventSubscriptions.length) {
+                                object.supportEventSubscriptions = [];
+                                for (var j = 0; j < message.supportEventSubscriptions.length; ++j)
+                                    object.supportEventSubscriptions[j] = $root.google.cloud.support.v2.SupportEventSubscription.toObject(message.supportEventSubscriptions[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListSupportEventSubscriptionsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.support.v2.ListSupportEventSubscriptionsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListSupportEventSubscriptionsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListSupportEventSubscriptionsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.support.v2.ListSupportEventSubscriptionsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListSupportEventSubscriptionsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.support.v2.ListSupportEventSubscriptionsResponse";
+                        };
+    
+                        return ListSupportEventSubscriptionsResponse;
+                    })();
+    
+                    v2.UpdateSupportEventSubscriptionRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateSupportEventSubscriptionRequest.
+                         * @memberof google.cloud.support.v2
+                         * @interface IUpdateSupportEventSubscriptionRequest
+                         * @property {google.cloud.support.v2.ISupportEventSubscription|null} [supportEventSubscription] UpdateSupportEventSubscriptionRequest supportEventSubscription
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateSupportEventSubscriptionRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateSupportEventSubscriptionRequest.
+                         * @memberof google.cloud.support.v2
+                         * @classdesc Represents an UpdateSupportEventSubscriptionRequest.
+                         * @implements IUpdateSupportEventSubscriptionRequest
+                         * @constructor
+                         * @param {google.cloud.support.v2.IUpdateSupportEventSubscriptionRequest=} [properties] Properties to set
+                         */
+                        function UpdateSupportEventSubscriptionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateSupportEventSubscriptionRequest supportEventSubscription.
+                         * @member {google.cloud.support.v2.ISupportEventSubscription|null|undefined} supportEventSubscription
+                         * @memberof google.cloud.support.v2.UpdateSupportEventSubscriptionRequest
+                         * @instance
+                         */
+                        UpdateSupportEventSubscriptionRequest.prototype.supportEventSubscription = null;
+    
+                        /**
+                         * UpdateSupportEventSubscriptionRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.support.v2.UpdateSupportEventSubscriptionRequest
+                         * @instance
+                         */
+                        UpdateSupportEventSubscriptionRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateSupportEventSubscriptionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.support.v2.UpdateSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2.IUpdateSupportEventSubscriptionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.support.v2.UpdateSupportEventSubscriptionRequest} UpdateSupportEventSubscriptionRequest instance
+                         */
+                        UpdateSupportEventSubscriptionRequest.create = function create(properties) {
+                            return new UpdateSupportEventSubscriptionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateSupportEventSubscriptionRequest message. Does not implicitly {@link google.cloud.support.v2.UpdateSupportEventSubscriptionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.support.v2.UpdateSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2.IUpdateSupportEventSubscriptionRequest} message UpdateSupportEventSubscriptionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateSupportEventSubscriptionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.supportEventSubscription != null && Object.hasOwnProperty.call(message, "supportEventSubscription"))
+                                $root.google.cloud.support.v2.SupportEventSubscription.encode(message.supportEventSubscription, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateSupportEventSubscriptionRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2.UpdateSupportEventSubscriptionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.support.v2.UpdateSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2.IUpdateSupportEventSubscriptionRequest} message UpdateSupportEventSubscriptionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateSupportEventSubscriptionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateSupportEventSubscriptionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.support.v2.UpdateSupportEventSubscriptionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.support.v2.UpdateSupportEventSubscriptionRequest} UpdateSupportEventSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateSupportEventSubscriptionRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.support.v2.UpdateSupportEventSubscriptionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.supportEventSubscription = $root.google.cloud.support.v2.SupportEventSubscription.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateSupportEventSubscriptionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.support.v2.UpdateSupportEventSubscriptionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.support.v2.UpdateSupportEventSubscriptionRequest} UpdateSupportEventSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateSupportEventSubscriptionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateSupportEventSubscriptionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.support.v2.UpdateSupportEventSubscriptionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateSupportEventSubscriptionRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.supportEventSubscription != null && message.hasOwnProperty("supportEventSubscription")) {
+                                var error = $root.google.cloud.support.v2.SupportEventSubscription.verify(message.supportEventSubscription, long + 1);
+                                if (error)
+                                    return "supportEventSubscription." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask, long + 1);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateSupportEventSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.support.v2.UpdateSupportEventSubscriptionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.support.v2.UpdateSupportEventSubscriptionRequest} UpdateSupportEventSubscriptionRequest
+                         */
+                        UpdateSupportEventSubscriptionRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.support.v2.UpdateSupportEventSubscriptionRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.support.v2.UpdateSupportEventSubscriptionRequest();
+                            if (object.supportEventSubscription != null) {
+                                if (typeof object.supportEventSubscription !== "object")
+                                    throw TypeError(".google.cloud.support.v2.UpdateSupportEventSubscriptionRequest.supportEventSubscription: object expected");
+                                message.supportEventSubscription = $root.google.cloud.support.v2.SupportEventSubscription.fromObject(object.supportEventSubscription, long + 1);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.support.v2.UpdateSupportEventSubscriptionRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask, long + 1);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateSupportEventSubscriptionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.support.v2.UpdateSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2.UpdateSupportEventSubscriptionRequest} message UpdateSupportEventSubscriptionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateSupportEventSubscriptionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.supportEventSubscription = null;
+                                object.updateMask = null;
+                            }
+                            if (message.supportEventSubscription != null && message.hasOwnProperty("supportEventSubscription"))
+                                object.supportEventSubscription = $root.google.cloud.support.v2.SupportEventSubscription.toObject(message.supportEventSubscription, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateSupportEventSubscriptionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.support.v2.UpdateSupportEventSubscriptionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateSupportEventSubscriptionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateSupportEventSubscriptionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.support.v2.UpdateSupportEventSubscriptionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateSupportEventSubscriptionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.support.v2.UpdateSupportEventSubscriptionRequest";
+                        };
+    
+                        return UpdateSupportEventSubscriptionRequest;
+                    })();
+    
+                    v2.DeleteSupportEventSubscriptionRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteSupportEventSubscriptionRequest.
+                         * @memberof google.cloud.support.v2
+                         * @interface IDeleteSupportEventSubscriptionRequest
+                         * @property {string|null} [name] DeleteSupportEventSubscriptionRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteSupportEventSubscriptionRequest.
+                         * @memberof google.cloud.support.v2
+                         * @classdesc Represents a DeleteSupportEventSubscriptionRequest.
+                         * @implements IDeleteSupportEventSubscriptionRequest
+                         * @constructor
+                         * @param {google.cloud.support.v2.IDeleteSupportEventSubscriptionRequest=} [properties] Properties to set
+                         */
+                        function DeleteSupportEventSubscriptionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteSupportEventSubscriptionRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.support.v2.DeleteSupportEventSubscriptionRequest
+                         * @instance
+                         */
+                        DeleteSupportEventSubscriptionRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteSupportEventSubscriptionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.support.v2.DeleteSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2.IDeleteSupportEventSubscriptionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.support.v2.DeleteSupportEventSubscriptionRequest} DeleteSupportEventSubscriptionRequest instance
+                         */
+                        DeleteSupportEventSubscriptionRequest.create = function create(properties) {
+                            return new DeleteSupportEventSubscriptionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteSupportEventSubscriptionRequest message. Does not implicitly {@link google.cloud.support.v2.DeleteSupportEventSubscriptionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.support.v2.DeleteSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2.IDeleteSupportEventSubscriptionRequest} message DeleteSupportEventSubscriptionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteSupportEventSubscriptionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteSupportEventSubscriptionRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2.DeleteSupportEventSubscriptionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.support.v2.DeleteSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2.IDeleteSupportEventSubscriptionRequest} message DeleteSupportEventSubscriptionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteSupportEventSubscriptionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteSupportEventSubscriptionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.support.v2.DeleteSupportEventSubscriptionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.support.v2.DeleteSupportEventSubscriptionRequest} DeleteSupportEventSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteSupportEventSubscriptionRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.support.v2.DeleteSupportEventSubscriptionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteSupportEventSubscriptionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.support.v2.DeleteSupportEventSubscriptionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.support.v2.DeleteSupportEventSubscriptionRequest} DeleteSupportEventSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteSupportEventSubscriptionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteSupportEventSubscriptionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.support.v2.DeleteSupportEventSubscriptionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteSupportEventSubscriptionRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteSupportEventSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.support.v2.DeleteSupportEventSubscriptionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.support.v2.DeleteSupportEventSubscriptionRequest} DeleteSupportEventSubscriptionRequest
+                         */
+                        DeleteSupportEventSubscriptionRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.support.v2.DeleteSupportEventSubscriptionRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.support.v2.DeleteSupportEventSubscriptionRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteSupportEventSubscriptionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.support.v2.DeleteSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2.DeleteSupportEventSubscriptionRequest} message DeleteSupportEventSubscriptionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteSupportEventSubscriptionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteSupportEventSubscriptionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.support.v2.DeleteSupportEventSubscriptionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteSupportEventSubscriptionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteSupportEventSubscriptionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.support.v2.DeleteSupportEventSubscriptionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteSupportEventSubscriptionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.support.v2.DeleteSupportEventSubscriptionRequest";
+                        };
+    
+                        return DeleteSupportEventSubscriptionRequest;
+                    })();
+    
+                    v2.UndeleteSupportEventSubscriptionRequest = (function() {
+    
+                        /**
+                         * Properties of an UndeleteSupportEventSubscriptionRequest.
+                         * @memberof google.cloud.support.v2
+                         * @interface IUndeleteSupportEventSubscriptionRequest
+                         * @property {string|null} [name] UndeleteSupportEventSubscriptionRequest name
+                         */
+    
+                        /**
+                         * Constructs a new UndeleteSupportEventSubscriptionRequest.
+                         * @memberof google.cloud.support.v2
+                         * @classdesc Represents an UndeleteSupportEventSubscriptionRequest.
+                         * @implements IUndeleteSupportEventSubscriptionRequest
+                         * @constructor
+                         * @param {google.cloud.support.v2.IUndeleteSupportEventSubscriptionRequest=} [properties] Properties to set
+                         */
+                        function UndeleteSupportEventSubscriptionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UndeleteSupportEventSubscriptionRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.support.v2.UndeleteSupportEventSubscriptionRequest
+                         * @instance
+                         */
+                        UndeleteSupportEventSubscriptionRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new UndeleteSupportEventSubscriptionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.support.v2.UndeleteSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2.IUndeleteSupportEventSubscriptionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.support.v2.UndeleteSupportEventSubscriptionRequest} UndeleteSupportEventSubscriptionRequest instance
+                         */
+                        UndeleteSupportEventSubscriptionRequest.create = function create(properties) {
+                            return new UndeleteSupportEventSubscriptionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UndeleteSupportEventSubscriptionRequest message. Does not implicitly {@link google.cloud.support.v2.UndeleteSupportEventSubscriptionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.support.v2.UndeleteSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2.IUndeleteSupportEventSubscriptionRequest} message UndeleteSupportEventSubscriptionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UndeleteSupportEventSubscriptionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UndeleteSupportEventSubscriptionRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2.UndeleteSupportEventSubscriptionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.support.v2.UndeleteSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2.IUndeleteSupportEventSubscriptionRequest} message UndeleteSupportEventSubscriptionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UndeleteSupportEventSubscriptionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UndeleteSupportEventSubscriptionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.support.v2.UndeleteSupportEventSubscriptionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.support.v2.UndeleteSupportEventSubscriptionRequest} UndeleteSupportEventSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UndeleteSupportEventSubscriptionRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.support.v2.UndeleteSupportEventSubscriptionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UndeleteSupportEventSubscriptionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.support.v2.UndeleteSupportEventSubscriptionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.support.v2.UndeleteSupportEventSubscriptionRequest} UndeleteSupportEventSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UndeleteSupportEventSubscriptionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UndeleteSupportEventSubscriptionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.support.v2.UndeleteSupportEventSubscriptionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UndeleteSupportEventSubscriptionRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UndeleteSupportEventSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.support.v2.UndeleteSupportEventSubscriptionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.support.v2.UndeleteSupportEventSubscriptionRequest} UndeleteSupportEventSubscriptionRequest
+                         */
+                        UndeleteSupportEventSubscriptionRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.support.v2.UndeleteSupportEventSubscriptionRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.support.v2.UndeleteSupportEventSubscriptionRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UndeleteSupportEventSubscriptionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.support.v2.UndeleteSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2.UndeleteSupportEventSubscriptionRequest} message UndeleteSupportEventSubscriptionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UndeleteSupportEventSubscriptionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UndeleteSupportEventSubscriptionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.support.v2.UndeleteSupportEventSubscriptionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UndeleteSupportEventSubscriptionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UndeleteSupportEventSubscriptionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.support.v2.UndeleteSupportEventSubscriptionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UndeleteSupportEventSubscriptionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.support.v2.UndeleteSupportEventSubscriptionRequest";
+                        };
+    
+                        return UndeleteSupportEventSubscriptionRequest;
+                    })();
+    
                     return v2;
                 })();
     
@@ -16582,6 +19028,2452 @@
                         };
     
                         return ShowFeedResponse;
+                    })();
+    
+                    v2beta.SupportEventSubscription = (function() {
+    
+                        /**
+                         * Properties of a SupportEventSubscription.
+                         * @memberof google.cloud.support.v2beta
+                         * @interface ISupportEventSubscription
+                         * @property {string|null} [name] SupportEventSubscription name
+                         * @property {string|null} [pubSubTopic] SupportEventSubscription pubSubTopic
+                         * @property {google.cloud.support.v2beta.SupportEventSubscription.State|null} [state] SupportEventSubscription state
+                         * @property {google.cloud.support.v2beta.SupportEventSubscription.FailureReason|null} [failureReason] SupportEventSubscription failureReason
+                         * @property {google.protobuf.ITimestamp|null} [createTime] SupportEventSubscription createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] SupportEventSubscription updateTime
+                         * @property {google.protobuf.ITimestamp|null} [deleteTime] SupportEventSubscription deleteTime
+                         * @property {google.protobuf.ITimestamp|null} [purgeTime] SupportEventSubscription purgeTime
+                         */
+    
+                        /**
+                         * Constructs a new SupportEventSubscription.
+                         * @memberof google.cloud.support.v2beta
+                         * @classdesc Represents a SupportEventSubscription.
+                         * @implements ISupportEventSubscription
+                         * @constructor
+                         * @param {google.cloud.support.v2beta.ISupportEventSubscription=} [properties] Properties to set
+                         */
+                        function SupportEventSubscription(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SupportEventSubscription name.
+                         * @member {string} name
+                         * @memberof google.cloud.support.v2beta.SupportEventSubscription
+                         * @instance
+                         */
+                        SupportEventSubscription.prototype.name = "";
+    
+                        /**
+                         * SupportEventSubscription pubSubTopic.
+                         * @member {string} pubSubTopic
+                         * @memberof google.cloud.support.v2beta.SupportEventSubscription
+                         * @instance
+                         */
+                        SupportEventSubscription.prototype.pubSubTopic = "";
+    
+                        /**
+                         * SupportEventSubscription state.
+                         * @member {google.cloud.support.v2beta.SupportEventSubscription.State} state
+                         * @memberof google.cloud.support.v2beta.SupportEventSubscription
+                         * @instance
+                         */
+                        SupportEventSubscription.prototype.state = 0;
+    
+                        /**
+                         * SupportEventSubscription failureReason.
+                         * @member {google.cloud.support.v2beta.SupportEventSubscription.FailureReason} failureReason
+                         * @memberof google.cloud.support.v2beta.SupportEventSubscription
+                         * @instance
+                         */
+                        SupportEventSubscription.prototype.failureReason = 0;
+    
+                        /**
+                         * SupportEventSubscription createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.support.v2beta.SupportEventSubscription
+                         * @instance
+                         */
+                        SupportEventSubscription.prototype.createTime = null;
+    
+                        /**
+                         * SupportEventSubscription updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.support.v2beta.SupportEventSubscription
+                         * @instance
+                         */
+                        SupportEventSubscription.prototype.updateTime = null;
+    
+                        /**
+                         * SupportEventSubscription deleteTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} deleteTime
+                         * @memberof google.cloud.support.v2beta.SupportEventSubscription
+                         * @instance
+                         */
+                        SupportEventSubscription.prototype.deleteTime = null;
+    
+                        /**
+                         * SupportEventSubscription purgeTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} purgeTime
+                         * @memberof google.cloud.support.v2beta.SupportEventSubscription
+                         * @instance
+                         */
+                        SupportEventSubscription.prototype.purgeTime = null;
+    
+                        /**
+                         * Creates a new SupportEventSubscription instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.support.v2beta.SupportEventSubscription
+                         * @static
+                         * @param {google.cloud.support.v2beta.ISupportEventSubscription=} [properties] Properties to set
+                         * @returns {google.cloud.support.v2beta.SupportEventSubscription} SupportEventSubscription instance
+                         */
+                        SupportEventSubscription.create = function create(properties) {
+                            return new SupportEventSubscription(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SupportEventSubscription message. Does not implicitly {@link google.cloud.support.v2beta.SupportEventSubscription.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.support.v2beta.SupportEventSubscription
+                         * @static
+                         * @param {google.cloud.support.v2beta.ISupportEventSubscription} message SupportEventSubscription message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SupportEventSubscription.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.pubSubTopic != null && Object.hasOwnProperty.call(message, "pubSubTopic"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.pubSubTopic);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.state);
+                            if (message.failureReason != null && Object.hasOwnProperty.call(message, "failureReason"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.failureReason);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.deleteTime != null && Object.hasOwnProperty.call(message, "deleteTime"))
+                                $root.google.protobuf.Timestamp.encode(message.deleteTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.purgeTime != null && Object.hasOwnProperty.call(message, "purgeTime"))
+                                $root.google.protobuf.Timestamp.encode(message.purgeTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SupportEventSubscription message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.SupportEventSubscription.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.support.v2beta.SupportEventSubscription
+                         * @static
+                         * @param {google.cloud.support.v2beta.ISupportEventSubscription} message SupportEventSubscription message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SupportEventSubscription.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SupportEventSubscription message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.support.v2beta.SupportEventSubscription
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.support.v2beta.SupportEventSubscription} SupportEventSubscription
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SupportEventSubscription.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.support.v2beta.SupportEventSubscription();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pubSubTopic = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.failureReason = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 6: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 7: {
+                                        message.deleteTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 8: {
+                                        message.purgeTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SupportEventSubscription message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.support.v2beta.SupportEventSubscription
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.support.v2beta.SupportEventSubscription} SupportEventSubscription
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SupportEventSubscription.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SupportEventSubscription message.
+                         * @function verify
+                         * @memberof google.cloud.support.v2beta.SupportEventSubscription
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SupportEventSubscription.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.pubSubTopic != null && message.hasOwnProperty("pubSubTopic"))
+                                if (!$util.isString(message.pubSubTopic))
+                                    return "pubSubTopic: string expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.failureReason != null && message.hasOwnProperty("failureReason"))
+                                switch (message.failureReason) {
+                                default:
+                                    return "failureReason: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime, long + 1);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime, long + 1);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.deleteTime != null && message.hasOwnProperty("deleteTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.deleteTime, long + 1);
+                                if (error)
+                                    return "deleteTime." + error;
+                            }
+                            if (message.purgeTime != null && message.hasOwnProperty("purgeTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.purgeTime, long + 1);
+                                if (error)
+                                    return "purgeTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SupportEventSubscription message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.support.v2beta.SupportEventSubscription
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.support.v2beta.SupportEventSubscription} SupportEventSubscription
+                         */
+                        SupportEventSubscription.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.support.v2beta.SupportEventSubscription)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.support.v2beta.SupportEventSubscription();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.pubSubTopic != null)
+                                message.pubSubTopic = String(object.pubSubTopic);
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "WORKING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "FAILING":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "DELETED":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            }
+                            switch (object.failureReason) {
+                            default:
+                                if (typeof object.failureReason === "number") {
+                                    message.failureReason = object.failureReason;
+                                    break;
+                                }
+                                break;
+                            case "FAILURE_REASON_UNSPECIFIED":
+                            case 0:
+                                message.failureReason = 0;
+                                break;
+                            case "PERMISSION_DENIED":
+                            case 1:
+                                message.failureReason = 1;
+                                break;
+                            case "TOPIC_NOT_FOUND":
+                            case 2:
+                                message.failureReason = 2;
+                                break;
+                            case "OTHER":
+                            case 3:
+                                message.failureReason = 3;
+                                break;
+                            }
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.support.v2beta.SupportEventSubscription.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime, long + 1);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.support.v2beta.SupportEventSubscription.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime, long + 1);
+                            }
+                            if (object.deleteTime != null) {
+                                if (typeof object.deleteTime !== "object")
+                                    throw TypeError(".google.cloud.support.v2beta.SupportEventSubscription.deleteTime: object expected");
+                                message.deleteTime = $root.google.protobuf.Timestamp.fromObject(object.deleteTime, long + 1);
+                            }
+                            if (object.purgeTime != null) {
+                                if (typeof object.purgeTime !== "object")
+                                    throw TypeError(".google.cloud.support.v2beta.SupportEventSubscription.purgeTime: object expected");
+                                message.purgeTime = $root.google.protobuf.Timestamp.fromObject(object.purgeTime, long + 1);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SupportEventSubscription message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.support.v2beta.SupportEventSubscription
+                         * @static
+                         * @param {google.cloud.support.v2beta.SupportEventSubscription} message SupportEventSubscription
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SupportEventSubscription.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.pubSubTopic = "";
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.failureReason = options.enums === String ? "FAILURE_REASON_UNSPECIFIED" : 0;
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.deleteTime = null;
+                                object.purgeTime = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.pubSubTopic != null && message.hasOwnProperty("pubSubTopic"))
+                                object.pubSubTopic = message.pubSubTopic;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.support.v2beta.SupportEventSubscription.State[message.state] === undefined ? message.state : $root.google.cloud.support.v2beta.SupportEventSubscription.State[message.state] : message.state;
+                            if (message.failureReason != null && message.hasOwnProperty("failureReason"))
+                                object.failureReason = options.enums === String ? $root.google.cloud.support.v2beta.SupportEventSubscription.FailureReason[message.failureReason] === undefined ? message.failureReason : $root.google.cloud.support.v2beta.SupportEventSubscription.FailureReason[message.failureReason] : message.failureReason;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.deleteTime != null && message.hasOwnProperty("deleteTime"))
+                                object.deleteTime = $root.google.protobuf.Timestamp.toObject(message.deleteTime, options);
+                            if (message.purgeTime != null && message.hasOwnProperty("purgeTime"))
+                                object.purgeTime = $root.google.protobuf.Timestamp.toObject(message.purgeTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SupportEventSubscription to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.support.v2beta.SupportEventSubscription
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SupportEventSubscription.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SupportEventSubscription
+                         * @function getTypeUrl
+                         * @memberof google.cloud.support.v2beta.SupportEventSubscription
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SupportEventSubscription.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.support.v2beta.SupportEventSubscription";
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.support.v2beta.SupportEventSubscription.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} WORKING=1 WORKING value
+                         * @property {number} FAILING=2 FAILING value
+                         * @property {number} DELETED=3 DELETED value
+                         */
+                        SupportEventSubscription.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "WORKING"] = 1;
+                            values[valuesById[2] = "FAILING"] = 2;
+                            values[valuesById[3] = "DELETED"] = 3;
+                            return values;
+                        })();
+    
+                        /**
+                         * FailureReason enum.
+                         * @name google.cloud.support.v2beta.SupportEventSubscription.FailureReason
+                         * @enum {number}
+                         * @property {number} FAILURE_REASON_UNSPECIFIED=0 FAILURE_REASON_UNSPECIFIED value
+                         * @property {number} PERMISSION_DENIED=1 PERMISSION_DENIED value
+                         * @property {number} TOPIC_NOT_FOUND=2 TOPIC_NOT_FOUND value
+                         * @property {number} OTHER=3 OTHER value
+                         */
+                        SupportEventSubscription.FailureReason = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "FAILURE_REASON_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PERMISSION_DENIED"] = 1;
+                            values[valuesById[2] = "TOPIC_NOT_FOUND"] = 2;
+                            values[valuesById[3] = "OTHER"] = 3;
+                            return values;
+                        })();
+    
+                        return SupportEventSubscription;
+                    })();
+    
+                    v2beta.SupportEventSubscriptionService = (function() {
+    
+                        /**
+                         * Constructs a new SupportEventSubscriptionService service.
+                         * @memberof google.cloud.support.v2beta
+                         * @classdesc Represents a SupportEventSubscriptionService
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function SupportEventSubscriptionService(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (SupportEventSubscriptionService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = SupportEventSubscriptionService;
+    
+                        /**
+                         * Creates new SupportEventSubscriptionService service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.support.v2beta.SupportEventSubscriptionService
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {SupportEventSubscriptionService} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        SupportEventSubscriptionService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.support.v2beta.SupportEventSubscriptionService|createSupportEventSubscription}.
+                         * @memberof google.cloud.support.v2beta.SupportEventSubscriptionService
+                         * @typedef CreateSupportEventSubscriptionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.support.v2beta.SupportEventSubscription} [response] SupportEventSubscription
+                         */
+    
+                        /**
+                         * Calls CreateSupportEventSubscription.
+                         * @function createSupportEventSubscription
+                         * @memberof google.cloud.support.v2beta.SupportEventSubscriptionService
+                         * @instance
+                         * @param {google.cloud.support.v2beta.ICreateSupportEventSubscriptionRequest} request CreateSupportEventSubscriptionRequest message or plain object
+                         * @param {google.cloud.support.v2beta.SupportEventSubscriptionService.CreateSupportEventSubscriptionCallback} callback Node-style callback called with the error, if any, and SupportEventSubscription
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SupportEventSubscriptionService.prototype.createSupportEventSubscription = function createSupportEventSubscription(request, callback) {
+                            return this.rpcCall(createSupportEventSubscription, $root.google.cloud.support.v2beta.CreateSupportEventSubscriptionRequest, $root.google.cloud.support.v2beta.SupportEventSubscription, request, callback);
+                        }, "name", { value: "CreateSupportEventSubscription" });
+    
+                        /**
+                         * Calls CreateSupportEventSubscription.
+                         * @function createSupportEventSubscription
+                         * @memberof google.cloud.support.v2beta.SupportEventSubscriptionService
+                         * @instance
+                         * @param {google.cloud.support.v2beta.ICreateSupportEventSubscriptionRequest} request CreateSupportEventSubscriptionRequest message or plain object
+                         * @returns {Promise<google.cloud.support.v2beta.SupportEventSubscription>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.support.v2beta.SupportEventSubscriptionService|getSupportEventSubscription}.
+                         * @memberof google.cloud.support.v2beta.SupportEventSubscriptionService
+                         * @typedef GetSupportEventSubscriptionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.support.v2beta.SupportEventSubscription} [response] SupportEventSubscription
+                         */
+    
+                        /**
+                         * Calls GetSupportEventSubscription.
+                         * @function getSupportEventSubscription
+                         * @memberof google.cloud.support.v2beta.SupportEventSubscriptionService
+                         * @instance
+                         * @param {google.cloud.support.v2beta.IGetSupportEventSubscriptionRequest} request GetSupportEventSubscriptionRequest message or plain object
+                         * @param {google.cloud.support.v2beta.SupportEventSubscriptionService.GetSupportEventSubscriptionCallback} callback Node-style callback called with the error, if any, and SupportEventSubscription
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SupportEventSubscriptionService.prototype.getSupportEventSubscription = function getSupportEventSubscription(request, callback) {
+                            return this.rpcCall(getSupportEventSubscription, $root.google.cloud.support.v2beta.GetSupportEventSubscriptionRequest, $root.google.cloud.support.v2beta.SupportEventSubscription, request, callback);
+                        }, "name", { value: "GetSupportEventSubscription" });
+    
+                        /**
+                         * Calls GetSupportEventSubscription.
+                         * @function getSupportEventSubscription
+                         * @memberof google.cloud.support.v2beta.SupportEventSubscriptionService
+                         * @instance
+                         * @param {google.cloud.support.v2beta.IGetSupportEventSubscriptionRequest} request GetSupportEventSubscriptionRequest message or plain object
+                         * @returns {Promise<google.cloud.support.v2beta.SupportEventSubscription>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.support.v2beta.SupportEventSubscriptionService|listSupportEventSubscriptions}.
+                         * @memberof google.cloud.support.v2beta.SupportEventSubscriptionService
+                         * @typedef ListSupportEventSubscriptionsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.support.v2beta.ListSupportEventSubscriptionsResponse} [response] ListSupportEventSubscriptionsResponse
+                         */
+    
+                        /**
+                         * Calls ListSupportEventSubscriptions.
+                         * @function listSupportEventSubscriptions
+                         * @memberof google.cloud.support.v2beta.SupportEventSubscriptionService
+                         * @instance
+                         * @param {google.cloud.support.v2beta.IListSupportEventSubscriptionsRequest} request ListSupportEventSubscriptionsRequest message or plain object
+                         * @param {google.cloud.support.v2beta.SupportEventSubscriptionService.ListSupportEventSubscriptionsCallback} callback Node-style callback called with the error, if any, and ListSupportEventSubscriptionsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SupportEventSubscriptionService.prototype.listSupportEventSubscriptions = function listSupportEventSubscriptions(request, callback) {
+                            return this.rpcCall(listSupportEventSubscriptions, $root.google.cloud.support.v2beta.ListSupportEventSubscriptionsRequest, $root.google.cloud.support.v2beta.ListSupportEventSubscriptionsResponse, request, callback);
+                        }, "name", { value: "ListSupportEventSubscriptions" });
+    
+                        /**
+                         * Calls ListSupportEventSubscriptions.
+                         * @function listSupportEventSubscriptions
+                         * @memberof google.cloud.support.v2beta.SupportEventSubscriptionService
+                         * @instance
+                         * @param {google.cloud.support.v2beta.IListSupportEventSubscriptionsRequest} request ListSupportEventSubscriptionsRequest message or plain object
+                         * @returns {Promise<google.cloud.support.v2beta.ListSupportEventSubscriptionsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.support.v2beta.SupportEventSubscriptionService|updateSupportEventSubscription}.
+                         * @memberof google.cloud.support.v2beta.SupportEventSubscriptionService
+                         * @typedef UpdateSupportEventSubscriptionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.support.v2beta.SupportEventSubscription} [response] SupportEventSubscription
+                         */
+    
+                        /**
+                         * Calls UpdateSupportEventSubscription.
+                         * @function updateSupportEventSubscription
+                         * @memberof google.cloud.support.v2beta.SupportEventSubscriptionService
+                         * @instance
+                         * @param {google.cloud.support.v2beta.IUpdateSupportEventSubscriptionRequest} request UpdateSupportEventSubscriptionRequest message or plain object
+                         * @param {google.cloud.support.v2beta.SupportEventSubscriptionService.UpdateSupportEventSubscriptionCallback} callback Node-style callback called with the error, if any, and SupportEventSubscription
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SupportEventSubscriptionService.prototype.updateSupportEventSubscription = function updateSupportEventSubscription(request, callback) {
+                            return this.rpcCall(updateSupportEventSubscription, $root.google.cloud.support.v2beta.UpdateSupportEventSubscriptionRequest, $root.google.cloud.support.v2beta.SupportEventSubscription, request, callback);
+                        }, "name", { value: "UpdateSupportEventSubscription" });
+    
+                        /**
+                         * Calls UpdateSupportEventSubscription.
+                         * @function updateSupportEventSubscription
+                         * @memberof google.cloud.support.v2beta.SupportEventSubscriptionService
+                         * @instance
+                         * @param {google.cloud.support.v2beta.IUpdateSupportEventSubscriptionRequest} request UpdateSupportEventSubscriptionRequest message or plain object
+                         * @returns {Promise<google.cloud.support.v2beta.SupportEventSubscription>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.support.v2beta.SupportEventSubscriptionService|deleteSupportEventSubscription}.
+                         * @memberof google.cloud.support.v2beta.SupportEventSubscriptionService
+                         * @typedef DeleteSupportEventSubscriptionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.support.v2beta.SupportEventSubscription} [response] SupportEventSubscription
+                         */
+    
+                        /**
+                         * Calls DeleteSupportEventSubscription.
+                         * @function deleteSupportEventSubscription
+                         * @memberof google.cloud.support.v2beta.SupportEventSubscriptionService
+                         * @instance
+                         * @param {google.cloud.support.v2beta.IDeleteSupportEventSubscriptionRequest} request DeleteSupportEventSubscriptionRequest message or plain object
+                         * @param {google.cloud.support.v2beta.SupportEventSubscriptionService.DeleteSupportEventSubscriptionCallback} callback Node-style callback called with the error, if any, and SupportEventSubscription
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SupportEventSubscriptionService.prototype.deleteSupportEventSubscription = function deleteSupportEventSubscription(request, callback) {
+                            return this.rpcCall(deleteSupportEventSubscription, $root.google.cloud.support.v2beta.DeleteSupportEventSubscriptionRequest, $root.google.cloud.support.v2beta.SupportEventSubscription, request, callback);
+                        }, "name", { value: "DeleteSupportEventSubscription" });
+    
+                        /**
+                         * Calls DeleteSupportEventSubscription.
+                         * @function deleteSupportEventSubscription
+                         * @memberof google.cloud.support.v2beta.SupportEventSubscriptionService
+                         * @instance
+                         * @param {google.cloud.support.v2beta.IDeleteSupportEventSubscriptionRequest} request DeleteSupportEventSubscriptionRequest message or plain object
+                         * @returns {Promise<google.cloud.support.v2beta.SupportEventSubscription>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.support.v2beta.SupportEventSubscriptionService|undeleteSupportEventSubscription}.
+                         * @memberof google.cloud.support.v2beta.SupportEventSubscriptionService
+                         * @typedef UndeleteSupportEventSubscriptionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.support.v2beta.SupportEventSubscription} [response] SupportEventSubscription
+                         */
+    
+                        /**
+                         * Calls UndeleteSupportEventSubscription.
+                         * @function undeleteSupportEventSubscription
+                         * @memberof google.cloud.support.v2beta.SupportEventSubscriptionService
+                         * @instance
+                         * @param {google.cloud.support.v2beta.IUndeleteSupportEventSubscriptionRequest} request UndeleteSupportEventSubscriptionRequest message or plain object
+                         * @param {google.cloud.support.v2beta.SupportEventSubscriptionService.UndeleteSupportEventSubscriptionCallback} callback Node-style callback called with the error, if any, and SupportEventSubscription
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SupportEventSubscriptionService.prototype.undeleteSupportEventSubscription = function undeleteSupportEventSubscription(request, callback) {
+                            return this.rpcCall(undeleteSupportEventSubscription, $root.google.cloud.support.v2beta.UndeleteSupportEventSubscriptionRequest, $root.google.cloud.support.v2beta.SupportEventSubscription, request, callback);
+                        }, "name", { value: "UndeleteSupportEventSubscription" });
+    
+                        /**
+                         * Calls UndeleteSupportEventSubscription.
+                         * @function undeleteSupportEventSubscription
+                         * @memberof google.cloud.support.v2beta.SupportEventSubscriptionService
+                         * @instance
+                         * @param {google.cloud.support.v2beta.IUndeleteSupportEventSubscriptionRequest} request UndeleteSupportEventSubscriptionRequest message or plain object
+                         * @returns {Promise<google.cloud.support.v2beta.SupportEventSubscription>} Promise
+                         * @variation 2
+                         */
+    
+                        return SupportEventSubscriptionService;
+                    })();
+    
+                    v2beta.CreateSupportEventSubscriptionRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateSupportEventSubscriptionRequest.
+                         * @memberof google.cloud.support.v2beta
+                         * @interface ICreateSupportEventSubscriptionRequest
+                         * @property {string|null} [parent] CreateSupportEventSubscriptionRequest parent
+                         * @property {google.cloud.support.v2beta.ISupportEventSubscription|null} [supportEventSubscription] CreateSupportEventSubscriptionRequest supportEventSubscription
+                         */
+    
+                        /**
+                         * Constructs a new CreateSupportEventSubscriptionRequest.
+                         * @memberof google.cloud.support.v2beta
+                         * @classdesc Represents a CreateSupportEventSubscriptionRequest.
+                         * @implements ICreateSupportEventSubscriptionRequest
+                         * @constructor
+                         * @param {google.cloud.support.v2beta.ICreateSupportEventSubscriptionRequest=} [properties] Properties to set
+                         */
+                        function CreateSupportEventSubscriptionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateSupportEventSubscriptionRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.support.v2beta.CreateSupportEventSubscriptionRequest
+                         * @instance
+                         */
+                        CreateSupportEventSubscriptionRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateSupportEventSubscriptionRequest supportEventSubscription.
+                         * @member {google.cloud.support.v2beta.ISupportEventSubscription|null|undefined} supportEventSubscription
+                         * @memberof google.cloud.support.v2beta.CreateSupportEventSubscriptionRequest
+                         * @instance
+                         */
+                        CreateSupportEventSubscriptionRequest.prototype.supportEventSubscription = null;
+    
+                        /**
+                         * Creates a new CreateSupportEventSubscriptionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.support.v2beta.CreateSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2beta.ICreateSupportEventSubscriptionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.support.v2beta.CreateSupportEventSubscriptionRequest} CreateSupportEventSubscriptionRequest instance
+                         */
+                        CreateSupportEventSubscriptionRequest.create = function create(properties) {
+                            return new CreateSupportEventSubscriptionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSupportEventSubscriptionRequest message. Does not implicitly {@link google.cloud.support.v2beta.CreateSupportEventSubscriptionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.support.v2beta.CreateSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2beta.ICreateSupportEventSubscriptionRequest} message CreateSupportEventSubscriptionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSupportEventSubscriptionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.supportEventSubscription != null && Object.hasOwnProperty.call(message, "supportEventSubscription"))
+                                $root.google.cloud.support.v2beta.SupportEventSubscription.encode(message.supportEventSubscription, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSupportEventSubscriptionRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.CreateSupportEventSubscriptionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.support.v2beta.CreateSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2beta.ICreateSupportEventSubscriptionRequest} message CreateSupportEventSubscriptionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSupportEventSubscriptionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateSupportEventSubscriptionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.support.v2beta.CreateSupportEventSubscriptionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.support.v2beta.CreateSupportEventSubscriptionRequest} CreateSupportEventSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSupportEventSubscriptionRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.support.v2beta.CreateSupportEventSubscriptionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.supportEventSubscription = $root.google.cloud.support.v2beta.SupportEventSubscription.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateSupportEventSubscriptionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.support.v2beta.CreateSupportEventSubscriptionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.support.v2beta.CreateSupportEventSubscriptionRequest} CreateSupportEventSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSupportEventSubscriptionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateSupportEventSubscriptionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.support.v2beta.CreateSupportEventSubscriptionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateSupportEventSubscriptionRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.supportEventSubscription != null && message.hasOwnProperty("supportEventSubscription")) {
+                                var error = $root.google.cloud.support.v2beta.SupportEventSubscription.verify(message.supportEventSubscription, long + 1);
+                                if (error)
+                                    return "supportEventSubscription." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateSupportEventSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.support.v2beta.CreateSupportEventSubscriptionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.support.v2beta.CreateSupportEventSubscriptionRequest} CreateSupportEventSubscriptionRequest
+                         */
+                        CreateSupportEventSubscriptionRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.support.v2beta.CreateSupportEventSubscriptionRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.support.v2beta.CreateSupportEventSubscriptionRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.supportEventSubscription != null) {
+                                if (typeof object.supportEventSubscription !== "object")
+                                    throw TypeError(".google.cloud.support.v2beta.CreateSupportEventSubscriptionRequest.supportEventSubscription: object expected");
+                                message.supportEventSubscription = $root.google.cloud.support.v2beta.SupportEventSubscription.fromObject(object.supportEventSubscription, long + 1);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateSupportEventSubscriptionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.support.v2beta.CreateSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2beta.CreateSupportEventSubscriptionRequest} message CreateSupportEventSubscriptionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateSupportEventSubscriptionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.supportEventSubscription = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.supportEventSubscription != null && message.hasOwnProperty("supportEventSubscription"))
+                                object.supportEventSubscription = $root.google.cloud.support.v2beta.SupportEventSubscription.toObject(message.supportEventSubscription, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateSupportEventSubscriptionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.support.v2beta.CreateSupportEventSubscriptionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateSupportEventSubscriptionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateSupportEventSubscriptionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.support.v2beta.CreateSupportEventSubscriptionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateSupportEventSubscriptionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.support.v2beta.CreateSupportEventSubscriptionRequest";
+                        };
+    
+                        return CreateSupportEventSubscriptionRequest;
+                    })();
+    
+                    v2beta.GetSupportEventSubscriptionRequest = (function() {
+    
+                        /**
+                         * Properties of a GetSupportEventSubscriptionRequest.
+                         * @memberof google.cloud.support.v2beta
+                         * @interface IGetSupportEventSubscriptionRequest
+                         * @property {string|null} [name] GetSupportEventSubscriptionRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetSupportEventSubscriptionRequest.
+                         * @memberof google.cloud.support.v2beta
+                         * @classdesc Represents a GetSupportEventSubscriptionRequest.
+                         * @implements IGetSupportEventSubscriptionRequest
+                         * @constructor
+                         * @param {google.cloud.support.v2beta.IGetSupportEventSubscriptionRequest=} [properties] Properties to set
+                         */
+                        function GetSupportEventSubscriptionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetSupportEventSubscriptionRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.support.v2beta.GetSupportEventSubscriptionRequest
+                         * @instance
+                         */
+                        GetSupportEventSubscriptionRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetSupportEventSubscriptionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.support.v2beta.GetSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2beta.IGetSupportEventSubscriptionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.support.v2beta.GetSupportEventSubscriptionRequest} GetSupportEventSubscriptionRequest instance
+                         */
+                        GetSupportEventSubscriptionRequest.create = function create(properties) {
+                            return new GetSupportEventSubscriptionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetSupportEventSubscriptionRequest message. Does not implicitly {@link google.cloud.support.v2beta.GetSupportEventSubscriptionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.support.v2beta.GetSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2beta.IGetSupportEventSubscriptionRequest} message GetSupportEventSubscriptionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSupportEventSubscriptionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetSupportEventSubscriptionRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.GetSupportEventSubscriptionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.support.v2beta.GetSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2beta.IGetSupportEventSubscriptionRequest} message GetSupportEventSubscriptionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSupportEventSubscriptionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetSupportEventSubscriptionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.support.v2beta.GetSupportEventSubscriptionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.support.v2beta.GetSupportEventSubscriptionRequest} GetSupportEventSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSupportEventSubscriptionRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.support.v2beta.GetSupportEventSubscriptionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetSupportEventSubscriptionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.support.v2beta.GetSupportEventSubscriptionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.support.v2beta.GetSupportEventSubscriptionRequest} GetSupportEventSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSupportEventSubscriptionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetSupportEventSubscriptionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.support.v2beta.GetSupportEventSubscriptionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetSupportEventSubscriptionRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetSupportEventSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.support.v2beta.GetSupportEventSubscriptionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.support.v2beta.GetSupportEventSubscriptionRequest} GetSupportEventSubscriptionRequest
+                         */
+                        GetSupportEventSubscriptionRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.support.v2beta.GetSupportEventSubscriptionRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.support.v2beta.GetSupportEventSubscriptionRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetSupportEventSubscriptionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.support.v2beta.GetSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2beta.GetSupportEventSubscriptionRequest} message GetSupportEventSubscriptionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetSupportEventSubscriptionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetSupportEventSubscriptionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.support.v2beta.GetSupportEventSubscriptionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetSupportEventSubscriptionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetSupportEventSubscriptionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.support.v2beta.GetSupportEventSubscriptionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetSupportEventSubscriptionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.support.v2beta.GetSupportEventSubscriptionRequest";
+                        };
+    
+                        return GetSupportEventSubscriptionRequest;
+                    })();
+    
+                    v2beta.ListSupportEventSubscriptionsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListSupportEventSubscriptionsRequest.
+                         * @memberof google.cloud.support.v2beta
+                         * @interface IListSupportEventSubscriptionsRequest
+                         * @property {string|null} [parent] ListSupportEventSubscriptionsRequest parent
+                         * @property {string|null} [filter] ListSupportEventSubscriptionsRequest filter
+                         * @property {boolean|null} [showDeleted] ListSupportEventSubscriptionsRequest showDeleted
+                         * @property {number|null} [pageSize] ListSupportEventSubscriptionsRequest pageSize
+                         * @property {string|null} [pageToken] ListSupportEventSubscriptionsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListSupportEventSubscriptionsRequest.
+                         * @memberof google.cloud.support.v2beta
+                         * @classdesc Represents a ListSupportEventSubscriptionsRequest.
+                         * @implements IListSupportEventSubscriptionsRequest
+                         * @constructor
+                         * @param {google.cloud.support.v2beta.IListSupportEventSubscriptionsRequest=} [properties] Properties to set
+                         */
+                        function ListSupportEventSubscriptionsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListSupportEventSubscriptionsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.support.v2beta.ListSupportEventSubscriptionsRequest
+                         * @instance
+                         */
+                        ListSupportEventSubscriptionsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListSupportEventSubscriptionsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.support.v2beta.ListSupportEventSubscriptionsRequest
+                         * @instance
+                         */
+                        ListSupportEventSubscriptionsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListSupportEventSubscriptionsRequest showDeleted.
+                         * @member {boolean} showDeleted
+                         * @memberof google.cloud.support.v2beta.ListSupportEventSubscriptionsRequest
+                         * @instance
+                         */
+                        ListSupportEventSubscriptionsRequest.prototype.showDeleted = false;
+    
+                        /**
+                         * ListSupportEventSubscriptionsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.support.v2beta.ListSupportEventSubscriptionsRequest
+                         * @instance
+                         */
+                        ListSupportEventSubscriptionsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListSupportEventSubscriptionsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.support.v2beta.ListSupportEventSubscriptionsRequest
+                         * @instance
+                         */
+                        ListSupportEventSubscriptionsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListSupportEventSubscriptionsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.support.v2beta.ListSupportEventSubscriptionsRequest
+                         * @static
+                         * @param {google.cloud.support.v2beta.IListSupportEventSubscriptionsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.support.v2beta.ListSupportEventSubscriptionsRequest} ListSupportEventSubscriptionsRequest instance
+                         */
+                        ListSupportEventSubscriptionsRequest.create = function create(properties) {
+                            return new ListSupportEventSubscriptionsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListSupportEventSubscriptionsRequest message. Does not implicitly {@link google.cloud.support.v2beta.ListSupportEventSubscriptionsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.support.v2beta.ListSupportEventSubscriptionsRequest
+                         * @static
+                         * @param {google.cloud.support.v2beta.IListSupportEventSubscriptionsRequest} message ListSupportEventSubscriptionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSupportEventSubscriptionsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.filter);
+                            if (message.showDeleted != null && Object.hasOwnProperty.call(message, "showDeleted"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.showDeleted);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListSupportEventSubscriptionsRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.ListSupportEventSubscriptionsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.support.v2beta.ListSupportEventSubscriptionsRequest
+                         * @static
+                         * @param {google.cloud.support.v2beta.IListSupportEventSubscriptionsRequest} message ListSupportEventSubscriptionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSupportEventSubscriptionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListSupportEventSubscriptionsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.support.v2beta.ListSupportEventSubscriptionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.support.v2beta.ListSupportEventSubscriptionsRequest} ListSupportEventSubscriptionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSupportEventSubscriptionsRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.support.v2beta.ListSupportEventSubscriptionsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.showDeleted = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListSupportEventSubscriptionsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.support.v2beta.ListSupportEventSubscriptionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.support.v2beta.ListSupportEventSubscriptionsRequest} ListSupportEventSubscriptionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSupportEventSubscriptionsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListSupportEventSubscriptionsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.support.v2beta.ListSupportEventSubscriptionsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListSupportEventSubscriptionsRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.showDeleted != null && message.hasOwnProperty("showDeleted"))
+                                if (typeof message.showDeleted !== "boolean")
+                                    return "showDeleted: boolean expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListSupportEventSubscriptionsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.support.v2beta.ListSupportEventSubscriptionsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.support.v2beta.ListSupportEventSubscriptionsRequest} ListSupportEventSubscriptionsRequest
+                         */
+                        ListSupportEventSubscriptionsRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.support.v2beta.ListSupportEventSubscriptionsRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.support.v2beta.ListSupportEventSubscriptionsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.showDeleted != null)
+                                message.showDeleted = Boolean(object.showDeleted);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListSupportEventSubscriptionsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.support.v2beta.ListSupportEventSubscriptionsRequest
+                         * @static
+                         * @param {google.cloud.support.v2beta.ListSupportEventSubscriptionsRequest} message ListSupportEventSubscriptionsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListSupportEventSubscriptionsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.filter = "";
+                                object.showDeleted = false;
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.showDeleted != null && message.hasOwnProperty("showDeleted"))
+                                object.showDeleted = message.showDeleted;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListSupportEventSubscriptionsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.support.v2beta.ListSupportEventSubscriptionsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListSupportEventSubscriptionsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListSupportEventSubscriptionsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.support.v2beta.ListSupportEventSubscriptionsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListSupportEventSubscriptionsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.support.v2beta.ListSupportEventSubscriptionsRequest";
+                        };
+    
+                        return ListSupportEventSubscriptionsRequest;
+                    })();
+    
+                    v2beta.ListSupportEventSubscriptionsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListSupportEventSubscriptionsResponse.
+                         * @memberof google.cloud.support.v2beta
+                         * @interface IListSupportEventSubscriptionsResponse
+                         * @property {Array.<google.cloud.support.v2beta.ISupportEventSubscription>|null} [supportEventSubscriptions] ListSupportEventSubscriptionsResponse supportEventSubscriptions
+                         * @property {string|null} [nextPageToken] ListSupportEventSubscriptionsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListSupportEventSubscriptionsResponse.
+                         * @memberof google.cloud.support.v2beta
+                         * @classdesc Represents a ListSupportEventSubscriptionsResponse.
+                         * @implements IListSupportEventSubscriptionsResponse
+                         * @constructor
+                         * @param {google.cloud.support.v2beta.IListSupportEventSubscriptionsResponse=} [properties] Properties to set
+                         */
+                        function ListSupportEventSubscriptionsResponse(properties) {
+                            this.supportEventSubscriptions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListSupportEventSubscriptionsResponse supportEventSubscriptions.
+                         * @member {Array.<google.cloud.support.v2beta.ISupportEventSubscription>} supportEventSubscriptions
+                         * @memberof google.cloud.support.v2beta.ListSupportEventSubscriptionsResponse
+                         * @instance
+                         */
+                        ListSupportEventSubscriptionsResponse.prototype.supportEventSubscriptions = $util.emptyArray;
+    
+                        /**
+                         * ListSupportEventSubscriptionsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.support.v2beta.ListSupportEventSubscriptionsResponse
+                         * @instance
+                         */
+                        ListSupportEventSubscriptionsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListSupportEventSubscriptionsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.support.v2beta.ListSupportEventSubscriptionsResponse
+                         * @static
+                         * @param {google.cloud.support.v2beta.IListSupportEventSubscriptionsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.support.v2beta.ListSupportEventSubscriptionsResponse} ListSupportEventSubscriptionsResponse instance
+                         */
+                        ListSupportEventSubscriptionsResponse.create = function create(properties) {
+                            return new ListSupportEventSubscriptionsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListSupportEventSubscriptionsResponse message. Does not implicitly {@link google.cloud.support.v2beta.ListSupportEventSubscriptionsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.support.v2beta.ListSupportEventSubscriptionsResponse
+                         * @static
+                         * @param {google.cloud.support.v2beta.IListSupportEventSubscriptionsResponse} message ListSupportEventSubscriptionsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSupportEventSubscriptionsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.supportEventSubscriptions != null && message.supportEventSubscriptions.length)
+                                for (var i = 0; i < message.supportEventSubscriptions.length; ++i)
+                                    $root.google.cloud.support.v2beta.SupportEventSubscription.encode(message.supportEventSubscriptions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListSupportEventSubscriptionsResponse message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.ListSupportEventSubscriptionsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.support.v2beta.ListSupportEventSubscriptionsResponse
+                         * @static
+                         * @param {google.cloud.support.v2beta.IListSupportEventSubscriptionsResponse} message ListSupportEventSubscriptionsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSupportEventSubscriptionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListSupportEventSubscriptionsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.support.v2beta.ListSupportEventSubscriptionsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.support.v2beta.ListSupportEventSubscriptionsResponse} ListSupportEventSubscriptionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSupportEventSubscriptionsResponse.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.support.v2beta.ListSupportEventSubscriptionsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.supportEventSubscriptions && message.supportEventSubscriptions.length))
+                                            message.supportEventSubscriptions = [];
+                                        message.supportEventSubscriptions.push($root.google.cloud.support.v2beta.SupportEventSubscription.decode(reader, reader.uint32(), undefined, long + 1));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListSupportEventSubscriptionsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.support.v2beta.ListSupportEventSubscriptionsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.support.v2beta.ListSupportEventSubscriptionsResponse} ListSupportEventSubscriptionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSupportEventSubscriptionsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListSupportEventSubscriptionsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.support.v2beta.ListSupportEventSubscriptionsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListSupportEventSubscriptionsResponse.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.supportEventSubscriptions != null && message.hasOwnProperty("supportEventSubscriptions")) {
+                                if (!Array.isArray(message.supportEventSubscriptions))
+                                    return "supportEventSubscriptions: array expected";
+                                for (var i = 0; i < message.supportEventSubscriptions.length; ++i) {
+                                    var error = $root.google.cloud.support.v2beta.SupportEventSubscription.verify(message.supportEventSubscriptions[i], long + 1);
+                                    if (error)
+                                        return "supportEventSubscriptions." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListSupportEventSubscriptionsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.support.v2beta.ListSupportEventSubscriptionsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.support.v2beta.ListSupportEventSubscriptionsResponse} ListSupportEventSubscriptionsResponse
+                         */
+                        ListSupportEventSubscriptionsResponse.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.support.v2beta.ListSupportEventSubscriptionsResponse)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.support.v2beta.ListSupportEventSubscriptionsResponse();
+                            if (object.supportEventSubscriptions) {
+                                if (!Array.isArray(object.supportEventSubscriptions))
+                                    throw TypeError(".google.cloud.support.v2beta.ListSupportEventSubscriptionsResponse.supportEventSubscriptions: array expected");
+                                message.supportEventSubscriptions = [];
+                                for (var i = 0; i < object.supportEventSubscriptions.length; ++i) {
+                                    if (typeof object.supportEventSubscriptions[i] !== "object")
+                                        throw TypeError(".google.cloud.support.v2beta.ListSupportEventSubscriptionsResponse.supportEventSubscriptions: object expected");
+                                    message.supportEventSubscriptions[i] = $root.google.cloud.support.v2beta.SupportEventSubscription.fromObject(object.supportEventSubscriptions[i], long + 1);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListSupportEventSubscriptionsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.support.v2beta.ListSupportEventSubscriptionsResponse
+                         * @static
+                         * @param {google.cloud.support.v2beta.ListSupportEventSubscriptionsResponse} message ListSupportEventSubscriptionsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListSupportEventSubscriptionsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.supportEventSubscriptions = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.supportEventSubscriptions && message.supportEventSubscriptions.length) {
+                                object.supportEventSubscriptions = [];
+                                for (var j = 0; j < message.supportEventSubscriptions.length; ++j)
+                                    object.supportEventSubscriptions[j] = $root.google.cloud.support.v2beta.SupportEventSubscription.toObject(message.supportEventSubscriptions[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListSupportEventSubscriptionsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.support.v2beta.ListSupportEventSubscriptionsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListSupportEventSubscriptionsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListSupportEventSubscriptionsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.support.v2beta.ListSupportEventSubscriptionsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListSupportEventSubscriptionsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.support.v2beta.ListSupportEventSubscriptionsResponse";
+                        };
+    
+                        return ListSupportEventSubscriptionsResponse;
+                    })();
+    
+                    v2beta.UpdateSupportEventSubscriptionRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateSupportEventSubscriptionRequest.
+                         * @memberof google.cloud.support.v2beta
+                         * @interface IUpdateSupportEventSubscriptionRequest
+                         * @property {google.cloud.support.v2beta.ISupportEventSubscription|null} [supportEventSubscription] UpdateSupportEventSubscriptionRequest supportEventSubscription
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateSupportEventSubscriptionRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateSupportEventSubscriptionRequest.
+                         * @memberof google.cloud.support.v2beta
+                         * @classdesc Represents an UpdateSupportEventSubscriptionRequest.
+                         * @implements IUpdateSupportEventSubscriptionRequest
+                         * @constructor
+                         * @param {google.cloud.support.v2beta.IUpdateSupportEventSubscriptionRequest=} [properties] Properties to set
+                         */
+                        function UpdateSupportEventSubscriptionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateSupportEventSubscriptionRequest supportEventSubscription.
+                         * @member {google.cloud.support.v2beta.ISupportEventSubscription|null|undefined} supportEventSubscription
+                         * @memberof google.cloud.support.v2beta.UpdateSupportEventSubscriptionRequest
+                         * @instance
+                         */
+                        UpdateSupportEventSubscriptionRequest.prototype.supportEventSubscription = null;
+    
+                        /**
+                         * UpdateSupportEventSubscriptionRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.support.v2beta.UpdateSupportEventSubscriptionRequest
+                         * @instance
+                         */
+                        UpdateSupportEventSubscriptionRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateSupportEventSubscriptionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.support.v2beta.UpdateSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2beta.IUpdateSupportEventSubscriptionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.support.v2beta.UpdateSupportEventSubscriptionRequest} UpdateSupportEventSubscriptionRequest instance
+                         */
+                        UpdateSupportEventSubscriptionRequest.create = function create(properties) {
+                            return new UpdateSupportEventSubscriptionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateSupportEventSubscriptionRequest message. Does not implicitly {@link google.cloud.support.v2beta.UpdateSupportEventSubscriptionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.support.v2beta.UpdateSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2beta.IUpdateSupportEventSubscriptionRequest} message UpdateSupportEventSubscriptionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateSupportEventSubscriptionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.supportEventSubscription != null && Object.hasOwnProperty.call(message, "supportEventSubscription"))
+                                $root.google.cloud.support.v2beta.SupportEventSubscription.encode(message.supportEventSubscription, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateSupportEventSubscriptionRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.UpdateSupportEventSubscriptionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.support.v2beta.UpdateSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2beta.IUpdateSupportEventSubscriptionRequest} message UpdateSupportEventSubscriptionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateSupportEventSubscriptionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateSupportEventSubscriptionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.support.v2beta.UpdateSupportEventSubscriptionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.support.v2beta.UpdateSupportEventSubscriptionRequest} UpdateSupportEventSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateSupportEventSubscriptionRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.support.v2beta.UpdateSupportEventSubscriptionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.supportEventSubscription = $root.google.cloud.support.v2beta.SupportEventSubscription.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateSupportEventSubscriptionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.support.v2beta.UpdateSupportEventSubscriptionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.support.v2beta.UpdateSupportEventSubscriptionRequest} UpdateSupportEventSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateSupportEventSubscriptionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateSupportEventSubscriptionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.support.v2beta.UpdateSupportEventSubscriptionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateSupportEventSubscriptionRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.supportEventSubscription != null && message.hasOwnProperty("supportEventSubscription")) {
+                                var error = $root.google.cloud.support.v2beta.SupportEventSubscription.verify(message.supportEventSubscription, long + 1);
+                                if (error)
+                                    return "supportEventSubscription." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask, long + 1);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateSupportEventSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.support.v2beta.UpdateSupportEventSubscriptionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.support.v2beta.UpdateSupportEventSubscriptionRequest} UpdateSupportEventSubscriptionRequest
+                         */
+                        UpdateSupportEventSubscriptionRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.support.v2beta.UpdateSupportEventSubscriptionRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.support.v2beta.UpdateSupportEventSubscriptionRequest();
+                            if (object.supportEventSubscription != null) {
+                                if (typeof object.supportEventSubscription !== "object")
+                                    throw TypeError(".google.cloud.support.v2beta.UpdateSupportEventSubscriptionRequest.supportEventSubscription: object expected");
+                                message.supportEventSubscription = $root.google.cloud.support.v2beta.SupportEventSubscription.fromObject(object.supportEventSubscription, long + 1);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.support.v2beta.UpdateSupportEventSubscriptionRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask, long + 1);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateSupportEventSubscriptionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.support.v2beta.UpdateSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2beta.UpdateSupportEventSubscriptionRequest} message UpdateSupportEventSubscriptionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateSupportEventSubscriptionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.supportEventSubscription = null;
+                                object.updateMask = null;
+                            }
+                            if (message.supportEventSubscription != null && message.hasOwnProperty("supportEventSubscription"))
+                                object.supportEventSubscription = $root.google.cloud.support.v2beta.SupportEventSubscription.toObject(message.supportEventSubscription, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateSupportEventSubscriptionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.support.v2beta.UpdateSupportEventSubscriptionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateSupportEventSubscriptionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateSupportEventSubscriptionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.support.v2beta.UpdateSupportEventSubscriptionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateSupportEventSubscriptionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.support.v2beta.UpdateSupportEventSubscriptionRequest";
+                        };
+    
+                        return UpdateSupportEventSubscriptionRequest;
+                    })();
+    
+                    v2beta.DeleteSupportEventSubscriptionRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteSupportEventSubscriptionRequest.
+                         * @memberof google.cloud.support.v2beta
+                         * @interface IDeleteSupportEventSubscriptionRequest
+                         * @property {string|null} [name] DeleteSupportEventSubscriptionRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteSupportEventSubscriptionRequest.
+                         * @memberof google.cloud.support.v2beta
+                         * @classdesc Represents a DeleteSupportEventSubscriptionRequest.
+                         * @implements IDeleteSupportEventSubscriptionRequest
+                         * @constructor
+                         * @param {google.cloud.support.v2beta.IDeleteSupportEventSubscriptionRequest=} [properties] Properties to set
+                         */
+                        function DeleteSupportEventSubscriptionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteSupportEventSubscriptionRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.support.v2beta.DeleteSupportEventSubscriptionRequest
+                         * @instance
+                         */
+                        DeleteSupportEventSubscriptionRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteSupportEventSubscriptionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.support.v2beta.DeleteSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2beta.IDeleteSupportEventSubscriptionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.support.v2beta.DeleteSupportEventSubscriptionRequest} DeleteSupportEventSubscriptionRequest instance
+                         */
+                        DeleteSupportEventSubscriptionRequest.create = function create(properties) {
+                            return new DeleteSupportEventSubscriptionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteSupportEventSubscriptionRequest message. Does not implicitly {@link google.cloud.support.v2beta.DeleteSupportEventSubscriptionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.support.v2beta.DeleteSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2beta.IDeleteSupportEventSubscriptionRequest} message DeleteSupportEventSubscriptionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteSupportEventSubscriptionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteSupportEventSubscriptionRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.DeleteSupportEventSubscriptionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.support.v2beta.DeleteSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2beta.IDeleteSupportEventSubscriptionRequest} message DeleteSupportEventSubscriptionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteSupportEventSubscriptionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteSupportEventSubscriptionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.support.v2beta.DeleteSupportEventSubscriptionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.support.v2beta.DeleteSupportEventSubscriptionRequest} DeleteSupportEventSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteSupportEventSubscriptionRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.support.v2beta.DeleteSupportEventSubscriptionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteSupportEventSubscriptionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.support.v2beta.DeleteSupportEventSubscriptionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.support.v2beta.DeleteSupportEventSubscriptionRequest} DeleteSupportEventSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteSupportEventSubscriptionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteSupportEventSubscriptionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.support.v2beta.DeleteSupportEventSubscriptionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteSupportEventSubscriptionRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteSupportEventSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.support.v2beta.DeleteSupportEventSubscriptionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.support.v2beta.DeleteSupportEventSubscriptionRequest} DeleteSupportEventSubscriptionRequest
+                         */
+                        DeleteSupportEventSubscriptionRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.support.v2beta.DeleteSupportEventSubscriptionRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.support.v2beta.DeleteSupportEventSubscriptionRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteSupportEventSubscriptionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.support.v2beta.DeleteSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2beta.DeleteSupportEventSubscriptionRequest} message DeleteSupportEventSubscriptionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteSupportEventSubscriptionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteSupportEventSubscriptionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.support.v2beta.DeleteSupportEventSubscriptionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteSupportEventSubscriptionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteSupportEventSubscriptionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.support.v2beta.DeleteSupportEventSubscriptionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteSupportEventSubscriptionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.support.v2beta.DeleteSupportEventSubscriptionRequest";
+                        };
+    
+                        return DeleteSupportEventSubscriptionRequest;
+                    })();
+    
+                    v2beta.UndeleteSupportEventSubscriptionRequest = (function() {
+    
+                        /**
+                         * Properties of an UndeleteSupportEventSubscriptionRequest.
+                         * @memberof google.cloud.support.v2beta
+                         * @interface IUndeleteSupportEventSubscriptionRequest
+                         * @property {string|null} [name] UndeleteSupportEventSubscriptionRequest name
+                         */
+    
+                        /**
+                         * Constructs a new UndeleteSupportEventSubscriptionRequest.
+                         * @memberof google.cloud.support.v2beta
+                         * @classdesc Represents an UndeleteSupportEventSubscriptionRequest.
+                         * @implements IUndeleteSupportEventSubscriptionRequest
+                         * @constructor
+                         * @param {google.cloud.support.v2beta.IUndeleteSupportEventSubscriptionRequest=} [properties] Properties to set
+                         */
+                        function UndeleteSupportEventSubscriptionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UndeleteSupportEventSubscriptionRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.support.v2beta.UndeleteSupportEventSubscriptionRequest
+                         * @instance
+                         */
+                        UndeleteSupportEventSubscriptionRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new UndeleteSupportEventSubscriptionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.support.v2beta.UndeleteSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2beta.IUndeleteSupportEventSubscriptionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.support.v2beta.UndeleteSupportEventSubscriptionRequest} UndeleteSupportEventSubscriptionRequest instance
+                         */
+                        UndeleteSupportEventSubscriptionRequest.create = function create(properties) {
+                            return new UndeleteSupportEventSubscriptionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UndeleteSupportEventSubscriptionRequest message. Does not implicitly {@link google.cloud.support.v2beta.UndeleteSupportEventSubscriptionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.support.v2beta.UndeleteSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2beta.IUndeleteSupportEventSubscriptionRequest} message UndeleteSupportEventSubscriptionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UndeleteSupportEventSubscriptionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UndeleteSupportEventSubscriptionRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.UndeleteSupportEventSubscriptionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.support.v2beta.UndeleteSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2beta.IUndeleteSupportEventSubscriptionRequest} message UndeleteSupportEventSubscriptionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UndeleteSupportEventSubscriptionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UndeleteSupportEventSubscriptionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.support.v2beta.UndeleteSupportEventSubscriptionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.support.v2beta.UndeleteSupportEventSubscriptionRequest} UndeleteSupportEventSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UndeleteSupportEventSubscriptionRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.support.v2beta.UndeleteSupportEventSubscriptionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UndeleteSupportEventSubscriptionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.support.v2beta.UndeleteSupportEventSubscriptionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.support.v2beta.UndeleteSupportEventSubscriptionRequest} UndeleteSupportEventSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UndeleteSupportEventSubscriptionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UndeleteSupportEventSubscriptionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.support.v2beta.UndeleteSupportEventSubscriptionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UndeleteSupportEventSubscriptionRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UndeleteSupportEventSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.support.v2beta.UndeleteSupportEventSubscriptionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.support.v2beta.UndeleteSupportEventSubscriptionRequest} UndeleteSupportEventSubscriptionRequest
+                         */
+                        UndeleteSupportEventSubscriptionRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.support.v2beta.UndeleteSupportEventSubscriptionRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.support.v2beta.UndeleteSupportEventSubscriptionRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UndeleteSupportEventSubscriptionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.support.v2beta.UndeleteSupportEventSubscriptionRequest
+                         * @static
+                         * @param {google.cloud.support.v2beta.UndeleteSupportEventSubscriptionRequest} message UndeleteSupportEventSubscriptionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UndeleteSupportEventSubscriptionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UndeleteSupportEventSubscriptionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.support.v2beta.UndeleteSupportEventSubscriptionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UndeleteSupportEventSubscriptionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UndeleteSupportEventSubscriptionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.support.v2beta.UndeleteSupportEventSubscriptionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UndeleteSupportEventSubscriptionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.support.v2beta.UndeleteSupportEventSubscriptionRequest";
+                        };
+    
+                        return UndeleteSupportEventSubscriptionRequest;
                     })();
     
                     return v2beta;
