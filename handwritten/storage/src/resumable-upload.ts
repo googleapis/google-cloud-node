@@ -818,7 +818,11 @@ export class Upload extends Writable {
     if (hasValidUserToken) {
       this.currentInvocationId.uri = userTokenValue as string;
     } else if (userTokenKey && this.customRequestOptions?.headers) {
-      delete this.customRequestOptions.headers[userTokenKey];
+      this.customRequestOptions = {
+        ...this.customRequestOptions,
+        headers: { ...this.customRequestOptions.headers },
+      };
+      delete this.customRequestOptions.headers![userTokenKey];
     }
 
     let googAPIClient = `${getRuntimeTrackingString()} gccl/${
@@ -1022,7 +1026,11 @@ export class Upload extends Writable {
     if (hasValidUserToken) {
       this.currentInvocationId.chunk = userTokenValue as string;
     } else if (userTokenKey && this.customRequestOptions?.headers) {
-      delete this.customRequestOptions.headers[userTokenKey];
+      this.customRequestOptions = {
+        ...this.customRequestOptions,
+        headers: { ...this.customRequestOptions.headers },
+      };
+      delete this.customRequestOptions.headers![userTokenKey];
     }
 
     let googAPIClient = `${getRuntimeTrackingString()} gccl/${
@@ -1251,7 +1259,11 @@ export class Upload extends Writable {
     if (hasValidUserToken) {
       this.currentInvocationId.checkUploadStatus = userTokenValue as string;
     } else if (userTokenKey && this.customRequestOptions?.headers) {
-      delete this.customRequestOptions.headers[userTokenKey];
+      this.customRequestOptions = {
+        ...this.customRequestOptions,
+        headers: { ...this.customRequestOptions.headers },
+      };
+      delete this.customRequestOptions.headers![userTokenKey];
     }
 
     let googAPIClient = `${getRuntimeTrackingString()} gccl/${
