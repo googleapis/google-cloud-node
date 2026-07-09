@@ -109,8 +109,8 @@ describe('Avro Samples System Tests', () => {
 
     const topicName = resources.generateName(`topic-rev`);
     const subName = resources.generateName(`sub-rev`);
-    const [topic] = await pubsub.topic(topicName).get();
-    const [subscription] = await pubsub.subscription(subName).get();
+    const [topic] = await pubsub.createTopic(topicName);
+    const [subscription] = await pubsub.createSubscription(topicName, subName);
 
     const type = avro.parse(definition);
     const province = {
