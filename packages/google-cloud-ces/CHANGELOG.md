@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/ces-v0.5.0...ces-v0.6.0) (2026-07-09)
+
+
+### Features
+
+* Update googleapis source and regenerate client libraries ([#8821](https://github.com/googleapis/google-cloud-node/issues/8821)) ([2a3a77c](https://github.com/googleapis/google-cloud-node/commit/2a3a77ceaa4ff2c7e1a2ec0338a770fa60b738a9))
+
 ## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/ces-v0.4.1...ces-v0.5.0) (2026-06-25)
 
 
