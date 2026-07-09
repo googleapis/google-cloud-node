@@ -23,16 +23,6 @@ describe('Protobuf Samples System Tests', () => {
   const pubsub = new PubSub();
   const resources = new TestResources('ps-sys-proto');
 
-  let topicName: string;
-  let subName: string;
-  let schemaId: string;
-
-  before(async () => {
-    topicName = resources.generateName('topic');
-    subName = resources.generateName('sub');
-    schemaId = resources.generateName('schema');
-  });
-
   after(async () => {
     const [subscriptions] = await pubsub.getSubscriptions();
     await Promise.all(
@@ -54,9 +44,12 @@ describe('Protobuf Samples System Tests', () => {
   });
 
   it('should publish and listen for protobuf messages', async () => {
+    const topicName = resources.generateName('topic');
+    const subName = resources.generateName('sub');
+    const schemaId = resources.generateName('schema');
     const definition = fs.readFileSync('system-test/fixtures/provinces.proto').toString();
-
     await pubsub.createSchema(schemaId, 'PROTOCOL_BUFFER', definition);
+
     const [topic] = await pubsub.createTopic({
       name: topicName,
       schemaSettings: {
@@ -67,34 +60,41 @@ describe('Protobuf Samples System Tests', () => {
 
     const [subscription] = await topic.createSubscription(subName);
 
+    // Make an encoder using the protobufjs library.
+    //
+    // Since we're providing the test message for a specific schema here, we'll
+    // also code in the path to a sample proto definition.
     const root = await protobuf.load('system-test/fixtures/provinces.proto');
     const Province = root.lookupType('utilities.Province');
-    const province = {
+    const province: ProvinceObject = {
       name: 'Ontario',
-      post_abbr: 'ON',
+      postAbbr: 'ON',
     };
 
-    const messageObj = Province.create(province);
-    (messageObj as any).post_abbr = 'ON';
-    const dataBuffer = Buffer.from(Province.encode(messageObj).finish());
+    const message = Province.create(province);
+    const dataBuffer = Buffer.from(Province.encode(message).finish());
 
     const messageId = await topic.publishMessage({data: dataBuffer});
     assert.ok(messageId);
 
-    const message = await new Promise<Message>((resolve, reject) => {
+    let received!: Message;
+    await new Promise<Message>((resolve, reject) => {
       const timeout = setTimeout(() => reject(new Error('Timeout waiting for Proto message')), 15000);
       subscription.once('message', (m: Message) => {
-        clearTimeout(timeout);
         m.ack();
+        received = m;
+        clearTimeout(timeout);
         resolve(m);
       });
     });
 
-    const schemaMetadata = Schema.metadataFromMessage(message.attributes);
+    const schemaMetadata = Schema.metadataFromMessage(received.attributes);
     assert.strictEqual(schemaMetadata.encoding, 'BINARY');
 
-    const result = Province.decode(message.data) as any;
-    assert.strictEqual(result.name, 'Ontario');
-    assert.strictEqual(result.postAbbr || result.post_abbr, 'ON');
+    for (let i = 0; i < received.length; i++) {
+      const result = Province.decode(received.data) as any;
+      assert.strictEqual(result.name, 'Ontario');
+      assert.strictEqual(result.postAbbr || result.post_abbr, 'ON');
+    }
   });
 });

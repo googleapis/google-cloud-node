@@ -23,27 +23,13 @@ describe('Avro Samples System Tests', () => {
   const pubsub = new PubSub();
   const resources = new TestResources('ps-sys-avro');
 
-  let topicName: string;
-  let subName: string;
   let schemaId: string;
 
   before(async () => {
-    topicName = resources.generateName('topic');
-    subName = resources.generateName('sub');
     schemaId = resources.generateName('schema');
 
     const definition = fs.readFileSync('system-test/fixtures/provinces.avsc').toString();
     await pubsub.createSchema(schemaId, 'AVRO', definition);
-    await pubsub.createTopic({
-      name: topicName,
-      schemaSettings: {
-        schema: await pubsub.schema(schemaId).getName(),
-        encoding: 'BINARY',
-      },
-    });
-
-    const [topic] = await pubsub.topic(topicName).get();
-    await topic.createSubscription(subName);
   });
 
   after(async () => {
@@ -66,9 +52,18 @@ describe('Avro Samples System Tests', () => {
     );
   });
 
-  it('should publish and listen for avro records', async () => {
+  async function publishAndListen(encoding: 'BINARY' | 'JSON') {
+    const topicName = resources.generateName(`topic-${encoding}`);
+    const subName = resources.generateName(`sub-${encoding}`);
+
     const definition = fs.readFileSync('system-test/fixtures/provinces.avsc').toString();
-    const [topic] = await pubsub.topic(topicName).get();
+    const [topic] = await pubsub.createTopic({
+      name: topicName,
+      schemaSettings: {
+        schema: await pubsub.schema(schemaId).getName(),
+        encoding,
+      }
+    });
     const [subscription] = await pubsub.subscription(subName).get();
 
     const type = avro.parse(definition);
@@ -92,11 +87,19 @@ describe('Avro Samples System Tests', () => {
     });
 
     const schemaMetadata = Schema.metadataFromMessage(message.attributes);
-    assert.strictEqual(schemaMetadata.encoding, 'BINARY');
+    assert.strictEqual(schemaMetadata.encoding, encoding);
 
     const result = type.fromBuffer(message.data) as any;
     assert.strictEqual(result.name, 'Ontario');
     assert.strictEqual(result.post_abbr, 'ON');
+  }
+
+  it('should publish and listen for avro records (binary encoding)', async () => {
+    publishAndListen('BINARY');
+  });
+
+  it('should publish and listen for avro records (json encoding)', async () => {
+    publishAndListen('JSON');
   });
 
   it('should listen for avro records with revisions', async () => {
@@ -104,6 +107,8 @@ describe('Avro Samples System Tests', () => {
 
     const schemaClient = await pubsub.getSchemaClient();
 
+    const topicName = resources.generateName(`topic-rev`);
+    const subName = resources.generateName(`sub-rev`);
     const [topic] = await pubsub.topic(topicName).get();
     const [subscription] = await pubsub.subscription(subName).get();
 
