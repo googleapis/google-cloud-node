@@ -145,6 +145,7 @@
     "packages/google-cloud-privatecatalog": {},
     "packages/google-cloud-privilegedaccessmanager": {},
     "packages/google-cloud-productregistry": {},
+    "packages/google-cloud-pubsub-api": {"component": "google-cloud-pubsub-api"},
     "packages/google-cloud-rapidmigrationassessment": {},
     "packages/google-cloud-recaptchaenterprise": {},
     "packages/google-cloud-recommender": {},

@@ -1351,6 +1351,12 @@ libraries:
     apis:
       - path: google/cloud/productregistry/v1
     copyright_year: "2026"
+  - name: google-cloud-pubsub-api
+    version: 0.1.0
+    apis:
+      - path: google/pubsub/v1
+    nodejs:
+      package_name: '@google-cloud/pubsub-api'
   - name: google-cloud-rapidmigrationassessment
     version: 2.2.2
     apis:
