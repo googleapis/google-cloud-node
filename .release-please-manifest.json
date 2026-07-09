@@ -223,6 +223,7 @@
   "packages/google-cloud-workstations": "2.3.0",
   "packages/google-container": "6.10.0",
   "packages/google-dataflow": "4.1.2",
+  "packages/google-developer-knowledge": "0.0.0",
   "packages/google-devicesandservices-health": "0.3.0",
   "packages/google-devtools-artifactregistry": "4.7.1",
   "packages/google-devtools-cloudbuild": "5.6.0",
