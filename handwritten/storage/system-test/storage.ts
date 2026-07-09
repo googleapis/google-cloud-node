@@ -3441,16 +3441,8 @@ describe('storage', function () {
       // reaching the right endpoint with the API request.
       const channel = storage.channel('id', 'resource-id');
       await assert.rejects(channel.stop(), (err: GaxiosError) => {
-        // Accept 403 or 404 depending on the environment permissions
-        const validCodes = [403, 404];
-        assert.ok(validCodes.includes(Number(err.code)));
-
-        // If it's a 403, the message won't be "Channel not found",
-        // so you might need to skip the message assertion for 403s.
-        if (err.code === 404) {
-          assert.strictEqual(err!.message.indexOf("Channel 'id' not found"), 0);
-        }
-        return true;
+        assert.strictEqual((err as GaxiosError).code, 404);
+        assert.strictEqual(err!.message.indexOf("Channel 'id' not found"), 0);
       });
     });
   });
