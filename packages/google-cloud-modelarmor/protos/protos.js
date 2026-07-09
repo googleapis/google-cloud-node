@@ -590,6 +590,22 @@
                         return values;
                     })();
     
+                    /**
+                     * Modality enum.
+                     * @name google.cloud.modelarmor.v1.Modality
+                     * @enum {number}
+                     * @property {number} MODALITY_UNSPECIFIED=0 MODALITY_UNSPECIFIED value
+                     * @property {number} MODALITY_TEXT=1 MODALITY_TEXT value
+                     * @property {number} MODALITY_IMAGE=2 MODALITY_IMAGE value
+                     */
+                    v1.Modality = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "MODALITY_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "MODALITY_TEXT"] = 1;
+                        values[valuesById[2] = "MODALITY_IMAGE"] = 2;
+                        return values;
+                    })();
+    
                     v1.Template = (function() {
     
                         /**
@@ -999,6 +1015,7 @@
                              * @property {boolean|null} [logSanitizeOperations] TemplateMetadata logSanitizeOperations
                              * @property {google.cloud.modelarmor.v1.Template.TemplateMetadata.EnforcementType|null} [enforcementType] TemplateMetadata enforcementType
                              * @property {google.cloud.modelarmor.v1.Template.TemplateMetadata.IMultiLanguageDetection|null} [multiLanguageDetection] TemplateMetadata multiLanguageDetection
+                             * @property {Array.<google.cloud.modelarmor.v1.Modality>|null} [modalities] TemplateMetadata modalities
                              */
     
                             /**
@@ -1010,6 +1027,7 @@
                              * @param {google.cloud.modelarmor.v1.Template.ITemplateMetadata=} [properties] Properties to set
                              */
                             function TemplateMetadata(properties) {
+                                this.modalities = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null && keys[i] !== "__proto__")
@@ -1089,6 +1107,14 @@
                             TemplateMetadata.prototype.multiLanguageDetection = null;
     
                             /**
+                             * TemplateMetadata modalities.
+                             * @member {Array.<google.cloud.modelarmor.v1.Modality>} modalities
+                             * @memberof google.cloud.modelarmor.v1.Template.TemplateMetadata
+                             * @instance
+                             */
+                            TemplateMetadata.prototype.modalities = $util.emptyArray;
+    
+                            /**
                              * Creates a new TemplateMetadata instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.modelarmor.v1.Template.TemplateMetadata
@@ -1130,6 +1156,12 @@
                                     writer.uint32(/* id 8, wireType 0 =*/64).int32(message.enforcementType);
                                 if (message.multiLanguageDetection != null && Object.hasOwnProperty.call(message, "multiLanguageDetection"))
                                     $root.google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection.encode(message.multiLanguageDetection, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                                if (message.modalities != null && message.modalities.length) {
+                                    writer.uint32(/* id 11, wireType 2 =*/90).fork();
+                                    for (var i = 0; i < message.modalities.length; ++i)
+                                        writer.int32(message.modalities[i]);
+                                    writer.ldelim();
+                                }
                                 return writer;
                             };
     
@@ -1206,6 +1238,17 @@
                                             message.multiLanguageDetection = $root.google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
+                                    case 11: {
+                                            if (!(message.modalities && message.modalities.length))
+                                                message.modalities = [];
+                                            if ((tag & 7) === 2) {
+                                                var end2 = reader.uint32() + reader.pos;
+                                                while (reader.pos < end2)
+                                                    message.modalities.push(reader.int32());
+                                            } else
+                                                message.modalities.push(reader.int32());
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7, long);
                                         break;
@@ -1280,6 +1323,19 @@
                                     if (error)
                                         return "multiLanguageDetection." + error;
                                 }
+                                if (message.modalities != null && message.hasOwnProperty("modalities")) {
+                                    if (!Array.isArray(message.modalities))
+                                        return "modalities: array expected";
+                                    for (var i = 0; i < message.modalities.length; ++i)
+                                        switch (message.modalities[i]) {
+                                        default:
+                                            return "modalities: enum value[] expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                            break;
+                                        }
+                                }
                                 return null;
                             };
     
@@ -1338,6 +1394,31 @@
                                         throw TypeError(".google.cloud.modelarmor.v1.Template.TemplateMetadata.multiLanguageDetection: object expected");
                                     message.multiLanguageDetection = $root.google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection.fromObject(object.multiLanguageDetection, long + 1);
                                 }
+                                if (object.modalities) {
+                                    if (!Array.isArray(object.modalities))
+                                        throw TypeError(".google.cloud.modelarmor.v1.Template.TemplateMetadata.modalities: array expected");
+                                    message.modalities = [];
+                                    for (var i = 0; i < object.modalities.length; ++i)
+                                        switch (object.modalities[i]) {
+                                        default:
+                                            if (typeof object.modalities[i] === "number") {
+                                                message.modalities[i] = object.modalities[i];
+                                                break;
+                                            }
+                                        case "MODALITY_UNSPECIFIED":
+                                        case 0:
+                                            message.modalities[i] = 0;
+                                            break;
+                                        case "MODALITY_TEXT":
+                                        case 1:
+                                            message.modalities[i] = 1;
+                                            break;
+                                        case "MODALITY_IMAGE":
+                                        case 2:
+                                            message.modalities[i] = 2;
+                                            break;
+                                        }
+                                }
                                 return message;
                             };
     
@@ -1354,6 +1435,8 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.modalities = [];
                                 if (options.defaults) {
                                     object.ignorePartialInvocationFailures = false;
                                     object.customPromptSafetyErrorCode = 0;
@@ -1383,6 +1466,11 @@
                                     object.enforcementType = options.enums === String ? $root.google.cloud.modelarmor.v1.Template.TemplateMetadata.EnforcementType[message.enforcementType] === undefined ? message.enforcementType : $root.google.cloud.modelarmor.v1.Template.TemplateMetadata.EnforcementType[message.enforcementType] : message.enforcementType;
                                 if (message.multiLanguageDetection != null && message.hasOwnProperty("multiLanguageDetection"))
                                     object.multiLanguageDetection = $root.google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection.toObject(message.multiLanguageDetection, options);
+                                if (message.modalities && message.modalities.length) {
+                                    object.modalities = [];
+                                    for (var j = 0; j < message.modalities.length; ++j)
+                                        object.modalities[j] = options.enums === String ? $root.google.cloud.modelarmor.v1.Modality[message.modalities[j]] === undefined ? message.modalities[j] : $root.google.cloud.modelarmor.v1.Modality[message.modalities[j]] : message.modalities[j];
+                                }
                                 return object;
                             };
     
@@ -10420,6 +10508,7 @@
                          * @interface ISdpFilterResult
                          * @property {google.cloud.modelarmor.v1.ISdpInspectResult|null} [inspectResult] SdpFilterResult inspectResult
                          * @property {google.cloud.modelarmor.v1.ISdpDeidentifyResult|null} [deidentifyResult] SdpFilterResult deidentifyResult
+                         * @property {google.cloud.modelarmor.v1.ISdpRedactResult|null} [redactResult] SdpFilterResult redactResult
                          */
     
                         /**
@@ -10453,17 +10542,25 @@
                          */
                         SdpFilterResult.prototype.deidentifyResult = null;
     
+                        /**
+                         * SdpFilterResult redactResult.
+                         * @member {google.cloud.modelarmor.v1.ISdpRedactResult|null|undefined} redactResult
+                         * @memberof google.cloud.modelarmor.v1.SdpFilterResult
+                         * @instance
+                         */
+                        SdpFilterResult.prototype.redactResult = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * SdpFilterResult result.
-                         * @member {"inspectResult"|"deidentifyResult"|undefined} result
+                         * @member {"inspectResult"|"deidentifyResult"|"redactResult"|undefined} result
                          * @memberof google.cloud.modelarmor.v1.SdpFilterResult
                          * @instance
                          */
                         Object.defineProperty(SdpFilterResult.prototype, "result", {
-                            get: $util.oneOfGetter($oneOfFields = ["inspectResult", "deidentifyResult"]),
+                            get: $util.oneOfGetter($oneOfFields = ["inspectResult", "deidentifyResult", "redactResult"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -10495,6 +10592,8 @@
                                 $root.google.cloud.modelarmor.v1.SdpInspectResult.encode(message.inspectResult, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.deidentifyResult != null && Object.hasOwnProperty.call(message, "deidentifyResult"))
                                 $root.google.cloud.modelarmor.v1.SdpDeidentifyResult.encode(message.deidentifyResult, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.redactResult != null && Object.hasOwnProperty.call(message, "redactResult"))
+                                $root.google.cloud.modelarmor.v1.SdpRedactResult.encode(message.redactResult, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -10541,6 +10640,10 @@
                                     }
                                 case 2: {
                                         message.deidentifyResult = $root.google.cloud.modelarmor.v1.SdpDeidentifyResult.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 3: {
+                                        message.redactResult = $root.google.cloud.modelarmor.v1.SdpRedactResult.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 default:
@@ -10601,6 +10704,16 @@
                                         return "deidentifyResult." + error;
                                 }
                             }
+                            if (message.redactResult != null && message.hasOwnProperty("redactResult")) {
+                                if (properties.result === 1)
+                                    return "result: multiple values";
+                                properties.result = 1;
+                                {
+                                    var error = $root.google.cloud.modelarmor.v1.SdpRedactResult.verify(message.redactResult, long + 1);
+                                    if (error)
+                                        return "redactResult." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -10630,6 +10743,11 @@
                                     throw TypeError(".google.cloud.modelarmor.v1.SdpFilterResult.deidentifyResult: object expected");
                                 message.deidentifyResult = $root.google.cloud.modelarmor.v1.SdpDeidentifyResult.fromObject(object.deidentifyResult, long + 1);
                             }
+                            if (object.redactResult != null) {
+                                if (typeof object.redactResult !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1.SdpFilterResult.redactResult: object expected");
+                                message.redactResult = $root.google.cloud.modelarmor.v1.SdpRedactResult.fromObject(object.redactResult, long + 1);
+                            }
                             return message;
                         };
     
@@ -10655,6 +10773,11 @@
                                 object.deidentifyResult = $root.google.cloud.modelarmor.v1.SdpDeidentifyResult.toObject(message.deidentifyResult, options);
                                 if (options.oneofs)
                                     object.result = "deidentifyResult";
+                            }
+                            if (message.redactResult != null && message.hasOwnProperty("redactResult")) {
+                                object.redactResult = $root.google.cloud.modelarmor.v1.SdpRedactResult.toObject(message.redactResult, options);
+                                if (options.oneofs)
+                                    object.result = "redactResult";
                             }
                             return object;
                         };
@@ -10699,6 +10822,7 @@
                          * @property {google.cloud.modelarmor.v1.FilterMatchState|null} [matchState] SdpInspectResult matchState
                          * @property {Array.<google.cloud.modelarmor.v1.ISdpFinding>|null} [findings] SdpInspectResult findings
                          * @property {boolean|null} [findingsTruncated] SdpInspectResult findingsTruncated
+                         * @property {string|null} [extractedImageText] SdpInspectResult extractedImageText
                          */
     
                         /**
@@ -10759,6 +10883,14 @@
                         SdpInspectResult.prototype.findingsTruncated = false;
     
                         /**
+                         * SdpInspectResult extractedImageText.
+                         * @member {string} extractedImageText
+                         * @memberof google.cloud.modelarmor.v1.SdpInspectResult
+                         * @instance
+                         */
+                        SdpInspectResult.prototype.extractedImageText = "";
+    
+                        /**
                          * Creates a new SdpInspectResult instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.modelarmor.v1.SdpInspectResult
@@ -10794,6 +10926,8 @@
                                     $root.google.cloud.modelarmor.v1.SdpFinding.encode(message.findings[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.findingsTruncated != null && Object.hasOwnProperty.call(message, "findingsTruncated"))
                                 writer.uint32(/* id 5, wireType 0 =*/40).bool(message.findingsTruncated);
+                            if (message.extractedImageText != null && Object.hasOwnProperty.call(message, "extractedImageText"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.extractedImageText);
                             return writer;
                         };
     
@@ -10856,6 +10990,10 @@
                                     }
                                 case 5: {
                                         message.findingsTruncated = reader.bool();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.extractedImageText = reader.string();
                                         break;
                                     }
                                 default:
@@ -10936,6 +11074,9 @@
                             if (message.findingsTruncated != null && message.hasOwnProperty("findingsTruncated"))
                                 if (typeof message.findingsTruncated !== "boolean")
                                     return "findingsTruncated: boolean expected";
+                            if (message.extractedImageText != null && message.hasOwnProperty("extractedImageText"))
+                                if (!$util.isString(message.extractedImageText))
+                                    return "extractedImageText: string expected";
                             return null;
                         };
     
@@ -11017,6 +11158,8 @@
                             }
                             if (object.findingsTruncated != null)
                                 message.findingsTruncated = Boolean(object.findingsTruncated);
+                            if (object.extractedImageText != null)
+                                message.extractedImageText = String(object.extractedImageText);
                             return message;
                         };
     
@@ -11041,6 +11184,7 @@
                                 object.executionState = options.enums === String ? "FILTER_EXECUTION_STATE_UNSPECIFIED" : 0;
                                 object.matchState = options.enums === String ? "FILTER_MATCH_STATE_UNSPECIFIED" : 0;
                                 object.findingsTruncated = false;
+                                object.extractedImageText = "";
                             }
                             if (message.executionState != null && message.hasOwnProperty("executionState"))
                                 object.executionState = options.enums === String ? $root.google.cloud.modelarmor.v1.FilterExecutionState[message.executionState] === undefined ? message.executionState : $root.google.cloud.modelarmor.v1.FilterExecutionState[message.executionState] : message.executionState;
@@ -11058,6 +11202,8 @@
                             }
                             if (message.findingsTruncated != null && message.hasOwnProperty("findingsTruncated"))
                                 object.findingsTruncated = message.findingsTruncated;
+                            if (message.extractedImageText != null && message.hasOwnProperty("extractedImageText"))
+                                object.extractedImageText = message.extractedImageText;
                             return object;
                         };
     
@@ -11528,6 +11674,7 @@
                                 case 5:
                                 case 6:
                                 case 7:
+                                case 8:
                                     break;
                                 }
                             if (message.byteData != null && message.hasOwnProperty("byteData"))
@@ -11590,6 +11737,10 @@
                             case "CSV":
                             case 7:
                                 message.byteDataType = 7;
+                                break;
+                            case "IMAGE":
+                            case 8:
+                                message.byteDataType = 8;
                                 break;
                             }
                             if (object.byteData != null)
@@ -11668,6 +11819,7 @@
                          * @property {number} POWERPOINT_DOCUMENT=5 POWERPOINT_DOCUMENT value
                          * @property {number} TXT=6 TXT value
                          * @property {number} CSV=7 CSV value
+                         * @property {number} IMAGE=8 IMAGE value
                          */
                         ByteDataItem.ByteItemType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -11679,6 +11831,7 @@
                             values[valuesById[5] = "POWERPOINT_DOCUMENT"] = 5;
                             values[valuesById[6] = "TXT"] = 6;
                             values[valuesById[7] = "CSV"] = 7;
+                            values[valuesById[8] = "IMAGE"] = 8;
                             return values;
                         })();
     
@@ -12124,6 +12277,796 @@
                         return SdpDeidentifyResult;
                     })();
     
+                    v1.SdpImageFindingLocation = (function() {
+    
+                        /**
+                         * Properties of a SdpImageFindingLocation.
+                         * @memberof google.cloud.modelarmor.v1
+                         * @interface ISdpImageFindingLocation
+                         * @property {Array.<google.cloud.modelarmor.v1.SdpImageFindingLocation.ISdpBoundingBox>|null} [boundingBoxes] SdpImageFindingLocation boundingBoxes
+                         */
+    
+                        /**
+                         * Constructs a new SdpImageFindingLocation.
+                         * @memberof google.cloud.modelarmor.v1
+                         * @classdesc Represents a SdpImageFindingLocation.
+                         * @implements ISdpImageFindingLocation
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1.ISdpImageFindingLocation=} [properties] Properties to set
+                         */
+                        function SdpImageFindingLocation(properties) {
+                            this.boundingBoxes = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SdpImageFindingLocation boundingBoxes.
+                         * @member {Array.<google.cloud.modelarmor.v1.SdpImageFindingLocation.ISdpBoundingBox>} boundingBoxes
+                         * @memberof google.cloud.modelarmor.v1.SdpImageFindingLocation
+                         * @instance
+                         */
+                        SdpImageFindingLocation.prototype.boundingBoxes = $util.emptyArray;
+    
+                        /**
+                         * Creates a new SdpImageFindingLocation instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1.SdpImageFindingLocation
+                         * @static
+                         * @param {google.cloud.modelarmor.v1.ISdpImageFindingLocation=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1.SdpImageFindingLocation} SdpImageFindingLocation instance
+                         */
+                        SdpImageFindingLocation.create = function create(properties) {
+                            return new SdpImageFindingLocation(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SdpImageFindingLocation message. Does not implicitly {@link google.cloud.modelarmor.v1.SdpImageFindingLocation.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1.SdpImageFindingLocation
+                         * @static
+                         * @param {google.cloud.modelarmor.v1.ISdpImageFindingLocation} message SdpImageFindingLocation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SdpImageFindingLocation.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.boundingBoxes != null && message.boundingBoxes.length)
+                                for (var i = 0; i < message.boundingBoxes.length; ++i)
+                                    $root.google.cloud.modelarmor.v1.SdpImageFindingLocation.SdpBoundingBox.encode(message.boundingBoxes[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SdpImageFindingLocation message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1.SdpImageFindingLocation.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1.SdpImageFindingLocation
+                         * @static
+                         * @param {google.cloud.modelarmor.v1.ISdpImageFindingLocation} message SdpImageFindingLocation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SdpImageFindingLocation.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SdpImageFindingLocation message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1.SdpImageFindingLocation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1.SdpImageFindingLocation} SdpImageFindingLocation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SdpImageFindingLocation.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1.SdpImageFindingLocation();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.boundingBoxes && message.boundingBoxes.length))
+                                            message.boundingBoxes = [];
+                                        message.boundingBoxes.push($root.google.cloud.modelarmor.v1.SdpImageFindingLocation.SdpBoundingBox.decode(reader, reader.uint32(), undefined, long + 1));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SdpImageFindingLocation message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1.SdpImageFindingLocation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1.SdpImageFindingLocation} SdpImageFindingLocation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SdpImageFindingLocation.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SdpImageFindingLocation message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1.SdpImageFindingLocation
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SdpImageFindingLocation.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.boundingBoxes != null && message.hasOwnProperty("boundingBoxes")) {
+                                if (!Array.isArray(message.boundingBoxes))
+                                    return "boundingBoxes: array expected";
+                                for (var i = 0; i < message.boundingBoxes.length; ++i) {
+                                    var error = $root.google.cloud.modelarmor.v1.SdpImageFindingLocation.SdpBoundingBox.verify(message.boundingBoxes[i], long + 1);
+                                    if (error)
+                                        return "boundingBoxes." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SdpImageFindingLocation message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1.SdpImageFindingLocation
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1.SdpImageFindingLocation} SdpImageFindingLocation
+                         */
+                        SdpImageFindingLocation.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1.SdpImageFindingLocation)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.modelarmor.v1.SdpImageFindingLocation();
+                            if (object.boundingBoxes) {
+                                if (!Array.isArray(object.boundingBoxes))
+                                    throw TypeError(".google.cloud.modelarmor.v1.SdpImageFindingLocation.boundingBoxes: array expected");
+                                message.boundingBoxes = [];
+                                for (var i = 0; i < object.boundingBoxes.length; ++i) {
+                                    if (typeof object.boundingBoxes[i] !== "object")
+                                        throw TypeError(".google.cloud.modelarmor.v1.SdpImageFindingLocation.boundingBoxes: object expected");
+                                    message.boundingBoxes[i] = $root.google.cloud.modelarmor.v1.SdpImageFindingLocation.SdpBoundingBox.fromObject(object.boundingBoxes[i], long + 1);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SdpImageFindingLocation message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1.SdpImageFindingLocation
+                         * @static
+                         * @param {google.cloud.modelarmor.v1.SdpImageFindingLocation} message SdpImageFindingLocation
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SdpImageFindingLocation.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.boundingBoxes = [];
+                            if (message.boundingBoxes && message.boundingBoxes.length) {
+                                object.boundingBoxes = [];
+                                for (var j = 0; j < message.boundingBoxes.length; ++j)
+                                    object.boundingBoxes[j] = $root.google.cloud.modelarmor.v1.SdpImageFindingLocation.SdpBoundingBox.toObject(message.boundingBoxes[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SdpImageFindingLocation to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1.SdpImageFindingLocation
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SdpImageFindingLocation.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SdpImageFindingLocation
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1.SdpImageFindingLocation
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SdpImageFindingLocation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1.SdpImageFindingLocation";
+                        };
+    
+                        SdpImageFindingLocation.SdpBoundingBox = (function() {
+    
+                            /**
+                             * Properties of a SdpBoundingBox.
+                             * @memberof google.cloud.modelarmor.v1.SdpImageFindingLocation
+                             * @interface ISdpBoundingBox
+                             * @property {number|null} [top] SdpBoundingBox top
+                             * @property {number|null} [left] SdpBoundingBox left
+                             * @property {number|null} [width] SdpBoundingBox width
+                             * @property {number|null} [height] SdpBoundingBox height
+                             */
+    
+                            /**
+                             * Constructs a new SdpBoundingBox.
+                             * @memberof google.cloud.modelarmor.v1.SdpImageFindingLocation
+                             * @classdesc Represents a SdpBoundingBox.
+                             * @implements ISdpBoundingBox
+                             * @constructor
+                             * @param {google.cloud.modelarmor.v1.SdpImageFindingLocation.ISdpBoundingBox=} [properties] Properties to set
+                             */
+                            function SdpBoundingBox(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SdpBoundingBox top.
+                             * @member {number} top
+                             * @memberof google.cloud.modelarmor.v1.SdpImageFindingLocation.SdpBoundingBox
+                             * @instance
+                             */
+                            SdpBoundingBox.prototype.top = 0;
+    
+                            /**
+                             * SdpBoundingBox left.
+                             * @member {number} left
+                             * @memberof google.cloud.modelarmor.v1.SdpImageFindingLocation.SdpBoundingBox
+                             * @instance
+                             */
+                            SdpBoundingBox.prototype.left = 0;
+    
+                            /**
+                             * SdpBoundingBox width.
+                             * @member {number} width
+                             * @memberof google.cloud.modelarmor.v1.SdpImageFindingLocation.SdpBoundingBox
+                             * @instance
+                             */
+                            SdpBoundingBox.prototype.width = 0;
+    
+                            /**
+                             * SdpBoundingBox height.
+                             * @member {number} height
+                             * @memberof google.cloud.modelarmor.v1.SdpImageFindingLocation.SdpBoundingBox
+                             * @instance
+                             */
+                            SdpBoundingBox.prototype.height = 0;
+    
+                            /**
+                             * Creates a new SdpBoundingBox instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.modelarmor.v1.SdpImageFindingLocation.SdpBoundingBox
+                             * @static
+                             * @param {google.cloud.modelarmor.v1.SdpImageFindingLocation.ISdpBoundingBox=} [properties] Properties to set
+                             * @returns {google.cloud.modelarmor.v1.SdpImageFindingLocation.SdpBoundingBox} SdpBoundingBox instance
+                             */
+                            SdpBoundingBox.create = function create(properties) {
+                                return new SdpBoundingBox(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SdpBoundingBox message. Does not implicitly {@link google.cloud.modelarmor.v1.SdpImageFindingLocation.SdpBoundingBox.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.modelarmor.v1.SdpImageFindingLocation.SdpBoundingBox
+                             * @static
+                             * @param {google.cloud.modelarmor.v1.SdpImageFindingLocation.ISdpBoundingBox} message SdpBoundingBox message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SdpBoundingBox.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.top != null && Object.hasOwnProperty.call(message, "top"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.top);
+                                if (message.left != null && Object.hasOwnProperty.call(message, "left"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.left);
+                                if (message.width != null && Object.hasOwnProperty.call(message, "width"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.width);
+                                if (message.height != null && Object.hasOwnProperty.call(message, "height"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.height);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SdpBoundingBox message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1.SdpImageFindingLocation.SdpBoundingBox.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.modelarmor.v1.SdpImageFindingLocation.SdpBoundingBox
+                             * @static
+                             * @param {google.cloud.modelarmor.v1.SdpImageFindingLocation.ISdpBoundingBox} message SdpBoundingBox message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SdpBoundingBox.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SdpBoundingBox message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.modelarmor.v1.SdpImageFindingLocation.SdpBoundingBox
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.modelarmor.v1.SdpImageFindingLocation.SdpBoundingBox} SdpBoundingBox
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SdpBoundingBox.decode = function decode(reader, length, error, long) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1.SdpImageFindingLocation.SdpBoundingBox();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.top = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.left = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.width = reader.int32();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.height = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7, long);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SdpBoundingBox message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.modelarmor.v1.SdpImageFindingLocation.SdpBoundingBox
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.modelarmor.v1.SdpImageFindingLocation.SdpBoundingBox} SdpBoundingBox
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SdpBoundingBox.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SdpBoundingBox message.
+                             * @function verify
+                             * @memberof google.cloud.modelarmor.v1.SdpImageFindingLocation.SdpBoundingBox
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SdpBoundingBox.verify = function verify(message, long) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
+                                if (message.top != null && message.hasOwnProperty("top"))
+                                    if (!$util.isInteger(message.top))
+                                        return "top: integer expected";
+                                if (message.left != null && message.hasOwnProperty("left"))
+                                    if (!$util.isInteger(message.left))
+                                        return "left: integer expected";
+                                if (message.width != null && message.hasOwnProperty("width"))
+                                    if (!$util.isInteger(message.width))
+                                        return "width: integer expected";
+                                if (message.height != null && message.hasOwnProperty("height"))
+                                    if (!$util.isInteger(message.height))
+                                        return "height: integer expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SdpBoundingBox message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.modelarmor.v1.SdpImageFindingLocation.SdpBoundingBox
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.modelarmor.v1.SdpImageFindingLocation.SdpBoundingBox} SdpBoundingBox
+                             */
+                            SdpBoundingBox.fromObject = function fromObject(object, long) {
+                                if (object instanceof $root.google.cloud.modelarmor.v1.SdpImageFindingLocation.SdpBoundingBox)
+                                    return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var message = new $root.google.cloud.modelarmor.v1.SdpImageFindingLocation.SdpBoundingBox();
+                                if (object.top != null)
+                                    message.top = object.top | 0;
+                                if (object.left != null)
+                                    message.left = object.left | 0;
+                                if (object.width != null)
+                                    message.width = object.width | 0;
+                                if (object.height != null)
+                                    message.height = object.height | 0;
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SdpBoundingBox message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.modelarmor.v1.SdpImageFindingLocation.SdpBoundingBox
+                             * @static
+                             * @param {google.cloud.modelarmor.v1.SdpImageFindingLocation.SdpBoundingBox} message SdpBoundingBox
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SdpBoundingBox.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.top = 0;
+                                    object.left = 0;
+                                    object.width = 0;
+                                    object.height = 0;
+                                }
+                                if (message.top != null && message.hasOwnProperty("top"))
+                                    object.top = message.top;
+                                if (message.left != null && message.hasOwnProperty("left"))
+                                    object.left = message.left;
+                                if (message.width != null && message.hasOwnProperty("width"))
+                                    object.width = message.width;
+                                if (message.height != null && message.hasOwnProperty("height"))
+                                    object.height = message.height;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SdpBoundingBox to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.modelarmor.v1.SdpImageFindingLocation.SdpBoundingBox
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SdpBoundingBox.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SdpBoundingBox
+                             * @function getTypeUrl
+                             * @memberof google.cloud.modelarmor.v1.SdpImageFindingLocation.SdpBoundingBox
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SdpBoundingBox.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.modelarmor.v1.SdpImageFindingLocation.SdpBoundingBox";
+                            };
+    
+                            return SdpBoundingBox;
+                        })();
+    
+                        return SdpImageFindingLocation;
+                    })();
+    
+                    v1.SdpContentLocation = (function() {
+    
+                        /**
+                         * Properties of a SdpContentLocation.
+                         * @memberof google.cloud.modelarmor.v1
+                         * @interface ISdpContentLocation
+                         * @property {google.cloud.modelarmor.v1.ISdpImageFindingLocation|null} [imageFindingLocation] SdpContentLocation imageFindingLocation
+                         * @property {string|null} [containerName] SdpContentLocation containerName
+                         */
+    
+                        /**
+                         * Constructs a new SdpContentLocation.
+                         * @memberof google.cloud.modelarmor.v1
+                         * @classdesc Represents a SdpContentLocation.
+                         * @implements ISdpContentLocation
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1.ISdpContentLocation=} [properties] Properties to set
+                         */
+                        function SdpContentLocation(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SdpContentLocation imageFindingLocation.
+                         * @member {google.cloud.modelarmor.v1.ISdpImageFindingLocation|null|undefined} imageFindingLocation
+                         * @memberof google.cloud.modelarmor.v1.SdpContentLocation
+                         * @instance
+                         */
+                        SdpContentLocation.prototype.imageFindingLocation = null;
+    
+                        /**
+                         * SdpContentLocation containerName.
+                         * @member {string} containerName
+                         * @memberof google.cloud.modelarmor.v1.SdpContentLocation
+                         * @instance
+                         */
+                        SdpContentLocation.prototype.containerName = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * SdpContentLocation location.
+                         * @member {"imageFindingLocation"|undefined} location
+                         * @memberof google.cloud.modelarmor.v1.SdpContentLocation
+                         * @instance
+                         */
+                        Object.defineProperty(SdpContentLocation.prototype, "location", {
+                            get: $util.oneOfGetter($oneOfFields = ["imageFindingLocation"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new SdpContentLocation instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1.SdpContentLocation
+                         * @static
+                         * @param {google.cloud.modelarmor.v1.ISdpContentLocation=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1.SdpContentLocation} SdpContentLocation instance
+                         */
+                        SdpContentLocation.create = function create(properties) {
+                            return new SdpContentLocation(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SdpContentLocation message. Does not implicitly {@link google.cloud.modelarmor.v1.SdpContentLocation.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1.SdpContentLocation
+                         * @static
+                         * @param {google.cloud.modelarmor.v1.ISdpContentLocation} message SdpContentLocation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SdpContentLocation.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.containerName != null && Object.hasOwnProperty.call(message, "containerName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.containerName);
+                            if (message.imageFindingLocation != null && Object.hasOwnProperty.call(message, "imageFindingLocation"))
+                                $root.google.cloud.modelarmor.v1.SdpImageFindingLocation.encode(message.imageFindingLocation, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SdpContentLocation message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1.SdpContentLocation.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1.SdpContentLocation
+                         * @static
+                         * @param {google.cloud.modelarmor.v1.ISdpContentLocation} message SdpContentLocation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SdpContentLocation.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SdpContentLocation message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1.SdpContentLocation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1.SdpContentLocation} SdpContentLocation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SdpContentLocation.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1.SdpContentLocation();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 2: {
+                                        message.imageFindingLocation = $root.google.cloud.modelarmor.v1.SdpImageFindingLocation.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 1: {
+                                        message.containerName = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SdpContentLocation message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1.SdpContentLocation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1.SdpContentLocation} SdpContentLocation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SdpContentLocation.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SdpContentLocation message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1.SdpContentLocation
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SdpContentLocation.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            var properties = {};
+                            if (message.imageFindingLocation != null && message.hasOwnProperty("imageFindingLocation")) {
+                                properties.location = 1;
+                                {
+                                    var error = $root.google.cloud.modelarmor.v1.SdpImageFindingLocation.verify(message.imageFindingLocation, long + 1);
+                                    if (error)
+                                        return "imageFindingLocation." + error;
+                                }
+                            }
+                            if (message.containerName != null && message.hasOwnProperty("containerName"))
+                                if (!$util.isString(message.containerName))
+                                    return "containerName: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SdpContentLocation message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1.SdpContentLocation
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1.SdpContentLocation} SdpContentLocation
+                         */
+                        SdpContentLocation.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1.SdpContentLocation)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.modelarmor.v1.SdpContentLocation();
+                            if (object.imageFindingLocation != null) {
+                                if (typeof object.imageFindingLocation !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1.SdpContentLocation.imageFindingLocation: object expected");
+                                message.imageFindingLocation = $root.google.cloud.modelarmor.v1.SdpImageFindingLocation.fromObject(object.imageFindingLocation, long + 1);
+                            }
+                            if (object.containerName != null)
+                                message.containerName = String(object.containerName);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SdpContentLocation message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1.SdpContentLocation
+                         * @static
+                         * @param {google.cloud.modelarmor.v1.SdpContentLocation} message SdpContentLocation
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SdpContentLocation.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.containerName = "";
+                            if (message.containerName != null && message.hasOwnProperty("containerName"))
+                                object.containerName = message.containerName;
+                            if (message.imageFindingLocation != null && message.hasOwnProperty("imageFindingLocation")) {
+                                object.imageFindingLocation = $root.google.cloud.modelarmor.v1.SdpImageFindingLocation.toObject(message.imageFindingLocation, options);
+                                if (options.oneofs)
+                                    object.location = "imageFindingLocation";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SdpContentLocation to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1.SdpContentLocation
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SdpContentLocation.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SdpContentLocation
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1.SdpContentLocation
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SdpContentLocation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1.SdpContentLocation";
+                        };
+    
+                        return SdpContentLocation;
+                    })();
+    
                     v1.SdpFinding = (function() {
     
                         /**
@@ -12437,6 +13380,7 @@
                              * @interface ISdpFindingLocation
                              * @property {google.cloud.modelarmor.v1.IRangeInfo|null} [byteRange] SdpFindingLocation byteRange
                              * @property {google.cloud.modelarmor.v1.IRangeInfo|null} [codepointRange] SdpFindingLocation codepointRange
+                             * @property {Array.<google.cloud.modelarmor.v1.ISdpContentLocation>|null} [contentLocations] SdpFindingLocation contentLocations
                              */
     
                             /**
@@ -12448,6 +13392,7 @@
                              * @param {google.cloud.modelarmor.v1.SdpFinding.ISdpFindingLocation=} [properties] Properties to set
                              */
                             function SdpFindingLocation(properties) {
+                                this.contentLocations = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null && keys[i] !== "__proto__")
@@ -12469,6 +13414,14 @@
                              * @instance
                              */
                             SdpFindingLocation.prototype.codepointRange = null;
+    
+                            /**
+                             * SdpFindingLocation contentLocations.
+                             * @member {Array.<google.cloud.modelarmor.v1.ISdpContentLocation>} contentLocations
+                             * @memberof google.cloud.modelarmor.v1.SdpFinding.SdpFindingLocation
+                             * @instance
+                             */
+                            SdpFindingLocation.prototype.contentLocations = $util.emptyArray;
     
                             /**
                              * Creates a new SdpFindingLocation instance using the specified properties.
@@ -12498,6 +13451,9 @@
                                     $root.google.cloud.modelarmor.v1.RangeInfo.encode(message.byteRange, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                                 if (message.codepointRange != null && Object.hasOwnProperty.call(message, "codepointRange"))
                                     $root.google.cloud.modelarmor.v1.RangeInfo.encode(message.codepointRange, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.contentLocations != null && message.contentLocations.length)
+                                    for (var i = 0; i < message.contentLocations.length; ++i)
+                                        $root.google.cloud.modelarmor.v1.SdpContentLocation.encode(message.contentLocations[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                                 return writer;
                             };
     
@@ -12544,6 +13500,12 @@
                                         }
                                     case 2: {
                                             message.codepointRange = $root.google.cloud.modelarmor.v1.RangeInfo.decode(reader, reader.uint32(), undefined, long + 1);
+                                            break;
+                                        }
+                                    case 3: {
+                                            if (!(message.contentLocations && message.contentLocations.length))
+                                                message.contentLocations = [];
+                                            message.contentLocations.push($root.google.cloud.modelarmor.v1.SdpContentLocation.decode(reader, reader.uint32(), undefined, long + 1));
                                             break;
                                         }
                                     default:
@@ -12595,6 +13557,15 @@
                                     if (error)
                                         return "codepointRange." + error;
                                 }
+                                if (message.contentLocations != null && message.hasOwnProperty("contentLocations")) {
+                                    if (!Array.isArray(message.contentLocations))
+                                        return "contentLocations: array expected";
+                                    for (var i = 0; i < message.contentLocations.length; ++i) {
+                                        var error = $root.google.cloud.modelarmor.v1.SdpContentLocation.verify(message.contentLocations[i], long + 1);
+                                        if (error)
+                                            return "contentLocations." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -12624,6 +13595,16 @@
                                         throw TypeError(".google.cloud.modelarmor.v1.SdpFinding.SdpFindingLocation.codepointRange: object expected");
                                     message.codepointRange = $root.google.cloud.modelarmor.v1.RangeInfo.fromObject(object.codepointRange, long + 1);
                                 }
+                                if (object.contentLocations) {
+                                    if (!Array.isArray(object.contentLocations))
+                                        throw TypeError(".google.cloud.modelarmor.v1.SdpFinding.SdpFindingLocation.contentLocations: array expected");
+                                    message.contentLocations = [];
+                                    for (var i = 0; i < object.contentLocations.length; ++i) {
+                                        if (typeof object.contentLocations[i] !== "object")
+                                            throw TypeError(".google.cloud.modelarmor.v1.SdpFinding.SdpFindingLocation.contentLocations: object expected");
+                                        message.contentLocations[i] = $root.google.cloud.modelarmor.v1.SdpContentLocation.fromObject(object.contentLocations[i], long + 1);
+                                    }
+                                }
                                 return message;
                             };
     
@@ -12640,6 +13621,8 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.contentLocations = [];
                                 if (options.defaults) {
                                     object.byteRange = null;
                                     object.codepointRange = null;
@@ -12648,6 +13631,11 @@
                                     object.byteRange = $root.google.cloud.modelarmor.v1.RangeInfo.toObject(message.byteRange, options);
                                 if (message.codepointRange != null && message.hasOwnProperty("codepointRange"))
                                     object.codepointRange = $root.google.cloud.modelarmor.v1.RangeInfo.toObject(message.codepointRange, options);
+                                if (message.contentLocations && message.contentLocations.length) {
+                                    object.contentLocations = [];
+                                    for (var j = 0; j < message.contentLocations.length; ++j)
+                                        object.contentLocations[j] = $root.google.cloud.modelarmor.v1.SdpContentLocation.toObject(message.contentLocations[j], options);
+                                }
                                 return object;
                             };
     
@@ -12681,6 +13669,440 @@
                         })();
     
                         return SdpFinding;
+                    })();
+    
+                    v1.SdpRedactResult = (function() {
+    
+                        /**
+                         * Properties of a SdpRedactResult.
+                         * @memberof google.cloud.modelarmor.v1
+                         * @interface ISdpRedactResult
+                         * @property {google.cloud.modelarmor.v1.FilterExecutionState|null} [executionState] SdpRedactResult executionState
+                         * @property {Array.<google.cloud.modelarmor.v1.IMessageItem>|null} [messageItems] SdpRedactResult messageItems
+                         * @property {google.cloud.modelarmor.v1.FilterMatchState|null} [matchState] SdpRedactResult matchState
+                         * @property {Uint8Array|null} [redactedImage] SdpRedactResult redactedImage
+                         * @property {Array.<google.cloud.modelarmor.v1.ISdpFinding>|null} [findings] SdpRedactResult findings
+                         * @property {string|null} [extractedImageText] SdpRedactResult extractedImageText
+                         */
+    
+                        /**
+                         * Constructs a new SdpRedactResult.
+                         * @memberof google.cloud.modelarmor.v1
+                         * @classdesc Represents a SdpRedactResult.
+                         * @implements ISdpRedactResult
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1.ISdpRedactResult=} [properties] Properties to set
+                         */
+                        function SdpRedactResult(properties) {
+                            this.messageItems = [];
+                            this.findings = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SdpRedactResult executionState.
+                         * @member {google.cloud.modelarmor.v1.FilterExecutionState} executionState
+                         * @memberof google.cloud.modelarmor.v1.SdpRedactResult
+                         * @instance
+                         */
+                        SdpRedactResult.prototype.executionState = 0;
+    
+                        /**
+                         * SdpRedactResult messageItems.
+                         * @member {Array.<google.cloud.modelarmor.v1.IMessageItem>} messageItems
+                         * @memberof google.cloud.modelarmor.v1.SdpRedactResult
+                         * @instance
+                         */
+                        SdpRedactResult.prototype.messageItems = $util.emptyArray;
+    
+                        /**
+                         * SdpRedactResult matchState.
+                         * @member {google.cloud.modelarmor.v1.FilterMatchState} matchState
+                         * @memberof google.cloud.modelarmor.v1.SdpRedactResult
+                         * @instance
+                         */
+                        SdpRedactResult.prototype.matchState = 0;
+    
+                        /**
+                         * SdpRedactResult redactedImage.
+                         * @member {Uint8Array} redactedImage
+                         * @memberof google.cloud.modelarmor.v1.SdpRedactResult
+                         * @instance
+                         */
+                        SdpRedactResult.prototype.redactedImage = $util.newBuffer([]);
+    
+                        /**
+                         * SdpRedactResult findings.
+                         * @member {Array.<google.cloud.modelarmor.v1.ISdpFinding>} findings
+                         * @memberof google.cloud.modelarmor.v1.SdpRedactResult
+                         * @instance
+                         */
+                        SdpRedactResult.prototype.findings = $util.emptyArray;
+    
+                        /**
+                         * SdpRedactResult extractedImageText.
+                         * @member {string} extractedImageText
+                         * @memberof google.cloud.modelarmor.v1.SdpRedactResult
+                         * @instance
+                         */
+                        SdpRedactResult.prototype.extractedImageText = "";
+    
+                        /**
+                         * Creates a new SdpRedactResult instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1.SdpRedactResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1.ISdpRedactResult=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1.SdpRedactResult} SdpRedactResult instance
+                         */
+                        SdpRedactResult.create = function create(properties) {
+                            return new SdpRedactResult(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SdpRedactResult message. Does not implicitly {@link google.cloud.modelarmor.v1.SdpRedactResult.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1.SdpRedactResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1.ISdpRedactResult} message SdpRedactResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SdpRedactResult.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.executionState != null && Object.hasOwnProperty.call(message, "executionState"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.executionState);
+                            if (message.messageItems != null && message.messageItems.length)
+                                for (var i = 0; i < message.messageItems.length; ++i)
+                                    $root.google.cloud.modelarmor.v1.MessageItem.encode(message.messageItems[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.matchState != null && Object.hasOwnProperty.call(message, "matchState"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.matchState);
+                            if (message.redactedImage != null && Object.hasOwnProperty.call(message, "redactedImage"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.redactedImage);
+                            if (message.findings != null && message.findings.length)
+                                for (var i = 0; i < message.findings.length; ++i)
+                                    $root.google.cloud.modelarmor.v1.SdpFinding.encode(message.findings[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.extractedImageText != null && Object.hasOwnProperty.call(message, "extractedImageText"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.extractedImageText);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SdpRedactResult message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1.SdpRedactResult.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1.SdpRedactResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1.ISdpRedactResult} message SdpRedactResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SdpRedactResult.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SdpRedactResult message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1.SdpRedactResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1.SdpRedactResult} SdpRedactResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SdpRedactResult.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1.SdpRedactResult();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.executionState = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.messageItems && message.messageItems.length))
+                                            message.messageItems = [];
+                                        message.messageItems.push($root.google.cloud.modelarmor.v1.MessageItem.decode(reader, reader.uint32(), undefined, long + 1));
+                                        break;
+                                    }
+                                case 3: {
+                                        message.matchState = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.redactedImage = reader.bytes();
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.findings && message.findings.length))
+                                            message.findings = [];
+                                        message.findings.push($root.google.cloud.modelarmor.v1.SdpFinding.decode(reader, reader.uint32(), undefined, long + 1));
+                                        break;
+                                    }
+                                case 6: {
+                                        message.extractedImageText = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SdpRedactResult message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1.SdpRedactResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1.SdpRedactResult} SdpRedactResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SdpRedactResult.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SdpRedactResult message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1.SdpRedactResult
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SdpRedactResult.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.executionState != null && message.hasOwnProperty("executionState"))
+                                switch (message.executionState) {
+                                default:
+                                    return "executionState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.messageItems != null && message.hasOwnProperty("messageItems")) {
+                                if (!Array.isArray(message.messageItems))
+                                    return "messageItems: array expected";
+                                for (var i = 0; i < message.messageItems.length; ++i) {
+                                    var error = $root.google.cloud.modelarmor.v1.MessageItem.verify(message.messageItems[i], long + 1);
+                                    if (error)
+                                        return "messageItems." + error;
+                                }
+                            }
+                            if (message.matchState != null && message.hasOwnProperty("matchState"))
+                                switch (message.matchState) {
+                                default:
+                                    return "matchState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.redactedImage != null && message.hasOwnProperty("redactedImage"))
+                                if (!(message.redactedImage && typeof message.redactedImage.length === "number" || $util.isString(message.redactedImage)))
+                                    return "redactedImage: buffer expected";
+                            if (message.findings != null && message.hasOwnProperty("findings")) {
+                                if (!Array.isArray(message.findings))
+                                    return "findings: array expected";
+                                for (var i = 0; i < message.findings.length; ++i) {
+                                    var error = $root.google.cloud.modelarmor.v1.SdpFinding.verify(message.findings[i], long + 1);
+                                    if (error)
+                                        return "findings." + error;
+                                }
+                            }
+                            if (message.extractedImageText != null && message.hasOwnProperty("extractedImageText"))
+                                if (!$util.isString(message.extractedImageText))
+                                    return "extractedImageText: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SdpRedactResult message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1.SdpRedactResult
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1.SdpRedactResult} SdpRedactResult
+                         */
+                        SdpRedactResult.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1.SdpRedactResult)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.modelarmor.v1.SdpRedactResult();
+                            switch (object.executionState) {
+                            default:
+                                if (typeof object.executionState === "number") {
+                                    message.executionState = object.executionState;
+                                    break;
+                                }
+                                break;
+                            case "FILTER_EXECUTION_STATE_UNSPECIFIED":
+                            case 0:
+                                message.executionState = 0;
+                                break;
+                            case "EXECUTION_SUCCESS":
+                            case 1:
+                                message.executionState = 1;
+                                break;
+                            case "EXECUTION_SKIPPED":
+                            case 2:
+                                message.executionState = 2;
+                                break;
+                            }
+                            if (object.messageItems) {
+                                if (!Array.isArray(object.messageItems))
+                                    throw TypeError(".google.cloud.modelarmor.v1.SdpRedactResult.messageItems: array expected");
+                                message.messageItems = [];
+                                for (var i = 0; i < object.messageItems.length; ++i) {
+                                    if (typeof object.messageItems[i] !== "object")
+                                        throw TypeError(".google.cloud.modelarmor.v1.SdpRedactResult.messageItems: object expected");
+                                    message.messageItems[i] = $root.google.cloud.modelarmor.v1.MessageItem.fromObject(object.messageItems[i], long + 1);
+                                }
+                            }
+                            switch (object.matchState) {
+                            default:
+                                if (typeof object.matchState === "number") {
+                                    message.matchState = object.matchState;
+                                    break;
+                                }
+                                break;
+                            case "FILTER_MATCH_STATE_UNSPECIFIED":
+                            case 0:
+                                message.matchState = 0;
+                                break;
+                            case "NO_MATCH_FOUND":
+                            case 1:
+                                message.matchState = 1;
+                                break;
+                            case "MATCH_FOUND":
+                            case 2:
+                                message.matchState = 2;
+                                break;
+                            }
+                            if (object.redactedImage != null)
+                                if (typeof object.redactedImage === "string")
+                                    $util.base64.decode(object.redactedImage, message.redactedImage = $util.newBuffer($util.base64.length(object.redactedImage)), 0);
+                                else if (object.redactedImage.length >= 0)
+                                    message.redactedImage = object.redactedImage;
+                            if (object.findings) {
+                                if (!Array.isArray(object.findings))
+                                    throw TypeError(".google.cloud.modelarmor.v1.SdpRedactResult.findings: array expected");
+                                message.findings = [];
+                                for (var i = 0; i < object.findings.length; ++i) {
+                                    if (typeof object.findings[i] !== "object")
+                                        throw TypeError(".google.cloud.modelarmor.v1.SdpRedactResult.findings: object expected");
+                                    message.findings[i] = $root.google.cloud.modelarmor.v1.SdpFinding.fromObject(object.findings[i], long + 1);
+                                }
+                            }
+                            if (object.extractedImageText != null)
+                                message.extractedImageText = String(object.extractedImageText);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SdpRedactResult message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1.SdpRedactResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1.SdpRedactResult} message SdpRedactResult
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SdpRedactResult.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.messageItems = [];
+                                object.findings = [];
+                            }
+                            if (options.defaults) {
+                                object.executionState = options.enums === String ? "FILTER_EXECUTION_STATE_UNSPECIFIED" : 0;
+                                object.matchState = options.enums === String ? "FILTER_MATCH_STATE_UNSPECIFIED" : 0;
+                                if (options.bytes === String)
+                                    object.redactedImage = "";
+                                else {
+                                    object.redactedImage = [];
+                                    if (options.bytes !== Array)
+                                        object.redactedImage = $util.newBuffer(object.redactedImage);
+                                }
+                                object.extractedImageText = "";
+                            }
+                            if (message.executionState != null && message.hasOwnProperty("executionState"))
+                                object.executionState = options.enums === String ? $root.google.cloud.modelarmor.v1.FilterExecutionState[message.executionState] === undefined ? message.executionState : $root.google.cloud.modelarmor.v1.FilterExecutionState[message.executionState] : message.executionState;
+                            if (message.messageItems && message.messageItems.length) {
+                                object.messageItems = [];
+                                for (var j = 0; j < message.messageItems.length; ++j)
+                                    object.messageItems[j] = $root.google.cloud.modelarmor.v1.MessageItem.toObject(message.messageItems[j], options);
+                            }
+                            if (message.matchState != null && message.hasOwnProperty("matchState"))
+                                object.matchState = options.enums === String ? $root.google.cloud.modelarmor.v1.FilterMatchState[message.matchState] === undefined ? message.matchState : $root.google.cloud.modelarmor.v1.FilterMatchState[message.matchState] : message.matchState;
+                            if (message.redactedImage != null && message.hasOwnProperty("redactedImage"))
+                                object.redactedImage = options.bytes === String ? $util.base64.encode(message.redactedImage, 0, message.redactedImage.length) : options.bytes === Array ? Array.prototype.slice.call(message.redactedImage) : message.redactedImage;
+                            if (message.findings && message.findings.length) {
+                                object.findings = [];
+                                for (var j = 0; j < message.findings.length; ++j)
+                                    object.findings[j] = $root.google.cloud.modelarmor.v1.SdpFinding.toObject(message.findings[j], options);
+                            }
+                            if (message.extractedImageText != null && message.hasOwnProperty("extractedImageText"))
+                                object.extractedImageText = message.extractedImageText;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SdpRedactResult to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1.SdpRedactResult
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SdpRedactResult.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SdpRedactResult
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1.SdpRedactResult
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SdpRedactResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1.SdpRedactResult";
+                        };
+    
+                        return SdpRedactResult;
                     })();
     
                     v1.PiAndJailbreakFilterResult = (function() {

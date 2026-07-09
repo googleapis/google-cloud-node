@@ -3363,8 +3363,10 @@
                              * @interface IGitRemoteSettings
                              * @property {string|null} [url] GitRemoteSettings url
                              * @property {string|null} [defaultBranch] GitRemoteSettings defaultBranch
+                             * @property {string|null} [effectiveDefaultBranch] GitRemoteSettings effectiveDefaultBranch
                              * @property {string|null} [authenticationTokenSecretVersion] GitRemoteSettings authenticationTokenSecretVersion
                              * @property {google.cloud.dataform.v1.Repository.GitRemoteSettings.ISshAuthenticationConfig|null} [sshAuthenticationConfig] GitRemoteSettings sshAuthenticationConfig
+                             * @property {string|null} [gitRepositoryLink] GitRemoteSettings gitRepositoryLink
                              * @property {google.cloud.dataform.v1.Repository.GitRemoteSettings.TokenStatus|null} [tokenStatus] GitRemoteSettings tokenStatus
                              */
     
@@ -3400,6 +3402,14 @@
                             GitRemoteSettings.prototype.defaultBranch = "";
     
                             /**
+                             * GitRemoteSettings effectiveDefaultBranch.
+                             * @member {string} effectiveDefaultBranch
+                             * @memberof google.cloud.dataform.v1.Repository.GitRemoteSettings
+                             * @instance
+                             */
+                            GitRemoteSettings.prototype.effectiveDefaultBranch = "";
+    
+                            /**
                              * GitRemoteSettings authenticationTokenSecretVersion.
                              * @member {string} authenticationTokenSecretVersion
                              * @memberof google.cloud.dataform.v1.Repository.GitRemoteSettings
@@ -3416,12 +3426,29 @@
                             GitRemoteSettings.prototype.sshAuthenticationConfig = null;
     
                             /**
+                             * GitRemoteSettings gitRepositoryLink.
+                             * @member {string|null|undefined} gitRepositoryLink
+                             * @memberof google.cloud.dataform.v1.Repository.GitRemoteSettings
+                             * @instance
+                             */
+                            GitRemoteSettings.prototype.gitRepositoryLink = null;
+    
+                            /**
                              * GitRemoteSettings tokenStatus.
                              * @member {google.cloud.dataform.v1.Repository.GitRemoteSettings.TokenStatus} tokenStatus
                              * @memberof google.cloud.dataform.v1.Repository.GitRemoteSettings
                              * @instance
                              */
                             GitRemoteSettings.prototype.tokenStatus = 0;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(GitRemoteSettings.prototype, "_gitRepositoryLink", {
+                                get: $util.oneOfGetter($oneOfFields = ["gitRepositoryLink"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
     
                             /**
                              * Creates a new GitRemoteSettings instance using the specified properties.
@@ -3457,6 +3484,10 @@
                                     writer.uint32(/* id 4, wireType 0 =*/32).int32(message.tokenStatus);
                                 if (message.sshAuthenticationConfig != null && Object.hasOwnProperty.call(message, "sshAuthenticationConfig"))
                                     $root.google.cloud.dataform.v1.Repository.GitRemoteSettings.SshAuthenticationConfig.encode(message.sshAuthenticationConfig, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.gitRepositoryLink != null && Object.hasOwnProperty.call(message, "gitRepositoryLink"))
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.gitRepositoryLink);
+                                if (message.effectiveDefaultBranch != null && Object.hasOwnProperty.call(message, "effectiveDefaultBranch"))
+                                    writer.uint32(/* id 9, wireType 2 =*/74).string(message.effectiveDefaultBranch);
                                 return writer;
                             };
     
@@ -3505,12 +3536,20 @@
                                             message.defaultBranch = reader.string();
                                             break;
                                         }
+                                    case 9: {
+                                            message.effectiveDefaultBranch = reader.string();
+                                            break;
+                                        }
                                     case 3: {
                                             message.authenticationTokenSecretVersion = reader.string();
                                             break;
                                         }
                                     case 5: {
                                             message.sshAuthenticationConfig = $root.google.cloud.dataform.v1.Repository.GitRemoteSettings.SshAuthenticationConfig.decode(reader, reader.uint32(), undefined, long + 1);
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.gitRepositoryLink = reader.string();
                                             break;
                                         }
                                     case 4: {
@@ -3556,12 +3595,16 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
+                                var properties = {};
                                 if (message.url != null && message.hasOwnProperty("url"))
                                     if (!$util.isString(message.url))
                                         return "url: string expected";
                                 if (message.defaultBranch != null && message.hasOwnProperty("defaultBranch"))
                                     if (!$util.isString(message.defaultBranch))
                                         return "defaultBranch: string expected";
+                                if (message.effectiveDefaultBranch != null && message.hasOwnProperty("effectiveDefaultBranch"))
+                                    if (!$util.isString(message.effectiveDefaultBranch))
+                                        return "effectiveDefaultBranch: string expected";
                                 if (message.authenticationTokenSecretVersion != null && message.hasOwnProperty("authenticationTokenSecretVersion"))
                                     if (!$util.isString(message.authenticationTokenSecretVersion))
                                         return "authenticationTokenSecretVersion: string expected";
@@ -3569,6 +3612,11 @@
                                     var error = $root.google.cloud.dataform.v1.Repository.GitRemoteSettings.SshAuthenticationConfig.verify(message.sshAuthenticationConfig, long + 1);
                                     if (error)
                                         return "sshAuthenticationConfig." + error;
+                                }
+                                if (message.gitRepositoryLink != null && message.hasOwnProperty("gitRepositoryLink")) {
+                                    properties._gitRepositoryLink = 1;
+                                    if (!$util.isString(message.gitRepositoryLink))
+                                        return "gitRepositoryLink: string expected";
                                 }
                                 if (message.tokenStatus != null && message.hasOwnProperty("tokenStatus"))
                                     switch (message.tokenStatus) {
@@ -3603,6 +3651,8 @@
                                     message.url = String(object.url);
                                 if (object.defaultBranch != null)
                                     message.defaultBranch = String(object.defaultBranch);
+                                if (object.effectiveDefaultBranch != null)
+                                    message.effectiveDefaultBranch = String(object.effectiveDefaultBranch);
                                 if (object.authenticationTokenSecretVersion != null)
                                     message.authenticationTokenSecretVersion = String(object.authenticationTokenSecretVersion);
                                 if (object.sshAuthenticationConfig != null) {
@@ -3610,6 +3660,8 @@
                                         throw TypeError(".google.cloud.dataform.v1.Repository.GitRemoteSettings.sshAuthenticationConfig: object expected");
                                     message.sshAuthenticationConfig = $root.google.cloud.dataform.v1.Repository.GitRemoteSettings.SshAuthenticationConfig.fromObject(object.sshAuthenticationConfig, long + 1);
                                 }
+                                if (object.gitRepositoryLink != null)
+                                    message.gitRepositoryLink = String(object.gitRepositoryLink);
                                 switch (object.tokenStatus) {
                                 default:
                                     if (typeof object.tokenStatus === "number") {
@@ -3656,6 +3708,7 @@
                                     object.authenticationTokenSecretVersion = "";
                                     object.tokenStatus = options.enums === String ? "TOKEN_STATUS_UNSPECIFIED" : 0;
                                     object.sshAuthenticationConfig = null;
+                                    object.effectiveDefaultBranch = "";
                                 }
                                 if (message.url != null && message.hasOwnProperty("url"))
                                     object.url = message.url;
@@ -3667,6 +3720,13 @@
                                     object.tokenStatus = options.enums === String ? $root.google.cloud.dataform.v1.Repository.GitRemoteSettings.TokenStatus[message.tokenStatus] === undefined ? message.tokenStatus : $root.google.cloud.dataform.v1.Repository.GitRemoteSettings.TokenStatus[message.tokenStatus] : message.tokenStatus;
                                 if (message.sshAuthenticationConfig != null && message.hasOwnProperty("sshAuthenticationConfig"))
                                     object.sshAuthenticationConfig = $root.google.cloud.dataform.v1.Repository.GitRemoteSettings.SshAuthenticationConfig.toObject(message.sshAuthenticationConfig, options);
+                                if (message.gitRepositoryLink != null && message.hasOwnProperty("gitRepositoryLink")) {
+                                    object.gitRepositoryLink = message.gitRepositoryLink;
+                                    if (options.oneofs)
+                                        object._gitRepositoryLink = "gitRepositoryLink";
+                                }
+                                if (message.effectiveDefaultBranch != null && message.hasOwnProperty("effectiveDefaultBranch"))
+                                    object.effectiveDefaultBranch = message.effectiveDefaultBranch;
                                 return object;
                             };
     

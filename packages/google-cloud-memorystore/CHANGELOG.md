@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/memorystore-v0.6.1...memorystore-v0.7.0) (2026-07-07)
+
+
+### Features
+
+* Consolidate prettierignore and prettierrc files: handwritten ([#8081](https://github.com/googleapis/google-cloud-node/issues/8081)) ([a241532](https://github.com/googleapis/google-cloud-node/commit/a2415320b9c840f6ae27894451abb561a080ff82))
+
 ## [0.6.1](https://github.com/googleapis/google-cloud-node/compare/memorystore-v0.6.0...memorystore-v0.6.1) (2026-05-12)
 
 

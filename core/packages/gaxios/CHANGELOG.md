@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [7.2.0](https://github.com/googleapis/google-cloud-node/compare/gaxios-v7.1.6...gaxios-v7.2.0) (2026-07-07)
+
+
+### Features
+
+* Consolidate prettierignore and prettierrc files: handwritten ([#8081](https://github.com/googleapis/google-cloud-node/issues/8081)) ([a241532](https://github.com/googleapis/google-cloud-node/commit/a2415320b9c840f6ae27894451abb561a080ff82))
+
 ## [7.1.6](https://github.com/googleapis/google-cloud-node/compare/gaxios-v7.1.5...gaxios-v7.1.6) (2026-06-30)
 
 
