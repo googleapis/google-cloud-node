@@ -168,8 +168,9 @@ export interface GetSignedUrlConfig
   version?: 'v2' | 'v4';
 
   /**
-   * Use virtual hosted-style URLs (e.g., `https://mybucket.storage.googleapis.com/...`) 
-   * instead of path-style URLs (e.g., `https://storage.googleapis.com/mybucket/...`). 
+   * Determines the URL structure for accessing bucket resources.
+   * - `true`: Uses virtual hosted-style URLs (e.g., `https://mybucket.storage.googleapis.com/...`) 
+   * - `false`: Uses path-style URLs (e.g., `https://storage.googleapis.com/mybucket/...`). 
    * Virtual hosted-style URLs are generally preferred.
    * @default false
    */
