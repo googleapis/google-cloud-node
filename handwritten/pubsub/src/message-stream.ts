@@ -18,6 +18,7 @@ import {promisify} from '@google-cloud/promisify';
 import {ClientStub, GoogleError, grpc} from 'google-gax';
 import * as isStreamEnded from 'is-stream-ended';
 import {PassThrough} from 'stream';
+import {randomUUID} from 'crypto';
 
 import {PullRetry} from './pull-retry';
 import {Subscriber} from './subscriber';
