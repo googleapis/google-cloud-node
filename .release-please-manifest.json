@@ -176,6 +176,7 @@
   "packages/google-cloud-policytroubleshooter-iam": "0.8.2",
   "packages/google-cloud-privatecatalog": "4.2.2",
   "packages/google-cloud-privilegedaccessmanager": "0.6.2",
+  "packages/google-cloud-pubsub-api": "0.1.0",
   "packages/google-cloud-rapidmigrationassessment": "2.2.2",
   "packages/google-cloud-recaptchaenterprise": "6.4.2",
   "packages/google-cloud-recommender": "7.3.0",
