@@ -1347,6 +1347,10 @@ libraries:
     copyright_year: "2026"
     nodejs:
       default_version: v1
+  - name: google-cloud-productregistry
+    apis:
+      - path: google/cloud/productregistry/v1
+    copyright_year: "2026"
   - name: google-cloud-pubsub-api
     version: 0.1.0
     apis:
