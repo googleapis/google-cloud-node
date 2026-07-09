@@ -48,6 +48,9 @@ describe('OpenTelemetry Samples System Tests', () => {
   });
 
   after(async () => {
+    // Don't interfere with other tests.
+    provider.shutdown();
+
     const [subscriptions] = await pubsub.getSubscriptions();
     await Promise.all(
       resources.filterForCleanup(subscriptions).map(x => x.delete?.())
