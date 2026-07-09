@@ -1808,7 +1808,7 @@ libraries:
       - path: google/developers/knowledge/v1
     copyright_year: "2026"
     nodejs:
-      package_name: google-developer-knowledge
+      package_name: '@google/developer-knowledge'
   - name: google-devicesandservices-health
     version: 0.3.0
     apis:
