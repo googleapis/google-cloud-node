@@ -61,6 +61,6 @@
     "typescript": "5.8.3"
   },
   "engines": {
-    "node": ">=v18"
+    "node": ">=18"
   }
 }

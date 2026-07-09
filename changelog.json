@@ -435,23 +435,6 @@
       "changes": [
         {
           "type": "feat",
-          "sha": "3391fd27d1c15e051293207a07c6db00e760d370",
-          "message": "Update API sources and regenerate",
-          "issues": [
-            "8672"
-          ]
-        }
-      ],
-      "version": "5.1.0",
-      "language": "JAVASCRIPT",
-      "artifactName": "@google-cloud/precise-date",
-      "id": "ef93f9b7-739d-49a7-aa75-f1c04b9ab908",
-      "createTime": "2026-06-24T18:20:54.504Z"
-    },
-    {
-      "changes": [
-        {
-          "type": "feat",
           "sha": "a2415320b9c840f6ae27894451abb561a080ff82",
           "message": "Consolidate prettierignore and prettierrc files: handwritten",
           "issues": [
@@ -464,23 +447,6 @@
       "artifactName": "gaxios",
       "id": "6b65487d-c5a9-45df-adf7-524481537017",
       "createTime": "2026-07-07T04:38:13.492Z"
-    },
-    {
-      "changes": [
-        {
-          "type": "feat",
-          "sha": "3391fd27d1c15e051293207a07c6db00e760d370",
-          "message": "Update API sources and regenerate",
-          "issues": [
-            "8672"
-          ]
-        }
-      ],
-      "version": "5.1.0",
-      "language": "JAVASCRIPT",
-      "artifactName": "@google-cloud/promisify",
-      "id": "20912a56-2568-49fa-a6ba-180bdfa33d32",
-      "createTime": "2026-06-24T18:20:52.132Z"
     },
     {
       "changes": [
@@ -554,23 +520,6 @@
     {
       "changes": [
         {
-          "type": "feat",
-          "sha": "d9399f0cf44b79e2b38ce429b17709ee9845544e",
-          "message": "Migrate google-cloud-capacityplanner to librarian v0.22.0",
-          "issues": [
-            "8773"
-          ]
-        }
-      ],
-      "version": "0.2.0",
-      "language": "JAVASCRIPT",
-      "artifactName": "@google-cloud/capacityplanner",
-      "id": "d3f5584e-4924-4d9c-9236-67a0ec3f40a3",
-      "createTime": "2026-06-29T17:40:53.096Z"
-    },
-    {
-      "changes": [
-        {
           "type": "fix",
           "sha": "07b13a17e6533184c708dc388c3fa3dc6581f7a9",
           "message": "Prevent comma corruption when draining stream error responses",
@@ -593,6 +542,23 @@
       "artifactName": "gaxios",
       "id": "35cfd7ef-33af-4254-aa72-f4a34ddf8f2c",
       "createTime": "2026-06-30T19:41:56.401Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d9399f0cf44b79e2b38ce429b17709ee9845544e",
+          "message": "Migrate google-cloud-capacityplanner to librarian v0.22.0",
+          "issues": [
+            "8773"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/capacityplanner",
+      "id": "d3f5584e-4924-4d9c-9236-67a0ec3f40a3",
+      "createTime": "2026-06-29T17:40:53.096Z"
     },
     {
       "changes": [
@@ -1081,6 +1047,57 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "3391fd27d1c15e051293207a07c6db00e760d370",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8672"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/precise-date",
+      "id": "ef93f9b7-739d-49a7-aa75-f1c04b9ab908",
+      "createTime": "2026-06-24T18:20:54.504Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3391fd27d1c15e051293207a07c6db00e760d370",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8672"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/projectify",
+      "id": "ef7418ba-36d6-4c30-a8ea-13c4434195a7",
+      "createTime": "2026-06-24T18:20:52.474Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3391fd27d1c15e051293207a07c6db00e760d370",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8672"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/promisify",
+      "id": "20912a56-2568-49fa-a6ba-180bdfa33d32",
+      "createTime": "2026-06-24T18:20:52.132Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "76e6d3b6dea6032547780155c045e41552e27f40",
           "message": "Regional access boundaries main merge",
           "issues": [
@@ -1283,6 +1300,51 @@
       "artifactName": "gapic-node-processing",
       "id": "68a02aaa-17ed-404e-b452-e70bda09de60",
       "createTime": "2026-06-18T00:26:09.228Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "11.2.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/logging",
+      "id": "25bab115-ea4f-4ff2-a7e0-5aa0384c1b95",
+      "createTime": "2026-06-16T00:07:06.794Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ea623da20f374cfa480fb9fdb7758afd0a993a8e",
+          "message": "Update dependency protobufjs to v7.5.5 [security]",
+          "issues": [
+            "8071"
+          ],
+          "scope": "deps"
+        },
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "5.1.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-storage",
+      "id": "74883ea7-b13f-4282-9b14-46d047d4e432",
+      "createTime": "2026-06-16T00:07:06.414Z"
     },
     {
       "changes": [
@@ -1869,51 +1931,6 @@
       "artifactName": "@google-ads/datamanager",
       "id": "e51e396d-ddb9-4531-9f9e-4822535bbf23",
       "createTime": "2026-06-16T00:01:48.990Z"
-    },
-    {
-      "changes": [
-        {
-          "type": "fix",
-          "sha": "ea623da20f374cfa480fb9fdb7758afd0a993a8e",
-          "message": "Update dependency protobufjs to v7.5.5 [security]",
-          "issues": [
-            "8071"
-          ],
-          "scope": "deps"
-        },
-        {
-          "type": "fix",
-          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
-          "message": "Remove vulnerable dependency `uuid`",
-          "issues": [
-            "8120"
-          ],
-          "scope": "deps"
-        }
-      ],
-      "version": "5.1.2",
-      "language": "JAVASCRIPT",
-      "artifactName": "@google-cloud/bigquery-storage",
-      "id": "74883ea7-b13f-4282-9b14-46d047d4e432",
-      "createTime": "2026-06-16T00:07:06.414Z"
-    },
-    {
-      "changes": [
-        {
-          "type": "fix",
-          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
-          "message": "Remove vulnerable dependency `uuid`",
-          "issues": [
-            "8120"
-          ],
-          "scope": "deps"
-        }
-      ],
-      "version": "11.2.3",
-      "language": "JAVASCRIPT",
-      "artifactName": "@google-cloud/logging",
-      "id": "25bab115-ea4f-4ff2-a7e0-5aa0384c1b95",
-      "createTime": "2026-06-16T00:07:06.794Z"
     },
     {
       "changes": [
@@ -4229,31 +4246,6 @@
           ]
         }
       ],
-      "version": "10.1.3",
-      "language": "JAVASCRIPT",
-      "artifactName": "teeny-request",
-      "id": "7eaf6e35-1029-484c-8687-a7f7a30907f5",
-      "createTime": "2026-05-06T21:35:07.497Z"
-    },
-    {
-      "changes": [
-        {
-          "type": "fix",
-          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
-          "message": "Bump all node submodules",
-          "issues": [
-            "8178"
-          ]
-        },
-        {
-          "type": "fix",
-          "sha": "c1a03fe604662091be283055c7d34052c64d6334",
-          "message": "Change the copyright year for files in the packages folder",
-          "issues": [
-            "8109"
-          ]
-        }
-      ],
       "version": "5.0.2",
       "language": "JAVASCRIPT",
       "artifactName": "google-proto-files",
@@ -4320,6 +4312,31 @@
       "artifactName": "@google-cloud/spanner",
       "id": "a5e4c00a-94e9-42fb-96e8-8b7c29c58d82",
       "createTime": "2026-05-06T21:35:08.503Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "c1a03fe604662091be283055c7d34052c64d6334",
+          "message": "Change the copyright year for files in the packages folder",
+          "issues": [
+            "8109"
+          ]
+        }
+      ],
+      "version": "10.1.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "teeny-request",
+      "id": "7eaf6e35-1029-484c-8687-a7f7a30907f5",
+      "createTime": "2026-05-06T21:35:07.497Z"
     },
     {
       "changes": [
@@ -12012,32 +12029,6 @@
     {
       "changes": [
         {
-          "type": "fix",
-          "sha": "7fad2f6e2ef0b16ab87a92ae471136fe6f2655ef",
-          "message": "Unblock the releases on Node Bigquery",
-          "issues": [
-            "7946"
-          ]
-        },
-        {
-          "type": "feat",
-          "sha": "e500d4077065529fbdee4be565434a34b6643c09",
-          "message": "Allow the user to ask for skipping parsing rows when querying",
-          "issues": [
-            "7848"
-          ],
-          "scope": "bigquery"
-        }
-      ],
-      "version": "8.3.0",
-      "language": "JAVASCRIPT",
-      "artifactName": "@google-cloud/bigquery",
-      "id": "95c0b159-cdba-4b27-9c19-e99b2535868f",
-      "createTime": "2026-04-09T15:40:48.837Z"
-    },
-    {
-      "changes": [
-        {
           "type": "feat",
           "sha": "460e654682993b5d0e9b20ef12e92f40d106ecf9",
           "message": "[vectorsearch] Added CMEK support",
@@ -12471,6 +12462,32 @@
       "artifactName": "@google-cloud/firestore",
       "id": "660fa930-cd94-405a-b4ea-3008b640c4f4",
       "createTime": "2026-04-13T20:17:24.690Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7fad2f6e2ef0b16ab87a92ae471136fe6f2655ef",
+          "message": "Unblock the releases on Node Bigquery",
+          "issues": [
+            "7946"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "e500d4077065529fbdee4be565434a34b6643c09",
+          "message": "Allow the user to ask for skipping parsing rows when querying",
+          "issues": [
+            "7848"
+          ],
+          "scope": "bigquery"
+        }
+      ],
+      "version": "8.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery",
+      "id": "95c0b159-cdba-4b27-9c19-e99b2535868f",
+      "createTime": "2026-04-09T15:40:48.837Z"
     },
     {
       "changes": [
