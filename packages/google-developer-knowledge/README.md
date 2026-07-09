@@ -103,6 +103,6 @@ See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=developerknowledge.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local
-[homepage_samples]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-developers-knowledge/samples
-[homepage_changelog]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-developers-knowledge/CHANGELOG.md
-[homepage]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-developers-knowledge
+[homepage_samples]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-developer-knowledge/samples
+[homepage_changelog]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-developer-knowledge/CHANGELOG.md
+[homepage]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-developer-knowledge
