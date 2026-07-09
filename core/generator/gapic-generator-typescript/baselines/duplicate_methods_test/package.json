@@ -1,8 +1,13 @@
 {
   "name": "duplicate-methods-test",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "Duplicate_methods_test client for Node.js",
-  "repository": "googleapis/nodejs-duplicate-methods-test",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/googleapis/google-cloud-node.git",
+    "directory": "packages/google-duplicate_methods_test"
+  },
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-duplicate_methods_test",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "main": "build/src/index.js",

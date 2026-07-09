@@ -201,6 +201,15 @@ export class API {
     ];
   }
 
+  /**
+   * The directory name of the package in the google-cloud-node monorepo.
+   * By default, it is the kebab-case version of the proto package name (e.g. google-monitoring).
+   * Templates use this to construct the repository directory and homepage URLs.
+   */
+  get monorepoDirectory(): string {
+    return this.naming.namePath;
+  }
+
   get services() {
     return Object.keys(this.protos)
       .map(filename => this.protos[filename])
