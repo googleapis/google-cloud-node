@@ -1765,8 +1765,8 @@ libraries:
     version: 5.1.1
     apis:
       - path: google/cloud/workflows/v1
-      - path: google/cloud/workflows/v1beta
       - path: google/cloud/workflows/executions/v1
+      - path: google/cloud/workflows/v1beta
       - path: google/cloud/workflows/executions/v1beta
     copyright_year: "2026"
     nodejs:
