@@ -193,6 +193,7 @@
     "packages/google-cloud-workstations": {},
     "packages/google-container": {},
     "packages/google-dataflow": {},
+    "packages/google-developer-knowledge": {},
     "packages/google-devicesandservices-health": {},
     "packages/google-devtools-artifactregistry": {},
     "packages/google-devtools-cloudbuild": {},

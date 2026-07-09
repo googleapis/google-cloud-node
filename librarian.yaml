@@ -1813,6 +1813,12 @@ libraries:
     nodejs:
       default_version: v1beta3
       package_name: '@google-cloud/dataflow'
+  - name: google-developer-knowledge
+    apis:
+      - path: google/developers/knowledge/v1
+    copyright_year: "2026"
+    nodejs:
+      package_name: '@google/developer-knowledge'
   - name: google-devicesandservices-health
     version: 0.3.0
     apis:
