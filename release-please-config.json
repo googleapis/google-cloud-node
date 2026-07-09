@@ -144,6 +144,7 @@
     "packages/google-cloud-policytroubleshooter-iam": {},
     "packages/google-cloud-privatecatalog": {},
     "packages/google-cloud-privilegedaccessmanager": {},
+    "packages/google-cloud-productregistry": {},
     "packages/google-cloud-rapidmigrationassessment": {},
     "packages/google-cloud-recaptchaenterprise": {},
     "packages/google-cloud-recommender": {},
