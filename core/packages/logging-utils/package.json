@@ -42,6 +42,6 @@
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/core/packages/logging-utils",
   "engines": {
-    "node": ">=14"
+    "node": ">=18"
   }
 }
