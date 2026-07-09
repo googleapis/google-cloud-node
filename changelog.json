@@ -4,6 +4,23 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "3391fd27d1c15e051293207a07c6db00e760d370",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8672"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/projectify",
+      "id": "ef7418ba-36d6-4c30-a8ea-13c4434195a7",
+      "createTime": "2026-06-24T18:20:52.474Z"
+    },
+    {
+      "changes": [
+        {
           "type": "chore",
           "sha": "bd61260a93db997e09c39958eb4e4f89916203c6",
           "message": "Upgrade to Node 18",
