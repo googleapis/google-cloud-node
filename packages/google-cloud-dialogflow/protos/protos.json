@@ -2984,15 +2984,24 @@
                         },
                         "error": {
                           "type": "Error",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "rawContent": {
                           "type": "bytes",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "content": {
                           "type": "string",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
@@ -4807,6 +4816,13 @@
                           "type": "bool",
                           "id": 8
                         },
+                        "enableVoiceActivityEvents": {
+                          "type": "bool",
+                          "id": 27,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "disableNoSpeechRecognizedEvent": {
                           "type": "bool",
                           "id": 14
@@ -5496,7 +5512,11 @@
                           "values": {
                             "MESSAGE_TYPE_UNSPECIFIED": 0,
                             "TRANSCRIPT": 1,
-                            "END_OF_SINGLE_UTTERANCE": 2
+                            "DTMF_DIGITS": 3,
+                            "END_OF_SINGLE_UTTERANCE": 2,
+                            "PARTIAL_DTMF_DIGITS": 4,
+                            "SPEECH_ACTIVITY_BEGIN": 5,
+                            "SPEECH_ACTIVITY_END": 6
                           }
                         }
                       }
@@ -9679,6 +9699,13 @@
                         "serviceLatency": {
                           "type": "ServiceLatency",
                           "id": 4
+                        },
+                        "cesDebugInfo": {
+                          "type": "google.protobuf.Struct",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -18368,15 +18395,24 @@
                         },
                         "error": {
                           "type": "Error",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "rawContent": {
                           "type": "bytes",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "content": {
                           "type": "string",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
@@ -20940,6 +20976,13 @@
                           "type": "bool",
                           "id": 8
                         },
+                        "enableVoiceActivityEvents": {
+                          "type": "bool",
+                          "id": 27,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "disableNoSpeechRecognizedEvent": {
                           "type": "bool",
                           "id": 14
@@ -21721,7 +21764,9 @@
                             "TRANSCRIPT": 1,
                             "END_OF_SINGLE_UTTERANCE": 2,
                             "DTMF_DIGITS": 3,
-                            "PARTIAL_DTMF_DIGITS": 4
+                            "PARTIAL_DTMF_DIGITS": 4,
+                            "SPEECH_ACTIVITY_BEGIN": 5,
+                            "SPEECH_ACTIVITY_END": 6
                           }
                         }
                       }
@@ -26006,6 +26051,13 @@
                         "serviceLatency": {
                           "type": "ServiceLatency",
                           "id": 4
+                        },
+                        "cesDebugInfo": {
+                          "type": "google.protobuf.Struct",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {

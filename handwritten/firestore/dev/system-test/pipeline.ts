@@ -7406,7 +7406,9 @@ describe.skipClassic('Pipeline search', () => {
             });
 
           const isRestTest = isRest(firestore);
-          const expectedErrorPattern = isRestTest ? /"code": 400/ : /3 INVALID_ARGUMENT.*/;
+          const expectedErrorPattern = isRestTest
+            ? /"code": 400/
+            : /3 INVALID_ARGUMENT.*/;
           await expect(ppl.execute()).to.be.rejectedWith(expectedErrorPattern);
         });
       });
@@ -7459,7 +7461,9 @@ describe.skipClassic('Pipeline search', () => {
 
           snapshot = await ppl.execute();
           expect(snapshot.results.length).to.equal(1);
-          expect(['solTacos', 'eastsideTacos']).to.include(snapshot.results[0].id);
+          expect(['solTacos', 'eastsideTacos']).to.include(
+            snapshot.results[0].id,
+          );
         });
       });
 

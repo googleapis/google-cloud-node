@@ -38,16 +38,9 @@ import {
   mockGenerateAccessToken,
   mockStsTokenExchange,
   getExpectedExternalAccountMetricsHeaderValue,
-  saEmail,
 } from './externalclienthelper';
 import {DEFAULT_UNIVERSE} from '../src/auth/authclient';
 import {TestUtils} from './utils';
-import {
-  RegionalAccessBoundaryData,
-  SERVICE_ACCOUNT_LOOKUP_ENDPOINT,
-  WORKFORCE_LOOKUP_ENDPOINT,
-  WORKLOAD_LOOKUP_ENDPOINT,
-} from '../src/auth/regionalaccessboundary';
 nock.disableNetConnect();
 
 interface SampleResponse {
@@ -162,20 +155,11 @@ describe('BaseExternalAccountClient', () => {
     '//iam.googleapis.com/projects_suffix/123456',
   ];
 
-  let sandbox: sinon.SinonSandbox;
-  beforeEach(() => {
-    sandbox = sinon.createSandbox();
-    sandbox
-      .stub(BaseExternalAccountClient.prototype, 'getRegionalAccessBoundaryUrl')
-      .resolves(undefined);
-  });
-
   afterEach(() => {
     nock.cleanAll();
     if (clock) {
       clock.restore();
     }
-    sandbox.restore();
   });
 
   describe('Constructor', () => {
@@ -2720,236 +2704,6 @@ describe('BaseExternalAccountClient', () => {
         unexpiredTokenResponse.token,
         credentials.access_token,
       );
-    });
-  });
-
-  describe('regional access boundaries', () => {
-    const MOCK_ACCESS_TOKEN = 'ACCESS_TOKEN';
-    const MOCK_AUTH_HEADER = `Bearer ${MOCK_ACCESS_TOKEN}`;
-    const EXPECTED_RAB_DATA: RegionalAccessBoundaryData = {
-      locations: ['some-locations'],
-      encodedLocations: '0xdeadbeef',
-    };
-
-    beforeEach(() => {
-      (
-        BaseExternalAccountClient.prototype
-          .getRegionalAccessBoundaryUrl as sinon.SinonStub
-      ).restore();
-    });
-
-    afterEach(() => {
-      nock.cleanAll();
-    });
-
-    it('should trigger asynchronous RAB refresh for workload identity', async () => {
-      const projectNumber = '12345';
-      const workloadPoolId = 'my-pool';
-      const workloadAudience = `//iam.googleapis.com/projects/${projectNumber}/locations/global/workloadIdentityPools/${workloadPoolId}/providers/my-provider`;
-      const workloadOptions = {
-        ...externalAccountOptions,
-        audience: workloadAudience,
-      };
-      const client = new TestExternalAccountClient(workloadOptions);
-
-      const stsScope = mockStsTokenExchange([
-        {
-          statusCode: 200,
-          response: {...stsSuccessfulResponse, access_token: MOCK_ACCESS_TOKEN},
-          request: {
-            grant_type: 'urn:ietf:params:oauth:grant-type:token-exchange',
-            audience: workloadAudience,
-            scope: 'https://www.googleapis.com/auth/cloud-platform',
-            requested_token_type:
-              'urn:ietf:params:oauth:token-type:access_token',
-            subject_token: 'subject_token_0',
-            subject_token_type: 'urn:ietf:params:oauth:token-type:jwt',
-          },
-        },
-      ]);
-
-      const lookupUrl = WORKLOAD_LOOKUP_ENDPOINT.replace(
-        '{project_id}',
-        projectNumber,
-      ).replace('{pool_id}', workloadPoolId);
-
-      let rabLookupCalled = false;
-      const rabScope = nock(new URL(lookupUrl).origin)
-        .get(new URL(lookupUrl).pathname)
-        .matchHeader('authorization', MOCK_AUTH_HEADER)
-        .reply(() => {
-          rabLookupCalled = true;
-          return [200, EXPECTED_RAB_DATA];
-        });
-
-      // Initial call - should NOT have the header yet
-      const headers = await client.getRequestHeaders();
-      assert.strictEqual(headers.get('x-allowed-locations'), null);
-
-      // Wait for background lookup
-      let attempts = 0;
-      while (!rabLookupCalled && attempts < 10) {
-        await new Promise(r => setTimeout(r, 50));
-        attempts++;
-      }
-      assert.strictEqual(rabLookupCalled, true);
-
-      await new Promise(r => setTimeout(r, 50));
-      assert.deepStrictEqual(
-        client.getRegionalAccessBoundary(),
-        EXPECTED_RAB_DATA,
-      );
-
-      stsScope.done();
-      rabScope.done();
-    });
-
-    it('should trigger asynchronous RAB refresh for workforce identity', async () => {
-      const workforcePoolId = 'my-workforce-pool';
-      const location = 'global';
-      const workforceAudience = `//iam.googleapis.com/locations/${location}/workforcePools/${workforcePoolId}/providers/my-provider`;
-      const workforceOptions = {
-        ...externalAccountOptions,
-        audience: workforceAudience,
-      };
-      const client = new TestExternalAccountClient(workforceOptions);
-
-      const stsScope = mockStsTokenExchange([
-        {
-          statusCode: 200,
-          response: {...stsSuccessfulResponse, access_token: MOCK_ACCESS_TOKEN},
-          request: {
-            grant_type: 'urn:ietf:params:oauth:grant-type:token-exchange',
-            audience: workforceAudience,
-            scope: 'https://www.googleapis.com/auth/cloud-platform',
-            requested_token_type:
-              'urn:ietf:params:oauth:token-type:access_token',
-            subject_token: 'subject_token_0',
-            subject_token_type: 'urn:ietf:params:oauth:token-type:jwt',
-          },
-        },
-      ]);
-
-      const lookupUrl = WORKFORCE_LOOKUP_ENDPOINT.replace(
-        '{location}',
-        location,
-      ).replace('{pool_id}', workforcePoolId);
-
-      let rabLookupCalled = false;
-      const rabScope = nock(new URL(lookupUrl).origin)
-        .get(new URL(lookupUrl).pathname)
-        .matchHeader('authorization', MOCK_AUTH_HEADER)
-        .reply(() => {
-          rabLookupCalled = true;
-          return [200, EXPECTED_RAB_DATA];
-        });
-
-      const headers = await client.getRequestHeaders();
-      assert.strictEqual(headers.get('x-allowed-locations'), null);
-
-      let attempts = 0;
-      while (!rabLookupCalled && attempts < 10) {
-        await new Promise(r => setTimeout(r, 50));
-        attempts++;
-      }
-      assert.strictEqual(rabLookupCalled, true);
-
-      await new Promise(r => setTimeout(r, 50));
-      assert.deepStrictEqual(
-        client.getRegionalAccessBoundary(),
-        EXPECTED_RAB_DATA,
-      );
-
-      stsScope.done();
-      rabScope.done();
-    });
-
-    it('should fail background lookup for an invalid audience', async () => {
-      const invalidAudience = 'invalid-audience-format/providers/1235';
-      const invalidOptions = {
-        ...externalAccountOptions,
-        audience: invalidAudience,
-      };
-      const client = new TestExternalAccountClient(invalidOptions);
-
-      // Note: background refresh fails silently in terms of getRequestHeaders resolving.
-      // But we can manually trigger getRegionalAccessBoundaryUrl to verify it throws.
-      await assert.rejects(
-        client.getRegionalAccessBoundaryUrl(),
-        /RegionalAccessBoundary: Invalid audience provided/,
-      );
-    });
-
-    it('should trigger asynchronous RAB refresh for impersonated service account', async () => {
-      const projectNumber = '12345';
-      const workloadPoolId = 'my-pool';
-      const workloadAudience = `//iam.googleapis.com/projects/${projectNumber}/locations/global/workloadIdentityPools/${workloadPoolId}/providers/my-provider`;
-      const workloadOptions = {
-        ...externalAccountOptionsWithSA,
-        audience: workloadAudience,
-      };
-      const client = new TestExternalAccountClient(workloadOptions);
-
-      const stsScope = mockStsTokenExchange([
-        {
-          statusCode: 200,
-          response: {...stsSuccessfulResponse, access_token: MOCK_ACCESS_TOKEN},
-          request: {
-            grant_type: 'urn:ietf:params:oauth:grant-type:token-exchange',
-            audience: workloadAudience,
-            scope: 'https://www.googleapis.com/auth/cloud-platform',
-            requested_token_type:
-              'urn:ietf:params:oauth:token-type:access_token',
-            subject_token: 'subject_token_0',
-            subject_token_type: 'urn:ietf:params:oauth:token-type:jwt',
-          },
-        },
-      ]);
-
-      const saSuccessResponse = {
-        accessToken: 'SA_ACCESS_TOKEN',
-        expireTime: new Date(Date.now() + 60 * 60 * 100).toISOString(),
-      };
-      const impersonatedScope = mockGenerateAccessToken({
-        statusCode: 200,
-        response: saSuccessResponse,
-        token: stsSuccessfulResponse.access_token,
-        scopes: ['https://www.googleapis.com/auth/cloud-platform'],
-      });
-
-      const lookupUrl = SERVICE_ACCOUNT_LOOKUP_ENDPOINT.replace(
-        '{service_account_email}',
-        encodeURIComponent(saEmail),
-      );
-
-      let rabLookupCalled = false;
-      const rabScope = nock(new URL(lookupUrl).origin)
-        .get(new URL(lookupUrl).pathname)
-        .matchHeader('authorization', `Bearer ${saSuccessResponse.accessToken}`)
-        .reply(() => {
-          rabLookupCalled = true;
-          return [200, EXPECTED_RAB_DATA];
-        });
-
-      const headers = await client.getRequestHeaders();
-      assert.strictEqual(headers.get('x-allowed-locations'), null);
-
-      let attempts = 0;
-      while (!rabLookupCalled && attempts < 10) {
-        await new Promise(r => setTimeout(r, 50));
-        attempts++;
-      }
-      assert.strictEqual(rabLookupCalled, true);
-
-      await new Promise(r => setTimeout(r, 50));
-      assert.deepStrictEqual(
-        client.getRegionalAccessBoundary(),
-        EXPECTED_RAB_DATA,
-      );
-
-      stsScope.done();
-      rabScope.done();
-      impersonatedScope.done();
     });
   });
 });

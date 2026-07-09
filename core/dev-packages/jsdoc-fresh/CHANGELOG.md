@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [5.0.4](https://github.com/googleapis/google-cloud-node/compare/jsdoc-fresh-v5.0.3...jsdoc-fresh-v5.0.4) (2026-06-25)
+
+
+### Bug Fixes
+
+* Correct repository URLs in core package.json files ([#8722](https://github.com/googleapis/google-cloud-node/issues/8722)) ([368f18e](https://github.com/googleapis/google-cloud-node/commit/368f18ecc361310e7bfb323ba0e7836186ea08d1))
+
 ## [5.0.3](https://github.com/googleapis/google-cloud-node/compare/jsdoc-fresh-v5.0.2...jsdoc-fresh-v5.0.3) (2026-05-11)
 
 
