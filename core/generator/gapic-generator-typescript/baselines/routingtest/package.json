@@ -2,8 +2,13 @@
   "name": "routingtest",
   "version": "0.1.0",
   "description": "Routingtest client for Node.js",
-  "repository": "googleapis/nodejs-routingtest",
+  "repository": {
+    "type": "git",
+    "directory": "packages/google-routingtest",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
+  },
   "license": "Apache-2.0",
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-routingtest",
   "author": "Google LLC",
   "main": "build/src/index.js",
   "files": [
@@ -54,6 +59,6 @@
     "sinon": "^20.0.0"
   },
   "engines": {
-    "node": ">=v18"
+    "node": ">=18"
   }
 }
