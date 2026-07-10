@@ -19,11 +19,10 @@ import {replaceProjectIdToken} from '@google-cloud/projectify';
 import * as extend from 'extend';
 import {AuthClient, GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
 import * as gax from 'google-gax';
+import {v1} from '.';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const PKG = require('../../package.json');
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const v1 = require('./v1');
 
 import {promisifySome} from './util';
 import {
@@ -57,8 +56,9 @@ import {PublishOptions} from './publisher';
 import {CallOptions} from 'google-gax';
 import {Transform} from 'stream';
 import {google} from '../protos/protos';
-import {SchemaServiceClient} from './v1';
 import * as tracing from './telemetry-tracing';
+
+type SchemaServiceClient = v1.SchemaServiceClient;
 
 /**
  * Project ID placeholder.
@@ -1262,7 +1262,7 @@ export class PubSub {
    */
   async getSchemaClient(): Promise<SchemaServiceClient> {
     if (!this.schemaClient) {
-      const options = await this.getClientConfig();
+      const options = await this.getClientConfig() as gax.ClientOptions;
       this.schemaClient = new v1.SchemaServiceClient(options);
     }
 
@@ -1307,13 +1307,13 @@ export class PubSub {
    */
   async getClientAsync_(config: GetClientConfig): Promise<gax.ClientStub> {
     // Make sure we've got a fully created config with projectId and such.
-    const options = await this.getClientConfig();
+    const options = await this.getClientConfig() as gax.ClientOptions;
 
     let gaxClient = this.api[config.client];
 
     if (!gaxClient) {
       // Lazily instantiate client.
-      gaxClient = new v1[config.client](options) as gax.ClientStub;
+      gaxClient = new v1[config.client](options) as unknown as gax.ClientStub;
       this.api[config.client] = gaxClient;
     }
 
