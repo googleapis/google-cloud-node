@@ -661,7 +661,6 @@ describe('Client pool', () => {
 
   it('logs transition to gRPC', async () => {
     const logs: string[] = [];
-    setLibVersion('8.6.0');
     setLogFunction(msg => logs.push(msg));
 
     try {
