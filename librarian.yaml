@@ -1347,6 +1347,16 @@ libraries:
     copyright_year: "2026"
     nodejs:
       default_version: v1
+  - name: google-cloud-productregistry
+    apis:
+      - path: google/cloud/productregistry/v1
+    copyright_year: "2026"
+  - name: google-cloud-pubsub-api
+    version: 0.1.0
+    apis:
+      - path: google/pubsub/v1
+    nodejs:
+      package_name: '@google-cloud/pubsub-api'
   - name: google-cloud-rapidmigrationassessment
     version: 2.2.2
     apis:
@@ -1765,8 +1775,8 @@ libraries:
     version: 5.1.1
     apis:
       - path: google/cloud/workflows/v1
-      - path: google/cloud/workflows/v1beta
       - path: google/cloud/workflows/executions/v1
+      - path: google/cloud/workflows/v1beta
       - path: google/cloud/workflows/executions/v1beta
     copyright_year: "2026"
     nodejs:
@@ -1803,6 +1813,12 @@ libraries:
     nodejs:
       default_version: v1beta3
       package_name: '@google-cloud/dataflow'
+  - name: google-developer-knowledge
+    apis:
+      - path: google/developers/knowledge/v1
+    copyright_year: "2026"
+    nodejs:
+      package_name: '@google/developer-knowledge'
   - name: google-devicesandservices-health
     version: 0.3.0
     apis:
