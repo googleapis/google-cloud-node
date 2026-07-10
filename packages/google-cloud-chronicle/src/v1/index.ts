@@ -23,7 +23,9 @@ export { DataAccessControlServiceClient } from './data_access_control_service_cl
 export { DataTableServiceClient } from './data_table_service_client';
 export { EntityServiceClient } from './entity_service_client';
 export { FeaturedContentNativeDashboardServiceClient } from './featured_content_native_dashboard_service_client';
+export { FindingsRefinementServiceClient } from './findings_refinement_service_client';
 export { InstanceServiceClient } from './instance_service_client';
 export { NativeDashboardServiceClient } from './native_dashboard_service_client';
 export { ReferenceListServiceClient } from './reference_list_service_client';
+export { RuleExecutionErrorServiceClient } from './rule_execution_error_service_client';
 export { RuleServiceClient } from './rule_service_client';

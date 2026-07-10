@@ -11,6 +11,6 @@
     "name": "agentregistry",
     "name_pretty": "Agent Registry",
     "product_documentation": "https://docs.cloud.google.com/agent-registry/overview",
-    "release_level": "stable",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-node"
 }

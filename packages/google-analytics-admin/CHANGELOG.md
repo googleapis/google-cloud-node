@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.2.0](https://github.com/googleapis/google-cloud-node/compare/admin-v9.1.0...admin-v9.2.0) (2026-06-25)
+
+
+### Features
+
+* Update sources and regenerate ([#8714](https://github.com/googleapis/google-cloud-node/issues/8714)) ([65e2f6d](https://github.com/googleapis/google-cloud-node/commit/65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa))
+
 ## [9.1.0](https://github.com/googleapis/google-cloud-node/compare/admin-v9.0.1...admin-v9.1.0) (2026-05-01)
 
 

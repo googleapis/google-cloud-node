@@ -384,7 +384,7 @@ describe.skipClassic('Pipeline class', () => {
       });
 
       it('can execute delete stage within a transaction', async () => {
-        const promise = firestore.runTransaction(async transaction => {
+        await firestore.runTransaction(async transaction => {
           const deletePpl = firestore
             .pipeline()
             .collection(dmlCol.path)
@@ -395,9 +395,8 @@ describe.skipClassic('Pipeline class', () => {
           expectResults(deleteRes, {documents_modified: 1});
         });
 
-        await expect(promise).to.be.rejectedWith(
-          /Transactional DML operations are not yet supported/,
-        );
+        const docSnap = await dmlCol.doc('book2').get();
+        expect(docSnap.exists).to.be.false;
       });
 
       it('can execute update stage with addFields', async () => {
@@ -7406,7 +7405,9 @@ describe.skipClassic('Pipeline search', () => {
             });
 
           const isRestTest = isRest(firestore);
-          const expectedErrorPattern = isRestTest ? /"code": 400/ : /3 INVALID_ARGUMENT.*/;
+          const expectedErrorPattern = isRestTest
+            ? /"code": 400/
+            : /3 INVALID_ARGUMENT.*/;
           await expect(ppl.execute()).to.be.rejectedWith(expectedErrorPattern);
         });
       });
@@ -7459,7 +7460,9 @@ describe.skipClassic('Pipeline search', () => {
 
           snapshot = await ppl.execute();
           expect(snapshot.results.length).to.equal(1);
-          expect(['solTacos', 'eastsideTacos']).to.include(snapshot.results[0].id);
+          expect(['solTacos', 'eastsideTacos']).to.include(
+            snapshot.results[0].id,
+          );
         });
       });
 

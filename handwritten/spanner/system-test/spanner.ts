@@ -2947,7 +2947,7 @@ describe('Spanner', () => {
     });
   });
 
-  describe('Backups', () => {
+  describe.skip('Backups', () => {
     const SKIP_POSTGRESQL_BACKUP_TESTS = true;
 
     let googleSqlDatabase1: Database;

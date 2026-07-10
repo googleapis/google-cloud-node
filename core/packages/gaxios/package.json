@@ -1,6 +1,6 @@
 {
   "name": "gaxios",
-  "version": "7.1.5",
+  "version": "7.2.0",
   "description": "A simple common HTTP client specifically for Google APIs and services.",
   "main": "build/cjs/src/index.js",
   "types": "build/cjs/src/index.d.ts",
@@ -38,8 +38,8 @@
   },
   "repository": {
     "type": "git",
-    "directory": "packages/gaxios",
-    "url": "https://github.com/googleapis/google-cloud-node-core.git"
+    "directory": "core/packages/gaxios",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
   },
   "keywords": [
     "google"
@@ -101,5 +101,5 @@
     "https-proxy-agent": "^7.0.1",
     "node-fetch": "^3.3.2"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node-core/tree/main/packages/gaxios"
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/core/packages/gaxios"
 }

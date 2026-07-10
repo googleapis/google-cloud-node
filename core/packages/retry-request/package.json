@@ -5,8 +5,8 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "directory": "packages/retry-request",
-    "url": "https://github.com/googleapis/google-cloud-node-core.git"
+    "directory": "core/packages/retry-request",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
   },
   "scripts": {
     "docs": "jsdoc -c .jsdoc.js",
@@ -47,5 +47,5 @@
     "mocha": "^11.1.0",
     "typescript": "5.8.3"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node-core/tree/main/packages/retry-request"
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/core/packages/retry-request"
 }

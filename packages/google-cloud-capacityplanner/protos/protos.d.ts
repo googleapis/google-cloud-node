@@ -5555,2176 +5555,520 @@ export namespace google {
                     }
                 }
 
-                /** Represents a CapacityPlanningService */
-                class CapacityPlanningService extends $protobuf.rpc.Service {
+                /** Properties of a FutureReservation. */
+                interface IFutureReservation {
 
-                    /**
-                     * Constructs a new CapacityPlanningService service.
-                     * @param rpcImpl RPC implementation
-                     * @param [requestDelimited=false] Whether requests are length-delimited
-                     * @param [responseDelimited=false] Whether responses are length-delimited
-                     */
-                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+                    /** FutureReservation specificSkuProperties */
+                    specificSkuProperties?: (google.cloud.capacityplanner.v1beta.FutureReservation.ISpecificSKUProperties|null);
 
-                    /**
-                     * Creates new CapacityPlanningService service using the specified rpc implementation.
-                     * @param rpcImpl RPC implementation
-                     * @param [requestDelimited=false] Whether requests are length-delimited
-                     * @param [responseDelimited=false] Whether responses are length-delimited
-                     * @returns RPC service. Useful where requests and/or responses are streamed.
-                     */
-                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): CapacityPlanningService;
+                    /** FutureReservation id */
+                    id?: (number|Long|string|null);
 
-                    /**
-                     * Calls GetCapacityPlan.
-                     * @param request GetCapacityPlanRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and CapacityPlan
-                     */
-                    public getCapacityPlan(request: google.cloud.capacityplanner.v1beta.IGetCapacityPlanRequest, callback: google.cloud.capacityplanner.v1beta.CapacityPlanningService.GetCapacityPlanCallback): void;
-
-                    /**
-                     * Calls GetCapacityPlan.
-                     * @param request GetCapacityPlanRequest message or plain object
-                     * @returns Promise
-                     */
-                    public getCapacityPlan(request: google.cloud.capacityplanner.v1beta.IGetCapacityPlanRequest): Promise<google.cloud.capacityplanner.v1beta.CapacityPlan>;
-
-                    /**
-                     * Calls QueryCapacityPlans.
-                     * @param request QueryCapacityPlansRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and QueryCapacityPlansResponse
-                     */
-                    public queryCapacityPlans(request: google.cloud.capacityplanner.v1beta.IQueryCapacityPlansRequest, callback: google.cloud.capacityplanner.v1beta.CapacityPlanningService.QueryCapacityPlansCallback): void;
-
-                    /**
-                     * Calls QueryCapacityPlans.
-                     * @param request QueryCapacityPlansRequest message or plain object
-                     * @returns Promise
-                     */
-                    public queryCapacityPlans(request: google.cloud.capacityplanner.v1beta.IQueryCapacityPlansRequest): Promise<google.cloud.capacityplanner.v1beta.QueryCapacityPlansResponse>;
-
-                    /**
-                     * Calls QueryCapacityPlanInsights.
-                     * @param request QueryCapacityPlanInsightsRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and QueryCapacityPlanInsightsResponse
-                     */
-                    public queryCapacityPlanInsights(request: google.cloud.capacityplanner.v1beta.IQueryCapacityPlanInsightsRequest, callback: google.cloud.capacityplanner.v1beta.CapacityPlanningService.QueryCapacityPlanInsightsCallback): void;
-
-                    /**
-                     * Calls QueryCapacityPlanInsights.
-                     * @param request QueryCapacityPlanInsightsRequest message or plain object
-                     * @returns Promise
-                     */
-                    public queryCapacityPlanInsights(request: google.cloud.capacityplanner.v1beta.IQueryCapacityPlanInsightsRequest): Promise<google.cloud.capacityplanner.v1beta.QueryCapacityPlanInsightsResponse>;
-                }
-
-                namespace CapacityPlanningService {
-
-                    /**
-                     * Callback as used by {@link google.cloud.capacityplanner.v1beta.CapacityPlanningService|getCapacityPlan}.
-                     * @param error Error, if any
-                     * @param [response] CapacityPlan
-                     */
-                    type GetCapacityPlanCallback = (error: (Error|null), response?: google.cloud.capacityplanner.v1beta.CapacityPlan) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.capacityplanner.v1beta.CapacityPlanningService|queryCapacityPlans}.
-                     * @param error Error, if any
-                     * @param [response] QueryCapacityPlansResponse
-                     */
-                    type QueryCapacityPlansCallback = (error: (Error|null), response?: google.cloud.capacityplanner.v1beta.QueryCapacityPlansResponse) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.capacityplanner.v1beta.CapacityPlanningService|queryCapacityPlanInsights}.
-                     * @param error Error, if any
-                     * @param [response] QueryCapacityPlanInsightsResponse
-                     */
-                    type QueryCapacityPlanInsightsCallback = (error: (Error|null), response?: google.cloud.capacityplanner.v1beta.QueryCapacityPlanInsightsResponse) => void;
-                }
-
-                /** State enum. */
-                enum State {
-                    STATE_UNSPECIFIED = 0,
-                    PENDING_REVIEW = 1,
-                    IN_REVIEW = 3,
-                    APPROVED_PROVISIONAL = 8,
-                    OBSOLETE = 5,
-                    CANNOT_BE_FULFILLED = 7,
-                    ON_HOLD_CONTACT_SALES = 9,
-                    IN_FULFILLMENT = 10
-                }
-
-                /** CapacityType enum. */
-                enum CapacityType {
-                    CAPACITY_TYPE_UNKNOWN = 0,
-                    CAPACITY_TYPE_INORGANIC_DRAFT = 1,
-                    CAPACITY_TYPE_INORGANIC_PENDING = 2,
-                    CAPACITY_TYPE_INORGANIC_APPROVED = 3
-                }
-
-                /** Properties of a GetCapacityPlanRequest. */
-                interface IGetCapacityPlanRequest {
-
-                    /** GetCapacityPlanRequest name */
-                    name?: (string|null);
-                }
-
-                /** Represents a GetCapacityPlanRequest. */
-                class GetCapacityPlanRequest implements IGetCapacityPlanRequest {
-
-                    /**
-                     * Constructs a new GetCapacityPlanRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.capacityplanner.v1beta.IGetCapacityPlanRequest);
-
-                    /** GetCapacityPlanRequest name. */
-                    public name: string;
-
-                    /**
-                     * Creates a new GetCapacityPlanRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns GetCapacityPlanRequest instance
-                     */
-                    public static create(properties?: google.cloud.capacityplanner.v1beta.IGetCapacityPlanRequest): google.cloud.capacityplanner.v1beta.GetCapacityPlanRequest;
-
-                    /**
-                     * Encodes the specified GetCapacityPlanRequest message. Does not implicitly {@link google.cloud.capacityplanner.v1beta.GetCapacityPlanRequest.verify|verify} messages.
-                     * @param message GetCapacityPlanRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.capacityplanner.v1beta.IGetCapacityPlanRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified GetCapacityPlanRequest message, length delimited. Does not implicitly {@link google.cloud.capacityplanner.v1beta.GetCapacityPlanRequest.verify|verify} messages.
-                     * @param message GetCapacityPlanRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.capacityplanner.v1beta.IGetCapacityPlanRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a GetCapacityPlanRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns GetCapacityPlanRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.capacityplanner.v1beta.GetCapacityPlanRequest;
-
-                    /**
-                     * Decodes a GetCapacityPlanRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns GetCapacityPlanRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.capacityplanner.v1beta.GetCapacityPlanRequest;
-
-                    /**
-                     * Verifies a GetCapacityPlanRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a GetCapacityPlanRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns GetCapacityPlanRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.capacityplanner.v1beta.GetCapacityPlanRequest;
-
-                    /**
-                     * Creates a plain object from a GetCapacityPlanRequest message. Also converts values to other types if specified.
-                     * @param message GetCapacityPlanRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.capacityplanner.v1beta.GetCapacityPlanRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this GetCapacityPlanRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for GetCapacityPlanRequest
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a QueryCapacityPlansRequest. */
-                interface IQueryCapacityPlansRequest {
-
-                    /** QueryCapacityPlansRequest parent */
-                    parent?: (string|null);
-
-                    /** QueryCapacityPlansRequest pageSize */
-                    pageSize?: (number|null);
-
-                    /** QueryCapacityPlansRequest pageToken */
-                    pageToken?: (string|null);
-
-                    /** QueryCapacityPlansRequest location */
-                    location?: (string|null);
-                }
-
-                /** Represents a QueryCapacityPlansRequest. */
-                class QueryCapacityPlansRequest implements IQueryCapacityPlansRequest {
-
-                    /**
-                     * Constructs a new QueryCapacityPlansRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.capacityplanner.v1beta.IQueryCapacityPlansRequest);
-
-                    /** QueryCapacityPlansRequest parent. */
-                    public parent: string;
-
-                    /** QueryCapacityPlansRequest pageSize. */
-                    public pageSize: number;
-
-                    /** QueryCapacityPlansRequest pageToken. */
-                    public pageToken: string;
-
-                    /** QueryCapacityPlansRequest location. */
-                    public location: string;
-
-                    /**
-                     * Creates a new QueryCapacityPlansRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns QueryCapacityPlansRequest instance
-                     */
-                    public static create(properties?: google.cloud.capacityplanner.v1beta.IQueryCapacityPlansRequest): google.cloud.capacityplanner.v1beta.QueryCapacityPlansRequest;
-
-                    /**
-                     * Encodes the specified QueryCapacityPlansRequest message. Does not implicitly {@link google.cloud.capacityplanner.v1beta.QueryCapacityPlansRequest.verify|verify} messages.
-                     * @param message QueryCapacityPlansRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.capacityplanner.v1beta.IQueryCapacityPlansRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified QueryCapacityPlansRequest message, length delimited. Does not implicitly {@link google.cloud.capacityplanner.v1beta.QueryCapacityPlansRequest.verify|verify} messages.
-                     * @param message QueryCapacityPlansRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.capacityplanner.v1beta.IQueryCapacityPlansRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a QueryCapacityPlansRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns QueryCapacityPlansRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.capacityplanner.v1beta.QueryCapacityPlansRequest;
-
-                    /**
-                     * Decodes a QueryCapacityPlansRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns QueryCapacityPlansRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.capacityplanner.v1beta.QueryCapacityPlansRequest;
-
-                    /**
-                     * Verifies a QueryCapacityPlansRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a QueryCapacityPlansRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns QueryCapacityPlansRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.capacityplanner.v1beta.QueryCapacityPlansRequest;
-
-                    /**
-                     * Creates a plain object from a QueryCapacityPlansRequest message. Also converts values to other types if specified.
-                     * @param message QueryCapacityPlansRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.capacityplanner.v1beta.QueryCapacityPlansRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this QueryCapacityPlansRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for QueryCapacityPlansRequest
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a QueryCapacityPlansResponse. */
-                interface IQueryCapacityPlansResponse {
-
-                    /** QueryCapacityPlansResponse capacityPlans */
-                    capacityPlans?: (google.cloud.capacityplanner.v1beta.ICapacityPlan[]|null);
-
-                    /** QueryCapacityPlansResponse nextPageToken */
-                    nextPageToken?: (string|null);
-                }
-
-                /** Represents a QueryCapacityPlansResponse. */
-                class QueryCapacityPlansResponse implements IQueryCapacityPlansResponse {
-
-                    /**
-                     * Constructs a new QueryCapacityPlansResponse.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.capacityplanner.v1beta.IQueryCapacityPlansResponse);
-
-                    /** QueryCapacityPlansResponse capacityPlans. */
-                    public capacityPlans: google.cloud.capacityplanner.v1beta.ICapacityPlan[];
-
-                    /** QueryCapacityPlansResponse nextPageToken. */
-                    public nextPageToken: string;
-
-                    /**
-                     * Creates a new QueryCapacityPlansResponse instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns QueryCapacityPlansResponse instance
-                     */
-                    public static create(properties?: google.cloud.capacityplanner.v1beta.IQueryCapacityPlansResponse): google.cloud.capacityplanner.v1beta.QueryCapacityPlansResponse;
-
-                    /**
-                     * Encodes the specified QueryCapacityPlansResponse message. Does not implicitly {@link google.cloud.capacityplanner.v1beta.QueryCapacityPlansResponse.verify|verify} messages.
-                     * @param message QueryCapacityPlansResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.capacityplanner.v1beta.IQueryCapacityPlansResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified QueryCapacityPlansResponse message, length delimited. Does not implicitly {@link google.cloud.capacityplanner.v1beta.QueryCapacityPlansResponse.verify|verify} messages.
-                     * @param message QueryCapacityPlansResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.capacityplanner.v1beta.IQueryCapacityPlansResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a QueryCapacityPlansResponse message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns QueryCapacityPlansResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.capacityplanner.v1beta.QueryCapacityPlansResponse;
-
-                    /**
-                     * Decodes a QueryCapacityPlansResponse message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns QueryCapacityPlansResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.capacityplanner.v1beta.QueryCapacityPlansResponse;
-
-                    /**
-                     * Verifies a QueryCapacityPlansResponse message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a QueryCapacityPlansResponse message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns QueryCapacityPlansResponse
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.capacityplanner.v1beta.QueryCapacityPlansResponse;
-
-                    /**
-                     * Creates a plain object from a QueryCapacityPlansResponse message. Also converts values to other types if specified.
-                     * @param message QueryCapacityPlansResponse
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.capacityplanner.v1beta.QueryCapacityPlansResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this QueryCapacityPlansResponse to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for QueryCapacityPlansResponse
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a QueryCapacityPlanInsightsRequest. */
-                interface IQueryCapacityPlanInsightsRequest {
-
-                    /** QueryCapacityPlanInsightsRequest parent */
-                    parent?: (string|null);
-
-                    /** QueryCapacityPlanInsightsRequest capacityPlanFilters */
-                    capacityPlanFilters?: (google.cloud.capacityplanner.v1beta.ICapacityPlanFilters|null);
-                }
-
-                /** Represents a QueryCapacityPlanInsightsRequest. */
-                class QueryCapacityPlanInsightsRequest implements IQueryCapacityPlanInsightsRequest {
-
-                    /**
-                     * Constructs a new QueryCapacityPlanInsightsRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.capacityplanner.v1beta.IQueryCapacityPlanInsightsRequest);
-
-                    /** QueryCapacityPlanInsightsRequest parent. */
-                    public parent: string;
-
-                    /** QueryCapacityPlanInsightsRequest capacityPlanFilters. */
-                    public capacityPlanFilters?: (google.cloud.capacityplanner.v1beta.ICapacityPlanFilters|null);
-
-                    /**
-                     * Creates a new QueryCapacityPlanInsightsRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns QueryCapacityPlanInsightsRequest instance
-                     */
-                    public static create(properties?: google.cloud.capacityplanner.v1beta.IQueryCapacityPlanInsightsRequest): google.cloud.capacityplanner.v1beta.QueryCapacityPlanInsightsRequest;
-
-                    /**
-                     * Encodes the specified QueryCapacityPlanInsightsRequest message. Does not implicitly {@link google.cloud.capacityplanner.v1beta.QueryCapacityPlanInsightsRequest.verify|verify} messages.
-                     * @param message QueryCapacityPlanInsightsRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.capacityplanner.v1beta.IQueryCapacityPlanInsightsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified QueryCapacityPlanInsightsRequest message, length delimited. Does not implicitly {@link google.cloud.capacityplanner.v1beta.QueryCapacityPlanInsightsRequest.verify|verify} messages.
-                     * @param message QueryCapacityPlanInsightsRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.capacityplanner.v1beta.IQueryCapacityPlanInsightsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a QueryCapacityPlanInsightsRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns QueryCapacityPlanInsightsRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.capacityplanner.v1beta.QueryCapacityPlanInsightsRequest;
-
-                    /**
-                     * Decodes a QueryCapacityPlanInsightsRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns QueryCapacityPlanInsightsRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.capacityplanner.v1beta.QueryCapacityPlanInsightsRequest;
-
-                    /**
-                     * Verifies a QueryCapacityPlanInsightsRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a QueryCapacityPlanInsightsRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns QueryCapacityPlanInsightsRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.capacityplanner.v1beta.QueryCapacityPlanInsightsRequest;
-
-                    /**
-                     * Creates a plain object from a QueryCapacityPlanInsightsRequest message. Also converts values to other types if specified.
-                     * @param message QueryCapacityPlanInsightsRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.capacityplanner.v1beta.QueryCapacityPlanInsightsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this QueryCapacityPlanInsightsRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for QueryCapacityPlanInsightsRequest
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a QueryCapacityPlanInsightsResponse. */
-                interface IQueryCapacityPlanInsightsResponse {
-
-                    /** QueryCapacityPlanInsightsResponse aggregatedCapacityPlanView */
-                    aggregatedCapacityPlanView?: (google.cloud.capacityplanner.v1beta.ICapacityPlanView|null);
-                }
-
-                /** Represents a QueryCapacityPlanInsightsResponse. */
-                class QueryCapacityPlanInsightsResponse implements IQueryCapacityPlanInsightsResponse {
-
-                    /**
-                     * Constructs a new QueryCapacityPlanInsightsResponse.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.capacityplanner.v1beta.IQueryCapacityPlanInsightsResponse);
-
-                    /** QueryCapacityPlanInsightsResponse aggregatedCapacityPlanView. */
-                    public aggregatedCapacityPlanView?: (google.cloud.capacityplanner.v1beta.ICapacityPlanView|null);
-
-                    /**
-                     * Creates a new QueryCapacityPlanInsightsResponse instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns QueryCapacityPlanInsightsResponse instance
-                     */
-                    public static create(properties?: google.cloud.capacityplanner.v1beta.IQueryCapacityPlanInsightsResponse): google.cloud.capacityplanner.v1beta.QueryCapacityPlanInsightsResponse;
-
-                    /**
-                     * Encodes the specified QueryCapacityPlanInsightsResponse message. Does not implicitly {@link google.cloud.capacityplanner.v1beta.QueryCapacityPlanInsightsResponse.verify|verify} messages.
-                     * @param message QueryCapacityPlanInsightsResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.capacityplanner.v1beta.IQueryCapacityPlanInsightsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified QueryCapacityPlanInsightsResponse message, length delimited. Does not implicitly {@link google.cloud.capacityplanner.v1beta.QueryCapacityPlanInsightsResponse.verify|verify} messages.
-                     * @param message QueryCapacityPlanInsightsResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.capacityplanner.v1beta.IQueryCapacityPlanInsightsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a QueryCapacityPlanInsightsResponse message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns QueryCapacityPlanInsightsResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.capacityplanner.v1beta.QueryCapacityPlanInsightsResponse;
-
-                    /**
-                     * Decodes a QueryCapacityPlanInsightsResponse message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns QueryCapacityPlanInsightsResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.capacityplanner.v1beta.QueryCapacityPlanInsightsResponse;
-
-                    /**
-                     * Verifies a QueryCapacityPlanInsightsResponse message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a QueryCapacityPlanInsightsResponse message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns QueryCapacityPlanInsightsResponse
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.capacityplanner.v1beta.QueryCapacityPlanInsightsResponse;
-
-                    /**
-                     * Creates a plain object from a QueryCapacityPlanInsightsResponse message. Also converts values to other types if specified.
-                     * @param message QueryCapacityPlanInsightsResponse
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.capacityplanner.v1beta.QueryCapacityPlanInsightsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this QueryCapacityPlanInsightsResponse to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for QueryCapacityPlanInsightsResponse
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a CapacityPlanFilters. */
-                interface ICapacityPlanFilters {
-
-                    /** CapacityPlanFilters keys */
-                    keys?: (google.cloud.capacityplanner.v1beta.ICapacityPlanKey[]|null);
-
-                    /** CapacityPlanFilters capacityTypes */
-                    capacityTypes?: (google.cloud.capacityplanner.v1beta.CapacityType[]|null);
-
-                    /** CapacityPlanFilters capacityPlanId */
-                    capacityPlanId?: (string|null);
-                }
-
-                /** Represents a CapacityPlanFilters. */
-                class CapacityPlanFilters implements ICapacityPlanFilters {
-
-                    /**
-                     * Constructs a new CapacityPlanFilters.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.capacityplanner.v1beta.ICapacityPlanFilters);
-
-                    /** CapacityPlanFilters keys. */
-                    public keys: google.cloud.capacityplanner.v1beta.ICapacityPlanKey[];
-
-                    /** CapacityPlanFilters capacityTypes. */
-                    public capacityTypes: google.cloud.capacityplanner.v1beta.CapacityType[];
-
-                    /** CapacityPlanFilters capacityPlanId. */
-                    public capacityPlanId: string;
-
-                    /**
-                     * Creates a new CapacityPlanFilters instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns CapacityPlanFilters instance
-                     */
-                    public static create(properties?: google.cloud.capacityplanner.v1beta.ICapacityPlanFilters): google.cloud.capacityplanner.v1beta.CapacityPlanFilters;
-
-                    /**
-                     * Encodes the specified CapacityPlanFilters message. Does not implicitly {@link google.cloud.capacityplanner.v1beta.CapacityPlanFilters.verify|verify} messages.
-                     * @param message CapacityPlanFilters message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.capacityplanner.v1beta.ICapacityPlanFilters, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified CapacityPlanFilters message, length delimited. Does not implicitly {@link google.cloud.capacityplanner.v1beta.CapacityPlanFilters.verify|verify} messages.
-                     * @param message CapacityPlanFilters message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.capacityplanner.v1beta.ICapacityPlanFilters, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a CapacityPlanFilters message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns CapacityPlanFilters
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.capacityplanner.v1beta.CapacityPlanFilters;
-
-                    /**
-                     * Decodes a CapacityPlanFilters message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns CapacityPlanFilters
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.capacityplanner.v1beta.CapacityPlanFilters;
-
-                    /**
-                     * Verifies a CapacityPlanFilters message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a CapacityPlanFilters message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns CapacityPlanFilters
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.capacityplanner.v1beta.CapacityPlanFilters;
-
-                    /**
-                     * Creates a plain object from a CapacityPlanFilters message. Also converts values to other types if specified.
-                     * @param message CapacityPlanFilters
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.capacityplanner.v1beta.CapacityPlanFilters, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this CapacityPlanFilters to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for CapacityPlanFilters
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a CapacityPlanKey. */
-                interface ICapacityPlanKey {
-
-                    /** CapacityPlanKey resourceContainer */
-                    resourceContainer?: (google.cloud.capacityplanner.v1beta.IResourceContainer|null);
-
-                    /** CapacityPlanKey resourceIdKey */
-                    resourceIdKey?: (google.cloud.capacityplanner.v1beta.IResourceIdKey|null);
-
-                    /** CapacityPlanKey locationId */
-                    locationId?: (google.cloud.capacityplanner.v1beta.ILocationIdentifier|null);
-                }
-
-                /** Represents a CapacityPlanKey. */
-                class CapacityPlanKey implements ICapacityPlanKey {
-
-                    /**
-                     * Constructs a new CapacityPlanKey.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.capacityplanner.v1beta.ICapacityPlanKey);
-
-                    /** CapacityPlanKey resourceContainer. */
-                    public resourceContainer?: (google.cloud.capacityplanner.v1beta.IResourceContainer|null);
-
-                    /** CapacityPlanKey resourceIdKey. */
-                    public resourceIdKey?: (google.cloud.capacityplanner.v1beta.IResourceIdKey|null);
-
-                    /** CapacityPlanKey locationId. */
-                    public locationId?: (google.cloud.capacityplanner.v1beta.ILocationIdentifier|null);
-
-                    /**
-                     * Creates a new CapacityPlanKey instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns CapacityPlanKey instance
-                     */
-                    public static create(properties?: google.cloud.capacityplanner.v1beta.ICapacityPlanKey): google.cloud.capacityplanner.v1beta.CapacityPlanKey;
-
-                    /**
-                     * Encodes the specified CapacityPlanKey message. Does not implicitly {@link google.cloud.capacityplanner.v1beta.CapacityPlanKey.verify|verify} messages.
-                     * @param message CapacityPlanKey message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.capacityplanner.v1beta.ICapacityPlanKey, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified CapacityPlanKey message, length delimited. Does not implicitly {@link google.cloud.capacityplanner.v1beta.CapacityPlanKey.verify|verify} messages.
-                     * @param message CapacityPlanKey message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.capacityplanner.v1beta.ICapacityPlanKey, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a CapacityPlanKey message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns CapacityPlanKey
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.capacityplanner.v1beta.CapacityPlanKey;
-
-                    /**
-                     * Decodes a CapacityPlanKey message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns CapacityPlanKey
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.capacityplanner.v1beta.CapacityPlanKey;
-
-                    /**
-                     * Verifies a CapacityPlanKey message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a CapacityPlanKey message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns CapacityPlanKey
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.capacityplanner.v1beta.CapacityPlanKey;
-
-                    /**
-                     * Creates a plain object from a CapacityPlanKey message. Also converts values to other types if specified.
-                     * @param message CapacityPlanKey
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.capacityplanner.v1beta.CapacityPlanKey, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this CapacityPlanKey to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for CapacityPlanKey
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a CapacityPlanView. */
-                interface ICapacityPlanView {
-
-                    /** CapacityPlanView key */
-                    key?: (google.cloud.capacityplanner.v1beta.ICapacityPlanKey|null);
-
-                    /** CapacityPlanView timeSeriesViews */
-                    timeSeriesViews?: (google.cloud.capacityplanner.v1beta.ITimeSeriesView[]|null);
-                }
-
-                /** Represents a CapacityPlanView. */
-                class CapacityPlanView implements ICapacityPlanView {
-
-                    /**
-                     * Constructs a new CapacityPlanView.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.capacityplanner.v1beta.ICapacityPlanView);
-
-                    /** CapacityPlanView key. */
-                    public key?: (google.cloud.capacityplanner.v1beta.ICapacityPlanKey|null);
-
-                    /** CapacityPlanView timeSeriesViews. */
-                    public timeSeriesViews: google.cloud.capacityplanner.v1beta.ITimeSeriesView[];
-
-                    /**
-                     * Creates a new CapacityPlanView instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns CapacityPlanView instance
-                     */
-                    public static create(properties?: google.cloud.capacityplanner.v1beta.ICapacityPlanView): google.cloud.capacityplanner.v1beta.CapacityPlanView;
-
-                    /**
-                     * Encodes the specified CapacityPlanView message. Does not implicitly {@link google.cloud.capacityplanner.v1beta.CapacityPlanView.verify|verify} messages.
-                     * @param message CapacityPlanView message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.capacityplanner.v1beta.ICapacityPlanView, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified CapacityPlanView message, length delimited. Does not implicitly {@link google.cloud.capacityplanner.v1beta.CapacityPlanView.verify|verify} messages.
-                     * @param message CapacityPlanView message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.capacityplanner.v1beta.ICapacityPlanView, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a CapacityPlanView message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns CapacityPlanView
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.capacityplanner.v1beta.CapacityPlanView;
-
-                    /**
-                     * Decodes a CapacityPlanView message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns CapacityPlanView
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.capacityplanner.v1beta.CapacityPlanView;
-
-                    /**
-                     * Verifies a CapacityPlanView message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a CapacityPlanView message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns CapacityPlanView
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.capacityplanner.v1beta.CapacityPlanView;
-
-                    /**
-                     * Creates a plain object from a CapacityPlanView message. Also converts values to other types if specified.
-                     * @param message CapacityPlanView
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.capacityplanner.v1beta.CapacityPlanView, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this CapacityPlanView to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for CapacityPlanView
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a TimeSeriesView. */
-                interface ITimeSeriesView {
-
-                    /** TimeSeriesView type */
-                    type?: (google.cloud.capacityplanner.v1beta.CapacityType|keyof typeof google.cloud.capacityplanner.v1beta.CapacityType|null);
-
-                    /** TimeSeriesView capacityValue */
-                    capacityValue?: (google.cloud.capacityplanner.v1beta.IDemandValue|null);
-                }
-
-                /** Represents a TimeSeriesView. */
-                class TimeSeriesView implements ITimeSeriesView {
-
-                    /**
-                     * Constructs a new TimeSeriesView.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.capacityplanner.v1beta.ITimeSeriesView);
-
-                    /** TimeSeriesView type. */
-                    public type: (google.cloud.capacityplanner.v1beta.CapacityType|keyof typeof google.cloud.capacityplanner.v1beta.CapacityType);
-
-                    /** TimeSeriesView capacityValue. */
-                    public capacityValue?: (google.cloud.capacityplanner.v1beta.IDemandValue|null);
-
-                    /**
-                     * Creates a new TimeSeriesView instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns TimeSeriesView instance
-                     */
-                    public static create(properties?: google.cloud.capacityplanner.v1beta.ITimeSeriesView): google.cloud.capacityplanner.v1beta.TimeSeriesView;
-
-                    /**
-                     * Encodes the specified TimeSeriesView message. Does not implicitly {@link google.cloud.capacityplanner.v1beta.TimeSeriesView.verify|verify} messages.
-                     * @param message TimeSeriesView message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.capacityplanner.v1beta.ITimeSeriesView, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified TimeSeriesView message, length delimited. Does not implicitly {@link google.cloud.capacityplanner.v1beta.TimeSeriesView.verify|verify} messages.
-                     * @param message TimeSeriesView message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.capacityplanner.v1beta.ITimeSeriesView, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a TimeSeriesView message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns TimeSeriesView
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.capacityplanner.v1beta.TimeSeriesView;
-
-                    /**
-                     * Decodes a TimeSeriesView message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns TimeSeriesView
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.capacityplanner.v1beta.TimeSeriesView;
-
-                    /**
-                     * Verifies a TimeSeriesView message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a TimeSeriesView message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns TimeSeriesView
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.capacityplanner.v1beta.TimeSeriesView;
-
-                    /**
-                     * Creates a plain object from a TimeSeriesView message. Also converts values to other types if specified.
-                     * @param message TimeSeriesView
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.capacityplanner.v1beta.TimeSeriesView, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this TimeSeriesView to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for TimeSeriesView
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a CapacityPlan. */
-                interface ICapacityPlan {
-
-                    /** CapacityPlan name */
-                    name?: (string|null);
-
-                    /** CapacityPlan capacityDemandMetadata */
-                    capacityDemandMetadata?: (google.cloud.capacityplanner.v1beta.IDemandMetadata|null);
-
-                    /** CapacityPlan serviceDemands */
-                    serviceDemands?: (google.cloud.capacityplanner.v1beta.IServiceDemand[]|null);
-
-                    /** CapacityPlan reporter */
-                    reporter?: (google.cloud.capacityplanner.v1beta.IUser|null);
-
-                    /** CapacityPlan state */
-                    state?: (google.cloud.capacityplanner.v1beta.State|keyof typeof google.cloud.capacityplanner.v1beta.State|null);
-
-                    /** CapacityPlan createTime */
+                    /** FutureReservation createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
 
-                    /** CapacityPlan updateTime */
-                    updateTime?: (google.protobuf.ITimestamp|null);
+                    /** FutureReservation zone */
+                    zone?: (string|null);
 
-                    /** CapacityPlan description */
+                    /** FutureReservation description */
                     description?: (string|null);
 
-                    /** CapacityPlan title */
-                    title?: (string|null);
+                    /** FutureReservation futureReservation */
+                    futureReservation?: (string|null);
+
+                    /** FutureReservation ownerProjectId */
+                    ownerProjectId?: (string|null);
+
+                    /** FutureReservation timeWindow */
+                    timeWindow?: (google.cloud.capacityplanner.v1beta.FutureReservation.ITimeWindow|null);
+
+                    /** FutureReservation shareSettings */
+                    shareSettings?: (google.cloud.capacityplanner.v1beta.Allocation.IShareSettings|null);
+
+                    /** FutureReservation namePrefix */
+                    namePrefix?: (string|null);
+
+                    /** FutureReservation status */
+                    status?: (google.cloud.capacityplanner.v1beta.FutureReservation.IStatus|null);
+
+                    /** FutureReservation autoCreatedReservationsDeleteTime */
+                    autoCreatedReservationsDeleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FutureReservation autoDeleteAutoCreatedReservations */
+                    autoDeleteAutoCreatedReservations?: (boolean|null);
                 }
 
-                /** Represents a CapacityPlan. */
-                class CapacityPlan implements ICapacityPlan {
+                /** Represents a FutureReservation. */
+                class FutureReservation implements IFutureReservation {
 
                     /**
-                     * Constructs a new CapacityPlan.
+                     * Constructs a new FutureReservation.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.capacityplanner.v1beta.ICapacityPlan);
+                    constructor(properties?: google.cloud.capacityplanner.v1beta.IFutureReservation);
 
-                    /** CapacityPlan name. */
-                    public name: string;
+                    /** FutureReservation specificSkuProperties. */
+                    public specificSkuProperties?: (google.cloud.capacityplanner.v1beta.FutureReservation.ISpecificSKUProperties|null);
 
-                    /** CapacityPlan capacityDemandMetadata. */
-                    public capacityDemandMetadata?: (google.cloud.capacityplanner.v1beta.IDemandMetadata|null);
+                    /** FutureReservation id. */
+                    public id: (number|Long|string);
 
-                    /** CapacityPlan serviceDemands. */
-                    public serviceDemands: google.cloud.capacityplanner.v1beta.IServiceDemand[];
-
-                    /** CapacityPlan reporter. */
-                    public reporter?: (google.cloud.capacityplanner.v1beta.IUser|null);
-
-                    /** CapacityPlan state. */
-                    public state: (google.cloud.capacityplanner.v1beta.State|keyof typeof google.cloud.capacityplanner.v1beta.State);
-
-                    /** CapacityPlan createTime. */
+                    /** FutureReservation createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
 
-                    /** CapacityPlan updateTime. */
-                    public updateTime?: (google.protobuf.ITimestamp|null);
+                    /** FutureReservation zone. */
+                    public zone: string;
 
-                    /** CapacityPlan description. */
+                    /** FutureReservation description. */
                     public description: string;
 
-                    /** CapacityPlan title. */
-                    public title: string;
+                    /** FutureReservation futureReservation. */
+                    public futureReservation: string;
+
+                    /** FutureReservation ownerProjectId. */
+                    public ownerProjectId: string;
+
+                    /** FutureReservation timeWindow. */
+                    public timeWindow?: (google.cloud.capacityplanner.v1beta.FutureReservation.ITimeWindow|null);
+
+                    /** FutureReservation shareSettings. */
+                    public shareSettings?: (google.cloud.capacityplanner.v1beta.Allocation.IShareSettings|null);
+
+                    /** FutureReservation namePrefix. */
+                    public namePrefix: string;
+
+                    /** FutureReservation status. */
+                    public status?: (google.cloud.capacityplanner.v1beta.FutureReservation.IStatus|null);
+
+                    /** FutureReservation autoCreatedReservationsDeleteTime. */
+                    public autoCreatedReservationsDeleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FutureReservation autoDeleteAutoCreatedReservations. */
+                    public autoDeleteAutoCreatedReservations: boolean;
+
+                    /** FutureReservation type. */
+                    public type?: "specificSkuProperties";
 
                     /**
-                     * Creates a new CapacityPlan instance using the specified properties.
+                     * Creates a new FutureReservation instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns CapacityPlan instance
+                     * @returns FutureReservation instance
                      */
-                    public static create(properties?: google.cloud.capacityplanner.v1beta.ICapacityPlan): google.cloud.capacityplanner.v1beta.CapacityPlan;
+                    public static create(properties?: google.cloud.capacityplanner.v1beta.IFutureReservation): google.cloud.capacityplanner.v1beta.FutureReservation;
 
                     /**
-                     * Encodes the specified CapacityPlan message. Does not implicitly {@link google.cloud.capacityplanner.v1beta.CapacityPlan.verify|verify} messages.
-                     * @param message CapacityPlan message or plain object to encode
+                     * Encodes the specified FutureReservation message. Does not implicitly {@link google.cloud.capacityplanner.v1beta.FutureReservation.verify|verify} messages.
+                     * @param message FutureReservation message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.capacityplanner.v1beta.ICapacityPlan, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.capacityplanner.v1beta.IFutureReservation, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified CapacityPlan message, length delimited. Does not implicitly {@link google.cloud.capacityplanner.v1beta.CapacityPlan.verify|verify} messages.
-                     * @param message CapacityPlan message or plain object to encode
+                     * Encodes the specified FutureReservation message, length delimited. Does not implicitly {@link google.cloud.capacityplanner.v1beta.FutureReservation.verify|verify} messages.
+                     * @param message FutureReservation message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.capacityplanner.v1beta.ICapacityPlan, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.capacityplanner.v1beta.IFutureReservation, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes a CapacityPlan message from the specified reader or buffer.
+                     * Decodes a FutureReservation message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns CapacityPlan
+                     * @returns FutureReservation
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.capacityplanner.v1beta.CapacityPlan;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.capacityplanner.v1beta.FutureReservation;
 
                     /**
-                     * Decodes a CapacityPlan message from the specified reader or buffer, length delimited.
+                     * Decodes a FutureReservation message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns CapacityPlan
+                     * @returns FutureReservation
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.capacityplanner.v1beta.CapacityPlan;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.capacityplanner.v1beta.FutureReservation;
 
                     /**
-                     * Verifies a CapacityPlan message.
+                     * Verifies a FutureReservation message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates a CapacityPlan message from a plain object. Also converts values to their respective internal types.
+                     * Creates a FutureReservation message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns CapacityPlan
+                     * @returns FutureReservation
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.capacityplanner.v1beta.CapacityPlan;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.capacityplanner.v1beta.FutureReservation;
 
                     /**
-                     * Creates a plain object from a CapacityPlan message. Also converts values to other types if specified.
-                     * @param message CapacityPlan
+                     * Creates a plain object from a FutureReservation message. Also converts values to other types if specified.
+                     * @param message FutureReservation
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.capacityplanner.v1beta.CapacityPlan, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.capacityplanner.v1beta.FutureReservation, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this CapacityPlan to JSON.
+                     * Converts this FutureReservation to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
 
                     /**
-                     * Gets the default type url for CapacityPlan
+                     * Gets the default type url for FutureReservation
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** Properties of a DemandMetadata. */
-                interface IDemandMetadata {
-
-                    /** DemandMetadata demandPreferences */
-                    demandPreferences?: (google.cloud.capacityplanner.v1beta.IDemandPreference[]|null);
-                }
-
-                /** Represents a DemandMetadata. */
-                class DemandMetadata implements IDemandMetadata {
-
-                    /**
-                     * Constructs a new DemandMetadata.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.capacityplanner.v1beta.IDemandMetadata);
-
-                    /** DemandMetadata demandPreferences. */
-                    public demandPreferences: google.cloud.capacityplanner.v1beta.IDemandPreference[];
-
-                    /**
-                     * Creates a new DemandMetadata instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns DemandMetadata instance
-                     */
-                    public static create(properties?: google.cloud.capacityplanner.v1beta.IDemandMetadata): google.cloud.capacityplanner.v1beta.DemandMetadata;
-
-                    /**
-                     * Encodes the specified DemandMetadata message. Does not implicitly {@link google.cloud.capacityplanner.v1beta.DemandMetadata.verify|verify} messages.
-                     * @param message DemandMetadata message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.capacityplanner.v1beta.IDemandMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified DemandMetadata message, length delimited. Does not implicitly {@link google.cloud.capacityplanner.v1beta.DemandMetadata.verify|verify} messages.
-                     * @param message DemandMetadata message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.capacityplanner.v1beta.IDemandMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a DemandMetadata message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns DemandMetadata
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.capacityplanner.v1beta.DemandMetadata;
-
-                    /**
-                     * Decodes a DemandMetadata message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns DemandMetadata
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.capacityplanner.v1beta.DemandMetadata;
-
-                    /**
-                     * Verifies a DemandMetadata message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a DemandMetadata message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns DemandMetadata
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.capacityplanner.v1beta.DemandMetadata;
-
-                    /**
-                     * Creates a plain object from a DemandMetadata message. Also converts values to other types if specified.
-                     * @param message DemandMetadata
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.capacityplanner.v1beta.DemandMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this DemandMetadata to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for DemandMetadata
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a DemandPreference. */
-                interface IDemandPreference {
-
-                    /** DemandPreference preferenceId */
-                    preferenceId?: (string|null);
-
-                    /** DemandPreference value */
-                    value?: (google.cloud.capacityplanner.v1beta.IValue|null);
-                }
-
-                /** Represents a DemandPreference. */
-                class DemandPreference implements IDemandPreference {
-
-                    /**
-                     * Constructs a new DemandPreference.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.capacityplanner.v1beta.IDemandPreference);
-
-                    /** DemandPreference preferenceId. */
-                    public preferenceId: string;
-
-                    /** DemandPreference value. */
-                    public value?: (google.cloud.capacityplanner.v1beta.IValue|null);
-
-                    /**
-                     * Creates a new DemandPreference instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns DemandPreference instance
-                     */
-                    public static create(properties?: google.cloud.capacityplanner.v1beta.IDemandPreference): google.cloud.capacityplanner.v1beta.DemandPreference;
-
-                    /**
-                     * Encodes the specified DemandPreference message. Does not implicitly {@link google.cloud.capacityplanner.v1beta.DemandPreference.verify|verify} messages.
-                     * @param message DemandPreference message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.capacityplanner.v1beta.IDemandPreference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified DemandPreference message, length delimited. Does not implicitly {@link google.cloud.capacityplanner.v1beta.DemandPreference.verify|verify} messages.
-                     * @param message DemandPreference message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.capacityplanner.v1beta.IDemandPreference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a DemandPreference message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns DemandPreference
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.capacityplanner.v1beta.DemandPreference;
-
-                    /**
-                     * Decodes a DemandPreference message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns DemandPreference
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.capacityplanner.v1beta.DemandPreference;
-
-                    /**
-                     * Verifies a DemandPreference message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a DemandPreference message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns DemandPreference
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.capacityplanner.v1beta.DemandPreference;
-
-                    /**
-                     * Creates a plain object from a DemandPreference message. Also converts values to other types if specified.
-                     * @param message DemandPreference
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.capacityplanner.v1beta.DemandPreference, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this DemandPreference to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for DemandPreference
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a ServiceDemand. */
-                interface IServiceDemand {
-
-                    /** ServiceDemand service */
-                    service?: (string|null);
-
-                    /** ServiceDemand demandMetadata */
-                    demandMetadata?: (google.cloud.capacityplanner.v1beta.IDemandMetadata|null);
-
-                    /** ServiceDemand resourceDemands */
-                    resourceDemands?: (google.cloud.capacityplanner.v1beta.IResourceDemand[]|null);
-                }
-
-                /** Represents a ServiceDemand. */
-                class ServiceDemand implements IServiceDemand {
-
-                    /**
-                     * Constructs a new ServiceDemand.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.capacityplanner.v1beta.IServiceDemand);
-
-                    /** ServiceDemand service. */
-                    public service: string;
-
-                    /** ServiceDemand demandMetadata. */
-                    public demandMetadata?: (google.cloud.capacityplanner.v1beta.IDemandMetadata|null);
-
-                    /** ServiceDemand resourceDemands. */
-                    public resourceDemands: google.cloud.capacityplanner.v1beta.IResourceDemand[];
-
-                    /**
-                     * Creates a new ServiceDemand instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ServiceDemand instance
-                     */
-                    public static create(properties?: google.cloud.capacityplanner.v1beta.IServiceDemand): google.cloud.capacityplanner.v1beta.ServiceDemand;
-
-                    /**
-                     * Encodes the specified ServiceDemand message. Does not implicitly {@link google.cloud.capacityplanner.v1beta.ServiceDemand.verify|verify} messages.
-                     * @param message ServiceDemand message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.capacityplanner.v1beta.IServiceDemand, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ServiceDemand message, length delimited. Does not implicitly {@link google.cloud.capacityplanner.v1beta.ServiceDemand.verify|verify} messages.
-                     * @param message ServiceDemand message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.capacityplanner.v1beta.IServiceDemand, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ServiceDemand message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ServiceDemand
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.capacityplanner.v1beta.ServiceDemand;
-
-                    /**
-                     * Decodes a ServiceDemand message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ServiceDemand
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.capacityplanner.v1beta.ServiceDemand;
-
-                    /**
-                     * Verifies a ServiceDemand message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ServiceDemand message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ServiceDemand
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.capacityplanner.v1beta.ServiceDemand;
-
-                    /**
-                     * Creates a plain object from a ServiceDemand message. Also converts values to other types if specified.
-                     * @param message ServiceDemand
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.capacityplanner.v1beta.ServiceDemand, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ServiceDemand to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ServiceDemand
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a ResourceDemand. */
-                interface IResourceDemand {
-
-                    /** ResourceDemand id */
-                    id?: (string|null);
-
-                    /** ResourceDemand resourceContainer */
-                    resourceContainer?: (google.cloud.capacityplanner.v1beta.IResourceContainer|null);
-
-                    /** ResourceDemand resourceId */
-                    resourceId?: (google.cloud.capacityplanner.v1beta.IResourceIdentifier|null);
-
-                    /** ResourceDemand locationId */
-                    locationId?: (google.cloud.capacityplanner.v1beta.ILocationIdentifier|null);
-
-                    /** ResourceDemand state */
-                    state?: (google.cloud.capacityplanner.v1beta.State|keyof typeof google.cloud.capacityplanner.v1beta.State|null);
-
-                    /** ResourceDemand reporter */
-                    reporter?: (google.cloud.capacityplanner.v1beta.IUser|null);
-
-                    /** ResourceDemand createTime */
-                    createTime?: (google.protobuf.ITimestamp|null);
-
-                    /** ResourceDemand updateTime */
-                    updateTime?: (google.protobuf.ITimestamp|null);
-
-                    /** ResourceDemand demandValues */
-                    demandValues?: (google.cloud.capacityplanner.v1beta.IDemandValues|null);
-
-                    /** ResourceDemand demandMetadata */
-                    demandMetadata?: (google.cloud.capacityplanner.v1beta.IDemandMetadata|null);
-
-                    /** ResourceDemand childResourceDemands */
-                    childResourceDemands?: (google.cloud.capacityplanner.v1beta.IChildResourceDemand[]|null);
-                }
-
-                /** Represents a ResourceDemand. */
-                class ResourceDemand implements IResourceDemand {
-
-                    /**
-                     * Constructs a new ResourceDemand.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.capacityplanner.v1beta.IResourceDemand);
-
-                    /** ResourceDemand id. */
-                    public id: string;
-
-                    /** ResourceDemand resourceContainer. */
-                    public resourceContainer?: (google.cloud.capacityplanner.v1beta.IResourceContainer|null);
-
-                    /** ResourceDemand resourceId. */
-                    public resourceId?: (google.cloud.capacityplanner.v1beta.IResourceIdentifier|null);
-
-                    /** ResourceDemand locationId. */
-                    public locationId?: (google.cloud.capacityplanner.v1beta.ILocationIdentifier|null);
-
-                    /** ResourceDemand state. */
-                    public state: (google.cloud.capacityplanner.v1beta.State|keyof typeof google.cloud.capacityplanner.v1beta.State);
-
-                    /** ResourceDemand reporter. */
-                    public reporter?: (google.cloud.capacityplanner.v1beta.IUser|null);
-
-                    /** ResourceDemand createTime. */
-                    public createTime?: (google.protobuf.ITimestamp|null);
-
-                    /** ResourceDemand updateTime. */
-                    public updateTime?: (google.protobuf.ITimestamp|null);
-
-                    /** ResourceDemand demandValues. */
-                    public demandValues?: (google.cloud.capacityplanner.v1beta.IDemandValues|null);
-
-                    /** ResourceDemand demandMetadata. */
-                    public demandMetadata?: (google.cloud.capacityplanner.v1beta.IDemandMetadata|null);
-
-                    /** ResourceDemand childResourceDemands. */
-                    public childResourceDemands: google.cloud.capacityplanner.v1beta.IChildResourceDemand[];
-
-                    /**
-                     * Creates a new ResourceDemand instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ResourceDemand instance
-                     */
-                    public static create(properties?: google.cloud.capacityplanner.v1beta.IResourceDemand): google.cloud.capacityplanner.v1beta.ResourceDemand;
-
-                    /**
-                     * Encodes the specified ResourceDemand message. Does not implicitly {@link google.cloud.capacityplanner.v1beta.ResourceDemand.verify|verify} messages.
-                     * @param message ResourceDemand message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.capacityplanner.v1beta.IResourceDemand, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ResourceDemand message, length delimited. Does not implicitly {@link google.cloud.capacityplanner.v1beta.ResourceDemand.verify|verify} messages.
-                     * @param message ResourceDemand message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.capacityplanner.v1beta.IResourceDemand, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ResourceDemand message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ResourceDemand
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.capacityplanner.v1beta.ResourceDemand;
-
-                    /**
-                     * Decodes a ResourceDemand message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ResourceDemand
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.capacityplanner.v1beta.ResourceDemand;
-
-                    /**
-                     * Verifies a ResourceDemand message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ResourceDemand message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ResourceDemand
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.capacityplanner.v1beta.ResourceDemand;
-
-                    /**
-                     * Creates a plain object from a ResourceDemand message. Also converts values to other types if specified.
-                     * @param message ResourceDemand
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.capacityplanner.v1beta.ResourceDemand, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ResourceDemand to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ResourceDemand
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a User. */
-                interface IUser {
-
-                    /** User email */
-                    email?: (string|null);
-                }
-
-                /** Represents a User. */
-                class User implements IUser {
-
-                    /**
-                     * Constructs a new User.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.capacityplanner.v1beta.IUser);
-
-                    /** User email. */
-                    public email: string;
-
-                    /**
-                     * Creates a new User instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns User instance
-                     */
-                    public static create(properties?: google.cloud.capacityplanner.v1beta.IUser): google.cloud.capacityplanner.v1beta.User;
-
-                    /**
-                     * Encodes the specified User message. Does not implicitly {@link google.cloud.capacityplanner.v1beta.User.verify|verify} messages.
-                     * @param message User message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.capacityplanner.v1beta.IUser, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified User message, length delimited. Does not implicitly {@link google.cloud.capacityplanner.v1beta.User.verify|verify} messages.
-                     * @param message User message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.capacityplanner.v1beta.IUser, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a User message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns User
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.capacityplanner.v1beta.User;
-
-                    /**
-                     * Decodes a User message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns User
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.capacityplanner.v1beta.User;
-
-                    /**
-                     * Verifies a User message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a User message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns User
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.capacityplanner.v1beta.User;
-
-                    /**
-                     * Creates a plain object from a User message. Also converts values to other types if specified.
-                     * @param message User
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.capacityplanner.v1beta.User, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this User to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for User
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a DemandValues. */
-                interface IDemandValues {
-
-                    /** DemandValues values */
-                    values?: (google.cloud.capacityplanner.v1beta.IDemandValue[]|null);
-                }
-
-                /** Represents a DemandValues. */
-                class DemandValues implements IDemandValues {
-
-                    /**
-                     * Constructs a new DemandValues.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.capacityplanner.v1beta.IDemandValues);
-
-                    /** DemandValues values. */
-                    public values: google.cloud.capacityplanner.v1beta.IDemandValue[];
-
-                    /**
-                     * Creates a new DemandValues instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns DemandValues instance
-                     */
-                    public static create(properties?: google.cloud.capacityplanner.v1beta.IDemandValues): google.cloud.capacityplanner.v1beta.DemandValues;
-
-                    /**
-                     * Encodes the specified DemandValues message. Does not implicitly {@link google.cloud.capacityplanner.v1beta.DemandValues.verify|verify} messages.
-                     * @param message DemandValues message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.capacityplanner.v1beta.IDemandValues, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified DemandValues message, length delimited. Does not implicitly {@link google.cloud.capacityplanner.v1beta.DemandValues.verify|verify} messages.
-                     * @param message DemandValues message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.capacityplanner.v1beta.IDemandValues, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a DemandValues message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns DemandValues
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.capacityplanner.v1beta.DemandValues;
-
-                    /**
-                     * Decodes a DemandValues message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns DemandValues
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.capacityplanner.v1beta.DemandValues;
-
-                    /**
-                     * Verifies a DemandValues message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a DemandValues message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns DemandValues
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.capacityplanner.v1beta.DemandValues;
-
-                    /**
-                     * Creates a plain object from a DemandValues message. Also converts values to other types if specified.
-                     * @param message DemandValues
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.capacityplanner.v1beta.DemandValues, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this DemandValues to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for DemandValues
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a DemandValue. */
-                interface IDemandValue {
-
-                    /** DemandValue name */
-                    name?: (string|null);
-
-                    /** DemandValue timeValues */
-                    timeValues?: (google.cloud.capacityplanner.v1beta.ITimeValue[]|null);
-
-                    /** DemandValue unit */
-                    unit?: (google.cloud.capacityplanner.v1beta.Unit|keyof typeof google.cloud.capacityplanner.v1beta.Unit|null);
-                }
-
-                /** Represents a DemandValue. */
-                class DemandValue implements IDemandValue {
-
-                    /**
-                     * Constructs a new DemandValue.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.capacityplanner.v1beta.IDemandValue);
-
-                    /** DemandValue name. */
-                    public name: string;
-
-                    /** DemandValue timeValues. */
-                    public timeValues: google.cloud.capacityplanner.v1beta.ITimeValue[];
-
-                    /** DemandValue unit. */
-                    public unit: (google.cloud.capacityplanner.v1beta.Unit|keyof typeof google.cloud.capacityplanner.v1beta.Unit);
-
-                    /**
-                     * Creates a new DemandValue instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns DemandValue instance
-                     */
-                    public static create(properties?: google.cloud.capacityplanner.v1beta.IDemandValue): google.cloud.capacityplanner.v1beta.DemandValue;
-
-                    /**
-                     * Encodes the specified DemandValue message. Does not implicitly {@link google.cloud.capacityplanner.v1beta.DemandValue.verify|verify} messages.
-                     * @param message DemandValue message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.capacityplanner.v1beta.IDemandValue, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified DemandValue message, length delimited. Does not implicitly {@link google.cloud.capacityplanner.v1beta.DemandValue.verify|verify} messages.
-                     * @param message DemandValue message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.capacityplanner.v1beta.IDemandValue, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a DemandValue message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns DemandValue
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.capacityplanner.v1beta.DemandValue;
-
-                    /**
-                     * Decodes a DemandValue message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns DemandValue
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.capacityplanner.v1beta.DemandValue;
-
-                    /**
-                     * Verifies a DemandValue message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a DemandValue message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns DemandValue
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.capacityplanner.v1beta.DemandValue;
-
-                    /**
-                     * Creates a plain object from a DemandValue message. Also converts values to other types if specified.
-                     * @param message DemandValue
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.capacityplanner.v1beta.DemandValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this DemandValue to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for DemandValue
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a TimeValue. */
-                interface ITimeValue {
-
-                    /** TimeValue time */
-                    time?: (google.protobuf.ITimestamp|null);
-
-                    /** TimeValue value */
-                    value?: (number|null);
-                }
-
-                /** Represents a TimeValue. */
-                class TimeValue implements ITimeValue {
-
-                    /**
-                     * Constructs a new TimeValue.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.capacityplanner.v1beta.ITimeValue);
-
-                    /** TimeValue time. */
-                    public time?: (google.protobuf.ITimestamp|null);
-
-                    /** TimeValue value. */
-                    public value?: (number|null);
-
-                    /**
-                     * Creates a new TimeValue instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns TimeValue instance
-                     */
-                    public static create(properties?: google.cloud.capacityplanner.v1beta.ITimeValue): google.cloud.capacityplanner.v1beta.TimeValue;
-
-                    /**
-                     * Encodes the specified TimeValue message. Does not implicitly {@link google.cloud.capacityplanner.v1beta.TimeValue.verify|verify} messages.
-                     * @param message TimeValue message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.capacityplanner.v1beta.ITimeValue, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified TimeValue message, length delimited. Does not implicitly {@link google.cloud.capacityplanner.v1beta.TimeValue.verify|verify} messages.
-                     * @param message TimeValue message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.capacityplanner.v1beta.ITimeValue, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a TimeValue message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns TimeValue
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.capacityplanner.v1beta.TimeValue;
-
-                    /**
-                     * Decodes a TimeValue message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns TimeValue
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.capacityplanner.v1beta.TimeValue;
-
-                    /**
-                     * Verifies a TimeValue message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a TimeValue message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns TimeValue
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.capacityplanner.v1beta.TimeValue;
-
-                    /**
-                     * Creates a plain object from a TimeValue message. Also converts values to other types if specified.
-                     * @param message TimeValue
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.capacityplanner.v1beta.TimeValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this TimeValue to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for TimeValue
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a ChildResourceDemand. */
-                interface IChildResourceDemand {
-
-                    /** ChildResourceDemand resourceId */
-                    resourceId?: (google.cloud.capacityplanner.v1beta.IResourceIdentifier|null);
-
-                    /** ChildResourceDemand demandValues */
-                    demandValues?: (google.cloud.capacityplanner.v1beta.IDemandValues|null);
-
-                    /** ChildResourceDemand demandMetadata */
-                    demandMetadata?: (google.cloud.capacityplanner.v1beta.IDemandMetadata|null);
-                }
-
-                /** Represents a ChildResourceDemand. */
-                class ChildResourceDemand implements IChildResourceDemand {
-
-                    /**
-                     * Constructs a new ChildResourceDemand.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.capacityplanner.v1beta.IChildResourceDemand);
-
-                    /** ChildResourceDemand resourceId. */
-                    public resourceId?: (google.cloud.capacityplanner.v1beta.IResourceIdentifier|null);
-
-                    /** ChildResourceDemand demandValues. */
-                    public demandValues?: (google.cloud.capacityplanner.v1beta.IDemandValues|null);
-
-                    /** ChildResourceDemand demandMetadata. */
-                    public demandMetadata?: (google.cloud.capacityplanner.v1beta.IDemandMetadata|null);
-
-                    /**
-                     * Creates a new ChildResourceDemand instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ChildResourceDemand instance
-                     */
-                    public static create(properties?: google.cloud.capacityplanner.v1beta.IChildResourceDemand): google.cloud.capacityplanner.v1beta.ChildResourceDemand;
-
-                    /**
-                     * Encodes the specified ChildResourceDemand message. Does not implicitly {@link google.cloud.capacityplanner.v1beta.ChildResourceDemand.verify|verify} messages.
-                     * @param message ChildResourceDemand message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.capacityplanner.v1beta.IChildResourceDemand, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ChildResourceDemand message, length delimited. Does not implicitly {@link google.cloud.capacityplanner.v1beta.ChildResourceDemand.verify|verify} messages.
-                     * @param message ChildResourceDemand message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.capacityplanner.v1beta.IChildResourceDemand, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ChildResourceDemand message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ChildResourceDemand
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.capacityplanner.v1beta.ChildResourceDemand;
-
-                    /**
-                     * Decodes a ChildResourceDemand message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ChildResourceDemand
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.capacityplanner.v1beta.ChildResourceDemand;
-
-                    /**
-                     * Verifies a ChildResourceDemand message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ChildResourceDemand message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ChildResourceDemand
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.capacityplanner.v1beta.ChildResourceDemand;
-
-                    /**
-                     * Creates a plain object from a ChildResourceDemand message. Also converts values to other types if specified.
-                     * @param message ChildResourceDemand
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.capacityplanner.v1beta.ChildResourceDemand, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ChildResourceDemand to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ChildResourceDemand
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                namespace FutureReservation {
+
+                    /** Properties of a SpecificSKUProperties. */
+                    interface ISpecificSKUProperties {
+
+                        /** SpecificSKUProperties instanceProperties */
+                        instanceProperties?: (google.cloud.capacityplanner.v1beta.Allocation.SpecificSKUAllocation.IAllocatedInstanceProperties|null);
+
+                        /** SpecificSKUProperties totalCount */
+                        totalCount?: (number|Long|string|null);
+                    }
+
+                    /** Represents a SpecificSKUProperties. */
+                    class SpecificSKUProperties implements ISpecificSKUProperties {
+
+                        /**
+                         * Constructs a new SpecificSKUProperties.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.capacityplanner.v1beta.FutureReservation.ISpecificSKUProperties);
+
+                        /** SpecificSKUProperties instanceProperties. */
+                        public instanceProperties?: (google.cloud.capacityplanner.v1beta.Allocation.SpecificSKUAllocation.IAllocatedInstanceProperties|null);
+
+                        /** SpecificSKUProperties totalCount. */
+                        public totalCount: (number|Long|string);
+
+                        /**
+                         * Creates a new SpecificSKUProperties instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SpecificSKUProperties instance
+                         */
+                        public static create(properties?: google.cloud.capacityplanner.v1beta.FutureReservation.ISpecificSKUProperties): google.cloud.capacityplanner.v1beta.FutureReservation.SpecificSKUProperties;
+
+                        /**
+                         * Encodes the specified SpecificSKUProperties message. Does not implicitly {@link google.cloud.capacityplanner.v1beta.FutureReservation.SpecificSKUProperties.verify|verify} messages.
+                         * @param message SpecificSKUProperties message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.capacityplanner.v1beta.FutureReservation.ISpecificSKUProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SpecificSKUProperties message, length delimited. Does not implicitly {@link google.cloud.capacityplanner.v1beta.FutureReservation.SpecificSKUProperties.verify|verify} messages.
+                         * @param message SpecificSKUProperties message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.capacityplanner.v1beta.FutureReservation.ISpecificSKUProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SpecificSKUProperties message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SpecificSKUProperties
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.capacityplanner.v1beta.FutureReservation.SpecificSKUProperties;
+
+                        /**
+                         * Decodes a SpecificSKUProperties message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SpecificSKUProperties
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.capacityplanner.v1beta.FutureReservation.SpecificSKUProperties;
+
+                        /**
+                         * Verifies a SpecificSKUProperties message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SpecificSKUProperties message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SpecificSKUProperties
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.capacityplanner.v1beta.FutureReservation.SpecificSKUProperties;
+
+                        /**
+                         * Creates a plain object from a SpecificSKUProperties message. Also converts values to other types if specified.
+                         * @param message SpecificSKUProperties
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.capacityplanner.v1beta.FutureReservation.SpecificSKUProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SpecificSKUProperties to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SpecificSKUProperties
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a TimeWindow. */
+                    interface ITimeWindow {
+
+                        /** TimeWindow startTime */
+                        startTime?: (google.protobuf.ITimestamp|null);
+
+                        /** TimeWindow endTime */
+                        endTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a TimeWindow. */
+                    class TimeWindow implements ITimeWindow {
+
+                        /**
+                         * Constructs a new TimeWindow.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.capacityplanner.v1beta.FutureReservation.ITimeWindow);
+
+                        /** TimeWindow startTime. */
+                        public startTime?: (google.protobuf.ITimestamp|null);
+
+                        /** TimeWindow endTime. */
+                        public endTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new TimeWindow instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TimeWindow instance
+                         */
+                        public static create(properties?: google.cloud.capacityplanner.v1beta.FutureReservation.ITimeWindow): google.cloud.capacityplanner.v1beta.FutureReservation.TimeWindow;
+
+                        /**
+                         * Encodes the specified TimeWindow message. Does not implicitly {@link google.cloud.capacityplanner.v1beta.FutureReservation.TimeWindow.verify|verify} messages.
+                         * @param message TimeWindow message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.capacityplanner.v1beta.FutureReservation.ITimeWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TimeWindow message, length delimited. Does not implicitly {@link google.cloud.capacityplanner.v1beta.FutureReservation.TimeWindow.verify|verify} messages.
+                         * @param message TimeWindow message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.capacityplanner.v1beta.FutureReservation.ITimeWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TimeWindow message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TimeWindow
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.capacityplanner.v1beta.FutureReservation.TimeWindow;
+
+                        /**
+                         * Decodes a TimeWindow message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TimeWindow
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.capacityplanner.v1beta.FutureReservation.TimeWindow;
+
+                        /**
+                         * Verifies a TimeWindow message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TimeWindow message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TimeWindow
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.capacityplanner.v1beta.FutureReservation.TimeWindow;
+
+                        /**
+                         * Creates a plain object from a TimeWindow message. Also converts values to other types if specified.
+                         * @param message TimeWindow
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.capacityplanner.v1beta.FutureReservation.TimeWindow, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TimeWindow to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TimeWindow
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a Status. */
+                    interface IStatus {
+
+                        /** Status procurementStatus */
+                        procurementStatus?: (google.cloud.capacityplanner.v1beta.FutureReservation.Status.ProcurementStatus|keyof typeof google.cloud.capacityplanner.v1beta.FutureReservation.Status.ProcurementStatus|null);
+
+                        /** Status lockTime */
+                        lockTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Status autoCreatedReservations */
+                        autoCreatedReservations?: (string[]|null);
+
+                        /** Status fulfilledCount */
+                        fulfilledCount?: (number|Long|string|null);
+                    }
+
+                    /** Represents a Status. */
+                    class Status implements IStatus {
+
+                        /**
+                         * Constructs a new Status.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.capacityplanner.v1beta.FutureReservation.IStatus);
+
+                        /** Status procurementStatus. */
+                        public procurementStatus: (google.cloud.capacityplanner.v1beta.FutureReservation.Status.ProcurementStatus|keyof typeof google.cloud.capacityplanner.v1beta.FutureReservation.Status.ProcurementStatus);
+
+                        /** Status lockTime. */
+                        public lockTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Status autoCreatedReservations. */
+                        public autoCreatedReservations: string[];
+
+                        /** Status fulfilledCount. */
+                        public fulfilledCount: (number|Long|string);
+
+                        /**
+                         * Creates a new Status instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Status instance
+                         */
+                        public static create(properties?: google.cloud.capacityplanner.v1beta.FutureReservation.IStatus): google.cloud.capacityplanner.v1beta.FutureReservation.Status;
+
+                        /**
+                         * Encodes the specified Status message. Does not implicitly {@link google.cloud.capacityplanner.v1beta.FutureReservation.Status.verify|verify} messages.
+                         * @param message Status message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.capacityplanner.v1beta.FutureReservation.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Status message, length delimited. Does not implicitly {@link google.cloud.capacityplanner.v1beta.FutureReservation.Status.verify|verify} messages.
+                         * @param message Status message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.capacityplanner.v1beta.FutureReservation.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Status message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Status
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.capacityplanner.v1beta.FutureReservation.Status;
+
+                        /**
+                         * Decodes a Status message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Status
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.capacityplanner.v1beta.FutureReservation.Status;
+
+                        /**
+                         * Verifies a Status message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Status message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Status
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.capacityplanner.v1beta.FutureReservation.Status;
+
+                        /**
+                         * Creates a plain object from a Status message. Also converts values to other types if specified.
+                         * @param message Status
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.capacityplanner.v1beta.FutureReservation.Status, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Status to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Status
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Status {
+
+                        /** ProcurementStatus enum. */
+                        enum ProcurementStatus {
+                            PROCUREMENT_STATUS_UNSPECIFIED = 0,
+                            PENDING_APPROVAL = 1,
+                            APPROVED = 2,
+                            COMMITTED = 3,
+                            DECLINED = 4,
+                            CANCELLED = 5,
+                            PROCURING = 6,
+                            PROVISIONING = 7,
+                            FULFILLED = 8,
+                            FAILED = 9,
+                            FAILED_PARTIALLY_FULFILLED = 10,
+                            DRAFTING = 11,
+                            PENDING_AMENDMENT_APPROVAL = 12
+                        }
+                    }
                 }
 
                 /** LocationLevel enum. */
@@ -8633,522 +6977,6 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a FutureReservation. */
-                interface IFutureReservation {
-
-                    /** FutureReservation specificSkuProperties */
-                    specificSkuProperties?: (google.cloud.capacityplanner.v1beta.FutureReservation.ISpecificSKUProperties|null);
-
-                    /** FutureReservation id */
-                    id?: (number|Long|string|null);
-
-                    /** FutureReservation createTime */
-                    createTime?: (google.protobuf.ITimestamp|null);
-
-                    /** FutureReservation zone */
-                    zone?: (string|null);
-
-                    /** FutureReservation description */
-                    description?: (string|null);
-
-                    /** FutureReservation futureReservation */
-                    futureReservation?: (string|null);
-
-                    /** FutureReservation ownerProjectId */
-                    ownerProjectId?: (string|null);
-
-                    /** FutureReservation timeWindow */
-                    timeWindow?: (google.cloud.capacityplanner.v1beta.FutureReservation.ITimeWindow|null);
-
-                    /** FutureReservation shareSettings */
-                    shareSettings?: (google.cloud.capacityplanner.v1beta.Allocation.IShareSettings|null);
-
-                    /** FutureReservation namePrefix */
-                    namePrefix?: (string|null);
-
-                    /** FutureReservation status */
-                    status?: (google.cloud.capacityplanner.v1beta.FutureReservation.IStatus|null);
-
-                    /** FutureReservation autoCreatedReservationsDeleteTime */
-                    autoCreatedReservationsDeleteTime?: (google.protobuf.ITimestamp|null);
-
-                    /** FutureReservation autoDeleteAutoCreatedReservations */
-                    autoDeleteAutoCreatedReservations?: (boolean|null);
-                }
-
-                /** Represents a FutureReservation. */
-                class FutureReservation implements IFutureReservation {
-
-                    /**
-                     * Constructs a new FutureReservation.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.capacityplanner.v1beta.IFutureReservation);
-
-                    /** FutureReservation specificSkuProperties. */
-                    public specificSkuProperties?: (google.cloud.capacityplanner.v1beta.FutureReservation.ISpecificSKUProperties|null);
-
-                    /** FutureReservation id. */
-                    public id: (number|Long|string);
-
-                    /** FutureReservation createTime. */
-                    public createTime?: (google.protobuf.ITimestamp|null);
-
-                    /** FutureReservation zone. */
-                    public zone: string;
-
-                    /** FutureReservation description. */
-                    public description: string;
-
-                    /** FutureReservation futureReservation. */
-                    public futureReservation: string;
-
-                    /** FutureReservation ownerProjectId. */
-                    public ownerProjectId: string;
-
-                    /** FutureReservation timeWindow. */
-                    public timeWindow?: (google.cloud.capacityplanner.v1beta.FutureReservation.ITimeWindow|null);
-
-                    /** FutureReservation shareSettings. */
-                    public shareSettings?: (google.cloud.capacityplanner.v1beta.Allocation.IShareSettings|null);
-
-                    /** FutureReservation namePrefix. */
-                    public namePrefix: string;
-
-                    /** FutureReservation status. */
-                    public status?: (google.cloud.capacityplanner.v1beta.FutureReservation.IStatus|null);
-
-                    /** FutureReservation autoCreatedReservationsDeleteTime. */
-                    public autoCreatedReservationsDeleteTime?: (google.protobuf.ITimestamp|null);
-
-                    /** FutureReservation autoDeleteAutoCreatedReservations. */
-                    public autoDeleteAutoCreatedReservations: boolean;
-
-                    /** FutureReservation type. */
-                    public type?: "specificSkuProperties";
-
-                    /**
-                     * Creates a new FutureReservation instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns FutureReservation instance
-                     */
-                    public static create(properties?: google.cloud.capacityplanner.v1beta.IFutureReservation): google.cloud.capacityplanner.v1beta.FutureReservation;
-
-                    /**
-                     * Encodes the specified FutureReservation message. Does not implicitly {@link google.cloud.capacityplanner.v1beta.FutureReservation.verify|verify} messages.
-                     * @param message FutureReservation message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.capacityplanner.v1beta.IFutureReservation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified FutureReservation message, length delimited. Does not implicitly {@link google.cloud.capacityplanner.v1beta.FutureReservation.verify|verify} messages.
-                     * @param message FutureReservation message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.capacityplanner.v1beta.IFutureReservation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a FutureReservation message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns FutureReservation
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.capacityplanner.v1beta.FutureReservation;
-
-                    /**
-                     * Decodes a FutureReservation message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns FutureReservation
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.capacityplanner.v1beta.FutureReservation;
-
-                    /**
-                     * Verifies a FutureReservation message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a FutureReservation message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns FutureReservation
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.capacityplanner.v1beta.FutureReservation;
-
-                    /**
-                     * Creates a plain object from a FutureReservation message. Also converts values to other types if specified.
-                     * @param message FutureReservation
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.capacityplanner.v1beta.FutureReservation, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this FutureReservation to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for FutureReservation
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace FutureReservation {
-
-                    /** Properties of a SpecificSKUProperties. */
-                    interface ISpecificSKUProperties {
-
-                        /** SpecificSKUProperties instanceProperties */
-                        instanceProperties?: (google.cloud.capacityplanner.v1beta.Allocation.SpecificSKUAllocation.IAllocatedInstanceProperties|null);
-
-                        /** SpecificSKUProperties totalCount */
-                        totalCount?: (number|Long|string|null);
-                    }
-
-                    /** Represents a SpecificSKUProperties. */
-                    class SpecificSKUProperties implements ISpecificSKUProperties {
-
-                        /**
-                         * Constructs a new SpecificSKUProperties.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.capacityplanner.v1beta.FutureReservation.ISpecificSKUProperties);
-
-                        /** SpecificSKUProperties instanceProperties. */
-                        public instanceProperties?: (google.cloud.capacityplanner.v1beta.Allocation.SpecificSKUAllocation.IAllocatedInstanceProperties|null);
-
-                        /** SpecificSKUProperties totalCount. */
-                        public totalCount: (number|Long|string);
-
-                        /**
-                         * Creates a new SpecificSKUProperties instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns SpecificSKUProperties instance
-                         */
-                        public static create(properties?: google.cloud.capacityplanner.v1beta.FutureReservation.ISpecificSKUProperties): google.cloud.capacityplanner.v1beta.FutureReservation.SpecificSKUProperties;
-
-                        /**
-                         * Encodes the specified SpecificSKUProperties message. Does not implicitly {@link google.cloud.capacityplanner.v1beta.FutureReservation.SpecificSKUProperties.verify|verify} messages.
-                         * @param message SpecificSKUProperties message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.capacityplanner.v1beta.FutureReservation.ISpecificSKUProperties, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified SpecificSKUProperties message, length delimited. Does not implicitly {@link google.cloud.capacityplanner.v1beta.FutureReservation.SpecificSKUProperties.verify|verify} messages.
-                         * @param message SpecificSKUProperties message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.capacityplanner.v1beta.FutureReservation.ISpecificSKUProperties, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a SpecificSKUProperties message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns SpecificSKUProperties
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.capacityplanner.v1beta.FutureReservation.SpecificSKUProperties;
-
-                        /**
-                         * Decodes a SpecificSKUProperties message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns SpecificSKUProperties
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.capacityplanner.v1beta.FutureReservation.SpecificSKUProperties;
-
-                        /**
-                         * Verifies a SpecificSKUProperties message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a SpecificSKUProperties message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns SpecificSKUProperties
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.capacityplanner.v1beta.FutureReservation.SpecificSKUProperties;
-
-                        /**
-                         * Creates a plain object from a SpecificSKUProperties message. Also converts values to other types if specified.
-                         * @param message SpecificSKUProperties
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.capacityplanner.v1beta.FutureReservation.SpecificSKUProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this SpecificSKUProperties to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for SpecificSKUProperties
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    /** Properties of a TimeWindow. */
-                    interface ITimeWindow {
-
-                        /** TimeWindow startTime */
-                        startTime?: (google.protobuf.ITimestamp|null);
-
-                        /** TimeWindow endTime */
-                        endTime?: (google.protobuf.ITimestamp|null);
-                    }
-
-                    /** Represents a TimeWindow. */
-                    class TimeWindow implements ITimeWindow {
-
-                        /**
-                         * Constructs a new TimeWindow.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.capacityplanner.v1beta.FutureReservation.ITimeWindow);
-
-                        /** TimeWindow startTime. */
-                        public startTime?: (google.protobuf.ITimestamp|null);
-
-                        /** TimeWindow endTime. */
-                        public endTime?: (google.protobuf.ITimestamp|null);
-
-                        /**
-                         * Creates a new TimeWindow instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns TimeWindow instance
-                         */
-                        public static create(properties?: google.cloud.capacityplanner.v1beta.FutureReservation.ITimeWindow): google.cloud.capacityplanner.v1beta.FutureReservation.TimeWindow;
-
-                        /**
-                         * Encodes the specified TimeWindow message. Does not implicitly {@link google.cloud.capacityplanner.v1beta.FutureReservation.TimeWindow.verify|verify} messages.
-                         * @param message TimeWindow message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.capacityplanner.v1beta.FutureReservation.ITimeWindow, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified TimeWindow message, length delimited. Does not implicitly {@link google.cloud.capacityplanner.v1beta.FutureReservation.TimeWindow.verify|verify} messages.
-                         * @param message TimeWindow message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.capacityplanner.v1beta.FutureReservation.ITimeWindow, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a TimeWindow message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns TimeWindow
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.capacityplanner.v1beta.FutureReservation.TimeWindow;
-
-                        /**
-                         * Decodes a TimeWindow message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns TimeWindow
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.capacityplanner.v1beta.FutureReservation.TimeWindow;
-
-                        /**
-                         * Verifies a TimeWindow message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a TimeWindow message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns TimeWindow
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.capacityplanner.v1beta.FutureReservation.TimeWindow;
-
-                        /**
-                         * Creates a plain object from a TimeWindow message. Also converts values to other types if specified.
-                         * @param message TimeWindow
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.capacityplanner.v1beta.FutureReservation.TimeWindow, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this TimeWindow to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for TimeWindow
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    /** Properties of a Status. */
-                    interface IStatus {
-
-                        /** Status procurementStatus */
-                        procurementStatus?: (google.cloud.capacityplanner.v1beta.FutureReservation.Status.ProcurementStatus|keyof typeof google.cloud.capacityplanner.v1beta.FutureReservation.Status.ProcurementStatus|null);
-
-                        /** Status lockTime */
-                        lockTime?: (google.protobuf.ITimestamp|null);
-
-                        /** Status autoCreatedReservations */
-                        autoCreatedReservations?: (string[]|null);
-
-                        /** Status fulfilledCount */
-                        fulfilledCount?: (number|Long|string|null);
-                    }
-
-                    /** Represents a Status. */
-                    class Status implements IStatus {
-
-                        /**
-                         * Constructs a new Status.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.capacityplanner.v1beta.FutureReservation.IStatus);
-
-                        /** Status procurementStatus. */
-                        public procurementStatus: (google.cloud.capacityplanner.v1beta.FutureReservation.Status.ProcurementStatus|keyof typeof google.cloud.capacityplanner.v1beta.FutureReservation.Status.ProcurementStatus);
-
-                        /** Status lockTime. */
-                        public lockTime?: (google.protobuf.ITimestamp|null);
-
-                        /** Status autoCreatedReservations. */
-                        public autoCreatedReservations: string[];
-
-                        /** Status fulfilledCount. */
-                        public fulfilledCount: (number|Long|string);
-
-                        /**
-                         * Creates a new Status instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns Status instance
-                         */
-                        public static create(properties?: google.cloud.capacityplanner.v1beta.FutureReservation.IStatus): google.cloud.capacityplanner.v1beta.FutureReservation.Status;
-
-                        /**
-                         * Encodes the specified Status message. Does not implicitly {@link google.cloud.capacityplanner.v1beta.FutureReservation.Status.verify|verify} messages.
-                         * @param message Status message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.capacityplanner.v1beta.FutureReservation.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified Status message, length delimited. Does not implicitly {@link google.cloud.capacityplanner.v1beta.FutureReservation.Status.verify|verify} messages.
-                         * @param message Status message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.capacityplanner.v1beta.FutureReservation.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a Status message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns Status
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.capacityplanner.v1beta.FutureReservation.Status;
-
-                        /**
-                         * Decodes a Status message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns Status
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.capacityplanner.v1beta.FutureReservation.Status;
-
-                        /**
-                         * Verifies a Status message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a Status message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns Status
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.capacityplanner.v1beta.FutureReservation.Status;
-
-                        /**
-                         * Creates a plain object from a Status message. Also converts values to other types if specified.
-                         * @param message Status
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.capacityplanner.v1beta.FutureReservation.Status, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this Status to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for Status
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    namespace Status {
-
-                        /** ProcurementStatus enum. */
-                        enum ProcurementStatus {
-                            PROCUREMENT_STATUS_UNSPECIFIED = 0,
-                            PENDING_APPROVAL = 1,
-                            APPROVED = 2,
-                            COMMITTED = 3,
-                            DECLINED = 4,
-                            CANCELLED = 5,
-                            PROCURING = 6,
-                            PROVISIONING = 7,
-                            FULFILLED = 8,
-                            FAILED = 9,
-                            FAILED_PARTIALLY_FULFILLED = 10,
-                            DRAFTING = 11,
-                            PENDING_AMENDMENT_APPROVAL = 12
-                        }
-                    }
                 }
 
                 /** Represents a UsageService */
@@ -12222,6 +10050,19 @@ export namespace google {
     /** Namespace api. */
     namespace api {
 
+        /** FieldBehavior enum. */
+        enum FieldBehavior {
+            FIELD_BEHAVIOR_UNSPECIFIED = 0,
+            OPTIONAL = 1,
+            REQUIRED = 2,
+            OUTPUT_ONLY = 3,
+            INPUT_ONLY = 4,
+            IMMUTABLE = 5,
+            UNORDERED_LIST = 6,
+            NON_EMPTY_DEFAULT = 7,
+            IDENTIFIER = 8
+        }
+
         /** Properties of a Http. */
         interface IHttp {
 
@@ -14306,19 +12147,6 @@ export namespace google {
             BETA = 3,
             GA = 4,
             DEPRECATED = 5
-        }
-
-        /** FieldBehavior enum. */
-        enum FieldBehavior {
-            FIELD_BEHAVIOR_UNSPECIFIED = 0,
-            OPTIONAL = 1,
-            REQUIRED = 2,
-            OUTPUT_ONLY = 3,
-            INPUT_ONLY = 4,
-            IMMUTABLE = 5,
-            UNORDERED_LIST = 6,
-            NON_EMPTY_DEFAULT = 7,
-            IDENTIFIER = 8
         }
 
         /** Properties of a ResourceDescriptor. */

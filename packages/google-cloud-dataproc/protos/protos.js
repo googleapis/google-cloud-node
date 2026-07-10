@@ -16830,6 +16830,7 @@
                          * @property {google.cloud.dataproc.v1.INodeGroupAffinity|null} [nodeGroupAffinity] GceClusterConfig nodeGroupAffinity
                          * @property {google.cloud.dataproc.v1.IShieldedInstanceConfig|null} [shieldedInstanceConfig] GceClusterConfig shieldedInstanceConfig
                          * @property {google.cloud.dataproc.v1.IConfidentialInstanceConfig|null} [confidentialInstanceConfig] GceClusterConfig confidentialInstanceConfig
+                         * @property {Object.<string,string>|null} [resourceManagerTags] GceClusterConfig resourceManagerTags
                          */
     
                         /**
@@ -16844,6 +16845,7 @@
                             this.serviceAccountScopes = [];
                             this.tags = [];
                             this.metadata = {};
+                            this.resourceManagerTags = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null && keys[i] !== "__proto__")
@@ -16954,6 +16956,14 @@
                          */
                         GceClusterConfig.prototype.confidentialInstanceConfig = null;
     
+                        /**
+                         * GceClusterConfig resourceManagerTags.
+                         * @member {Object.<string,string>} resourceManagerTags
+                         * @memberof google.cloud.dataproc.v1.GceClusterConfig
+                         * @instance
+                         */
+                        GceClusterConfig.prototype.resourceManagerTags = $util.emptyObject;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -17016,6 +17026,9 @@
                                 $root.google.cloud.dataproc.v1.ShieldedInstanceConfig.encode(message.shieldedInstanceConfig, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                             if (message.confidentialInstanceConfig != null && Object.hasOwnProperty.call(message, "confidentialInstanceConfig"))
                                 $root.google.cloud.dataproc.v1.ConfidentialInstanceConfig.encode(message.confidentialInstanceConfig, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                            if (message.resourceManagerTags != null && Object.hasOwnProperty.call(message, "resourceManagerTags"))
+                                for (var keys = Object.keys(message.resourceManagerTags), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 16, wireType 2 =*/130).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.resourceManagerTags[keys[i]]).ldelim();
                             return writer;
                         };
     
@@ -17133,6 +17146,31 @@
                                         message.confidentialInstanceConfig = $root.google.cloud.dataproc.v1.ConfidentialInstanceConfig.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
+                                case 16: {
+                                        if (message.resourceManagerTags === $util.emptyObject)
+                                            message.resourceManagerTags = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7, long);
+                                                break;
+                                            }
+                                        }
+                                        if (key === "__proto__")
+                                            $util.makeProp(message.resourceManagerTags, key);
+                                        message.resourceManagerTags[key] = value;
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7, long);
                                     break;
@@ -17242,6 +17280,14 @@
                                 if (error)
                                     return "confidentialInstanceConfig." + error;
                             }
+                            if (message.resourceManagerTags != null && message.hasOwnProperty("resourceManagerTags")) {
+                                if (!$util.isObject(message.resourceManagerTags))
+                                    return "resourceManagerTags: object expected";
+                                var key = Object.keys(message.resourceManagerTags);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.resourceManagerTags[key[i]]))
+                                        return "resourceManagerTags: string{k:string} expected";
+                            }
                             return null;
                         };
     
@@ -17339,6 +17385,16 @@
                                     throw TypeError(".google.cloud.dataproc.v1.GceClusterConfig.confidentialInstanceConfig: object expected");
                                 message.confidentialInstanceConfig = $root.google.cloud.dataproc.v1.ConfidentialInstanceConfig.fromObject(object.confidentialInstanceConfig, long + 1);
                             }
+                            if (object.resourceManagerTags) {
+                                if (typeof object.resourceManagerTags !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.GceClusterConfig.resourceManagerTags: object expected");
+                                message.resourceManagerTags = {};
+                                for (var keys = Object.keys(object.resourceManagerTags), i = 0; i < keys.length; ++i) {
+                                    if (keys[i] === "__proto__")
+                                        $util.makeProp(message.resourceManagerTags, keys[i]);
+                                    message.resourceManagerTags[keys[i]] = String(object.resourceManagerTags[keys[i]]);
+                                }
+                            }
                             return message;
                         };
     
@@ -17359,8 +17415,10 @@
                                 object.serviceAccountScopes = [];
                                 object.tags = [];
                             }
-                            if (options.objects || options.defaults)
+                            if (options.objects || options.defaults) {
                                 object.metadata = {};
+                                object.resourceManagerTags = {};
+                            }
                             if (options.defaults) {
                                 object.zoneUri = "";
                                 object.networkUri = "";
@@ -17414,6 +17472,14 @@
                                 object.shieldedInstanceConfig = $root.google.cloud.dataproc.v1.ShieldedInstanceConfig.toObject(message.shieldedInstanceConfig, options);
                             if (message.confidentialInstanceConfig != null && message.hasOwnProperty("confidentialInstanceConfig"))
                                 object.confidentialInstanceConfig = $root.google.cloud.dataproc.v1.ConfidentialInstanceConfig.toObject(message.confidentialInstanceConfig, options);
+                            if (message.resourceManagerTags && (keys2 = Object.keys(message.resourceManagerTags)).length) {
+                                object.resourceManagerTags = {};
+                                for (var j = 0; j < keys2.length; ++j) {
+                                    if (keys2[j] === "__proto__")
+                                        $util.makeProp(object.resourceManagerTags, keys2[j]);
+                                    object.resourceManagerTags[keys2[j]] = message.resourceManagerTags[keys2[j]];
+                                }
+                            }
                             return object;
                         };
     
@@ -17984,6 +18050,7 @@
                          * @memberof google.cloud.dataproc.v1
                          * @interface IConfidentialInstanceConfig
                          * @property {boolean|null} [enableConfidentialCompute] ConfidentialInstanceConfig enableConfidentialCompute
+                         * @property {google.cloud.dataproc.v1.ConfidentialInstanceConfig.ConfidentialInstanceType|null} [confidentialInstanceType] ConfidentialInstanceConfig confidentialInstanceType
                          */
     
                         /**
@@ -18008,6 +18075,14 @@
                          * @instance
                          */
                         ConfidentialInstanceConfig.prototype.enableConfidentialCompute = false;
+    
+                        /**
+                         * ConfidentialInstanceConfig confidentialInstanceType.
+                         * @member {google.cloud.dataproc.v1.ConfidentialInstanceConfig.ConfidentialInstanceType} confidentialInstanceType
+                         * @memberof google.cloud.dataproc.v1.ConfidentialInstanceConfig
+                         * @instance
+                         */
+                        ConfidentialInstanceConfig.prototype.confidentialInstanceType = 0;
     
                         /**
                          * Creates a new ConfidentialInstanceConfig instance using the specified properties.
@@ -18035,6 +18110,8 @@
                                 writer = $Writer.create();
                             if (message.enableConfidentialCompute != null && Object.hasOwnProperty.call(message, "enableConfidentialCompute"))
                                 writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enableConfidentialCompute);
+                            if (message.confidentialInstanceType != null && Object.hasOwnProperty.call(message, "confidentialInstanceType"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.confidentialInstanceType);
                             return writer;
                         };
     
@@ -18079,6 +18156,10 @@
                                         message.enableConfidentialCompute = reader.bool();
                                         break;
                                     }
+                                case 2: {
+                                        message.confidentialInstanceType = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7, long);
                                     break;
@@ -18121,6 +18202,16 @@
                             if (message.enableConfidentialCompute != null && message.hasOwnProperty("enableConfidentialCompute"))
                                 if (typeof message.enableConfidentialCompute !== "boolean")
                                     return "enableConfidentialCompute: boolean expected";
+                            if (message.confidentialInstanceType != null && message.hasOwnProperty("confidentialInstanceType"))
+                                switch (message.confidentialInstanceType) {
+                                default:
+                                    return "confidentialInstanceType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -18142,6 +18233,30 @@
                             var message = new $root.google.cloud.dataproc.v1.ConfidentialInstanceConfig();
                             if (object.enableConfidentialCompute != null)
                                 message.enableConfidentialCompute = Boolean(object.enableConfidentialCompute);
+                            switch (object.confidentialInstanceType) {
+                            default:
+                                if (typeof object.confidentialInstanceType === "number") {
+                                    message.confidentialInstanceType = object.confidentialInstanceType;
+                                    break;
+                                }
+                                break;
+                            case "CONFIDENTIAL_INSTANCE_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.confidentialInstanceType = 0;
+                                break;
+                            case "SEV":
+                            case 1:
+                                message.confidentialInstanceType = 1;
+                                break;
+                            case "SEV_SNP":
+                            case 2:
+                                message.confidentialInstanceType = 2;
+                                break;
+                            case "TDX":
+                            case 3:
+                                message.confidentialInstanceType = 3;
+                                break;
+                            }
                             return message;
                         };
     
@@ -18158,10 +18273,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.enableConfidentialCompute = false;
+                                object.confidentialInstanceType = options.enums === String ? "CONFIDENTIAL_INSTANCE_TYPE_UNSPECIFIED" : 0;
+                            }
                             if (message.enableConfidentialCompute != null && message.hasOwnProperty("enableConfidentialCompute"))
                                 object.enableConfidentialCompute = message.enableConfidentialCompute;
+                            if (message.confidentialInstanceType != null && message.hasOwnProperty("confidentialInstanceType"))
+                                object.confidentialInstanceType = options.enums === String ? $root.google.cloud.dataproc.v1.ConfidentialInstanceConfig.ConfidentialInstanceType[message.confidentialInstanceType] === undefined ? message.confidentialInstanceType : $root.google.cloud.dataproc.v1.ConfidentialInstanceConfig.ConfidentialInstanceType[message.confidentialInstanceType] : message.confidentialInstanceType;
                             return object;
                         };
     
@@ -18190,6 +18309,24 @@
                             }
                             return typeUrlPrefix + "/google.cloud.dataproc.v1.ConfidentialInstanceConfig";
                         };
+    
+                        /**
+                         * ConfidentialInstanceType enum.
+                         * @name google.cloud.dataproc.v1.ConfidentialInstanceConfig.ConfidentialInstanceType
+                         * @enum {number}
+                         * @property {number} CONFIDENTIAL_INSTANCE_TYPE_UNSPECIFIED=0 CONFIDENTIAL_INSTANCE_TYPE_UNSPECIFIED value
+                         * @property {number} SEV=1 SEV value
+                         * @property {number} SEV_SNP=2 SEV_SNP value
+                         * @property {number} TDX=3 TDX value
+                         */
+                        ConfidentialInstanceConfig.ConfidentialInstanceType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "CONFIDENTIAL_INSTANCE_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "SEV"] = 1;
+                            values[valuesById[2] = "SEV_SNP"] = 2;
+                            values[valuesById[3] = "TDX"] = 3;
+                            return values;
+                        })();
     
                         return ConfidentialInstanceConfig;
                     })();
@@ -20199,6 +20336,7 @@
                              * @interface IInstanceSelection
                              * @property {Array.<string>|null} [machineTypes] InstanceSelection machineTypes
                              * @property {number|null} [rank] InstanceSelection rank
+                             * @property {google.cloud.dataproc.v1.IDiskConfig|null} [diskConfig] InstanceSelection diskConfig
                              */
     
                             /**
@@ -20234,6 +20372,14 @@
                             InstanceSelection.prototype.rank = 0;
     
                             /**
+                             * InstanceSelection diskConfig.
+                             * @member {google.cloud.dataproc.v1.IDiskConfig|null|undefined} diskConfig
+                             * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection
+                             * @instance
+                             */
+                            InstanceSelection.prototype.diskConfig = null;
+    
+                            /**
                              * Creates a new InstanceSelection instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection
@@ -20262,6 +20408,8 @@
                                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.machineTypes[i]);
                                 if (message.rank != null && Object.hasOwnProperty.call(message, "rank"))
                                     writer.uint32(/* id 2, wireType 0 =*/16).int32(message.rank);
+                                if (message.diskConfig != null && Object.hasOwnProperty.call(message, "diskConfig"))
+                                    $root.google.cloud.dataproc.v1.DiskConfig.encode(message.diskConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                                 return writer;
                             };
     
@@ -20310,6 +20458,10 @@
                                         }
                                     case 2: {
                                             message.rank = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.diskConfig = $root.google.cloud.dataproc.v1.DiskConfig.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     default:
@@ -20361,6 +20513,11 @@
                                 if (message.rank != null && message.hasOwnProperty("rank"))
                                     if (!$util.isInteger(message.rank))
                                         return "rank: integer expected";
+                                if (message.diskConfig != null && message.hasOwnProperty("diskConfig")) {
+                                    var error = $root.google.cloud.dataproc.v1.DiskConfig.verify(message.diskConfig, long + 1);
+                                    if (error)
+                                        return "diskConfig." + error;
+                                }
                                 return null;
                             };
     
@@ -20389,6 +20546,11 @@
                                 }
                                 if (object.rank != null)
                                     message.rank = object.rank | 0;
+                                if (object.diskConfig != null) {
+                                    if (typeof object.diskConfig !== "object")
+                                        throw TypeError(".google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection.diskConfig: object expected");
+                                    message.diskConfig = $root.google.cloud.dataproc.v1.DiskConfig.fromObject(object.diskConfig, long + 1);
+                                }
                                 return message;
                             };
     
@@ -20407,8 +20569,10 @@
                                 var object = {};
                                 if (options.arrays || options.defaults)
                                     object.machineTypes = [];
-                                if (options.defaults)
+                                if (options.defaults) {
                                     object.rank = 0;
+                                    object.diskConfig = null;
+                                }
                                 if (message.machineTypes && message.machineTypes.length) {
                                     object.machineTypes = [];
                                     for (var j = 0; j < message.machineTypes.length; ++j)
@@ -20416,6 +20580,8 @@
                                 }
                                 if (message.rank != null && message.hasOwnProperty("rank"))
                                     object.rank = message.rank;
+                                if (message.diskConfig != null && message.hasOwnProperty("diskConfig"))
+                                    object.diskConfig = $root.google.cloud.dataproc.v1.DiskConfig.toObject(message.diskConfig, options);
                                 return object;
                             };
     
@@ -20967,6 +21133,7 @@
                          * @property {string|null} [localSsdInterface] DiskConfig localSsdInterface
                          * @property {number|Long|null} [bootDiskProvisionedIops] DiskConfig bootDiskProvisionedIops
                          * @property {number|Long|null} [bootDiskProvisionedThroughput] DiskConfig bootDiskProvisionedThroughput
+                         * @property {Array.<google.cloud.dataproc.v1.IAttachedDiskConfig>|null} [attachedDiskConfigs] DiskConfig attachedDiskConfigs
                          */
     
                         /**
@@ -20978,6 +21145,7 @@
                          * @param {google.cloud.dataproc.v1.IDiskConfig=} [properties] Properties to set
                          */
                         function DiskConfig(properties) {
+                            this.attachedDiskConfigs = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null && keys[i] !== "__proto__")
@@ -21032,6 +21200,14 @@
                          */
                         DiskConfig.prototype.bootDiskProvisionedThroughput = null;
     
+                        /**
+                         * DiskConfig attachedDiskConfigs.
+                         * @member {Array.<google.cloud.dataproc.v1.IAttachedDiskConfig>} attachedDiskConfigs
+                         * @memberof google.cloud.dataproc.v1.DiskConfig
+                         * @instance
+                         */
+                        DiskConfig.prototype.attachedDiskConfigs = $util.emptyArray;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -21083,6 +21259,9 @@
                                 writer.uint32(/* id 5, wireType 0 =*/40).int64(message.bootDiskProvisionedIops);
                             if (message.bootDiskProvisionedThroughput != null && Object.hasOwnProperty.call(message, "bootDiskProvisionedThroughput"))
                                 writer.uint32(/* id 6, wireType 0 =*/48).int64(message.bootDiskProvisionedThroughput);
+                            if (message.attachedDiskConfigs != null && message.attachedDiskConfigs.length)
+                                for (var i = 0; i < message.attachedDiskConfigs.length; ++i)
+                                    $root.google.cloud.dataproc.v1.AttachedDiskConfig.encode(message.attachedDiskConfigs[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             return writer;
                         };
     
@@ -21147,6 +21326,12 @@
                                         message.bootDiskProvisionedThroughput = reader.int64();
                                         break;
                                     }
+                                case 7: {
+                                        if (!(message.attachedDiskConfigs && message.attachedDiskConfigs.length))
+                                            message.attachedDiskConfigs = [];
+                                        message.attachedDiskConfigs.push($root.google.cloud.dataproc.v1.AttachedDiskConfig.decode(reader, reader.uint32(), undefined, long + 1));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7, long);
                                     break;
@@ -21209,6 +21394,15 @@
                                 if (!$util.isInteger(message.bootDiskProvisionedThroughput) && !(message.bootDiskProvisionedThroughput && $util.isInteger(message.bootDiskProvisionedThroughput.low) && $util.isInteger(message.bootDiskProvisionedThroughput.high)))
                                     return "bootDiskProvisionedThroughput: integer|Long expected";
                             }
+                            if (message.attachedDiskConfigs != null && message.hasOwnProperty("attachedDiskConfigs")) {
+                                if (!Array.isArray(message.attachedDiskConfigs))
+                                    return "attachedDiskConfigs: array expected";
+                                for (var i = 0; i < message.attachedDiskConfigs.length; ++i) {
+                                    var error = $root.google.cloud.dataproc.v1.AttachedDiskConfig.verify(message.attachedDiskConfigs[i], long + 1);
+                                    if (error)
+                                        return "attachedDiskConfigs." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -21254,6 +21448,16 @@
                                     message.bootDiskProvisionedThroughput = object.bootDiskProvisionedThroughput;
                                 else if (typeof object.bootDiskProvisionedThroughput === "object")
                                     message.bootDiskProvisionedThroughput = new $util.LongBits(object.bootDiskProvisionedThroughput.low >>> 0, object.bootDiskProvisionedThroughput.high >>> 0).toNumber();
+                            if (object.attachedDiskConfigs) {
+                                if (!Array.isArray(object.attachedDiskConfigs))
+                                    throw TypeError(".google.cloud.dataproc.v1.DiskConfig.attachedDiskConfigs: array expected");
+                                message.attachedDiskConfigs = [];
+                                for (var i = 0; i < object.attachedDiskConfigs.length; ++i) {
+                                    if (typeof object.attachedDiskConfigs[i] !== "object")
+                                        throw TypeError(".google.cloud.dataproc.v1.DiskConfig.attachedDiskConfigs: object expected");
+                                    message.attachedDiskConfigs[i] = $root.google.cloud.dataproc.v1.AttachedDiskConfig.fromObject(object.attachedDiskConfigs[i], long + 1);
+                                }
+                            }
                             return message;
                         };
     
@@ -21270,6 +21474,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.attachedDiskConfigs = [];
                             if (options.defaults) {
                                 object.bootDiskSizeGb = 0;
                                 object.numLocalSsds = 0;
@@ -21299,6 +21505,11 @@
                                     object.bootDiskProvisionedThroughput = options.longs === String ? $util.Long.prototype.toString.call(message.bootDiskProvisionedThroughput) : options.longs === Number ? new $util.LongBits(message.bootDiskProvisionedThroughput.low >>> 0, message.bootDiskProvisionedThroughput.high >>> 0).toNumber() : message.bootDiskProvisionedThroughput;
                                 if (options.oneofs)
                                     object._bootDiskProvisionedThroughput = "bootDiskProvisionedThroughput";
+                            }
+                            if (message.attachedDiskConfigs && message.attachedDiskConfigs.length) {
+                                object.attachedDiskConfigs = [];
+                                for (var j = 0; j < message.attachedDiskConfigs.length; ++j)
+                                    object.attachedDiskConfigs[j] = $root.google.cloud.dataproc.v1.AttachedDiskConfig.toObject(message.attachedDiskConfigs[j], options);
                             }
                             return object;
                         };
@@ -21330,6 +21541,391 @@
                         };
     
                         return DiskConfig;
+                    })();
+    
+                    v1.AttachedDiskConfig = (function() {
+    
+                        /**
+                         * Properties of an AttachedDiskConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @interface IAttachedDiskConfig
+                         * @property {google.cloud.dataproc.v1.AttachedDiskConfig.DiskType|null} [diskType] AttachedDiskConfig diskType
+                         * @property {number|null} [diskSizeGb] AttachedDiskConfig diskSizeGb
+                         * @property {number|Long|null} [provisionedIops] AttachedDiskConfig provisionedIops
+                         * @property {number|Long|null} [provisionedThroughput] AttachedDiskConfig provisionedThroughput
+                         */
+    
+                        /**
+                         * Constructs a new AttachedDiskConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @classdesc Represents an AttachedDiskConfig.
+                         * @implements IAttachedDiskConfig
+                         * @constructor
+                         * @param {google.cloud.dataproc.v1.IAttachedDiskConfig=} [properties] Properties to set
+                         */
+                        function AttachedDiskConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AttachedDiskConfig diskType.
+                         * @member {google.cloud.dataproc.v1.AttachedDiskConfig.DiskType} diskType
+                         * @memberof google.cloud.dataproc.v1.AttachedDiskConfig
+                         * @instance
+                         */
+                        AttachedDiskConfig.prototype.diskType = 0;
+    
+                        /**
+                         * AttachedDiskConfig diskSizeGb.
+                         * @member {number} diskSizeGb
+                         * @memberof google.cloud.dataproc.v1.AttachedDiskConfig
+                         * @instance
+                         */
+                        AttachedDiskConfig.prototype.diskSizeGb = 0;
+    
+                        /**
+                         * AttachedDiskConfig provisionedIops.
+                         * @member {number|Long|null|undefined} provisionedIops
+                         * @memberof google.cloud.dataproc.v1.AttachedDiskConfig
+                         * @instance
+                         */
+                        AttachedDiskConfig.prototype.provisionedIops = null;
+    
+                        /**
+                         * AttachedDiskConfig provisionedThroughput.
+                         * @member {number|Long|null|undefined} provisionedThroughput
+                         * @memberof google.cloud.dataproc.v1.AttachedDiskConfig
+                         * @instance
+                         */
+                        AttachedDiskConfig.prototype.provisionedThroughput = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(AttachedDiskConfig.prototype, "_provisionedIops", {
+                            get: $util.oneOfGetter($oneOfFields = ["provisionedIops"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(AttachedDiskConfig.prototype, "_provisionedThroughput", {
+                            get: $util.oneOfGetter($oneOfFields = ["provisionedThroughput"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new AttachedDiskConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataproc.v1.AttachedDiskConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IAttachedDiskConfig=} [properties] Properties to set
+                         * @returns {google.cloud.dataproc.v1.AttachedDiskConfig} AttachedDiskConfig instance
+                         */
+                        AttachedDiskConfig.create = function create(properties) {
+                            return new AttachedDiskConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AttachedDiskConfig message. Does not implicitly {@link google.cloud.dataproc.v1.AttachedDiskConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataproc.v1.AttachedDiskConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IAttachedDiskConfig} message AttachedDiskConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AttachedDiskConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.diskType != null && Object.hasOwnProperty.call(message, "diskType"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.diskType);
+                            if (message.diskSizeGb != null && Object.hasOwnProperty.call(message, "diskSizeGb"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.diskSizeGb);
+                            if (message.provisionedIops != null && Object.hasOwnProperty.call(message, "provisionedIops"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.provisionedIops);
+                            if (message.provisionedThroughput != null && Object.hasOwnProperty.call(message, "provisionedThroughput"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.provisionedThroughput);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AttachedDiskConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.AttachedDiskConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataproc.v1.AttachedDiskConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IAttachedDiskConfig} message AttachedDiskConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AttachedDiskConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AttachedDiskConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataproc.v1.AttachedDiskConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataproc.v1.AttachedDiskConfig} AttachedDiskConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AttachedDiskConfig.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.AttachedDiskConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.diskType = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.diskSizeGb = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.provisionedIops = reader.int64();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.provisionedThroughput = reader.int64();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AttachedDiskConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataproc.v1.AttachedDiskConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataproc.v1.AttachedDiskConfig} AttachedDiskConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AttachedDiskConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AttachedDiskConfig message.
+                         * @function verify
+                         * @memberof google.cloud.dataproc.v1.AttachedDiskConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AttachedDiskConfig.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            var properties = {};
+                            if (message.diskType != null && message.hasOwnProperty("diskType"))
+                                switch (message.diskType) {
+                                default:
+                                    return "diskType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.diskSizeGb != null && message.hasOwnProperty("diskSizeGb"))
+                                if (!$util.isInteger(message.diskSizeGb))
+                                    return "diskSizeGb: integer expected";
+                            if (message.provisionedIops != null && message.hasOwnProperty("provisionedIops")) {
+                                properties._provisionedIops = 1;
+                                if (!$util.isInteger(message.provisionedIops) && !(message.provisionedIops && $util.isInteger(message.provisionedIops.low) && $util.isInteger(message.provisionedIops.high)))
+                                    return "provisionedIops: integer|Long expected";
+                            }
+                            if (message.provisionedThroughput != null && message.hasOwnProperty("provisionedThroughput")) {
+                                properties._provisionedThroughput = 1;
+                                if (!$util.isInteger(message.provisionedThroughput) && !(message.provisionedThroughput && $util.isInteger(message.provisionedThroughput.low) && $util.isInteger(message.provisionedThroughput.high)))
+                                    return "provisionedThroughput: integer|Long expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AttachedDiskConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataproc.v1.AttachedDiskConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataproc.v1.AttachedDiskConfig} AttachedDiskConfig
+                         */
+                        AttachedDiskConfig.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.dataproc.v1.AttachedDiskConfig)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.dataproc.v1.AttachedDiskConfig();
+                            switch (object.diskType) {
+                            default:
+                                if (typeof object.diskType === "number") {
+                                    message.diskType = object.diskType;
+                                    break;
+                                }
+                                break;
+                            case "DISK_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.diskType = 0;
+                                break;
+                            case "HYPERDISK_BALANCED":
+                            case 1:
+                                message.diskType = 1;
+                                break;
+                            case "HYPERDISK_EXTREME":
+                            case 2:
+                                message.diskType = 2;
+                                break;
+                            case "HYPERDISK_ML":
+                            case 3:
+                                message.diskType = 3;
+                                break;
+                            case "HYPERDISK_THROUGHPUT":
+                            case 4:
+                                message.diskType = 4;
+                                break;
+                            }
+                            if (object.diskSizeGb != null)
+                                message.diskSizeGb = object.diskSizeGb | 0;
+                            if (object.provisionedIops != null)
+                                if ($util.Long)
+                                    (message.provisionedIops = $util.Long.fromValue(object.provisionedIops)).unsigned = false;
+                                else if (typeof object.provisionedIops === "string")
+                                    message.provisionedIops = parseInt(object.provisionedIops, 10);
+                                else if (typeof object.provisionedIops === "number")
+                                    message.provisionedIops = object.provisionedIops;
+                                else if (typeof object.provisionedIops === "object")
+                                    message.provisionedIops = new $util.LongBits(object.provisionedIops.low >>> 0, object.provisionedIops.high >>> 0).toNumber();
+                            if (object.provisionedThroughput != null)
+                                if ($util.Long)
+                                    (message.provisionedThroughput = $util.Long.fromValue(object.provisionedThroughput)).unsigned = false;
+                                else if (typeof object.provisionedThroughput === "string")
+                                    message.provisionedThroughput = parseInt(object.provisionedThroughput, 10);
+                                else if (typeof object.provisionedThroughput === "number")
+                                    message.provisionedThroughput = object.provisionedThroughput;
+                                else if (typeof object.provisionedThroughput === "object")
+                                    message.provisionedThroughput = new $util.LongBits(object.provisionedThroughput.low >>> 0, object.provisionedThroughput.high >>> 0).toNumber();
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AttachedDiskConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataproc.v1.AttachedDiskConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.AttachedDiskConfig} message AttachedDiskConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AttachedDiskConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.diskType = options.enums === String ? "DISK_TYPE_UNSPECIFIED" : 0;
+                                object.diskSizeGb = 0;
+                            }
+                            if (message.diskType != null && message.hasOwnProperty("diskType"))
+                                object.diskType = options.enums === String ? $root.google.cloud.dataproc.v1.AttachedDiskConfig.DiskType[message.diskType] === undefined ? message.diskType : $root.google.cloud.dataproc.v1.AttachedDiskConfig.DiskType[message.diskType] : message.diskType;
+                            if (message.diskSizeGb != null && message.hasOwnProperty("diskSizeGb"))
+                                object.diskSizeGb = message.diskSizeGb;
+                            if (message.provisionedIops != null && message.hasOwnProperty("provisionedIops")) {
+                                if (typeof message.provisionedIops === "number")
+                                    object.provisionedIops = options.longs === String ? String(message.provisionedIops) : message.provisionedIops;
+                                else
+                                    object.provisionedIops = options.longs === String ? $util.Long.prototype.toString.call(message.provisionedIops) : options.longs === Number ? new $util.LongBits(message.provisionedIops.low >>> 0, message.provisionedIops.high >>> 0).toNumber() : message.provisionedIops;
+                                if (options.oneofs)
+                                    object._provisionedIops = "provisionedIops";
+                            }
+                            if (message.provisionedThroughput != null && message.hasOwnProperty("provisionedThroughput")) {
+                                if (typeof message.provisionedThroughput === "number")
+                                    object.provisionedThroughput = options.longs === String ? String(message.provisionedThroughput) : message.provisionedThroughput;
+                                else
+                                    object.provisionedThroughput = options.longs === String ? $util.Long.prototype.toString.call(message.provisionedThroughput) : options.longs === Number ? new $util.LongBits(message.provisionedThroughput.low >>> 0, message.provisionedThroughput.high >>> 0).toNumber() : message.provisionedThroughput;
+                                if (options.oneofs)
+                                    object._provisionedThroughput = "provisionedThroughput";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AttachedDiskConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataproc.v1.AttachedDiskConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AttachedDiskConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AttachedDiskConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataproc.v1.AttachedDiskConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AttachedDiskConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataproc.v1.AttachedDiskConfig";
+                        };
+    
+                        /**
+                         * DiskType enum.
+                         * @name google.cloud.dataproc.v1.AttachedDiskConfig.DiskType
+                         * @enum {number}
+                         * @property {number} DISK_TYPE_UNSPECIFIED=0 DISK_TYPE_UNSPECIFIED value
+                         * @property {number} HYPERDISK_BALANCED=1 HYPERDISK_BALANCED value
+                         * @property {number} HYPERDISK_EXTREME=2 HYPERDISK_EXTREME value
+                         * @property {number} HYPERDISK_ML=3 HYPERDISK_ML value
+                         * @property {number} HYPERDISK_THROUGHPUT=4 HYPERDISK_THROUGHPUT value
+                         */
+                        AttachedDiskConfig.DiskType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "DISK_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "HYPERDISK_BALANCED"] = 1;
+                            values[valuesById[2] = "HYPERDISK_EXTREME"] = 2;
+                            values[valuesById[3] = "HYPERDISK_ML"] = 3;
+                            values[valuesById[4] = "HYPERDISK_THROUGHPUT"] = 4;
+                            return values;
+                        })();
+    
+                        return AttachedDiskConfig;
                     })();
     
                     v1.AuxiliaryNodeGroup = (function() {

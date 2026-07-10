@@ -261,15 +261,22 @@ cd "${PROJECT_ROOT}"
 # Check if the package directory has changes. If not, skip tests.
 if [[ "${RUNNING_IN_CI:-}" == "true" ]]; then
     # The package path is hardcoded during migration
-    RELATIVE_PKG_PATH="handwritten/spanner"
+    RELATIVE_PKG_PATH="."
     
     echo "Checking for changes in ${RELATIVE_PKG_PATH}..."
     
     # Determine the diff range based on the CI system/event
-    # Safe default: HEAD~1..HEAD
     DIFF_RANGE="HEAD~1..HEAD"
-
-    git fetch --deepen=10 2>/dev/null || true
+    
+    # If we are in a Kokoro Pull Request, diff against the main branch
+    if [[ -n "${KOKORO_GITHUB_PULL_REQUEST_NUMBER:-}" ]]; then
+        git fetch origin main --deepen=300 2>/dev/null || true
+        if git merge-base origin/main HEAD >/dev/null 2>&1; then
+            DIFF_RANGE="origin/main..."
+        fi
+    else
+        git fetch --deepen=10 2>/dev/null || true
+    fi
     if git diff --quiet "${DIFF_RANGE}" -- "${RELATIVE_PKG_PATH}"; then
         echo "No changes detected in ${RELATIVE_PKG_PATH}. Skipping tests."
         exit 0

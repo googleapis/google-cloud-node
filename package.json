@@ -12,7 +12,7 @@
     "test": "echo nothing to test",
     "test-generate": "SMOKE_TEST=true node ./bin/generate-readme.mjs",
     "generate": "./bin/generate-readme.mjs",
-    "lint": "echo nothing to lint",
+    "lint": "node ./bin/linter.mjs",
     "clean": "echo nothing to clean",
     "precompile": "echo nothing to precompile",
     "system-test": "echo nothing to system test",
@@ -40,7 +40,13 @@
     "parse-link-header": "^2.0.0"
   },
   "devDependencies": {
-    "gts": "^6.0.2"
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "gts": "^6.0.2",
+    "prettier": "^3.3.3"
   },
   "engines": {
     "node": ">=18"
