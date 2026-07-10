@@ -894,6 +894,34 @@ describe('googleauth', () => {
       );
     });
 
+    it('_tryGetApplicationCredentialsFromWellKnownFile should honor CLOUDSDK_CONFIG over the default location', async () => {
+      // `gcloud` writes the ADC file under $CLOUDSDK_CONFIG when it is set, so
+      // it must take precedence over the platform default ($HOME/.config/gcloud
+      // here). The default Linux well-known file is left absent on purpose.
+      const cloudSdkConfigDir = path.join('/', 'fake', 'cloudsdk', 'config');
+      const cloudSdkAdcPath = path.join(
+        cloudSdkConfigDir,
+        'application_default_credentials.json',
+      );
+      mockEnvVar('CLOUDSDK_CONFIG', cloudSdkConfigDir);
+      (fs.existsSync as sinon.SinonStub)
+        .withArgs(cloudSdkAdcPath)
+        .returns(true);
+      (fs.createReadStream as sinon.SinonStub)
+        .withArgs(cloudSdkAdcPath)
+        .callsFake(() => fs.createReadStream('./test/fixtures/private2.json'));
+      (fs.realpathSync as unknown as sinon.SinonStub)
+        .withArgs(cloudSdkAdcPath)
+        .returnsArg(0);
+      (fs.lstatSync as sinon.SinonStub)
+        .withArgs(cloudSdkAdcPath)
+        .returns({isFile: () => true} as fs.Stats);
+
+      const client =
+        (await auth._tryGetApplicationCredentialsFromWellKnownFile()) as JWT;
+      assert.strictEqual(client.email, private2JSON.client_email);
+    });
+
     it('getProjectId should return a new projectId the first time and a cached projectId the second time', async () => {
       mockEnvVar('GCLOUD_PROJECT', STUB_PROJECT);
 
