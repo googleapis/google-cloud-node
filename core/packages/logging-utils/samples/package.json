@@ -23,7 +23,7 @@
     "directory": "core/packages/logging-utils/samples"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=18"
   },
   "dependencies": {
     "google-logging-utils": "^1.1.4"
