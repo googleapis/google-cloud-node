@@ -1160,6 +1160,16 @@ export class KeyManagementServiceClient {
    * @param {string} request.name
    *   Required. The {@link protos.google.cloud.kms.v1.ImportJob.name|name} of the
    *   {@link protos.google.cloud.kms.v1.ImportJob|ImportJob} to get.
+   * @param {google.cloud.kms.v1.PublicKey.PublicKeyFormat} [request.publicKeyFormat]
+   *   Optional. Specifies the {@link protos.|WrappingPublicKey} format.
+   *   If not specified:
+   *     * For RSA-based import methods, the wrapping key will be returned in PEM
+   *     format
+   *     * For pure ML-KEM-based import methods, the wrapping key will be returned
+   *     in the raw bytes format specified in FIPS-203
+   *     * For X-Wing-based import methods, the wrapping key will be returned in
+   *     the raw bytes format specified in
+   *     https://datatracker.ietf.org/doc/draft-connolly-cfrg-xwing-kem.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
