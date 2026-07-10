@@ -29,6 +29,7 @@ import * as tracing from '../src/telemetry-tracing';
 import {Topic} from '../src/topic';
 import * as util from '../src/util';
 import {Schema, SchemaTypes, ISchema, SchemaViews} from '../src/schema';
+import {v1 as v1real} from '../src';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const PKG = require('../../package.json');
 const sandbox = sinon.createSandbox();
@@ -145,7 +146,7 @@ function fakeGoogleAuth(...args: Array<{}>) {
   return (googleAuthOverride || util.noop)(...args);
 }
 
-const v1Override = {};
+const v1Override = Object.assign({}, v1real);
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let v1ClientOverrides: any = {};
 
@@ -195,7 +196,7 @@ describe('PubSub', () => {
       './snapshot': {Snapshot: FakeSnapshot},
       './subscription': {Subscription},
       './topic': {Topic: FakeTopic},
-      './v1': v1Override,
+      './index': {v1:v1Override},
       './util': fakeUtil,
     }).PubSub;
   });

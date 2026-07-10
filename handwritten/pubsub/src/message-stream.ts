@@ -44,10 +44,10 @@ export const logs = {
 const KEEP_ALIVE_INTERVAL = 30000;
 
 /*!
- * Deadline for the stream.
+ * Deadline for the stream. This will need to go away and be replaced with something
+ * more graceful for pulling the config out of the pubsub-api package.
  */
-const gapicConfig = require("@google-cloud/pubsub-api/src/v1/subscriber_client_config.json");
-const PULL_TIMEOUT = gapicConfig.interfaces[
+const PULL_TIMEOUT = require('./v1-old/subscriber_client_config.json').interfaces[
   'google.pubsub.v1.Subscriber'
 ].methods.StreamingPull.timeout_millis;
 

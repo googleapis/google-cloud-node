@@ -19,7 +19,7 @@ import {replaceProjectIdToken} from '@google-cloud/projectify';
 import * as extend from 'extend';
 import {AuthClient, GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
 import * as gax from 'google-gax';
-import {v1} from '.';
+import {v1} from './';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const PKG = require('../../package.json');
