@@ -747,7 +747,7 @@ export abstract class BaseExternalAccountClient extends AuthClient {
       );
     }
 
-    // Check if the audience corresponds to a workload identity pool.
+    // Check if the audience corresponds to a workforce identity pool.
     const wfPoolId = getWorkforcePoolIdFromAudience(this.audience);
     if (wfPoolId) {
       return WORKFORCE_LOOKUP_ENDPOINT.replace(
@@ -756,7 +756,7 @@ export abstract class BaseExternalAccountClient extends AuthClient {
       );
     }
 
-    // Check if the audience corresponds to a workforce identity pool.
+    // Check if the audience corresponds to a workload identity pool.
     const wlPoolId = getWorkloadPoolIdFromAudience(this.audience);
     const projectNumber = this.getProjectNumber(this.audience);
     if (wlPoolId && projectNumber) {

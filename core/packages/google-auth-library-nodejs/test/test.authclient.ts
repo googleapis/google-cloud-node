@@ -33,6 +33,16 @@ import {
   SERVICE_ACCOUNT_LOOKUP_ENDPOINT,
 } from '../src/auth/regionalaccessboundary';
 
+interface ComputeWithRAB {
+  regionalAccessBoundaryManager: {
+    regionalAccessBoundaryRefreshPromise: Promise<void> | null;
+    fetchRegionalAccessBoundary(
+      accessToken: string,
+    ): Promise<RegionalAccessBoundaryData | null>;
+  };
+  resolveServiceAccountEmail(): Promise<string | null>;
+}
+
 // Fakes for the logger, to capture logs that would've happened.
 interface TestLog {
   namespace: string;
@@ -444,18 +454,11 @@ describe('AuthClient', () => {
 
         assert.strictEqual(headers.get('x-allowed-locations'), null);
 
-        // Wait for the background task to complete (not ideal but necessary for testing side effect)
-        // In a real scenario we'd use a better way to wait for the internal promise
-        let attempts = 0;
-        while (!rabLookupCalled && attempts < 10) {
-          await new Promise(r => setTimeout(r, 50));
-          attempts++;
-        }
+        // Wait for the background task to complete
+        await (compute as unknown as ComputeWithRAB)
+          .regionalAccessBoundaryManager.regionalAccessBoundaryRefreshPromise;
 
         assert.strictEqual(rabLookupCalled, true);
-
-        // Give the background processing a moment to update the class member
-        await new Promise(r => setTimeout(r, 50));
         assert.deepStrictEqual(
           compute.getRegionalAccessBoundary(),
           EXPECTED_RAB_DATA,
@@ -516,11 +519,8 @@ describe('AuthClient', () => {
         await compute.getRequestHeaders('/v1/resource');
 
         // Wait for the background task to complete
-        let attempts = 0;
-        while (!compute.getRegionalAccessBoundary() && attempts < 10) {
-          await new Promise(r => setTimeout(r, 50));
-          attempts++;
-        }
+        await (compute as unknown as ComputeWithRAB)
+          .regionalAccessBoundaryManager.regionalAccessBoundaryRefreshPromise;
 
         assert.deepStrictEqual(
           compute.getRegionalAccessBoundary(),
@@ -553,12 +553,9 @@ describe('AuthClient', () => {
 
         await compute.getRequestHeaders('https://pubsub.googleapis.com');
 
-        // Wait for retries (exponential backoff might take a moment)
-        let attempts = 0;
-        while (!compute.getRegionalAccessBoundary() && attempts < 20) {
-          await new Promise(r => setTimeout(r, 150));
-          attempts++;
-        }
+        // Wait for the background task to complete
+        await (compute as unknown as ComputeWithRAB)
+          .regionalAccessBoundaryManager.regionalAccessBoundaryRefreshPromise;
 
         assert.deepStrictEqual(
           compute.getRegionalAccessBoundary(),
@@ -586,15 +583,9 @@ describe('AuthClient', () => {
 
         await compute.getRequestHeaders('https://pubsub.googleapis.com');
 
-        // Wait for it to fail and enter cooldown
-        let attempts = 0;
-        while (
-          !compute.getRegionalAccessBoundaryCooldownTime() &&
-          attempts < 10
-        ) {
-          await new Promise(r => setTimeout(r, 50));
-          attempts++;
-        }
+        // Wait for the background task to complete
+        await (compute as unknown as ComputeWithRAB)
+          .regionalAccessBoundaryManager.regionalAccessBoundaryRefreshPromise;
 
         assert.ok(compute.getRegionalAccessBoundaryCooldownTime() > Date.now());
 
@@ -612,20 +603,25 @@ describe('AuthClient', () => {
         const tokenScope = setupTokenNock(SERVICE_ACCOUNT_EMAIL);
         const spy = sandbox.spy(compute, 'getRegionalAccessBoundaryUrl');
         sandbox
-          .stub(compute as any, 'resolveServiceAccountEmail')
+          .stub(
+            compute as unknown as ComputeWithRAB,
+            'resolveServiceAccountEmail',
+          )
           .resolves(null);
 
         // Make first request. This triggers the background refresh which calls getRegionalAccessBoundaryUrl once.
         await compute.getRequestHeaders('https://pubsub.googleapis.com');
 
-        // Wait a short moment to ensure the async background refresh has finished.
-        await new Promise(r => setTimeout(r, 50));
+        // Wait for the background task to complete
+        await (compute as unknown as ComputeWithRAB)
+          .regionalAccessBoundaryManager.regionalAccessBoundaryRefreshPromise;
 
         assert.strictEqual(spy.callCount, 1);
 
         // Make second request. This should NOT trigger background refresh or call getRegionalAccessBoundaryUrl again.
         await compute.getRequestHeaders('https://pubsub.googleapis.com');
-        await new Promise(r => setTimeout(r, 50));
+        await (compute as unknown as ComputeWithRAB)
+          .regionalAccessBoundaryManager.regionalAccessBoundaryRefreshPromise;
 
         assert.strictEqual(spy.callCount, 1);
 
@@ -647,7 +643,8 @@ describe('AuthClient', () => {
           .get(new URL(rabUrl).pathname)
           .reply(200, null as any);
 
-        const manager = (compute as any).regionalAccessBoundaryManager;
+        const manager = (compute as unknown as ComputeWithRAB)
+          .regionalAccessBoundaryManager;
 
         await assert.rejects(
           manager.fetchRegionalAccessBoundary('some-token'),
