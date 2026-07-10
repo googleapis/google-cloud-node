@@ -71,4 +71,4 @@ steps:
 substitutions:
   _GCP_PROJECT_ID: 'long-door-651'
 
-timeout: '3600s'
+timeout: '10800s'
