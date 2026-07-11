@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.0](https://github.com/googleapis/google-cloud-node/compare/places-v2.4.1...places-v2.5.0) (2026-06-01)
+
+
+### Features
+
+* [places] add transit_station data to Places API (New) ([#8363](https://github.com/googleapis/google-cloud-node/issues/8363)) ([cbc359c](https://github.com/googleapis/google-cloud-node/commit/cbc359cb7468e5338c67762c52ebb1d9c3910a22))
+
 ## [2.4.1](https://github.com/googleapis/google-cloud-node/compare/places-v2.4.0...places-v2.4.1) (2026-05-01)
 
 

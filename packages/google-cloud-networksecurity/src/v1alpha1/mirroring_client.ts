@@ -18,11 +18,24 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, IamClient, IamProtos, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+  IamClient,
+  IamProtos,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +57,7 @@ export class MirroringClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('network-security');
@@ -57,12 +70,12 @@ export class MirroringClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  mirroringStub?: Promise<{[name: string]: Function}>;
+  mirroringStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of MirroringClient.
@@ -103,21 +116,42 @@ export class MirroringClient {
    *     const client = new MirroringClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof MirroringClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'networksecurity.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -142,7 +176,7 @@ export class MirroringClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -155,18 +189,14 @@ export class MirroringClient {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
-  
+
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -188,106 +218,114 @@ export class MirroringClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       authorizationPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/authorizationPolicies/{authorization_policy}'
+        'projects/{project}/locations/{location}/authorizationPolicies/{authorization_policy}',
       ),
       authzPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/authzPolicies/{authz_policy}'
+        'projects/{project}/locations/{location}/authzPolicies/{authz_policy}',
       ),
       backendAuthenticationConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/backendAuthenticationConfigs/{backend_authentication_config}'
+        'projects/{project}/locations/{location}/backendAuthenticationConfigs/{backend_authentication_config}',
       ),
       clientTlsPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/clientTlsPolicies/{client_tls_policy}'
+        'projects/{project}/locations/{location}/clientTlsPolicies/{client_tls_policy}',
       ),
       dnsThreatDetectorPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dnsThreatDetectors/{dns_threat_detector}'
+        'projects/{project}/locations/{location}/dnsThreatDetectors/{dns_threat_detector}',
       ),
       firewallEndpointAssociationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/firewallEndpointAssociations/{firewall_endpoint_association}'
+        'projects/{project}/locations/{location}/firewallEndpointAssociations/{firewall_endpoint_association}',
       ),
       forwardingRulePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/global/forwardingRules/{forwarding_rule}'
+        'projects/{project}/global/forwardingRules/{forwarding_rule}',
       ),
       gatewaySecurityPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/gatewaySecurityPolicies/{gateway_security_policy}'
+        'projects/{project}/locations/{location}/gatewaySecurityPolicies/{gateway_security_policy}',
       ),
       gatewaySecurityPolicyRulePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/gatewaySecurityPolicies/{gateway_security_policy}/rules/{rule}'
+        'projects/{project}/locations/{location}/gatewaySecurityPolicies/{gateway_security_policy}/rules/{rule}',
       ),
       interceptDeploymentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/interceptDeployments/{intercept_deployment}'
+        'projects/{project}/locations/{location}/interceptDeployments/{intercept_deployment}',
       ),
       interceptDeploymentGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/interceptDeploymentGroups/{intercept_deployment_group}'
+        'projects/{project}/locations/{location}/interceptDeploymentGroups/{intercept_deployment_group}',
       ),
       interceptEndpointGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/interceptEndpointGroups/{intercept_endpoint_group}'
+        'projects/{project}/locations/{location}/interceptEndpointGroups/{intercept_endpoint_group}',
       ),
-      interceptEndpointGroupAssociationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/interceptEndpointGroupAssociations/{intercept_endpoint_group_association}'
-      ),
+      interceptEndpointGroupAssociationPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/interceptEndpointGroupAssociations/{intercept_endpoint_group_association}',
+        ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
       mirroringDeploymentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/mirroringDeployments/{mirroring_deployment}'
+        'projects/{project}/locations/{location}/mirroringDeployments/{mirroring_deployment}',
       ),
       mirroringDeploymentGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/mirroringDeploymentGroups/{mirroring_deployment_group}'
+        'projects/{project}/locations/{location}/mirroringDeploymentGroups/{mirroring_deployment_group}',
       ),
       mirroringEndpointGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/mirroringEndpointGroups/{mirroring_endpoint_group}'
+        'projects/{project}/locations/{location}/mirroringEndpointGroups/{mirroring_endpoint_group}',
       ),
-      mirroringEndpointGroupAssociationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/mirroringEndpointGroupAssociations/{mirroring_endpoint_group_association}'
-      ),
+      mirroringEndpointGroupAssociationPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/mirroringEndpointGroupAssociations/{mirroring_endpoint_group_association}',
+        ),
       networkPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/global/networks/{network}'
+        'projects/{project}/global/networks/{network}',
       ),
-      organizationLocationFirewallEndpointsPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/firewallEndpoints/{firewall_endpoint}'
-      ),
-      organizationLocationSecurityProfilePathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/securityProfiles/{security_profile}'
-      ),
-      organizationLocationSecurityProfileGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/securityProfileGroups/{security_profile_group}'
-      ),
+      organizationLocationFirewallEndpointsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/firewallEndpoints/{firewall_endpoint}',
+        ),
+      organizationLocationSecurityProfilePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/securityProfiles/{security_profile}',
+        ),
+      organizationLocationSecurityProfileGroupPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/securityProfileGroups/{security_profile_group}',
+        ),
       partnerSSEGatewayPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/partnerSSEGateways/{partner_sse_gateway}'
+        'projects/{project}/locations/{location}/partnerSSEGateways/{partner_sse_gateway}',
       ),
       partnerSSERealmPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/partnerSSERealms/{partner_sse_realm}'
+        'projects/{project}/locations/{location}/partnerSSERealms/{partner_sse_realm}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
-      projectLocationFirewallEndpointsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/firewallEndpoints/{firewall_endpoint}'
-      ),
-      projectLocationSecurityProfilePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/securityProfiles/{security_profile}'
-      ),
-      projectLocationSecurityProfileGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/securityProfileGroups/{security_profile_group}'
-      ),
+      projectLocationFirewallEndpointsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/firewallEndpoints/{firewall_endpoint}',
+        ),
+      projectLocationSecurityProfilePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/securityProfiles/{security_profile}',
+        ),
+      projectLocationSecurityProfileGroupPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/securityProfileGroups/{security_profile_group}',
+        ),
       sACAttachmentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/sacAttachments/{sac_attachment}'
+        'projects/{project}/locations/{location}/sacAttachments/{sac_attachment}',
       ),
       sACRealmPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/sacRealms/{sac_realm}'
+        'projects/{project}/locations/{location}/sacRealms/{sac_realm}',
       ),
       sSEGatewayReferencePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/sseGatewayReferences/{sse_gateway_reference}'
+        'projects/{project}/locations/{location}/sseGatewayReferences/{sse_gateway_reference}',
       ),
       serverTlsPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/serverTlsPolicies/{server_tls_policy}'
+        'projects/{project}/locations/{location}/serverTlsPolicies/{server_tls_policy}',
       ),
       tlsInspectionPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/tlsInspectionPolicies/{tls_inspection_policy}'
+        'projects/{project}/locations/{location}/tlsInspectionPolicies/{tls_inspection_policy}',
       ),
       urlListPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/urlLists/{url_list}'
+        'projects/{project}/locations/{location}/urlLists/{url_list}',
       ),
     };
 
@@ -295,14 +333,27 @@ export class MirroringClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listMirroringEndpointGroups:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'mirroringEndpointGroups'),
+      listMirroringEndpointGroups: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'mirroringEndpointGroups',
+      ),
       listMirroringEndpointGroupAssociations:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'mirroringEndpointGroupAssociations'),
-      listMirroringDeploymentGroups:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'mirroringDeploymentGroups'),
-      listMirroringDeployments:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'mirroringDeployments')
+        new this._gaxModule.PageDescriptor(
+          'pageToken',
+          'nextPageToken',
+          'mirroringEndpointGroupAssociations',
+        ),
+      listMirroringDeploymentGroups: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'mirroringDeploymentGroups',
+      ),
+      listMirroringDeployments: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'mirroringDeployments',
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -311,124 +362,323 @@ export class MirroringClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1alpha1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1alpha1/{name=projects/*}/locations',},{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1alpha1/{resource=projects/*/locations/*/authorizationPolicies/*}:getIamPolicy',additional_bindings: [{get: '/v1alpha1/{resource=projects/*/locations/*/serverTlsPolicies/*}:getIamPolicy',},{get: '/v1alpha1/{resource=projects/*/locations/*/clientTlsPolicies/*}:getIamPolicy',},{get: '/v1alpha1/{resource=projects/*/locations/*/addressGroups/*}:getIamPolicy',},{get: '/v1alpha1/{resource=projects/*/locations/*/authzPolicies/*}:getIamPolicy',}],
-      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1alpha1/{resource=projects/*/locations/*/authorizationPolicies/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1alpha1/{resource=projects/*/locations/*/serverTlsPolicies/*}:setIamPolicy',body: '*',},{post: '/v1alpha1/{resource=projects/*/locations/*/clientTlsPolicies/*}:setIamPolicy',body: '*',},{post: '/v1alpha1/{resource=projects/*/locations/*/addressGroups/*}:setIamPolicy',body: '*',},{post: '/v1alpha1/{resource=projects/*/locations/*/authzPolicies/*}:setIamPolicy',body: '*',}],
-      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1alpha1/{resource=projects/*/locations/*/authorizationPolicies/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1alpha1/{resource=projects/*/locations/*/serverTlsPolicies/*}:testIamPermissions',body: '*',},{post: '/v1alpha1/{resource=projects/*/locations/*/clientTlsPolicies/*}:testIamPermissions',body: '*',},{post: '/v1alpha1/{resource=projects/*/locations/*/addressGroups/*}:testIamPermissions',body: '*',},{post: '/v1alpha1/{resource=projects/*/locations/*/authzPolicies/*}:testIamPermissions',body: '*',}],
-      },{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1alpha1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',additional_bindings: [{post: '/v1alpha1/{name=organizations/*/locations/*/operations/*}:cancel',body: '*',}],
-      },{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1alpha1/{name=projects/*/locations/*/operations/*}',additional_bindings: [{delete: '/v1alpha1/{name=organizations/*/locations/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.GetOperation',get: '/v1alpha1/{name=projects/*/locations/*/operations/*}',additional_bindings: [{get: '/v1alpha1/{name=organizations/*/locations/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v1alpha1/{name=projects/*/locations/*}/operations',additional_bindings: [{get: '/v1alpha1/{name=organizations/*/locations/*}/operations',}],
-      }];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.cloud.location.Locations.GetLocation',
+          get: '/v1alpha1/{name=projects/*/locations/*}',
+        },
+        {
+          selector: 'google.cloud.location.Locations.ListLocations',
+          get: '/v1alpha1/{name=projects/*}/locations',
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
+          get: '/v1alpha1/{resource=projects/*/locations/*/authorizationPolicies/*}:getIamPolicy',
+          additional_bindings: [
+            {
+              get: '/v1alpha1/{resource=projects/*/locations/*/serverTlsPolicies/*}:getIamPolicy',
+            },
+            {
+              get: '/v1alpha1/{resource=projects/*/locations/*/clientTlsPolicies/*}:getIamPolicy',
+            },
+            {
+              get: '/v1alpha1/{resource=projects/*/locations/*/addressGroups/*}:getIamPolicy',
+            },
+            {
+              get: '/v1alpha1/{resource=projects/*/locations/*/authzPolicies/*}:getIamPolicy',
+            },
+          ],
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
+          post: '/v1alpha1/{resource=projects/*/locations/*/authorizationPolicies/*}:setIamPolicy',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1alpha1/{resource=projects/*/locations/*/serverTlsPolicies/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1alpha1/{resource=projects/*/locations/*/clientTlsPolicies/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1alpha1/{resource=projects/*/locations/*/addressGroups/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1alpha1/{resource=projects/*/locations/*/authzPolicies/*}:setIamPolicy',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
+          post: '/v1alpha1/{resource=projects/*/locations/*/authorizationPolicies/*}:testIamPermissions',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1alpha1/{resource=projects/*/locations/*/serverTlsPolicies/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1alpha1/{resource=projects/*/locations/*/clientTlsPolicies/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1alpha1/{resource=projects/*/locations/*/addressGroups/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1alpha1/{resource=projects/*/locations/*/authzPolicies/*}:testIamPermissions',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1alpha1/{name=projects/*/locations/*/operations/*}:cancel',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1alpha1/{name=organizations/*/locations/*/operations/*}:cancel',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.DeleteOperation',
+          delete: '/v1alpha1/{name=projects/*/locations/*/operations/*}',
+          additional_bindings: [
+            {
+              delete:
+                '/v1alpha1/{name=organizations/*/locations/*/operations/*}',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1alpha1/{name=projects/*/locations/*/operations/*}',
+          additional_bindings: [
+            {
+              get: '/v1alpha1/{name=organizations/*/locations/*/operations/*}',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v1alpha1/{name=projects/*/locations/*}/operations',
+          additional_bindings: [
+            { get: '/v1alpha1/{name=organizations/*/locations/*}/operations' },
+          ],
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
     const createMirroringEndpointGroupResponse = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroup') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroup',
+    ) as gax.protobuf.Type;
     const createMirroringEndpointGroupMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateMirroringEndpointGroupResponse = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroup') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroup',
+    ) as gax.protobuf.Type;
     const updateMirroringEndpointGroupMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteMirroringEndpointGroupResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteMirroringEndpointGroupMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
-    const createMirroringEndpointGroupAssociationResponse = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroupAssociation') as gax.protobuf.Type;
-    const createMirroringEndpointGroupAssociationMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
-    const updateMirroringEndpointGroupAssociationResponse = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroupAssociation') as gax.protobuf.Type;
-    const updateMirroringEndpointGroupAssociationMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
-    const deleteMirroringEndpointGroupAssociationResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
-    const deleteMirroringEndpointGroupAssociationMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata',
+    ) as gax.protobuf.Type;
+    const createMirroringEndpointGroupAssociationResponse =
+      protoFilesRoot.lookup(
+        '.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroupAssociation',
+      ) as gax.protobuf.Type;
+    const createMirroringEndpointGroupAssociationMetadata =
+      protoFilesRoot.lookup(
+        '.google.cloud.networksecurity.v1alpha1.OperationMetadata',
+      ) as gax.protobuf.Type;
+    const updateMirroringEndpointGroupAssociationResponse =
+      protoFilesRoot.lookup(
+        '.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroupAssociation',
+      ) as gax.protobuf.Type;
+    const updateMirroringEndpointGroupAssociationMetadata =
+      protoFilesRoot.lookup(
+        '.google.cloud.networksecurity.v1alpha1.OperationMetadata',
+      ) as gax.protobuf.Type;
+    const deleteMirroringEndpointGroupAssociationResponse =
+      protoFilesRoot.lookup('.google.protobuf.Empty') as gax.protobuf.Type;
+    const deleteMirroringEndpointGroupAssociationMetadata =
+      protoFilesRoot.lookup(
+        '.google.cloud.networksecurity.v1alpha1.OperationMetadata',
+      ) as gax.protobuf.Type;
     const createMirroringDeploymentGroupResponse = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.MirroringDeploymentGroup') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.MirroringDeploymentGroup',
+    ) as gax.protobuf.Type;
     const createMirroringDeploymentGroupMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateMirroringDeploymentGroupResponse = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.MirroringDeploymentGroup') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.MirroringDeploymentGroup',
+    ) as gax.protobuf.Type;
     const updateMirroringDeploymentGroupMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteMirroringDeploymentGroupResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteMirroringDeploymentGroupMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const createMirroringDeploymentResponse = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.MirroringDeployment') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.MirroringDeployment',
+    ) as gax.protobuf.Type;
     const createMirroringDeploymentMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateMirroringDeploymentResponse = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.MirroringDeployment') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.MirroringDeployment',
+    ) as gax.protobuf.Type;
     const updateMirroringDeploymentMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteMirroringDeploymentResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteMirroringDeploymentMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createMirroringEndpointGroup: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createMirroringEndpointGroupResponse.decode.bind(createMirroringEndpointGroupResponse),
-        createMirroringEndpointGroupMetadata.decode.bind(createMirroringEndpointGroupMetadata)),
+        createMirroringEndpointGroupResponse.decode.bind(
+          createMirroringEndpointGroupResponse,
+        ),
+        createMirroringEndpointGroupMetadata.decode.bind(
+          createMirroringEndpointGroupMetadata,
+        ),
+      ),
       updateMirroringEndpointGroup: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        updateMirroringEndpointGroupResponse.decode.bind(updateMirroringEndpointGroupResponse),
-        updateMirroringEndpointGroupMetadata.decode.bind(updateMirroringEndpointGroupMetadata)),
+        updateMirroringEndpointGroupResponse.decode.bind(
+          updateMirroringEndpointGroupResponse,
+        ),
+        updateMirroringEndpointGroupMetadata.decode.bind(
+          updateMirroringEndpointGroupMetadata,
+        ),
+      ),
       deleteMirroringEndpointGroup: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deleteMirroringEndpointGroupResponse.decode.bind(deleteMirroringEndpointGroupResponse),
-        deleteMirroringEndpointGroupMetadata.decode.bind(deleteMirroringEndpointGroupMetadata)),
-      createMirroringEndpointGroupAssociation: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        createMirroringEndpointGroupAssociationResponse.decode.bind(createMirroringEndpointGroupAssociationResponse),
-        createMirroringEndpointGroupAssociationMetadata.decode.bind(createMirroringEndpointGroupAssociationMetadata)),
-      updateMirroringEndpointGroupAssociation: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        updateMirroringEndpointGroupAssociationResponse.decode.bind(updateMirroringEndpointGroupAssociationResponse),
-        updateMirroringEndpointGroupAssociationMetadata.decode.bind(updateMirroringEndpointGroupAssociationMetadata)),
-      deleteMirroringEndpointGroupAssociation: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        deleteMirroringEndpointGroupAssociationResponse.decode.bind(deleteMirroringEndpointGroupAssociationResponse),
-        deleteMirroringEndpointGroupAssociationMetadata.decode.bind(deleteMirroringEndpointGroupAssociationMetadata)),
+        deleteMirroringEndpointGroupResponse.decode.bind(
+          deleteMirroringEndpointGroupResponse,
+        ),
+        deleteMirroringEndpointGroupMetadata.decode.bind(
+          deleteMirroringEndpointGroupMetadata,
+        ),
+      ),
+      createMirroringEndpointGroupAssociation:
+        new this._gaxModule.LongrunningDescriptor(
+          this.operationsClient,
+          createMirroringEndpointGroupAssociationResponse.decode.bind(
+            createMirroringEndpointGroupAssociationResponse,
+          ),
+          createMirroringEndpointGroupAssociationMetadata.decode.bind(
+            createMirroringEndpointGroupAssociationMetadata,
+          ),
+        ),
+      updateMirroringEndpointGroupAssociation:
+        new this._gaxModule.LongrunningDescriptor(
+          this.operationsClient,
+          updateMirroringEndpointGroupAssociationResponse.decode.bind(
+            updateMirroringEndpointGroupAssociationResponse,
+          ),
+          updateMirroringEndpointGroupAssociationMetadata.decode.bind(
+            updateMirroringEndpointGroupAssociationMetadata,
+          ),
+        ),
+      deleteMirroringEndpointGroupAssociation:
+        new this._gaxModule.LongrunningDescriptor(
+          this.operationsClient,
+          deleteMirroringEndpointGroupAssociationResponse.decode.bind(
+            deleteMirroringEndpointGroupAssociationResponse,
+          ),
+          deleteMirroringEndpointGroupAssociationMetadata.decode.bind(
+            deleteMirroringEndpointGroupAssociationMetadata,
+          ),
+        ),
       createMirroringDeploymentGroup: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createMirroringDeploymentGroupResponse.decode.bind(createMirroringDeploymentGroupResponse),
-        createMirroringDeploymentGroupMetadata.decode.bind(createMirroringDeploymentGroupMetadata)),
+        createMirroringDeploymentGroupResponse.decode.bind(
+          createMirroringDeploymentGroupResponse,
+        ),
+        createMirroringDeploymentGroupMetadata.decode.bind(
+          createMirroringDeploymentGroupMetadata,
+        ),
+      ),
       updateMirroringDeploymentGroup: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        updateMirroringDeploymentGroupResponse.decode.bind(updateMirroringDeploymentGroupResponse),
-        updateMirroringDeploymentGroupMetadata.decode.bind(updateMirroringDeploymentGroupMetadata)),
+        updateMirroringDeploymentGroupResponse.decode.bind(
+          updateMirroringDeploymentGroupResponse,
+        ),
+        updateMirroringDeploymentGroupMetadata.decode.bind(
+          updateMirroringDeploymentGroupMetadata,
+        ),
+      ),
       deleteMirroringDeploymentGroup: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deleteMirroringDeploymentGroupResponse.decode.bind(deleteMirroringDeploymentGroupResponse),
-        deleteMirroringDeploymentGroupMetadata.decode.bind(deleteMirroringDeploymentGroupMetadata)),
+        deleteMirroringDeploymentGroupResponse.decode.bind(
+          deleteMirroringDeploymentGroupResponse,
+        ),
+        deleteMirroringDeploymentGroupMetadata.decode.bind(
+          deleteMirroringDeploymentGroupMetadata,
+        ),
+      ),
       createMirroringDeployment: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createMirroringDeploymentResponse.decode.bind(createMirroringDeploymentResponse),
-        createMirroringDeploymentMetadata.decode.bind(createMirroringDeploymentMetadata)),
+        createMirroringDeploymentResponse.decode.bind(
+          createMirroringDeploymentResponse,
+        ),
+        createMirroringDeploymentMetadata.decode.bind(
+          createMirroringDeploymentMetadata,
+        ),
+      ),
       updateMirroringDeployment: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        updateMirroringDeploymentResponse.decode.bind(updateMirroringDeploymentResponse),
-        updateMirroringDeploymentMetadata.decode.bind(updateMirroringDeploymentMetadata)),
+        updateMirroringDeploymentResponse.decode.bind(
+          updateMirroringDeploymentResponse,
+        ),
+        updateMirroringDeploymentMetadata.decode.bind(
+          updateMirroringDeploymentMetadata,
+        ),
+      ),
       deleteMirroringDeployment: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deleteMirroringDeploymentResponse.decode.bind(deleteMirroringDeploymentResponse),
-        deleteMirroringDeploymentMetadata.decode.bind(deleteMirroringDeploymentMetadata))
+        deleteMirroringDeploymentResponse.decode.bind(
+          deleteMirroringDeploymentResponse,
+        ),
+        deleteMirroringDeploymentMetadata.decode.bind(
+          deleteMirroringDeploymentMetadata,
+        ),
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.networksecurity.v1alpha1.Mirroring', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.networksecurity.v1alpha1.Mirroring',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -459,28 +709,54 @@ export class MirroringClient {
     // Put together the "service stub" for
     // google.cloud.networksecurity.v1alpha1.Mirroring.
     this.mirroringStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.networksecurity.v1alpha1.Mirroring') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.networksecurity.v1alpha1.Mirroring',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.networksecurity.v1alpha1.Mirroring,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const mirroringStubMethods =
-        ['listMirroringEndpointGroups', 'getMirroringEndpointGroup', 'createMirroringEndpointGroup', 'updateMirroringEndpointGroup', 'deleteMirroringEndpointGroup', 'listMirroringEndpointGroupAssociations', 'getMirroringEndpointGroupAssociation', 'createMirroringEndpointGroupAssociation', 'updateMirroringEndpointGroupAssociation', 'deleteMirroringEndpointGroupAssociation', 'listMirroringDeploymentGroups', 'getMirroringDeploymentGroup', 'createMirroringDeploymentGroup', 'updateMirroringDeploymentGroup', 'deleteMirroringDeploymentGroup', 'listMirroringDeployments', 'getMirroringDeployment', 'createMirroringDeployment', 'updateMirroringDeployment', 'deleteMirroringDeployment'];
+    const mirroringStubMethods = [
+      'listMirroringEndpointGroups',
+      'getMirroringEndpointGroup',
+      'createMirroringEndpointGroup',
+      'updateMirroringEndpointGroup',
+      'deleteMirroringEndpointGroup',
+      'listMirroringEndpointGroupAssociations',
+      'getMirroringEndpointGroupAssociation',
+      'createMirroringEndpointGroupAssociation',
+      'updateMirroringEndpointGroupAssociation',
+      'deleteMirroringEndpointGroupAssociation',
+      'listMirroringDeploymentGroups',
+      'getMirroringDeploymentGroup',
+      'createMirroringDeploymentGroup',
+      'updateMirroringDeploymentGroup',
+      'deleteMirroringDeploymentGroup',
+      'listMirroringDeployments',
+      'getMirroringDeployment',
+      'createMirroringDeployment',
+      'updateMirroringDeployment',
+      'deleteMirroringDeployment',
+    ];
     for (const methodName of mirroringStubMethods) {
       const callPromise = this.mirroringStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -490,7 +766,7 @@ export class MirroringClient {
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -505,8 +781,14 @@ export class MirroringClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'networksecurity.googleapis.com';
   }
@@ -517,8 +799,14 @@ export class MirroringClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'networksecurity.googleapis.com';
   }
@@ -549,9 +837,7 @@ export class MirroringClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -560,8 +846,9 @@ export class MirroringClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -572,1883 +859,2932 @@ export class MirroringClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Gets a specific endpoint group.
- * See https://google.aip.dev/131.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the endpoint group to retrieve.
- *   Format:
- *   projects/{project}/locations/{location}/mirroringEndpointGroups/{mirroring_endpoint_group}
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroup|MirroringEndpointGroup}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/mirroring.get_mirroring_endpoint_group.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Mirroring_GetMirroringEndpointGroup_async
- */
+  /**
+   * Gets a specific endpoint group.
+   * See https://google.aip.dev/131.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the endpoint group to retrieve.
+   *   Format:
+   *   projects/{project}/locations/{location}/mirroringEndpointGroups/{mirroring_endpoint_group}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroup|MirroringEndpointGroup}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/mirroring.get_mirroring_endpoint_group.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Mirroring_GetMirroringEndpointGroup_async
+   */
   getMirroringEndpointGroup(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup,
-        protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup,
+      (
+        | protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getMirroringEndpointGroup(
-      request: protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup,
-          protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup,
+      | protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getMirroringEndpointGroup(
-      request: protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupRequest,
-      callback: Callback<
-          protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup,
-          protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupRequest,
+    callback: Callback<
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup,
+      | protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getMirroringEndpointGroup(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup,
-          protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup,
-          protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup,
-        protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup,
+      | protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup,
+      (
+        | protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getMirroringEndpointGroup request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup,
-        protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup,
+          | protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getMirroringEndpointGroup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getMirroringEndpointGroup(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup,
-        protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getMirroringEndpointGroup response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getMirroringEndpointGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup,
+          (
+            | protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getMirroringEndpointGroup response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets a specific association.
- * See https://google.aip.dev/131.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the association to retrieve.
- *   Format:
- *   projects/{project}/locations/{location}/mirroringEndpointGroupAssociations/{mirroring_endpoint_group_association}
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroupAssociation|MirroringEndpointGroupAssociation}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/mirroring.get_mirroring_endpoint_group_association.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Mirroring_GetMirroringEndpointGroupAssociation_async
- */
+  /**
+   * Gets a specific association.
+   * See https://google.aip.dev/131.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the association to retrieve.
+   *   Format:
+   *   projects/{project}/locations/{location}/mirroringEndpointGroupAssociations/{mirroring_endpoint_group_association}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroupAssociation|MirroringEndpointGroupAssociation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/mirroring.get_mirroring_endpoint_group_association.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Mirroring_GetMirroringEndpointGroupAssociation_async
+   */
   getMirroringEndpointGroupAssociation(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupAssociationRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation,
-        protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupAssociationRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupAssociationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation,
+      (
+        | protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupAssociationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getMirroringEndpointGroupAssociation(
-      request: protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupAssociationRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation,
-          protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupAssociationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupAssociationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation,
+      | protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupAssociationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getMirroringEndpointGroupAssociation(
-      request: protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupAssociationRequest,
-      callback: Callback<
-          protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation,
-          protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupAssociationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupAssociationRequest,
+    callback: Callback<
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation,
+      | protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupAssociationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getMirroringEndpointGroupAssociation(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupAssociationRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupAssociationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation,
-          protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupAssociationRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation,
-          protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupAssociationRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation,
-        protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupAssociationRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupAssociationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation,
+      | protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupAssociationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation,
+      (
+        | protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupAssociationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getMirroringEndpointGroupAssociation request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation,
-        protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupAssociationRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation,
+          | protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupAssociationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getMirroringEndpointGroupAssociation response %j', response);
+          this._log.info(
+            'getMirroringEndpointGroupAssociation response %j',
+            response,
+          );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getMirroringEndpointGroupAssociation(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation,
-        protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupAssociationRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getMirroringEndpointGroupAssociation response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getMirroringEndpointGroupAssociation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation,
+          (
+            | protos.google.cloud.networksecurity.v1alpha1.IGetMirroringEndpointGroupAssociationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'getMirroringEndpointGroupAssociation response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets a specific deployment group.
- * See https://google.aip.dev/131.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the deployment group to retrieve.
- *   Format:
- *   projects/{project}/locations/{location}/mirroringDeploymentGroups/{mirroring_deployment_group}
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1alpha1.MirroringDeploymentGroup|MirroringDeploymentGroup}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/mirroring.get_mirroring_deployment_group.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Mirroring_GetMirroringDeploymentGroup_async
- */
+  /**
+   * Gets a specific deployment group.
+   * See https://google.aip.dev/131.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the deployment group to retrieve.
+   *   Format:
+   *   projects/{project}/locations/{location}/mirroringDeploymentGroups/{mirroring_deployment_group}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1alpha1.MirroringDeploymentGroup|MirroringDeploymentGroup}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/mirroring.get_mirroring_deployment_group.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Mirroring_GetMirroringDeploymentGroup_async
+   */
   getMirroringDeploymentGroup(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentGroupRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup,
-        protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentGroupRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentGroupRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup,
+      (
+        | protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentGroupRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getMirroringDeploymentGroup(
-      request: protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentGroupRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup,
-          protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentGroupRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup,
+      | protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getMirroringDeploymentGroup(
-      request: protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentGroupRequest,
-      callback: Callback<
-          protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup,
-          protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentGroupRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentGroupRequest,
+    callback: Callback<
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup,
+      | protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getMirroringDeploymentGroup(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentGroupRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentGroupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup,
-          protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentGroupRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup,
-          protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentGroupRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup,
-        protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentGroupRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup,
+      | protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup,
+      (
+        | protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentGroupRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getMirroringDeploymentGroup request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup,
-        protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentGroupRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup,
+          | protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getMirroringDeploymentGroup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getMirroringDeploymentGroup(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup,
-        protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentGroupRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getMirroringDeploymentGroup response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getMirroringDeploymentGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup,
+          (
+            | protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentGroupRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getMirroringDeploymentGroup response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets a specific deployment.
- * See https://google.aip.dev/131.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the deployment to retrieve.
- *   Format:
- *   projects/{project}/locations/{location}/mirroringDeployments/{mirroring_deployment}
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1alpha1.MirroringDeployment|MirroringDeployment}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/mirroring.get_mirroring_deployment.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Mirroring_GetMirroringDeployment_async
- */
+  /**
+   * Gets a specific deployment.
+   * See https://google.aip.dev/131.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the deployment to retrieve.
+   *   Format:
+   *   projects/{project}/locations/{location}/mirroringDeployments/{mirroring_deployment}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1alpha1.MirroringDeployment|MirroringDeployment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/mirroring.get_mirroring_deployment.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Mirroring_GetMirroringDeployment_async
+   */
   getMirroringDeployment(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment,
-        protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment,
+      (
+        | protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getMirroringDeployment(
-      request: protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment,
-          protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment,
+      | protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getMirroringDeployment(
-      request: protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentRequest,
-      callback: Callback<
-          protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment,
-          protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentRequest,
+    callback: Callback<
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment,
+      | protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getMirroringDeployment(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment,
-          protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment,
-          protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment,
-        protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment,
+      | protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment,
+      (
+        | protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getMirroringDeployment request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment,
-        protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment,
+          | protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getMirroringDeployment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getMirroringDeployment(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment,
-        protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getMirroringDeployment response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getMirroringDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment,
+          (
+            | protos.google.cloud.networksecurity.v1alpha1.IGetMirroringDeploymentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getMirroringDeployment response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
- * Creates an endpoint group in a given project and location.
- * See https://google.aip.dev/133.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource where this endpoint group will be created.
- *   Format: projects/{project}/locations/{location}
- * @param {string} request.mirroringEndpointGroupId
- *   Required. The ID to use for the endpoint group, which will become the final
- *   component of the endpoint group's resource name.
- * @param {google.cloud.networksecurity.v1alpha1.MirroringEndpointGroup} request.mirroringEndpointGroup
- *   Required. The endpoint group to create.
- * @param {string} [request.requestId]
- *   Optional. A unique identifier for this request. Must be a UUID4.
- *   This request is only idempotent if a `request_id` is provided.
- *   See https://google.aip.dev/155 for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/mirroring.create_mirroring_endpoint_group.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Mirroring_CreateMirroringEndpointGroup_async
- */
+  /**
+   * Creates an endpoint group in a given project and location.
+   * See https://google.aip.dev/133.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where this endpoint group will be created.
+   *   Format: projects/{project}/locations/{location}
+   * @param {string} request.mirroringEndpointGroupId
+   *   Required. The ID to use for the endpoint group, which will become the final
+   *   component of the endpoint group's resource name.
+   * @param {google.cloud.networksecurity.v1alpha1.MirroringEndpointGroup} request.mirroringEndpointGroup
+   *   Required. The endpoint group to create.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. Must be a UUID4.
+   *   This request is only idempotent if a `request_id` is provided.
+   *   See https://google.aip.dev/155 for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/mirroring.create_mirroring_endpoint_group.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Mirroring_CreateMirroringEndpointGroup_async
+   */
   createMirroringEndpointGroup(
-      request?: protos.google.cloud.networksecurity.v1alpha1.ICreateMirroringEndpointGroupRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.ICreateMirroringEndpointGroupRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createMirroringEndpointGroup(
-      request: protos.google.cloud.networksecurity.v1alpha1.ICreateMirroringEndpointGroupRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.ICreateMirroringEndpointGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createMirroringEndpointGroup(
-      request: protos.google.cloud.networksecurity.v1alpha1.ICreateMirroringEndpointGroupRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.ICreateMirroringEndpointGroupRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createMirroringEndpointGroup(
-      request?: protos.google.cloud.networksecurity.v1alpha1.ICreateMirroringEndpointGroupRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1alpha1.ICreateMirroringEndpointGroupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createMirroringEndpointGroup response %j', rawResponse);
+          this._log.info(
+            'createMirroringEndpointGroup response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createMirroringEndpointGroup request %j', request);
-    return this.innerApiCalls.createMirroringEndpointGroup(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createMirroringEndpointGroup response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createMirroringEndpointGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'createMirroringEndpointGroup response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createMirroringEndpointGroup()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/mirroring.create_mirroring_endpoint_group.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Mirroring_CreateMirroringEndpointGroup_async
- */
-  async checkCreateMirroringEndpointGroupProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createMirroringEndpointGroup()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/mirroring.create_mirroring_endpoint_group.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Mirroring_CreateMirroringEndpointGroup_async
+   */
+  async checkCreateMirroringEndpointGroupProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroup,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >
+  > {
     this._log.info('createMirroringEndpointGroup long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createMirroringEndpointGroup, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createMirroringEndpointGroup,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroup,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >;
   }
-/**
- * Updates an endpoint group.
- * See https://google.aip.dev/134.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. The list of fields to update.
- *   Fields are specified relative to the endpoint group
- *   (e.g. `description`; *not* `mirroring_endpoint_group.description`).
- *   See https://google.aip.dev/161 for more details.
- * @param {google.cloud.networksecurity.v1alpha1.MirroringEndpointGroup} request.mirroringEndpointGroup
- *   Required. The endpoint group to update.
- * @param {string} [request.requestId]
- *   Optional. A unique identifier for this request. Must be a UUID4.
- *   This request is only idempotent if a `request_id` is provided.
- *   See https://google.aip.dev/155 for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/mirroring.update_mirroring_endpoint_group.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Mirroring_UpdateMirroringEndpointGroup_async
- */
+  /**
+   * Updates an endpoint group.
+   * See https://google.aip.dev/134.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The list of fields to update.
+   *   Fields are specified relative to the endpoint group
+   *   (e.g. `description`; *not* `mirroring_endpoint_group.description`).
+   *   See https://google.aip.dev/161 for more details.
+   * @param {google.cloud.networksecurity.v1alpha1.MirroringEndpointGroup} request.mirroringEndpointGroup
+   *   Required. The endpoint group to update.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. Must be a UUID4.
+   *   This request is only idempotent if a `request_id` is provided.
+   *   See https://google.aip.dev/155 for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/mirroring.update_mirroring_endpoint_group.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Mirroring_UpdateMirroringEndpointGroup_async
+   */
   updateMirroringEndpointGroup(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateMirroringEndpointGroupRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateMirroringEndpointGroupRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateMirroringEndpointGroup(
-      request: protos.google.cloud.networksecurity.v1alpha1.IUpdateMirroringEndpointGroupRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IUpdateMirroringEndpointGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateMirroringEndpointGroup(
-      request: protos.google.cloud.networksecurity.v1alpha1.IUpdateMirroringEndpointGroupRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IUpdateMirroringEndpointGroupRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateMirroringEndpointGroup(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateMirroringEndpointGroupRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateMirroringEndpointGroupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'mirroring_endpoint_group.name': request.mirroringEndpointGroup!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'mirroring_endpoint_group.name':
+          request.mirroringEndpointGroup!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateMirroringEndpointGroup response %j', rawResponse);
+          this._log.info(
+            'updateMirroringEndpointGroup response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateMirroringEndpointGroup request %j', request);
-    return this.innerApiCalls.updateMirroringEndpointGroup(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateMirroringEndpointGroup response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateMirroringEndpointGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'updateMirroringEndpointGroup response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateMirroringEndpointGroup()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/mirroring.update_mirroring_endpoint_group.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Mirroring_UpdateMirroringEndpointGroup_async
- */
-  async checkUpdateMirroringEndpointGroupProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateMirroringEndpointGroup()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/mirroring.update_mirroring_endpoint_group.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Mirroring_UpdateMirroringEndpointGroup_async
+   */
+  async checkUpdateMirroringEndpointGroupProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroup,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >
+  > {
     this._log.info('updateMirroringEndpointGroup long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateMirroringEndpointGroup, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateMirroringEndpointGroup,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroup,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >;
   }
-/**
- * Deletes an endpoint group.
- * See https://google.aip.dev/135.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The endpoint group to delete.
- * @param {string} [request.requestId]
- *   Optional. A unique identifier for this request. Must be a UUID4.
- *   This request is only idempotent if a `request_id` is provided.
- *   See https://google.aip.dev/155 for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/mirroring.delete_mirroring_endpoint_group.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Mirroring_DeleteMirroringEndpointGroup_async
- */
+  /**
+   * Deletes an endpoint group.
+   * See https://google.aip.dev/135.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The endpoint group to delete.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. Must be a UUID4.
+   *   This request is only idempotent if a `request_id` is provided.
+   *   See https://google.aip.dev/155 for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/mirroring.delete_mirroring_endpoint_group.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Mirroring_DeleteMirroringEndpointGroup_async
+   */
   deleteMirroringEndpointGroup(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteMirroringEndpointGroupRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteMirroringEndpointGroupRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteMirroringEndpointGroup(
-      request: protos.google.cloud.networksecurity.v1alpha1.IDeleteMirroringEndpointGroupRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IDeleteMirroringEndpointGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteMirroringEndpointGroup(
-      request: protos.google.cloud.networksecurity.v1alpha1.IDeleteMirroringEndpointGroupRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IDeleteMirroringEndpointGroupRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteMirroringEndpointGroup(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteMirroringEndpointGroupRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteMirroringEndpointGroupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteMirroringEndpointGroup response %j', rawResponse);
+          this._log.info(
+            'deleteMirroringEndpointGroup response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteMirroringEndpointGroup request %j', request);
-    return this.innerApiCalls.deleteMirroringEndpointGroup(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteMirroringEndpointGroup response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteMirroringEndpointGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteMirroringEndpointGroup response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteMirroringEndpointGroup()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/mirroring.delete_mirroring_endpoint_group.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Mirroring_DeleteMirroringEndpointGroup_async
- */
-  async checkDeleteMirroringEndpointGroupProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteMirroringEndpointGroup()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/mirroring.delete_mirroring_endpoint_group.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Mirroring_DeleteMirroringEndpointGroup_async
+   */
+  async checkDeleteMirroringEndpointGroupProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >
+  > {
     this._log.info('deleteMirroringEndpointGroup long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteMirroringEndpointGroup, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteMirroringEndpointGroup,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >;
   }
-/**
- * Creates an association in a given project and location.
- * See https://google.aip.dev/133.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource where this association will be created.
- *   Format: projects/{project}/locations/{location}
- * @param {string} [request.mirroringEndpointGroupAssociationId]
- *   Optional. The ID to use for the new association, which will become the
- *   final component of the endpoint group's resource name. If not provided, the
- *   server will generate a unique ID.
- * @param {google.cloud.networksecurity.v1alpha1.MirroringEndpointGroupAssociation} request.mirroringEndpointGroupAssociation
- *   Required. The association to create.
- * @param {string} [request.requestId]
- *   Optional. A unique identifier for this request. Must be a UUID4.
- *   This request is only idempotent if a `request_id` is provided.
- *   See https://google.aip.dev/155 for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/mirroring.create_mirroring_endpoint_group_association.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Mirroring_CreateMirroringEndpointGroupAssociation_async
- */
+  /**
+   * Creates an association in a given project and location.
+   * See https://google.aip.dev/133.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where this association will be created.
+   *   Format: projects/{project}/locations/{location}
+   * @param {string} [request.mirroringEndpointGroupAssociationId]
+   *   Optional. The ID to use for the new association, which will become the
+   *   final component of the endpoint group's resource name. If not provided, the
+   *   server will generate a unique ID.
+   * @param {google.cloud.networksecurity.v1alpha1.MirroringEndpointGroupAssociation} request.mirroringEndpointGroupAssociation
+   *   Required. The association to create.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. Must be a UUID4.
+   *   This request is only idempotent if a `request_id` is provided.
+   *   See https://google.aip.dev/155 for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/mirroring.create_mirroring_endpoint_group_association.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Mirroring_CreateMirroringEndpointGroupAssociation_async
+   */
   createMirroringEndpointGroupAssociation(
-      request?: protos.google.cloud.networksecurity.v1alpha1.ICreateMirroringEndpointGroupAssociationRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.ICreateMirroringEndpointGroupAssociationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createMirroringEndpointGroupAssociation(
-      request: protos.google.cloud.networksecurity.v1alpha1.ICreateMirroringEndpointGroupAssociationRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.ICreateMirroringEndpointGroupAssociationRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createMirroringEndpointGroupAssociation(
-      request: protos.google.cloud.networksecurity.v1alpha1.ICreateMirroringEndpointGroupAssociationRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.ICreateMirroringEndpointGroupAssociationRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createMirroringEndpointGroupAssociation(
-      request?: protos.google.cloud.networksecurity.v1alpha1.ICreateMirroringEndpointGroupAssociationRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1alpha1.ICreateMirroringEndpointGroupAssociationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createMirroringEndpointGroupAssociation response %j', rawResponse);
+          this._log.info(
+            'createMirroringEndpointGroupAssociation response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createMirroringEndpointGroupAssociation request %j', request);
-    return this.innerApiCalls.createMirroringEndpointGroupAssociation(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createMirroringEndpointGroupAssociation response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    this._log.info(
+      'createMirroringEndpointGroupAssociation request %j',
+      request,
+    );
+    return this.innerApiCalls
+      .createMirroringEndpointGroupAssociation(
+        request,
+        options,
+        wrappedCallback,
+      )
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'createMirroringEndpointGroupAssociation response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createMirroringEndpointGroupAssociation()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/mirroring.create_mirroring_endpoint_group_association.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Mirroring_CreateMirroringEndpointGroupAssociation_async
- */
-  async checkCreateMirroringEndpointGroupAssociationProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createMirroringEndpointGroupAssociation()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/mirroring.create_mirroring_endpoint_group_association.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Mirroring_CreateMirroringEndpointGroupAssociation_async
+   */
+  async checkCreateMirroringEndpointGroupAssociationProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroupAssociation,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >
+  > {
     this._log.info('createMirroringEndpointGroupAssociation long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createMirroringEndpointGroupAssociation, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createMirroringEndpointGroupAssociation,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroupAssociation,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >;
   }
-/**
- * Updates an association.
- * See https://google.aip.dev/134.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. The list of fields to update.
- *   Fields are specified relative to the association
- *   (e.g. `description`; *not*
- *   `mirroring_endpoint_group_association.description`). See
- *   https://google.aip.dev/161 for more details.
- * @param {google.cloud.networksecurity.v1alpha1.MirroringEndpointGroupAssociation} request.mirroringEndpointGroupAssociation
- *   Required. The association to update.
- * @param {string} [request.requestId]
- *   Optional. A unique identifier for this request. Must be a UUID4.
- *   This request is only idempotent if a `request_id` is provided.
- *   See https://google.aip.dev/155 for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/mirroring.update_mirroring_endpoint_group_association.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Mirroring_UpdateMirroringEndpointGroupAssociation_async
- */
+  /**
+   * Updates an association.
+   * See https://google.aip.dev/134.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The list of fields to update.
+   *   Fields are specified relative to the association
+   *   (e.g. `description`; *not*
+   *   `mirroring_endpoint_group_association.description`). See
+   *   https://google.aip.dev/161 for more details.
+   * @param {google.cloud.networksecurity.v1alpha1.MirroringEndpointGroupAssociation} request.mirroringEndpointGroupAssociation
+   *   Required. The association to update.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. Must be a UUID4.
+   *   This request is only idempotent if a `request_id` is provided.
+   *   See https://google.aip.dev/155 for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/mirroring.update_mirroring_endpoint_group_association.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Mirroring_UpdateMirroringEndpointGroupAssociation_async
+   */
   updateMirroringEndpointGroupAssociation(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateMirroringEndpointGroupAssociationRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateMirroringEndpointGroupAssociationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateMirroringEndpointGroupAssociation(
-      request: protos.google.cloud.networksecurity.v1alpha1.IUpdateMirroringEndpointGroupAssociationRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IUpdateMirroringEndpointGroupAssociationRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateMirroringEndpointGroupAssociation(
-      request: protos.google.cloud.networksecurity.v1alpha1.IUpdateMirroringEndpointGroupAssociationRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IUpdateMirroringEndpointGroupAssociationRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateMirroringEndpointGroupAssociation(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateMirroringEndpointGroupAssociationRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateMirroringEndpointGroupAssociationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'mirroring_endpoint_group_association.name': request.mirroringEndpointGroupAssociation!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'mirroring_endpoint_group_association.name':
+          request.mirroringEndpointGroupAssociation!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateMirroringEndpointGroupAssociation response %j', rawResponse);
+          this._log.info(
+            'updateMirroringEndpointGroupAssociation response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateMirroringEndpointGroupAssociation request %j', request);
-    return this.innerApiCalls.updateMirroringEndpointGroupAssociation(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateMirroringEndpointGroupAssociation response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    this._log.info(
+      'updateMirroringEndpointGroupAssociation request %j',
+      request,
+    );
+    return this.innerApiCalls
+      .updateMirroringEndpointGroupAssociation(
+        request,
+        options,
+        wrappedCallback,
+      )
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'updateMirroringEndpointGroupAssociation response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateMirroringEndpointGroupAssociation()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/mirroring.update_mirroring_endpoint_group_association.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Mirroring_UpdateMirroringEndpointGroupAssociation_async
- */
-  async checkUpdateMirroringEndpointGroupAssociationProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateMirroringEndpointGroupAssociation()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/mirroring.update_mirroring_endpoint_group_association.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Mirroring_UpdateMirroringEndpointGroupAssociation_async
+   */
+  async checkUpdateMirroringEndpointGroupAssociationProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroupAssociation,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >
+  > {
     this._log.info('updateMirroringEndpointGroupAssociation long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateMirroringEndpointGroupAssociation, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateMirroringEndpointGroupAssociation,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroupAssociation,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >;
   }
-/**
- * Deletes an association.
- * See https://google.aip.dev/135.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The association to delete.
- * @param {string} [request.requestId]
- *   Optional. A unique identifier for this request. Must be a UUID4.
- *   This request is only idempotent if a `request_id` is provided.
- *   See https://google.aip.dev/155 for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/mirroring.delete_mirroring_endpoint_group_association.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Mirroring_DeleteMirroringEndpointGroupAssociation_async
- */
+  /**
+   * Deletes an association.
+   * See https://google.aip.dev/135.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The association to delete.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. Must be a UUID4.
+   *   This request is only idempotent if a `request_id` is provided.
+   *   See https://google.aip.dev/155 for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/mirroring.delete_mirroring_endpoint_group_association.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Mirroring_DeleteMirroringEndpointGroupAssociation_async
+   */
   deleteMirroringEndpointGroupAssociation(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteMirroringEndpointGroupAssociationRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteMirroringEndpointGroupAssociationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteMirroringEndpointGroupAssociation(
-      request: protos.google.cloud.networksecurity.v1alpha1.IDeleteMirroringEndpointGroupAssociationRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IDeleteMirroringEndpointGroupAssociationRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteMirroringEndpointGroupAssociation(
-      request: protos.google.cloud.networksecurity.v1alpha1.IDeleteMirroringEndpointGroupAssociationRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IDeleteMirroringEndpointGroupAssociationRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteMirroringEndpointGroupAssociation(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteMirroringEndpointGroupAssociationRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteMirroringEndpointGroupAssociationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteMirroringEndpointGroupAssociation response %j', rawResponse);
+          this._log.info(
+            'deleteMirroringEndpointGroupAssociation response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteMirroringEndpointGroupAssociation request %j', request);
-    return this.innerApiCalls.deleteMirroringEndpointGroupAssociation(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteMirroringEndpointGroupAssociation response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    this._log.info(
+      'deleteMirroringEndpointGroupAssociation request %j',
+      request,
+    );
+    return this.innerApiCalls
+      .deleteMirroringEndpointGroupAssociation(
+        request,
+        options,
+        wrappedCallback,
+      )
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteMirroringEndpointGroupAssociation response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteMirroringEndpointGroupAssociation()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/mirroring.delete_mirroring_endpoint_group_association.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Mirroring_DeleteMirroringEndpointGroupAssociation_async
- */
-  async checkDeleteMirroringEndpointGroupAssociationProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteMirroringEndpointGroupAssociation()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/mirroring.delete_mirroring_endpoint_group_association.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Mirroring_DeleteMirroringEndpointGroupAssociation_async
+   */
+  async checkDeleteMirroringEndpointGroupAssociationProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >
+  > {
     this._log.info('deleteMirroringEndpointGroupAssociation long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteMirroringEndpointGroupAssociation, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteMirroringEndpointGroupAssociation,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >;
   }
-/**
- * Creates a deployment group in a given project and location.
- * See https://google.aip.dev/133.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource where this deployment group will be created.
- *   Format: projects/{project}/locations/{location}
- * @param {string} request.mirroringDeploymentGroupId
- *   Required. The ID to use for the new deployment group, which will become the
- *   final component of the deployment group's resource name.
- * @param {google.cloud.networksecurity.v1alpha1.MirroringDeploymentGroup} request.mirroringDeploymentGroup
- *   Required. The deployment group to create.
- * @param {string} [request.requestId]
- *   Optional. A unique identifier for this request. Must be a UUID4.
- *   This request is only idempotent if a `request_id` is provided.
- *   See https://google.aip.dev/155 for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/mirroring.create_mirroring_deployment_group.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Mirroring_CreateMirroringDeploymentGroup_async
- */
+  /**
+   * Creates a deployment group in a given project and location.
+   * See https://google.aip.dev/133.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where this deployment group will be created.
+   *   Format: projects/{project}/locations/{location}
+   * @param {string} request.mirroringDeploymentGroupId
+   *   Required. The ID to use for the new deployment group, which will become the
+   *   final component of the deployment group's resource name.
+   * @param {google.cloud.networksecurity.v1alpha1.MirroringDeploymentGroup} request.mirroringDeploymentGroup
+   *   Required. The deployment group to create.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. Must be a UUID4.
+   *   This request is only idempotent if a `request_id` is provided.
+   *   See https://google.aip.dev/155 for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/mirroring.create_mirroring_deployment_group.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Mirroring_CreateMirroringDeploymentGroup_async
+   */
   createMirroringDeploymentGroup(
-      request?: protos.google.cloud.networksecurity.v1alpha1.ICreateMirroringDeploymentGroupRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.ICreateMirroringDeploymentGroupRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createMirroringDeploymentGroup(
-      request: protos.google.cloud.networksecurity.v1alpha1.ICreateMirroringDeploymentGroupRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.ICreateMirroringDeploymentGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createMirroringDeploymentGroup(
-      request: protos.google.cloud.networksecurity.v1alpha1.ICreateMirroringDeploymentGroupRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.ICreateMirroringDeploymentGroupRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createMirroringDeploymentGroup(
-      request?: protos.google.cloud.networksecurity.v1alpha1.ICreateMirroringDeploymentGroupRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1alpha1.ICreateMirroringDeploymentGroupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createMirroringDeploymentGroup response %j', rawResponse);
+          this._log.info(
+            'createMirroringDeploymentGroup response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createMirroringDeploymentGroup request %j', request);
-    return this.innerApiCalls.createMirroringDeploymentGroup(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createMirroringDeploymentGroup response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createMirroringDeploymentGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'createMirroringDeploymentGroup response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createMirroringDeploymentGroup()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/mirroring.create_mirroring_deployment_group.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Mirroring_CreateMirroringDeploymentGroup_async
- */
-  async checkCreateMirroringDeploymentGroupProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1alpha1.MirroringDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createMirroringDeploymentGroup()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/mirroring.create_mirroring_deployment_group.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Mirroring_CreateMirroringDeploymentGroup_async
+   */
+  async checkCreateMirroringDeploymentGroupProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networksecurity.v1alpha1.MirroringDeploymentGroup,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >
+  > {
     this._log.info('createMirroringDeploymentGroup long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createMirroringDeploymentGroup, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1alpha1.MirroringDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createMirroringDeploymentGroup,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networksecurity.v1alpha1.MirroringDeploymentGroup,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >;
   }
-/**
- * Updates a deployment group.
- * See https://google.aip.dev/134.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. The list of fields to update.
- *   Fields are specified relative to the deployment group
- *   (e.g. `description`; *not*
- *   `mirroring_deployment_group.description`). See
- *   https://google.aip.dev/161 for more details.
- * @param {google.cloud.networksecurity.v1alpha1.MirroringDeploymentGroup} request.mirroringDeploymentGroup
- *   Required. The deployment group to update.
- * @param {string} [request.requestId]
- *   Optional. A unique identifier for this request. Must be a UUID4.
- *   This request is only idempotent if a `request_id` is provided.
- *   See https://google.aip.dev/155 for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/mirroring.update_mirroring_deployment_group.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Mirroring_UpdateMirroringDeploymentGroup_async
- */
+  /**
+   * Updates a deployment group.
+   * See https://google.aip.dev/134.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The list of fields to update.
+   *   Fields are specified relative to the deployment group
+   *   (e.g. `description`; *not*
+   *   `mirroring_deployment_group.description`). See
+   *   https://google.aip.dev/161 for more details.
+   * @param {google.cloud.networksecurity.v1alpha1.MirroringDeploymentGroup} request.mirroringDeploymentGroup
+   *   Required. The deployment group to update.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. Must be a UUID4.
+   *   This request is only idempotent if a `request_id` is provided.
+   *   See https://google.aip.dev/155 for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/mirroring.update_mirroring_deployment_group.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Mirroring_UpdateMirroringDeploymentGroup_async
+   */
   updateMirroringDeploymentGroup(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateMirroringDeploymentGroupRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateMirroringDeploymentGroupRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateMirroringDeploymentGroup(
-      request: protos.google.cloud.networksecurity.v1alpha1.IUpdateMirroringDeploymentGroupRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IUpdateMirroringDeploymentGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateMirroringDeploymentGroup(
-      request: protos.google.cloud.networksecurity.v1alpha1.IUpdateMirroringDeploymentGroupRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IUpdateMirroringDeploymentGroupRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateMirroringDeploymentGroup(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateMirroringDeploymentGroupRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateMirroringDeploymentGroupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'mirroring_deployment_group.name': request.mirroringDeploymentGroup!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'mirroring_deployment_group.name':
+          request.mirroringDeploymentGroup!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateMirroringDeploymentGroup response %j', rawResponse);
+          this._log.info(
+            'updateMirroringDeploymentGroup response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateMirroringDeploymentGroup request %j', request);
-    return this.innerApiCalls.updateMirroringDeploymentGroup(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateMirroringDeploymentGroup response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateMirroringDeploymentGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'updateMirroringDeploymentGroup response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateMirroringDeploymentGroup()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/mirroring.update_mirroring_deployment_group.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Mirroring_UpdateMirroringDeploymentGroup_async
- */
-  async checkUpdateMirroringDeploymentGroupProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1alpha1.MirroringDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateMirroringDeploymentGroup()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/mirroring.update_mirroring_deployment_group.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Mirroring_UpdateMirroringDeploymentGroup_async
+   */
+  async checkUpdateMirroringDeploymentGroupProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networksecurity.v1alpha1.MirroringDeploymentGroup,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >
+  > {
     this._log.info('updateMirroringDeploymentGroup long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateMirroringDeploymentGroup, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1alpha1.MirroringDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateMirroringDeploymentGroup,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networksecurity.v1alpha1.MirroringDeploymentGroup,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >;
   }
-/**
- * Deletes a deployment group.
- * See https://google.aip.dev/135.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The deployment group to delete.
- * @param {string} [request.requestId]
- *   Optional. A unique identifier for this request. Must be a UUID4.
- *   This request is only idempotent if a `request_id` is provided.
- *   See https://google.aip.dev/155 for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/mirroring.delete_mirroring_deployment_group.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Mirroring_DeleteMirroringDeploymentGroup_async
- */
+  /**
+   * Deletes a deployment group.
+   * See https://google.aip.dev/135.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The deployment group to delete.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. Must be a UUID4.
+   *   This request is only idempotent if a `request_id` is provided.
+   *   See https://google.aip.dev/155 for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/mirroring.delete_mirroring_deployment_group.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Mirroring_DeleteMirroringDeploymentGroup_async
+   */
   deleteMirroringDeploymentGroup(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteMirroringDeploymentGroupRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteMirroringDeploymentGroupRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteMirroringDeploymentGroup(
-      request: protos.google.cloud.networksecurity.v1alpha1.IDeleteMirroringDeploymentGroupRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IDeleteMirroringDeploymentGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteMirroringDeploymentGroup(
-      request: protos.google.cloud.networksecurity.v1alpha1.IDeleteMirroringDeploymentGroupRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IDeleteMirroringDeploymentGroupRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteMirroringDeploymentGroup(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteMirroringDeploymentGroupRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteMirroringDeploymentGroupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteMirroringDeploymentGroup response %j', rawResponse);
+          this._log.info(
+            'deleteMirroringDeploymentGroup response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteMirroringDeploymentGroup request %j', request);
-    return this.innerApiCalls.deleteMirroringDeploymentGroup(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteMirroringDeploymentGroup response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteMirroringDeploymentGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteMirroringDeploymentGroup response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteMirroringDeploymentGroup()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/mirroring.delete_mirroring_deployment_group.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Mirroring_DeleteMirroringDeploymentGroup_async
- */
-  async checkDeleteMirroringDeploymentGroupProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteMirroringDeploymentGroup()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/mirroring.delete_mirroring_deployment_group.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Mirroring_DeleteMirroringDeploymentGroup_async
+   */
+  async checkDeleteMirroringDeploymentGroupProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >
+  > {
     this._log.info('deleteMirroringDeploymentGroup long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteMirroringDeploymentGroup, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteMirroringDeploymentGroup,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >;
   }
-/**
- * Creates a deployment in a given project and location.
- * See https://google.aip.dev/133.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource where this deployment will be created.
- *   Format: projects/{project}/locations/{location}
- * @param {string} request.mirroringDeploymentId
- *   Required. The ID to use for the new deployment, which will become the final
- *   component of the deployment's resource name.
- * @param {google.cloud.networksecurity.v1alpha1.MirroringDeployment} request.mirroringDeployment
- *   Required. The deployment to create.
- * @param {string} [request.requestId]
- *   Optional. A unique identifier for this request. Must be a UUID4.
- *   This request is only idempotent if a `request_id` is provided.
- *   See https://google.aip.dev/155 for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/mirroring.create_mirroring_deployment.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Mirroring_CreateMirroringDeployment_async
- */
+  /**
+   * Creates a deployment in a given project and location.
+   * See https://google.aip.dev/133.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where this deployment will be created.
+   *   Format: projects/{project}/locations/{location}
+   * @param {string} request.mirroringDeploymentId
+   *   Required. The ID to use for the new deployment, which will become the final
+   *   component of the deployment's resource name.
+   * @param {google.cloud.networksecurity.v1alpha1.MirroringDeployment} request.mirroringDeployment
+   *   Required. The deployment to create.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. Must be a UUID4.
+   *   This request is only idempotent if a `request_id` is provided.
+   *   See https://google.aip.dev/155 for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/mirroring.create_mirroring_deployment.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Mirroring_CreateMirroringDeployment_async
+   */
   createMirroringDeployment(
-      request?: protos.google.cloud.networksecurity.v1alpha1.ICreateMirroringDeploymentRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.ICreateMirroringDeploymentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createMirroringDeployment(
-      request: protos.google.cloud.networksecurity.v1alpha1.ICreateMirroringDeploymentRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.ICreateMirroringDeploymentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createMirroringDeployment(
-      request: protos.google.cloud.networksecurity.v1alpha1.ICreateMirroringDeploymentRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.ICreateMirroringDeploymentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createMirroringDeployment(
-      request?: protos.google.cloud.networksecurity.v1alpha1.ICreateMirroringDeploymentRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1alpha1.ICreateMirroringDeploymentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createMirroringDeployment response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createMirroringDeployment request %j', request);
-    return this.innerApiCalls.createMirroringDeployment(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createMirroringDeployment response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createMirroringDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createMirroringDeployment response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createMirroringDeployment()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/mirroring.create_mirroring_deployment.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Mirroring_CreateMirroringDeployment_async
- */
-  async checkCreateMirroringDeploymentProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1alpha1.MirroringDeployment, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createMirroringDeployment()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/mirroring.create_mirroring_deployment.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Mirroring_CreateMirroringDeployment_async
+   */
+  async checkCreateMirroringDeploymentProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networksecurity.v1alpha1.MirroringDeployment,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >
+  > {
     this._log.info('createMirroringDeployment long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createMirroringDeployment, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1alpha1.MirroringDeployment, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createMirroringDeployment,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networksecurity.v1alpha1.MirroringDeployment,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >;
   }
-/**
- * Updates a deployment.
- * See https://google.aip.dev/134.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. The list of fields to update.
- *   Fields are specified relative to the deployment
- *   (e.g. `description`; *not* `mirroring_deployment.description`).
- *   See https://google.aip.dev/161 for more details.
- * @param {google.cloud.networksecurity.v1alpha1.MirroringDeployment} request.mirroringDeployment
- *   Required. The deployment to update.
- * @param {string} [request.requestId]
- *   Optional. A unique identifier for this request. Must be a UUID4.
- *   This request is only idempotent if a `request_id` is provided.
- *   See https://google.aip.dev/155 for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/mirroring.update_mirroring_deployment.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Mirroring_UpdateMirroringDeployment_async
- */
+  /**
+   * Updates a deployment.
+   * See https://google.aip.dev/134.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The list of fields to update.
+   *   Fields are specified relative to the deployment
+   *   (e.g. `description`; *not* `mirroring_deployment.description`).
+   *   See https://google.aip.dev/161 for more details.
+   * @param {google.cloud.networksecurity.v1alpha1.MirroringDeployment} request.mirroringDeployment
+   *   Required. The deployment to update.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. Must be a UUID4.
+   *   This request is only idempotent if a `request_id` is provided.
+   *   See https://google.aip.dev/155 for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/mirroring.update_mirroring_deployment.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Mirroring_UpdateMirroringDeployment_async
+   */
   updateMirroringDeployment(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateMirroringDeploymentRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateMirroringDeploymentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateMirroringDeployment(
-      request: protos.google.cloud.networksecurity.v1alpha1.IUpdateMirroringDeploymentRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IUpdateMirroringDeploymentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateMirroringDeployment(
-      request: protos.google.cloud.networksecurity.v1alpha1.IUpdateMirroringDeploymentRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IUpdateMirroringDeploymentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateMirroringDeployment(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateMirroringDeploymentRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateMirroringDeploymentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'mirroring_deployment.name': request.mirroringDeployment!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'mirroring_deployment.name': request.mirroringDeployment!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateMirroringDeployment response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateMirroringDeployment request %j', request);
-    return this.innerApiCalls.updateMirroringDeployment(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateMirroringDeployment response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateMirroringDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateMirroringDeployment response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateMirroringDeployment()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/mirroring.update_mirroring_deployment.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Mirroring_UpdateMirroringDeployment_async
- */
-  async checkUpdateMirroringDeploymentProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1alpha1.MirroringDeployment, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateMirroringDeployment()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/mirroring.update_mirroring_deployment.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Mirroring_UpdateMirroringDeployment_async
+   */
+  async checkUpdateMirroringDeploymentProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networksecurity.v1alpha1.MirroringDeployment,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >
+  > {
     this._log.info('updateMirroringDeployment long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateMirroringDeployment, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1alpha1.MirroringDeployment, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateMirroringDeployment,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networksecurity.v1alpha1.MirroringDeployment,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >;
   }
-/**
- * Deletes a deployment.
- * See https://google.aip.dev/135.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource
- * @param {string} [request.requestId]
- *   Optional. A unique identifier for this request. Must be a UUID4.
- *   This request is only idempotent if a `request_id` is provided.
- *   See https://google.aip.dev/155 for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/mirroring.delete_mirroring_deployment.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Mirroring_DeleteMirroringDeployment_async
- */
+  /**
+   * Deletes a deployment.
+   * See https://google.aip.dev/135.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. Must be a UUID4.
+   *   This request is only idempotent if a `request_id` is provided.
+   *   See https://google.aip.dev/155 for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/mirroring.delete_mirroring_deployment.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Mirroring_DeleteMirroringDeployment_async
+   */
   deleteMirroringDeployment(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteMirroringDeploymentRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteMirroringDeploymentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteMirroringDeployment(
-      request: protos.google.cloud.networksecurity.v1alpha1.IDeleteMirroringDeploymentRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IDeleteMirroringDeploymentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteMirroringDeployment(
-      request: protos.google.cloud.networksecurity.v1alpha1.IDeleteMirroringDeploymentRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IDeleteMirroringDeploymentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteMirroringDeployment(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteMirroringDeploymentRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteMirroringDeploymentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteMirroringDeployment response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteMirroringDeployment request %j', request);
-    return this.innerApiCalls.deleteMirroringDeployment(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteMirroringDeployment response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteMirroringDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteMirroringDeployment response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteMirroringDeployment()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/mirroring.delete_mirroring_deployment.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Mirroring_DeleteMirroringDeployment_async
- */
-  async checkDeleteMirroringDeploymentProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteMirroringDeployment()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/mirroring.delete_mirroring_deployment.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Mirroring_DeleteMirroringDeployment_async
+   */
+  async checkDeleteMirroringDeploymentProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >
+  > {
     this._log.info('deleteMirroringDeployment long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteMirroringDeployment, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteMirroringDeployment,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >;
   }
- /**
- * Lists endpoint groups in a given project and location.
- * See https://google.aip.dev/132.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of endpoint groups.
- *   Example: `projects/123456789/locations/global`.
- *   See https://google.aip.dev/132 for more details.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default. See
- *   https://google.aip.dev/158 for more details.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous
- *   `ListMirroringEndpointGroups` call. Provide this to retrieve the subsequent
- *   page. When paginating, all other parameters provided to
- *   `ListMirroringEndpointGroups` must match the call that provided the page
- *   token.
- *   See https://google.aip.dev/158 for more details.
- * @param {string} [request.filter]
- *   Optional. Filter expression.
- *   See https://google.aip.dev/160#filtering for more details.
- * @param {string} [request.orderBy]
- *   Optional. Sort expression.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroup|MirroringEndpointGroup}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listMirroringEndpointGroupsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists endpoint groups in a given project and location.
+   * See https://google.aip.dev/132.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of endpoint groups.
+   *   Example: `projects/123456789/locations/global`.
+   *   See https://google.aip.dev/132 for more details.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default. See
+   *   https://google.aip.dev/158 for more details.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListMirroringEndpointGroups` call. Provide this to retrieve the subsequent
+   *   page. When paginating, all other parameters provided to
+   *   `ListMirroringEndpointGroups` must match the call that provided the page
+   *   token.
+   *   See https://google.aip.dev/158 for more details.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression.
+   *   See https://google.aip.dev/160#filtering for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort expression.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroup|MirroringEndpointGroup}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listMirroringEndpointGroupsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listMirroringEndpointGroups(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup[],
-        protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsRequest|null,
-        protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsResponse
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup[],
+      protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsRequest | null,
+      protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsResponse,
+    ]
+  >;
   listMirroringEndpointGroups(
-      request: protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsRequest,
+      | protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup
+    >,
+  ): void;
   listMirroringEndpointGroups(
-      request: protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsRequest,
+      | protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup
+    >,
+  ): void;
   listMirroringEndpointGroups(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup>,
-      callback?: PaginationCallback<
-          protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup>):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup[],
-        protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsRequest|null,
-        protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsResponse
-      ]>|void {
+          | protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsRequest,
+      | protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup[],
+      protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsRequest | null,
+      protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsRequest,
-      protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsResponse|null|undefined,
-      protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsRequest,
+          | protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listMirroringEndpointGroups values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2457,468 +3793,540 @@ export class MirroringClient {
     this._log.info('listMirroringEndpointGroups request %j', request);
     return this.innerApiCalls
       .listMirroringEndpointGroups(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup[],
-        protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsRequest|null,
-        protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsResponse
-      ]) => {
-        this._log.info('listMirroringEndpointGroups values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup[],
+          protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsRequest | null,
+          protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsResponse,
+        ]) => {
+          this._log.info('listMirroringEndpointGroups values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listMirroringEndpointGroups`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of endpoint groups.
- *   Example: `projects/123456789/locations/global`.
- *   See https://google.aip.dev/132 for more details.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default. See
- *   https://google.aip.dev/158 for more details.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous
- *   `ListMirroringEndpointGroups` call. Provide this to retrieve the subsequent
- *   page. When paginating, all other parameters provided to
- *   `ListMirroringEndpointGroups` must match the call that provided the page
- *   token.
- *   See https://google.aip.dev/158 for more details.
- * @param {string} [request.filter]
- *   Optional. Filter expression.
- *   See https://google.aip.dev/160#filtering for more details.
- * @param {string} [request.orderBy]
- *   Optional. Sort expression.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroup|MirroringEndpointGroup} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listMirroringEndpointGroupsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listMirroringEndpointGroups`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of endpoint groups.
+   *   Example: `projects/123456789/locations/global`.
+   *   See https://google.aip.dev/132 for more details.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default. See
+   *   https://google.aip.dev/158 for more details.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListMirroringEndpointGroups` call. Provide this to retrieve the subsequent
+   *   page. When paginating, all other parameters provided to
+   *   `ListMirroringEndpointGroups` must match the call that provided the page
+   *   token.
+   *   See https://google.aip.dev/158 for more details.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression.
+   *   See https://google.aip.dev/160#filtering for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort expression.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroup|MirroringEndpointGroup} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listMirroringEndpointGroupsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listMirroringEndpointGroupsStream(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listMirroringEndpointGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listMirroringEndpointGroups stream %j', request);
     return this.descriptors.page.listMirroringEndpointGroups.createStream(
       this.innerApiCalls.listMirroringEndpointGroups as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listMirroringEndpointGroups`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of endpoint groups.
- *   Example: `projects/123456789/locations/global`.
- *   See https://google.aip.dev/132 for more details.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default. See
- *   https://google.aip.dev/158 for more details.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous
- *   `ListMirroringEndpointGroups` call. Provide this to retrieve the subsequent
- *   page. When paginating, all other parameters provided to
- *   `ListMirroringEndpointGroups` must match the call that provided the page
- *   token.
- *   See https://google.aip.dev/158 for more details.
- * @param {string} [request.filter]
- *   Optional. Filter expression.
- *   See https://google.aip.dev/160#filtering for more details.
- * @param {string} [request.orderBy]
- *   Optional. Sort expression.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroup|MirroringEndpointGroup}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/mirroring.list_mirroring_endpoint_groups.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Mirroring_ListMirroringEndpointGroups_async
- */
+  /**
+   * Equivalent to `listMirroringEndpointGroups`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of endpoint groups.
+   *   Example: `projects/123456789/locations/global`.
+   *   See https://google.aip.dev/132 for more details.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default. See
+   *   https://google.aip.dev/158 for more details.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListMirroringEndpointGroups` call. Provide this to retrieve the subsequent
+   *   page. When paginating, all other parameters provided to
+   *   `ListMirroringEndpointGroups` must match the call that provided the page
+   *   token.
+   *   See https://google.aip.dev/158 for more details.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression.
+   *   See https://google.aip.dev/160#filtering for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort expression.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroup|MirroringEndpointGroup}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/mirroring.list_mirroring_endpoint_groups.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Mirroring_ListMirroringEndpointGroups_async
+   */
   listMirroringEndpointGroupsAsync(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup>{
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listMirroringEndpointGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listMirroringEndpointGroups iterate %j', request);
     return this.descriptors.page.listMirroringEndpointGroups.asyncIterate(
       this.innerApiCalls['listMirroringEndpointGroups'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup>;
   }
- /**
- * Lists associations in a given project and location.
- * See https://google.aip.dev/132.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of associations.
- *   Example: `projects/123456789/locations/global`.
- *   See https://google.aip.dev/132 for more details.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default. See
- *   https://google.aip.dev/158 for more details.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous
- *   `ListMirroringEndpointGroups` call. Provide this to retrieve the subsequent
- *   page. When paginating, all other parameters provided to
- *   `ListMirroringEndpointGroups` must match the call that provided the page
- *   token. See https://google.aip.dev/158 for more details.
- * @param {string} [request.filter]
- *   Optional. Filter expression.
- *   See https://google.aip.dev/160#filtering for more details.
- * @param {string} [request.orderBy]
- *   Optional. Sort expression.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroupAssociation|MirroringEndpointGroupAssociation}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listMirroringEndpointGroupAssociationsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists associations in a given project and location.
+   * See https://google.aip.dev/132.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of associations.
+   *   Example: `projects/123456789/locations/global`.
+   *   See https://google.aip.dev/132 for more details.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default. See
+   *   https://google.aip.dev/158 for more details.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListMirroringEndpointGroups` call. Provide this to retrieve the subsequent
+   *   page. When paginating, all other parameters provided to
+   *   `ListMirroringEndpointGroups` must match the call that provided the page
+   *   token. See https://google.aip.dev/158 for more details.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression.
+   *   See https://google.aip.dev/160#filtering for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort expression.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroupAssociation|MirroringEndpointGroupAssociation}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listMirroringEndpointGroupAssociationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listMirroringEndpointGroupAssociations(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation[],
-        protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsRequest|null,
-        protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsResponse
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation[],
+      protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsRequest | null,
+      protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsResponse,
+    ]
+  >;
   listMirroringEndpointGroupAssociations(
-      request: protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsRequest,
+      | protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation
+    >,
+  ): void;
   listMirroringEndpointGroupAssociations(
-      request: protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsRequest,
+      | protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation
+    >,
+  ): void;
   listMirroringEndpointGroupAssociations(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation>,
-      callback?: PaginationCallback<
-          protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation>):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation[],
-        protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsRequest|null,
-        protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsResponse
-      ]>|void {
+          | protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsRequest,
+      | protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation[],
+      protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsRequest | null,
+      protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsRequest,
-      protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsResponse|null|undefined,
-      protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsRequest,
+          | protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listMirroringEndpointGroupAssociations values %j', values);
+          this._log.info(
+            'listMirroringEndpointGroupAssociations values %j',
+            values,
+          );
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listMirroringEndpointGroupAssociations request %j', request);
+    this._log.info(
+      'listMirroringEndpointGroupAssociations request %j',
+      request,
+    );
     return this.innerApiCalls
       .listMirroringEndpointGroupAssociations(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation[],
-        protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsRequest|null,
-        protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsResponse
-      ]) => {
-        this._log.info('listMirroringEndpointGroupAssociations values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation[],
+          protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsRequest | null,
+          protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsResponse,
+        ]) => {
+          this._log.info(
+            'listMirroringEndpointGroupAssociations values %j',
+            response,
+          );
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listMirroringEndpointGroupAssociations`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of associations.
- *   Example: `projects/123456789/locations/global`.
- *   See https://google.aip.dev/132 for more details.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default. See
- *   https://google.aip.dev/158 for more details.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous
- *   `ListMirroringEndpointGroups` call. Provide this to retrieve the subsequent
- *   page. When paginating, all other parameters provided to
- *   `ListMirroringEndpointGroups` must match the call that provided the page
- *   token. See https://google.aip.dev/158 for more details.
- * @param {string} [request.filter]
- *   Optional. Filter expression.
- *   See https://google.aip.dev/160#filtering for more details.
- * @param {string} [request.orderBy]
- *   Optional. Sort expression.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroupAssociation|MirroringEndpointGroupAssociation} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listMirroringEndpointGroupAssociationsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listMirroringEndpointGroupAssociations`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of associations.
+   *   Example: `projects/123456789/locations/global`.
+   *   See https://google.aip.dev/132 for more details.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default. See
+   *   https://google.aip.dev/158 for more details.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListMirroringEndpointGroups` call. Provide this to retrieve the subsequent
+   *   page. When paginating, all other parameters provided to
+   *   `ListMirroringEndpointGroups` must match the call that provided the page
+   *   token. See https://google.aip.dev/158 for more details.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression.
+   *   See https://google.aip.dev/160#filtering for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort expression.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroupAssociation|MirroringEndpointGroupAssociation} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listMirroringEndpointGroupAssociationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listMirroringEndpointGroupAssociationsStream(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
-    const defaultCallSettings = this._defaults['listMirroringEndpointGroupAssociations'];
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listMirroringEndpointGroupAssociations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listMirroringEndpointGroupAssociations stream %j', request);
     return this.descriptors.page.listMirroringEndpointGroupAssociations.createStream(
       this.innerApiCalls.listMirroringEndpointGroupAssociations as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listMirroringEndpointGroupAssociations`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of associations.
- *   Example: `projects/123456789/locations/global`.
- *   See https://google.aip.dev/132 for more details.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default. See
- *   https://google.aip.dev/158 for more details.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous
- *   `ListMirroringEndpointGroups` call. Provide this to retrieve the subsequent
- *   page. When paginating, all other parameters provided to
- *   `ListMirroringEndpointGroups` must match the call that provided the page
- *   token. See https://google.aip.dev/158 for more details.
- * @param {string} [request.filter]
- *   Optional. Filter expression.
- *   See https://google.aip.dev/160#filtering for more details.
- * @param {string} [request.orderBy]
- *   Optional. Sort expression.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroupAssociation|MirroringEndpointGroupAssociation}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/mirroring.list_mirroring_endpoint_group_associations.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Mirroring_ListMirroringEndpointGroupAssociations_async
- */
+  /**
+   * Equivalent to `listMirroringEndpointGroupAssociations`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of associations.
+   *   Example: `projects/123456789/locations/global`.
+   *   See https://google.aip.dev/132 for more details.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default. See
+   *   https://google.aip.dev/158 for more details.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListMirroringEndpointGroups` call. Provide this to retrieve the subsequent
+   *   page. When paginating, all other parameters provided to
+   *   `ListMirroringEndpointGroups` must match the call that provided the page
+   *   token. See https://google.aip.dev/158 for more details.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression.
+   *   See https://google.aip.dev/160#filtering for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort expression.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.networksecurity.v1alpha1.MirroringEndpointGroupAssociation|MirroringEndpointGroupAssociation}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/mirroring.list_mirroring_endpoint_group_associations.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Mirroring_ListMirroringEndpointGroupAssociations_async
+   */
   listMirroringEndpointGroupAssociationsAsync(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation>{
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
-    const defaultCallSettings = this._defaults['listMirroringEndpointGroupAssociations'];
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listMirroringEndpointGroupAssociations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
-    this._log.info('listMirroringEndpointGroupAssociations iterate %j', request);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info(
+      'listMirroringEndpointGroupAssociations iterate %j',
+      request,
+    );
     return this.descriptors.page.listMirroringEndpointGroupAssociations.asyncIterate(
       this.innerApiCalls['listMirroringEndpointGroupAssociations'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation>;
   }
- /**
- * Lists deployment groups in a given project and location.
- * See https://google.aip.dev/132.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of deployment groups.
- *   Example: `projects/123456789/locations/global`.
- *   See https://google.aip.dev/132 for more details.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default. See
- *   https://google.aip.dev/158 for more details.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous
- *   `ListMirroringDeploymentGroups` call. Provide this to retrieve the
- *   subsequent page. When paginating, all other parameters provided to
- *   `ListMirroringDeploymentGroups` must match the call that provided the page
- *   token. See https://google.aip.dev/158 for more details.
- * @param {string} [request.filter]
- *   Optional. Filter expression.
- *   See https://google.aip.dev/160#filtering for more details.
- * @param {string} [request.orderBy]
- *   Optional. Sort expression.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1alpha1.MirroringDeploymentGroup|MirroringDeploymentGroup}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listMirroringDeploymentGroupsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists deployment groups in a given project and location.
+   * See https://google.aip.dev/132.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of deployment groups.
+   *   Example: `projects/123456789/locations/global`.
+   *   See https://google.aip.dev/132 for more details.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default. See
+   *   https://google.aip.dev/158 for more details.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListMirroringDeploymentGroups` call. Provide this to retrieve the
+   *   subsequent page. When paginating, all other parameters provided to
+   *   `ListMirroringDeploymentGroups` must match the call that provided the page
+   *   token. See https://google.aip.dev/158 for more details.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression.
+   *   See https://google.aip.dev/160#filtering for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort expression.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1alpha1.MirroringDeploymentGroup|MirroringDeploymentGroup}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listMirroringDeploymentGroupsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listMirroringDeploymentGroups(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup[],
-        protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsRequest|null,
-        protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsResponse
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup[],
+      protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsRequest | null,
+      protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsResponse,
+    ]
+  >;
   listMirroringDeploymentGroups(
-      request: protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsRequest,
+      | protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup
+    >,
+  ): void;
   listMirroringDeploymentGroups(
-      request: protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsRequest,
+      | protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup
+    >,
+  ): void;
   listMirroringDeploymentGroups(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup>,
-      callback?: PaginationCallback<
-          protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup>):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup[],
-        protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsRequest|null,
-        protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsResponse
-      ]>|void {
+          | protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsRequest,
+      | protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup[],
+      protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsRequest | null,
+      protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsRequest,
-      protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsResponse|null|undefined,
-      protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsRequest,
+          | protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listMirroringDeploymentGroups values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2927,232 +4335,261 @@ export class MirroringClient {
     this._log.info('listMirroringDeploymentGroups request %j', request);
     return this.innerApiCalls
       .listMirroringDeploymentGroups(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup[],
-        protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsRequest|null,
-        protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsResponse
-      ]) => {
-        this._log.info('listMirroringDeploymentGroups values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup[],
+          protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsRequest | null,
+          protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsResponse,
+        ]) => {
+          this._log.info('listMirroringDeploymentGroups values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listMirroringDeploymentGroups`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of deployment groups.
- *   Example: `projects/123456789/locations/global`.
- *   See https://google.aip.dev/132 for more details.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default. See
- *   https://google.aip.dev/158 for more details.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous
- *   `ListMirroringDeploymentGroups` call. Provide this to retrieve the
- *   subsequent page. When paginating, all other parameters provided to
- *   `ListMirroringDeploymentGroups` must match the call that provided the page
- *   token. See https://google.aip.dev/158 for more details.
- * @param {string} [request.filter]
- *   Optional. Filter expression.
- *   See https://google.aip.dev/160#filtering for more details.
- * @param {string} [request.orderBy]
- *   Optional. Sort expression.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1alpha1.MirroringDeploymentGroup|MirroringDeploymentGroup} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listMirroringDeploymentGroupsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listMirroringDeploymentGroups`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of deployment groups.
+   *   Example: `projects/123456789/locations/global`.
+   *   See https://google.aip.dev/132 for more details.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default. See
+   *   https://google.aip.dev/158 for more details.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListMirroringDeploymentGroups` call. Provide this to retrieve the
+   *   subsequent page. When paginating, all other parameters provided to
+   *   `ListMirroringDeploymentGroups` must match the call that provided the page
+   *   token. See https://google.aip.dev/158 for more details.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression.
+   *   See https://google.aip.dev/160#filtering for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort expression.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1alpha1.MirroringDeploymentGroup|MirroringDeploymentGroup} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listMirroringDeploymentGroupsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listMirroringDeploymentGroupsStream(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listMirroringDeploymentGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listMirroringDeploymentGroups stream %j', request);
     return this.descriptors.page.listMirroringDeploymentGroups.createStream(
       this.innerApiCalls.listMirroringDeploymentGroups as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listMirroringDeploymentGroups`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of deployment groups.
- *   Example: `projects/123456789/locations/global`.
- *   See https://google.aip.dev/132 for more details.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default. See
- *   https://google.aip.dev/158 for more details.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous
- *   `ListMirroringDeploymentGroups` call. Provide this to retrieve the
- *   subsequent page. When paginating, all other parameters provided to
- *   `ListMirroringDeploymentGroups` must match the call that provided the page
- *   token. See https://google.aip.dev/158 for more details.
- * @param {string} [request.filter]
- *   Optional. Filter expression.
- *   See https://google.aip.dev/160#filtering for more details.
- * @param {string} [request.orderBy]
- *   Optional. Sort expression.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.networksecurity.v1alpha1.MirroringDeploymentGroup|MirroringDeploymentGroup}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/mirroring.list_mirroring_deployment_groups.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Mirroring_ListMirroringDeploymentGroups_async
- */
+  /**
+   * Equivalent to `listMirroringDeploymentGroups`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of deployment groups.
+   *   Example: `projects/123456789/locations/global`.
+   *   See https://google.aip.dev/132 for more details.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default. See
+   *   https://google.aip.dev/158 for more details.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListMirroringDeploymentGroups` call. Provide this to retrieve the
+   *   subsequent page. When paginating, all other parameters provided to
+   *   `ListMirroringDeploymentGroups` must match the call that provided the page
+   *   token. See https://google.aip.dev/158 for more details.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression.
+   *   See https://google.aip.dev/160#filtering for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort expression.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.networksecurity.v1alpha1.MirroringDeploymentGroup|MirroringDeploymentGroup}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/mirroring.list_mirroring_deployment_groups.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Mirroring_ListMirroringDeploymentGroups_async
+   */
   listMirroringDeploymentGroupsAsync(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup>{
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listMirroringDeploymentGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listMirroringDeploymentGroups iterate %j', request);
     return this.descriptors.page.listMirroringDeploymentGroups.asyncIterate(
       this.innerApiCalls['listMirroringDeploymentGroups'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup>;
   }
- /**
- * Lists deployments in a given project and location.
- * See https://google.aip.dev/132.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of deployments.
- *   Example: `projects/123456789/locations/us-central1-a`.
- *   See https://google.aip.dev/132 for more details.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default. See
- *   https://google.aip.dev/158 for more details.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListMirroringDeployments`
- *   call. Provide this to retrieve the subsequent page. When paginating, all
- *   other parameters provided to `ListMirroringDeployments` must match the call
- *   that provided the page token. See https://google.aip.dev/158 for more
- *   details.
- * @param {string} [request.filter]
- *   Optional. Filter expression.
- *   See https://google.aip.dev/160#filtering for more details.
- * @param {string} [request.orderBy]
- *   Optional. Sort expression.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1alpha1.MirroringDeployment|MirroringDeployment}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listMirroringDeploymentsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists deployments in a given project and location.
+   * See https://google.aip.dev/132.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of deployments.
+   *   Example: `projects/123456789/locations/us-central1-a`.
+   *   See https://google.aip.dev/132 for more details.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default. See
+   *   https://google.aip.dev/158 for more details.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListMirroringDeployments`
+   *   call. Provide this to retrieve the subsequent page. When paginating, all
+   *   other parameters provided to `ListMirroringDeployments` must match the call
+   *   that provided the page token. See https://google.aip.dev/158 for more
+   *   details.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression.
+   *   See https://google.aip.dev/160#filtering for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort expression.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1alpha1.MirroringDeployment|MirroringDeployment}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listMirroringDeploymentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listMirroringDeployments(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment[],
-        protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsRequest|null,
-        protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsResponse
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment[],
+      protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsRequest | null,
+      protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsResponse,
+    ]
+  >;
   listMirroringDeployments(
-      request: protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsRequest,
+      | protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment
+    >,
+  ): void;
   listMirroringDeployments(
-      request: protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsRequest,
+      | protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment
+    >,
+  ): void;
   listMirroringDeployments(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment>,
-      callback?: PaginationCallback<
-          protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment>):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment[],
-        protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsRequest|null,
-        protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsResponse
-      ]>|void {
+          | protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsRequest,
+      | protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment[],
+      protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsRequest | null,
+      protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsRequest,
-      protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsResponse|null|undefined,
-      protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsRequest,
+          | protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listMirroringDeployments values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3161,161 +4598,165 @@ export class MirroringClient {
     this._log.info('listMirroringDeployments request %j', request);
     return this.innerApiCalls
       .listMirroringDeployments(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment[],
-        protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsRequest|null,
-        protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsResponse
-      ]) => {
-        this._log.info('listMirroringDeployments values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment[],
+          protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsRequest | null,
+          protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsResponse,
+        ]) => {
+          this._log.info('listMirroringDeployments values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listMirroringDeployments`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of deployments.
- *   Example: `projects/123456789/locations/us-central1-a`.
- *   See https://google.aip.dev/132 for more details.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default. See
- *   https://google.aip.dev/158 for more details.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListMirroringDeployments`
- *   call. Provide this to retrieve the subsequent page. When paginating, all
- *   other parameters provided to `ListMirroringDeployments` must match the call
- *   that provided the page token. See https://google.aip.dev/158 for more
- *   details.
- * @param {string} [request.filter]
- *   Optional. Filter expression.
- *   See https://google.aip.dev/160#filtering for more details.
- * @param {string} [request.orderBy]
- *   Optional. Sort expression.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1alpha1.MirroringDeployment|MirroringDeployment} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listMirroringDeploymentsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listMirroringDeployments`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of deployments.
+   *   Example: `projects/123456789/locations/us-central1-a`.
+   *   See https://google.aip.dev/132 for more details.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default. See
+   *   https://google.aip.dev/158 for more details.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListMirroringDeployments`
+   *   call. Provide this to retrieve the subsequent page. When paginating, all
+   *   other parameters provided to `ListMirroringDeployments` must match the call
+   *   that provided the page token. See https://google.aip.dev/158 for more
+   *   details.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression.
+   *   See https://google.aip.dev/160#filtering for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort expression.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1alpha1.MirroringDeployment|MirroringDeployment} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listMirroringDeploymentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listMirroringDeploymentsStream(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listMirroringDeployments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listMirroringDeployments stream %j', request);
     return this.descriptors.page.listMirroringDeployments.createStream(
       this.innerApiCalls.listMirroringDeployments as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listMirroringDeployments`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of deployments.
- *   Example: `projects/123456789/locations/us-central1-a`.
- *   See https://google.aip.dev/132 for more details.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default. See
- *   https://google.aip.dev/158 for more details.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListMirroringDeployments`
- *   call. Provide this to retrieve the subsequent page. When paginating, all
- *   other parameters provided to `ListMirroringDeployments` must match the call
- *   that provided the page token. See https://google.aip.dev/158 for more
- *   details.
- * @param {string} [request.filter]
- *   Optional. Filter expression.
- *   See https://google.aip.dev/160#filtering for more details.
- * @param {string} [request.orderBy]
- *   Optional. Sort expression.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.networksecurity.v1alpha1.MirroringDeployment|MirroringDeployment}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/mirroring.list_mirroring_deployments.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Mirroring_ListMirroringDeployments_async
- */
+  /**
+   * Equivalent to `listMirroringDeployments`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of deployments.
+   *   Example: `projects/123456789/locations/us-central1-a`.
+   *   See https://google.aip.dev/132 for more details.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default. See
+   *   https://google.aip.dev/158 for more details.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListMirroringDeployments`
+   *   call. Provide this to retrieve the subsequent page. When paginating, all
+   *   other parameters provided to `ListMirroringDeployments` must match the call
+   *   that provided the page token. See https://google.aip.dev/158 for more
+   *   details.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression.
+   *   See https://google.aip.dev/160#filtering for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort expression.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.networksecurity.v1alpha1.MirroringDeployment|MirroringDeployment}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/mirroring.list_mirroring_deployments.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Mirroring_ListMirroringDeployments_async
+   */
   listMirroringDeploymentsAsync(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment>{
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listMirroringDeployments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listMirroringDeployments iterate %j', request);
     return this.descriptors.page.listMirroringDeployments.asyncIterate(
       this.innerApiCalls['listMirroringDeployments'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment>;
   }
-/**
- * Gets the access control policy for a resource. Returns an empty policy
- * if the resource exists and does not have a policy set.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {Object} [request.options]
- *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
- *   `GetIamPolicy`. This field is only used by Cloud IAM.
- *
- *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+  /**
+   * Gets the access control policy for a resource. Returns an empty policy
+   * if the resource exists and does not have a policy set.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {Object} [request.options]
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`. This field is only used by Cloud IAM.
+   *
+   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   getIamPolicy(
     request: IamProtos.google.iam.v1.GetIamPolicyRequest,
     options?:
@@ -3329,40 +4770,40 @@ export class MirroringClient {
       IamProtos.google.iam.v1.Policy,
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
-    >
-  ):Promise<[IamProtos.google.iam.v1.Policy]> {
+    >,
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
-/**
- * Returns permissions that a caller has on the specified resource. If the
- * resource does not exist, this will return an empty set of
- * permissions, not a NOT_FOUND error.
- *
- * Note: This operation is designed to be used for building
- * permission-aware UIs and command-line tools, not for authorization
- * checking. This operation may "fail open" without warning.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy detail is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {string[]} request.permissions
- *   The set of permissions to check for the `resource`. Permissions with
- *   wildcards (such as '*' or 'storage.*') are not allowed. For more
- *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   setIamPolicy(
     request: IamProtos.google.iam.v1.SetIamPolicyRequest,
     options?:
@@ -3376,41 +4817,41 @@ export class MirroringClient {
       IamProtos.google.iam.v1.Policy,
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
-    >
-  ):Promise<[IamProtos.google.iam.v1.Policy]> {
+    >,
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
-/**
- * Returns permissions that a caller has on the specified resource. If the
- * resource does not exist, this will return an empty set of
- * permissions, not a NOT_FOUND error.
- *
- * Note: This operation is designed to be used for building
- * permission-aware UIs and command-line tools, not for authorization
- * checking. This operation may "fail open" without warning.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy detail is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {string[]} request.permissions
- *   The set of permissions to check for the `resource`. Permissions with
- *   wildcards (such as '*' or 'storage.*') are not allowed. For more
- *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- *
- */
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   */
   testIamPermissions(
     request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
     options?:
@@ -3424,12 +4865,12 @@ export class MirroringClient {
       IamProtos.google.iam.v1.TestIamPermissionsResponse,
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
-    >
-  ):Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
+    >,
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
-/**
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -3464,12 +4905,11 @@ export class MirroringClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -3502,12 +4942,12 @@ export class MirroringClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-/**
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -3550,22 +4990,22 @@ export class MirroringClient {
       protos.google.longrunning.Operation,
       protos.google.longrunning.GetOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<[protos.google.longrunning.Operation]> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -3600,15 +5040,15 @@ export class MirroringClient {
    */
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
+    options?: gax.CallOptions,
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -3642,7 +5082,7 @@ export class MirroringClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-   cancelOperation(
+  cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -3655,25 +5095,24 @@ export class MirroringClient {
       protos.google.longrunning.CancelOperationRequest,
       protos.google.protobuf.Empty,
       {} | undefined | null
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
-
   /**
    * Deletes a long-running operation. This method indicates that the client is
    * no longer interested in the operation result. It does not cancel the
@@ -3712,22 +5151,22 @@ export class MirroringClient {
       protos.google.protobuf.Empty,
       protos.google.longrunning.DeleteOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -3743,7 +5182,11 @@ export class MirroringClient {
    * @param {string} authorization_policy
    * @returns {string} Resource name string.
    */
-  authorizationPolicyPath(project:string,location:string,authorizationPolicy:string) {
+  authorizationPolicyPath(
+    project: string,
+    location: string,
+    authorizationPolicy: string,
+  ) {
     return this.pathTemplates.authorizationPolicyPathTemplate.render({
       project: project,
       location: location,
@@ -3759,7 +5202,9 @@ export class MirroringClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAuthorizationPolicyName(authorizationPolicyName: string) {
-    return this.pathTemplates.authorizationPolicyPathTemplate.match(authorizationPolicyName).project;
+    return this.pathTemplates.authorizationPolicyPathTemplate.match(
+      authorizationPolicyName,
+    ).project;
   }
 
   /**
@@ -3770,7 +5215,9 @@ export class MirroringClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAuthorizationPolicyName(authorizationPolicyName: string) {
-    return this.pathTemplates.authorizationPolicyPathTemplate.match(authorizationPolicyName).location;
+    return this.pathTemplates.authorizationPolicyPathTemplate.match(
+      authorizationPolicyName,
+    ).location;
   }
 
   /**
@@ -3780,8 +5227,12 @@ export class MirroringClient {
    *   A fully-qualified path representing AuthorizationPolicy resource.
    * @returns {string} A string representing the authorization_policy.
    */
-  matchAuthorizationPolicyFromAuthorizationPolicyName(authorizationPolicyName: string) {
-    return this.pathTemplates.authorizationPolicyPathTemplate.match(authorizationPolicyName).authorization_policy;
+  matchAuthorizationPolicyFromAuthorizationPolicyName(
+    authorizationPolicyName: string,
+  ) {
+    return this.pathTemplates.authorizationPolicyPathTemplate.match(
+      authorizationPolicyName,
+    ).authorization_policy;
   }
 
   /**
@@ -3792,7 +5243,7 @@ export class MirroringClient {
    * @param {string} authz_policy
    * @returns {string} Resource name string.
    */
-  authzPolicyPath(project:string,location:string,authzPolicy:string) {
+  authzPolicyPath(project: string, location: string, authzPolicy: string) {
     return this.pathTemplates.authzPolicyPathTemplate.render({
       project: project,
       location: location,
@@ -3808,7 +5259,8 @@ export class MirroringClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAuthzPolicyName(authzPolicyName: string) {
-    return this.pathTemplates.authzPolicyPathTemplate.match(authzPolicyName).project;
+    return this.pathTemplates.authzPolicyPathTemplate.match(authzPolicyName)
+      .project;
   }
 
   /**
@@ -3819,7 +5271,8 @@ export class MirroringClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAuthzPolicyName(authzPolicyName: string) {
-    return this.pathTemplates.authzPolicyPathTemplate.match(authzPolicyName).location;
+    return this.pathTemplates.authzPolicyPathTemplate.match(authzPolicyName)
+      .location;
   }
 
   /**
@@ -3830,7 +5283,8 @@ export class MirroringClient {
    * @returns {string} A string representing the authz_policy.
    */
   matchAuthzPolicyFromAuthzPolicyName(authzPolicyName: string) {
-    return this.pathTemplates.authzPolicyPathTemplate.match(authzPolicyName).authz_policy;
+    return this.pathTemplates.authzPolicyPathTemplate.match(authzPolicyName)
+      .authz_policy;
   }
 
   /**
@@ -3841,7 +5295,11 @@ export class MirroringClient {
    * @param {string} backend_authentication_config
    * @returns {string} Resource name string.
    */
-  backendAuthenticationConfigPath(project:string,location:string,backendAuthenticationConfig:string) {
+  backendAuthenticationConfigPath(
+    project: string,
+    location: string,
+    backendAuthenticationConfig: string,
+  ) {
     return this.pathTemplates.backendAuthenticationConfigPathTemplate.render({
       project: project,
       location: location,
@@ -3856,8 +5314,12 @@ export class MirroringClient {
    *   A fully-qualified path representing BackendAuthenticationConfig resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromBackendAuthenticationConfigName(backendAuthenticationConfigName: string) {
-    return this.pathTemplates.backendAuthenticationConfigPathTemplate.match(backendAuthenticationConfigName).project;
+  matchProjectFromBackendAuthenticationConfigName(
+    backendAuthenticationConfigName: string,
+  ) {
+    return this.pathTemplates.backendAuthenticationConfigPathTemplate.match(
+      backendAuthenticationConfigName,
+    ).project;
   }
 
   /**
@@ -3867,8 +5329,12 @@ export class MirroringClient {
    *   A fully-qualified path representing BackendAuthenticationConfig resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromBackendAuthenticationConfigName(backendAuthenticationConfigName: string) {
-    return this.pathTemplates.backendAuthenticationConfigPathTemplate.match(backendAuthenticationConfigName).location;
+  matchLocationFromBackendAuthenticationConfigName(
+    backendAuthenticationConfigName: string,
+  ) {
+    return this.pathTemplates.backendAuthenticationConfigPathTemplate.match(
+      backendAuthenticationConfigName,
+    ).location;
   }
 
   /**
@@ -3878,8 +5344,12 @@ export class MirroringClient {
    *   A fully-qualified path representing BackendAuthenticationConfig resource.
    * @returns {string} A string representing the backend_authentication_config.
    */
-  matchBackendAuthenticationConfigFromBackendAuthenticationConfigName(backendAuthenticationConfigName: string) {
-    return this.pathTemplates.backendAuthenticationConfigPathTemplate.match(backendAuthenticationConfigName).backend_authentication_config;
+  matchBackendAuthenticationConfigFromBackendAuthenticationConfigName(
+    backendAuthenticationConfigName: string,
+  ) {
+    return this.pathTemplates.backendAuthenticationConfigPathTemplate.match(
+      backendAuthenticationConfigName,
+    ).backend_authentication_config;
   }
 
   /**
@@ -3890,7 +5360,11 @@ export class MirroringClient {
    * @param {string} client_tls_policy
    * @returns {string} Resource name string.
    */
-  clientTlsPolicyPath(project:string,location:string,clientTlsPolicy:string) {
+  clientTlsPolicyPath(
+    project: string,
+    location: string,
+    clientTlsPolicy: string,
+  ) {
     return this.pathTemplates.clientTlsPolicyPathTemplate.render({
       project: project,
       location: location,
@@ -3906,7 +5380,9 @@ export class MirroringClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromClientTlsPolicyName(clientTlsPolicyName: string) {
-    return this.pathTemplates.clientTlsPolicyPathTemplate.match(clientTlsPolicyName).project;
+    return this.pathTemplates.clientTlsPolicyPathTemplate.match(
+      clientTlsPolicyName,
+    ).project;
   }
 
   /**
@@ -3917,7 +5393,9 @@ export class MirroringClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromClientTlsPolicyName(clientTlsPolicyName: string) {
-    return this.pathTemplates.clientTlsPolicyPathTemplate.match(clientTlsPolicyName).location;
+    return this.pathTemplates.clientTlsPolicyPathTemplate.match(
+      clientTlsPolicyName,
+    ).location;
   }
 
   /**
@@ -3928,7 +5406,9 @@ export class MirroringClient {
    * @returns {string} A string representing the client_tls_policy.
    */
   matchClientTlsPolicyFromClientTlsPolicyName(clientTlsPolicyName: string) {
-    return this.pathTemplates.clientTlsPolicyPathTemplate.match(clientTlsPolicyName).client_tls_policy;
+    return this.pathTemplates.clientTlsPolicyPathTemplate.match(
+      clientTlsPolicyName,
+    ).client_tls_policy;
   }
 
   /**
@@ -3939,7 +5419,11 @@ export class MirroringClient {
    * @param {string} dns_threat_detector
    * @returns {string} Resource name string.
    */
-  dnsThreatDetectorPath(project:string,location:string,dnsThreatDetector:string) {
+  dnsThreatDetectorPath(
+    project: string,
+    location: string,
+    dnsThreatDetector: string,
+  ) {
     return this.pathTemplates.dnsThreatDetectorPathTemplate.render({
       project: project,
       location: location,
@@ -3955,7 +5439,9 @@ export class MirroringClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDnsThreatDetectorName(dnsThreatDetectorName: string) {
-    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(dnsThreatDetectorName).project;
+    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(
+      dnsThreatDetectorName,
+    ).project;
   }
 
   /**
@@ -3966,7 +5452,9 @@ export class MirroringClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDnsThreatDetectorName(dnsThreatDetectorName: string) {
-    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(dnsThreatDetectorName).location;
+    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(
+      dnsThreatDetectorName,
+    ).location;
   }
 
   /**
@@ -3976,8 +5464,12 @@ export class MirroringClient {
    *   A fully-qualified path representing DnsThreatDetector resource.
    * @returns {string} A string representing the dns_threat_detector.
    */
-  matchDnsThreatDetectorFromDnsThreatDetectorName(dnsThreatDetectorName: string) {
-    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(dnsThreatDetectorName).dns_threat_detector;
+  matchDnsThreatDetectorFromDnsThreatDetectorName(
+    dnsThreatDetectorName: string,
+  ) {
+    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(
+      dnsThreatDetectorName,
+    ).dns_threat_detector;
   }
 
   /**
@@ -3988,7 +5480,11 @@ export class MirroringClient {
    * @param {string} firewall_endpoint_association
    * @returns {string} Resource name string.
    */
-  firewallEndpointAssociationPath(project:string,location:string,firewallEndpointAssociation:string) {
+  firewallEndpointAssociationPath(
+    project: string,
+    location: string,
+    firewallEndpointAssociation: string,
+  ) {
     return this.pathTemplates.firewallEndpointAssociationPathTemplate.render({
       project: project,
       location: location,
@@ -4003,8 +5499,12 @@ export class MirroringClient {
    *   A fully-qualified path representing FirewallEndpointAssociation resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromFirewallEndpointAssociationName(firewallEndpointAssociationName: string) {
-    return this.pathTemplates.firewallEndpointAssociationPathTemplate.match(firewallEndpointAssociationName).project;
+  matchProjectFromFirewallEndpointAssociationName(
+    firewallEndpointAssociationName: string,
+  ) {
+    return this.pathTemplates.firewallEndpointAssociationPathTemplate.match(
+      firewallEndpointAssociationName,
+    ).project;
   }
 
   /**
@@ -4014,8 +5514,12 @@ export class MirroringClient {
    *   A fully-qualified path representing FirewallEndpointAssociation resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromFirewallEndpointAssociationName(firewallEndpointAssociationName: string) {
-    return this.pathTemplates.firewallEndpointAssociationPathTemplate.match(firewallEndpointAssociationName).location;
+  matchLocationFromFirewallEndpointAssociationName(
+    firewallEndpointAssociationName: string,
+  ) {
+    return this.pathTemplates.firewallEndpointAssociationPathTemplate.match(
+      firewallEndpointAssociationName,
+    ).location;
   }
 
   /**
@@ -4025,8 +5529,12 @@ export class MirroringClient {
    *   A fully-qualified path representing FirewallEndpointAssociation resource.
    * @returns {string} A string representing the firewall_endpoint_association.
    */
-  matchFirewallEndpointAssociationFromFirewallEndpointAssociationName(firewallEndpointAssociationName: string) {
-    return this.pathTemplates.firewallEndpointAssociationPathTemplate.match(firewallEndpointAssociationName).firewall_endpoint_association;
+  matchFirewallEndpointAssociationFromFirewallEndpointAssociationName(
+    firewallEndpointAssociationName: string,
+  ) {
+    return this.pathTemplates.firewallEndpointAssociationPathTemplate.match(
+      firewallEndpointAssociationName,
+    ).firewall_endpoint_association;
   }
 
   /**
@@ -4036,7 +5544,7 @@ export class MirroringClient {
    * @param {string} forwarding_rule
    * @returns {string} Resource name string.
    */
-  forwardingRulePath(project:string,forwardingRule:string) {
+  forwardingRulePath(project: string, forwardingRule: string) {
     return this.pathTemplates.forwardingRulePathTemplate.render({
       project: project,
       forwarding_rule: forwardingRule,
@@ -4051,7 +5559,9 @@ export class MirroringClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromForwardingRuleName(forwardingRuleName: string) {
-    return this.pathTemplates.forwardingRulePathTemplate.match(forwardingRuleName).project;
+    return this.pathTemplates.forwardingRulePathTemplate.match(
+      forwardingRuleName,
+    ).project;
   }
 
   /**
@@ -4062,7 +5572,9 @@ export class MirroringClient {
    * @returns {string} A string representing the forwarding_rule.
    */
   matchForwardingRuleFromForwardingRuleName(forwardingRuleName: string) {
-    return this.pathTemplates.forwardingRulePathTemplate.match(forwardingRuleName).forwarding_rule;
+    return this.pathTemplates.forwardingRulePathTemplate.match(
+      forwardingRuleName,
+    ).forwarding_rule;
   }
 
   /**
@@ -4073,7 +5585,11 @@ export class MirroringClient {
    * @param {string} gateway_security_policy
    * @returns {string} Resource name string.
    */
-  gatewaySecurityPolicyPath(project:string,location:string,gatewaySecurityPolicy:string) {
+  gatewaySecurityPolicyPath(
+    project: string,
+    location: string,
+    gatewaySecurityPolicy: string,
+  ) {
     return this.pathTemplates.gatewaySecurityPolicyPathTemplate.render({
       project: project,
       location: location,
@@ -4089,7 +5605,9 @@ export class MirroringClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromGatewaySecurityPolicyName(gatewaySecurityPolicyName: string) {
-    return this.pathTemplates.gatewaySecurityPolicyPathTemplate.match(gatewaySecurityPolicyName).project;
+    return this.pathTemplates.gatewaySecurityPolicyPathTemplate.match(
+      gatewaySecurityPolicyName,
+    ).project;
   }
 
   /**
@@ -4099,8 +5617,12 @@ export class MirroringClient {
    *   A fully-qualified path representing GatewaySecurityPolicy resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromGatewaySecurityPolicyName(gatewaySecurityPolicyName: string) {
-    return this.pathTemplates.gatewaySecurityPolicyPathTemplate.match(gatewaySecurityPolicyName).location;
+  matchLocationFromGatewaySecurityPolicyName(
+    gatewaySecurityPolicyName: string,
+  ) {
+    return this.pathTemplates.gatewaySecurityPolicyPathTemplate.match(
+      gatewaySecurityPolicyName,
+    ).location;
   }
 
   /**
@@ -4110,8 +5632,12 @@ export class MirroringClient {
    *   A fully-qualified path representing GatewaySecurityPolicy resource.
    * @returns {string} A string representing the gateway_security_policy.
    */
-  matchGatewaySecurityPolicyFromGatewaySecurityPolicyName(gatewaySecurityPolicyName: string) {
-    return this.pathTemplates.gatewaySecurityPolicyPathTemplate.match(gatewaySecurityPolicyName).gateway_security_policy;
+  matchGatewaySecurityPolicyFromGatewaySecurityPolicyName(
+    gatewaySecurityPolicyName: string,
+  ) {
+    return this.pathTemplates.gatewaySecurityPolicyPathTemplate.match(
+      gatewaySecurityPolicyName,
+    ).gateway_security_policy;
   }
 
   /**
@@ -4123,7 +5649,12 @@ export class MirroringClient {
    * @param {string} rule
    * @returns {string} Resource name string.
    */
-  gatewaySecurityPolicyRulePath(project:string,location:string,gatewaySecurityPolicy:string,rule:string) {
+  gatewaySecurityPolicyRulePath(
+    project: string,
+    location: string,
+    gatewaySecurityPolicy: string,
+    rule: string,
+  ) {
     return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.render({
       project: project,
       location: location,
@@ -4139,8 +5670,12 @@ export class MirroringClient {
    *   A fully-qualified path representing GatewaySecurityPolicyRule resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromGatewaySecurityPolicyRuleName(gatewaySecurityPolicyRuleName: string) {
-    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(gatewaySecurityPolicyRuleName).project;
+  matchProjectFromGatewaySecurityPolicyRuleName(
+    gatewaySecurityPolicyRuleName: string,
+  ) {
+    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(
+      gatewaySecurityPolicyRuleName,
+    ).project;
   }
 
   /**
@@ -4150,8 +5685,12 @@ export class MirroringClient {
    *   A fully-qualified path representing GatewaySecurityPolicyRule resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromGatewaySecurityPolicyRuleName(gatewaySecurityPolicyRuleName: string) {
-    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(gatewaySecurityPolicyRuleName).location;
+  matchLocationFromGatewaySecurityPolicyRuleName(
+    gatewaySecurityPolicyRuleName: string,
+  ) {
+    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(
+      gatewaySecurityPolicyRuleName,
+    ).location;
   }
 
   /**
@@ -4161,8 +5700,12 @@ export class MirroringClient {
    *   A fully-qualified path representing GatewaySecurityPolicyRule resource.
    * @returns {string} A string representing the gateway_security_policy.
    */
-  matchGatewaySecurityPolicyFromGatewaySecurityPolicyRuleName(gatewaySecurityPolicyRuleName: string) {
-    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(gatewaySecurityPolicyRuleName).gateway_security_policy;
+  matchGatewaySecurityPolicyFromGatewaySecurityPolicyRuleName(
+    gatewaySecurityPolicyRuleName: string,
+  ) {
+    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(
+      gatewaySecurityPolicyRuleName,
+    ).gateway_security_policy;
   }
 
   /**
@@ -4172,8 +5715,12 @@ export class MirroringClient {
    *   A fully-qualified path representing GatewaySecurityPolicyRule resource.
    * @returns {string} A string representing the rule.
    */
-  matchRuleFromGatewaySecurityPolicyRuleName(gatewaySecurityPolicyRuleName: string) {
-    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(gatewaySecurityPolicyRuleName).rule;
+  matchRuleFromGatewaySecurityPolicyRuleName(
+    gatewaySecurityPolicyRuleName: string,
+  ) {
+    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(
+      gatewaySecurityPolicyRuleName,
+    ).rule;
   }
 
   /**
@@ -4184,7 +5731,11 @@ export class MirroringClient {
    * @param {string} intercept_deployment
    * @returns {string} Resource name string.
    */
-  interceptDeploymentPath(project:string,location:string,interceptDeployment:string) {
+  interceptDeploymentPath(
+    project: string,
+    location: string,
+    interceptDeployment: string,
+  ) {
     return this.pathTemplates.interceptDeploymentPathTemplate.render({
       project: project,
       location: location,
@@ -4200,7 +5751,9 @@ export class MirroringClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromInterceptDeploymentName(interceptDeploymentName: string) {
-    return this.pathTemplates.interceptDeploymentPathTemplate.match(interceptDeploymentName).project;
+    return this.pathTemplates.interceptDeploymentPathTemplate.match(
+      interceptDeploymentName,
+    ).project;
   }
 
   /**
@@ -4211,7 +5764,9 @@ export class MirroringClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromInterceptDeploymentName(interceptDeploymentName: string) {
-    return this.pathTemplates.interceptDeploymentPathTemplate.match(interceptDeploymentName).location;
+    return this.pathTemplates.interceptDeploymentPathTemplate.match(
+      interceptDeploymentName,
+    ).location;
   }
 
   /**
@@ -4221,8 +5776,12 @@ export class MirroringClient {
    *   A fully-qualified path representing InterceptDeployment resource.
    * @returns {string} A string representing the intercept_deployment.
    */
-  matchInterceptDeploymentFromInterceptDeploymentName(interceptDeploymentName: string) {
-    return this.pathTemplates.interceptDeploymentPathTemplate.match(interceptDeploymentName).intercept_deployment;
+  matchInterceptDeploymentFromInterceptDeploymentName(
+    interceptDeploymentName: string,
+  ) {
+    return this.pathTemplates.interceptDeploymentPathTemplate.match(
+      interceptDeploymentName,
+    ).intercept_deployment;
   }
 
   /**
@@ -4233,7 +5792,11 @@ export class MirroringClient {
    * @param {string} intercept_deployment_group
    * @returns {string} Resource name string.
    */
-  interceptDeploymentGroupPath(project:string,location:string,interceptDeploymentGroup:string) {
+  interceptDeploymentGroupPath(
+    project: string,
+    location: string,
+    interceptDeploymentGroup: string,
+  ) {
     return this.pathTemplates.interceptDeploymentGroupPathTemplate.render({
       project: project,
       location: location,
@@ -4248,8 +5811,12 @@ export class MirroringClient {
    *   A fully-qualified path representing InterceptDeploymentGroup resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromInterceptDeploymentGroupName(interceptDeploymentGroupName: string) {
-    return this.pathTemplates.interceptDeploymentGroupPathTemplate.match(interceptDeploymentGroupName).project;
+  matchProjectFromInterceptDeploymentGroupName(
+    interceptDeploymentGroupName: string,
+  ) {
+    return this.pathTemplates.interceptDeploymentGroupPathTemplate.match(
+      interceptDeploymentGroupName,
+    ).project;
   }
 
   /**
@@ -4259,8 +5826,12 @@ export class MirroringClient {
    *   A fully-qualified path representing InterceptDeploymentGroup resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromInterceptDeploymentGroupName(interceptDeploymentGroupName: string) {
-    return this.pathTemplates.interceptDeploymentGroupPathTemplate.match(interceptDeploymentGroupName).location;
+  matchLocationFromInterceptDeploymentGroupName(
+    interceptDeploymentGroupName: string,
+  ) {
+    return this.pathTemplates.interceptDeploymentGroupPathTemplate.match(
+      interceptDeploymentGroupName,
+    ).location;
   }
 
   /**
@@ -4270,8 +5841,12 @@ export class MirroringClient {
    *   A fully-qualified path representing InterceptDeploymentGroup resource.
    * @returns {string} A string representing the intercept_deployment_group.
    */
-  matchInterceptDeploymentGroupFromInterceptDeploymentGroupName(interceptDeploymentGroupName: string) {
-    return this.pathTemplates.interceptDeploymentGroupPathTemplate.match(interceptDeploymentGroupName).intercept_deployment_group;
+  matchInterceptDeploymentGroupFromInterceptDeploymentGroupName(
+    interceptDeploymentGroupName: string,
+  ) {
+    return this.pathTemplates.interceptDeploymentGroupPathTemplate.match(
+      interceptDeploymentGroupName,
+    ).intercept_deployment_group;
   }
 
   /**
@@ -4282,7 +5857,11 @@ export class MirroringClient {
    * @param {string} intercept_endpoint_group
    * @returns {string} Resource name string.
    */
-  interceptEndpointGroupPath(project:string,location:string,interceptEndpointGroup:string) {
+  interceptEndpointGroupPath(
+    project: string,
+    location: string,
+    interceptEndpointGroup: string,
+  ) {
     return this.pathTemplates.interceptEndpointGroupPathTemplate.render({
       project: project,
       location: location,
@@ -4297,8 +5876,12 @@ export class MirroringClient {
    *   A fully-qualified path representing InterceptEndpointGroup resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromInterceptEndpointGroupName(interceptEndpointGroupName: string) {
-    return this.pathTemplates.interceptEndpointGroupPathTemplate.match(interceptEndpointGroupName).project;
+  matchProjectFromInterceptEndpointGroupName(
+    interceptEndpointGroupName: string,
+  ) {
+    return this.pathTemplates.interceptEndpointGroupPathTemplate.match(
+      interceptEndpointGroupName,
+    ).project;
   }
 
   /**
@@ -4308,8 +5891,12 @@ export class MirroringClient {
    *   A fully-qualified path representing InterceptEndpointGroup resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromInterceptEndpointGroupName(interceptEndpointGroupName: string) {
-    return this.pathTemplates.interceptEndpointGroupPathTemplate.match(interceptEndpointGroupName).location;
+  matchLocationFromInterceptEndpointGroupName(
+    interceptEndpointGroupName: string,
+  ) {
+    return this.pathTemplates.interceptEndpointGroupPathTemplate.match(
+      interceptEndpointGroupName,
+    ).location;
   }
 
   /**
@@ -4319,8 +5906,12 @@ export class MirroringClient {
    *   A fully-qualified path representing InterceptEndpointGroup resource.
    * @returns {string} A string representing the intercept_endpoint_group.
    */
-  matchInterceptEndpointGroupFromInterceptEndpointGroupName(interceptEndpointGroupName: string) {
-    return this.pathTemplates.interceptEndpointGroupPathTemplate.match(interceptEndpointGroupName).intercept_endpoint_group;
+  matchInterceptEndpointGroupFromInterceptEndpointGroupName(
+    interceptEndpointGroupName: string,
+  ) {
+    return this.pathTemplates.interceptEndpointGroupPathTemplate.match(
+      interceptEndpointGroupName,
+    ).intercept_endpoint_group;
   }
 
   /**
@@ -4331,12 +5922,18 @@ export class MirroringClient {
    * @param {string} intercept_endpoint_group_association
    * @returns {string} Resource name string.
    */
-  interceptEndpointGroupAssociationPath(project:string,location:string,interceptEndpointGroupAssociation:string) {
-    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.render({
-      project: project,
-      location: location,
-      intercept_endpoint_group_association: interceptEndpointGroupAssociation,
-    });
+  interceptEndpointGroupAssociationPath(
+    project: string,
+    location: string,
+    interceptEndpointGroupAssociation: string,
+  ) {
+    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        intercept_endpoint_group_association: interceptEndpointGroupAssociation,
+      },
+    );
   }
 
   /**
@@ -4346,8 +5943,12 @@ export class MirroringClient {
    *   A fully-qualified path representing InterceptEndpointGroupAssociation resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromInterceptEndpointGroupAssociationName(interceptEndpointGroupAssociationName: string) {
-    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match(interceptEndpointGroupAssociationName).project;
+  matchProjectFromInterceptEndpointGroupAssociationName(
+    interceptEndpointGroupAssociationName: string,
+  ) {
+    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match(
+      interceptEndpointGroupAssociationName,
+    ).project;
   }
 
   /**
@@ -4357,8 +5958,12 @@ export class MirroringClient {
    *   A fully-qualified path representing InterceptEndpointGroupAssociation resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromInterceptEndpointGroupAssociationName(interceptEndpointGroupAssociationName: string) {
-    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match(interceptEndpointGroupAssociationName).location;
+  matchLocationFromInterceptEndpointGroupAssociationName(
+    interceptEndpointGroupAssociationName: string,
+  ) {
+    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match(
+      interceptEndpointGroupAssociationName,
+    ).location;
   }
 
   /**
@@ -4368,8 +5973,12 @@ export class MirroringClient {
    *   A fully-qualified path representing InterceptEndpointGroupAssociation resource.
    * @returns {string} A string representing the intercept_endpoint_group_association.
    */
-  matchInterceptEndpointGroupAssociationFromInterceptEndpointGroupAssociationName(interceptEndpointGroupAssociationName: string) {
-    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match(interceptEndpointGroupAssociationName).intercept_endpoint_group_association;
+  matchInterceptEndpointGroupAssociationFromInterceptEndpointGroupAssociationName(
+    interceptEndpointGroupAssociationName: string,
+  ) {
+    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match(
+      interceptEndpointGroupAssociationName,
+    ).intercept_endpoint_group_association;
   }
 
   /**
@@ -4379,7 +5988,7 @@ export class MirroringClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -4416,7 +6025,11 @@ export class MirroringClient {
    * @param {string} mirroring_deployment
    * @returns {string} Resource name string.
    */
-  mirroringDeploymentPath(project:string,location:string,mirroringDeployment:string) {
+  mirroringDeploymentPath(
+    project: string,
+    location: string,
+    mirroringDeployment: string,
+  ) {
     return this.pathTemplates.mirroringDeploymentPathTemplate.render({
       project: project,
       location: location,
@@ -4432,7 +6045,9 @@ export class MirroringClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromMirroringDeploymentName(mirroringDeploymentName: string) {
-    return this.pathTemplates.mirroringDeploymentPathTemplate.match(mirroringDeploymentName).project;
+    return this.pathTemplates.mirroringDeploymentPathTemplate.match(
+      mirroringDeploymentName,
+    ).project;
   }
 
   /**
@@ -4443,7 +6058,9 @@ export class MirroringClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromMirroringDeploymentName(mirroringDeploymentName: string) {
-    return this.pathTemplates.mirroringDeploymentPathTemplate.match(mirroringDeploymentName).location;
+    return this.pathTemplates.mirroringDeploymentPathTemplate.match(
+      mirroringDeploymentName,
+    ).location;
   }
 
   /**
@@ -4453,8 +6070,12 @@ export class MirroringClient {
    *   A fully-qualified path representing MirroringDeployment resource.
    * @returns {string} A string representing the mirroring_deployment.
    */
-  matchMirroringDeploymentFromMirroringDeploymentName(mirroringDeploymentName: string) {
-    return this.pathTemplates.mirroringDeploymentPathTemplate.match(mirroringDeploymentName).mirroring_deployment;
+  matchMirroringDeploymentFromMirroringDeploymentName(
+    mirroringDeploymentName: string,
+  ) {
+    return this.pathTemplates.mirroringDeploymentPathTemplate.match(
+      mirroringDeploymentName,
+    ).mirroring_deployment;
   }
 
   /**
@@ -4465,7 +6086,11 @@ export class MirroringClient {
    * @param {string} mirroring_deployment_group
    * @returns {string} Resource name string.
    */
-  mirroringDeploymentGroupPath(project:string,location:string,mirroringDeploymentGroup:string) {
+  mirroringDeploymentGroupPath(
+    project: string,
+    location: string,
+    mirroringDeploymentGroup: string,
+  ) {
     return this.pathTemplates.mirroringDeploymentGroupPathTemplate.render({
       project: project,
       location: location,
@@ -4480,8 +6105,12 @@ export class MirroringClient {
    *   A fully-qualified path representing MirroringDeploymentGroup resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromMirroringDeploymentGroupName(mirroringDeploymentGroupName: string) {
-    return this.pathTemplates.mirroringDeploymentGroupPathTemplate.match(mirroringDeploymentGroupName).project;
+  matchProjectFromMirroringDeploymentGroupName(
+    mirroringDeploymentGroupName: string,
+  ) {
+    return this.pathTemplates.mirroringDeploymentGroupPathTemplate.match(
+      mirroringDeploymentGroupName,
+    ).project;
   }
 
   /**
@@ -4491,8 +6120,12 @@ export class MirroringClient {
    *   A fully-qualified path representing MirroringDeploymentGroup resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromMirroringDeploymentGroupName(mirroringDeploymentGroupName: string) {
-    return this.pathTemplates.mirroringDeploymentGroupPathTemplate.match(mirroringDeploymentGroupName).location;
+  matchLocationFromMirroringDeploymentGroupName(
+    mirroringDeploymentGroupName: string,
+  ) {
+    return this.pathTemplates.mirroringDeploymentGroupPathTemplate.match(
+      mirroringDeploymentGroupName,
+    ).location;
   }
 
   /**
@@ -4502,8 +6135,12 @@ export class MirroringClient {
    *   A fully-qualified path representing MirroringDeploymentGroup resource.
    * @returns {string} A string representing the mirroring_deployment_group.
    */
-  matchMirroringDeploymentGroupFromMirroringDeploymentGroupName(mirroringDeploymentGroupName: string) {
-    return this.pathTemplates.mirroringDeploymentGroupPathTemplate.match(mirroringDeploymentGroupName).mirroring_deployment_group;
+  matchMirroringDeploymentGroupFromMirroringDeploymentGroupName(
+    mirroringDeploymentGroupName: string,
+  ) {
+    return this.pathTemplates.mirroringDeploymentGroupPathTemplate.match(
+      mirroringDeploymentGroupName,
+    ).mirroring_deployment_group;
   }
 
   /**
@@ -4514,7 +6151,11 @@ export class MirroringClient {
    * @param {string} mirroring_endpoint_group
    * @returns {string} Resource name string.
    */
-  mirroringEndpointGroupPath(project:string,location:string,mirroringEndpointGroup:string) {
+  mirroringEndpointGroupPath(
+    project: string,
+    location: string,
+    mirroringEndpointGroup: string,
+  ) {
     return this.pathTemplates.mirroringEndpointGroupPathTemplate.render({
       project: project,
       location: location,
@@ -4529,8 +6170,12 @@ export class MirroringClient {
    *   A fully-qualified path representing MirroringEndpointGroup resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromMirroringEndpointGroupName(mirroringEndpointGroupName: string) {
-    return this.pathTemplates.mirroringEndpointGroupPathTemplate.match(mirroringEndpointGroupName).project;
+  matchProjectFromMirroringEndpointGroupName(
+    mirroringEndpointGroupName: string,
+  ) {
+    return this.pathTemplates.mirroringEndpointGroupPathTemplate.match(
+      mirroringEndpointGroupName,
+    ).project;
   }
 
   /**
@@ -4540,8 +6185,12 @@ export class MirroringClient {
    *   A fully-qualified path representing MirroringEndpointGroup resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromMirroringEndpointGroupName(mirroringEndpointGroupName: string) {
-    return this.pathTemplates.mirroringEndpointGroupPathTemplate.match(mirroringEndpointGroupName).location;
+  matchLocationFromMirroringEndpointGroupName(
+    mirroringEndpointGroupName: string,
+  ) {
+    return this.pathTemplates.mirroringEndpointGroupPathTemplate.match(
+      mirroringEndpointGroupName,
+    ).location;
   }
 
   /**
@@ -4551,8 +6200,12 @@ export class MirroringClient {
    *   A fully-qualified path representing MirroringEndpointGroup resource.
    * @returns {string} A string representing the mirroring_endpoint_group.
    */
-  matchMirroringEndpointGroupFromMirroringEndpointGroupName(mirroringEndpointGroupName: string) {
-    return this.pathTemplates.mirroringEndpointGroupPathTemplate.match(mirroringEndpointGroupName).mirroring_endpoint_group;
+  matchMirroringEndpointGroupFromMirroringEndpointGroupName(
+    mirroringEndpointGroupName: string,
+  ) {
+    return this.pathTemplates.mirroringEndpointGroupPathTemplate.match(
+      mirroringEndpointGroupName,
+    ).mirroring_endpoint_group;
   }
 
   /**
@@ -4563,12 +6216,18 @@ export class MirroringClient {
    * @param {string} mirroring_endpoint_group_association
    * @returns {string} Resource name string.
    */
-  mirroringEndpointGroupAssociationPath(project:string,location:string,mirroringEndpointGroupAssociation:string) {
-    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.render({
-      project: project,
-      location: location,
-      mirroring_endpoint_group_association: mirroringEndpointGroupAssociation,
-    });
+  mirroringEndpointGroupAssociationPath(
+    project: string,
+    location: string,
+    mirroringEndpointGroupAssociation: string,
+  ) {
+    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        mirroring_endpoint_group_association: mirroringEndpointGroupAssociation,
+      },
+    );
   }
 
   /**
@@ -4578,8 +6237,12 @@ export class MirroringClient {
    *   A fully-qualified path representing MirroringEndpointGroupAssociation resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromMirroringEndpointGroupAssociationName(mirroringEndpointGroupAssociationName: string) {
-    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match(mirroringEndpointGroupAssociationName).project;
+  matchProjectFromMirroringEndpointGroupAssociationName(
+    mirroringEndpointGroupAssociationName: string,
+  ) {
+    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match(
+      mirroringEndpointGroupAssociationName,
+    ).project;
   }
 
   /**
@@ -4589,8 +6252,12 @@ export class MirroringClient {
    *   A fully-qualified path representing MirroringEndpointGroupAssociation resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromMirroringEndpointGroupAssociationName(mirroringEndpointGroupAssociationName: string) {
-    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match(mirroringEndpointGroupAssociationName).location;
+  matchLocationFromMirroringEndpointGroupAssociationName(
+    mirroringEndpointGroupAssociationName: string,
+  ) {
+    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match(
+      mirroringEndpointGroupAssociationName,
+    ).location;
   }
 
   /**
@@ -4600,8 +6267,12 @@ export class MirroringClient {
    *   A fully-qualified path representing MirroringEndpointGroupAssociation resource.
    * @returns {string} A string representing the mirroring_endpoint_group_association.
    */
-  matchMirroringEndpointGroupAssociationFromMirroringEndpointGroupAssociationName(mirroringEndpointGroupAssociationName: string) {
-    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match(mirroringEndpointGroupAssociationName).mirroring_endpoint_group_association;
+  matchMirroringEndpointGroupAssociationFromMirroringEndpointGroupAssociationName(
+    mirroringEndpointGroupAssociationName: string,
+  ) {
+    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match(
+      mirroringEndpointGroupAssociationName,
+    ).mirroring_endpoint_group_association;
   }
 
   /**
@@ -4611,7 +6282,7 @@ export class MirroringClient {
    * @param {string} network
    * @returns {string} Resource name string.
    */
-  networkPath(project:string,network:string) {
+  networkPath(project: string, network: string) {
     return this.pathTemplates.networkPathTemplate.render({
       project: project,
       network: network,
@@ -4648,12 +6319,18 @@ export class MirroringClient {
    * @param {string} firewall_endpoint
    * @returns {string} Resource name string.
    */
-  organizationLocationFirewallEndpointsPath(organization:string,location:string,firewallEndpoint:string) {
-    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.render({
-      organization: organization,
-      location: location,
-      firewall_endpoint: firewallEndpoint,
-    });
+  organizationLocationFirewallEndpointsPath(
+    organization: string,
+    location: string,
+    firewallEndpoint: string,
+  ) {
+    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        firewall_endpoint: firewallEndpoint,
+      },
+    );
   }
 
   /**
@@ -4663,8 +6340,12 @@ export class MirroringClient {
    *   A fully-qualified path representing organization_location_firewallEndpoints resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationFirewallEndpointsName(organizationLocationFirewallEndpointsName: string) {
-    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match(organizationLocationFirewallEndpointsName).organization;
+  matchOrganizationFromOrganizationLocationFirewallEndpointsName(
+    organizationLocationFirewallEndpointsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match(
+      organizationLocationFirewallEndpointsName,
+    ).organization;
   }
 
   /**
@@ -4674,8 +6355,12 @@ export class MirroringClient {
    *   A fully-qualified path representing organization_location_firewallEndpoints resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationFirewallEndpointsName(organizationLocationFirewallEndpointsName: string) {
-    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match(organizationLocationFirewallEndpointsName).location;
+  matchLocationFromOrganizationLocationFirewallEndpointsName(
+    organizationLocationFirewallEndpointsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match(
+      organizationLocationFirewallEndpointsName,
+    ).location;
   }
 
   /**
@@ -4685,8 +6370,12 @@ export class MirroringClient {
    *   A fully-qualified path representing organization_location_firewallEndpoints resource.
    * @returns {string} A string representing the firewall_endpoint.
    */
-  matchFirewallEndpointFromOrganizationLocationFirewallEndpointsName(organizationLocationFirewallEndpointsName: string) {
-    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match(organizationLocationFirewallEndpointsName).firewall_endpoint;
+  matchFirewallEndpointFromOrganizationLocationFirewallEndpointsName(
+    organizationLocationFirewallEndpointsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match(
+      organizationLocationFirewallEndpointsName,
+    ).firewall_endpoint;
   }
 
   /**
@@ -4697,12 +6386,18 @@ export class MirroringClient {
    * @param {string} security_profile
    * @returns {string} Resource name string.
    */
-  organizationLocationSecurityProfilePath(organization:string,location:string,securityProfile:string) {
-    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.render({
-      organization: organization,
-      location: location,
-      security_profile: securityProfile,
-    });
+  organizationLocationSecurityProfilePath(
+    organization: string,
+    location: string,
+    securityProfile: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        security_profile: securityProfile,
+      },
+    );
   }
 
   /**
@@ -4712,8 +6407,12 @@ export class MirroringClient {
    *   A fully-qualified path representing organization_location_security_profile resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationSecurityProfileName(organizationLocationSecurityProfileName: string) {
-    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.match(organizationLocationSecurityProfileName).organization;
+  matchOrganizationFromOrganizationLocationSecurityProfileName(
+    organizationLocationSecurityProfileName: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.match(
+      organizationLocationSecurityProfileName,
+    ).organization;
   }
 
   /**
@@ -4723,8 +6422,12 @@ export class MirroringClient {
    *   A fully-qualified path representing organization_location_security_profile resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationSecurityProfileName(organizationLocationSecurityProfileName: string) {
-    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.match(organizationLocationSecurityProfileName).location;
+  matchLocationFromOrganizationLocationSecurityProfileName(
+    organizationLocationSecurityProfileName: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.match(
+      organizationLocationSecurityProfileName,
+    ).location;
   }
 
   /**
@@ -4734,8 +6437,12 @@ export class MirroringClient {
    *   A fully-qualified path representing organization_location_security_profile resource.
    * @returns {string} A string representing the security_profile.
    */
-  matchSecurityProfileFromOrganizationLocationSecurityProfileName(organizationLocationSecurityProfileName: string) {
-    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.match(organizationLocationSecurityProfileName).security_profile;
+  matchSecurityProfileFromOrganizationLocationSecurityProfileName(
+    organizationLocationSecurityProfileName: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.match(
+      organizationLocationSecurityProfileName,
+    ).security_profile;
   }
 
   /**
@@ -4746,12 +6453,18 @@ export class MirroringClient {
    * @param {string} security_profile_group
    * @returns {string} Resource name string.
    */
-  organizationLocationSecurityProfileGroupPath(organization:string,location:string,securityProfileGroup:string) {
-    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.render({
-      organization: organization,
-      location: location,
-      security_profile_group: securityProfileGroup,
-    });
+  organizationLocationSecurityProfileGroupPath(
+    organization: string,
+    location: string,
+    securityProfileGroup: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        security_profile_group: securityProfileGroup,
+      },
+    );
   }
 
   /**
@@ -4761,8 +6474,12 @@ export class MirroringClient {
    *   A fully-qualified path representing organization_location_security_profile_group resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationSecurityProfileGroupName(organizationLocationSecurityProfileGroupName: string) {
-    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match(organizationLocationSecurityProfileGroupName).organization;
+  matchOrganizationFromOrganizationLocationSecurityProfileGroupName(
+    organizationLocationSecurityProfileGroupName: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match(
+      organizationLocationSecurityProfileGroupName,
+    ).organization;
   }
 
   /**
@@ -4772,8 +6489,12 @@ export class MirroringClient {
    *   A fully-qualified path representing organization_location_security_profile_group resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationSecurityProfileGroupName(organizationLocationSecurityProfileGroupName: string) {
-    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match(organizationLocationSecurityProfileGroupName).location;
+  matchLocationFromOrganizationLocationSecurityProfileGroupName(
+    organizationLocationSecurityProfileGroupName: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match(
+      organizationLocationSecurityProfileGroupName,
+    ).location;
   }
 
   /**
@@ -4783,8 +6504,12 @@ export class MirroringClient {
    *   A fully-qualified path representing organization_location_security_profile_group resource.
    * @returns {string} A string representing the security_profile_group.
    */
-  matchSecurityProfileGroupFromOrganizationLocationSecurityProfileGroupName(organizationLocationSecurityProfileGroupName: string) {
-    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match(organizationLocationSecurityProfileGroupName).security_profile_group;
+  matchSecurityProfileGroupFromOrganizationLocationSecurityProfileGroupName(
+    organizationLocationSecurityProfileGroupName: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match(
+      organizationLocationSecurityProfileGroupName,
+    ).security_profile_group;
   }
 
   /**
@@ -4795,7 +6520,11 @@ export class MirroringClient {
    * @param {string} partner_sse_gateway
    * @returns {string} Resource name string.
    */
-  partnerSSEGatewayPath(project:string,location:string,partnerSseGateway:string) {
+  partnerSSEGatewayPath(
+    project: string,
+    location: string,
+    partnerSseGateway: string,
+  ) {
     return this.pathTemplates.partnerSSEGatewayPathTemplate.render({
       project: project,
       location: location,
@@ -4811,7 +6540,9 @@ export class MirroringClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromPartnerSSEGatewayName(partnerSSEGatewayName: string) {
-    return this.pathTemplates.partnerSSEGatewayPathTemplate.match(partnerSSEGatewayName).project;
+    return this.pathTemplates.partnerSSEGatewayPathTemplate.match(
+      partnerSSEGatewayName,
+    ).project;
   }
 
   /**
@@ -4822,7 +6553,9 @@ export class MirroringClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPartnerSSEGatewayName(partnerSSEGatewayName: string) {
-    return this.pathTemplates.partnerSSEGatewayPathTemplate.match(partnerSSEGatewayName).location;
+    return this.pathTemplates.partnerSSEGatewayPathTemplate.match(
+      partnerSSEGatewayName,
+    ).location;
   }
 
   /**
@@ -4832,8 +6565,12 @@ export class MirroringClient {
    *   A fully-qualified path representing PartnerSSEGateway resource.
    * @returns {string} A string representing the partner_sse_gateway.
    */
-  matchPartnerSseGatewayFromPartnerSSEGatewayName(partnerSSEGatewayName: string) {
-    return this.pathTemplates.partnerSSEGatewayPathTemplate.match(partnerSSEGatewayName).partner_sse_gateway;
+  matchPartnerSseGatewayFromPartnerSSEGatewayName(
+    partnerSSEGatewayName: string,
+  ) {
+    return this.pathTemplates.partnerSSEGatewayPathTemplate.match(
+      partnerSSEGatewayName,
+    ).partner_sse_gateway;
   }
 
   /**
@@ -4844,7 +6581,11 @@ export class MirroringClient {
    * @param {string} partner_sse_realm
    * @returns {string} Resource name string.
    */
-  partnerSSERealmPath(project:string,location:string,partnerSseRealm:string) {
+  partnerSSERealmPath(
+    project: string,
+    location: string,
+    partnerSseRealm: string,
+  ) {
     return this.pathTemplates.partnerSSERealmPathTemplate.render({
       project: project,
       location: location,
@@ -4860,7 +6601,9 @@ export class MirroringClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromPartnerSSERealmName(partnerSSERealmName: string) {
-    return this.pathTemplates.partnerSSERealmPathTemplate.match(partnerSSERealmName).project;
+    return this.pathTemplates.partnerSSERealmPathTemplate.match(
+      partnerSSERealmName,
+    ).project;
   }
 
   /**
@@ -4871,7 +6614,9 @@ export class MirroringClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPartnerSSERealmName(partnerSSERealmName: string) {
-    return this.pathTemplates.partnerSSERealmPathTemplate.match(partnerSSERealmName).location;
+    return this.pathTemplates.partnerSSERealmPathTemplate.match(
+      partnerSSERealmName,
+    ).location;
   }
 
   /**
@@ -4882,7 +6627,9 @@ export class MirroringClient {
    * @returns {string} A string representing the partner_sse_realm.
    */
   matchPartnerSseRealmFromPartnerSSERealmName(partnerSSERealmName: string) {
-    return this.pathTemplates.partnerSSERealmPathTemplate.match(partnerSSERealmName).partner_sse_realm;
+    return this.pathTemplates.partnerSSERealmPathTemplate.match(
+      partnerSSERealmName,
+    ).partner_sse_realm;
   }
 
   /**
@@ -4891,7 +6638,7 @@ export class MirroringClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -4916,12 +6663,18 @@ export class MirroringClient {
    * @param {string} firewall_endpoint
    * @returns {string} Resource name string.
    */
-  projectLocationFirewallEndpointsPath(project:string,location:string,firewallEndpoint:string) {
-    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.render({
-      project: project,
-      location: location,
-      firewall_endpoint: firewallEndpoint,
-    });
+  projectLocationFirewallEndpointsPath(
+    project: string,
+    location: string,
+    firewallEndpoint: string,
+  ) {
+    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        firewall_endpoint: firewallEndpoint,
+      },
+    );
   }
 
   /**
@@ -4931,8 +6684,12 @@ export class MirroringClient {
    *   A fully-qualified path representing project_location_firewallEndpoints resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationFirewallEndpointsName(projectLocationFirewallEndpointsName: string) {
-    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match(projectLocationFirewallEndpointsName).project;
+  matchProjectFromProjectLocationFirewallEndpointsName(
+    projectLocationFirewallEndpointsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match(
+      projectLocationFirewallEndpointsName,
+    ).project;
   }
 
   /**
@@ -4942,8 +6699,12 @@ export class MirroringClient {
    *   A fully-qualified path representing project_location_firewallEndpoints resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationFirewallEndpointsName(projectLocationFirewallEndpointsName: string) {
-    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match(projectLocationFirewallEndpointsName).location;
+  matchLocationFromProjectLocationFirewallEndpointsName(
+    projectLocationFirewallEndpointsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match(
+      projectLocationFirewallEndpointsName,
+    ).location;
   }
 
   /**
@@ -4953,8 +6714,12 @@ export class MirroringClient {
    *   A fully-qualified path representing project_location_firewallEndpoints resource.
    * @returns {string} A string representing the firewall_endpoint.
    */
-  matchFirewallEndpointFromProjectLocationFirewallEndpointsName(projectLocationFirewallEndpointsName: string) {
-    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match(projectLocationFirewallEndpointsName).firewall_endpoint;
+  matchFirewallEndpointFromProjectLocationFirewallEndpointsName(
+    projectLocationFirewallEndpointsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match(
+      projectLocationFirewallEndpointsName,
+    ).firewall_endpoint;
   }
 
   /**
@@ -4965,12 +6730,18 @@ export class MirroringClient {
    * @param {string} security_profile
    * @returns {string} Resource name string.
    */
-  projectLocationSecurityProfilePath(project:string,location:string,securityProfile:string) {
-    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.render({
-      project: project,
-      location: location,
-      security_profile: securityProfile,
-    });
+  projectLocationSecurityProfilePath(
+    project: string,
+    location: string,
+    securityProfile: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        security_profile: securityProfile,
+      },
+    );
   }
 
   /**
@@ -4980,8 +6751,12 @@ export class MirroringClient {
    *   A fully-qualified path representing project_location_security_profile resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationSecurityProfileName(projectLocationSecurityProfileName: string) {
-    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.match(projectLocationSecurityProfileName).project;
+  matchProjectFromProjectLocationSecurityProfileName(
+    projectLocationSecurityProfileName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.match(
+      projectLocationSecurityProfileName,
+    ).project;
   }
 
   /**
@@ -4991,8 +6766,12 @@ export class MirroringClient {
    *   A fully-qualified path representing project_location_security_profile resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationSecurityProfileName(projectLocationSecurityProfileName: string) {
-    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.match(projectLocationSecurityProfileName).location;
+  matchLocationFromProjectLocationSecurityProfileName(
+    projectLocationSecurityProfileName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.match(
+      projectLocationSecurityProfileName,
+    ).location;
   }
 
   /**
@@ -5002,8 +6781,12 @@ export class MirroringClient {
    *   A fully-qualified path representing project_location_security_profile resource.
    * @returns {string} A string representing the security_profile.
    */
-  matchSecurityProfileFromProjectLocationSecurityProfileName(projectLocationSecurityProfileName: string) {
-    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.match(projectLocationSecurityProfileName).security_profile;
+  matchSecurityProfileFromProjectLocationSecurityProfileName(
+    projectLocationSecurityProfileName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.match(
+      projectLocationSecurityProfileName,
+    ).security_profile;
   }
 
   /**
@@ -5014,12 +6797,18 @@ export class MirroringClient {
    * @param {string} security_profile_group
    * @returns {string} Resource name string.
    */
-  projectLocationSecurityProfileGroupPath(project:string,location:string,securityProfileGroup:string) {
-    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.render({
-      project: project,
-      location: location,
-      security_profile_group: securityProfileGroup,
-    });
+  projectLocationSecurityProfileGroupPath(
+    project: string,
+    location: string,
+    securityProfileGroup: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        security_profile_group: securityProfileGroup,
+      },
+    );
   }
 
   /**
@@ -5029,8 +6818,12 @@ export class MirroringClient {
    *   A fully-qualified path representing project_location_security_profile_group resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationSecurityProfileGroupName(projectLocationSecurityProfileGroupName: string) {
-    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match(projectLocationSecurityProfileGroupName).project;
+  matchProjectFromProjectLocationSecurityProfileGroupName(
+    projectLocationSecurityProfileGroupName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match(
+      projectLocationSecurityProfileGroupName,
+    ).project;
   }
 
   /**
@@ -5040,8 +6833,12 @@ export class MirroringClient {
    *   A fully-qualified path representing project_location_security_profile_group resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationSecurityProfileGroupName(projectLocationSecurityProfileGroupName: string) {
-    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match(projectLocationSecurityProfileGroupName).location;
+  matchLocationFromProjectLocationSecurityProfileGroupName(
+    projectLocationSecurityProfileGroupName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match(
+      projectLocationSecurityProfileGroupName,
+    ).location;
   }
 
   /**
@@ -5051,8 +6848,12 @@ export class MirroringClient {
    *   A fully-qualified path representing project_location_security_profile_group resource.
    * @returns {string} A string representing the security_profile_group.
    */
-  matchSecurityProfileGroupFromProjectLocationSecurityProfileGroupName(projectLocationSecurityProfileGroupName: string) {
-    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match(projectLocationSecurityProfileGroupName).security_profile_group;
+  matchSecurityProfileGroupFromProjectLocationSecurityProfileGroupName(
+    projectLocationSecurityProfileGroupName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match(
+      projectLocationSecurityProfileGroupName,
+    ).security_profile_group;
   }
 
   /**
@@ -5063,7 +6864,7 @@ export class MirroringClient {
    * @param {string} sac_attachment
    * @returns {string} Resource name string.
    */
-  sACAttachmentPath(project:string,location:string,sacAttachment:string) {
+  sACAttachmentPath(project: string, location: string, sacAttachment: string) {
     return this.pathTemplates.sACAttachmentPathTemplate.render({
       project: project,
       location: location,
@@ -5079,7 +6880,8 @@ export class MirroringClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromSACAttachmentName(sACAttachmentName: string) {
-    return this.pathTemplates.sACAttachmentPathTemplate.match(sACAttachmentName).project;
+    return this.pathTemplates.sACAttachmentPathTemplate.match(sACAttachmentName)
+      .project;
   }
 
   /**
@@ -5090,7 +6892,8 @@ export class MirroringClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromSACAttachmentName(sACAttachmentName: string) {
-    return this.pathTemplates.sACAttachmentPathTemplate.match(sACAttachmentName).location;
+    return this.pathTemplates.sACAttachmentPathTemplate.match(sACAttachmentName)
+      .location;
   }
 
   /**
@@ -5101,7 +6904,8 @@ export class MirroringClient {
    * @returns {string} A string representing the sac_attachment.
    */
   matchSacAttachmentFromSACAttachmentName(sACAttachmentName: string) {
-    return this.pathTemplates.sACAttachmentPathTemplate.match(sACAttachmentName).sac_attachment;
+    return this.pathTemplates.sACAttachmentPathTemplate.match(sACAttachmentName)
+      .sac_attachment;
   }
 
   /**
@@ -5112,7 +6916,7 @@ export class MirroringClient {
    * @param {string} sac_realm
    * @returns {string} Resource name string.
    */
-  sACRealmPath(project:string,location:string,sacRealm:string) {
+  sACRealmPath(project: string, location: string, sacRealm: string) {
     return this.pathTemplates.sACRealmPathTemplate.render({
       project: project,
       location: location,
@@ -5150,7 +6954,8 @@ export class MirroringClient {
    * @returns {string} A string representing the sac_realm.
    */
   matchSacRealmFromSACRealmName(sACRealmName: string) {
-    return this.pathTemplates.sACRealmPathTemplate.match(sACRealmName).sac_realm;
+    return this.pathTemplates.sACRealmPathTemplate.match(sACRealmName)
+      .sac_realm;
   }
 
   /**
@@ -5161,7 +6966,11 @@ export class MirroringClient {
    * @param {string} sse_gateway_reference
    * @returns {string} Resource name string.
    */
-  sSEGatewayReferencePath(project:string,location:string,sseGatewayReference:string) {
+  sSEGatewayReferencePath(
+    project: string,
+    location: string,
+    sseGatewayReference: string,
+  ) {
     return this.pathTemplates.sSEGatewayReferencePathTemplate.render({
       project: project,
       location: location,
@@ -5177,7 +6986,9 @@ export class MirroringClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromSSEGatewayReferenceName(sSEGatewayReferenceName: string) {
-    return this.pathTemplates.sSEGatewayReferencePathTemplate.match(sSEGatewayReferenceName).project;
+    return this.pathTemplates.sSEGatewayReferencePathTemplate.match(
+      sSEGatewayReferenceName,
+    ).project;
   }
 
   /**
@@ -5188,7 +6999,9 @@ export class MirroringClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromSSEGatewayReferenceName(sSEGatewayReferenceName: string) {
-    return this.pathTemplates.sSEGatewayReferencePathTemplate.match(sSEGatewayReferenceName).location;
+    return this.pathTemplates.sSEGatewayReferencePathTemplate.match(
+      sSEGatewayReferenceName,
+    ).location;
   }
 
   /**
@@ -5198,8 +7011,12 @@ export class MirroringClient {
    *   A fully-qualified path representing SSEGatewayReference resource.
    * @returns {string} A string representing the sse_gateway_reference.
    */
-  matchSseGatewayReferenceFromSSEGatewayReferenceName(sSEGatewayReferenceName: string) {
-    return this.pathTemplates.sSEGatewayReferencePathTemplate.match(sSEGatewayReferenceName).sse_gateway_reference;
+  matchSseGatewayReferenceFromSSEGatewayReferenceName(
+    sSEGatewayReferenceName: string,
+  ) {
+    return this.pathTemplates.sSEGatewayReferencePathTemplate.match(
+      sSEGatewayReferenceName,
+    ).sse_gateway_reference;
   }
 
   /**
@@ -5210,7 +7027,11 @@ export class MirroringClient {
    * @param {string} server_tls_policy
    * @returns {string} Resource name string.
    */
-  serverTlsPolicyPath(project:string,location:string,serverTlsPolicy:string) {
+  serverTlsPolicyPath(
+    project: string,
+    location: string,
+    serverTlsPolicy: string,
+  ) {
     return this.pathTemplates.serverTlsPolicyPathTemplate.render({
       project: project,
       location: location,
@@ -5226,7 +7047,9 @@ export class MirroringClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromServerTlsPolicyName(serverTlsPolicyName: string) {
-    return this.pathTemplates.serverTlsPolicyPathTemplate.match(serverTlsPolicyName).project;
+    return this.pathTemplates.serverTlsPolicyPathTemplate.match(
+      serverTlsPolicyName,
+    ).project;
   }
 
   /**
@@ -5237,7 +7060,9 @@ export class MirroringClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromServerTlsPolicyName(serverTlsPolicyName: string) {
-    return this.pathTemplates.serverTlsPolicyPathTemplate.match(serverTlsPolicyName).location;
+    return this.pathTemplates.serverTlsPolicyPathTemplate.match(
+      serverTlsPolicyName,
+    ).location;
   }
 
   /**
@@ -5248,7 +7073,9 @@ export class MirroringClient {
    * @returns {string} A string representing the server_tls_policy.
    */
   matchServerTlsPolicyFromServerTlsPolicyName(serverTlsPolicyName: string) {
-    return this.pathTemplates.serverTlsPolicyPathTemplate.match(serverTlsPolicyName).server_tls_policy;
+    return this.pathTemplates.serverTlsPolicyPathTemplate.match(
+      serverTlsPolicyName,
+    ).server_tls_policy;
   }
 
   /**
@@ -5259,7 +7086,11 @@ export class MirroringClient {
    * @param {string} tls_inspection_policy
    * @returns {string} Resource name string.
    */
-  tlsInspectionPolicyPath(project:string,location:string,tlsInspectionPolicy:string) {
+  tlsInspectionPolicyPath(
+    project: string,
+    location: string,
+    tlsInspectionPolicy: string,
+  ) {
     return this.pathTemplates.tlsInspectionPolicyPathTemplate.render({
       project: project,
       location: location,
@@ -5275,7 +7106,9 @@ export class MirroringClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTlsInspectionPolicyName(tlsInspectionPolicyName: string) {
-    return this.pathTemplates.tlsInspectionPolicyPathTemplate.match(tlsInspectionPolicyName).project;
+    return this.pathTemplates.tlsInspectionPolicyPathTemplate.match(
+      tlsInspectionPolicyName,
+    ).project;
   }
 
   /**
@@ -5286,7 +7119,9 @@ export class MirroringClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromTlsInspectionPolicyName(tlsInspectionPolicyName: string) {
-    return this.pathTemplates.tlsInspectionPolicyPathTemplate.match(tlsInspectionPolicyName).location;
+    return this.pathTemplates.tlsInspectionPolicyPathTemplate.match(
+      tlsInspectionPolicyName,
+    ).location;
   }
 
   /**
@@ -5296,8 +7131,12 @@ export class MirroringClient {
    *   A fully-qualified path representing TlsInspectionPolicy resource.
    * @returns {string} A string representing the tls_inspection_policy.
    */
-  matchTlsInspectionPolicyFromTlsInspectionPolicyName(tlsInspectionPolicyName: string) {
-    return this.pathTemplates.tlsInspectionPolicyPathTemplate.match(tlsInspectionPolicyName).tls_inspection_policy;
+  matchTlsInspectionPolicyFromTlsInspectionPolicyName(
+    tlsInspectionPolicyName: string,
+  ) {
+    return this.pathTemplates.tlsInspectionPolicyPathTemplate.match(
+      tlsInspectionPolicyName,
+    ).tls_inspection_policy;
   }
 
   /**
@@ -5308,7 +7147,7 @@ export class MirroringClient {
    * @param {string} url_list
    * @returns {string} Resource name string.
    */
-  urlListPath(project:string,location:string,urlList:string) {
+  urlListPath(project: string, location: string, urlList: string) {
     return this.pathTemplates.urlListPathTemplate.render({
       project: project,
       location: location,
@@ -5357,12 +7196,16 @@ export class MirroringClient {
    */
   close(): Promise<void> {
     if (this.mirroringStub && !this._terminated) {
-      return this.mirroringStub.then(stub => {
+      return this.mirroringStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch(err => {throw err});
-        this.locationsClient.close().catch(err => {throw err});
+        this.iamClient.close().catch((err) => {
+          throw err;
+        });
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
         void this.operationsClient.close();
       });
     }

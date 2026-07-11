@@ -1,11 +1,11 @@
 {
   "name": "@google-cloud/storage",
   "description": "Cloud Storage Client Library for Node.js",
-  "version": "7.20.0",
+  "version": "7.21.0",
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=18"
   },
   "repository": {
     "type": "git",
@@ -55,7 +55,6 @@
     "compile:esm": "tsc -p .",
     "compile": "npm run compile:cjs && npm run compile:esm",
     "conformance-test": "mocha --parallel build/cjs/conformance-test/ --require build/cjs/conformance-test/globalHooks.js",
-    "docs-test": "linkinator docs",
     "docs": "jsdoc -c .jsdoc.json",
     "fix": "gts fix",
     "lint": "gts check",
@@ -63,7 +62,6 @@
     "postcompile:cjs": "babel --plugins gapic-tools/build/src/replaceImportMetaUrl,gapic-tools/build/src/toggleESMFlagVariable build/cjs/src/util.js -o build/cjs/src/util.js && cp internal-tooling/helpers/package.cjs.json build/cjs/package.json",
     "precompile": "rm -rf build/",
     "preconformance-test": "npm run compile:cjs -- --sourceMap",
-    "predocs-test": "npm run docs",
     "predocs": "npm run compile:cjs -- --sourceMap",
     "prelint": "cd samples; npm link ../; npm install",
     "prepare": "npm run compile",
@@ -73,7 +71,7 @@
     "samples-test": "npm link && cd samples/ && npm link ../ && npm test && cd ../",
     "system-test:esm": "mocha build/esm/system-test --timeout 600000 --exit",
     "system-test": "mocha build/cjs/system-test --timeout 600000 --exit",
-    "test": "cross-env NODE_OPTIONS='--no-deprecation' c8 mocha build/cjs/test"
+    "test": "cross-env NODE_OPTIONS=\"--require ./scripts/preload-yargs.cjs --no-deprecation\" c8 mocha build/cjs/test"
   },
   "dependencies": {
     "@google-cloud/paginator": "^5.0.0",
@@ -89,8 +87,7 @@
     "mime": "^3.0.0",
     "p-limit": "^3.0.1",
     "retry-request": "^7.0.0",
-    "teeny-request": "^9.0.0",
-    "uuid": "^8.0.0"
+    "teeny-request": "^9.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.22.10",
@@ -109,8 +106,7 @@
     "@types/request": "^2.48.4",
     "@types/sinon": "^17.0.0",
     "@types/tmp": "0.2.6",
-    "@types/uuid": "^8.0.0",
-    "@types/yargs": "^17.0.10",
+    "@types/yargs": "^17.0.35",
     "c8": "^9.0.0",
     "form-data": "^4.0.4",
     "gapic-tools": "^0.4.0",
@@ -118,7 +114,6 @@
     "jsdoc": "^4.0.4",
     "jsdoc-fresh": "^5.0.0",
     "jsdoc-region-tag": "^4.0.0",
-    "linkinator": "^3.0.0",
     "mocha": "^9.2.2",
     "mockery": "^2.1.0",
     "nock": "~13.5.0",
@@ -130,7 +125,7 @@
     "path-to-regexp": "6.3.0",
     "tmp": "^0.2.0",
     "typescript": "^5.1.6",
-    "yargs": "^17.3.1",
+    "yargs": "^17.7.2",
     "cross-env": "^7.0.3"
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/storage"

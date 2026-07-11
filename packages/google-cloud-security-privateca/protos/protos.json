@@ -289,6 +289,13 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
+                            "encryptionSpec": {
+                              "type": "EncryptionSpec",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
                             "labels": {
                               "keyType": "string",
                               "type": "string",
@@ -353,6 +360,13 @@
                                 "backdateDuration": {
                                   "type": "google.protobuf.Duration",
                                   "id": 7,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "allowRequesterSpecifiedNotBeforeTime": {
+                                  "type": "bool",
+                                  "id": 8,
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
@@ -474,6 +488,14 @@
                                   }
                                 }
                               }
+                            }
+                          }
+                        },
+                        "EncryptionSpec": {
+                          "fields": {
+                            "cloudKmsKey": {
+                              "type": "string",
+                              "id": 1
                             }
                           }
                         },
@@ -697,6 +719,13 @@
                               "keyType": "string",
                               "type": "string",
                               "id": 14,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "requestedNotBeforeTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 15,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }

@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.8.2](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v5.8.1...dialogflow-cx-v5.8.2) (2026-06-01)
+
+
+### Bug Fixes
+
+* **deps:** Remove vulnerable dependency `uuid` ([#8120](https://github.com/googleapis/google-cloud-node/issues/8120)) ([3ec901e](https://github.com/googleapis/google-cloud-node/commit/3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a))
+
 ## [5.8.1](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v5.8.0...dialogflow-cx-v5.8.1) (2026-05-01)
 
 

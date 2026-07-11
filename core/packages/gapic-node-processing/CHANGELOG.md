@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.9](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.1.8...gapic-node-processing-v0.1.9) (2026-06-18)
+
+
+### Bug Fixes
+
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+
 ## [0.1.8](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.1.7...gapic-node-processing-v0.1.8) (2026-05-01)
 
 

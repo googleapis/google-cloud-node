@@ -5,6 +5,2852 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "3391fd27d1c15e051293207a07c6db00e760d370",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8672"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/projectify",
+      "id": "ef7418ba-36d6-4c30-a8ea-13c4434195a7",
+      "createTime": "2026-06-24T18:20:52.474Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "chore",
+          "sha": "bd61260a93db997e09c39958eb4e4f89916203c6",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "8824"
+          ],
+          "breakingChangeNote": "Drop support for Node.js versions < 18."
+        },
+        {
+          "type": "fix",
+          "sha": "be6bfb42b768fafb40ab0d7298367acbccefc6ae",
+          "message": "Re-enable tests",
+          "issues": [
+            "8828"
+          ],
+          "scope": "cloud-profiler"
+        },
+        {
+          "type": "fix",
+          "sha": "ea623da20f374cfa480fb9fdb7758afd0a993a8e",
+          "message": "Update dependency protobufjs to v7.5.5 [security]",
+          "issues": [
+            "8071"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "7.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/profiler",
+      "id": "73eab495-b7c3-40c5-896f-572b43fdd379",
+      "createTime": "2026-07-08T17:10:18.122Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3391fd27d1c15e051293207a07c6db00e760d370",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8672"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/precise-date",
+      "id": "ef93f9b7-739d-49a7-aa75-f1c04b9ab908",
+      "createTime": "2026-06-24T18:20:54.504Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a2415320b9c840f6ae27894451abb561a080ff82",
+          "message": "Consolidate prettierignore and prettierrc files: handwritten",
+          "issues": [
+            "8081"
+          ]
+        }
+      ],
+      "version": "7.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "gaxios",
+      "id": "6b65487d-c5a9-45df-adf7-524481537017",
+      "createTime": "2026-07-07T04:38:13.492Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3391fd27d1c15e051293207a07c6db00e760d370",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8672"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/promisify",
+      "id": "20912a56-2568-49fa-a6ba-180bdfa33d32",
+      "createTime": "2026-06-24T18:20:52.132Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a2415320b9c840f6ae27894451abb561a080ff82",
+          "message": "Consolidate prettierignore and prettierrc files: handwritten",
+          "issues": [
+            "8081"
+          ]
+        }
+      ],
+      "version": "0.16.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/reports",
+      "id": "2db81b06-da11-4258-9851-75e4731580bc",
+      "createTime": "2026-07-07T04:29:41.741Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a2415320b9c840f6ae27894451abb561a080ff82",
+          "message": "Consolidate prettierignore and prettierrc files: handwritten",
+          "issues": [
+            "8081"
+          ]
+        }
+      ],
+      "version": "0.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis-cluster",
+      "id": "2b5ed336-af93-40d3-afff-18a9ba82a111",
+      "createTime": "2026-07-07T04:29:41.717Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a2415320b9c840f6ae27894451abb561a080ff82",
+          "message": "Consolidate prettierignore and prettierrc files: handwritten",
+          "issues": [
+            "8081"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/memorystore",
+      "id": "f6f204a5-eab8-44ad-9ae6-432c873b4caa",
+      "createTime": "2026-07-07T04:29:41.694Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e132e80349d8531c1cb9193255ad55ace1db5329",
+          "message": "Kokoro pipeline for system test",
+          "issues": [
+            "8751"
+          ],
+          "scope": "spanner"
+        }
+      ],
+      "version": "8.8.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/spanner",
+      "id": "91efec41-6f4d-46a2-85e4-30da0709e6a2",
+      "createTime": "2026-07-06T06:28:40.860Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d9399f0cf44b79e2b38ce429b17709ee9845544e",
+          "message": "Migrate google-cloud-capacityplanner to librarian v0.22.0",
+          "issues": [
+            "8773"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/capacityplanner",
+      "id": "d3f5584e-4924-4d9c-9236-67a0ec3f40a3",
+      "createTime": "2026-06-29T17:40:53.096Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07b13a17e6533184c708dc388c3fa3dc6581f7a9",
+          "message": "Prevent comma corruption when draining stream error responses",
+          "issues": [
+            "8779"
+          ],
+          "scope": "gaxios"
+        },
+        {
+          "type": "fix",
+          "sha": "368f18ecc361310e7bfb323ba0e7836186ea08d1",
+          "message": "Correct repository URLs in core package.json files",
+          "issues": [
+            "8722"
+          ]
+        }
+      ],
+      "version": "7.1.6",
+      "language": "JAVASCRIPT",
+      "artifactName": "gaxios",
+      "id": "35cfd7ef-33af-4254-aa72-f4a34ddf8f2c",
+      "createTime": "2026-06-30T19:41:56.401Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d9399f0cf44b79e2b38ce429b17709ee9845544e",
+          "message": "Migrate google-cloud-capacityplanner to librarian v0.22.0",
+          "issues": [
+            "8773"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/capacityplanner",
+      "id": "d3f5584e-4924-4d9c-9236-67a0ec3f40a3",
+      "createTime": "2026-06-29T17:40:53.096Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "368f18ecc361310e7bfb323ba0e7836186ea08d1",
+          "message": "Correct repository URLs in core package.json files",
+          "issues": [
+            "8722"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "aae55b30b22c27d004d2eaa0fc25b61cbd742832",
+          "message": "Filter out empty services from api.services",
+          "issues": [
+            "8686"
+          ],
+          "scope": "generator"
+        }
+      ],
+      "version": "4.12.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gapic-generator",
+      "id": "e01c0552-8f1b-4b06-a2ab-086b141dbec9",
+      "createTime": "2026-06-26T14:32:48.723Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "368f18ecc361310e7bfb323ba0e7836186ea08d1",
+          "message": "Correct repository URLs in core package.json files",
+          "issues": [
+            "8722"
+          ]
+        }
+      ],
+      "version": "5.0.4",
+      "language": "JAVASCRIPT",
+      "artifactName": "jsdoc-fresh",
+      "id": "2f8f9920-3169-4787-a275-17024fa3abc6",
+      "createTime": "2026-06-25T19:00:36.034Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa",
+          "message": "Update sources and regenerate",
+          "issues": [
+            "8714"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "b17c6531144b6f52259342bde6570e5479f8be50",
+          "message": "Onboard a new library",
+          "issues": [
+            "8673"
+          ],
+          "scope": "google/cloud/agentregistry/v1"
+        },
+        {
+          "type": "fix",
+          "sha": "c1a03fe604662091be283055c7d34052c64d6334",
+          "message": "Change the copyright year for files in the packages folder",
+          "issues": [
+            "8109"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/agentregistry",
+      "id": "e730d357-a6b1-4d4e-bd9b-f0c66e2bac15",
+      "createTime": "2026-06-25T13:39:13.639Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "00c8b21b5f76f1b60d6da5100bbbe487bbaff2be",
+          "message": "Unblock release by upgrading @types/sinon for mapmanagement package",
+          "issues": [
+            "8674"
+          ]
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/mapmanagement",
+      "id": "408f0c55-180b-4260-a309-31e3e9c78a4a",
+      "createTime": "2026-06-25T13:39:13.613Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa",
+          "message": "Update sources and regenerate",
+          "issues": [
+            "8714"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/ces",
+      "id": "bbdafb0d-53e3-4236-b18f-4fb06dccef38",
+      "createTime": "2026-06-25T13:39:13.576Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ce4d8493844e1a95a2b1cc952674dcdbee1bc566",
+          "message": "Regenerated google-monitoring-dashboard",
+          "issues": [
+            "8643"
+          ]
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/monitoring-dashboards",
+      "id": "3eaf0bd8-8230-42a7-87f2-a9dc9985babf",
+      "createTime": "2026-06-25T13:39:13.546Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa",
+          "message": "Update sources and regenerate",
+          "issues": [
+            "8714"
+          ]
+        }
+      ],
+      "version": "5.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudbuild",
+      "id": "99eaa370-ea7e-4ef8-9df6-46469f23020b",
+      "createTime": "2026-06-25T13:39:13.515Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa",
+          "message": "Update sources and regenerate",
+          "issues": [
+            "8714"
+          ]
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vectorsearch",
+      "id": "7e5356a1-1b8a-4e0d-84eb-d7a5207c4ad7",
+      "createTime": "2026-06-25T13:39:13.478Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "44360026d32a0461beb10de497803b658c96c668",
+          "message": "Migrate google-cloud-speech to librarian (keep helpers)",
+          "issues": [
+            "8648"
+          ]
+        }
+      ],
+      "version": "7.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/speech",
+      "id": "aa9156f4-a8f1-4cc3-97be-8db057d3a76e",
+      "createTime": "2026-06-25T13:39:13.430Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa",
+          "message": "Update sources and regenerate",
+          "issues": [
+            "8714"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "3391fd27d1c15e051293207a07c6db00e760d370",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8672"
+          ]
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/oracledatabase",
+      "id": "12efaa21-5536-4fa4-8abe-c75d3ffc25ff",
+      "createTime": "2026-06-25T13:39:13.392Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa",
+          "message": "Update sources and regenerate",
+          "issues": [
+            "8714"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "3391fd27d1c15e051293207a07c6db00e760d370",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8672"
+          ]
+        }
+      ],
+      "version": "0.13.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/networkservices",
+      "id": "3426dd4c-5612-4826-af4d-0e8b4594ae99",
+      "createTime": "2026-06-25T13:39:13.365Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa",
+          "message": "Update sources and regenerate",
+          "issues": [
+            "8714"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "3391fd27d1c15e051293207a07c6db00e760d370",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8672"
+          ]
+        }
+      ],
+      "version": "5.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-management",
+      "id": "3c516a00-996a-4d02-9e31-d97d4023a306",
+      "createTime": "2026-06-25T13:39:13.334Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5a5a0c1ac9500f885a2f4e94175f1776d501fe25",
+          "message": "Regenerate google-cloud-monitoring",
+          "issues": [
+            "8640"
+          ]
+        }
+      ],
+      "version": "5.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/monitoring",
+      "id": "12395709-9586-4505-8538-02f7cce6e726",
+      "createTime": "2026-06-25T13:39:13.304Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3391fd27d1c15e051293207a07c6db00e760d370",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8672"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/modelarmor",
+      "id": "1ebfa08b-bf65-426b-b910-0ea509523822",
+      "createTime": "2026-06-25T13:39:13.278Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3391fd27d1c15e051293207a07c6db00e760d370",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8672"
+          ]
+        }
+      ],
+      "version": "2.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "6278b566-0ee2-408d-8f04-3061fc8a5caa",
+      "createTime": "2026-06-25T13:39:13.254Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa",
+          "message": "Update sources and regenerate",
+          "issues": [
+            "8714"
+          ]
+        }
+      ],
+      "version": "7.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "d84fca65-bf22-443f-b340-7bc0cec9a210",
+      "createTime": "2026-06-25T13:39:13.227Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa",
+          "message": "Update sources and regenerate",
+          "issues": [
+            "8714"
+          ]
+        }
+      ],
+      "version": "6.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc",
+      "id": "13d68bef-c1b4-44dd-9e6a-0a45feb8112a",
+      "createTime": "2026-06-25T13:39:13.202Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa",
+          "message": "Update sources and regenerate",
+          "issues": [
+            "8714"
+          ]
+        }
+      ],
+      "version": "2.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataform",
+      "id": "d53195d8-c487-4036-8d3d-2b4ec692b181",
+      "createTime": "2026-06-25T13:39:13.177Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3391fd27d1c15e051293207a07c6db00e760d370",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8672"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/confidentialcomputing",
+      "id": "71662095-91fb-4b5c-bd3f-08615717da8a",
+      "createTime": "2026-06-25T13:39:13.146Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa",
+          "message": "Update sources and regenerate",
+          "issues": [
+            "8714"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "3391fd27d1c15e051293207a07c6db00e760d370",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8672"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/chronicle",
+      "id": "58ea0fff-b377-4920-bc69-b3e81e2978e6",
+      "createTime": "2026-06-25T13:39:13.121Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3391fd27d1c15e051293207a07c6db00e760d370",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8672"
+          ]
+        }
+      ],
+      "version": "2.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/alloydb",
+      "id": "d4d39001-923b-4718-bba9-77e41a363f06",
+      "createTime": "2026-06-25T13:39:13.090Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa",
+          "message": "Update sources and regenerate",
+          "issues": [
+            "8714"
+          ]
+        }
+      ],
+      "version": "0.25.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "ea0e607a-d8aa-4637-8e12-d54d021acfd2",
+      "createTime": "2026-06-25T13:39:13.062Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa",
+          "message": "Update sources and regenerate",
+          "issues": [
+            "8714"
+          ]
+        }
+      ],
+      "version": "9.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/admin",
+      "id": "3e4badf2-68df-4c08-aba2-f6d0856d841b",
+      "createTime": "2026-06-25T13:39:13.036Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3391fd27d1c15e051293207a07c6db00e760d370",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8672"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/datamanager",
+      "id": "9d11a7e7-9865-4e27-b485-8c00ef86dfb0",
+      "createTime": "2026-06-25T13:39:13.011Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "76e6d3b6dea6032547780155c045e41552e27f40",
+          "message": "Regional access boundaries main merge",
+          "issues": [
+            "8665"
+          ],
+          "scope": "auth"
+        },
+        {
+          "type": "fix",
+          "sha": "368f18ecc361310e7bfb323ba0e7836186ea08d1",
+          "message": "Correct repository URLs in core package.json files",
+          "issues": [
+            "8722"
+          ]
+        }
+      ],
+      "version": "10.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-auth-library",
+      "id": "9bf256fa-a10d-42ce-94cf-dd824ab8d864",
+      "createTime": "2026-06-24T17:44:31.336Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "perf",
+          "sha": "6ab8de0035e901d5781523a472b441880b3605ac",
+          "message": "Optimize query result decoding",
+          "issues": [
+            "8452"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "894cd8d4728a4aa74dc9df5ce4960b24a24c3bec",
+          "message": "Precompute common headers",
+          "issues": [
+            "8451"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "fix",
+          "sha": "2a7c79feb906e5a8c7fa5520e26e59607dcffac1",
+          "message": "Avoid overriding host context manager and isolate session creation context",
+          "issues": [
+            "8441"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "feat",
+          "sha": "28b6350209bfb60125e0575331b2aa297500eb75",
+          "message": "Optimize replaceProjectIdToken from projectify",
+          "issues": [
+            "8412"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "fix",
+          "sha": "f9e1102daa40a155d3eafeed31b63625f91c6d6c",
+          "message": "Isolate OpenTelemetry background timers in ROOT_CONTEXT to prevent context and memory leaks",
+          "issues": [
+            "8399"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        },
+        {
+          "type": "fix",
+          "sha": "600ccca895ff8429fed55c1d14523b2533080818",
+          "message": "Resolve prelint, eslint, and prettier CI build failures",
+          "issues": [
+            "8359"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "feat",
+          "sha": "a59dde9b4827e7c601cd5f18a1cf528e9bae1847",
+          "message": "Optimize RequestId propagation and minimize OpenTelemetry active tracing overhead",
+          "issues": [
+            "8329"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "feat",
+          "sha": "f1d31f94690486f4d443400fa4018a32b8bea04e",
+          "message": "Add cache updates API",
+          "issues": [
+            "8307"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "fix",
+          "sha": "f81f0a63fde72a238dcb987be90f0f93e0757f0e",
+          "message": "Specify explicit destinations in spanner owlbot.py",
+          "issues": [
+            "8304"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "4715de939397c0a08926076bb57c563dab240673",
+          "message": "Add cache updates API",
+          "issues": [
+            "8124"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "feat",
+          "sha": "4715de939397c0a08926076bb57c563dab240673",
+          "message": "`isolation_level` and `read_lock_mode` are added to message `.google.spanner.v1.CommitResponse`",
+          "issues": [],
+          "scope": "spanner"
+        }
+      ],
+      "version": "8.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/spanner",
+      "id": "95c9e714-badc-44e9-930e-3a67aaf8e392",
+      "createTime": "2026-06-24T06:53:36.034Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "4e4badf1a5c6fde28fa099fb184b02cf794d8dfd",
+          "message": "Strip trailing slashes from automatic GDCH audience",
+          "issues": [
+            "8692"
+          ]
+        }
+      ],
+      "version": "10.8.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-auth-library",
+      "id": "1234fa56-56ae-4a3f-9f4c-3ede08d18b0e",
+      "createTime": "2026-06-23T14:18:08.208Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "75f148ca83618193c884e139ff8ed76e28854d2d",
+          "message": "Port GDCH credentials support to Node.js Auth SDK",
+          "issues": [
+            "8301"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "c1a03fe604662091be283055c7d34052c64d6334",
+          "message": "Change the copyright year for files in the packages folder",
+          "issues": [
+            "8109"
+          ]
+        }
+      ],
+      "version": "10.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-auth-library",
+      "id": "6a306654-ec88-4349-9e08-6183c563dae9",
+      "createTime": "2026-06-18T00:26:09.772Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c1a03fe604662091be283055c7d34052c64d6334",
+          "message": "Change the copyright year for files in the packages folder",
+          "issues": [
+            "8109"
+          ]
+        }
+      ],
+      "version": "0.1.9",
+      "language": "JAVASCRIPT",
+      "artifactName": "gapic-node-processing",
+      "id": "68a02aaa-17ed-404e-b452-e70bda09de60",
+      "createTime": "2026-06-18T00:26:09.228Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "6.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/paginator",
+      "id": "c63f3e55-1fb5-48c1-9bf9-3519c570fa7f",
+      "createTime": "2026-06-16T00:07:06.206Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "6f9710c504c5272dfb59a77c7da98235ed9cf3ff",
+          "message": "Add initial files for google.maps.mapmanagement.v2beta",
+          "issues": [
+            "8066"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "c1a03fe604662091be283055c7d34052c64d6334",
+          "message": "Change the copyright year for files in the packages folder",
+          "issues": [
+            "8109"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/mapmanagement",
+      "id": "cb9f4bcf-16eb-4f6b-8c46-198dc9c2fb05",
+      "createTime": "2026-06-16T00:01:49.870Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "602338ba5a448a7fe8b5a8c60dcb68adad39e20e",
+          "message": "Remove abandoned deps",
+          "issues": [],
+          "scope": "php"
+        }
+      ],
+      "version": "0.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/ces",
+      "id": "8669bf15-81dc-4fa6-a915-0768cc184a2e",
+      "createTime": "2026-06-16T00:01:49.830Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4b5aff4b65b3729f3742d25ba0674bad0943d456",
+          "message": "Regenerated google-cloud-monitoring",
+          "issues": [
+            "8618"
+          ]
+        }
+      ],
+      "version": "6.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/grafeas",
+      "id": "f185a70a-4f0a-4fdc-8d99-1698ca275443",
+      "createTime": "2026-06-16T00:01:49.802Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "48cfd703e8632bc2b219a298a98301de23dc3ea9",
+          "message": "Migrate google-devtools-containeranalysis to librarian",
+          "issues": [
+            "8534"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "9f7d7b9132694b89908243d7c284c0a6e121826d",
+          "message": "Update librarian.js for containeranalysis to fix postproccessing issue",
+          "issues": [
+            "8489"
+          ]
+        }
+      ],
+      "version": "6.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/containeranalysis",
+      "id": "1f0ec86f-f81c-4b90-b5ed-48cc542b1eb6",
+      "createTime": "2026-06-16T00:01:49.782Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "127ce8d7a8fb8e3b56a25c0b3b3122c20aee81d5",
+          "message": "Migrate google-cloud-workstations to librarian",
+          "issues": [
+            "8480"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workstations",
+      "id": "88107424-7dae-4854-bb80-a7849db9e5c1",
+      "createTime": "2026-06-16T00:01:49.752Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8d87b39babf85a341506a1f4918a18a835887990",
+          "message": "Regenerated google-cloud-talent",
+          "issues": [
+            "8616"
+          ]
+        }
+      ],
+      "version": "7.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/talent",
+      "id": "87891f49-3155-4e7c-9114-ae1f560d0843",
+      "createTime": "2026-06-16T00:01:49.723Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f629251e27e51aa06003b4846a497d5a7c411cc2",
+          "message": "Local OwlBot generation batch 4",
+          "issues": [
+            "8615"
+          ]
+        }
+      ],
+      "version": "2.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/support",
+      "id": "1392367d-209a-4e72-97da-060051ea3928",
+      "createTime": "2026-06-16T00:01:49.689Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f629251e27e51aa06003b4846a497d5a7c411cc2",
+          "message": "Local OwlBot generation batch 4",
+          "issues": [
+            "8615"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storageinsights",
+      "id": "993f9cd6-84e3-4c43-bc9b-3fac0f8d1ea5",
+      "createTime": "2026-06-16T00:01:49.662Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f629251e27e51aa06003b4846a497d5a7c411cc2",
+          "message": "Local OwlBot generation batch 4",
+          "issues": [
+            "8615"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storagebatchoperations",
+      "id": "83dd25a8-e991-41f6-be96-4063b2ae9dea",
+      "createTime": "2026-06-16T00:01:49.597Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f629251e27e51aa06003b4846a497d5a7c411cc2",
+          "message": "Local OwlBot generation batch 4",
+          "issues": [
+            "8615"
+          ]
+        }
+      ],
+      "version": "7.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/speech",
+      "id": "d67acc91-ed11-4980-9ef1-557e1937a1ff",
+      "createTime": "2026-06-16T00:01:49.565Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "fae15ecca725f8e978341156e2c99c623ce74fcc",
+          "message": "Local OwlBot generation batch 3",
+          "issues": [
+            "8614"
+          ]
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/shell",
+      "id": "01f38cf6-b443-4bd8-8f4d-a42784e039b0",
+      "createTime": "2026-06-16T00:01:49.547Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "fae15ecca725f8e978341156e2c99c623ce74fcc",
+          "message": "Local OwlBot generation batch 3",
+          "issues": [
+            "8614"
+          ]
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/servicehealth",
+      "id": "6d4ddb9d-3815-4a48-938e-6d7df77b9dd9",
+      "createTime": "2026-06-16T00:01:49.528Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "fae15ecca725f8e978341156e2c99c623ce74fcc",
+          "message": "Local OwlBot generation batch 3",
+          "issues": [
+            "8614"
+          ]
+        }
+      ],
+      "version": "6.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-directory",
+      "id": "ac611c85-8c81-4311-a86b-ae2c6b71260c",
+      "createTime": "2026-06-16T00:01:49.505Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "fae15ecca725f8e978341156e2c99c623ce74fcc",
+          "message": "Local OwlBot generation batch 3",
+          "issues": [
+            "8614"
+          ]
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/securitycentermanagement",
+      "id": "16a07239-12da-4b27-a11b-8b086b29a779",
+      "createTime": "2026-06-16T00:01:49.483Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "fae15ecca725f8e978341156e2c99c623ce74fcc",
+          "message": "Local OwlBot generation batch 3",
+          "issues": [
+            "8614"
+          ]
+        }
+      ],
+      "version": "9.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-center",
+      "id": "8899dd96-d4e4-40c0-8c61-fb83c777f57d",
+      "createTime": "2026-06-16T00:01:49.463Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "243fb1a66876934bd68ca96e420937ae8adeb77d",
+          "message": "Local OwlBot generation batch 2",
+          "issues": [
+            "8613"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/publicca",
+      "id": "bf8c0aba-ad77-43b5-aca5-8392b1c241d4",
+      "createTime": "2026-06-16T00:01:49.435Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "243fb1a66876934bd68ca96e420937ae8adeb77d",
+          "message": "Local OwlBot generation batch 2",
+          "issues": [
+            "8613"
+          ]
+        }
+      ],
+      "version": "7.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-private-ca",
+      "id": "d28f104e-fb9d-4ebc-8041-716c24b18093",
+      "createTime": "2026-06-16T00:01:49.398Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "243fb1a66876934bd68ca96e420937ae8adeb77d",
+          "message": "Local OwlBot generation batch 2",
+          "issues": [
+            "8613"
+          ]
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/securesourcemanager",
+      "id": "7c3ee866-136e-41f7-8c2c-5097838de754",
+      "createTime": "2026-06-16T00:01:49.379Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "243fb1a66876934bd68ca96e420937ae8adeb77d",
+          "message": "Local OwlBot generation batch 2",
+          "issues": [
+            "8613"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "13d03c1f0f07f92770d44490050ab65498b4a8ff",
+          "message": "Improve librarian.js script an re-add missing functions",
+          "issues": [
+            "8424"
+          ],
+          "scope": "google-cloud-secretmanager"
+        }
+      ],
+      "version": "6.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/secret-manager",
+      "id": "6d46a70b-fef5-429c-9c9b-ae4e7b8b62d4",
+      "createTime": "2026-06-16T00:01:49.356Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "243fb1a66876934bd68ca96e420937ae8adeb77d",
+          "message": "Local OwlBot generation batch 2",
+          "issues": [
+            "8613"
+          ]
+        }
+      ],
+      "version": "5.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/scheduler",
+      "id": "628d4344-f972-4646-b716-11de21dfc83a",
+      "createTime": "2026-06-16T00:01:49.336Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b4d5da72a41c4d961eaeee7b7633c7885ecb9166",
+          "message": "Local OwlBot generation batch 1",
+          "issues": [
+            "8612"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/run",
+      "id": "2d48bde2-7d4f-40c2-94dd-40c7175c67f9",
+      "createTime": "2026-06-16T00:01:49.317Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b4d5da72a41c4d961eaeee7b7633c7885ecb9166",
+          "message": "Local OwlBot generation batch 1",
+          "issues": [
+            "8612"
+          ]
+        }
+      ],
+      "version": "4.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/retail",
+      "id": "e4c30900-ce61-44cd-8b6e-d6bcd3b93b0b",
+      "createTime": "2026-06-16T00:01:49.289Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b4d5da72a41c4d961eaeee7b7633c7885ecb9166",
+          "message": "Local OwlBot generation batch 1",
+          "issues": [
+            "8612"
+          ]
+        }
+      ],
+      "version": "6.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/resource-manager",
+      "id": "71926705-f9cd-4188-955f-520361e6a9f6",
+      "createTime": "2026-06-16T00:01:49.271Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b4d5da72a41c4d961eaeee7b7633c7885ecb9166",
+          "message": "Local OwlBot generation batch 1",
+          "issues": [
+            "8612"
+          ]
+        }
+      ],
+      "version": "0.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis-cluster",
+      "id": "a5eea79e-66c3-4968-947e-8290a5db5111",
+      "createTime": "2026-06-16T00:01:49.252Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b4d5da72a41c4d961eaeee7b7633c7885ecb9166",
+          "message": "Local OwlBot generation batch 1",
+          "issues": [
+            "8612"
+          ]
+        }
+      ],
+      "version": "5.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis",
+      "id": "e75a17b5-cb71-43de-96c8-ea9d83726950",
+      "createTime": "2026-06-16T00:01:49.219Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7e6c7bead35a43c675c8875ff1fd2979badeb6f7",
+          "message": "[recommender] Support utilization insights and cloud hub",
+          "issues": [
+            "8375"
+          ]
+        }
+      ],
+      "version": "7.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recommender",
+      "id": "c4c9cee3-2248-40aa-81ab-a6189074e5db",
+      "createTime": "2026-06-16T00:01:49.195Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8882faa7faecb3afab2f3a658d33bcc125b48885",
+          "message": "Update google-cloud-locationfinder API",
+          "issues": [
+            "8583"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/locationfinder",
+      "id": "529cf5bc-ee80-44d0-944a-7c7b5a427130",
+      "createTime": "2026-06-16T00:01:49.176Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3b7367a24115ccf43bd46646f257cee6e787c07c",
+          "message": "Regenerated google-cloud-dataproc",
+          "issues": [
+            "8604"
+          ]
+        }
+      ],
+      "version": "6.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc",
+      "id": "d841ba9b-da77-4ae1-8ce9-66a892f98ba8",
+      "createTime": "2026-06-16T00:01:49.153Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e314fa8c1aada689298f0ba84619f6918d17cb05",
+          "message": "Migrate google-cloud-apigeeconnect to librarian",
+          "issues": [
+            "8493"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apigee-connect",
+      "id": "6cca5280-30f6-4bc0-9b51-bfa1213ac08f",
+      "createTime": "2026-06-16T00:01:49.124Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "29e4147e202ac786d7a943e0156be4160bba459f",
+          "message": "Migrate google-cloud-apigateway to librarian",
+          "issues": [
+            "8492"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/api-gateway",
+      "id": "670900cf-52fc-420e-ab4a-98aeebf35a1c",
+      "createTime": "2026-06-16T00:01:49.089Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2a7f82336695397220cae1ee249f8ff5e1871b60",
+          "message": "Migrate google-cloud-alloydb to librarian",
+          "issues": [
+            "8491"
+          ]
+        }
+      ],
+      "version": "2.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/alloydb",
+      "id": "a3285d82-068f-4747-afea-52df5b8bb6ff",
+      "createTime": "2026-06-16T00:01:49.067Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f5b12cf10d9974c87e651e1182a5804030af8cdc",
+          "message": "[datamanager] add encrypted_user_id.proto and the EncryptedUserId resource",
+          "issues": [
+            "8378"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/datamanager",
+      "id": "e51e396d-ddb9-4531-9f9e-4822535bbf23",
+      "createTime": "2026-06-16T00:01:48.990Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ea623da20f374cfa480fb9fdb7758afd0a993a8e",
+          "message": "Update dependency protobufjs to v7.5.5 [security]",
+          "issues": [
+            "8071"
+          ],
+          "scope": "deps"
+        },
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "5.1.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-storage",
+      "id": "74883ea7-b13f-4282-9b14-46d047d4e432",
+      "createTime": "2026-06-16T00:07:06.414Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "11.2.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/logging",
+      "id": "25bab115-ea4f-4ff2-a7e0-5aa0384c1b95",
+      "createTime": "2026-06-16T00:07:06.794Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d56eb080b89bf58bd8235f4843f3801ecd1ae8be",
+          "message": "Add space to readme",
+          "issues": [
+            "8448"
+          ],
+          "scope": "doc"
+        },
+        {
+          "type": "feat",
+          "sha": "5c16c6218730d4835fae3c2c6abe78f21d856bcb",
+          "message": "Consolidate package manager to pnpm on gapic-generator-typescript",
+          "issues": [
+            "8365"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "1c44d96461b5e8729352001ec9027c20e074470b",
+          "message": "Disable snippet metadata generation",
+          "issues": [
+            "8403"
+          ],
+          "scope": "gapic-generator-typescript"
+        },
+        {
+          "type": "feat",
+          "sha": "b053d0edfa1ade74ce069279af86f058c77a589b",
+          "message": "Clean up per-package eslintrc configurations",
+          "issues": []
+        }
+      ],
+      "version": "4.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gapic-generator",
+      "id": "8402656a-1584-47c9-9c2b-f058dcb9a316",
+      "createTime": "2026-06-08T17:51:13.237Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        },
+        {
+          "type": "feat",
+          "sha": "86086a62cb6b583af71ef1ba6d42abe894b66323",
+          "message": "Enable CRC32C validation by default in transfer manager",
+          "issues": [
+            "8350"
+          ],
+          "scope": "storage"
+        }
+      ],
+      "version": "7.21.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage",
+      "id": "537ef063-0980-45b9-955b-8f732ce8b12a",
+      "createTime": "2026-06-03T21:14:03.792Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "75f148ca83618193c884e139ff8ed76e28854d2d",
+          "message": "Port GDCH credentials support to Node.js Auth SDK",
+          "issues": [
+            "8301"
+          ]
+        }
+      ],
+      "version": "10.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-auth-library",
+      "id": "c0798cea-e5bb-4f98-b15a-da5098ced3c0",
+      "createTime": "2026-06-03T21:14:03.065Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d25b276be2d154b68d0e6bce62244c15a5103f7a",
+          "message": "[databasecenter] add a AggregateQueryStats  API",
+          "issues": [
+            "8315"
+          ]
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/databasecenter",
+      "id": "a9734e61-1c4c-4d09-9c56-df7f23edf4ee",
+      "createTime": "2026-06-01T19:22:56.778Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8f540c744695c8c5133260130ab967c991daa317",
+          "message": "[health] introduce MedicalDeviceInfo message for Software as Medical Device (SaMD) metadata tracking",
+          "issues": [
+            "8328"
+          ]
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/health",
+      "id": "143a372b-0f84-48f6-837a-e882f3a9b1a7",
+      "createTime": "2026-06-01T19:22:56.738Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "4.2.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage-transfer",
+      "id": "3e140b1c-ac63-4e63-a141-01cac4087efe",
+      "createTime": "2026-06-01T19:22:56.703Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "05e3b32975b0d2123c91553d5be6afc37af3c733",
+          "message": "[control] add support for GCS Storage Control Intelligence Finding APIs",
+          "issues": [
+            "8368"
+          ]
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage-control",
+      "id": "e6ec0ead-c041-401a-b468-d0453318c794",
+      "createTime": "2026-06-01T19:22:56.665Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "56fc6d77a42f2f2a49ac6cc6fde7758d5ab10a02",
+          "message": "[dlp] Supporting Conversation Content Type",
+          "issues": [
+            "8369"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "6.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dlp",
+      "id": "bcd1e511-170e-4d63-b4e1-abd8e2a0a557",
+      "createTime": "2026-06-01T19:22:56.622Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cbc359cb7468e5338c67762c52ebb1d9c3910a22",
+          "message": "[places] add transit_station data to Places API (New)",
+          "issues": [
+            "8363"
+          ]
+        }
+      ],
+      "version": "2.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/places",
+      "id": "a0414fcf-9e45-4f4a-af04-8111fc23604d",
+      "createTime": "2026-06-01T19:22:56.574Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "6.7.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/containeranalysis",
+      "id": "fdc72da1-1c27-49c3-892f-1de50202fa7f",
+      "createTime": "2026-06-01T19:22:56.528Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7f561350167d26dfa718ac70d5c23d7abe825116",
+          "message": "[container] add custom node image configuration",
+          "issues": [
+            "8370"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "6.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "5e86d7b6-41cf-4fb6-b45b-ae1955cd05a6",
+      "createTime": "2026-06-01T19:22:56.482Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "4.3.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vmmigration",
+      "id": "8da7b3a7-136e-48e7-84c5-bcf1664fc690",
+      "createTime": "2026-06-01T19:22:56.442Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "5.3.7",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vision",
+      "id": "5f3837c5-3d65-49a1-92e8-2bf8c71c9fba",
+      "createTime": "2026-06-01T19:22:56.396Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "4.4.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-transcoder",
+      "id": "8e4ce7bb-4a61-45ee-b38a-6313fe9126f5",
+      "createTime": "2026-06-01T19:22:56.360Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.2.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/livestream",
+      "id": "96e0adf8-cb2c-4d4e-9d3c-9dea44e6acf8",
+      "createTime": "2026-06-01T19:22:56.311Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "9.4.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/translate",
+      "id": "3e03bed3-ff11-4c76-a672-307df3a630c0",
+      "createTime": "2026-06-01T19:22:56.274Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "6.2.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tasks",
+      "id": "e0fb0933-b217-433e-91e6-e49e456b2f46",
+      "createTime": "2026-06-01T19:22:56.232Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "7.1.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/talent",
+      "id": "69dba184-88e0-4222-b55f-b6e970132969",
+      "createTime": "2026-06-01T19:22:56.192Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c83b9a659cae7f366e77c43421732f3bdd6b47dd",
+          "message": "[cloudsupport] v2 version for `GetComment` and `GetAttachment`",
+          "issues": [
+            "8281"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/support",
+      "id": "c083e4c6-a7c6-487a-b875-1ee51a893912",
+      "createTime": "2026-06-01T19:22:56.149Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "7.3.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/speech",
+      "id": "daae4176-3871-40f4-8962-fde75a6ed981",
+      "createTime": "2026-06-01T19:22:56.109Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "6.1.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-directory",
+      "id": "a6053ce0-1c72-4f71-a3ef-6702fd086c67",
+      "createTime": "2026-06-01T19:22:56.070Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "9.3.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-center",
+      "id": "0e7e74e9-201b-4ba4-9b32-1391ecc94995",
+      "createTime": "2026-06-01T19:22:56.029Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c57233c171eaf119ed7a98dd9a3a8ea8610fbc59",
+          "message": "[security] add allow_requester_specified_not_before_time and requested_not_before_time fields to PrivateCA v1 API",
+          "issues": [
+            "8364"
+          ]
+        }
+      ],
+      "version": "7.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-private-ca",
+      "id": "a62aaa1f-c837-4956-bc3c-bf072e31e922",
+      "createTime": "2026-06-01T19:22:55.987Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "6.1.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/secret-manager",
+      "id": "39da9a7f-0697-40b8-870d-44a188dd958a",
+      "createTime": "2026-06-01T19:22:55.951Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e87fb095fc4678b3f44d6d6af285ed5614c64c51",
+          "message": "[saasservicemgmt] Changed field behavior for an existing field `rollout_kind` in message `.google.cloud.saasplatform.saasservicemgmt.v1beta1.Rollout`",
+          "issues": [
+            "8352"
+          ],
+          "breakingChangeNote": "[saasservicemgmt] Changed field behavior for an existing field `rollout_kind` in message `.google.cloud.saasplatform.saasservicemgmt.v1beta1.Rollout` ([#8352](https://github.com/googleapis/google-cloud-node/issues/8352))"
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/saasservicemgmt",
+      "id": "329aed3f-52a4-4aa4-b49d-282e9fc8724f",
+      "createTime": "2026-06-01T19:22:55.913Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "6.4.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recaptcha-enterprise",
+      "id": "f057238f-fbec-4c36-a48c-9a99a520920b",
+      "createTime": "2026-06-01T19:22:55.881Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4f49c6ff43031718838555e67a50a495c8cd7c89",
+          "message": "[networksecurity] add networksecurity v1 client library",
+          "issues": [
+            "8348"
+          ]
+        }
+      ],
+      "version": "3.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-security",
+      "id": "8c1078dc-a2d8-4e03-b70e-bfec95ab64c3",
+      "createTime": "2026-06-01T19:22:55.839Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "551a1fafaebc737b15710de8e461f8d6ce1ee690",
+          "message": "[networkmanagement] add fields and messages for Cloud Run jobs",
+          "issues": [
+            "8355"
+          ]
+        }
+      ],
+      "version": "5.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-management",
+      "id": "165693c4-905c-49ef-ac67-b001a716784d",
+      "createTime": "2026-06-01T19:22:55.805Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "5.3.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/monitoring",
+      "id": "2ea907ce-b157-48e8-86dc-d4824b8095d1",
+      "createTime": "2026-06-01T19:22:55.762Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "7.2.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/language",
+      "id": "efd97208-50d7-46bf-9526-131b0cbe10dc",
+      "createTime": "2026-06-01T19:22:55.725Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "5.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms",
+      "id": "8f73800c-22f4-4c1c-90f5-d0feedec8dea",
+      "createTime": "2026-06-01T19:22:55.691Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "5.2.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iot",
+      "id": "0c41903f-b453-449c-9195-da43cea67b6a",
+      "createTime": "2026-06-01T19:22:55.654Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "80560690651f3b76272dab7908d3a46aebc3e478",
+          "message": "[geminidataanalytics] update google-cloud-geminidataanalytics to include v1",
+          "issues": [
+            "8376"
+          ]
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/geminidataanalytics",
+      "id": "ed524797-d635-4960-89c0-ababe5288af5",
+      "createTime": "2026-06-01T19:22:55.569Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "9.6.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/documentai",
+      "id": "96e3f8b9-369d-4ecd-bcfc-5425b43c15ac",
+      "createTime": "2026-06-01T19:22:55.522Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "5.8.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "40954743-c625-4f12-9d33-751f4aab0260",
+      "createTime": "2026-06-01T19:22:55.484Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "7.6.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "70c71687-a366-4481-a017-0254846cb1b9",
+      "createTime": "2026-06-01T19:22:55.438Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "6.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc",
+      "id": "3caff46d-c03b-4e0d-a401-06b9e1acb8b0",
+      "createTime": "2026-06-01T19:22:55.403Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1b66ad2342685ff12a7f90e5b99e971f51f19e44",
+          "message": "[dataplex] Add `RequestDataProductAccess` method to request access to `DataAssets` with in a `DataProduct`",
+          "issues": [
+            "8353"
+          ],
+          "scope": "dataplex"
+        }
+      ],
+      "version": "5.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataplex",
+      "id": "27061b2e-35c6-4a24-b30c-343d75b35102",
+      "createTime": "2026-06-01T19:22:55.363Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "4.1.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contact-center-insights",
+      "id": "27099566-aa7d-49fd-880b-53293df144d8",
+      "createTime": "2026-06-01T19:22:55.326Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        },
+        {
+          "type": "feat",
+          "sha": "5293fbcf148363882516565b00482ae39d6bf1c8",
+          "message": "[compute] Update Compute Engine v1beta API to revision 20260427 (#1194)",
+          "issues": [
+            "8285"
+          ]
+        }
+      ],
+      "version": "6.13.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "6c07f529-38df-40fb-a1a8-de5370329be6",
+      "createTime": "2026-06-01T19:22:55.283Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.1.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/certificate-manager",
+      "id": "cc57af77-d88b-46f6-9522-d03c4626772c",
+      "createTime": "2026-06-01T19:22:55.246Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cb9a19eb93bccdbc7c579df021b9e898d32675a2",
+          "message": "Add support for assessment tasks in BigQuery Migration API",
+          "issues": [
+            "8334"
+          ]
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-migration",
+      "id": "8c54a02e-2d7a-4cb2-87f7-aecf3587e0d6",
+      "createTime": "2026-06-01T19:22:55.200Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "5.1.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/automl",
+      "id": "253c2794-6d2c-489a-9b35-f23c283b4ca9",
+      "createTime": "2026-06-01T19:22:55.151Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "6.3.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/asset",
+      "id": "1548501a-9a01-48f8-9d4b-5c25408e7abe",
+      "createTime": "2026-06-01T19:22:55.114Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "6.8.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "f554400f-759d-4285-85f6-9089ad9c14e5",
+      "createTime": "2026-06-01T19:22:55.069Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ecec52d9fa7e5a8557596f42407412b714c8bd3d",
+          "message": "[datamanager] add the coupon_codes field to CartData to track coupon redemptions for Google Ads and Google Analytics",
+          "issues": [
+            "8300"
+          ]
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/datamanager",
+      "id": "ff236e25-94e3-4137-875b-7275bb76929e",
+      "createTime": "2026-06-01T19:22:55.019Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b053d0edfa1ade74ce069279af86f058c77a589b",
+          "message": "Clean up per-package eslintrc configurations",
+          "issues": []
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/databasecenter",
+      "id": "f84cab41-03a8-4bac-9b58-f8e7085e958d",
+      "createTime": "2026-05-27T14:19:38.645Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b053d0edfa1ade74ce069279af86f058c77a589b",
+          "message": "Clean up per-package eslintrc configurations",
+          "issues": []
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/health",
+      "id": "53112cf1-654b-4464-841a-c45d44f7a572",
+      "createTime": "2026-05-27T14:19:38.619Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b053d0edfa1ade74ce069279af86f058c77a589b",
+          "message": "Clean up per-package eslintrc configurations",
+          "issues": []
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appoptimize",
+      "id": "287b1809-fd57-4e2b-99bb-9ac035562468",
+      "createTime": "2026-05-27T14:19:38.585Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b053d0edfa1ade74ce069279af86f058c77a589b",
+          "message": "Clean up per-package eslintrc configurations",
+          "issues": []
+        }
+      ],
+      "version": "6.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "a34b70d8-a861-498e-adc2-18e9c48d2c97",
+      "createTime": "2026-05-27T14:19:38.552Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e9ad85f0db9570343fb0625579fb9ee484280b59",
+          "message": "Add folders and teamFolders related changes to v1",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "e9ad85f0db9570343fb0625579fb9ee484280b59",
+          "message": "Update GCP Client Libraries in v1beta1 to support Folders, TeamFolders, and other relevant APIs",
+          "issues": []
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataform",
+      "id": "bcf87cc6-6208-468d-8d5a-c70cce1cce81",
+      "createTime": "2026-05-27T14:19:38.525Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b053d0edfa1ade74ce069279af86f058c77a589b",
+          "message": "Clean up per-package eslintrc configurations",
+          "issues": []
+        }
+      ],
+      "version": "6.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "e7d4db06-e03c-4596-86fe-6bbb6cf84f3d",
+      "createTime": "2026-05-27T14:19:38.499Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b053d0edfa1ade74ce069279af86f058c77a589b",
+          "message": "Clean up per-package eslintrc configurations",
+          "issues": []
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/data",
+      "id": "9df33332-601f-4585-be90-e2d443ba4c79",
+      "createTime": "2026-05-27T14:19:38.461Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "Added new PUBLIC dimension: CREATIVE_SSL_COMPLIANCE_OVERRIDE_NAME",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "Added new API dimension: CREATIVE_SSL_SCAN_RESULT",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "Added new PUBLIC dimension: CREATIVE_SSL_SCAN_RESULT_NAME",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "Added new PUBLIC metric: AD_SERVER_ACTIVE_VIEW_REVENUE",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "Added new PUBLIC dimension: LINE_ITEM_AVERAGE_NUMBER_OF_VIEWERS",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "An existing value `DEMAND_SUBCHANNEL_ALL` is removed from enum `Dimension`",
+          "issues": [],
+          "breakingChangeNote": "An existing value `DEMAND_SUBCHANNEL_ALL` is removed from enum `Dimension`"
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "Add readonly OAuth scope",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "Add ProposalLineItem service and messages to the API.",
+          "issues": [],
+          "scope": "deals"
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "Added new PUBLIC dimension: TARGETS_CUSTOMER_MATCHING_LIST",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "Expose both `get` and `list` methods for RichMediaAdsCompanies to external clients.",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "Changed field behavior for an existing field `display_name` in message `.google.ads.admanager.v1.Application`",
+          "issues": [],
+          "breakingChangeNote": "Changed field behavior for an existing field `display_name` in message `.google.ads.admanager.v1.Application`"
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "A new message `ApplicationStoreEnum` is added",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "A new message `ApplicationApprovalStatusEnum` is added",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "A new message `ApplicationPlatformEnum` is added",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "A new message `WebviewClaimingStatusEnum` is added",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "A new field `app_store_id` is added to message `.google.ads.admanager.v1.Application`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "A new field `app_stores` is added to message `.google.ads.admanager.v1.Application`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "A new field `archived` is added to message `.google.ads.admanager.v1.Application`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "A new field `app_store_display_name` is added to message `.google.ads.admanager.v1.Application`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "A new field `application_code` is added to message `.google.ads.admanager.v1.Application`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "A new field `developer` is added to message `.google.ads.admanager.v1.Application`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "A new field `platform` is added to message `.google.ads.admanager.v1.Application`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "A new field `free` is added to message `.google.ads.admanager.v1.Application`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "A new field `download_url` is added to message `.google.ads.admanager.v1.Application`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "A new field `approval_status` is added to message `.google.ads.admanager.v1.Application`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "A new field `webview_claiming_status` is added to message `.google.ads.admanager.v1.Application`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "A new method `CreateApplication` is added to service `ApplicationService`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "A new method `BatchCreateApplications` is added to service `ApplicationService`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "A new method `UpdateApplication` is added to service `ApplicationService`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "A new method `BatchUpdateApplications` is added to service `ApplicationService`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "A new method `BatchArchiveApplications` is added to service `ApplicationService`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "A new method `BatchUnarchiveApplications` is added to service `ApplicationService`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "A new message `CreateApplicationRequest` is added",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "A new message `BatchCreateApplicationsRequest` is added",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "A new message `BatchCreateApplicationsResponse` is added",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "A new message `UpdateApplicationRequest` is added",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "A new message `BatchUpdateApplicationsRequest` is added",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "A new message `BatchUpdateApplicationsResponse` is added",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "A new message `BatchArchiveApplicationsRequest` is added",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "A new message `BatchArchiveApplicationsResponse` is added",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "A new message `BatchUnarchiveApplicationsRequest` is added",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "A new message `BatchUnarchiveApplicationsResponse` is added",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "Removed UNIFIED_PRICING_RULE_ID dimension",
+          "issues": [],
+          "breakingChangeNote": "Removed UNIFIED_PRICING_RULE_ID dimension"
+        },
+        {
+          "type": "fix",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "Removed UNIFIED_PRICING_RULE_NAME dimension",
+          "issues": [],
+          "breakingChangeNote": "Removed UNIFIED_PRICING_RULE_NAME dimension"
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "Added child publisher resource.",
+          "issues": [],
+          "scope": "child_publisher"
+        },
+        {
+          "type": "fix",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "Remove unused AdManagerError type",
+          "issues": [],
+          "breakingChangeNote": "Remove unused AdManagerError type"
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "Added McmEarnings service",
+          "issues": [],
+          "scope": "mcm_earnings"
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "This is referenced for delegation_type in mcm_earnings",
+          "issues": [],
+          "scope": "DelegationTypeEnum"
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "New REQUIRED field `display_name` in message `.google.ads.admanager.v1.Label`",
+          "issues": [],
+          "breakingChangeNote": "New REQUIRED field `display_name` in message `.google.ads.admanager.v1.Label`"
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "New REQUIRED field `types` in message `.google.ads.admanager.v1.Label`",
+          "issues": [],
+          "breakingChangeNote": "New REQUIRED field `types` in message `.google.ads.admanager.v1.Label`"
+        },
+        {
+          "type": "feat",
+          "sha": "dfd3f1eb39ed1839f4d25729dd6143a97707c87c",
+          "message": "[admanager] added new API dimension: CREATIVE_SSL_COMPLIANCE_OVERRIDE",
+          "issues": []
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/admanager",
+      "id": "837e4e3a-5ca2-4cb5-8a2d-0261ba1a0986",
+      "createTime": "2026-05-27T14:19:38.433Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "d67ad568b13e6b12c4d16b9b34dbde41b6eac4a5",
           "message": "[container] add confidential instance type and hyperdisk support to GKE API",
           "issues": [
@@ -78784,5 +81630,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-05-14T00:02:24.695Z"
+  "updateTime": "2026-07-08T17:10:18.122Z"
 }

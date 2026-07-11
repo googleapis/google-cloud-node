@@ -151,6 +151,9 @@ export class ZoneVmExtensionPoliciesClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
@@ -383,7 +386,7 @@ export class ZoneVmExtensionPoliciesClient {
   // -- Service calls --
   // -------------------
   /**
-   * Deletes a specified zone VM extension policy.
+   * Deletes a specified zone VM extension policy within a project.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -551,7 +554,7 @@ export class ZoneVmExtensionPoliciesClient {
       });
   }
   /**
-   * Retrieves details of a specific zone VM extension policy.
+   * Retrieves details of a specific zone VM extension policy within a project.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -867,7 +870,7 @@ export class ZoneVmExtensionPoliciesClient {
       });
   }
   /**
-   * Modifies an existing zone VM extension policy.
+   * Modifies an existing zone VM extension policy within a project.
    *
    * @param {Object} request
    *   The request object that will be sent.

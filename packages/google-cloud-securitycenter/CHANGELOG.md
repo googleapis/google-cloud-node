@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [9.4.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v9.3.2...security-center-v9.4.0) (2026-06-16)
+
+
+### Features
+
+* Local OwlBot generation batch 3 ([#8614](https://github.com/googleapis/google-cloud-node/issues/8614)) ([fae15ec](https://github.com/googleapis/google-cloud-node/commit/fae15ecca725f8e978341156e2c99c623ce74fcc))
+
+## [9.3.2](https://github.com/googleapis/google-cloud-node/compare/security-center-v9.3.1...security-center-v9.3.2) (2026-06-01)
+
+
+### Bug Fixes
+
+* **deps:** Remove vulnerable dependency `uuid` ([#8120](https://github.com/googleapis/google-cloud-node/issues/8120)) ([3ec901e](https://github.com/googleapis/google-cloud-node/commit/3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a))
+
 ## [9.3.1](https://github.com/googleapis/google-cloud-node/compare/security-center-v9.3.0...security-center-v9.3.1) (2026-05-01)
 
 

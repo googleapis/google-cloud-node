@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.3.0](https://github.com/googleapis/google-cloud-node/compare/recommender-v7.2.2...recommender-v7.3.0) (2026-06-16)
+
+
+### Features
+
+* [recommender] Support utilization insights and cloud hub ([#8375](https://github.com/googleapis/google-cloud-node/issues/8375)) ([7e6c7be](https://github.com/googleapis/google-cloud-node/commit/7e6c7bead35a43c675c8875ff1fd2979badeb6f7))
+
 ## [7.2.2](https://github.com/googleapis/google-cloud-node/compare/recommender-v7.2.1...recommender-v7.2.2) (2026-05-01)
 
 

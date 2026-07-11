@@ -4,8 +4,8 @@
   "description": "A common tooling library used by the googleapis npm module. You probably don't want to use this directly.",
   "repository": {
     "type": "git",
-    "directory": "packages/nodejs-googleapis-common",
-    "url": "https://github.com/googleapis/google-cloud-node-core.git"
+    "directory": "core/packages/nodejs-googleapis-common",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
   },
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",
@@ -26,8 +26,6 @@
     "lint": "gts check",
     "samples-test": "mocha build/samples-test",
     "docs": "jsdoc -c .jsdoc.js",
-    "predocs-test": "npm run docs",
-    "docs-test": "linkinator docs",
     "webpack": "webpack",
     "browser-test": "karma start",
     "prelint": "cd samples; npm link ../; npm install",
@@ -73,7 +71,6 @@
     "karma-remap-coverage": "^0.1.5",
     "karma-sourcemap-loader": "^0.4.0",
     "karma-webpack": "^5.0.1",
-    "linkinator": "^6.1.2",
     "mocha": "^11.1.0",
     "mv": "^2.1.1",
     "ncp": "^2.0.0",
@@ -90,7 +87,7 @@
     "webpack-cli": "^6.0.1"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=18"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node-core/tree/main/packages/nodejs-googleapis-common"
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/core/packages/nodejs-googleapis-common"
 }

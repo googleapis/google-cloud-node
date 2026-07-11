@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/promisify",
-  "version": "5.0.1",
+  "version": "5.1.0",
   "description": "A simple utility for promisifying functions and classes.",
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",
@@ -20,8 +20,6 @@
     "presystem-test": "npm run compile",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "system-test": "mocha build/system-test",
-    "docs-test": "linkinator docs",
-    "predocs-test": "npm run docs",
     "prelint": "cd samples; npm link ../; npm install",
     "clean": "gts clean",
     "precompile": "gts clean"
@@ -45,7 +43,6 @@
     "jsdoc": "^4.0.4",
     "jsdoc-fresh": "^3.0.0",
     "jsdoc-region-tag": "^3.0.0",
-    "linkinator": "^6.1.2",
     "mocha": "^11.1.0",
     "sinon": "^19.0.2",
     "typescript": "^5.8.2"

@@ -4,8 +4,8 @@
   "description": "Get the metadata from a Google Cloud Platform environment",
   "repository": {
     "type": "git",
-    "directory": "packages/gcp-metadata",
-    "url": "https://github.com/googleapis/google-cloud-node-core.git"
+    "directory": "core/packages/gcp-metadata",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
   },
   "main": "./build/src/index.js",
   "types": "./build/src/index.d.ts",
@@ -24,8 +24,6 @@
     "test": "c8 mocha --timeout=5000 build/test",
     "docs": "jsdoc -c .jsdoc.js",
     "lint": "gts check",
-    "docs-test": "linkinator docs",
-    "predocs-test": "npm run docs",
     "prelint": "cd samples; npm link ../; npm install",
     "clean": "gts clean",
     "precompile": "gts clean"
@@ -62,7 +60,6 @@
     "jsdoc": "^4.0.4",
     "jsdoc-fresh": "^5.0.0",
     "jsdoc-region-tag": "^4.0.0",
-    "linkinator": "^6.1.2",
     "mocha": "^11.1.0",
     "ncp": "^2.0.0",
     "nock": "^14.0.5",
@@ -73,5 +70,5 @@
   "engines": {
     "node": ">=18"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node-core/tree/main/packages/gcp-metadata"
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/core/packages/gcp-metadata"
 }

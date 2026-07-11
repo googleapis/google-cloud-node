@@ -106,7 +106,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update settings | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.update_settings.js) |
 | update source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.update_source.js) |
 | validate import job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/migration_center.validate_import_job.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/samples/generated/v1/snippet_metadata_google.cloud.migrationcenter.v1.json) |
 
 
 ## Supported Node.js Versions
@@ -140,7 +139,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -150,7 +149,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-migrationcenter/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

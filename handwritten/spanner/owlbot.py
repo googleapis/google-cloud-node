@@ -64,7 +64,7 @@ if staging.is_dir():
 
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_mono_repo_library(relative_dir="handwritten/spanner", source_location='build/src')
-s.copy(templates, destination="handwritten/spanner", excludes=[".kokoro/samples-test.sh", ".kokoro/trampoline_v2.sh", ".github/release-trigger.yml", ".github/sync-repo-settings.yaml", "README.md"])
+s.copy(templates, destination="handwritten/spanner", excludes=[".kokoro/samples-test.sh", ".kokoro/trampoline_v2.sh", ".github/release-trigger.yml", ".github/sync-repo-settings.yaml", "README.md", ".eslintignore", ".eslintrc.json"])
 
 node.postprocess_gapic_library_hermetic(relative_dir="handwritten/spanner")
 

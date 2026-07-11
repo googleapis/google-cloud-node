@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {GSuiteAddOnsClient} from './g_suite_add_ons_client';
+export { GSuiteAddOnsClient } from './g_suite_add_ons_client';

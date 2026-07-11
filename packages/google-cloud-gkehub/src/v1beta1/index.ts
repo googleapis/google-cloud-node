@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {GkeHubMembershipServiceClient} from './gke_hub_membership_service_client';
+export { GkeHubMembershipServiceClient } from './gke_hub_membership_service_client';

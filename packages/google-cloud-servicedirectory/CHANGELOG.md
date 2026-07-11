@@ -1,5 +1,19 @@
 # Changelog
 
+## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/service-directory-v6.1.3...service-directory-v6.2.0) (2026-06-16)
+
+
+### Features
+
+* Local OwlBot generation batch 3 ([#8614](https://github.com/googleapis/google-cloud-node/issues/8614)) ([fae15ec](https://github.com/googleapis/google-cloud-node/commit/fae15ecca725f8e978341156e2c99c623ce74fcc))
+
+## [6.1.3](https://github.com/googleapis/google-cloud-node/compare/service-directory-v6.1.2...service-directory-v6.1.3) (2026-06-01)
+
+
+### Bug Fixes
+
+* **deps:** Remove vulnerable dependency `uuid` ([#8120](https://github.com/googleapis/google-cloud-node/issues/8120)) ([3ec901e](https://github.com/googleapis/google-cloud-node/commit/3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a))
+
 ## [6.1.2](https://github.com/googleapis/google-cloud-node/compare/service-directory-v6.1.1...service-directory-v6.1.2) (2026-05-01)
 
 

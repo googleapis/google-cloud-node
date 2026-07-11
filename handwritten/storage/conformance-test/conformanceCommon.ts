@@ -16,7 +16,7 @@
 import * as jsonToNodeApiMapping from './test-data/retryInvocationMap.json';
 import * as libraryMethods from './libraryMethods';
 import {Bucket, File, HmacKey, Notification, Storage} from '../src/';
-import * as uuid from 'uuid';
+import * as crypto from 'crypto';
 import * as assert from 'assert';
 import {DecorateRequestOptions} from '../src/nodejs-common';
 import fetch from 'node-fetch';
@@ -231,5 +231,5 @@ async function getTestBenchRetryTest(
 }
 
 function shortUUID() {
-  return uuid.v1().split('-').shift();
+  return crypto.randomUUID().split('-').shift();
 }

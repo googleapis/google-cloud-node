@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/data-v6.0.0...data-v6.1.0) (2026-05-27)
+
+
+### Features
+
+* Clean up per-package eslintrc configurations ([b053d0e](https://github.com/googleapis/google-cloud-node/commit/b053d0edfa1ade74ce069279af86f058c77a589b))
+
 ## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/data-v5.2.2...data-v6.0.0) (2026-05-12)
 
 

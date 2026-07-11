@@ -18,11 +18,24 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, IamClient, IamProtos, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+  IamClient,
+  IamProtos,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -45,7 +58,7 @@ export class InterceptClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('network-security');
@@ -58,12 +71,12 @@ export class InterceptClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  interceptStub?: Promise<{[name: string]: Function}>;
+  interceptStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of InterceptClient.
@@ -104,21 +117,42 @@ export class InterceptClient {
    *     const client = new InterceptClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof InterceptClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'networksecurity.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -143,7 +177,7 @@ export class InterceptClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -156,18 +190,14 @@ export class InterceptClient {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
-  
+
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -189,106 +219,114 @@ export class InterceptClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       authorizationPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/authorizationPolicies/{authorization_policy}'
+        'projects/{project}/locations/{location}/authorizationPolicies/{authorization_policy}',
       ),
       authzPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/authzPolicies/{authz_policy}'
+        'projects/{project}/locations/{location}/authzPolicies/{authz_policy}',
       ),
       backendAuthenticationConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/backendAuthenticationConfigs/{backend_authentication_config}'
+        'projects/{project}/locations/{location}/backendAuthenticationConfigs/{backend_authentication_config}',
       ),
       clientTlsPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/clientTlsPolicies/{client_tls_policy}'
+        'projects/{project}/locations/{location}/clientTlsPolicies/{client_tls_policy}',
       ),
       dnsThreatDetectorPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dnsThreatDetectors/{dns_threat_detector}'
+        'projects/{project}/locations/{location}/dnsThreatDetectors/{dns_threat_detector}',
       ),
       firewallEndpointAssociationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/firewallEndpointAssociations/{firewall_endpoint_association}'
+        'projects/{project}/locations/{location}/firewallEndpointAssociations/{firewall_endpoint_association}',
       ),
       forwardingRulePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/global/forwardingRules/{forwarding_rule}'
+        'projects/{project}/global/forwardingRules/{forwarding_rule}',
       ),
       gatewaySecurityPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/gatewaySecurityPolicies/{gateway_security_policy}'
+        'projects/{project}/locations/{location}/gatewaySecurityPolicies/{gateway_security_policy}',
       ),
       gatewaySecurityPolicyRulePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/gatewaySecurityPolicies/{gateway_security_policy}/rules/{rule}'
+        'projects/{project}/locations/{location}/gatewaySecurityPolicies/{gateway_security_policy}/rules/{rule}',
       ),
       interceptDeploymentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/interceptDeployments/{intercept_deployment}'
+        'projects/{project}/locations/{location}/interceptDeployments/{intercept_deployment}',
       ),
       interceptDeploymentGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/interceptDeploymentGroups/{intercept_deployment_group}'
+        'projects/{project}/locations/{location}/interceptDeploymentGroups/{intercept_deployment_group}',
       ),
       interceptEndpointGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/interceptEndpointGroups/{intercept_endpoint_group}'
+        'projects/{project}/locations/{location}/interceptEndpointGroups/{intercept_endpoint_group}',
       ),
-      interceptEndpointGroupAssociationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/interceptEndpointGroupAssociations/{intercept_endpoint_group_association}'
-      ),
+      interceptEndpointGroupAssociationPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/interceptEndpointGroupAssociations/{intercept_endpoint_group_association}',
+        ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
       mirroringDeploymentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/mirroringDeployments/{mirroring_deployment}'
+        'projects/{project}/locations/{location}/mirroringDeployments/{mirroring_deployment}',
       ),
       mirroringDeploymentGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/mirroringDeploymentGroups/{mirroring_deployment_group}'
+        'projects/{project}/locations/{location}/mirroringDeploymentGroups/{mirroring_deployment_group}',
       ),
       mirroringEndpointGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/mirroringEndpointGroups/{mirroring_endpoint_group}'
+        'projects/{project}/locations/{location}/mirroringEndpointGroups/{mirroring_endpoint_group}',
       ),
-      mirroringEndpointGroupAssociationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/mirroringEndpointGroupAssociations/{mirroring_endpoint_group_association}'
-      ),
+      mirroringEndpointGroupAssociationPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/mirroringEndpointGroupAssociations/{mirroring_endpoint_group_association}',
+        ),
       networkPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/global/networks/{network}'
+        'projects/{project}/global/networks/{network}',
       ),
-      organizationLocationFirewallEndpointsPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/firewallEndpoints/{firewall_endpoint}'
-      ),
-      organizationLocationSecurityProfilePathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/securityProfiles/{security_profile}'
-      ),
-      organizationLocationSecurityProfileGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/securityProfileGroups/{security_profile_group}'
-      ),
+      organizationLocationFirewallEndpointsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/firewallEndpoints/{firewall_endpoint}',
+        ),
+      organizationLocationSecurityProfilePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/securityProfiles/{security_profile}',
+        ),
+      organizationLocationSecurityProfileGroupPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/securityProfileGroups/{security_profile_group}',
+        ),
       partnerSSEGatewayPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/partnerSSEGateways/{partner_sse_gateway}'
+        'projects/{project}/locations/{location}/partnerSSEGateways/{partner_sse_gateway}',
       ),
       partnerSSERealmPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/partnerSSERealms/{partner_sse_realm}'
+        'projects/{project}/locations/{location}/partnerSSERealms/{partner_sse_realm}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
-      projectLocationFirewallEndpointsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/firewallEndpoints/{firewall_endpoint}'
-      ),
-      projectLocationSecurityProfilePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/securityProfiles/{security_profile}'
-      ),
-      projectLocationSecurityProfileGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/securityProfileGroups/{security_profile_group}'
-      ),
+      projectLocationFirewallEndpointsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/firewallEndpoints/{firewall_endpoint}',
+        ),
+      projectLocationSecurityProfilePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/securityProfiles/{security_profile}',
+        ),
+      projectLocationSecurityProfileGroupPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/securityProfileGroups/{security_profile_group}',
+        ),
       sACAttachmentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/sacAttachments/{sac_attachment}'
+        'projects/{project}/locations/{location}/sacAttachments/{sac_attachment}',
       ),
       sACRealmPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/sacRealms/{sac_realm}'
+        'projects/{project}/locations/{location}/sacRealms/{sac_realm}',
       ),
       sSEGatewayReferencePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/sseGatewayReferences/{sse_gateway_reference}'
+        'projects/{project}/locations/{location}/sseGatewayReferences/{sse_gateway_reference}',
       ),
       serverTlsPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/serverTlsPolicies/{server_tls_policy}'
+        'projects/{project}/locations/{location}/serverTlsPolicies/{server_tls_policy}',
       ),
       tlsInspectionPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/tlsInspectionPolicies/{tls_inspection_policy}'
+        'projects/{project}/locations/{location}/tlsInspectionPolicies/{tls_inspection_policy}',
       ),
       urlListPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/urlLists/{url_list}'
+        'projects/{project}/locations/{location}/urlLists/{url_list}',
       ),
     };
 
@@ -296,14 +334,27 @@ export class InterceptClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listInterceptEndpointGroups:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'interceptEndpointGroups'),
+      listInterceptEndpointGroups: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'interceptEndpointGroups',
+      ),
       listInterceptEndpointGroupAssociations:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'interceptEndpointGroupAssociations'),
-      listInterceptDeploymentGroups:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'interceptDeploymentGroups'),
-      listInterceptDeployments:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'interceptDeployments')
+        new this._gaxModule.PageDescriptor(
+          'pageToken',
+          'nextPageToken',
+          'interceptEndpointGroupAssociations',
+        ),
+      listInterceptDeploymentGroups: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'interceptDeploymentGroups',
+      ),
+      listInterceptDeployments: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'interceptDeployments',
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -312,124 +363,323 @@ export class InterceptClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1alpha1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1alpha1/{name=projects/*}/locations',},{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1alpha1/{resource=projects/*/locations/*/authorizationPolicies/*}:getIamPolicy',additional_bindings: [{get: '/v1alpha1/{resource=projects/*/locations/*/serverTlsPolicies/*}:getIamPolicy',},{get: '/v1alpha1/{resource=projects/*/locations/*/clientTlsPolicies/*}:getIamPolicy',},{get: '/v1alpha1/{resource=projects/*/locations/*/addressGroups/*}:getIamPolicy',},{get: '/v1alpha1/{resource=projects/*/locations/*/authzPolicies/*}:getIamPolicy',}],
-      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1alpha1/{resource=projects/*/locations/*/authorizationPolicies/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1alpha1/{resource=projects/*/locations/*/serverTlsPolicies/*}:setIamPolicy',body: '*',},{post: '/v1alpha1/{resource=projects/*/locations/*/clientTlsPolicies/*}:setIamPolicy',body: '*',},{post: '/v1alpha1/{resource=projects/*/locations/*/addressGroups/*}:setIamPolicy',body: '*',},{post: '/v1alpha1/{resource=projects/*/locations/*/authzPolicies/*}:setIamPolicy',body: '*',}],
-      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1alpha1/{resource=projects/*/locations/*/authorizationPolicies/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1alpha1/{resource=projects/*/locations/*/serverTlsPolicies/*}:testIamPermissions',body: '*',},{post: '/v1alpha1/{resource=projects/*/locations/*/clientTlsPolicies/*}:testIamPermissions',body: '*',},{post: '/v1alpha1/{resource=projects/*/locations/*/addressGroups/*}:testIamPermissions',body: '*',},{post: '/v1alpha1/{resource=projects/*/locations/*/authzPolicies/*}:testIamPermissions',body: '*',}],
-      },{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1alpha1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',additional_bindings: [{post: '/v1alpha1/{name=organizations/*/locations/*/operations/*}:cancel',body: '*',}],
-      },{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1alpha1/{name=projects/*/locations/*/operations/*}',additional_bindings: [{delete: '/v1alpha1/{name=organizations/*/locations/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.GetOperation',get: '/v1alpha1/{name=projects/*/locations/*/operations/*}',additional_bindings: [{get: '/v1alpha1/{name=organizations/*/locations/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v1alpha1/{name=projects/*/locations/*}/operations',additional_bindings: [{get: '/v1alpha1/{name=organizations/*/locations/*}/operations',}],
-      }];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.cloud.location.Locations.GetLocation',
+          get: '/v1alpha1/{name=projects/*/locations/*}',
+        },
+        {
+          selector: 'google.cloud.location.Locations.ListLocations',
+          get: '/v1alpha1/{name=projects/*}/locations',
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
+          get: '/v1alpha1/{resource=projects/*/locations/*/authorizationPolicies/*}:getIamPolicy',
+          additional_bindings: [
+            {
+              get: '/v1alpha1/{resource=projects/*/locations/*/serverTlsPolicies/*}:getIamPolicy',
+            },
+            {
+              get: '/v1alpha1/{resource=projects/*/locations/*/clientTlsPolicies/*}:getIamPolicy',
+            },
+            {
+              get: '/v1alpha1/{resource=projects/*/locations/*/addressGroups/*}:getIamPolicy',
+            },
+            {
+              get: '/v1alpha1/{resource=projects/*/locations/*/authzPolicies/*}:getIamPolicy',
+            },
+          ],
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
+          post: '/v1alpha1/{resource=projects/*/locations/*/authorizationPolicies/*}:setIamPolicy',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1alpha1/{resource=projects/*/locations/*/serverTlsPolicies/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1alpha1/{resource=projects/*/locations/*/clientTlsPolicies/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1alpha1/{resource=projects/*/locations/*/addressGroups/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1alpha1/{resource=projects/*/locations/*/authzPolicies/*}:setIamPolicy',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
+          post: '/v1alpha1/{resource=projects/*/locations/*/authorizationPolicies/*}:testIamPermissions',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1alpha1/{resource=projects/*/locations/*/serverTlsPolicies/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1alpha1/{resource=projects/*/locations/*/clientTlsPolicies/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1alpha1/{resource=projects/*/locations/*/addressGroups/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1alpha1/{resource=projects/*/locations/*/authzPolicies/*}:testIamPermissions',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1alpha1/{name=projects/*/locations/*/operations/*}:cancel',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1alpha1/{name=organizations/*/locations/*/operations/*}:cancel',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.DeleteOperation',
+          delete: '/v1alpha1/{name=projects/*/locations/*/operations/*}',
+          additional_bindings: [
+            {
+              delete:
+                '/v1alpha1/{name=organizations/*/locations/*/operations/*}',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1alpha1/{name=projects/*/locations/*/operations/*}',
+          additional_bindings: [
+            {
+              get: '/v1alpha1/{name=organizations/*/locations/*/operations/*}',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v1alpha1/{name=projects/*/locations/*}/operations',
+          additional_bindings: [
+            { get: '/v1alpha1/{name=organizations/*/locations/*}/operations' },
+          ],
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
     const createInterceptEndpointGroupResponse = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroup') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroup',
+    ) as gax.protobuf.Type;
     const createInterceptEndpointGroupMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateInterceptEndpointGroupResponse = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroup') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroup',
+    ) as gax.protobuf.Type;
     const updateInterceptEndpointGroupMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteInterceptEndpointGroupResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteInterceptEndpointGroupMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
-    const createInterceptEndpointGroupAssociationResponse = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroupAssociation') as gax.protobuf.Type;
-    const createInterceptEndpointGroupAssociationMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
-    const updateInterceptEndpointGroupAssociationResponse = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroupAssociation') as gax.protobuf.Type;
-    const updateInterceptEndpointGroupAssociationMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
-    const deleteInterceptEndpointGroupAssociationResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
-    const deleteInterceptEndpointGroupAssociationMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata',
+    ) as gax.protobuf.Type;
+    const createInterceptEndpointGroupAssociationResponse =
+      protoFilesRoot.lookup(
+        '.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroupAssociation',
+      ) as gax.protobuf.Type;
+    const createInterceptEndpointGroupAssociationMetadata =
+      protoFilesRoot.lookup(
+        '.google.cloud.networksecurity.v1alpha1.OperationMetadata',
+      ) as gax.protobuf.Type;
+    const updateInterceptEndpointGroupAssociationResponse =
+      protoFilesRoot.lookup(
+        '.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroupAssociation',
+      ) as gax.protobuf.Type;
+    const updateInterceptEndpointGroupAssociationMetadata =
+      protoFilesRoot.lookup(
+        '.google.cloud.networksecurity.v1alpha1.OperationMetadata',
+      ) as gax.protobuf.Type;
+    const deleteInterceptEndpointGroupAssociationResponse =
+      protoFilesRoot.lookup('.google.protobuf.Empty') as gax.protobuf.Type;
+    const deleteInterceptEndpointGroupAssociationMetadata =
+      protoFilesRoot.lookup(
+        '.google.cloud.networksecurity.v1alpha1.OperationMetadata',
+      ) as gax.protobuf.Type;
     const createInterceptDeploymentGroupResponse = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.InterceptDeploymentGroup') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.InterceptDeploymentGroup',
+    ) as gax.protobuf.Type;
     const createInterceptDeploymentGroupMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateInterceptDeploymentGroupResponse = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.InterceptDeploymentGroup') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.InterceptDeploymentGroup',
+    ) as gax.protobuf.Type;
     const updateInterceptDeploymentGroupMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteInterceptDeploymentGroupResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteInterceptDeploymentGroupMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const createInterceptDeploymentResponse = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.InterceptDeployment') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.InterceptDeployment',
+    ) as gax.protobuf.Type;
     const createInterceptDeploymentMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateInterceptDeploymentResponse = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.InterceptDeployment') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.InterceptDeployment',
+    ) as gax.protobuf.Type;
     const updateInterceptDeploymentMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteInterceptDeploymentResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteInterceptDeploymentMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createInterceptEndpointGroup: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createInterceptEndpointGroupResponse.decode.bind(createInterceptEndpointGroupResponse),
-        createInterceptEndpointGroupMetadata.decode.bind(createInterceptEndpointGroupMetadata)),
+        createInterceptEndpointGroupResponse.decode.bind(
+          createInterceptEndpointGroupResponse,
+        ),
+        createInterceptEndpointGroupMetadata.decode.bind(
+          createInterceptEndpointGroupMetadata,
+        ),
+      ),
       updateInterceptEndpointGroup: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        updateInterceptEndpointGroupResponse.decode.bind(updateInterceptEndpointGroupResponse),
-        updateInterceptEndpointGroupMetadata.decode.bind(updateInterceptEndpointGroupMetadata)),
+        updateInterceptEndpointGroupResponse.decode.bind(
+          updateInterceptEndpointGroupResponse,
+        ),
+        updateInterceptEndpointGroupMetadata.decode.bind(
+          updateInterceptEndpointGroupMetadata,
+        ),
+      ),
       deleteInterceptEndpointGroup: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deleteInterceptEndpointGroupResponse.decode.bind(deleteInterceptEndpointGroupResponse),
-        deleteInterceptEndpointGroupMetadata.decode.bind(deleteInterceptEndpointGroupMetadata)),
-      createInterceptEndpointGroupAssociation: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        createInterceptEndpointGroupAssociationResponse.decode.bind(createInterceptEndpointGroupAssociationResponse),
-        createInterceptEndpointGroupAssociationMetadata.decode.bind(createInterceptEndpointGroupAssociationMetadata)),
-      updateInterceptEndpointGroupAssociation: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        updateInterceptEndpointGroupAssociationResponse.decode.bind(updateInterceptEndpointGroupAssociationResponse),
-        updateInterceptEndpointGroupAssociationMetadata.decode.bind(updateInterceptEndpointGroupAssociationMetadata)),
-      deleteInterceptEndpointGroupAssociation: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        deleteInterceptEndpointGroupAssociationResponse.decode.bind(deleteInterceptEndpointGroupAssociationResponse),
-        deleteInterceptEndpointGroupAssociationMetadata.decode.bind(deleteInterceptEndpointGroupAssociationMetadata)),
+        deleteInterceptEndpointGroupResponse.decode.bind(
+          deleteInterceptEndpointGroupResponse,
+        ),
+        deleteInterceptEndpointGroupMetadata.decode.bind(
+          deleteInterceptEndpointGroupMetadata,
+        ),
+      ),
+      createInterceptEndpointGroupAssociation:
+        new this._gaxModule.LongrunningDescriptor(
+          this.operationsClient,
+          createInterceptEndpointGroupAssociationResponse.decode.bind(
+            createInterceptEndpointGroupAssociationResponse,
+          ),
+          createInterceptEndpointGroupAssociationMetadata.decode.bind(
+            createInterceptEndpointGroupAssociationMetadata,
+          ),
+        ),
+      updateInterceptEndpointGroupAssociation:
+        new this._gaxModule.LongrunningDescriptor(
+          this.operationsClient,
+          updateInterceptEndpointGroupAssociationResponse.decode.bind(
+            updateInterceptEndpointGroupAssociationResponse,
+          ),
+          updateInterceptEndpointGroupAssociationMetadata.decode.bind(
+            updateInterceptEndpointGroupAssociationMetadata,
+          ),
+        ),
+      deleteInterceptEndpointGroupAssociation:
+        new this._gaxModule.LongrunningDescriptor(
+          this.operationsClient,
+          deleteInterceptEndpointGroupAssociationResponse.decode.bind(
+            deleteInterceptEndpointGroupAssociationResponse,
+          ),
+          deleteInterceptEndpointGroupAssociationMetadata.decode.bind(
+            deleteInterceptEndpointGroupAssociationMetadata,
+          ),
+        ),
       createInterceptDeploymentGroup: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createInterceptDeploymentGroupResponse.decode.bind(createInterceptDeploymentGroupResponse),
-        createInterceptDeploymentGroupMetadata.decode.bind(createInterceptDeploymentGroupMetadata)),
+        createInterceptDeploymentGroupResponse.decode.bind(
+          createInterceptDeploymentGroupResponse,
+        ),
+        createInterceptDeploymentGroupMetadata.decode.bind(
+          createInterceptDeploymentGroupMetadata,
+        ),
+      ),
       updateInterceptDeploymentGroup: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        updateInterceptDeploymentGroupResponse.decode.bind(updateInterceptDeploymentGroupResponse),
-        updateInterceptDeploymentGroupMetadata.decode.bind(updateInterceptDeploymentGroupMetadata)),
+        updateInterceptDeploymentGroupResponse.decode.bind(
+          updateInterceptDeploymentGroupResponse,
+        ),
+        updateInterceptDeploymentGroupMetadata.decode.bind(
+          updateInterceptDeploymentGroupMetadata,
+        ),
+      ),
       deleteInterceptDeploymentGroup: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deleteInterceptDeploymentGroupResponse.decode.bind(deleteInterceptDeploymentGroupResponse),
-        deleteInterceptDeploymentGroupMetadata.decode.bind(deleteInterceptDeploymentGroupMetadata)),
+        deleteInterceptDeploymentGroupResponse.decode.bind(
+          deleteInterceptDeploymentGroupResponse,
+        ),
+        deleteInterceptDeploymentGroupMetadata.decode.bind(
+          deleteInterceptDeploymentGroupMetadata,
+        ),
+      ),
       createInterceptDeployment: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createInterceptDeploymentResponse.decode.bind(createInterceptDeploymentResponse),
-        createInterceptDeploymentMetadata.decode.bind(createInterceptDeploymentMetadata)),
+        createInterceptDeploymentResponse.decode.bind(
+          createInterceptDeploymentResponse,
+        ),
+        createInterceptDeploymentMetadata.decode.bind(
+          createInterceptDeploymentMetadata,
+        ),
+      ),
       updateInterceptDeployment: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        updateInterceptDeploymentResponse.decode.bind(updateInterceptDeploymentResponse),
-        updateInterceptDeploymentMetadata.decode.bind(updateInterceptDeploymentMetadata)),
+        updateInterceptDeploymentResponse.decode.bind(
+          updateInterceptDeploymentResponse,
+        ),
+        updateInterceptDeploymentMetadata.decode.bind(
+          updateInterceptDeploymentMetadata,
+        ),
+      ),
       deleteInterceptDeployment: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deleteInterceptDeploymentResponse.decode.bind(deleteInterceptDeploymentResponse),
-        deleteInterceptDeploymentMetadata.decode.bind(deleteInterceptDeploymentMetadata))
+        deleteInterceptDeploymentResponse.decode.bind(
+          deleteInterceptDeploymentResponse,
+        ),
+        deleteInterceptDeploymentMetadata.decode.bind(
+          deleteInterceptDeploymentMetadata,
+        ),
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.networksecurity.v1alpha1.Intercept', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.networksecurity.v1alpha1.Intercept',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -460,28 +710,54 @@ export class InterceptClient {
     // Put together the "service stub" for
     // google.cloud.networksecurity.v1alpha1.Intercept.
     this.interceptStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.networksecurity.v1alpha1.Intercept') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.networksecurity.v1alpha1.Intercept',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.networksecurity.v1alpha1.Intercept,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const interceptStubMethods =
-        ['listInterceptEndpointGroups', 'getInterceptEndpointGroup', 'createInterceptEndpointGroup', 'updateInterceptEndpointGroup', 'deleteInterceptEndpointGroup', 'listInterceptEndpointGroupAssociations', 'getInterceptEndpointGroupAssociation', 'createInterceptEndpointGroupAssociation', 'updateInterceptEndpointGroupAssociation', 'deleteInterceptEndpointGroupAssociation', 'listInterceptDeploymentGroups', 'getInterceptDeploymentGroup', 'createInterceptDeploymentGroup', 'updateInterceptDeploymentGroup', 'deleteInterceptDeploymentGroup', 'listInterceptDeployments', 'getInterceptDeployment', 'createInterceptDeployment', 'updateInterceptDeployment', 'deleteInterceptDeployment'];
+    const interceptStubMethods = [
+      'listInterceptEndpointGroups',
+      'getInterceptEndpointGroup',
+      'createInterceptEndpointGroup',
+      'updateInterceptEndpointGroup',
+      'deleteInterceptEndpointGroup',
+      'listInterceptEndpointGroupAssociations',
+      'getInterceptEndpointGroupAssociation',
+      'createInterceptEndpointGroupAssociation',
+      'updateInterceptEndpointGroupAssociation',
+      'deleteInterceptEndpointGroupAssociation',
+      'listInterceptDeploymentGroups',
+      'getInterceptDeploymentGroup',
+      'createInterceptDeploymentGroup',
+      'updateInterceptDeploymentGroup',
+      'deleteInterceptDeploymentGroup',
+      'listInterceptDeployments',
+      'getInterceptDeployment',
+      'createInterceptDeployment',
+      'updateInterceptDeployment',
+      'deleteInterceptDeployment',
+    ];
     for (const methodName of interceptStubMethods) {
       const callPromise = this.interceptStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -491,7 +767,7 @@ export class InterceptClient {
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -506,8 +782,14 @@ export class InterceptClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'networksecurity.googleapis.com';
   }
@@ -518,8 +800,14 @@ export class InterceptClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'networksecurity.googleapis.com';
   }
@@ -550,9 +838,7 @@ export class InterceptClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -561,8 +847,9 @@ export class InterceptClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -573,1883 +860,2932 @@ export class InterceptClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Gets a specific endpoint group.
- * See https://google.aip.dev/131.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the endpoint group to retrieve.
- *   Format:
- *   projects/{project}/locations/{location}/interceptEndpointGroups/{intercept_endpoint_group}
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroup|InterceptEndpointGroup}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/intercept.get_intercept_endpoint_group.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Intercept_GetInterceptEndpointGroup_async
- */
+  /**
+   * Gets a specific endpoint group.
+   * See https://google.aip.dev/131.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the endpoint group to retrieve.
+   *   Format:
+   *   projects/{project}/locations/{location}/interceptEndpointGroups/{intercept_endpoint_group}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroup|InterceptEndpointGroup}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/intercept.get_intercept_endpoint_group.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Intercept_GetInterceptEndpointGroup_async
+   */
   getInterceptEndpointGroup(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup,
-        protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup,
+      (
+        | protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getInterceptEndpointGroup(
-      request: protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup,
-          protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup,
+      | protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getInterceptEndpointGroup(
-      request: protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupRequest,
-      callback: Callback<
-          protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup,
-          protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupRequest,
+    callback: Callback<
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup,
+      | protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getInterceptEndpointGroup(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup,
-          protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup,
-          protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup,
-        protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup,
+      | protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup,
+      (
+        | protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getInterceptEndpointGroup request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup,
-        protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup,
+          | protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getInterceptEndpointGroup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getInterceptEndpointGroup(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup,
-        protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getInterceptEndpointGroup response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getInterceptEndpointGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup,
+          (
+            | protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getInterceptEndpointGroup response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets a specific association.
- * See https://google.aip.dev/131.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the association to retrieve.
- *   Format:
- *   projects/{project}/locations/{location}/interceptEndpointGroupAssociations/{intercept_endpoint_group_association}
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroupAssociation|InterceptEndpointGroupAssociation}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/intercept.get_intercept_endpoint_group_association.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Intercept_GetInterceptEndpointGroupAssociation_async
- */
+  /**
+   * Gets a specific association.
+   * See https://google.aip.dev/131.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the association to retrieve.
+   *   Format:
+   *   projects/{project}/locations/{location}/interceptEndpointGroupAssociations/{intercept_endpoint_group_association}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroupAssociation|InterceptEndpointGroupAssociation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/intercept.get_intercept_endpoint_group_association.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Intercept_GetInterceptEndpointGroupAssociation_async
+   */
   getInterceptEndpointGroupAssociation(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupAssociationRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation,
-        protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupAssociationRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupAssociationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation,
+      (
+        | protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupAssociationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getInterceptEndpointGroupAssociation(
-      request: protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupAssociationRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation,
-          protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupAssociationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupAssociationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation,
+      | protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupAssociationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getInterceptEndpointGroupAssociation(
-      request: protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupAssociationRequest,
-      callback: Callback<
-          protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation,
-          protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupAssociationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupAssociationRequest,
+    callback: Callback<
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation,
+      | protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupAssociationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getInterceptEndpointGroupAssociation(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupAssociationRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupAssociationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation,
-          protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupAssociationRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation,
-          protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupAssociationRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation,
-        protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupAssociationRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupAssociationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation,
+      | protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupAssociationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation,
+      (
+        | protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupAssociationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getInterceptEndpointGroupAssociation request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation,
-        protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupAssociationRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation,
+          | protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupAssociationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getInterceptEndpointGroupAssociation response %j', response);
+          this._log.info(
+            'getInterceptEndpointGroupAssociation response %j',
+            response,
+          );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getInterceptEndpointGroupAssociation(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation,
-        protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupAssociationRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getInterceptEndpointGroupAssociation response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getInterceptEndpointGroupAssociation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation,
+          (
+            | protos.google.cloud.networksecurity.v1alpha1.IGetInterceptEndpointGroupAssociationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'getInterceptEndpointGroupAssociation response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets a specific deployment group.
- * See https://google.aip.dev/131.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the deployment group to retrieve.
- *   Format:
- *   projects/{project}/locations/{location}/interceptDeploymentGroups/{intercept_deployment_group}
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1alpha1.InterceptDeploymentGroup|InterceptDeploymentGroup}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/intercept.get_intercept_deployment_group.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Intercept_GetInterceptDeploymentGroup_async
- */
+  /**
+   * Gets a specific deployment group.
+   * See https://google.aip.dev/131.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the deployment group to retrieve.
+   *   Format:
+   *   projects/{project}/locations/{location}/interceptDeploymentGroups/{intercept_deployment_group}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1alpha1.InterceptDeploymentGroup|InterceptDeploymentGroup}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/intercept.get_intercept_deployment_group.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Intercept_GetInterceptDeploymentGroup_async
+   */
   getInterceptDeploymentGroup(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentGroupRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup,
-        protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentGroupRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentGroupRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup,
+      (
+        | protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentGroupRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getInterceptDeploymentGroup(
-      request: protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentGroupRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup,
-          protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentGroupRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup,
+      | protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getInterceptDeploymentGroup(
-      request: protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentGroupRequest,
-      callback: Callback<
-          protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup,
-          protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentGroupRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentGroupRequest,
+    callback: Callback<
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup,
+      | protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getInterceptDeploymentGroup(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentGroupRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentGroupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup,
-          protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentGroupRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup,
-          protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentGroupRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup,
-        protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentGroupRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup,
+      | protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup,
+      (
+        | protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentGroupRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getInterceptDeploymentGroup request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup,
-        protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentGroupRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup,
+          | protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getInterceptDeploymentGroup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getInterceptDeploymentGroup(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup,
-        protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentGroupRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getInterceptDeploymentGroup response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getInterceptDeploymentGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup,
+          (
+            | protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentGroupRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getInterceptDeploymentGroup response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets a specific deployment.
- * See https://google.aip.dev/131.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the deployment to retrieve.
- *   Format:
- *   projects/{project}/locations/{location}/interceptDeployments/{intercept_deployment}
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1alpha1.InterceptDeployment|InterceptDeployment}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/intercept.get_intercept_deployment.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Intercept_GetInterceptDeployment_async
- */
+  /**
+   * Gets a specific deployment.
+   * See https://google.aip.dev/131.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the deployment to retrieve.
+   *   Format:
+   *   projects/{project}/locations/{location}/interceptDeployments/{intercept_deployment}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1alpha1.InterceptDeployment|InterceptDeployment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/intercept.get_intercept_deployment.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Intercept_GetInterceptDeployment_async
+   */
   getInterceptDeployment(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment,
-        protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment,
+      (
+        | protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getInterceptDeployment(
-      request: protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment,
-          protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment,
+      | protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getInterceptDeployment(
-      request: protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentRequest,
-      callback: Callback<
-          protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment,
-          protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentRequest,
+    callback: Callback<
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment,
+      | protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getInterceptDeployment(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment,
-          protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment,
-          protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment,
-        protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment,
+      | protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment,
+      (
+        | protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getInterceptDeployment request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment,
-        protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment,
+          | protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getInterceptDeployment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getInterceptDeployment(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment,
-        protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getInterceptDeployment response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getInterceptDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment,
+          (
+            | protos.google.cloud.networksecurity.v1alpha1.IGetInterceptDeploymentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getInterceptDeployment response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
- * Creates an endpoint group in a given project and location.
- * See https://google.aip.dev/133.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource where this endpoint group will be created.
- *   Format: projects/{project}/locations/{location}
- * @param {string} request.interceptEndpointGroupId
- *   Required. The ID to use for the endpoint group, which will become the final
- *   component of the endpoint group's resource name.
- * @param {google.cloud.networksecurity.v1alpha1.InterceptEndpointGroup} request.interceptEndpointGroup
- *   Required. The endpoint group to create.
- * @param {string} [request.requestId]
- *   Optional. A unique identifier for this request. Must be a UUID4.
- *   This request is only idempotent if a `request_id` is provided.
- *   See https://google.aip.dev/155 for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/intercept.create_intercept_endpoint_group.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Intercept_CreateInterceptEndpointGroup_async
- */
+  /**
+   * Creates an endpoint group in a given project and location.
+   * See https://google.aip.dev/133.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where this endpoint group will be created.
+   *   Format: projects/{project}/locations/{location}
+   * @param {string} request.interceptEndpointGroupId
+   *   Required. The ID to use for the endpoint group, which will become the final
+   *   component of the endpoint group's resource name.
+   * @param {google.cloud.networksecurity.v1alpha1.InterceptEndpointGroup} request.interceptEndpointGroup
+   *   Required. The endpoint group to create.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. Must be a UUID4.
+   *   This request is only idempotent if a `request_id` is provided.
+   *   See https://google.aip.dev/155 for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/intercept.create_intercept_endpoint_group.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Intercept_CreateInterceptEndpointGroup_async
+   */
   createInterceptEndpointGroup(
-      request?: protos.google.cloud.networksecurity.v1alpha1.ICreateInterceptEndpointGroupRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.ICreateInterceptEndpointGroupRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createInterceptEndpointGroup(
-      request: protos.google.cloud.networksecurity.v1alpha1.ICreateInterceptEndpointGroupRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.ICreateInterceptEndpointGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createInterceptEndpointGroup(
-      request: protos.google.cloud.networksecurity.v1alpha1.ICreateInterceptEndpointGroupRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.ICreateInterceptEndpointGroupRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createInterceptEndpointGroup(
-      request?: protos.google.cloud.networksecurity.v1alpha1.ICreateInterceptEndpointGroupRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1alpha1.ICreateInterceptEndpointGroupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createInterceptEndpointGroup response %j', rawResponse);
+          this._log.info(
+            'createInterceptEndpointGroup response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createInterceptEndpointGroup request %j', request);
-    return this.innerApiCalls.createInterceptEndpointGroup(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createInterceptEndpointGroup response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createInterceptEndpointGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'createInterceptEndpointGroup response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createInterceptEndpointGroup()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/intercept.create_intercept_endpoint_group.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Intercept_CreateInterceptEndpointGroup_async
- */
-  async checkCreateInterceptEndpointGroupProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createInterceptEndpointGroup()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/intercept.create_intercept_endpoint_group.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Intercept_CreateInterceptEndpointGroup_async
+   */
+  async checkCreateInterceptEndpointGroupProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroup,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >
+  > {
     this._log.info('createInterceptEndpointGroup long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createInterceptEndpointGroup, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createInterceptEndpointGroup,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroup,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >;
   }
-/**
- * Updates an endpoint group.
- * See https://google.aip.dev/134.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. The list of fields to update.
- *   Fields are specified relative to the endpoint group
- *   (e.g. `description`; *not* `intercept_endpoint_group.description`).
- *   See https://google.aip.dev/161 for more details.
- * @param {google.cloud.networksecurity.v1alpha1.InterceptEndpointGroup} request.interceptEndpointGroup
- *   Required. The endpoint group to update.
- * @param {string} [request.requestId]
- *   Optional. A unique identifier for this request. Must be a UUID4.
- *   This request is only idempotent if a `request_id` is provided.
- *   See https://google.aip.dev/155 for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/intercept.update_intercept_endpoint_group.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Intercept_UpdateInterceptEndpointGroup_async
- */
+  /**
+   * Updates an endpoint group.
+   * See https://google.aip.dev/134.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The list of fields to update.
+   *   Fields are specified relative to the endpoint group
+   *   (e.g. `description`; *not* `intercept_endpoint_group.description`).
+   *   See https://google.aip.dev/161 for more details.
+   * @param {google.cloud.networksecurity.v1alpha1.InterceptEndpointGroup} request.interceptEndpointGroup
+   *   Required. The endpoint group to update.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. Must be a UUID4.
+   *   This request is only idempotent if a `request_id` is provided.
+   *   See https://google.aip.dev/155 for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/intercept.update_intercept_endpoint_group.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Intercept_UpdateInterceptEndpointGroup_async
+   */
   updateInterceptEndpointGroup(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateInterceptEndpointGroupRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateInterceptEndpointGroupRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateInterceptEndpointGroup(
-      request: protos.google.cloud.networksecurity.v1alpha1.IUpdateInterceptEndpointGroupRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IUpdateInterceptEndpointGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateInterceptEndpointGroup(
-      request: protos.google.cloud.networksecurity.v1alpha1.IUpdateInterceptEndpointGroupRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IUpdateInterceptEndpointGroupRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateInterceptEndpointGroup(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateInterceptEndpointGroupRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateInterceptEndpointGroupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'intercept_endpoint_group.name': request.interceptEndpointGroup!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'intercept_endpoint_group.name':
+          request.interceptEndpointGroup!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateInterceptEndpointGroup response %j', rawResponse);
+          this._log.info(
+            'updateInterceptEndpointGroup response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateInterceptEndpointGroup request %j', request);
-    return this.innerApiCalls.updateInterceptEndpointGroup(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateInterceptEndpointGroup response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateInterceptEndpointGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'updateInterceptEndpointGroup response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateInterceptEndpointGroup()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/intercept.update_intercept_endpoint_group.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Intercept_UpdateInterceptEndpointGroup_async
- */
-  async checkUpdateInterceptEndpointGroupProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateInterceptEndpointGroup()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/intercept.update_intercept_endpoint_group.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Intercept_UpdateInterceptEndpointGroup_async
+   */
+  async checkUpdateInterceptEndpointGroupProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroup,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >
+  > {
     this._log.info('updateInterceptEndpointGroup long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateInterceptEndpointGroup, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroup, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateInterceptEndpointGroup,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroup,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >;
   }
-/**
- * Deletes an endpoint group.
- * See https://google.aip.dev/135.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The endpoint group to delete.
- * @param {string} [request.requestId]
- *   Optional. A unique identifier for this request. Must be a UUID4.
- *   This request is only idempotent if a `request_id` is provided.
- *   See https://google.aip.dev/155 for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/intercept.delete_intercept_endpoint_group.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Intercept_DeleteInterceptEndpointGroup_async
- */
+  /**
+   * Deletes an endpoint group.
+   * See https://google.aip.dev/135.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The endpoint group to delete.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. Must be a UUID4.
+   *   This request is only idempotent if a `request_id` is provided.
+   *   See https://google.aip.dev/155 for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/intercept.delete_intercept_endpoint_group.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Intercept_DeleteInterceptEndpointGroup_async
+   */
   deleteInterceptEndpointGroup(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteInterceptEndpointGroupRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteInterceptEndpointGroupRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteInterceptEndpointGroup(
-      request: protos.google.cloud.networksecurity.v1alpha1.IDeleteInterceptEndpointGroupRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IDeleteInterceptEndpointGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteInterceptEndpointGroup(
-      request: protos.google.cloud.networksecurity.v1alpha1.IDeleteInterceptEndpointGroupRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IDeleteInterceptEndpointGroupRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteInterceptEndpointGroup(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteInterceptEndpointGroupRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteInterceptEndpointGroupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteInterceptEndpointGroup response %j', rawResponse);
+          this._log.info(
+            'deleteInterceptEndpointGroup response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteInterceptEndpointGroup request %j', request);
-    return this.innerApiCalls.deleteInterceptEndpointGroup(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteInterceptEndpointGroup response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteInterceptEndpointGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteInterceptEndpointGroup response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteInterceptEndpointGroup()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/intercept.delete_intercept_endpoint_group.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Intercept_DeleteInterceptEndpointGroup_async
- */
-  async checkDeleteInterceptEndpointGroupProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteInterceptEndpointGroup()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/intercept.delete_intercept_endpoint_group.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Intercept_DeleteInterceptEndpointGroup_async
+   */
+  async checkDeleteInterceptEndpointGroupProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >
+  > {
     this._log.info('deleteInterceptEndpointGroup long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteInterceptEndpointGroup, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteInterceptEndpointGroup,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >;
   }
-/**
- * Creates an association in a given project and location.
- * See https://google.aip.dev/133.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource where this association will be created.
- *   Format: projects/{project}/locations/{location}
- * @param {string} [request.interceptEndpointGroupAssociationId]
- *   Optional. The ID to use for the new association, which will become the
- *   final component of the endpoint group's resource name. If not provided, the
- *   server will generate a unique ID.
- * @param {google.cloud.networksecurity.v1alpha1.InterceptEndpointGroupAssociation} request.interceptEndpointGroupAssociation
- *   Required. The association to create.
- * @param {string} [request.requestId]
- *   Optional. A unique identifier for this request. Must be a UUID4.
- *   This request is only idempotent if a `request_id` is provided.
- *   See https://google.aip.dev/155 for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/intercept.create_intercept_endpoint_group_association.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Intercept_CreateInterceptEndpointGroupAssociation_async
- */
+  /**
+   * Creates an association in a given project and location.
+   * See https://google.aip.dev/133.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where this association will be created.
+   *   Format: projects/{project}/locations/{location}
+   * @param {string} [request.interceptEndpointGroupAssociationId]
+   *   Optional. The ID to use for the new association, which will become the
+   *   final component of the endpoint group's resource name. If not provided, the
+   *   server will generate a unique ID.
+   * @param {google.cloud.networksecurity.v1alpha1.InterceptEndpointGroupAssociation} request.interceptEndpointGroupAssociation
+   *   Required. The association to create.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. Must be a UUID4.
+   *   This request is only idempotent if a `request_id` is provided.
+   *   See https://google.aip.dev/155 for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/intercept.create_intercept_endpoint_group_association.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Intercept_CreateInterceptEndpointGroupAssociation_async
+   */
   createInterceptEndpointGroupAssociation(
-      request?: protos.google.cloud.networksecurity.v1alpha1.ICreateInterceptEndpointGroupAssociationRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.ICreateInterceptEndpointGroupAssociationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createInterceptEndpointGroupAssociation(
-      request: protos.google.cloud.networksecurity.v1alpha1.ICreateInterceptEndpointGroupAssociationRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.ICreateInterceptEndpointGroupAssociationRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createInterceptEndpointGroupAssociation(
-      request: protos.google.cloud.networksecurity.v1alpha1.ICreateInterceptEndpointGroupAssociationRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.ICreateInterceptEndpointGroupAssociationRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createInterceptEndpointGroupAssociation(
-      request?: protos.google.cloud.networksecurity.v1alpha1.ICreateInterceptEndpointGroupAssociationRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1alpha1.ICreateInterceptEndpointGroupAssociationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createInterceptEndpointGroupAssociation response %j', rawResponse);
+          this._log.info(
+            'createInterceptEndpointGroupAssociation response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createInterceptEndpointGroupAssociation request %j', request);
-    return this.innerApiCalls.createInterceptEndpointGroupAssociation(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createInterceptEndpointGroupAssociation response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    this._log.info(
+      'createInterceptEndpointGroupAssociation request %j',
+      request,
+    );
+    return this.innerApiCalls
+      .createInterceptEndpointGroupAssociation(
+        request,
+        options,
+        wrappedCallback,
+      )
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'createInterceptEndpointGroupAssociation response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createInterceptEndpointGroupAssociation()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/intercept.create_intercept_endpoint_group_association.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Intercept_CreateInterceptEndpointGroupAssociation_async
- */
-  async checkCreateInterceptEndpointGroupAssociationProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createInterceptEndpointGroupAssociation()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/intercept.create_intercept_endpoint_group_association.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Intercept_CreateInterceptEndpointGroupAssociation_async
+   */
+  async checkCreateInterceptEndpointGroupAssociationProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroupAssociation,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >
+  > {
     this._log.info('createInterceptEndpointGroupAssociation long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createInterceptEndpointGroupAssociation, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createInterceptEndpointGroupAssociation,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroupAssociation,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >;
   }
-/**
- * Updates an association.
- * See https://google.aip.dev/134.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. The list of fields to update.
- *   Fields are specified relative to the association
- *   (e.g. `description`; *not*
- *   `intercept_endpoint_group_association.description`). See
- *   https://google.aip.dev/161 for more details.
- * @param {google.cloud.networksecurity.v1alpha1.InterceptEndpointGroupAssociation} request.interceptEndpointGroupAssociation
- *   Required. The association to update.
- * @param {string} [request.requestId]
- *   Optional. A unique identifier for this request. Must be a UUID4.
- *   This request is only idempotent if a `request_id` is provided.
- *   See https://google.aip.dev/155 for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/intercept.update_intercept_endpoint_group_association.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Intercept_UpdateInterceptEndpointGroupAssociation_async
- */
+  /**
+   * Updates an association.
+   * See https://google.aip.dev/134.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The list of fields to update.
+   *   Fields are specified relative to the association
+   *   (e.g. `description`; *not*
+   *   `intercept_endpoint_group_association.description`). See
+   *   https://google.aip.dev/161 for more details.
+   * @param {google.cloud.networksecurity.v1alpha1.InterceptEndpointGroupAssociation} request.interceptEndpointGroupAssociation
+   *   Required. The association to update.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. Must be a UUID4.
+   *   This request is only idempotent if a `request_id` is provided.
+   *   See https://google.aip.dev/155 for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/intercept.update_intercept_endpoint_group_association.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Intercept_UpdateInterceptEndpointGroupAssociation_async
+   */
   updateInterceptEndpointGroupAssociation(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateInterceptEndpointGroupAssociationRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateInterceptEndpointGroupAssociationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateInterceptEndpointGroupAssociation(
-      request: protos.google.cloud.networksecurity.v1alpha1.IUpdateInterceptEndpointGroupAssociationRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IUpdateInterceptEndpointGroupAssociationRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateInterceptEndpointGroupAssociation(
-      request: protos.google.cloud.networksecurity.v1alpha1.IUpdateInterceptEndpointGroupAssociationRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IUpdateInterceptEndpointGroupAssociationRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateInterceptEndpointGroupAssociation(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateInterceptEndpointGroupAssociationRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateInterceptEndpointGroupAssociationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'intercept_endpoint_group_association.name': request.interceptEndpointGroupAssociation!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'intercept_endpoint_group_association.name':
+          request.interceptEndpointGroupAssociation!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateInterceptEndpointGroupAssociation response %j', rawResponse);
+          this._log.info(
+            'updateInterceptEndpointGroupAssociation response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateInterceptEndpointGroupAssociation request %j', request);
-    return this.innerApiCalls.updateInterceptEndpointGroupAssociation(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateInterceptEndpointGroupAssociation response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    this._log.info(
+      'updateInterceptEndpointGroupAssociation request %j',
+      request,
+    );
+    return this.innerApiCalls
+      .updateInterceptEndpointGroupAssociation(
+        request,
+        options,
+        wrappedCallback,
+      )
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'updateInterceptEndpointGroupAssociation response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateInterceptEndpointGroupAssociation()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/intercept.update_intercept_endpoint_group_association.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Intercept_UpdateInterceptEndpointGroupAssociation_async
- */
-  async checkUpdateInterceptEndpointGroupAssociationProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateInterceptEndpointGroupAssociation()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/intercept.update_intercept_endpoint_group_association.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Intercept_UpdateInterceptEndpointGroupAssociation_async
+   */
+  async checkUpdateInterceptEndpointGroupAssociationProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroupAssociation,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >
+  > {
     this._log.info('updateInterceptEndpointGroupAssociation long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateInterceptEndpointGroupAssociation, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroupAssociation, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateInterceptEndpointGroupAssociation,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroupAssociation,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >;
   }
-/**
- * Deletes an association.
- * See https://google.aip.dev/135.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The association to delete.
- * @param {string} [request.requestId]
- *   Optional. A unique identifier for this request. Must be a UUID4.
- *   This request is only idempotent if a `request_id` is provided.
- *   See https://google.aip.dev/155 for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/intercept.delete_intercept_endpoint_group_association.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Intercept_DeleteInterceptEndpointGroupAssociation_async
- */
+  /**
+   * Deletes an association.
+   * See https://google.aip.dev/135.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The association to delete.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. Must be a UUID4.
+   *   This request is only idempotent if a `request_id` is provided.
+   *   See https://google.aip.dev/155 for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/intercept.delete_intercept_endpoint_group_association.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Intercept_DeleteInterceptEndpointGroupAssociation_async
+   */
   deleteInterceptEndpointGroupAssociation(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteInterceptEndpointGroupAssociationRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteInterceptEndpointGroupAssociationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteInterceptEndpointGroupAssociation(
-      request: protos.google.cloud.networksecurity.v1alpha1.IDeleteInterceptEndpointGroupAssociationRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IDeleteInterceptEndpointGroupAssociationRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteInterceptEndpointGroupAssociation(
-      request: protos.google.cloud.networksecurity.v1alpha1.IDeleteInterceptEndpointGroupAssociationRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IDeleteInterceptEndpointGroupAssociationRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteInterceptEndpointGroupAssociation(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteInterceptEndpointGroupAssociationRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteInterceptEndpointGroupAssociationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteInterceptEndpointGroupAssociation response %j', rawResponse);
+          this._log.info(
+            'deleteInterceptEndpointGroupAssociation response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteInterceptEndpointGroupAssociation request %j', request);
-    return this.innerApiCalls.deleteInterceptEndpointGroupAssociation(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteInterceptEndpointGroupAssociation response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    this._log.info(
+      'deleteInterceptEndpointGroupAssociation request %j',
+      request,
+    );
+    return this.innerApiCalls
+      .deleteInterceptEndpointGroupAssociation(
+        request,
+        options,
+        wrappedCallback,
+      )
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteInterceptEndpointGroupAssociation response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteInterceptEndpointGroupAssociation()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/intercept.delete_intercept_endpoint_group_association.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Intercept_DeleteInterceptEndpointGroupAssociation_async
- */
-  async checkDeleteInterceptEndpointGroupAssociationProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteInterceptEndpointGroupAssociation()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/intercept.delete_intercept_endpoint_group_association.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Intercept_DeleteInterceptEndpointGroupAssociation_async
+   */
+  async checkDeleteInterceptEndpointGroupAssociationProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >
+  > {
     this._log.info('deleteInterceptEndpointGroupAssociation long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteInterceptEndpointGroupAssociation, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteInterceptEndpointGroupAssociation,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >;
   }
-/**
- * Creates a deployment group in a given project and location.
- * See https://google.aip.dev/133.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource where this deployment group will be created.
- *   Format: projects/{project}/locations/{location}
- * @param {string} request.interceptDeploymentGroupId
- *   Required. The ID to use for the new deployment group, which will become the
- *   final component of the deployment group's resource name.
- * @param {google.cloud.networksecurity.v1alpha1.InterceptDeploymentGroup} request.interceptDeploymentGroup
- *   Required. The deployment group to create.
- * @param {string} [request.requestId]
- *   Optional. A unique identifier for this request. Must be a UUID4.
- *   This request is only idempotent if a `request_id` is provided.
- *   See https://google.aip.dev/155 for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/intercept.create_intercept_deployment_group.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Intercept_CreateInterceptDeploymentGroup_async
- */
+  /**
+   * Creates a deployment group in a given project and location.
+   * See https://google.aip.dev/133.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where this deployment group will be created.
+   *   Format: projects/{project}/locations/{location}
+   * @param {string} request.interceptDeploymentGroupId
+   *   Required. The ID to use for the new deployment group, which will become the
+   *   final component of the deployment group's resource name.
+   * @param {google.cloud.networksecurity.v1alpha1.InterceptDeploymentGroup} request.interceptDeploymentGroup
+   *   Required. The deployment group to create.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. Must be a UUID4.
+   *   This request is only idempotent if a `request_id` is provided.
+   *   See https://google.aip.dev/155 for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/intercept.create_intercept_deployment_group.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Intercept_CreateInterceptDeploymentGroup_async
+   */
   createInterceptDeploymentGroup(
-      request?: protos.google.cloud.networksecurity.v1alpha1.ICreateInterceptDeploymentGroupRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.ICreateInterceptDeploymentGroupRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createInterceptDeploymentGroup(
-      request: protos.google.cloud.networksecurity.v1alpha1.ICreateInterceptDeploymentGroupRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.ICreateInterceptDeploymentGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createInterceptDeploymentGroup(
-      request: protos.google.cloud.networksecurity.v1alpha1.ICreateInterceptDeploymentGroupRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.ICreateInterceptDeploymentGroupRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createInterceptDeploymentGroup(
-      request?: protos.google.cloud.networksecurity.v1alpha1.ICreateInterceptDeploymentGroupRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1alpha1.ICreateInterceptDeploymentGroupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createInterceptDeploymentGroup response %j', rawResponse);
+          this._log.info(
+            'createInterceptDeploymentGroup response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createInterceptDeploymentGroup request %j', request);
-    return this.innerApiCalls.createInterceptDeploymentGroup(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createInterceptDeploymentGroup response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createInterceptDeploymentGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'createInterceptDeploymentGroup response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createInterceptDeploymentGroup()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/intercept.create_intercept_deployment_group.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Intercept_CreateInterceptDeploymentGroup_async
- */
-  async checkCreateInterceptDeploymentGroupProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1alpha1.InterceptDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createInterceptDeploymentGroup()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/intercept.create_intercept_deployment_group.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Intercept_CreateInterceptDeploymentGroup_async
+   */
+  async checkCreateInterceptDeploymentGroupProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networksecurity.v1alpha1.InterceptDeploymentGroup,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >
+  > {
     this._log.info('createInterceptDeploymentGroup long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createInterceptDeploymentGroup, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1alpha1.InterceptDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createInterceptDeploymentGroup,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networksecurity.v1alpha1.InterceptDeploymentGroup,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >;
   }
-/**
- * Updates a deployment group.
- * See https://google.aip.dev/134.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. The list of fields to update.
- *   Fields are specified relative to the deployment group
- *   (e.g. `description`; *not*
- *   `intercept_deployment_group.description`). See
- *   https://google.aip.dev/161 for more details.
- * @param {google.cloud.networksecurity.v1alpha1.InterceptDeploymentGroup} request.interceptDeploymentGroup
- *   Required. The deployment group to update.
- * @param {string} [request.requestId]
- *   Optional. A unique identifier for this request. Must be a UUID4.
- *   This request is only idempotent if a `request_id` is provided.
- *   See https://google.aip.dev/155 for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/intercept.update_intercept_deployment_group.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Intercept_UpdateInterceptDeploymentGroup_async
- */
+  /**
+   * Updates a deployment group.
+   * See https://google.aip.dev/134.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The list of fields to update.
+   *   Fields are specified relative to the deployment group
+   *   (e.g. `description`; *not*
+   *   `intercept_deployment_group.description`). See
+   *   https://google.aip.dev/161 for more details.
+   * @param {google.cloud.networksecurity.v1alpha1.InterceptDeploymentGroup} request.interceptDeploymentGroup
+   *   Required. The deployment group to update.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. Must be a UUID4.
+   *   This request is only idempotent if a `request_id` is provided.
+   *   See https://google.aip.dev/155 for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/intercept.update_intercept_deployment_group.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Intercept_UpdateInterceptDeploymentGroup_async
+   */
   updateInterceptDeploymentGroup(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateInterceptDeploymentGroupRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateInterceptDeploymentGroupRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateInterceptDeploymentGroup(
-      request: protos.google.cloud.networksecurity.v1alpha1.IUpdateInterceptDeploymentGroupRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IUpdateInterceptDeploymentGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateInterceptDeploymentGroup(
-      request: protos.google.cloud.networksecurity.v1alpha1.IUpdateInterceptDeploymentGroupRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IUpdateInterceptDeploymentGroupRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateInterceptDeploymentGroup(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateInterceptDeploymentGroupRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateInterceptDeploymentGroupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'intercept_deployment_group.name': request.interceptDeploymentGroup!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'intercept_deployment_group.name':
+          request.interceptDeploymentGroup!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateInterceptDeploymentGroup response %j', rawResponse);
+          this._log.info(
+            'updateInterceptDeploymentGroup response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateInterceptDeploymentGroup request %j', request);
-    return this.innerApiCalls.updateInterceptDeploymentGroup(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateInterceptDeploymentGroup response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateInterceptDeploymentGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'updateInterceptDeploymentGroup response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateInterceptDeploymentGroup()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/intercept.update_intercept_deployment_group.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Intercept_UpdateInterceptDeploymentGroup_async
- */
-  async checkUpdateInterceptDeploymentGroupProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1alpha1.InterceptDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateInterceptDeploymentGroup()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/intercept.update_intercept_deployment_group.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Intercept_UpdateInterceptDeploymentGroup_async
+   */
+  async checkUpdateInterceptDeploymentGroupProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networksecurity.v1alpha1.InterceptDeploymentGroup,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >
+  > {
     this._log.info('updateInterceptDeploymentGroup long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateInterceptDeploymentGroup, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1alpha1.InterceptDeploymentGroup, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateInterceptDeploymentGroup,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networksecurity.v1alpha1.InterceptDeploymentGroup,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >;
   }
-/**
- * Deletes a deployment group.
- * See https://google.aip.dev/135.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The deployment group to delete.
- * @param {string} [request.requestId]
- *   Optional. A unique identifier for this request. Must be a UUID4.
- *   This request is only idempotent if a `request_id` is provided.
- *   See https://google.aip.dev/155 for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/intercept.delete_intercept_deployment_group.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Intercept_DeleteInterceptDeploymentGroup_async
- */
+  /**
+   * Deletes a deployment group.
+   * See https://google.aip.dev/135.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The deployment group to delete.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. Must be a UUID4.
+   *   This request is only idempotent if a `request_id` is provided.
+   *   See https://google.aip.dev/155 for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/intercept.delete_intercept_deployment_group.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Intercept_DeleteInterceptDeploymentGroup_async
+   */
   deleteInterceptDeploymentGroup(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteInterceptDeploymentGroupRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteInterceptDeploymentGroupRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteInterceptDeploymentGroup(
-      request: protos.google.cloud.networksecurity.v1alpha1.IDeleteInterceptDeploymentGroupRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IDeleteInterceptDeploymentGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteInterceptDeploymentGroup(
-      request: protos.google.cloud.networksecurity.v1alpha1.IDeleteInterceptDeploymentGroupRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IDeleteInterceptDeploymentGroupRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteInterceptDeploymentGroup(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteInterceptDeploymentGroupRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteInterceptDeploymentGroupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteInterceptDeploymentGroup response %j', rawResponse);
+          this._log.info(
+            'deleteInterceptDeploymentGroup response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteInterceptDeploymentGroup request %j', request);
-    return this.innerApiCalls.deleteInterceptDeploymentGroup(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteInterceptDeploymentGroup response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteInterceptDeploymentGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteInterceptDeploymentGroup response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteInterceptDeploymentGroup()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/intercept.delete_intercept_deployment_group.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Intercept_DeleteInterceptDeploymentGroup_async
- */
-  async checkDeleteInterceptDeploymentGroupProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteInterceptDeploymentGroup()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/intercept.delete_intercept_deployment_group.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Intercept_DeleteInterceptDeploymentGroup_async
+   */
+  async checkDeleteInterceptDeploymentGroupProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >
+  > {
     this._log.info('deleteInterceptDeploymentGroup long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteInterceptDeploymentGroup, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteInterceptDeploymentGroup,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >;
   }
-/**
- * Creates a deployment in a given project and location.
- * See https://google.aip.dev/133.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource where this deployment will be created.
- *   Format: projects/{project}/locations/{location}
- * @param {string} request.interceptDeploymentId
- *   Required. The ID to use for the new deployment, which will become the final
- *   component of the deployment's resource name.
- * @param {google.cloud.networksecurity.v1alpha1.InterceptDeployment} request.interceptDeployment
- *   Required. The deployment to create.
- * @param {string} [request.requestId]
- *   Optional. A unique identifier for this request. Must be a UUID4.
- *   This request is only idempotent if a `request_id` is provided.
- *   See https://google.aip.dev/155 for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/intercept.create_intercept_deployment.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Intercept_CreateInterceptDeployment_async
- */
+  /**
+   * Creates a deployment in a given project and location.
+   * See https://google.aip.dev/133.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where this deployment will be created.
+   *   Format: projects/{project}/locations/{location}
+   * @param {string} request.interceptDeploymentId
+   *   Required. The ID to use for the new deployment, which will become the final
+   *   component of the deployment's resource name.
+   * @param {google.cloud.networksecurity.v1alpha1.InterceptDeployment} request.interceptDeployment
+   *   Required. The deployment to create.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. Must be a UUID4.
+   *   This request is only idempotent if a `request_id` is provided.
+   *   See https://google.aip.dev/155 for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/intercept.create_intercept_deployment.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Intercept_CreateInterceptDeployment_async
+   */
   createInterceptDeployment(
-      request?: protos.google.cloud.networksecurity.v1alpha1.ICreateInterceptDeploymentRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.ICreateInterceptDeploymentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createInterceptDeployment(
-      request: protos.google.cloud.networksecurity.v1alpha1.ICreateInterceptDeploymentRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.ICreateInterceptDeploymentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createInterceptDeployment(
-      request: protos.google.cloud.networksecurity.v1alpha1.ICreateInterceptDeploymentRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.ICreateInterceptDeploymentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createInterceptDeployment(
-      request?: protos.google.cloud.networksecurity.v1alpha1.ICreateInterceptDeploymentRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1alpha1.ICreateInterceptDeploymentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createInterceptDeployment response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createInterceptDeployment request %j', request);
-    return this.innerApiCalls.createInterceptDeployment(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createInterceptDeployment response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createInterceptDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createInterceptDeployment response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createInterceptDeployment()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/intercept.create_intercept_deployment.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Intercept_CreateInterceptDeployment_async
- */
-  async checkCreateInterceptDeploymentProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1alpha1.InterceptDeployment, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createInterceptDeployment()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/intercept.create_intercept_deployment.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Intercept_CreateInterceptDeployment_async
+   */
+  async checkCreateInterceptDeploymentProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networksecurity.v1alpha1.InterceptDeployment,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >
+  > {
     this._log.info('createInterceptDeployment long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createInterceptDeployment, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1alpha1.InterceptDeployment, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createInterceptDeployment,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networksecurity.v1alpha1.InterceptDeployment,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >;
   }
-/**
- * Updates a deployment.
- * See https://google.aip.dev/134.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. The list of fields to update.
- *   Fields are specified relative to the deployment
- *   (e.g. `description`; *not* `intercept_deployment.description`).
- *   See https://google.aip.dev/161 for more details.
- * @param {google.cloud.networksecurity.v1alpha1.InterceptDeployment} request.interceptDeployment
- *   Required. The deployment to update.
- * @param {string} [request.requestId]
- *   Optional. A unique identifier for this request. Must be a UUID4.
- *   This request is only idempotent if a `request_id` is provided.
- *   See https://google.aip.dev/155 for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/intercept.update_intercept_deployment.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Intercept_UpdateInterceptDeployment_async
- */
+  /**
+   * Updates a deployment.
+   * See https://google.aip.dev/134.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The list of fields to update.
+   *   Fields are specified relative to the deployment
+   *   (e.g. `description`; *not* `intercept_deployment.description`).
+   *   See https://google.aip.dev/161 for more details.
+   * @param {google.cloud.networksecurity.v1alpha1.InterceptDeployment} request.interceptDeployment
+   *   Required. The deployment to update.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. Must be a UUID4.
+   *   This request is only idempotent if a `request_id` is provided.
+   *   See https://google.aip.dev/155 for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/intercept.update_intercept_deployment.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Intercept_UpdateInterceptDeployment_async
+   */
   updateInterceptDeployment(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateInterceptDeploymentRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateInterceptDeploymentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateInterceptDeployment(
-      request: protos.google.cloud.networksecurity.v1alpha1.IUpdateInterceptDeploymentRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IUpdateInterceptDeploymentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateInterceptDeployment(
-      request: protos.google.cloud.networksecurity.v1alpha1.IUpdateInterceptDeploymentRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IUpdateInterceptDeploymentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateInterceptDeployment(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateInterceptDeploymentRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateInterceptDeploymentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'intercept_deployment.name': request.interceptDeployment!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'intercept_deployment.name': request.interceptDeployment!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateInterceptDeployment response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateInterceptDeployment request %j', request);
-    return this.innerApiCalls.updateInterceptDeployment(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateInterceptDeployment response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateInterceptDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateInterceptDeployment response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateInterceptDeployment()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/intercept.update_intercept_deployment.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Intercept_UpdateInterceptDeployment_async
- */
-  async checkUpdateInterceptDeploymentProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1alpha1.InterceptDeployment, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateInterceptDeployment()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/intercept.update_intercept_deployment.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Intercept_UpdateInterceptDeployment_async
+   */
+  async checkUpdateInterceptDeploymentProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networksecurity.v1alpha1.InterceptDeployment,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >
+  > {
     this._log.info('updateInterceptDeployment long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateInterceptDeployment, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1alpha1.InterceptDeployment, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateInterceptDeployment,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networksecurity.v1alpha1.InterceptDeployment,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >;
   }
-/**
- * Deletes a deployment.
- * See https://google.aip.dev/135.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource
- * @param {string} [request.requestId]
- *   Optional. A unique identifier for this request. Must be a UUID4.
- *   This request is only idempotent if a `request_id` is provided.
- *   See https://google.aip.dev/155 for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/intercept.delete_intercept_deployment.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Intercept_DeleteInterceptDeployment_async
- */
+  /**
+   * Deletes a deployment.
+   * See https://google.aip.dev/135.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. Must be a UUID4.
+   *   This request is only idempotent if a `request_id` is provided.
+   *   See https://google.aip.dev/155 for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/intercept.delete_intercept_deployment.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Intercept_DeleteInterceptDeployment_async
+   */
   deleteInterceptDeployment(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteInterceptDeploymentRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteInterceptDeploymentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteInterceptDeployment(
-      request: protos.google.cloud.networksecurity.v1alpha1.IDeleteInterceptDeploymentRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IDeleteInterceptDeploymentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteInterceptDeployment(
-      request: protos.google.cloud.networksecurity.v1alpha1.IDeleteInterceptDeploymentRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IDeleteInterceptDeploymentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteInterceptDeployment(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteInterceptDeploymentRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteInterceptDeploymentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteInterceptDeployment response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteInterceptDeployment request %j', request);
-    return this.innerApiCalls.deleteInterceptDeployment(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteInterceptDeployment response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteInterceptDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteInterceptDeployment response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteInterceptDeployment()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/intercept.delete_intercept_deployment.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Intercept_DeleteInterceptDeployment_async
- */
-  async checkDeleteInterceptDeploymentProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteInterceptDeployment()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/intercept.delete_intercept_deployment.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Intercept_DeleteInterceptDeployment_async
+   */
+  async checkDeleteInterceptDeploymentProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >
+  > {
     this._log.info('deleteInterceptDeployment long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteInterceptDeployment, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteInterceptDeployment,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >;
   }
- /**
- * Lists endpoint groups in a given project and location.
- * See https://google.aip.dev/132.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of endpoint groups.
- *   Example: `projects/123456789/locations/global`.
- *   See https://google.aip.dev/132 for more details.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default. See
- *   https://google.aip.dev/158 for more details.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous
- *   `ListInterceptEndpointGroups` call. Provide this to retrieve the subsequent
- *   page. When paginating, all other parameters provided to
- *   `ListInterceptEndpointGroups` must match the call that provided the page
- *   token.
- *   See https://google.aip.dev/158 for more details.
- * @param {string} [request.filter]
- *   Optional. Filter expression.
- *   See https://google.aip.dev/160#filtering for more details.
- * @param {string} [request.orderBy]
- *   Optional. Sort expression.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroup|InterceptEndpointGroup}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listInterceptEndpointGroupsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists endpoint groups in a given project and location.
+   * See https://google.aip.dev/132.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of endpoint groups.
+   *   Example: `projects/123456789/locations/global`.
+   *   See https://google.aip.dev/132 for more details.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default. See
+   *   https://google.aip.dev/158 for more details.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListInterceptEndpointGroups` call. Provide this to retrieve the subsequent
+   *   page. When paginating, all other parameters provided to
+   *   `ListInterceptEndpointGroups` must match the call that provided the page
+   *   token.
+   *   See https://google.aip.dev/158 for more details.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression.
+   *   See https://google.aip.dev/160#filtering for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort expression.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroup|InterceptEndpointGroup}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listInterceptEndpointGroupsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listInterceptEndpointGroups(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup[],
-        protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsRequest|null,
-        protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsResponse
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup[],
+      protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsRequest | null,
+      protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsResponse,
+    ]
+  >;
   listInterceptEndpointGroups(
-      request: protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsRequest,
+      | protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup
+    >,
+  ): void;
   listInterceptEndpointGroups(
-      request: protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsRequest,
+      | protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup
+    >,
+  ): void;
   listInterceptEndpointGroups(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup>,
-      callback?: PaginationCallback<
-          protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup>):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup[],
-        protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsRequest|null,
-        protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsResponse
-      ]>|void {
+          | protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsRequest,
+      | protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup[],
+      protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsRequest | null,
+      protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsRequest,
-      protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsResponse|null|undefined,
-      protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsRequest,
+          | protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listInterceptEndpointGroups values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2458,468 +3794,540 @@ export class InterceptClient {
     this._log.info('listInterceptEndpointGroups request %j', request);
     return this.innerApiCalls
       .listInterceptEndpointGroups(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup[],
-        protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsRequest|null,
-        protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsResponse
-      ]) => {
-        this._log.info('listInterceptEndpointGroups values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup[],
+          protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsRequest | null,
+          protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsResponse,
+        ]) => {
+          this._log.info('listInterceptEndpointGroups values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listInterceptEndpointGroups`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of endpoint groups.
- *   Example: `projects/123456789/locations/global`.
- *   See https://google.aip.dev/132 for more details.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default. See
- *   https://google.aip.dev/158 for more details.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous
- *   `ListInterceptEndpointGroups` call. Provide this to retrieve the subsequent
- *   page. When paginating, all other parameters provided to
- *   `ListInterceptEndpointGroups` must match the call that provided the page
- *   token.
- *   See https://google.aip.dev/158 for more details.
- * @param {string} [request.filter]
- *   Optional. Filter expression.
- *   See https://google.aip.dev/160#filtering for more details.
- * @param {string} [request.orderBy]
- *   Optional. Sort expression.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroup|InterceptEndpointGroup} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listInterceptEndpointGroupsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listInterceptEndpointGroups`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of endpoint groups.
+   *   Example: `projects/123456789/locations/global`.
+   *   See https://google.aip.dev/132 for more details.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default. See
+   *   https://google.aip.dev/158 for more details.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListInterceptEndpointGroups` call. Provide this to retrieve the subsequent
+   *   page. When paginating, all other parameters provided to
+   *   `ListInterceptEndpointGroups` must match the call that provided the page
+   *   token.
+   *   See https://google.aip.dev/158 for more details.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression.
+   *   See https://google.aip.dev/160#filtering for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort expression.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroup|InterceptEndpointGroup} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listInterceptEndpointGroupsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listInterceptEndpointGroupsStream(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listInterceptEndpointGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listInterceptEndpointGroups stream %j', request);
     return this.descriptors.page.listInterceptEndpointGroups.createStream(
       this.innerApiCalls.listInterceptEndpointGroups as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listInterceptEndpointGroups`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of endpoint groups.
- *   Example: `projects/123456789/locations/global`.
- *   See https://google.aip.dev/132 for more details.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default. See
- *   https://google.aip.dev/158 for more details.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous
- *   `ListInterceptEndpointGroups` call. Provide this to retrieve the subsequent
- *   page. When paginating, all other parameters provided to
- *   `ListInterceptEndpointGroups` must match the call that provided the page
- *   token.
- *   See https://google.aip.dev/158 for more details.
- * @param {string} [request.filter]
- *   Optional. Filter expression.
- *   See https://google.aip.dev/160#filtering for more details.
- * @param {string} [request.orderBy]
- *   Optional. Sort expression.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroup|InterceptEndpointGroup}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/intercept.list_intercept_endpoint_groups.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Intercept_ListInterceptEndpointGroups_async
- */
+  /**
+   * Equivalent to `listInterceptEndpointGroups`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of endpoint groups.
+   *   Example: `projects/123456789/locations/global`.
+   *   See https://google.aip.dev/132 for more details.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default. See
+   *   https://google.aip.dev/158 for more details.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListInterceptEndpointGroups` call. Provide this to retrieve the subsequent
+   *   page. When paginating, all other parameters provided to
+   *   `ListInterceptEndpointGroups` must match the call that provided the page
+   *   token.
+   *   See https://google.aip.dev/158 for more details.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression.
+   *   See https://google.aip.dev/160#filtering for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort expression.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroup|InterceptEndpointGroup}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/intercept.list_intercept_endpoint_groups.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Intercept_ListInterceptEndpointGroups_async
+   */
   listInterceptEndpointGroupsAsync(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup>{
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listInterceptEndpointGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listInterceptEndpointGroups iterate %j', request);
     return this.descriptors.page.listInterceptEndpointGroups.asyncIterate(
       this.innerApiCalls['listInterceptEndpointGroups'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroup>;
   }
- /**
- * Lists associations in a given project and location.
- * See https://google.aip.dev/132.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of associations.
- *   Example: `projects/123456789/locations/global`.
- *   See https://google.aip.dev/132 for more details.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default. See
- *   https://google.aip.dev/158 for more details.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous
- *   `ListInterceptEndpointGroups` call. Provide this to retrieve the subsequent
- *   page. When paginating, all other parameters provided to
- *   `ListInterceptEndpointGroups` must match the call that provided the page
- *   token. See https://google.aip.dev/158 for more details.
- * @param {string} [request.filter]
- *   Optional. Filter expression.
- *   See https://google.aip.dev/160#filtering for more details.
- * @param {string} [request.orderBy]
- *   Optional. Sort expression.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroupAssociation|InterceptEndpointGroupAssociation}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listInterceptEndpointGroupAssociationsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists associations in a given project and location.
+   * See https://google.aip.dev/132.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of associations.
+   *   Example: `projects/123456789/locations/global`.
+   *   See https://google.aip.dev/132 for more details.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default. See
+   *   https://google.aip.dev/158 for more details.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListInterceptEndpointGroups` call. Provide this to retrieve the subsequent
+   *   page. When paginating, all other parameters provided to
+   *   `ListInterceptEndpointGroups` must match the call that provided the page
+   *   token. See https://google.aip.dev/158 for more details.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression.
+   *   See https://google.aip.dev/160#filtering for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort expression.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroupAssociation|InterceptEndpointGroupAssociation}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listInterceptEndpointGroupAssociationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listInterceptEndpointGroupAssociations(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation[],
-        protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsRequest|null,
-        protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsResponse
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation[],
+      protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsRequest | null,
+      protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsResponse,
+    ]
+  >;
   listInterceptEndpointGroupAssociations(
-      request: protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsRequest,
+      | protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation
+    >,
+  ): void;
   listInterceptEndpointGroupAssociations(
-      request: protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsRequest,
+      | protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation
+    >,
+  ): void;
   listInterceptEndpointGroupAssociations(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation>,
-      callback?: PaginationCallback<
-          protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation>):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation[],
-        protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsRequest|null,
-        protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsResponse
-      ]>|void {
+          | protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsRequest,
+      | protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation[],
+      protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsRequest | null,
+      protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsRequest,
-      protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsResponse|null|undefined,
-      protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsRequest,
+          | protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listInterceptEndpointGroupAssociations values %j', values);
+          this._log.info(
+            'listInterceptEndpointGroupAssociations values %j',
+            values,
+          );
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listInterceptEndpointGroupAssociations request %j', request);
+    this._log.info(
+      'listInterceptEndpointGroupAssociations request %j',
+      request,
+    );
     return this.innerApiCalls
       .listInterceptEndpointGroupAssociations(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation[],
-        protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsRequest|null,
-        protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsResponse
-      ]) => {
-        this._log.info('listInterceptEndpointGroupAssociations values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation[],
+          protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsRequest | null,
+          protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsResponse,
+        ]) => {
+          this._log.info(
+            'listInterceptEndpointGroupAssociations values %j',
+            response,
+          );
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listInterceptEndpointGroupAssociations`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of associations.
- *   Example: `projects/123456789/locations/global`.
- *   See https://google.aip.dev/132 for more details.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default. See
- *   https://google.aip.dev/158 for more details.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous
- *   `ListInterceptEndpointGroups` call. Provide this to retrieve the subsequent
- *   page. When paginating, all other parameters provided to
- *   `ListInterceptEndpointGroups` must match the call that provided the page
- *   token. See https://google.aip.dev/158 for more details.
- * @param {string} [request.filter]
- *   Optional. Filter expression.
- *   See https://google.aip.dev/160#filtering for more details.
- * @param {string} [request.orderBy]
- *   Optional. Sort expression.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroupAssociation|InterceptEndpointGroupAssociation} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listInterceptEndpointGroupAssociationsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listInterceptEndpointGroupAssociations`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of associations.
+   *   Example: `projects/123456789/locations/global`.
+   *   See https://google.aip.dev/132 for more details.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default. See
+   *   https://google.aip.dev/158 for more details.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListInterceptEndpointGroups` call. Provide this to retrieve the subsequent
+   *   page. When paginating, all other parameters provided to
+   *   `ListInterceptEndpointGroups` must match the call that provided the page
+   *   token. See https://google.aip.dev/158 for more details.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression.
+   *   See https://google.aip.dev/160#filtering for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort expression.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroupAssociation|InterceptEndpointGroupAssociation} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listInterceptEndpointGroupAssociationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listInterceptEndpointGroupAssociationsStream(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
-    const defaultCallSettings = this._defaults['listInterceptEndpointGroupAssociations'];
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listInterceptEndpointGroupAssociations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listInterceptEndpointGroupAssociations stream %j', request);
     return this.descriptors.page.listInterceptEndpointGroupAssociations.createStream(
       this.innerApiCalls.listInterceptEndpointGroupAssociations as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listInterceptEndpointGroupAssociations`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of associations.
- *   Example: `projects/123456789/locations/global`.
- *   See https://google.aip.dev/132 for more details.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default. See
- *   https://google.aip.dev/158 for more details.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous
- *   `ListInterceptEndpointGroups` call. Provide this to retrieve the subsequent
- *   page. When paginating, all other parameters provided to
- *   `ListInterceptEndpointGroups` must match the call that provided the page
- *   token. See https://google.aip.dev/158 for more details.
- * @param {string} [request.filter]
- *   Optional. Filter expression.
- *   See https://google.aip.dev/160#filtering for more details.
- * @param {string} [request.orderBy]
- *   Optional. Sort expression.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroupAssociation|InterceptEndpointGroupAssociation}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/intercept.list_intercept_endpoint_group_associations.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Intercept_ListInterceptEndpointGroupAssociations_async
- */
+  /**
+   * Equivalent to `listInterceptEndpointGroupAssociations`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of associations.
+   *   Example: `projects/123456789/locations/global`.
+   *   See https://google.aip.dev/132 for more details.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default. See
+   *   https://google.aip.dev/158 for more details.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListInterceptEndpointGroups` call. Provide this to retrieve the subsequent
+   *   page. When paginating, all other parameters provided to
+   *   `ListInterceptEndpointGroups` must match the call that provided the page
+   *   token. See https://google.aip.dev/158 for more details.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression.
+   *   See https://google.aip.dev/160#filtering for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort expression.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.networksecurity.v1alpha1.InterceptEndpointGroupAssociation|InterceptEndpointGroupAssociation}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/intercept.list_intercept_endpoint_group_associations.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Intercept_ListInterceptEndpointGroupAssociations_async
+   */
   listInterceptEndpointGroupAssociationsAsync(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation>{
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListInterceptEndpointGroupAssociationsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
-    const defaultCallSettings = this._defaults['listInterceptEndpointGroupAssociations'];
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listInterceptEndpointGroupAssociations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
-    this._log.info('listInterceptEndpointGroupAssociations iterate %j', request);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info(
+      'listInterceptEndpointGroupAssociations iterate %j',
+      request,
+    );
     return this.descriptors.page.listInterceptEndpointGroupAssociations.asyncIterate(
       this.innerApiCalls['listInterceptEndpointGroupAssociations'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IInterceptEndpointGroupAssociation>;
   }
- /**
- * Lists deployment groups in a given project and location.
- * See https://google.aip.dev/132.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of deployment groups.
- *   Example: `projects/123456789/locations/global`.
- *   See https://google.aip.dev/132 for more details.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default. See
- *   https://google.aip.dev/158 for more details.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous
- *   `ListInterceptDeploymentGroups` call. Provide this to retrieve the
- *   subsequent page. When paginating, all other parameters provided to
- *   `ListInterceptDeploymentGroups` must match the call that provided the page
- *   token. See https://google.aip.dev/158 for more details.
- * @param {string} [request.filter]
- *   Optional. Filter expression.
- *   See https://google.aip.dev/160#filtering for more details.
- * @param {string} [request.orderBy]
- *   Optional. Sort expression.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1alpha1.InterceptDeploymentGroup|InterceptDeploymentGroup}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listInterceptDeploymentGroupsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists deployment groups in a given project and location.
+   * See https://google.aip.dev/132.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of deployment groups.
+   *   Example: `projects/123456789/locations/global`.
+   *   See https://google.aip.dev/132 for more details.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default. See
+   *   https://google.aip.dev/158 for more details.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListInterceptDeploymentGroups` call. Provide this to retrieve the
+   *   subsequent page. When paginating, all other parameters provided to
+   *   `ListInterceptDeploymentGroups` must match the call that provided the page
+   *   token. See https://google.aip.dev/158 for more details.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression.
+   *   See https://google.aip.dev/160#filtering for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort expression.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1alpha1.InterceptDeploymentGroup|InterceptDeploymentGroup}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listInterceptDeploymentGroupsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listInterceptDeploymentGroups(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup[],
-        protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsRequest|null,
-        protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsResponse
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup[],
+      protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsRequest | null,
+      protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsResponse,
+    ]
+  >;
   listInterceptDeploymentGroups(
-      request: protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsRequest,
+      | protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup
+    >,
+  ): void;
   listInterceptDeploymentGroups(
-      request: protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsRequest,
+      | protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup
+    >,
+  ): void;
   listInterceptDeploymentGroups(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup>,
-      callback?: PaginationCallback<
-          protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup>):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup[],
-        protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsRequest|null,
-        protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsResponse
-      ]>|void {
+          | protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsRequest,
+      | protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup[],
+      protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsRequest | null,
+      protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsRequest,
-      protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsResponse|null|undefined,
-      protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsRequest,
+          | protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listInterceptDeploymentGroups values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2928,232 +4336,261 @@ export class InterceptClient {
     this._log.info('listInterceptDeploymentGroups request %j', request);
     return this.innerApiCalls
       .listInterceptDeploymentGroups(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup[],
-        protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsRequest|null,
-        protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsResponse
-      ]) => {
-        this._log.info('listInterceptDeploymentGroups values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup[],
+          protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsRequest | null,
+          protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsResponse,
+        ]) => {
+          this._log.info('listInterceptDeploymentGroups values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listInterceptDeploymentGroups`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of deployment groups.
- *   Example: `projects/123456789/locations/global`.
- *   See https://google.aip.dev/132 for more details.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default. See
- *   https://google.aip.dev/158 for more details.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous
- *   `ListInterceptDeploymentGroups` call. Provide this to retrieve the
- *   subsequent page. When paginating, all other parameters provided to
- *   `ListInterceptDeploymentGroups` must match the call that provided the page
- *   token. See https://google.aip.dev/158 for more details.
- * @param {string} [request.filter]
- *   Optional. Filter expression.
- *   See https://google.aip.dev/160#filtering for more details.
- * @param {string} [request.orderBy]
- *   Optional. Sort expression.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1alpha1.InterceptDeploymentGroup|InterceptDeploymentGroup} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listInterceptDeploymentGroupsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listInterceptDeploymentGroups`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of deployment groups.
+   *   Example: `projects/123456789/locations/global`.
+   *   See https://google.aip.dev/132 for more details.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default. See
+   *   https://google.aip.dev/158 for more details.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListInterceptDeploymentGroups` call. Provide this to retrieve the
+   *   subsequent page. When paginating, all other parameters provided to
+   *   `ListInterceptDeploymentGroups` must match the call that provided the page
+   *   token. See https://google.aip.dev/158 for more details.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression.
+   *   See https://google.aip.dev/160#filtering for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort expression.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1alpha1.InterceptDeploymentGroup|InterceptDeploymentGroup} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listInterceptDeploymentGroupsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listInterceptDeploymentGroupsStream(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listInterceptDeploymentGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listInterceptDeploymentGroups stream %j', request);
     return this.descriptors.page.listInterceptDeploymentGroups.createStream(
       this.innerApiCalls.listInterceptDeploymentGroups as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listInterceptDeploymentGroups`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of deployment groups.
- *   Example: `projects/123456789/locations/global`.
- *   See https://google.aip.dev/132 for more details.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default. See
- *   https://google.aip.dev/158 for more details.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous
- *   `ListInterceptDeploymentGroups` call. Provide this to retrieve the
- *   subsequent page. When paginating, all other parameters provided to
- *   `ListInterceptDeploymentGroups` must match the call that provided the page
- *   token. See https://google.aip.dev/158 for more details.
- * @param {string} [request.filter]
- *   Optional. Filter expression.
- *   See https://google.aip.dev/160#filtering for more details.
- * @param {string} [request.orderBy]
- *   Optional. Sort expression.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.networksecurity.v1alpha1.InterceptDeploymentGroup|InterceptDeploymentGroup}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/intercept.list_intercept_deployment_groups.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Intercept_ListInterceptDeploymentGroups_async
- */
+  /**
+   * Equivalent to `listInterceptDeploymentGroups`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of deployment groups.
+   *   Example: `projects/123456789/locations/global`.
+   *   See https://google.aip.dev/132 for more details.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default. See
+   *   https://google.aip.dev/158 for more details.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListInterceptDeploymentGroups` call. Provide this to retrieve the
+   *   subsequent page. When paginating, all other parameters provided to
+   *   `ListInterceptDeploymentGroups` must match the call that provided the page
+   *   token. See https://google.aip.dev/158 for more details.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression.
+   *   See https://google.aip.dev/160#filtering for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort expression.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.networksecurity.v1alpha1.InterceptDeploymentGroup|InterceptDeploymentGroup}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/intercept.list_intercept_deployment_groups.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Intercept_ListInterceptDeploymentGroups_async
+   */
   listInterceptDeploymentGroupsAsync(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup>{
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentGroupsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listInterceptDeploymentGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listInterceptDeploymentGroups iterate %j', request);
     return this.descriptors.page.listInterceptDeploymentGroups.asyncIterate(
       this.innerApiCalls['listInterceptDeploymentGroups'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IInterceptDeploymentGroup>;
   }
- /**
- * Lists deployments in a given project and location.
- * See https://google.aip.dev/132.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of deployments.
- *   Example: `projects/123456789/locations/us-central1-a`.
- *   See https://google.aip.dev/132 for more details.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default. See
- *   https://google.aip.dev/158 for more details.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListInterceptDeployments`
- *   call. Provide this to retrieve the subsequent page. When paginating, all
- *   other parameters provided to `ListInterceptDeployments` must match the call
- *   that provided the page token. See https://google.aip.dev/158 for more
- *   details.
- * @param {string} [request.filter]
- *   Optional. Filter expression.
- *   See https://google.aip.dev/160#filtering for more details.
- * @param {string} [request.orderBy]
- *   Optional. Sort expression.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1alpha1.InterceptDeployment|InterceptDeployment}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listInterceptDeploymentsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists deployments in a given project and location.
+   * See https://google.aip.dev/132.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of deployments.
+   *   Example: `projects/123456789/locations/us-central1-a`.
+   *   See https://google.aip.dev/132 for more details.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default. See
+   *   https://google.aip.dev/158 for more details.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListInterceptDeployments`
+   *   call. Provide this to retrieve the subsequent page. When paginating, all
+   *   other parameters provided to `ListInterceptDeployments` must match the call
+   *   that provided the page token. See https://google.aip.dev/158 for more
+   *   details.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression.
+   *   See https://google.aip.dev/160#filtering for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort expression.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1alpha1.InterceptDeployment|InterceptDeployment}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listInterceptDeploymentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listInterceptDeployments(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment[],
-        protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsRequest|null,
-        protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsResponse
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment[],
+      protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsRequest | null,
+      protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsResponse,
+    ]
+  >;
   listInterceptDeployments(
-      request: protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsRequest,
+      | protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment
+    >,
+  ): void;
   listInterceptDeployments(
-      request: protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsRequest,
+      | protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment
+    >,
+  ): void;
   listInterceptDeployments(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment>,
-      callback?: PaginationCallback<
-          protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment>):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment[],
-        protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsRequest|null,
-        protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsResponse
-      ]>|void {
+          | protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsRequest,
+      | protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment[],
+      protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsRequest | null,
+      protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsRequest,
-      protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsResponse|null|undefined,
-      protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsRequest,
+          | protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listInterceptDeployments values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3162,161 +4599,165 @@ export class InterceptClient {
     this._log.info('listInterceptDeployments request %j', request);
     return this.innerApiCalls
       .listInterceptDeployments(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment[],
-        protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsRequest|null,
-        protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsResponse
-      ]) => {
-        this._log.info('listInterceptDeployments values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment[],
+          protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsRequest | null,
+          protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsResponse,
+        ]) => {
+          this._log.info('listInterceptDeployments values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listInterceptDeployments`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of deployments.
- *   Example: `projects/123456789/locations/us-central1-a`.
- *   See https://google.aip.dev/132 for more details.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default. See
- *   https://google.aip.dev/158 for more details.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListInterceptDeployments`
- *   call. Provide this to retrieve the subsequent page. When paginating, all
- *   other parameters provided to `ListInterceptDeployments` must match the call
- *   that provided the page token. See https://google.aip.dev/158 for more
- *   details.
- * @param {string} [request.filter]
- *   Optional. Filter expression.
- *   See https://google.aip.dev/160#filtering for more details.
- * @param {string} [request.orderBy]
- *   Optional. Sort expression.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1alpha1.InterceptDeployment|InterceptDeployment} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listInterceptDeploymentsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listInterceptDeployments`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of deployments.
+   *   Example: `projects/123456789/locations/us-central1-a`.
+   *   See https://google.aip.dev/132 for more details.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default. See
+   *   https://google.aip.dev/158 for more details.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListInterceptDeployments`
+   *   call. Provide this to retrieve the subsequent page. When paginating, all
+   *   other parameters provided to `ListInterceptDeployments` must match the call
+   *   that provided the page token. See https://google.aip.dev/158 for more
+   *   details.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression.
+   *   See https://google.aip.dev/160#filtering for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort expression.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1alpha1.InterceptDeployment|InterceptDeployment} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listInterceptDeploymentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listInterceptDeploymentsStream(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listInterceptDeployments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listInterceptDeployments stream %j', request);
     return this.descriptors.page.listInterceptDeployments.createStream(
       this.innerApiCalls.listInterceptDeployments as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listInterceptDeployments`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of deployments.
- *   Example: `projects/123456789/locations/us-central1-a`.
- *   See https://google.aip.dev/132 for more details.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default. See
- *   https://google.aip.dev/158 for more details.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListInterceptDeployments`
- *   call. Provide this to retrieve the subsequent page. When paginating, all
- *   other parameters provided to `ListInterceptDeployments` must match the call
- *   that provided the page token. See https://google.aip.dev/158 for more
- *   details.
- * @param {string} [request.filter]
- *   Optional. Filter expression.
- *   See https://google.aip.dev/160#filtering for more details.
- * @param {string} [request.orderBy]
- *   Optional. Sort expression.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.networksecurity.v1alpha1.InterceptDeployment|InterceptDeployment}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/intercept.list_intercept_deployments.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_Intercept_ListInterceptDeployments_async
- */
+  /**
+   * Equivalent to `listInterceptDeployments`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of deployments.
+   *   Example: `projects/123456789/locations/us-central1-a`.
+   *   See https://google.aip.dev/132 for more details.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default. See
+   *   https://google.aip.dev/158 for more details.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListInterceptDeployments`
+   *   call. Provide this to retrieve the subsequent page. When paginating, all
+   *   other parameters provided to `ListInterceptDeployments` must match the call
+   *   that provided the page token. See https://google.aip.dev/158 for more
+   *   details.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression.
+   *   See https://google.aip.dev/160#filtering for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort expression.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.networksecurity.v1alpha1.InterceptDeployment|InterceptDeployment}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/intercept.list_intercept_deployments.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_Intercept_ListInterceptDeployments_async
+   */
   listInterceptDeploymentsAsync(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment>{
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListInterceptDeploymentsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listInterceptDeployments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listInterceptDeployments iterate %j', request);
     return this.descriptors.page.listInterceptDeployments.asyncIterate(
       this.innerApiCalls['listInterceptDeployments'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IInterceptDeployment>;
   }
-/**
- * Gets the access control policy for a resource. Returns an empty policy
- * if the resource exists and does not have a policy set.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {Object} [request.options]
- *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
- *   `GetIamPolicy`. This field is only used by Cloud IAM.
- *
- *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+  /**
+   * Gets the access control policy for a resource. Returns an empty policy
+   * if the resource exists and does not have a policy set.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {Object} [request.options]
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`. This field is only used by Cloud IAM.
+   *
+   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   getIamPolicy(
     request: IamProtos.google.iam.v1.GetIamPolicyRequest,
     options?:
@@ -3330,40 +4771,40 @@ export class InterceptClient {
       IamProtos.google.iam.v1.Policy,
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
-    >
-  ):Promise<[IamProtos.google.iam.v1.Policy]> {
+    >,
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
-/**
- * Returns permissions that a caller has on the specified resource. If the
- * resource does not exist, this will return an empty set of
- * permissions, not a NOT_FOUND error.
- *
- * Note: This operation is designed to be used for building
- * permission-aware UIs and command-line tools, not for authorization
- * checking. This operation may "fail open" without warning.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy detail is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {string[]} request.permissions
- *   The set of permissions to check for the `resource`. Permissions with
- *   wildcards (such as '*' or 'storage.*') are not allowed. For more
- *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   setIamPolicy(
     request: IamProtos.google.iam.v1.SetIamPolicyRequest,
     options?:
@@ -3377,41 +4818,41 @@ export class InterceptClient {
       IamProtos.google.iam.v1.Policy,
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
-    >
-  ):Promise<[IamProtos.google.iam.v1.Policy]> {
+    >,
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
-/**
- * Returns permissions that a caller has on the specified resource. If the
- * resource does not exist, this will return an empty set of
- * permissions, not a NOT_FOUND error.
- *
- * Note: This operation is designed to be used for building
- * permission-aware UIs and command-line tools, not for authorization
- * checking. This operation may "fail open" without warning.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy detail is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {string[]} request.permissions
- *   The set of permissions to check for the `resource`. Permissions with
- *   wildcards (such as '*' or 'storage.*') are not allowed. For more
- *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- *
- */
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   */
   testIamPermissions(
     request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
     options?:
@@ -3425,12 +4866,12 @@ export class InterceptClient {
       IamProtos.google.iam.v1.TestIamPermissionsResponse,
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
-    >
-  ):Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
+    >,
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
-/**
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -3465,12 +4906,11 @@ export class InterceptClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -3503,12 +4943,12 @@ export class InterceptClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-/**
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -3551,22 +4991,22 @@ export class InterceptClient {
       protos.google.longrunning.Operation,
       protos.google.longrunning.GetOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<[protos.google.longrunning.Operation]> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -3601,15 +5041,15 @@ export class InterceptClient {
    */
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
+    options?: gax.CallOptions,
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -3643,7 +5083,7 @@ export class InterceptClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-   cancelOperation(
+  cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -3656,25 +5096,24 @@ export class InterceptClient {
       protos.google.longrunning.CancelOperationRequest,
       protos.google.protobuf.Empty,
       {} | undefined | null
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
-
   /**
    * Deletes a long-running operation. This method indicates that the client is
    * no longer interested in the operation result. It does not cancel the
@@ -3713,22 +5152,22 @@ export class InterceptClient {
       protos.google.protobuf.Empty,
       protos.google.longrunning.DeleteOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -3744,7 +5183,11 @@ export class InterceptClient {
    * @param {string} authorization_policy
    * @returns {string} Resource name string.
    */
-  authorizationPolicyPath(project:string,location:string,authorizationPolicy:string) {
+  authorizationPolicyPath(
+    project: string,
+    location: string,
+    authorizationPolicy: string,
+  ) {
     return this.pathTemplates.authorizationPolicyPathTemplate.render({
       project: project,
       location: location,
@@ -3760,7 +5203,9 @@ export class InterceptClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAuthorizationPolicyName(authorizationPolicyName: string) {
-    return this.pathTemplates.authorizationPolicyPathTemplate.match(authorizationPolicyName).project;
+    return this.pathTemplates.authorizationPolicyPathTemplate.match(
+      authorizationPolicyName,
+    ).project;
   }
 
   /**
@@ -3771,7 +5216,9 @@ export class InterceptClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAuthorizationPolicyName(authorizationPolicyName: string) {
-    return this.pathTemplates.authorizationPolicyPathTemplate.match(authorizationPolicyName).location;
+    return this.pathTemplates.authorizationPolicyPathTemplate.match(
+      authorizationPolicyName,
+    ).location;
   }
 
   /**
@@ -3781,8 +5228,12 @@ export class InterceptClient {
    *   A fully-qualified path representing AuthorizationPolicy resource.
    * @returns {string} A string representing the authorization_policy.
    */
-  matchAuthorizationPolicyFromAuthorizationPolicyName(authorizationPolicyName: string) {
-    return this.pathTemplates.authorizationPolicyPathTemplate.match(authorizationPolicyName).authorization_policy;
+  matchAuthorizationPolicyFromAuthorizationPolicyName(
+    authorizationPolicyName: string,
+  ) {
+    return this.pathTemplates.authorizationPolicyPathTemplate.match(
+      authorizationPolicyName,
+    ).authorization_policy;
   }
 
   /**
@@ -3793,7 +5244,7 @@ export class InterceptClient {
    * @param {string} authz_policy
    * @returns {string} Resource name string.
    */
-  authzPolicyPath(project:string,location:string,authzPolicy:string) {
+  authzPolicyPath(project: string, location: string, authzPolicy: string) {
     return this.pathTemplates.authzPolicyPathTemplate.render({
       project: project,
       location: location,
@@ -3809,7 +5260,8 @@ export class InterceptClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAuthzPolicyName(authzPolicyName: string) {
-    return this.pathTemplates.authzPolicyPathTemplate.match(authzPolicyName).project;
+    return this.pathTemplates.authzPolicyPathTemplate.match(authzPolicyName)
+      .project;
   }
 
   /**
@@ -3820,7 +5272,8 @@ export class InterceptClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAuthzPolicyName(authzPolicyName: string) {
-    return this.pathTemplates.authzPolicyPathTemplate.match(authzPolicyName).location;
+    return this.pathTemplates.authzPolicyPathTemplate.match(authzPolicyName)
+      .location;
   }
 
   /**
@@ -3831,7 +5284,8 @@ export class InterceptClient {
    * @returns {string} A string representing the authz_policy.
    */
   matchAuthzPolicyFromAuthzPolicyName(authzPolicyName: string) {
-    return this.pathTemplates.authzPolicyPathTemplate.match(authzPolicyName).authz_policy;
+    return this.pathTemplates.authzPolicyPathTemplate.match(authzPolicyName)
+      .authz_policy;
   }
 
   /**
@@ -3842,7 +5296,11 @@ export class InterceptClient {
    * @param {string} backend_authentication_config
    * @returns {string} Resource name string.
    */
-  backendAuthenticationConfigPath(project:string,location:string,backendAuthenticationConfig:string) {
+  backendAuthenticationConfigPath(
+    project: string,
+    location: string,
+    backendAuthenticationConfig: string,
+  ) {
     return this.pathTemplates.backendAuthenticationConfigPathTemplate.render({
       project: project,
       location: location,
@@ -3857,8 +5315,12 @@ export class InterceptClient {
    *   A fully-qualified path representing BackendAuthenticationConfig resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromBackendAuthenticationConfigName(backendAuthenticationConfigName: string) {
-    return this.pathTemplates.backendAuthenticationConfigPathTemplate.match(backendAuthenticationConfigName).project;
+  matchProjectFromBackendAuthenticationConfigName(
+    backendAuthenticationConfigName: string,
+  ) {
+    return this.pathTemplates.backendAuthenticationConfigPathTemplate.match(
+      backendAuthenticationConfigName,
+    ).project;
   }
 
   /**
@@ -3868,8 +5330,12 @@ export class InterceptClient {
    *   A fully-qualified path representing BackendAuthenticationConfig resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromBackendAuthenticationConfigName(backendAuthenticationConfigName: string) {
-    return this.pathTemplates.backendAuthenticationConfigPathTemplate.match(backendAuthenticationConfigName).location;
+  matchLocationFromBackendAuthenticationConfigName(
+    backendAuthenticationConfigName: string,
+  ) {
+    return this.pathTemplates.backendAuthenticationConfigPathTemplate.match(
+      backendAuthenticationConfigName,
+    ).location;
   }
 
   /**
@@ -3879,8 +5345,12 @@ export class InterceptClient {
    *   A fully-qualified path representing BackendAuthenticationConfig resource.
    * @returns {string} A string representing the backend_authentication_config.
    */
-  matchBackendAuthenticationConfigFromBackendAuthenticationConfigName(backendAuthenticationConfigName: string) {
-    return this.pathTemplates.backendAuthenticationConfigPathTemplate.match(backendAuthenticationConfigName).backend_authentication_config;
+  matchBackendAuthenticationConfigFromBackendAuthenticationConfigName(
+    backendAuthenticationConfigName: string,
+  ) {
+    return this.pathTemplates.backendAuthenticationConfigPathTemplate.match(
+      backendAuthenticationConfigName,
+    ).backend_authentication_config;
   }
 
   /**
@@ -3891,7 +5361,11 @@ export class InterceptClient {
    * @param {string} client_tls_policy
    * @returns {string} Resource name string.
    */
-  clientTlsPolicyPath(project:string,location:string,clientTlsPolicy:string) {
+  clientTlsPolicyPath(
+    project: string,
+    location: string,
+    clientTlsPolicy: string,
+  ) {
     return this.pathTemplates.clientTlsPolicyPathTemplate.render({
       project: project,
       location: location,
@@ -3907,7 +5381,9 @@ export class InterceptClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromClientTlsPolicyName(clientTlsPolicyName: string) {
-    return this.pathTemplates.clientTlsPolicyPathTemplate.match(clientTlsPolicyName).project;
+    return this.pathTemplates.clientTlsPolicyPathTemplate.match(
+      clientTlsPolicyName,
+    ).project;
   }
 
   /**
@@ -3918,7 +5394,9 @@ export class InterceptClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromClientTlsPolicyName(clientTlsPolicyName: string) {
-    return this.pathTemplates.clientTlsPolicyPathTemplate.match(clientTlsPolicyName).location;
+    return this.pathTemplates.clientTlsPolicyPathTemplate.match(
+      clientTlsPolicyName,
+    ).location;
   }
 
   /**
@@ -3929,7 +5407,9 @@ export class InterceptClient {
    * @returns {string} A string representing the client_tls_policy.
    */
   matchClientTlsPolicyFromClientTlsPolicyName(clientTlsPolicyName: string) {
-    return this.pathTemplates.clientTlsPolicyPathTemplate.match(clientTlsPolicyName).client_tls_policy;
+    return this.pathTemplates.clientTlsPolicyPathTemplate.match(
+      clientTlsPolicyName,
+    ).client_tls_policy;
   }
 
   /**
@@ -3940,7 +5420,11 @@ export class InterceptClient {
    * @param {string} dns_threat_detector
    * @returns {string} Resource name string.
    */
-  dnsThreatDetectorPath(project:string,location:string,dnsThreatDetector:string) {
+  dnsThreatDetectorPath(
+    project: string,
+    location: string,
+    dnsThreatDetector: string,
+  ) {
     return this.pathTemplates.dnsThreatDetectorPathTemplate.render({
       project: project,
       location: location,
@@ -3956,7 +5440,9 @@ export class InterceptClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDnsThreatDetectorName(dnsThreatDetectorName: string) {
-    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(dnsThreatDetectorName).project;
+    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(
+      dnsThreatDetectorName,
+    ).project;
   }
 
   /**
@@ -3967,7 +5453,9 @@ export class InterceptClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDnsThreatDetectorName(dnsThreatDetectorName: string) {
-    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(dnsThreatDetectorName).location;
+    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(
+      dnsThreatDetectorName,
+    ).location;
   }
 
   /**
@@ -3977,8 +5465,12 @@ export class InterceptClient {
    *   A fully-qualified path representing DnsThreatDetector resource.
    * @returns {string} A string representing the dns_threat_detector.
    */
-  matchDnsThreatDetectorFromDnsThreatDetectorName(dnsThreatDetectorName: string) {
-    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(dnsThreatDetectorName).dns_threat_detector;
+  matchDnsThreatDetectorFromDnsThreatDetectorName(
+    dnsThreatDetectorName: string,
+  ) {
+    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(
+      dnsThreatDetectorName,
+    ).dns_threat_detector;
   }
 
   /**
@@ -3989,7 +5481,11 @@ export class InterceptClient {
    * @param {string} firewall_endpoint_association
    * @returns {string} Resource name string.
    */
-  firewallEndpointAssociationPath(project:string,location:string,firewallEndpointAssociation:string) {
+  firewallEndpointAssociationPath(
+    project: string,
+    location: string,
+    firewallEndpointAssociation: string,
+  ) {
     return this.pathTemplates.firewallEndpointAssociationPathTemplate.render({
       project: project,
       location: location,
@@ -4004,8 +5500,12 @@ export class InterceptClient {
    *   A fully-qualified path representing FirewallEndpointAssociation resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromFirewallEndpointAssociationName(firewallEndpointAssociationName: string) {
-    return this.pathTemplates.firewallEndpointAssociationPathTemplate.match(firewallEndpointAssociationName).project;
+  matchProjectFromFirewallEndpointAssociationName(
+    firewallEndpointAssociationName: string,
+  ) {
+    return this.pathTemplates.firewallEndpointAssociationPathTemplate.match(
+      firewallEndpointAssociationName,
+    ).project;
   }
 
   /**
@@ -4015,8 +5515,12 @@ export class InterceptClient {
    *   A fully-qualified path representing FirewallEndpointAssociation resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromFirewallEndpointAssociationName(firewallEndpointAssociationName: string) {
-    return this.pathTemplates.firewallEndpointAssociationPathTemplate.match(firewallEndpointAssociationName).location;
+  matchLocationFromFirewallEndpointAssociationName(
+    firewallEndpointAssociationName: string,
+  ) {
+    return this.pathTemplates.firewallEndpointAssociationPathTemplate.match(
+      firewallEndpointAssociationName,
+    ).location;
   }
 
   /**
@@ -4026,8 +5530,12 @@ export class InterceptClient {
    *   A fully-qualified path representing FirewallEndpointAssociation resource.
    * @returns {string} A string representing the firewall_endpoint_association.
    */
-  matchFirewallEndpointAssociationFromFirewallEndpointAssociationName(firewallEndpointAssociationName: string) {
-    return this.pathTemplates.firewallEndpointAssociationPathTemplate.match(firewallEndpointAssociationName).firewall_endpoint_association;
+  matchFirewallEndpointAssociationFromFirewallEndpointAssociationName(
+    firewallEndpointAssociationName: string,
+  ) {
+    return this.pathTemplates.firewallEndpointAssociationPathTemplate.match(
+      firewallEndpointAssociationName,
+    ).firewall_endpoint_association;
   }
 
   /**
@@ -4037,7 +5545,7 @@ export class InterceptClient {
    * @param {string} forwarding_rule
    * @returns {string} Resource name string.
    */
-  forwardingRulePath(project:string,forwardingRule:string) {
+  forwardingRulePath(project: string, forwardingRule: string) {
     return this.pathTemplates.forwardingRulePathTemplate.render({
       project: project,
       forwarding_rule: forwardingRule,
@@ -4052,7 +5560,9 @@ export class InterceptClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromForwardingRuleName(forwardingRuleName: string) {
-    return this.pathTemplates.forwardingRulePathTemplate.match(forwardingRuleName).project;
+    return this.pathTemplates.forwardingRulePathTemplate.match(
+      forwardingRuleName,
+    ).project;
   }
 
   /**
@@ -4063,7 +5573,9 @@ export class InterceptClient {
    * @returns {string} A string representing the forwarding_rule.
    */
   matchForwardingRuleFromForwardingRuleName(forwardingRuleName: string) {
-    return this.pathTemplates.forwardingRulePathTemplate.match(forwardingRuleName).forwarding_rule;
+    return this.pathTemplates.forwardingRulePathTemplate.match(
+      forwardingRuleName,
+    ).forwarding_rule;
   }
 
   /**
@@ -4074,7 +5586,11 @@ export class InterceptClient {
    * @param {string} gateway_security_policy
    * @returns {string} Resource name string.
    */
-  gatewaySecurityPolicyPath(project:string,location:string,gatewaySecurityPolicy:string) {
+  gatewaySecurityPolicyPath(
+    project: string,
+    location: string,
+    gatewaySecurityPolicy: string,
+  ) {
     return this.pathTemplates.gatewaySecurityPolicyPathTemplate.render({
       project: project,
       location: location,
@@ -4090,7 +5606,9 @@ export class InterceptClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromGatewaySecurityPolicyName(gatewaySecurityPolicyName: string) {
-    return this.pathTemplates.gatewaySecurityPolicyPathTemplate.match(gatewaySecurityPolicyName).project;
+    return this.pathTemplates.gatewaySecurityPolicyPathTemplate.match(
+      gatewaySecurityPolicyName,
+    ).project;
   }
 
   /**
@@ -4100,8 +5618,12 @@ export class InterceptClient {
    *   A fully-qualified path representing GatewaySecurityPolicy resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromGatewaySecurityPolicyName(gatewaySecurityPolicyName: string) {
-    return this.pathTemplates.gatewaySecurityPolicyPathTemplate.match(gatewaySecurityPolicyName).location;
+  matchLocationFromGatewaySecurityPolicyName(
+    gatewaySecurityPolicyName: string,
+  ) {
+    return this.pathTemplates.gatewaySecurityPolicyPathTemplate.match(
+      gatewaySecurityPolicyName,
+    ).location;
   }
 
   /**
@@ -4111,8 +5633,12 @@ export class InterceptClient {
    *   A fully-qualified path representing GatewaySecurityPolicy resource.
    * @returns {string} A string representing the gateway_security_policy.
    */
-  matchGatewaySecurityPolicyFromGatewaySecurityPolicyName(gatewaySecurityPolicyName: string) {
-    return this.pathTemplates.gatewaySecurityPolicyPathTemplate.match(gatewaySecurityPolicyName).gateway_security_policy;
+  matchGatewaySecurityPolicyFromGatewaySecurityPolicyName(
+    gatewaySecurityPolicyName: string,
+  ) {
+    return this.pathTemplates.gatewaySecurityPolicyPathTemplate.match(
+      gatewaySecurityPolicyName,
+    ).gateway_security_policy;
   }
 
   /**
@@ -4124,7 +5650,12 @@ export class InterceptClient {
    * @param {string} rule
    * @returns {string} Resource name string.
    */
-  gatewaySecurityPolicyRulePath(project:string,location:string,gatewaySecurityPolicy:string,rule:string) {
+  gatewaySecurityPolicyRulePath(
+    project: string,
+    location: string,
+    gatewaySecurityPolicy: string,
+    rule: string,
+  ) {
     return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.render({
       project: project,
       location: location,
@@ -4140,8 +5671,12 @@ export class InterceptClient {
    *   A fully-qualified path representing GatewaySecurityPolicyRule resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromGatewaySecurityPolicyRuleName(gatewaySecurityPolicyRuleName: string) {
-    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(gatewaySecurityPolicyRuleName).project;
+  matchProjectFromGatewaySecurityPolicyRuleName(
+    gatewaySecurityPolicyRuleName: string,
+  ) {
+    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(
+      gatewaySecurityPolicyRuleName,
+    ).project;
   }
 
   /**
@@ -4151,8 +5686,12 @@ export class InterceptClient {
    *   A fully-qualified path representing GatewaySecurityPolicyRule resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromGatewaySecurityPolicyRuleName(gatewaySecurityPolicyRuleName: string) {
-    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(gatewaySecurityPolicyRuleName).location;
+  matchLocationFromGatewaySecurityPolicyRuleName(
+    gatewaySecurityPolicyRuleName: string,
+  ) {
+    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(
+      gatewaySecurityPolicyRuleName,
+    ).location;
   }
 
   /**
@@ -4162,8 +5701,12 @@ export class InterceptClient {
    *   A fully-qualified path representing GatewaySecurityPolicyRule resource.
    * @returns {string} A string representing the gateway_security_policy.
    */
-  matchGatewaySecurityPolicyFromGatewaySecurityPolicyRuleName(gatewaySecurityPolicyRuleName: string) {
-    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(gatewaySecurityPolicyRuleName).gateway_security_policy;
+  matchGatewaySecurityPolicyFromGatewaySecurityPolicyRuleName(
+    gatewaySecurityPolicyRuleName: string,
+  ) {
+    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(
+      gatewaySecurityPolicyRuleName,
+    ).gateway_security_policy;
   }
 
   /**
@@ -4173,8 +5716,12 @@ export class InterceptClient {
    *   A fully-qualified path representing GatewaySecurityPolicyRule resource.
    * @returns {string} A string representing the rule.
    */
-  matchRuleFromGatewaySecurityPolicyRuleName(gatewaySecurityPolicyRuleName: string) {
-    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(gatewaySecurityPolicyRuleName).rule;
+  matchRuleFromGatewaySecurityPolicyRuleName(
+    gatewaySecurityPolicyRuleName: string,
+  ) {
+    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(
+      gatewaySecurityPolicyRuleName,
+    ).rule;
   }
 
   /**
@@ -4185,7 +5732,11 @@ export class InterceptClient {
    * @param {string} intercept_deployment
    * @returns {string} Resource name string.
    */
-  interceptDeploymentPath(project:string,location:string,interceptDeployment:string) {
+  interceptDeploymentPath(
+    project: string,
+    location: string,
+    interceptDeployment: string,
+  ) {
     return this.pathTemplates.interceptDeploymentPathTemplate.render({
       project: project,
       location: location,
@@ -4201,7 +5752,9 @@ export class InterceptClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromInterceptDeploymentName(interceptDeploymentName: string) {
-    return this.pathTemplates.interceptDeploymentPathTemplate.match(interceptDeploymentName).project;
+    return this.pathTemplates.interceptDeploymentPathTemplate.match(
+      interceptDeploymentName,
+    ).project;
   }
 
   /**
@@ -4212,7 +5765,9 @@ export class InterceptClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromInterceptDeploymentName(interceptDeploymentName: string) {
-    return this.pathTemplates.interceptDeploymentPathTemplate.match(interceptDeploymentName).location;
+    return this.pathTemplates.interceptDeploymentPathTemplate.match(
+      interceptDeploymentName,
+    ).location;
   }
 
   /**
@@ -4222,8 +5777,12 @@ export class InterceptClient {
    *   A fully-qualified path representing InterceptDeployment resource.
    * @returns {string} A string representing the intercept_deployment.
    */
-  matchInterceptDeploymentFromInterceptDeploymentName(interceptDeploymentName: string) {
-    return this.pathTemplates.interceptDeploymentPathTemplate.match(interceptDeploymentName).intercept_deployment;
+  matchInterceptDeploymentFromInterceptDeploymentName(
+    interceptDeploymentName: string,
+  ) {
+    return this.pathTemplates.interceptDeploymentPathTemplate.match(
+      interceptDeploymentName,
+    ).intercept_deployment;
   }
 
   /**
@@ -4234,7 +5793,11 @@ export class InterceptClient {
    * @param {string} intercept_deployment_group
    * @returns {string} Resource name string.
    */
-  interceptDeploymentGroupPath(project:string,location:string,interceptDeploymentGroup:string) {
+  interceptDeploymentGroupPath(
+    project: string,
+    location: string,
+    interceptDeploymentGroup: string,
+  ) {
     return this.pathTemplates.interceptDeploymentGroupPathTemplate.render({
       project: project,
       location: location,
@@ -4249,8 +5812,12 @@ export class InterceptClient {
    *   A fully-qualified path representing InterceptDeploymentGroup resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromInterceptDeploymentGroupName(interceptDeploymentGroupName: string) {
-    return this.pathTemplates.interceptDeploymentGroupPathTemplate.match(interceptDeploymentGroupName).project;
+  matchProjectFromInterceptDeploymentGroupName(
+    interceptDeploymentGroupName: string,
+  ) {
+    return this.pathTemplates.interceptDeploymentGroupPathTemplate.match(
+      interceptDeploymentGroupName,
+    ).project;
   }
 
   /**
@@ -4260,8 +5827,12 @@ export class InterceptClient {
    *   A fully-qualified path representing InterceptDeploymentGroup resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromInterceptDeploymentGroupName(interceptDeploymentGroupName: string) {
-    return this.pathTemplates.interceptDeploymentGroupPathTemplate.match(interceptDeploymentGroupName).location;
+  matchLocationFromInterceptDeploymentGroupName(
+    interceptDeploymentGroupName: string,
+  ) {
+    return this.pathTemplates.interceptDeploymentGroupPathTemplate.match(
+      interceptDeploymentGroupName,
+    ).location;
   }
 
   /**
@@ -4271,8 +5842,12 @@ export class InterceptClient {
    *   A fully-qualified path representing InterceptDeploymentGroup resource.
    * @returns {string} A string representing the intercept_deployment_group.
    */
-  matchInterceptDeploymentGroupFromInterceptDeploymentGroupName(interceptDeploymentGroupName: string) {
-    return this.pathTemplates.interceptDeploymentGroupPathTemplate.match(interceptDeploymentGroupName).intercept_deployment_group;
+  matchInterceptDeploymentGroupFromInterceptDeploymentGroupName(
+    interceptDeploymentGroupName: string,
+  ) {
+    return this.pathTemplates.interceptDeploymentGroupPathTemplate.match(
+      interceptDeploymentGroupName,
+    ).intercept_deployment_group;
   }
 
   /**
@@ -4283,7 +5858,11 @@ export class InterceptClient {
    * @param {string} intercept_endpoint_group
    * @returns {string} Resource name string.
    */
-  interceptEndpointGroupPath(project:string,location:string,interceptEndpointGroup:string) {
+  interceptEndpointGroupPath(
+    project: string,
+    location: string,
+    interceptEndpointGroup: string,
+  ) {
     return this.pathTemplates.interceptEndpointGroupPathTemplate.render({
       project: project,
       location: location,
@@ -4298,8 +5877,12 @@ export class InterceptClient {
    *   A fully-qualified path representing InterceptEndpointGroup resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromInterceptEndpointGroupName(interceptEndpointGroupName: string) {
-    return this.pathTemplates.interceptEndpointGroupPathTemplate.match(interceptEndpointGroupName).project;
+  matchProjectFromInterceptEndpointGroupName(
+    interceptEndpointGroupName: string,
+  ) {
+    return this.pathTemplates.interceptEndpointGroupPathTemplate.match(
+      interceptEndpointGroupName,
+    ).project;
   }
 
   /**
@@ -4309,8 +5892,12 @@ export class InterceptClient {
    *   A fully-qualified path representing InterceptEndpointGroup resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromInterceptEndpointGroupName(interceptEndpointGroupName: string) {
-    return this.pathTemplates.interceptEndpointGroupPathTemplate.match(interceptEndpointGroupName).location;
+  matchLocationFromInterceptEndpointGroupName(
+    interceptEndpointGroupName: string,
+  ) {
+    return this.pathTemplates.interceptEndpointGroupPathTemplate.match(
+      interceptEndpointGroupName,
+    ).location;
   }
 
   /**
@@ -4320,8 +5907,12 @@ export class InterceptClient {
    *   A fully-qualified path representing InterceptEndpointGroup resource.
    * @returns {string} A string representing the intercept_endpoint_group.
    */
-  matchInterceptEndpointGroupFromInterceptEndpointGroupName(interceptEndpointGroupName: string) {
-    return this.pathTemplates.interceptEndpointGroupPathTemplate.match(interceptEndpointGroupName).intercept_endpoint_group;
+  matchInterceptEndpointGroupFromInterceptEndpointGroupName(
+    interceptEndpointGroupName: string,
+  ) {
+    return this.pathTemplates.interceptEndpointGroupPathTemplate.match(
+      interceptEndpointGroupName,
+    ).intercept_endpoint_group;
   }
 
   /**
@@ -4332,12 +5923,18 @@ export class InterceptClient {
    * @param {string} intercept_endpoint_group_association
    * @returns {string} Resource name string.
    */
-  interceptEndpointGroupAssociationPath(project:string,location:string,interceptEndpointGroupAssociation:string) {
-    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.render({
-      project: project,
-      location: location,
-      intercept_endpoint_group_association: interceptEndpointGroupAssociation,
-    });
+  interceptEndpointGroupAssociationPath(
+    project: string,
+    location: string,
+    interceptEndpointGroupAssociation: string,
+  ) {
+    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        intercept_endpoint_group_association: interceptEndpointGroupAssociation,
+      },
+    );
   }
 
   /**
@@ -4347,8 +5944,12 @@ export class InterceptClient {
    *   A fully-qualified path representing InterceptEndpointGroupAssociation resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromInterceptEndpointGroupAssociationName(interceptEndpointGroupAssociationName: string) {
-    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match(interceptEndpointGroupAssociationName).project;
+  matchProjectFromInterceptEndpointGroupAssociationName(
+    interceptEndpointGroupAssociationName: string,
+  ) {
+    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match(
+      interceptEndpointGroupAssociationName,
+    ).project;
   }
 
   /**
@@ -4358,8 +5959,12 @@ export class InterceptClient {
    *   A fully-qualified path representing InterceptEndpointGroupAssociation resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromInterceptEndpointGroupAssociationName(interceptEndpointGroupAssociationName: string) {
-    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match(interceptEndpointGroupAssociationName).location;
+  matchLocationFromInterceptEndpointGroupAssociationName(
+    interceptEndpointGroupAssociationName: string,
+  ) {
+    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match(
+      interceptEndpointGroupAssociationName,
+    ).location;
   }
 
   /**
@@ -4369,8 +5974,12 @@ export class InterceptClient {
    *   A fully-qualified path representing InterceptEndpointGroupAssociation resource.
    * @returns {string} A string representing the intercept_endpoint_group_association.
    */
-  matchInterceptEndpointGroupAssociationFromInterceptEndpointGroupAssociationName(interceptEndpointGroupAssociationName: string) {
-    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match(interceptEndpointGroupAssociationName).intercept_endpoint_group_association;
+  matchInterceptEndpointGroupAssociationFromInterceptEndpointGroupAssociationName(
+    interceptEndpointGroupAssociationName: string,
+  ) {
+    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match(
+      interceptEndpointGroupAssociationName,
+    ).intercept_endpoint_group_association;
   }
 
   /**
@@ -4380,7 +5989,7 @@ export class InterceptClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -4417,7 +6026,11 @@ export class InterceptClient {
    * @param {string} mirroring_deployment
    * @returns {string} Resource name string.
    */
-  mirroringDeploymentPath(project:string,location:string,mirroringDeployment:string) {
+  mirroringDeploymentPath(
+    project: string,
+    location: string,
+    mirroringDeployment: string,
+  ) {
     return this.pathTemplates.mirroringDeploymentPathTemplate.render({
       project: project,
       location: location,
@@ -4433,7 +6046,9 @@ export class InterceptClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromMirroringDeploymentName(mirroringDeploymentName: string) {
-    return this.pathTemplates.mirroringDeploymentPathTemplate.match(mirroringDeploymentName).project;
+    return this.pathTemplates.mirroringDeploymentPathTemplate.match(
+      mirroringDeploymentName,
+    ).project;
   }
 
   /**
@@ -4444,7 +6059,9 @@ export class InterceptClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromMirroringDeploymentName(mirroringDeploymentName: string) {
-    return this.pathTemplates.mirroringDeploymentPathTemplate.match(mirroringDeploymentName).location;
+    return this.pathTemplates.mirroringDeploymentPathTemplate.match(
+      mirroringDeploymentName,
+    ).location;
   }
 
   /**
@@ -4454,8 +6071,12 @@ export class InterceptClient {
    *   A fully-qualified path representing MirroringDeployment resource.
    * @returns {string} A string representing the mirroring_deployment.
    */
-  matchMirroringDeploymentFromMirroringDeploymentName(mirroringDeploymentName: string) {
-    return this.pathTemplates.mirroringDeploymentPathTemplate.match(mirroringDeploymentName).mirroring_deployment;
+  matchMirroringDeploymentFromMirroringDeploymentName(
+    mirroringDeploymentName: string,
+  ) {
+    return this.pathTemplates.mirroringDeploymentPathTemplate.match(
+      mirroringDeploymentName,
+    ).mirroring_deployment;
   }
 
   /**
@@ -4466,7 +6087,11 @@ export class InterceptClient {
    * @param {string} mirroring_deployment_group
    * @returns {string} Resource name string.
    */
-  mirroringDeploymentGroupPath(project:string,location:string,mirroringDeploymentGroup:string) {
+  mirroringDeploymentGroupPath(
+    project: string,
+    location: string,
+    mirroringDeploymentGroup: string,
+  ) {
     return this.pathTemplates.mirroringDeploymentGroupPathTemplate.render({
       project: project,
       location: location,
@@ -4481,8 +6106,12 @@ export class InterceptClient {
    *   A fully-qualified path representing MirroringDeploymentGroup resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromMirroringDeploymentGroupName(mirroringDeploymentGroupName: string) {
-    return this.pathTemplates.mirroringDeploymentGroupPathTemplate.match(mirroringDeploymentGroupName).project;
+  matchProjectFromMirroringDeploymentGroupName(
+    mirroringDeploymentGroupName: string,
+  ) {
+    return this.pathTemplates.mirroringDeploymentGroupPathTemplate.match(
+      mirroringDeploymentGroupName,
+    ).project;
   }
 
   /**
@@ -4492,8 +6121,12 @@ export class InterceptClient {
    *   A fully-qualified path representing MirroringDeploymentGroup resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromMirroringDeploymentGroupName(mirroringDeploymentGroupName: string) {
-    return this.pathTemplates.mirroringDeploymentGroupPathTemplate.match(mirroringDeploymentGroupName).location;
+  matchLocationFromMirroringDeploymentGroupName(
+    mirroringDeploymentGroupName: string,
+  ) {
+    return this.pathTemplates.mirroringDeploymentGroupPathTemplate.match(
+      mirroringDeploymentGroupName,
+    ).location;
   }
 
   /**
@@ -4503,8 +6136,12 @@ export class InterceptClient {
    *   A fully-qualified path representing MirroringDeploymentGroup resource.
    * @returns {string} A string representing the mirroring_deployment_group.
    */
-  matchMirroringDeploymentGroupFromMirroringDeploymentGroupName(mirroringDeploymentGroupName: string) {
-    return this.pathTemplates.mirroringDeploymentGroupPathTemplate.match(mirroringDeploymentGroupName).mirroring_deployment_group;
+  matchMirroringDeploymentGroupFromMirroringDeploymentGroupName(
+    mirroringDeploymentGroupName: string,
+  ) {
+    return this.pathTemplates.mirroringDeploymentGroupPathTemplate.match(
+      mirroringDeploymentGroupName,
+    ).mirroring_deployment_group;
   }
 
   /**
@@ -4515,7 +6152,11 @@ export class InterceptClient {
    * @param {string} mirroring_endpoint_group
    * @returns {string} Resource name string.
    */
-  mirroringEndpointGroupPath(project:string,location:string,mirroringEndpointGroup:string) {
+  mirroringEndpointGroupPath(
+    project: string,
+    location: string,
+    mirroringEndpointGroup: string,
+  ) {
     return this.pathTemplates.mirroringEndpointGroupPathTemplate.render({
       project: project,
       location: location,
@@ -4530,8 +6171,12 @@ export class InterceptClient {
    *   A fully-qualified path representing MirroringEndpointGroup resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromMirroringEndpointGroupName(mirroringEndpointGroupName: string) {
-    return this.pathTemplates.mirroringEndpointGroupPathTemplate.match(mirroringEndpointGroupName).project;
+  matchProjectFromMirroringEndpointGroupName(
+    mirroringEndpointGroupName: string,
+  ) {
+    return this.pathTemplates.mirroringEndpointGroupPathTemplate.match(
+      mirroringEndpointGroupName,
+    ).project;
   }
 
   /**
@@ -4541,8 +6186,12 @@ export class InterceptClient {
    *   A fully-qualified path representing MirroringEndpointGroup resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromMirroringEndpointGroupName(mirroringEndpointGroupName: string) {
-    return this.pathTemplates.mirroringEndpointGroupPathTemplate.match(mirroringEndpointGroupName).location;
+  matchLocationFromMirroringEndpointGroupName(
+    mirroringEndpointGroupName: string,
+  ) {
+    return this.pathTemplates.mirroringEndpointGroupPathTemplate.match(
+      mirroringEndpointGroupName,
+    ).location;
   }
 
   /**
@@ -4552,8 +6201,12 @@ export class InterceptClient {
    *   A fully-qualified path representing MirroringEndpointGroup resource.
    * @returns {string} A string representing the mirroring_endpoint_group.
    */
-  matchMirroringEndpointGroupFromMirroringEndpointGroupName(mirroringEndpointGroupName: string) {
-    return this.pathTemplates.mirroringEndpointGroupPathTemplate.match(mirroringEndpointGroupName).mirroring_endpoint_group;
+  matchMirroringEndpointGroupFromMirroringEndpointGroupName(
+    mirroringEndpointGroupName: string,
+  ) {
+    return this.pathTemplates.mirroringEndpointGroupPathTemplate.match(
+      mirroringEndpointGroupName,
+    ).mirroring_endpoint_group;
   }
 
   /**
@@ -4564,12 +6217,18 @@ export class InterceptClient {
    * @param {string} mirroring_endpoint_group_association
    * @returns {string} Resource name string.
    */
-  mirroringEndpointGroupAssociationPath(project:string,location:string,mirroringEndpointGroupAssociation:string) {
-    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.render({
-      project: project,
-      location: location,
-      mirroring_endpoint_group_association: mirroringEndpointGroupAssociation,
-    });
+  mirroringEndpointGroupAssociationPath(
+    project: string,
+    location: string,
+    mirroringEndpointGroupAssociation: string,
+  ) {
+    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        mirroring_endpoint_group_association: mirroringEndpointGroupAssociation,
+      },
+    );
   }
 
   /**
@@ -4579,8 +6238,12 @@ export class InterceptClient {
    *   A fully-qualified path representing MirroringEndpointGroupAssociation resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromMirroringEndpointGroupAssociationName(mirroringEndpointGroupAssociationName: string) {
-    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match(mirroringEndpointGroupAssociationName).project;
+  matchProjectFromMirroringEndpointGroupAssociationName(
+    mirroringEndpointGroupAssociationName: string,
+  ) {
+    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match(
+      mirroringEndpointGroupAssociationName,
+    ).project;
   }
 
   /**
@@ -4590,8 +6253,12 @@ export class InterceptClient {
    *   A fully-qualified path representing MirroringEndpointGroupAssociation resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromMirroringEndpointGroupAssociationName(mirroringEndpointGroupAssociationName: string) {
-    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match(mirroringEndpointGroupAssociationName).location;
+  matchLocationFromMirroringEndpointGroupAssociationName(
+    mirroringEndpointGroupAssociationName: string,
+  ) {
+    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match(
+      mirroringEndpointGroupAssociationName,
+    ).location;
   }
 
   /**
@@ -4601,8 +6268,12 @@ export class InterceptClient {
    *   A fully-qualified path representing MirroringEndpointGroupAssociation resource.
    * @returns {string} A string representing the mirroring_endpoint_group_association.
    */
-  matchMirroringEndpointGroupAssociationFromMirroringEndpointGroupAssociationName(mirroringEndpointGroupAssociationName: string) {
-    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match(mirroringEndpointGroupAssociationName).mirroring_endpoint_group_association;
+  matchMirroringEndpointGroupAssociationFromMirroringEndpointGroupAssociationName(
+    mirroringEndpointGroupAssociationName: string,
+  ) {
+    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match(
+      mirroringEndpointGroupAssociationName,
+    ).mirroring_endpoint_group_association;
   }
 
   /**
@@ -4612,7 +6283,7 @@ export class InterceptClient {
    * @param {string} network
    * @returns {string} Resource name string.
    */
-  networkPath(project:string,network:string) {
+  networkPath(project: string, network: string) {
     return this.pathTemplates.networkPathTemplate.render({
       project: project,
       network: network,
@@ -4649,12 +6320,18 @@ export class InterceptClient {
    * @param {string} firewall_endpoint
    * @returns {string} Resource name string.
    */
-  organizationLocationFirewallEndpointsPath(organization:string,location:string,firewallEndpoint:string) {
-    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.render({
-      organization: organization,
-      location: location,
-      firewall_endpoint: firewallEndpoint,
-    });
+  organizationLocationFirewallEndpointsPath(
+    organization: string,
+    location: string,
+    firewallEndpoint: string,
+  ) {
+    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        firewall_endpoint: firewallEndpoint,
+      },
+    );
   }
 
   /**
@@ -4664,8 +6341,12 @@ export class InterceptClient {
    *   A fully-qualified path representing organization_location_firewallEndpoints resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationFirewallEndpointsName(organizationLocationFirewallEndpointsName: string) {
-    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match(organizationLocationFirewallEndpointsName).organization;
+  matchOrganizationFromOrganizationLocationFirewallEndpointsName(
+    organizationLocationFirewallEndpointsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match(
+      organizationLocationFirewallEndpointsName,
+    ).organization;
   }
 
   /**
@@ -4675,8 +6356,12 @@ export class InterceptClient {
    *   A fully-qualified path representing organization_location_firewallEndpoints resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationFirewallEndpointsName(organizationLocationFirewallEndpointsName: string) {
-    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match(organizationLocationFirewallEndpointsName).location;
+  matchLocationFromOrganizationLocationFirewallEndpointsName(
+    organizationLocationFirewallEndpointsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match(
+      organizationLocationFirewallEndpointsName,
+    ).location;
   }
 
   /**
@@ -4686,8 +6371,12 @@ export class InterceptClient {
    *   A fully-qualified path representing organization_location_firewallEndpoints resource.
    * @returns {string} A string representing the firewall_endpoint.
    */
-  matchFirewallEndpointFromOrganizationLocationFirewallEndpointsName(organizationLocationFirewallEndpointsName: string) {
-    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match(organizationLocationFirewallEndpointsName).firewall_endpoint;
+  matchFirewallEndpointFromOrganizationLocationFirewallEndpointsName(
+    organizationLocationFirewallEndpointsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match(
+      organizationLocationFirewallEndpointsName,
+    ).firewall_endpoint;
   }
 
   /**
@@ -4698,12 +6387,18 @@ export class InterceptClient {
    * @param {string} security_profile
    * @returns {string} Resource name string.
    */
-  organizationLocationSecurityProfilePath(organization:string,location:string,securityProfile:string) {
-    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.render({
-      organization: organization,
-      location: location,
-      security_profile: securityProfile,
-    });
+  organizationLocationSecurityProfilePath(
+    organization: string,
+    location: string,
+    securityProfile: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        security_profile: securityProfile,
+      },
+    );
   }
 
   /**
@@ -4713,8 +6408,12 @@ export class InterceptClient {
    *   A fully-qualified path representing organization_location_security_profile resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationSecurityProfileName(organizationLocationSecurityProfileName: string) {
-    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.match(organizationLocationSecurityProfileName).organization;
+  matchOrganizationFromOrganizationLocationSecurityProfileName(
+    organizationLocationSecurityProfileName: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.match(
+      organizationLocationSecurityProfileName,
+    ).organization;
   }
 
   /**
@@ -4724,8 +6423,12 @@ export class InterceptClient {
    *   A fully-qualified path representing organization_location_security_profile resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationSecurityProfileName(organizationLocationSecurityProfileName: string) {
-    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.match(organizationLocationSecurityProfileName).location;
+  matchLocationFromOrganizationLocationSecurityProfileName(
+    organizationLocationSecurityProfileName: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.match(
+      organizationLocationSecurityProfileName,
+    ).location;
   }
 
   /**
@@ -4735,8 +6438,12 @@ export class InterceptClient {
    *   A fully-qualified path representing organization_location_security_profile resource.
    * @returns {string} A string representing the security_profile.
    */
-  matchSecurityProfileFromOrganizationLocationSecurityProfileName(organizationLocationSecurityProfileName: string) {
-    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.match(organizationLocationSecurityProfileName).security_profile;
+  matchSecurityProfileFromOrganizationLocationSecurityProfileName(
+    organizationLocationSecurityProfileName: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.match(
+      organizationLocationSecurityProfileName,
+    ).security_profile;
   }
 
   /**
@@ -4747,12 +6454,18 @@ export class InterceptClient {
    * @param {string} security_profile_group
    * @returns {string} Resource name string.
    */
-  organizationLocationSecurityProfileGroupPath(organization:string,location:string,securityProfileGroup:string) {
-    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.render({
-      organization: organization,
-      location: location,
-      security_profile_group: securityProfileGroup,
-    });
+  organizationLocationSecurityProfileGroupPath(
+    organization: string,
+    location: string,
+    securityProfileGroup: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        security_profile_group: securityProfileGroup,
+      },
+    );
   }
 
   /**
@@ -4762,8 +6475,12 @@ export class InterceptClient {
    *   A fully-qualified path representing organization_location_security_profile_group resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationSecurityProfileGroupName(organizationLocationSecurityProfileGroupName: string) {
-    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match(organizationLocationSecurityProfileGroupName).organization;
+  matchOrganizationFromOrganizationLocationSecurityProfileGroupName(
+    organizationLocationSecurityProfileGroupName: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match(
+      organizationLocationSecurityProfileGroupName,
+    ).organization;
   }
 
   /**
@@ -4773,8 +6490,12 @@ export class InterceptClient {
    *   A fully-qualified path representing organization_location_security_profile_group resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationSecurityProfileGroupName(organizationLocationSecurityProfileGroupName: string) {
-    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match(organizationLocationSecurityProfileGroupName).location;
+  matchLocationFromOrganizationLocationSecurityProfileGroupName(
+    organizationLocationSecurityProfileGroupName: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match(
+      organizationLocationSecurityProfileGroupName,
+    ).location;
   }
 
   /**
@@ -4784,8 +6505,12 @@ export class InterceptClient {
    *   A fully-qualified path representing organization_location_security_profile_group resource.
    * @returns {string} A string representing the security_profile_group.
    */
-  matchSecurityProfileGroupFromOrganizationLocationSecurityProfileGroupName(organizationLocationSecurityProfileGroupName: string) {
-    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match(organizationLocationSecurityProfileGroupName).security_profile_group;
+  matchSecurityProfileGroupFromOrganizationLocationSecurityProfileGroupName(
+    organizationLocationSecurityProfileGroupName: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match(
+      organizationLocationSecurityProfileGroupName,
+    ).security_profile_group;
   }
 
   /**
@@ -4796,7 +6521,11 @@ export class InterceptClient {
    * @param {string} partner_sse_gateway
    * @returns {string} Resource name string.
    */
-  partnerSSEGatewayPath(project:string,location:string,partnerSseGateway:string) {
+  partnerSSEGatewayPath(
+    project: string,
+    location: string,
+    partnerSseGateway: string,
+  ) {
     return this.pathTemplates.partnerSSEGatewayPathTemplate.render({
       project: project,
       location: location,
@@ -4812,7 +6541,9 @@ export class InterceptClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromPartnerSSEGatewayName(partnerSSEGatewayName: string) {
-    return this.pathTemplates.partnerSSEGatewayPathTemplate.match(partnerSSEGatewayName).project;
+    return this.pathTemplates.partnerSSEGatewayPathTemplate.match(
+      partnerSSEGatewayName,
+    ).project;
   }
 
   /**
@@ -4823,7 +6554,9 @@ export class InterceptClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPartnerSSEGatewayName(partnerSSEGatewayName: string) {
-    return this.pathTemplates.partnerSSEGatewayPathTemplate.match(partnerSSEGatewayName).location;
+    return this.pathTemplates.partnerSSEGatewayPathTemplate.match(
+      partnerSSEGatewayName,
+    ).location;
   }
 
   /**
@@ -4833,8 +6566,12 @@ export class InterceptClient {
    *   A fully-qualified path representing PartnerSSEGateway resource.
    * @returns {string} A string representing the partner_sse_gateway.
    */
-  matchPartnerSseGatewayFromPartnerSSEGatewayName(partnerSSEGatewayName: string) {
-    return this.pathTemplates.partnerSSEGatewayPathTemplate.match(partnerSSEGatewayName).partner_sse_gateway;
+  matchPartnerSseGatewayFromPartnerSSEGatewayName(
+    partnerSSEGatewayName: string,
+  ) {
+    return this.pathTemplates.partnerSSEGatewayPathTemplate.match(
+      partnerSSEGatewayName,
+    ).partner_sse_gateway;
   }
 
   /**
@@ -4845,7 +6582,11 @@ export class InterceptClient {
    * @param {string} partner_sse_realm
    * @returns {string} Resource name string.
    */
-  partnerSSERealmPath(project:string,location:string,partnerSseRealm:string) {
+  partnerSSERealmPath(
+    project: string,
+    location: string,
+    partnerSseRealm: string,
+  ) {
     return this.pathTemplates.partnerSSERealmPathTemplate.render({
       project: project,
       location: location,
@@ -4861,7 +6602,9 @@ export class InterceptClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromPartnerSSERealmName(partnerSSERealmName: string) {
-    return this.pathTemplates.partnerSSERealmPathTemplate.match(partnerSSERealmName).project;
+    return this.pathTemplates.partnerSSERealmPathTemplate.match(
+      partnerSSERealmName,
+    ).project;
   }
 
   /**
@@ -4872,7 +6615,9 @@ export class InterceptClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPartnerSSERealmName(partnerSSERealmName: string) {
-    return this.pathTemplates.partnerSSERealmPathTemplate.match(partnerSSERealmName).location;
+    return this.pathTemplates.partnerSSERealmPathTemplate.match(
+      partnerSSERealmName,
+    ).location;
   }
 
   /**
@@ -4883,7 +6628,9 @@ export class InterceptClient {
    * @returns {string} A string representing the partner_sse_realm.
    */
   matchPartnerSseRealmFromPartnerSSERealmName(partnerSSERealmName: string) {
-    return this.pathTemplates.partnerSSERealmPathTemplate.match(partnerSSERealmName).partner_sse_realm;
+    return this.pathTemplates.partnerSSERealmPathTemplate.match(
+      partnerSSERealmName,
+    ).partner_sse_realm;
   }
 
   /**
@@ -4892,7 +6639,7 @@ export class InterceptClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -4917,12 +6664,18 @@ export class InterceptClient {
    * @param {string} firewall_endpoint
    * @returns {string} Resource name string.
    */
-  projectLocationFirewallEndpointsPath(project:string,location:string,firewallEndpoint:string) {
-    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.render({
-      project: project,
-      location: location,
-      firewall_endpoint: firewallEndpoint,
-    });
+  projectLocationFirewallEndpointsPath(
+    project: string,
+    location: string,
+    firewallEndpoint: string,
+  ) {
+    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        firewall_endpoint: firewallEndpoint,
+      },
+    );
   }
 
   /**
@@ -4932,8 +6685,12 @@ export class InterceptClient {
    *   A fully-qualified path representing project_location_firewallEndpoints resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationFirewallEndpointsName(projectLocationFirewallEndpointsName: string) {
-    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match(projectLocationFirewallEndpointsName).project;
+  matchProjectFromProjectLocationFirewallEndpointsName(
+    projectLocationFirewallEndpointsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match(
+      projectLocationFirewallEndpointsName,
+    ).project;
   }
 
   /**
@@ -4943,8 +6700,12 @@ export class InterceptClient {
    *   A fully-qualified path representing project_location_firewallEndpoints resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationFirewallEndpointsName(projectLocationFirewallEndpointsName: string) {
-    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match(projectLocationFirewallEndpointsName).location;
+  matchLocationFromProjectLocationFirewallEndpointsName(
+    projectLocationFirewallEndpointsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match(
+      projectLocationFirewallEndpointsName,
+    ).location;
   }
 
   /**
@@ -4954,8 +6715,12 @@ export class InterceptClient {
    *   A fully-qualified path representing project_location_firewallEndpoints resource.
    * @returns {string} A string representing the firewall_endpoint.
    */
-  matchFirewallEndpointFromProjectLocationFirewallEndpointsName(projectLocationFirewallEndpointsName: string) {
-    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match(projectLocationFirewallEndpointsName).firewall_endpoint;
+  matchFirewallEndpointFromProjectLocationFirewallEndpointsName(
+    projectLocationFirewallEndpointsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match(
+      projectLocationFirewallEndpointsName,
+    ).firewall_endpoint;
   }
 
   /**
@@ -4966,12 +6731,18 @@ export class InterceptClient {
    * @param {string} security_profile
    * @returns {string} Resource name string.
    */
-  projectLocationSecurityProfilePath(project:string,location:string,securityProfile:string) {
-    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.render({
-      project: project,
-      location: location,
-      security_profile: securityProfile,
-    });
+  projectLocationSecurityProfilePath(
+    project: string,
+    location: string,
+    securityProfile: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        security_profile: securityProfile,
+      },
+    );
   }
 
   /**
@@ -4981,8 +6752,12 @@ export class InterceptClient {
    *   A fully-qualified path representing project_location_security_profile resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationSecurityProfileName(projectLocationSecurityProfileName: string) {
-    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.match(projectLocationSecurityProfileName).project;
+  matchProjectFromProjectLocationSecurityProfileName(
+    projectLocationSecurityProfileName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.match(
+      projectLocationSecurityProfileName,
+    ).project;
   }
 
   /**
@@ -4992,8 +6767,12 @@ export class InterceptClient {
    *   A fully-qualified path representing project_location_security_profile resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationSecurityProfileName(projectLocationSecurityProfileName: string) {
-    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.match(projectLocationSecurityProfileName).location;
+  matchLocationFromProjectLocationSecurityProfileName(
+    projectLocationSecurityProfileName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.match(
+      projectLocationSecurityProfileName,
+    ).location;
   }
 
   /**
@@ -5003,8 +6782,12 @@ export class InterceptClient {
    *   A fully-qualified path representing project_location_security_profile resource.
    * @returns {string} A string representing the security_profile.
    */
-  matchSecurityProfileFromProjectLocationSecurityProfileName(projectLocationSecurityProfileName: string) {
-    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.match(projectLocationSecurityProfileName).security_profile;
+  matchSecurityProfileFromProjectLocationSecurityProfileName(
+    projectLocationSecurityProfileName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.match(
+      projectLocationSecurityProfileName,
+    ).security_profile;
   }
 
   /**
@@ -5015,12 +6798,18 @@ export class InterceptClient {
    * @param {string} security_profile_group
    * @returns {string} Resource name string.
    */
-  projectLocationSecurityProfileGroupPath(project:string,location:string,securityProfileGroup:string) {
-    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.render({
-      project: project,
-      location: location,
-      security_profile_group: securityProfileGroup,
-    });
+  projectLocationSecurityProfileGroupPath(
+    project: string,
+    location: string,
+    securityProfileGroup: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        security_profile_group: securityProfileGroup,
+      },
+    );
   }
 
   /**
@@ -5030,8 +6819,12 @@ export class InterceptClient {
    *   A fully-qualified path representing project_location_security_profile_group resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationSecurityProfileGroupName(projectLocationSecurityProfileGroupName: string) {
-    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match(projectLocationSecurityProfileGroupName).project;
+  matchProjectFromProjectLocationSecurityProfileGroupName(
+    projectLocationSecurityProfileGroupName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match(
+      projectLocationSecurityProfileGroupName,
+    ).project;
   }
 
   /**
@@ -5041,8 +6834,12 @@ export class InterceptClient {
    *   A fully-qualified path representing project_location_security_profile_group resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationSecurityProfileGroupName(projectLocationSecurityProfileGroupName: string) {
-    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match(projectLocationSecurityProfileGroupName).location;
+  matchLocationFromProjectLocationSecurityProfileGroupName(
+    projectLocationSecurityProfileGroupName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match(
+      projectLocationSecurityProfileGroupName,
+    ).location;
   }
 
   /**
@@ -5052,8 +6849,12 @@ export class InterceptClient {
    *   A fully-qualified path representing project_location_security_profile_group resource.
    * @returns {string} A string representing the security_profile_group.
    */
-  matchSecurityProfileGroupFromProjectLocationSecurityProfileGroupName(projectLocationSecurityProfileGroupName: string) {
-    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match(projectLocationSecurityProfileGroupName).security_profile_group;
+  matchSecurityProfileGroupFromProjectLocationSecurityProfileGroupName(
+    projectLocationSecurityProfileGroupName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match(
+      projectLocationSecurityProfileGroupName,
+    ).security_profile_group;
   }
 
   /**
@@ -5064,7 +6865,7 @@ export class InterceptClient {
    * @param {string} sac_attachment
    * @returns {string} Resource name string.
    */
-  sACAttachmentPath(project:string,location:string,sacAttachment:string) {
+  sACAttachmentPath(project: string, location: string, sacAttachment: string) {
     return this.pathTemplates.sACAttachmentPathTemplate.render({
       project: project,
       location: location,
@@ -5080,7 +6881,8 @@ export class InterceptClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromSACAttachmentName(sACAttachmentName: string) {
-    return this.pathTemplates.sACAttachmentPathTemplate.match(sACAttachmentName).project;
+    return this.pathTemplates.sACAttachmentPathTemplate.match(sACAttachmentName)
+      .project;
   }
 
   /**
@@ -5091,7 +6893,8 @@ export class InterceptClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromSACAttachmentName(sACAttachmentName: string) {
-    return this.pathTemplates.sACAttachmentPathTemplate.match(sACAttachmentName).location;
+    return this.pathTemplates.sACAttachmentPathTemplate.match(sACAttachmentName)
+      .location;
   }
 
   /**
@@ -5102,7 +6905,8 @@ export class InterceptClient {
    * @returns {string} A string representing the sac_attachment.
    */
   matchSacAttachmentFromSACAttachmentName(sACAttachmentName: string) {
-    return this.pathTemplates.sACAttachmentPathTemplate.match(sACAttachmentName).sac_attachment;
+    return this.pathTemplates.sACAttachmentPathTemplate.match(sACAttachmentName)
+      .sac_attachment;
   }
 
   /**
@@ -5113,7 +6917,7 @@ export class InterceptClient {
    * @param {string} sac_realm
    * @returns {string} Resource name string.
    */
-  sACRealmPath(project:string,location:string,sacRealm:string) {
+  sACRealmPath(project: string, location: string, sacRealm: string) {
     return this.pathTemplates.sACRealmPathTemplate.render({
       project: project,
       location: location,
@@ -5151,7 +6955,8 @@ export class InterceptClient {
    * @returns {string} A string representing the sac_realm.
    */
   matchSacRealmFromSACRealmName(sACRealmName: string) {
-    return this.pathTemplates.sACRealmPathTemplate.match(sACRealmName).sac_realm;
+    return this.pathTemplates.sACRealmPathTemplate.match(sACRealmName)
+      .sac_realm;
   }
 
   /**
@@ -5162,7 +6967,11 @@ export class InterceptClient {
    * @param {string} sse_gateway_reference
    * @returns {string} Resource name string.
    */
-  sSEGatewayReferencePath(project:string,location:string,sseGatewayReference:string) {
+  sSEGatewayReferencePath(
+    project: string,
+    location: string,
+    sseGatewayReference: string,
+  ) {
     return this.pathTemplates.sSEGatewayReferencePathTemplate.render({
       project: project,
       location: location,
@@ -5178,7 +6987,9 @@ export class InterceptClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromSSEGatewayReferenceName(sSEGatewayReferenceName: string) {
-    return this.pathTemplates.sSEGatewayReferencePathTemplate.match(sSEGatewayReferenceName).project;
+    return this.pathTemplates.sSEGatewayReferencePathTemplate.match(
+      sSEGatewayReferenceName,
+    ).project;
   }
 
   /**
@@ -5189,7 +7000,9 @@ export class InterceptClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromSSEGatewayReferenceName(sSEGatewayReferenceName: string) {
-    return this.pathTemplates.sSEGatewayReferencePathTemplate.match(sSEGatewayReferenceName).location;
+    return this.pathTemplates.sSEGatewayReferencePathTemplate.match(
+      sSEGatewayReferenceName,
+    ).location;
   }
 
   /**
@@ -5199,8 +7012,12 @@ export class InterceptClient {
    *   A fully-qualified path representing SSEGatewayReference resource.
    * @returns {string} A string representing the sse_gateway_reference.
    */
-  matchSseGatewayReferenceFromSSEGatewayReferenceName(sSEGatewayReferenceName: string) {
-    return this.pathTemplates.sSEGatewayReferencePathTemplate.match(sSEGatewayReferenceName).sse_gateway_reference;
+  matchSseGatewayReferenceFromSSEGatewayReferenceName(
+    sSEGatewayReferenceName: string,
+  ) {
+    return this.pathTemplates.sSEGatewayReferencePathTemplate.match(
+      sSEGatewayReferenceName,
+    ).sse_gateway_reference;
   }
 
   /**
@@ -5211,7 +7028,11 @@ export class InterceptClient {
    * @param {string} server_tls_policy
    * @returns {string} Resource name string.
    */
-  serverTlsPolicyPath(project:string,location:string,serverTlsPolicy:string) {
+  serverTlsPolicyPath(
+    project: string,
+    location: string,
+    serverTlsPolicy: string,
+  ) {
     return this.pathTemplates.serverTlsPolicyPathTemplate.render({
       project: project,
       location: location,
@@ -5227,7 +7048,9 @@ export class InterceptClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromServerTlsPolicyName(serverTlsPolicyName: string) {
-    return this.pathTemplates.serverTlsPolicyPathTemplate.match(serverTlsPolicyName).project;
+    return this.pathTemplates.serverTlsPolicyPathTemplate.match(
+      serverTlsPolicyName,
+    ).project;
   }
 
   /**
@@ -5238,7 +7061,9 @@ export class InterceptClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromServerTlsPolicyName(serverTlsPolicyName: string) {
-    return this.pathTemplates.serverTlsPolicyPathTemplate.match(serverTlsPolicyName).location;
+    return this.pathTemplates.serverTlsPolicyPathTemplate.match(
+      serverTlsPolicyName,
+    ).location;
   }
 
   /**
@@ -5249,7 +7074,9 @@ export class InterceptClient {
    * @returns {string} A string representing the server_tls_policy.
    */
   matchServerTlsPolicyFromServerTlsPolicyName(serverTlsPolicyName: string) {
-    return this.pathTemplates.serverTlsPolicyPathTemplate.match(serverTlsPolicyName).server_tls_policy;
+    return this.pathTemplates.serverTlsPolicyPathTemplate.match(
+      serverTlsPolicyName,
+    ).server_tls_policy;
   }
 
   /**
@@ -5260,7 +7087,11 @@ export class InterceptClient {
    * @param {string} tls_inspection_policy
    * @returns {string} Resource name string.
    */
-  tlsInspectionPolicyPath(project:string,location:string,tlsInspectionPolicy:string) {
+  tlsInspectionPolicyPath(
+    project: string,
+    location: string,
+    tlsInspectionPolicy: string,
+  ) {
     return this.pathTemplates.tlsInspectionPolicyPathTemplate.render({
       project: project,
       location: location,
@@ -5276,7 +7107,9 @@ export class InterceptClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTlsInspectionPolicyName(tlsInspectionPolicyName: string) {
-    return this.pathTemplates.tlsInspectionPolicyPathTemplate.match(tlsInspectionPolicyName).project;
+    return this.pathTemplates.tlsInspectionPolicyPathTemplate.match(
+      tlsInspectionPolicyName,
+    ).project;
   }
 
   /**
@@ -5287,7 +7120,9 @@ export class InterceptClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromTlsInspectionPolicyName(tlsInspectionPolicyName: string) {
-    return this.pathTemplates.tlsInspectionPolicyPathTemplate.match(tlsInspectionPolicyName).location;
+    return this.pathTemplates.tlsInspectionPolicyPathTemplate.match(
+      tlsInspectionPolicyName,
+    ).location;
   }
 
   /**
@@ -5297,8 +7132,12 @@ export class InterceptClient {
    *   A fully-qualified path representing TlsInspectionPolicy resource.
    * @returns {string} A string representing the tls_inspection_policy.
    */
-  matchTlsInspectionPolicyFromTlsInspectionPolicyName(tlsInspectionPolicyName: string) {
-    return this.pathTemplates.tlsInspectionPolicyPathTemplate.match(tlsInspectionPolicyName).tls_inspection_policy;
+  matchTlsInspectionPolicyFromTlsInspectionPolicyName(
+    tlsInspectionPolicyName: string,
+  ) {
+    return this.pathTemplates.tlsInspectionPolicyPathTemplate.match(
+      tlsInspectionPolicyName,
+    ).tls_inspection_policy;
   }
 
   /**
@@ -5309,7 +7148,7 @@ export class InterceptClient {
    * @param {string} url_list
    * @returns {string} Resource name string.
    */
-  urlListPath(project:string,location:string,urlList:string) {
+  urlListPath(project: string, location: string, urlList: string) {
     return this.pathTemplates.urlListPathTemplate.render({
       project: project,
       location: location,
@@ -5358,12 +7197,16 @@ export class InterceptClient {
    */
   close(): Promise<void> {
     if (this.interceptStub && !this._terminated) {
-      return this.interceptStub.then(stub => {
+      return this.interceptStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch(err => {throw err});
-        this.locationsClient.close().catch(err => {throw err});
+        this.iamClient.close().catch((err) => {
+          throw err;
+        });
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
         void this.operationsClient.close();
       });
     }

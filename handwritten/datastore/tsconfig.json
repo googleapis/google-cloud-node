@@ -5,7 +5,7 @@
     "outDir": "build",
     "resolveJsonModule": true,
     "lib": [
-      "es2018",
+      "es2023",
       "dom"
     ]
   },
@@ -16,8 +16,8 @@
     "test/**/*.ts",
     "system-test/*.ts",
     "mock-server/datastore-server.ts",
-    "src/v1/datastore_client_config.json",
-    "protos/protos.json",
-    "src/v1/datastore_admin_client_config.json"
+    "src/**/*.json",
+    "samples/**/*.json",
+    "protos/protos.json"
   ]
 }

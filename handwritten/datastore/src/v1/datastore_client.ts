@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -56,7 +56,7 @@ export class DatastoreClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('datastore');
@@ -69,9 +69,9 @@ export class DatastoreClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   operationsClient: gax.OperationsClient;
-  datastoreStub?: Promise<{[name: string]: Function}>;
+  datastoreStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of DatastoreClient.
@@ -147,7 +147,7 @@ export class DatastoreClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -203,7 +203,7 @@ export class DatastoreClient {
     // Load the applicable protos.
     this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
@@ -243,7 +243,7 @@ export class DatastoreClient {
       'google.datastore.v1.Datastore',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')},
+      { 'x-goog-api-client': clientHeader.join(' ') },
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -283,7 +283,7 @@ export class DatastoreClient {
           (this._protos as any).google.datastore.v1.Datastore,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{[method: string]: Function}>;
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -299,7 +299,7 @@ export class DatastoreClient {
     ];
     for (const methodName of datastoreStubMethods) {
       const callPromise = this.datastoreStub.then(
-        stub =>
+        (stub) =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -504,14 +504,14 @@ export class DatastoreClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    const routingParameter = {};
+    let routingParameter = {};
     {
       const fieldValue = request.projectId;
       if (fieldValue !== undefined && fieldValue !== null) {
         const match = fieldValue.toString().match(RegExp('(?<project_id>.*)'));
         if (match) {
           const parameterValue = match.groups?.['project_id'] ?? fieldValue;
-          Object.assign(routingParameter, {project_id: parameterValue});
+          Object.assign(routingParameter, { project_id: parameterValue });
         }
       }
     }
@@ -521,13 +521,13 @@ export class DatastoreClient {
         const match = fieldValue.toString().match(RegExp('(?<database_id>.*)'));
         if (match) {
           const parameterValue = match.groups?.['database_id'] ?? fieldValue;
-          Object.assign(routingParameter, {database_id: parameterValue});
+          Object.assign(routingParameter, { database_id: parameterValue });
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('lookup request %j', request);
@@ -554,7 +554,23 @@ export class DatastoreClient {
           this._log.info('lookup response %j', response);
           return [response, options, rawResponse];
         },
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Queries for entities.
@@ -656,14 +672,14 @@ export class DatastoreClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    const routingParameter = {};
+    let routingParameter = {};
     {
       const fieldValue = request.projectId;
       if (fieldValue !== undefined && fieldValue !== null) {
         const match = fieldValue.toString().match(RegExp('(?<project_id>.*)'));
         if (match) {
           const parameterValue = match.groups?.['project_id'] ?? fieldValue;
-          Object.assign(routingParameter, {project_id: parameterValue});
+          Object.assign(routingParameter, { project_id: parameterValue });
         }
       }
     }
@@ -673,13 +689,13 @@ export class DatastoreClient {
         const match = fieldValue.toString().match(RegExp('(?<database_id>.*)'));
         if (match) {
           const parameterValue = match.groups?.['database_id'] ?? fieldValue;
-          Object.assign(routingParameter, {database_id: parameterValue});
+          Object.assign(routingParameter, { database_id: parameterValue });
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('runQuery request %j', request);
@@ -706,7 +722,23 @@ export class DatastoreClient {
           this._log.info('runQuery response %j', response);
           return [response, options, rawResponse];
         },
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Runs an aggregation query.
@@ -804,14 +836,14 @@ export class DatastoreClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    const routingParameter = {};
+    let routingParameter = {};
     {
       const fieldValue = request.projectId;
       if (fieldValue !== undefined && fieldValue !== null) {
         const match = fieldValue.toString().match(RegExp('(?<project_id>.*)'));
         if (match) {
           const parameterValue = match.groups?.['project_id'] ?? fieldValue;
-          Object.assign(routingParameter, {project_id: parameterValue});
+          Object.assign(routingParameter, { project_id: parameterValue });
         }
       }
     }
@@ -821,13 +853,13 @@ export class DatastoreClient {
         const match = fieldValue.toString().match(RegExp('(?<database_id>.*)'));
         if (match) {
           const parameterValue = match.groups?.['database_id'] ?? fieldValue;
-          Object.assign(routingParameter, {database_id: parameterValue});
+          Object.assign(routingParameter, { database_id: parameterValue });
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('runAggregationQuery request %j', request);
@@ -856,7 +888,23 @@ export class DatastoreClient {
           this._log.info('runAggregationQuery response %j', response);
           return [response, options, rawResponse];
         },
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Begins a new transaction.
@@ -942,14 +990,14 @@ export class DatastoreClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    const routingParameter = {};
+    let routingParameter = {};
     {
       const fieldValue = request.projectId;
       if (fieldValue !== undefined && fieldValue !== null) {
         const match = fieldValue.toString().match(RegExp('(?<project_id>.*)'));
         if (match) {
           const parameterValue = match.groups?.['project_id'] ?? fieldValue;
-          Object.assign(routingParameter, {project_id: parameterValue});
+          Object.assign(routingParameter, { project_id: parameterValue });
         }
       }
     }
@@ -959,13 +1007,13 @@ export class DatastoreClient {
         const match = fieldValue.toString().match(RegExp('(?<database_id>.*)'));
         if (match) {
           const parameterValue = match.groups?.['database_id'] ?? fieldValue;
-          Object.assign(routingParameter, {database_id: parameterValue});
+          Object.assign(routingParameter, { database_id: parameterValue });
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('beginTransaction request %j', request);
@@ -994,7 +1042,23 @@ export class DatastoreClient {
           this._log.info('beginTransaction response %j', response);
           return [response, options, rawResponse];
         },
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Commits a transaction, optionally creating, deleting or modifying some
@@ -1102,14 +1166,14 @@ export class DatastoreClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    const routingParameter = {};
+    let routingParameter = {};
     {
       const fieldValue = request.projectId;
       if (fieldValue !== undefined && fieldValue !== null) {
         const match = fieldValue.toString().match(RegExp('(?<project_id>.*)'));
         if (match) {
           const parameterValue = match.groups?.['project_id'] ?? fieldValue;
-          Object.assign(routingParameter, {project_id: parameterValue});
+          Object.assign(routingParameter, { project_id: parameterValue });
         }
       }
     }
@@ -1119,13 +1183,13 @@ export class DatastoreClient {
         const match = fieldValue.toString().match(RegExp('(?<database_id>.*)'));
         if (match) {
           const parameterValue = match.groups?.['database_id'] ?? fieldValue;
-          Object.assign(routingParameter, {database_id: parameterValue});
+          Object.assign(routingParameter, { database_id: parameterValue });
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('commit request %j', request);
@@ -1152,7 +1216,23 @@ export class DatastoreClient {
           this._log.info('commit response %j', response);
           return [response, options, rawResponse];
         },
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Rolls back a transaction.
@@ -1237,14 +1317,14 @@ export class DatastoreClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    const routingParameter = {};
+    let routingParameter = {};
     {
       const fieldValue = request.projectId;
       if (fieldValue !== undefined && fieldValue !== null) {
         const match = fieldValue.toString().match(RegExp('(?<project_id>.*)'));
         if (match) {
           const parameterValue = match.groups?.['project_id'] ?? fieldValue;
-          Object.assign(routingParameter, {project_id: parameterValue});
+          Object.assign(routingParameter, { project_id: parameterValue });
         }
       }
     }
@@ -1254,13 +1334,13 @@ export class DatastoreClient {
         const match = fieldValue.toString().match(RegExp('(?<database_id>.*)'));
         if (match) {
           const parameterValue = match.groups?.['database_id'] ?? fieldValue;
-          Object.assign(routingParameter, {database_id: parameterValue});
+          Object.assign(routingParameter, { database_id: parameterValue });
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('rollback request %j', request);
@@ -1287,7 +1367,23 @@ export class DatastoreClient {
           this._log.info('rollback response %j', response);
           return [response, options, rawResponse];
         },
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Allocates IDs for the given keys, which is useful for referencing an entity
@@ -1373,14 +1469,14 @@ export class DatastoreClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    const routingParameter = {};
+    let routingParameter = {};
     {
       const fieldValue = request.projectId;
       if (fieldValue !== undefined && fieldValue !== null) {
         const match = fieldValue.toString().match(RegExp('(?<project_id>.*)'));
         if (match) {
           const parameterValue = match.groups?.['project_id'] ?? fieldValue;
-          Object.assign(routingParameter, {project_id: parameterValue});
+          Object.assign(routingParameter, { project_id: parameterValue });
         }
       }
     }
@@ -1390,13 +1486,13 @@ export class DatastoreClient {
         const match = fieldValue.toString().match(RegExp('(?<database_id>.*)'));
         if (match) {
           const parameterValue = match.groups?.['database_id'] ?? fieldValue;
-          Object.assign(routingParameter, {database_id: parameterValue});
+          Object.assign(routingParameter, { database_id: parameterValue });
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('allocateIds request %j', request);
@@ -1423,7 +1519,23 @@ export class DatastoreClient {
           this._log.info('allocateIds response %j', response);
           return [response, options, rawResponse];
         },
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Prevents the supplied keys' IDs from being auto-allocated by Cloud
@@ -1509,14 +1621,14 @@ export class DatastoreClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    const routingParameter = {};
+    let routingParameter = {};
     {
       const fieldValue = request.projectId;
       if (fieldValue !== undefined && fieldValue !== null) {
         const match = fieldValue.toString().match(RegExp('(?<project_id>.*)'));
         if (match) {
           const parameterValue = match.groups?.['project_id'] ?? fieldValue;
-          Object.assign(routingParameter, {project_id: parameterValue});
+          Object.assign(routingParameter, { project_id: parameterValue });
         }
       }
     }
@@ -1526,13 +1638,13 @@ export class DatastoreClient {
         const match = fieldValue.toString().match(RegExp('(?<database_id>.*)'));
         if (match) {
           const parameterValue = match.groups?.['database_id'] ?? fieldValue;
-          Object.assign(routingParameter, {database_id: parameterValue});
+          Object.assign(routingParameter, { database_id: parameterValue });
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('reserveIds request %j', request);
@@ -1559,7 +1671,23 @@ export class DatastoreClient {
           this._log.info('reserveIds response %j', response);
           return [response, options, rawResponse];
         },
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
 
   /**
@@ -1728,7 +1856,6 @@ export class DatastoreClient {
       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
-
   /**
    * Deletes a long-running operation. This method indicates that the client is
    * no longer interested in the operation result. It does not cancel the
@@ -1794,11 +1921,11 @@ export class DatastoreClient {
    */
   close(): Promise<void> {
     if (this.datastoreStub && !this._terminated) {
-      return this.datastoreStub.then(stub => {
+      return this.datastoreStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.operationsClient.close();
+        void this.operationsClient.close();
       });
     }
     return Promise.resolve();

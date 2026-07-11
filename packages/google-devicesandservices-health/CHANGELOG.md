@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/health-v0.2.0...health-v0.3.0) (2026-06-01)
+
+
+### Features
+
+* [health] introduce MedicalDeviceInfo message for Software as Medical Device (SaMD) metadata tracking ([#8328](https://github.com/googleapis/google-cloud-node/issues/8328)) ([8f540c7](https://github.com/googleapis/google-cloud-node/commit/8f540c744695c8c5133260130ab967c991daa317))
+
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/health-v0.1.0...health-v0.2.0) (2026-05-27)
+
+
+### Features
+
+* Clean up per-package eslintrc configurations ([b053d0e](https://github.com/googleapis/google-cloud-node/commit/b053d0edfa1ade74ce069279af86f058c77a589b))
+
 ## 0.1.0 (2026-05-12)
 
 

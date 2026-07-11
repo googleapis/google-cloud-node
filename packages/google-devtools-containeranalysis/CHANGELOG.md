@@ -4,6 +4,25 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [6.8.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v6.7.2...containeranalysis-v6.8.0) (2026-06-16)
+
+
+### Features
+
+* Migrate google-devtools-containeranalysis to librarian ([#8534](https://github.com/googleapis/google-cloud-node/issues/8534)) ([48cfd70](https://github.com/googleapis/google-cloud-node/commit/48cfd703e8632bc2b219a298a98301de23dc3ea9))
+
+
+### Bug Fixes
+
+* Update librarian.js for containeranalysis to fix postproccessing issue ([#8489](https://github.com/googleapis/google-cloud-node/issues/8489)) ([9f7d7b9](https://github.com/googleapis/google-cloud-node/commit/9f7d7b9132694b89908243d7c284c0a6e121826d))
+
+## [6.7.2](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v6.7.1...containeranalysis-v6.7.2) (2026-06-01)
+
+
+### Bug Fixes
+
+* **deps:** Remove vulnerable dependency `uuid` ([#8120](https://github.com/googleapis/google-cloud-node/issues/8120)) ([3ec901e](https://github.com/googleapis/google-cloud-node/commit/3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a))
+
 ## [6.7.1](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v6.7.0...containeranalysis-v6.7.1) (2026-05-01)
 
 

@@ -65,7 +65,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list organizations | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-marketingplatform-admin/samples/generated/v1alpha/marketingplatform_admin_service.list_organizations.js) |
 | report property usage | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-marketingplatform-admin/samples/generated/v1alpha/marketingplatform_admin_service.report_property_usage.js) |
 | set property service level | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-marketingplatform-admin/samples/generated/v1alpha/marketingplatform_admin_service.set_property_service_level.js) |
-| marketingplatform | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-marketingplatform-admin/samples/generated/v1alpha/snippet_metadata_google.marketingplatform.admin.v1alpha.json) |
 
 
 ## Supported Node.js Versions

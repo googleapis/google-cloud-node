@@ -22,6 +22,7 @@ const health = require('@google-cloud/health');
 
 function main() {
   const dataPointsServiceClient = new health.DataPointsServiceClient();
+  const dataSubscriptionServiceClient = new health.DataSubscriptionServiceClient();
   const healthProfileServiceClient = new health.HealthProfileServiceClient();
 }
 

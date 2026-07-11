@@ -19,1961 +19,2798 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import {SinonStub} from 'sinon';
-import {describe, it} from 'mocha';
+import { SinonStub } from 'sinon';
+import { describe, it } from 'mocha';
 import * as datapointsserviceModule from '../src';
 
-import {PassThrough} from 'stream';
+import { PassThrough } from 'stream';
 
-import {protobuf, LROperation, operationsProtos} from 'google-gax';
+import { protobuf, LROperation, operationsProtos } from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json'),
+).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-    let type = root.lookupType(typeName) as protobuf.Type;
-    for (const field of fields.slice(0, -1)) {
-        type = type.fields[field]?.resolvedType as protobuf.Type;
-    }
-    return type.fields[fields[fields.length - 1]]?.defaultValue;
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-    const filledObject = (instance.constructor as typeof protobuf.Message)
-        .toObject(instance as protobuf.Message<T>, {defaults: true});
-    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  return (instance.constructor as typeof protobuf.Message).fromObject(
+    filledObject,
+  ) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
+  return error
+    ? sinon.stub().rejects(error)
+    : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
-    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(
+  response?: ResponseType,
+  error?: Error,
+) {
+  return error
+    ? sinon.stub().callsArgWith(2, error)
+    : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
-    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
-    const mockOperation = {
-        promise: innerStub,
-    };
-    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
+function stubLongRunningCall<ResponseType>(
+  response?: ResponseType,
+  callError?: Error,
+  lroError?: Error,
+) {
+  const innerStub = lroError
+    ? sinon.stub().rejects(lroError)
+    : sinon.stub().resolves([response]);
+  const mockOperation = {
+    promise: innerStub,
+  };
+  return callError
+    ? sinon.stub().rejects(callError)
+    : sinon.stub().resolves([mockOperation]);
 }
 
-function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
-    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
-    const mockOperation = {
-        promise: innerStub,
-    };
-    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
+function stubLongRunningCallWithCallback<ResponseType>(
+  response?: ResponseType,
+  callError?: Error,
+  lroError?: Error,
+) {
+  const innerStub = lroError
+    ? sinon.stub().rejects(lroError)
+    : sinon.stub().resolves([response]);
+  const mockOperation = {
+    promise: innerStub,
+  };
+  return callError
+    ? sinon.stub().callsArgWith(2, callError)
+    : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
-    const pagingStub = sinon.stub();
-    if (responses) {
-        for (let i = 0; i < responses.length; ++i) {
-            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
-        }
+function stubPageStreamingCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error,
+) {
+  const pagingStub = sinon.stub();
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
     }
-    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
-    const mockStream = new PassThrough({
-        objectMode: true,
-        transform: transformStub,
+  }
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : pagingStub;
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  // trigger as many responses as needed
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      setImmediate(() => {
+        mockStream.write({});
+      });
+    }
+    setImmediate(() => {
+      mockStream.end();
     });
-    // trigger as many responses as needed
-    if (responses) {
-        for (let i = 0; i < responses.length; ++i) {
-            setImmediate(() => { mockStream.write({}); });
-        }
-        setImmediate(() => { mockStream.end(); });
-    } else {
-        setImmediate(() => { mockStream.write({}); });
-        setImmediate(() => { mockStream.end(); });
-    }
-    return sinon.stub().returns(mockStream);
+  } else {
+    setImmediate(() => {
+      mockStream.write({});
+    });
+    setImmediate(() => {
+      mockStream.end();
+    });
+  }
+  return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
-    let counter = 0;
-    const asyncIterable = {
-        [Symbol.asyncIterator]() {
-            return {
-                async next() {
-                    if (error) {
-                        return Promise.reject(error);
-                    }
-                    if (counter >= responses!.length) {
-                        return Promise.resolve({done: true, value: undefined});
-                    }
-                    return Promise.resolve({done: false, value: responses![counter++]});
-                }
-            };
-        }
-    };
-    return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error,
+) {
+  let counter = 0;
+  const asyncIterable = {
+    [Symbol.asyncIterator]() {
+      return {
+        async next() {
+          if (error) {
+            return Promise.reject(error);
+          }
+          if (counter >= responses!.length) {
+            return Promise.resolve({ done: true, value: undefined });
+          }
+          return Promise.resolve({ done: false, value: responses![counter++] });
+        },
+      };
+    },
+  };
+  return sinon.stub().returns(asyncIterable);
 }
 
 describe('v4.DataPointsServiceClient', () => {
-    describe('Common methods', () => {
-        it('has apiEndpoint', () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient();
-            const apiEndpoint = client.apiEndpoint;
-            assert.strictEqual(apiEndpoint, 'health.googleapis.com');
+  describe('Common methods', () => {
+    it('has apiEndpoint', () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'health.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          datapointsserviceModule.v4.DataPointsServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'health.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          datapointsserviceModule.v4.DataPointsServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'health.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'health.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'health.example.com');
+    });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new datapointsserviceModule.v4.DataPointsServiceClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'health.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
         });
 
-        it('has universeDomain', () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient();
-            const universeDomain = client.universeDomain;
-            assert.strictEqual(universeDomain, "googleapis.com");
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new datapointsserviceModule.v4.DataPointsServiceClient(
+            { universeDomain: 'configured.example.com' },
+          );
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'health.configured.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
         });
+      });
+    }
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new datapointsserviceModule.v4.DataPointsServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
+    });
 
-        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-            it('throws DeprecationWarning if static servicePath is used', () => {
-                const stub = sinon.stub(process, 'emitWarning');
-                const servicePath = datapointsserviceModule.v4.DataPointsServiceClient.servicePath;
-                assert.strictEqual(servicePath, 'health.googleapis.com');
-                assert(stub.called);
-                stub.restore();
-            });
+    it('has port', () => {
+      const port = datapointsserviceModule.v4.DataPointsServiceClient.port;
+      assert(port);
+      assert(typeof port === 'number');
+    });
 
-            it('throws DeprecationWarning if static apiEndpoint is used', () => {
-                const stub = sinon.stub(process, 'emitWarning');
-                const apiEndpoint = datapointsserviceModule.v4.DataPointsServiceClient.apiEndpoint;
-                assert.strictEqual(apiEndpoint, 'health.googleapis.com');
-                assert(stub.called);
-                stub.restore();
-            });
+    it('should create a client with no option', () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient();
+      assert(client);
+    });
+
+    it('should create a client with gRPC fallback', () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        fallback: true,
+      });
+      assert(client);
+    });
+
+    it('has initialize method and supports deferred initialization', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.dataPointsServiceStub, undefined);
+      await client.initialize();
+      assert(client.dataPointsServiceStub);
+    });
+
+    it('has close method for the initialized client', (done) => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      client.initialize().catch((err) => {
+        throw err;
+      });
+      assert(client.dataPointsServiceStub);
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch((err) => {
+          throw err;
+        });
+    });
+
+    it('has close method for the non-initialized client', (done) => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.dataPointsServiceStub, undefined);
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch((err) => {
+          throw err;
+        });
+    });
+
+    it('has getProjectId method', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+      const result = await client.getProjectId();
+      assert.strictEqual(result, fakeProjectId);
+      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+    });
+
+    it('has getProjectId method with callback', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      client.auth.getProjectId = sinon
+        .stub()
+        .callsArgWith(0, null, fakeProjectId);
+      const promise = new Promise((resolve, reject) => {
+        client.getProjectId((err?: Error | null, projectId?: string | null) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(projectId);
+          }
+        });
+      });
+      const result = await promise;
+      assert.strictEqual(result, fakeProjectId);
+    });
+  });
+
+  describe('getDataPoint', () => {
+    it('invokes getDataPoint without error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.GetDataPointRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.GetDataPointRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.DataPoint(),
+      );
+      client.innerApiCalls.getDataPoint = stubSimpleCall(expectedResponse);
+      const [response] = await client.getDataPoint(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getDataPoint as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDataPoint as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getDataPoint without error using callback', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.GetDataPointRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.GetDataPointRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.DataPoint(),
+      );
+      client.innerApiCalls.getDataPoint =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getDataPoint(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.devicesandservices.health.v4.IDataPoint | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getDataPoint as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDataPoint as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getDataPoint with error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.GetDataPointRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.GetDataPointRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getDataPoint = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getDataPoint(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getDataPoint as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDataPoint as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getDataPoint with closed client', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.GetDataPointRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.GetDataPointRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.getDataPoint(request), expectedError);
+    });
+  });
+
+  describe('dailyRollUpDataPoints', () => {
+    it('invokes dailyRollUpDataPoints without error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.DailyRollUpDataPointsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.DailyRollUpDataPointsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.DailyRollUpDataPointsResponse(),
+      );
+      client.innerApiCalls.dailyRollUpDataPoints =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.dailyRollUpDataPoints(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.dailyRollUpDataPoints as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.dailyRollUpDataPoints as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes dailyRollUpDataPoints without error using callback', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.DailyRollUpDataPointsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.DailyRollUpDataPointsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.DailyRollUpDataPointsResponse(),
+      );
+      client.innerApiCalls.dailyRollUpDataPoints =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.dailyRollUpDataPoints(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.dailyRollUpDataPoints as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.dailyRollUpDataPoints as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes dailyRollUpDataPoints with error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.DailyRollUpDataPointsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.DailyRollUpDataPointsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.dailyRollUpDataPoints = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.dailyRollUpDataPoints(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.dailyRollUpDataPoints as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.dailyRollUpDataPoints as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes dailyRollUpDataPoints with closed client', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.DailyRollUpDataPointsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.DailyRollUpDataPointsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.dailyRollUpDataPoints(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('exportExerciseTcx', () => {
+    it('invokes exportExerciseTcx without error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.ExportExerciseTcxRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.ExportExerciseTcxRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.ExportExerciseTcxResponse(),
+      );
+      client.innerApiCalls.exportExerciseTcx = stubSimpleCall(expectedResponse);
+      const [response] = await client.exportExerciseTcx(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.exportExerciseTcx as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.exportExerciseTcx as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes exportExerciseTcx without error using callback', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.ExportExerciseTcxRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.ExportExerciseTcxRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.ExportExerciseTcxResponse(),
+      );
+      client.innerApiCalls.exportExerciseTcx =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.exportExerciseTcx(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.devicesandservices.health.v4.IExportExerciseTcxResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.exportExerciseTcx as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.exportExerciseTcx as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes exportExerciseTcx with error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.ExportExerciseTcxRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.ExportExerciseTcxRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.exportExerciseTcx = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.exportExerciseTcx(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.exportExerciseTcx as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.exportExerciseTcx as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes exportExerciseTcx with closed client', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.ExportExerciseTcxRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.ExportExerciseTcxRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.exportExerciseTcx(request), expectedError);
+    });
+  });
+
+  describe('createDataPoint', () => {
+    it('invokes createDataPoint without error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.CreateDataPointRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.CreateDataPointRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createDataPoint =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createDataPoint(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createDataPoint as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDataPoint as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createDataPoint without error using callback', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.CreateDataPointRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.CreateDataPointRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createDataPoint =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createDataPoint(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.devicesandservices.health.v4.IDataPoint,
+              protos.google.devicesandservices.health.v4.ICreateDataPointOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.devicesandservices.health.v4.IDataPoint,
+        protos.google.devicesandservices.health.v4.ICreateDataPointOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createDataPoint as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDataPoint as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createDataPoint with call error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.CreateDataPointRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.CreateDataPointRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createDataPoint = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.createDataPoint(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createDataPoint as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDataPoint as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createDataPoint with LRO error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.CreateDataPointRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.CreateDataPointRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createDataPoint = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.createDataPoint(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createDataPoint as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDataPoint as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateDataPointProgress without error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateDataPointProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateDataPointProgress with error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkCreateDataPointProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('updateDataPoint', () => {
+    it('invokes updateDataPoint without error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.UpdateDataPointRequest(),
+      );
+      request.dataPoint ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.UpdateDataPointRequest',
+        ['dataPoint', 'name'],
+      );
+      request.dataPoint.name = defaultValue1;
+      const expectedHeaderRequestParams = `data_point.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.updateDataPoint =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateDataPoint(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateDataPoint as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDataPoint as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateDataPoint without error using callback', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.UpdateDataPointRequest(),
+      );
+      request.dataPoint ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.UpdateDataPointRequest',
+        ['dataPoint', 'name'],
+      );
+      request.dataPoint.name = defaultValue1;
+      const expectedHeaderRequestParams = `data_point.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.updateDataPoint =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateDataPoint(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.devicesandservices.health.v4.IDataPoint,
+              protos.google.devicesandservices.health.v4.IUpdateDataPointOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.devicesandservices.health.v4.IDataPoint,
+        protos.google.devicesandservices.health.v4.IUpdateDataPointOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateDataPoint as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDataPoint as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateDataPoint with call error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.UpdateDataPointRequest(),
+      );
+      request.dataPoint ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.UpdateDataPointRequest',
+        ['dataPoint', 'name'],
+      );
+      request.dataPoint.name = defaultValue1;
+      const expectedHeaderRequestParams = `data_point.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateDataPoint = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.updateDataPoint(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateDataPoint as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDataPoint as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateDataPoint with LRO error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.UpdateDataPointRequest(),
+      );
+      request.dataPoint ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.UpdateDataPointRequest',
+        ['dataPoint', 'name'],
+      );
+      request.dataPoint.name = defaultValue1;
+      const expectedHeaderRequestParams = `data_point.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateDataPoint = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.updateDataPoint(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateDataPoint as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDataPoint as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdateDataPointProgress without error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdateDataPointProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateDataPointProgress with error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkUpdateDataPointProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('batchDeleteDataPoints', () => {
+    it('invokes batchDeleteDataPoints without error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.BatchDeleteDataPointsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.BatchDeleteDataPointsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.batchDeleteDataPoints =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.batchDeleteDataPoints(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchDeleteDataPoints as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchDeleteDataPoints as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchDeleteDataPoints without error using callback', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.BatchDeleteDataPointsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.BatchDeleteDataPointsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.batchDeleteDataPoints =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchDeleteDataPoints(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsResponse,
+              protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsResponse,
+        protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchDeleteDataPoints as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchDeleteDataPoints as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchDeleteDataPoints with call error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.BatchDeleteDataPointsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.BatchDeleteDataPointsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchDeleteDataPoints = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.batchDeleteDataPoints(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.batchDeleteDataPoints as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchDeleteDataPoints as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchDeleteDataPoints with LRO error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.BatchDeleteDataPointsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.BatchDeleteDataPointsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchDeleteDataPoints = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.batchDeleteDataPoints(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.batchDeleteDataPoints as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchDeleteDataPoints as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkBatchDeleteDataPointsProgress without error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkBatchDeleteDataPointsProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkBatchDeleteDataPointsProgress with error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkBatchDeleteDataPointsProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('listDataPoints', () => {
+    it('invokes listDataPoints without error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.ListDataPointsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.ListDataPointsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.DataPoint(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.DataPoint(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.DataPoint(),
+        ),
+      ];
+      client.innerApiCalls.listDataPoints = stubSimpleCall(expectedResponse);
+      const [response] = await client.listDataPoints(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listDataPoints as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDataPoints as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listDataPoints without error using callback', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.ListDataPointsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.ListDataPointsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.DataPoint(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.DataPoint(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.DataPoint(),
+        ),
+      ];
+      client.innerApiCalls.listDataPoints =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listDataPoints(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.devicesandservices.health.v4.IDataPoint[]
+              | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listDataPoints as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDataPoints as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listDataPoints with error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.ListDataPointsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.ListDataPointsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listDataPoints = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.listDataPoints(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listDataPoints as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDataPoints as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listDataPointsStream without error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.ListDataPointsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.ListDataPointsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.DataPoint(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.DataPoint(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.DataPoint(),
+        ),
+      ];
+      client.descriptors.page.listDataPoints.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listDataPointsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.devicesandservices.health.v4.DataPoint[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.devicesandservices.health.v4.DataPoint) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listDataPoints.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listDataPoints, request),
+      );
+      assert(
+        (client.descriptors.page.listDataPoints.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('invokes listDataPointsStream with error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.ListDataPointsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.ListDataPointsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listDataPoints.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listDataPointsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.devicesandservices.health.v4.DataPoint[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.devicesandservices.health.v4.DataPoint) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listDataPoints.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listDataPoints, request),
+      );
+      assert(
+        (client.descriptors.page.listDataPoints.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('uses async iteration with listDataPoints without error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.ListDataPointsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.ListDataPointsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.DataPoint(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.DataPoint(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.DataPoint(),
+        ),
+      ];
+      client.descriptors.page.listDataPoints.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.devicesandservices.health.v4.IDataPoint[] =
+        [];
+      const iterable = client.listDataPointsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listDataPoints.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listDataPoints.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('uses async iteration with listDataPoints with error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.ListDataPointsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.ListDataPointsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listDataPoints.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listDataPointsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.devicesandservices.health.v4.IDataPoint[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
         }
-        it('sets apiEndpoint according to universe domain camelCase', () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({universeDomain: 'example.com'});
-            const servicePath = client.apiEndpoint;
-            assert.strictEqual(servicePath, 'health.example.com');
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listDataPoints.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listDataPoints.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+  });
+
+  describe('reconcileDataPoints', () => {
+    it('invokes reconcileDataPoints without error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.ReconcileDataPointsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.ReconcileDataPointsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.ReconciledDataPoint(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.ReconciledDataPoint(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.ReconciledDataPoint(),
+        ),
+      ];
+      client.innerApiCalls.reconcileDataPoints =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.reconcileDataPoints(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.reconcileDataPoints as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.reconcileDataPoints as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes reconcileDataPoints without error using callback', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.ReconcileDataPointsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.ReconcileDataPointsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.ReconciledDataPoint(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.ReconciledDataPoint(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.ReconciledDataPoint(),
+        ),
+      ];
+      client.innerApiCalls.reconcileDataPoints =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.reconcileDataPoints(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.devicesandservices.health.v4.IReconciledDataPoint[]
+              | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.reconcileDataPoints as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.reconcileDataPoints as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes reconcileDataPoints with error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.ReconcileDataPointsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.ReconcileDataPointsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.reconcileDataPoints = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.reconcileDataPoints(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.reconcileDataPoints as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.reconcileDataPoints as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes reconcileDataPointsStream without error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.ReconcileDataPointsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.ReconcileDataPointsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.ReconciledDataPoint(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.ReconciledDataPoint(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.ReconciledDataPoint(),
+        ),
+      ];
+      client.descriptors.page.reconcileDataPoints.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.reconcileDataPointsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.devicesandservices.health.v4.ReconciledDataPoint[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.devicesandservices.health.v4.ReconciledDataPoint,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
         });
-
-        it('sets apiEndpoint according to universe domain snakeCase', () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({universe_domain: 'example.com'});
-            const servicePath = client.apiEndpoint;
-            assert.strictEqual(servicePath, 'health.example.com');
+        stream.on('error', (err: Error) => {
+          reject(err);
         });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.reconcileDataPoints.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.reconcileDataPoints, request),
+      );
+      assert(
+        (client.descriptors.page.reconcileDataPoints.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
 
-        if (typeof process === 'object' && 'env' in process) {
-            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-                it('sets apiEndpoint from environment variable', () => {
-                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-                    const client = new datapointsserviceModule.v4.DataPointsServiceClient();
-                    const servicePath = client.apiEndpoint;
-                    assert.strictEqual(servicePath, 'health.example.com');
-                    if (saved) {
-                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-                    } else {
-                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    }
-                });
+    it('invokes reconcileDataPointsStream with error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.ReconcileDataPointsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.ReconcileDataPointsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.reconcileDataPoints.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.reconcileDataPointsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.devicesandservices.health.v4.ReconciledDataPoint[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.devicesandservices.health.v4.ReconciledDataPoint,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.reconcileDataPoints.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.reconcileDataPoints, request),
+      );
+      assert(
+        (client.descriptors.page.reconcileDataPoints.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
 
-                it('value configured in code has priority over environment variable', () => {
-                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-                    const client = new datapointsserviceModule.v4.DataPointsServiceClient({universeDomain: 'configured.example.com'});
-                    const servicePath = client.apiEndpoint;
-                    assert.strictEqual(servicePath, 'health.configured.example.com');
-                    if (saved) {
-                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-                    } else {
-                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    }
-                });
-            });
+    it('uses async iteration with reconcileDataPoints without error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.ReconcileDataPointsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.ReconcileDataPointsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.ReconciledDataPoint(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.ReconciledDataPoint(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.ReconciledDataPoint(),
+        ),
+      ];
+      client.descriptors.page.reconcileDataPoints.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.devicesandservices.health.v4.IReconciledDataPoint[] =
+        [];
+      const iterable = client.reconcileDataPointsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.reconcileDataPoints.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.reconcileDataPoints.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('uses async iteration with reconcileDataPoints with error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.ReconcileDataPointsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.ReconcileDataPointsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.reconcileDataPoints.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.reconcileDataPointsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.devicesandservices.health.v4.IReconciledDataPoint[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
         }
-        it('does not allow setting both universeDomain and universe_domain', () => {
-            assert.throws(() => { new datapointsserviceModule.v4.DataPointsServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
-        });
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.reconcileDataPoints.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.reconcileDataPoints.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+  });
 
-        it('has port', () => {
-            const port = datapointsserviceModule.v4.DataPointsServiceClient.port;
-            assert(port);
-            assert(typeof port === 'number');
-        });
-
-        it('should create a client with no option', () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient();
-            assert(client);
-        });
-
-        it('should create a client with gRPC fallback', () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-                fallback: true,
-            });
-            assert(client);
-        });
-
-        it('has initialize method and supports deferred initialization', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            assert.strictEqual(client.dataPointsServiceStub, undefined);
-            await client.initialize();
-            assert(client.dataPointsServiceStub);
-        });
-
-        it('has close method for the initialized client', done => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            client.initialize().catch(err => {throw err});
-            assert(client.dataPointsServiceStub);
-            client.close().then(() => {
-                done();
-            }).catch(err => {throw err});
-        });
-
-        it('has close method for the non-initialized client', done => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            assert.strictEqual(client.dataPointsServiceStub, undefined);
-            client.close().then(() => {
-                done();
-            }).catch(err => {throw err});
-        });
-
-        it('has getProjectId method', async () => {
-            const fakeProjectId = 'fake-project-id';
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-            const result = await client.getProjectId();
-            assert.strictEqual(result, fakeProjectId);
-            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-        });
-
-        it('has getProjectId method with callback', async () => {
-            const fakeProjectId = 'fake-project-id';
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
-            const promise = new Promise((resolve, reject) => {
-                client.getProjectId((err?: Error|null, projectId?: string|null) => {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve(projectId);
-                    }
-                });
-            });
-            const result = await promise;
-            assert.strictEqual(result, fakeProjectId);
-        });
+  describe('rollUpDataPoints', () => {
+    it('invokes rollUpDataPoints without error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.RollUpDataPointsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.RollUpDataPointsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.RollupDataPoint(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.RollupDataPoint(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.RollupDataPoint(),
+        ),
+      ];
+      client.innerApiCalls.rollUpDataPoints = stubSimpleCall(expectedResponse);
+      const [response] = await client.rollUpDataPoints(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.rollUpDataPoints as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.rollUpDataPoints as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    describe('getDataPoint', () => {
-        it('invokes getDataPoint without error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.GetDataPointRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.GetDataPointRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.DataPoint()
-            );
-            client.innerApiCalls.getDataPoint = stubSimpleCall(expectedResponse);
-            const [response] = await client.getDataPoint(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getDataPoint as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getDataPoint as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getDataPoint without error using callback', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.GetDataPointRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.GetDataPointRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.DataPoint()
-            );
-            client.innerApiCalls.getDataPoint = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.getDataPoint(
-                    request,
-                    (err?: Error|null, result?: protos.google.devicesandservices.health.v4.IDataPoint|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getDataPoint as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getDataPoint as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getDataPoint with error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.GetDataPointRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.GetDataPointRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.getDataPoint = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.getDataPoint(request), expectedError);
-            const actualRequest = (client.innerApiCalls.getDataPoint as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getDataPoint as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getDataPoint with closed client', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.GetDataPointRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.GetDataPointRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.getDataPoint(request), expectedError);
-        });
-    });
-
-    describe('dailyRollUpDataPoints', () => {
-        it('invokes dailyRollUpDataPoints without error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.DailyRollUpDataPointsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.DailyRollUpDataPointsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.DailyRollUpDataPointsResponse()
-            );
-            client.innerApiCalls.dailyRollUpDataPoints = stubSimpleCall(expectedResponse);
-            const [response] = await client.dailyRollUpDataPoints(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.dailyRollUpDataPoints as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.dailyRollUpDataPoints as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes dailyRollUpDataPoints without error using callback', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.DailyRollUpDataPointsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.DailyRollUpDataPointsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.DailyRollUpDataPointsResponse()
-            );
-            client.innerApiCalls.dailyRollUpDataPoints = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.dailyRollUpDataPoints(
-                    request,
-                    (err?: Error|null, result?: protos.google.devicesandservices.health.v4.IDailyRollUpDataPointsResponse|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.dailyRollUpDataPoints as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.dailyRollUpDataPoints as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes dailyRollUpDataPoints with error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.DailyRollUpDataPointsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.DailyRollUpDataPointsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.dailyRollUpDataPoints = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.dailyRollUpDataPoints(request), expectedError);
-            const actualRequest = (client.innerApiCalls.dailyRollUpDataPoints as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.dailyRollUpDataPoints as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes dailyRollUpDataPoints with closed client', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.DailyRollUpDataPointsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.DailyRollUpDataPointsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.dailyRollUpDataPoints(request), expectedError);
-        });
-    });
-
-    describe('exportExerciseTcx', () => {
-        it('invokes exportExerciseTcx without error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.ExportExerciseTcxRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.ExportExerciseTcxRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.ExportExerciseTcxResponse()
-            );
-            client.innerApiCalls.exportExerciseTcx = stubSimpleCall(expectedResponse);
-            const [response] = await client.exportExerciseTcx(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.exportExerciseTcx as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.exportExerciseTcx as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes exportExerciseTcx without error using callback', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.ExportExerciseTcxRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.ExportExerciseTcxRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.ExportExerciseTcxResponse()
-            );
-            client.innerApiCalls.exportExerciseTcx = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.exportExerciseTcx(
-                    request,
-                    (err?: Error|null, result?: protos.google.devicesandservices.health.v4.IExportExerciseTcxResponse|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.exportExerciseTcx as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.exportExerciseTcx as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes exportExerciseTcx with error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.ExportExerciseTcxRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.ExportExerciseTcxRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.exportExerciseTcx = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.exportExerciseTcx(request), expectedError);
-            const actualRequest = (client.innerApiCalls.exportExerciseTcx as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.exportExerciseTcx as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes exportExerciseTcx with closed client', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.ExportExerciseTcxRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.ExportExerciseTcxRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.exportExerciseTcx(request), expectedError);
-        });
-    });
-
-    describe('createDataPoint', () => {
-        it('invokes createDataPoint without error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.CreateDataPointRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.CreateDataPointRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.createDataPoint = stubLongRunningCall(expectedResponse);
-            const [operation] = await client.createDataPoint(request);
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.createDataPoint as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createDataPoint as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createDataPoint without error using callback', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.CreateDataPointRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.CreateDataPointRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.createDataPoint = stubLongRunningCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.createDataPoint(
-                    request,
-                    (err?: Error|null,
-                     result?: LROperation<protos.google.devicesandservices.health.v4.IDataPoint, protos.google.devicesandservices.health.v4.ICreateDataPointOperationMetadata>|null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const operation = await promise as LROperation<protos.google.devicesandservices.health.v4.IDataPoint, protos.google.devicesandservices.health.v4.ICreateDataPointOperationMetadata>;
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.createDataPoint as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createDataPoint as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createDataPoint with call error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.CreateDataPointRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.CreateDataPointRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.createDataPoint = stubLongRunningCall(undefined, expectedError);
-            await assert.rejects(client.createDataPoint(request), expectedError);
-            const actualRequest = (client.innerApiCalls.createDataPoint as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createDataPoint as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createDataPoint with LRO error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.CreateDataPointRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.CreateDataPointRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.createDataPoint = stubLongRunningCall(undefined, undefined, expectedError);
-            const [operation] = await client.createDataPoint(request);
-            await assert.rejects(operation.promise(), expectedError);
-            const actualRequest = (client.innerApiCalls.createDataPoint as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createDataPoint as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes checkCreateDataPointProgress without error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedResponse = generateSampleMessage(
-              new operationsProtos.google.longrunning.Operation()
-            );
-            expectedResponse.name = 'test';
-            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
-
-            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-            const decodedOperation = await client.checkCreateDataPointProgress(expectedResponse.name);
-            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-            assert(decodedOperation.metadata);
-            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-        });
-
-        it('invokes checkCreateDataPointProgress with error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedError = new Error('expected');
-
-            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.checkCreateDataPointProgress(''), expectedError);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0));
-        });
-    });
-
-    describe('updateDataPoint', () => {
-        it('invokes updateDataPoint without error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.UpdateDataPointRequest()
-            );
-            request.dataPoint ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.UpdateDataPointRequest', ['dataPoint', 'name']);
-            request.dataPoint.name = defaultValue1;
-            const expectedHeaderRequestParams = `data_point.name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.updateDataPoint = stubLongRunningCall(expectedResponse);
-            const [operation] = await client.updateDataPoint(request);
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.updateDataPoint as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateDataPoint as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes updateDataPoint without error using callback', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.UpdateDataPointRequest()
-            );
-            request.dataPoint ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.UpdateDataPointRequest', ['dataPoint', 'name']);
-            request.dataPoint.name = defaultValue1;
-            const expectedHeaderRequestParams = `data_point.name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.updateDataPoint = stubLongRunningCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.updateDataPoint(
-                    request,
-                    (err?: Error|null,
-                     result?: LROperation<protos.google.devicesandservices.health.v4.IDataPoint, protos.google.devicesandservices.health.v4.IUpdateDataPointOperationMetadata>|null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const operation = await promise as LROperation<protos.google.devicesandservices.health.v4.IDataPoint, protos.google.devicesandservices.health.v4.IUpdateDataPointOperationMetadata>;
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.updateDataPoint as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateDataPoint as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes updateDataPoint with call error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.UpdateDataPointRequest()
-            );
-            request.dataPoint ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.UpdateDataPointRequest', ['dataPoint', 'name']);
-            request.dataPoint.name = defaultValue1;
-            const expectedHeaderRequestParams = `data_point.name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.updateDataPoint = stubLongRunningCall(undefined, expectedError);
-            await assert.rejects(client.updateDataPoint(request), expectedError);
-            const actualRequest = (client.innerApiCalls.updateDataPoint as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateDataPoint as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes updateDataPoint with LRO error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.UpdateDataPointRequest()
-            );
-            request.dataPoint ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.UpdateDataPointRequest', ['dataPoint', 'name']);
-            request.dataPoint.name = defaultValue1;
-            const expectedHeaderRequestParams = `data_point.name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.updateDataPoint = stubLongRunningCall(undefined, undefined, expectedError);
-            const [operation] = await client.updateDataPoint(request);
-            await assert.rejects(operation.promise(), expectedError);
-            const actualRequest = (client.innerApiCalls.updateDataPoint as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateDataPoint as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes checkUpdateDataPointProgress without error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedResponse = generateSampleMessage(
-              new operationsProtos.google.longrunning.Operation()
-            );
-            expectedResponse.name = 'test';
-            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
-
-            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-            const decodedOperation = await client.checkUpdateDataPointProgress(expectedResponse.name);
-            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-            assert(decodedOperation.metadata);
-            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-        });
-
-        it('invokes checkUpdateDataPointProgress with error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedError = new Error('expected');
-
-            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.checkUpdateDataPointProgress(''), expectedError);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0));
-        });
-    });
-
-    describe('batchDeleteDataPoints', () => {
-        it('invokes batchDeleteDataPoints without error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.BatchDeleteDataPointsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.BatchDeleteDataPointsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.batchDeleteDataPoints = stubLongRunningCall(expectedResponse);
-            const [operation] = await client.batchDeleteDataPoints(request);
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.batchDeleteDataPoints as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.batchDeleteDataPoints as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes batchDeleteDataPoints without error using callback', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.BatchDeleteDataPointsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.BatchDeleteDataPointsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.batchDeleteDataPoints = stubLongRunningCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.batchDeleteDataPoints(
-                    request,
-                    (err?: Error|null,
-                     result?: LROperation<protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsResponse, protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsOperationMetadata>|null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const operation = await promise as LROperation<protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsResponse, protos.google.devicesandservices.health.v4.IBatchDeleteDataPointsOperationMetadata>;
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.batchDeleteDataPoints as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.batchDeleteDataPoints as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes batchDeleteDataPoints with call error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.BatchDeleteDataPointsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.BatchDeleteDataPointsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.batchDeleteDataPoints = stubLongRunningCall(undefined, expectedError);
-            await assert.rejects(client.batchDeleteDataPoints(request), expectedError);
-            const actualRequest = (client.innerApiCalls.batchDeleteDataPoints as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.batchDeleteDataPoints as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes batchDeleteDataPoints with LRO error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.BatchDeleteDataPointsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.BatchDeleteDataPointsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.batchDeleteDataPoints = stubLongRunningCall(undefined, undefined, expectedError);
-            const [operation] = await client.batchDeleteDataPoints(request);
-            await assert.rejects(operation.promise(), expectedError);
-            const actualRequest = (client.innerApiCalls.batchDeleteDataPoints as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.batchDeleteDataPoints as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes checkBatchDeleteDataPointsProgress without error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedResponse = generateSampleMessage(
-              new operationsProtos.google.longrunning.Operation()
-            );
-            expectedResponse.name = 'test';
-            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
-
-            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-            const decodedOperation = await client.checkBatchDeleteDataPointsProgress(expectedResponse.name);
-            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-            assert(decodedOperation.metadata);
-            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-        });
-
-        it('invokes checkBatchDeleteDataPointsProgress with error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedError = new Error('expected');
-
-            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.checkBatchDeleteDataPointsProgress(''), expectedError);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0));
-        });
-    });
-
-    describe('listDataPoints', () => {
-        it('invokes listDataPoints without error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.ListDataPointsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.ListDataPointsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.devicesandservices.health.v4.DataPoint()),
-              generateSampleMessage(new protos.google.devicesandservices.health.v4.DataPoint()),
-              generateSampleMessage(new protos.google.devicesandservices.health.v4.DataPoint()),
-            ];
-            client.innerApiCalls.listDataPoints = stubSimpleCall(expectedResponse);
-            const [response] = await client.listDataPoints(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listDataPoints as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listDataPoints as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes listDataPoints without error using callback', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.ListDataPointsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.ListDataPointsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.devicesandservices.health.v4.DataPoint()),
-              generateSampleMessage(new protos.google.devicesandservices.health.v4.DataPoint()),
-              generateSampleMessage(new protos.google.devicesandservices.health.v4.DataPoint()),
-            ];
-            client.innerApiCalls.listDataPoints = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.listDataPoints(
-                    request,
-                    (err?: Error|null, result?: protos.google.devicesandservices.health.v4.IDataPoint[]|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listDataPoints as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listDataPoints as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes listDataPoints with error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.ListDataPointsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.ListDataPointsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.listDataPoints = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.listDataPoints(request), expectedError);
-            const actualRequest = (client.innerApiCalls.listDataPoints as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listDataPoints as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes listDataPointsStream without error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.ListDataPointsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.ListDataPointsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.devicesandservices.health.v4.DataPoint()),
-              generateSampleMessage(new protos.google.devicesandservices.health.v4.DataPoint()),
-              generateSampleMessage(new protos.google.devicesandservices.health.v4.DataPoint()),
-            ];
-            client.descriptors.page.listDataPoints.createStream = stubPageStreamingCall(expectedResponse);
-            const stream = client.listDataPointsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.devicesandservices.health.v4.DataPoint[] = [];
-                stream.on('data', (response: protos.google.devicesandservices.health.v4.DataPoint) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            const responses = await promise;
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert((client.descriptors.page.listDataPoints.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listDataPoints, request));
-            assert(
-                (client.descriptors.page.listDataPoints.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-
-        it('invokes listDataPointsStream with error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.ListDataPointsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.ListDataPointsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.listDataPoints.createStream = stubPageStreamingCall(undefined, expectedError);
-            const stream = client.listDataPointsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.devicesandservices.health.v4.DataPoint[] = [];
-                stream.on('data', (response: protos.google.devicesandservices.health.v4.DataPoint) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            await assert.rejects(promise, expectedError);
-            assert((client.descriptors.page.listDataPoints.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listDataPoints, request));
-            assert(
-                (client.descriptors.page.listDataPoints.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                         expectedHeaderRequestParams
-                    ) 
-            );
-        });
-
-        it('uses async iteration with listDataPoints without error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.ListDataPointsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.ListDataPointsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.devicesandservices.health.v4.DataPoint()),
-              generateSampleMessage(new protos.google.devicesandservices.health.v4.DataPoint()),
-              generateSampleMessage(new protos.google.devicesandservices.health.v4.DataPoint()),
-            ];
-            client.descriptors.page.listDataPoints.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: protos.google.devicesandservices.health.v4.IDataPoint[] = [];
-            const iterable = client.listDataPointsAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
+    it('invokes rollUpDataPoints without error using callback', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.RollUpDataPointsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.RollUpDataPointsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.RollupDataPoint(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.RollupDataPoint(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.RollupDataPoint(),
+        ),
+      ];
+      client.innerApiCalls.rollUpDataPoints =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.rollUpDataPoints(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.devicesandservices.health.v4.IRollupDataPoint[]
+              | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
             }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.descriptors.page.listDataPoints.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.listDataPoints.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-
-        it('uses async iteration with listDataPoints with error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.ListDataPointsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.ListDataPointsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.listDataPoints.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = client.listDataPointsAsync(request);
-            await assert.rejects(async () => {
-                const responses: protos.google.devicesandservices.health.v4.IDataPoint[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.descriptors.page.listDataPoints.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.listDataPoints.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.rollUpDataPoints as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.rollUpDataPoints as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    describe('reconcileDataPoints', () => {
-        it('invokes reconcileDataPoints without error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.ReconcileDataPointsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.ReconcileDataPointsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.devicesandservices.health.v4.ReconciledDataPoint()),
-              generateSampleMessage(new protos.google.devicesandservices.health.v4.ReconciledDataPoint()),
-              generateSampleMessage(new protos.google.devicesandservices.health.v4.ReconciledDataPoint()),
-            ];
-            client.innerApiCalls.reconcileDataPoints = stubSimpleCall(expectedResponse);
-            const [response] = await client.reconcileDataPoints(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.reconcileDataPoints as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.reconcileDataPoints as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes reconcileDataPoints without error using callback', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.ReconcileDataPointsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.ReconcileDataPointsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.devicesandservices.health.v4.ReconciledDataPoint()),
-              generateSampleMessage(new protos.google.devicesandservices.health.v4.ReconciledDataPoint()),
-              generateSampleMessage(new protos.google.devicesandservices.health.v4.ReconciledDataPoint()),
-            ];
-            client.innerApiCalls.reconcileDataPoints = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.reconcileDataPoints(
-                    request,
-                    (err?: Error|null, result?: protos.google.devicesandservices.health.v4.IReconciledDataPoint[]|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.reconcileDataPoints as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.reconcileDataPoints as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes reconcileDataPoints with error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.ReconcileDataPointsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.ReconcileDataPointsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.reconcileDataPoints = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.reconcileDataPoints(request), expectedError);
-            const actualRequest = (client.innerApiCalls.reconcileDataPoints as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.reconcileDataPoints as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes reconcileDataPointsStream without error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.ReconcileDataPointsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.ReconcileDataPointsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.devicesandservices.health.v4.ReconciledDataPoint()),
-              generateSampleMessage(new protos.google.devicesandservices.health.v4.ReconciledDataPoint()),
-              generateSampleMessage(new protos.google.devicesandservices.health.v4.ReconciledDataPoint()),
-            ];
-            client.descriptors.page.reconcileDataPoints.createStream = stubPageStreamingCall(expectedResponse);
-            const stream = client.reconcileDataPointsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.devicesandservices.health.v4.ReconciledDataPoint[] = [];
-                stream.on('data', (response: protos.google.devicesandservices.health.v4.ReconciledDataPoint) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            const responses = await promise;
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert((client.descriptors.page.reconcileDataPoints.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.reconcileDataPoints, request));
-            assert(
-                (client.descriptors.page.reconcileDataPoints.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-
-        it('invokes reconcileDataPointsStream with error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.ReconcileDataPointsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.ReconcileDataPointsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.reconcileDataPoints.createStream = stubPageStreamingCall(undefined, expectedError);
-            const stream = client.reconcileDataPointsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.devicesandservices.health.v4.ReconciledDataPoint[] = [];
-                stream.on('data', (response: protos.google.devicesandservices.health.v4.ReconciledDataPoint) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            await assert.rejects(promise, expectedError);
-            assert((client.descriptors.page.reconcileDataPoints.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.reconcileDataPoints, request));
-            assert(
-                (client.descriptors.page.reconcileDataPoints.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                         expectedHeaderRequestParams
-                    ) 
-            );
-        });
-
-        it('uses async iteration with reconcileDataPoints without error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.ReconcileDataPointsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.ReconcileDataPointsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.devicesandservices.health.v4.ReconciledDataPoint()),
-              generateSampleMessage(new protos.google.devicesandservices.health.v4.ReconciledDataPoint()),
-              generateSampleMessage(new protos.google.devicesandservices.health.v4.ReconciledDataPoint()),
-            ];
-            client.descriptors.page.reconcileDataPoints.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: protos.google.devicesandservices.health.v4.IReconciledDataPoint[] = [];
-            const iterable = client.reconcileDataPointsAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
-            }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.descriptors.page.reconcileDataPoints.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.reconcileDataPoints.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-
-        it('uses async iteration with reconcileDataPoints with error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.ReconcileDataPointsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.ReconcileDataPointsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.reconcileDataPoints.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = client.reconcileDataPointsAsync(request);
-            await assert.rejects(async () => {
-                const responses: protos.google.devicesandservices.health.v4.IReconciledDataPoint[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.descriptors.page.reconcileDataPoints.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.reconcileDataPoints.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
+    it('invokes rollUpDataPoints with error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.RollUpDataPointsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.RollUpDataPointsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.rollUpDataPoints = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.rollUpDataPoints(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.rollUpDataPoints as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.rollUpDataPoints as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    describe('rollUpDataPoints', () => {
-        it('invokes rollUpDataPoints without error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.RollUpDataPointsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.RollUpDataPointsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.devicesandservices.health.v4.RollupDataPoint()),
-              generateSampleMessage(new protos.google.devicesandservices.health.v4.RollupDataPoint()),
-              generateSampleMessage(new protos.google.devicesandservices.health.v4.RollupDataPoint()),
-            ];
-            client.innerApiCalls.rollUpDataPoints = stubSimpleCall(expectedResponse);
-            const [response] = await client.rollUpDataPoints(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.rollUpDataPoints as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.rollUpDataPoints as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    it('invokes rollUpDataPointsStream without error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.RollUpDataPointsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.RollUpDataPointsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.RollupDataPoint(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.RollupDataPoint(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.RollupDataPoint(),
+        ),
+      ];
+      client.descriptors.page.rollUpDataPoints.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.rollUpDataPointsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.devicesandservices.health.v4.RollupDataPoint[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.devicesandservices.health.v4.RollupDataPoint,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
         });
-
-        it('invokes rollUpDataPoints without error using callback', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.RollUpDataPointsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.RollUpDataPointsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.devicesandservices.health.v4.RollupDataPoint()),
-              generateSampleMessage(new protos.google.devicesandservices.health.v4.RollupDataPoint()),
-              generateSampleMessage(new protos.google.devicesandservices.health.v4.RollupDataPoint()),
-            ];
-            client.innerApiCalls.rollUpDataPoints = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.rollUpDataPoints(
-                    request,
-                    (err?: Error|null, result?: protos.google.devicesandservices.health.v4.IRollupDataPoint[]|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.rollUpDataPoints as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.rollUpDataPoints as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        stream.on('error', (err: Error) => {
+          reject(err);
         });
-
-        it('invokes rollUpDataPoints with error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.RollUpDataPointsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.RollUpDataPointsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.rollUpDataPoints = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.rollUpDataPoints(request), expectedError);
-            const actualRequest = (client.innerApiCalls.rollUpDataPoints as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.rollUpDataPoints as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes rollUpDataPointsStream without error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.RollUpDataPointsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.RollUpDataPointsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.devicesandservices.health.v4.RollupDataPoint()),
-              generateSampleMessage(new protos.google.devicesandservices.health.v4.RollupDataPoint()),
-              generateSampleMessage(new protos.google.devicesandservices.health.v4.RollupDataPoint()),
-            ];
-            client.descriptors.page.rollUpDataPoints.createStream = stubPageStreamingCall(expectedResponse);
-            const stream = client.rollUpDataPointsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.devicesandservices.health.v4.RollupDataPoint[] = [];
-                stream.on('data', (response: protos.google.devicesandservices.health.v4.RollupDataPoint) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            const responses = await promise;
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert((client.descriptors.page.rollUpDataPoints.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.rollUpDataPoints, request));
-            assert(
-                (client.descriptors.page.rollUpDataPoints.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-
-        it('invokes rollUpDataPointsStream with error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.RollUpDataPointsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.RollUpDataPointsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.rollUpDataPoints.createStream = stubPageStreamingCall(undefined, expectedError);
-            const stream = client.rollUpDataPointsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.devicesandservices.health.v4.RollupDataPoint[] = [];
-                stream.on('data', (response: protos.google.devicesandservices.health.v4.RollupDataPoint) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            await assert.rejects(promise, expectedError);
-            assert((client.descriptors.page.rollUpDataPoints.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.rollUpDataPoints, request));
-            assert(
-                (client.descriptors.page.rollUpDataPoints.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                         expectedHeaderRequestParams
-                    ) 
-            );
-        });
-
-        it('uses async iteration with rollUpDataPoints without error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.RollUpDataPointsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.RollUpDataPointsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.devicesandservices.health.v4.RollupDataPoint()),
-              generateSampleMessage(new protos.google.devicesandservices.health.v4.RollupDataPoint()),
-              generateSampleMessage(new protos.google.devicesandservices.health.v4.RollupDataPoint()),
-            ];
-            client.descriptors.page.rollUpDataPoints.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: protos.google.devicesandservices.health.v4.IRollupDataPoint[] = [];
-            const iterable = client.rollUpDataPointsAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
-            }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.descriptors.page.rollUpDataPoints.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.rollUpDataPoints.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-
-        it('uses async iteration with rollUpDataPoints with error', async () => {
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.RollUpDataPointsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.RollUpDataPointsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.rollUpDataPoints.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = client.rollUpDataPointsAsync(request);
-            await assert.rejects(async () => {
-                const responses: protos.google.devicesandservices.health.v4.IRollupDataPoint[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.descriptors.page.rollUpDataPoints.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.rollUpDataPoints.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.rollUpDataPoints.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.rollUpDataPoints, request),
+      );
+      assert(
+        (client.descriptors.page.rollUpDataPoints.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
     });
 
-    describe('Path templates', () => {
-
-        describe('dataPoint', async () => {
-            const fakePath = "/rendered/path/dataPoint";
-            const expectedParameters = {
-                user: "userValue",
-                data_type: "dataTypeValue",
-                data_point: "dataPointValue",
-            };
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.dataPointPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.dataPointPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('dataPointPath', () => {
-                const result = client.dataPointPath("userValue", "dataTypeValue", "dataPointValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.dataPointPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchUserFromDataPointName', () => {
-                const result = client.matchUserFromDataPointName(fakePath);
-                assert.strictEqual(result, "userValue");
-                assert((client.pathTemplates.dataPointPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDataTypeFromDataPointName', () => {
-                const result = client.matchDataTypeFromDataPointName(fakePath);
-                assert.strictEqual(result, "dataTypeValue");
-                assert((client.pathTemplates.dataPointPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDataPointFromDataPointName', () => {
-                const result = client.matchDataPointFromDataPointName(fakePath);
-                assert.strictEqual(result, "dataPointValue");
-                assert((client.pathTemplates.dataPointPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
+    it('invokes rollUpDataPointsStream with error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.RollUpDataPointsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.RollUpDataPointsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.rollUpDataPoints.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.rollUpDataPointsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.devicesandservices.health.v4.RollupDataPoint[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.devicesandservices.health.v4.RollupDataPoint,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
         });
-
-        describe('dataType', async () => {
-            const fakePath = "/rendered/path/dataType";
-            const expectedParameters = {
-                user: "userValue",
-                data_type: "dataTypeValue",
-            };
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.dataTypePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.dataTypePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('dataTypePath', () => {
-                const result = client.dataTypePath("userValue", "dataTypeValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.dataTypePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchUserFromDataTypeName', () => {
-                const result = client.matchUserFromDataTypeName(fakePath);
-                assert.strictEqual(result, "userValue");
-                assert((client.pathTemplates.dataTypePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDataTypeFromDataTypeName', () => {
-                const result = client.matchDataTypeFromDataTypeName(fakePath);
-                assert.strictEqual(result, "dataTypeValue");
-                assert((client.pathTemplates.dataTypePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
+        stream.on('error', (err: Error) => {
+          reject(err);
         });
-
-        describe('identity', async () => {
-            const fakePath = "/rendered/path/identity";
-            const expectedParameters = {
-                user: "userValue",
-            };
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.identityPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.identityPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('identityPath', () => {
-                const result = client.identityPath("userValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.identityPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchUserFromIdentityName', () => {
-                const result = client.matchUserFromIdentityName(fakePath);
-                assert.strictEqual(result, "userValue");
-                assert((client.pathTemplates.identityPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('profile', async () => {
-            const fakePath = "/rendered/path/profile";
-            const expectedParameters = {
-                user: "userValue",
-            };
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.profilePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.profilePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('profilePath', () => {
-                const result = client.profilePath("userValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.profilePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchUserFromProfileName', () => {
-                const result = client.matchUserFromProfileName(fakePath);
-                assert.strictEqual(result, "userValue");
-                assert((client.pathTemplates.profilePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('settings', async () => {
-            const fakePath = "/rendered/path/settings";
-            const expectedParameters = {
-                user: "userValue",
-            };
-            const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.settingsPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.settingsPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('settingsPath', () => {
-                const result = client.settingsPath("userValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.settingsPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchUserFromSettingsName', () => {
-                const result = client.matchUserFromSettingsName(fakePath);
-                assert.strictEqual(result, "userValue");
-                assert((client.pathTemplates.settingsPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.rollUpDataPoints.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.rollUpDataPoints, request),
+      );
+      assert(
+        (client.descriptors.page.rollUpDataPoints.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
     });
+
+    it('uses async iteration with rollUpDataPoints without error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.RollUpDataPointsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.RollUpDataPointsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.RollupDataPoint(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.RollupDataPoint(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.RollupDataPoint(),
+        ),
+      ];
+      client.descriptors.page.rollUpDataPoints.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.devicesandservices.health.v4.IRollupDataPoint[] =
+        [];
+      const iterable = client.rollUpDataPointsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.rollUpDataPoints.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.rollUpDataPoints.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('uses async iteration with rollUpDataPoints with error', async () => {
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.RollUpDataPointsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.RollUpDataPointsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.rollUpDataPoints.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.rollUpDataPointsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.devicesandservices.health.v4.IRollupDataPoint[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.rollUpDataPoints.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.rollUpDataPoints.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+  });
+
+  describe('Path templates', () => {
+    describe('dataPoint', async () => {
+      const fakePath = '/rendered/path/dataPoint';
+      const expectedParameters = {
+        user: 'userValue',
+        data_type: 'dataTypeValue',
+        data_point: 'dataPointValue',
+      };
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.dataPointPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dataPointPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('dataPointPath', () => {
+        const result = client.dataPointPath(
+          'userValue',
+          'dataTypeValue',
+          'dataPointValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.dataPointPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchUserFromDataPointName', () => {
+        const result = client.matchUserFromDataPointName(fakePath);
+        assert.strictEqual(result, 'userValue');
+        assert(
+          (client.pathTemplates.dataPointPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDataTypeFromDataPointName', () => {
+        const result = client.matchDataTypeFromDataPointName(fakePath);
+        assert.strictEqual(result, 'dataTypeValue');
+        assert(
+          (client.pathTemplates.dataPointPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDataPointFromDataPointName', () => {
+        const result = client.matchDataPointFromDataPointName(fakePath);
+        assert.strictEqual(result, 'dataPointValue');
+        assert(
+          (client.pathTemplates.dataPointPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('dataType', async () => {
+      const fakePath = '/rendered/path/dataType';
+      const expectedParameters = {
+        user: 'userValue',
+        data_type: 'dataTypeValue',
+      };
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.dataTypePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dataTypePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('dataTypePath', () => {
+        const result = client.dataTypePath('userValue', 'dataTypeValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.dataTypePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchUserFromDataTypeName', () => {
+        const result = client.matchUserFromDataTypeName(fakePath);
+        assert.strictEqual(result, 'userValue');
+        assert(
+          (client.pathTemplates.dataTypePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDataTypeFromDataTypeName', () => {
+        const result = client.matchDataTypeFromDataTypeName(fakePath);
+        assert.strictEqual(result, 'dataTypeValue');
+        assert(
+          (client.pathTemplates.dataTypePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('identity', async () => {
+      const fakePath = '/rendered/path/identity';
+      const expectedParameters = {
+        user: 'userValue',
+      };
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.identityPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.identityPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('identityPath', () => {
+        const result = client.identityPath('userValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.identityPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchUserFromIdentityName', () => {
+        const result = client.matchUserFromIdentityName(fakePath);
+        assert.strictEqual(result, 'userValue');
+        assert(
+          (client.pathTemplates.identityPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('irnProfile', async () => {
+      const fakePath = '/rendered/path/irnProfile';
+      const expectedParameters = {
+        user: 'userValue',
+      };
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.irnProfilePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.irnProfilePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('irnProfilePath', () => {
+        const result = client.irnProfilePath('userValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.irnProfilePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchUserFromIrnProfileName', () => {
+        const result = client.matchUserFromIrnProfileName(fakePath);
+        assert.strictEqual(result, 'userValue');
+        assert(
+          (client.pathTemplates.irnProfilePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('pairedDevice', async () => {
+      const fakePath = '/rendered/path/pairedDevice';
+      const expectedParameters = {
+        user: 'userValue',
+        paired_device: 'pairedDeviceValue',
+      };
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.pairedDevicePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.pairedDevicePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('pairedDevicePath', () => {
+        const result = client.pairedDevicePath(
+          'userValue',
+          'pairedDeviceValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.pairedDevicePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchUserFromPairedDeviceName', () => {
+        const result = client.matchUserFromPairedDeviceName(fakePath);
+        assert.strictEqual(result, 'userValue');
+        assert(
+          (client.pathTemplates.pairedDevicePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchPairedDeviceFromPairedDeviceName', () => {
+        const result = client.matchPairedDeviceFromPairedDeviceName(fakePath);
+        assert.strictEqual(result, 'pairedDeviceValue');
+        assert(
+          (client.pathTemplates.pairedDevicePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('profile', async () => {
+      const fakePath = '/rendered/path/profile';
+      const expectedParameters = {
+        user: 'userValue',
+      };
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.profilePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.profilePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('profilePath', () => {
+        const result = client.profilePath('userValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.profilePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchUserFromProfileName', () => {
+        const result = client.matchUserFromProfileName(fakePath);
+        assert.strictEqual(result, 'userValue');
+        assert(
+          (client.pathTemplates.profilePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('settings', async () => {
+      const fakePath = '/rendered/path/settings';
+      const expectedParameters = {
+        user: 'userValue',
+      };
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.settingsPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.settingsPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('settingsPath', () => {
+        const result = client.settingsPath('userValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.settingsPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchUserFromSettingsName', () => {
+        const result = client.matchUserFromSettingsName(fakePath);
+        assert.strictEqual(result, 'userValue');
+        assert(
+          (client.pathTemplates.settingsPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('subscriber', async () => {
+      const fakePath = '/rendered/path/subscriber';
+      const expectedParameters = {
+        project: 'projectValue',
+        subscriber: 'subscriberValue',
+      };
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.subscriberPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.subscriberPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('subscriberPath', () => {
+        const result = client.subscriberPath('projectValue', 'subscriberValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.subscriberPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromSubscriberName', () => {
+        const result = client.matchProjectFromSubscriberName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.subscriberPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSubscriberFromSubscriberName', () => {
+        const result = client.matchSubscriberFromSubscriberName(fakePath);
+        assert.strictEqual(result, 'subscriberValue');
+        assert(
+          (client.pathTemplates.subscriberPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('subscription', async () => {
+      const fakePath = '/rendered/path/subscription';
+      const expectedParameters = {
+        project: 'projectValue',
+        subscriber: 'subscriberValue',
+        subscription: 'subscriptionValue',
+      };
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.subscriptionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.subscriptionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('subscriptionPath', () => {
+        const result = client.subscriptionPath(
+          'projectValue',
+          'subscriberValue',
+          'subscriptionValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.subscriptionPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromSubscriptionName', () => {
+        const result = client.matchProjectFromSubscriptionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.subscriptionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSubscriberFromSubscriptionName', () => {
+        const result = client.matchSubscriberFromSubscriptionName(fakePath);
+        assert.strictEqual(result, 'subscriberValue');
+        assert(
+          (client.pathTemplates.subscriptionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSubscriptionFromSubscriptionName', () => {
+        const result = client.matchSubscriptionFromSubscriptionName(fakePath);
+        assert.strictEqual(result, 'subscriptionValue');
+        assert(
+          (client.pathTemplates.subscriptionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('user', async () => {
+      const fakePath = '/rendered/path/user';
+      const expectedParameters = {
+        user: 'userValue',
+      };
+      const client = new datapointsserviceModule.v4.DataPointsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.userPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.userPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('userPath', () => {
+        const result = client.userPath('userValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.userPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchUserFromUserName', () => {
+        const result = client.matchUserFromUserName(fakePath);
+        assert.strictEqual(result, 'userValue');
+        assert(
+          (client.pathTemplates.userPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+  });
 });

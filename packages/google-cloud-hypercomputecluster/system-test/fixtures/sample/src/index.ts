@@ -16,10 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {HypercomputeClusterClient} from '@google-cloud/hypercomputecluster';
+import { HypercomputeClusterClient } from '@google-cloud/hypercomputecluster';
 
 // check that the client class type name can be used
-function doStuffWithHypercomputeClusterClient(client: HypercomputeClusterClient) {
+function doStuffWithHypercomputeClusterClient(
+  client: HypercomputeClusterClient,
+) {
   client.close();
 }
 

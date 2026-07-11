@@ -16,10 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {VideoStitcherServiceClient} from '@google-cloud/video-stitcher';
+import { VideoStitcherServiceClient } from '@google-cloud/video-stitcher';
 
 // check that the client class type name can be used
-function doStuffWithVideoStitcherServiceClient(client: VideoStitcherServiceClient) {
+function doStuffWithVideoStitcherServiceClient(
+  client: VideoStitcherServiceClient,
+) {
   client.close();
 }
 

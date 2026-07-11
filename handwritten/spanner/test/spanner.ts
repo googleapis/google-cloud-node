@@ -91,7 +91,13 @@ const {
   InMemorySpanExporter,
 } = require('@opentelemetry/sdk-trace-node');
 const {SimpleSpanProcessor} = require('@opentelemetry/sdk-trace-base');
-const {startTrace, ObservabilityOptions} = require('../src/instrument');
+const {trace} = require('@opentelemetry/api');
+const {
+  startTrace,
+  ObservabilityOptions,
+  isTracingEnabled,
+  _resetTracingEnabledForTest,
+} = require('../src/instrument');
 
 function numberToEnglishWord(num: number): string {
   switch (num) {
@@ -356,8 +362,8 @@ describe('Spanner with mock server', () => {
     instance = spanner.instance('instance');
   });
 
-  after(() => {
-    spanner.close();
+  after(async () => {
+    await spanner.close();
     server.tryShutdown(() => {});
     delete process.env.SPANNER_EMULATOR_HOST;
     sandbox.restore();
@@ -901,6 +907,41 @@ describe('Spanner with mock server', () => {
         assert.strictEqual(metadata.rowType!.fields!.length, 1);
         assert.strictEqual(metadata.rowType!.fields![0].name, '');
         assert.strictEqual(rows[0]['_0'], 1);
+      } finally {
+        await database.close();
+      }
+    });
+
+    it('should support JSON mode with wrapNumbers and wrapStructs options', async () => {
+      const database = newTestDatabase();
+      try {
+        // 1. With wrapNumbers = false, wrapStructs = false
+        const [rowsRaw] = (await database.run({
+          sql: selectAllTypes,
+          json: true,
+          jsonOptions: {wrapNumbers: false, wrapStructs: false},
+        })) as any;
+        assert.strictEqual(rowsRaw.length, 3);
+        const rowRaw = rowsRaw[0];
+        // INT64 / FLOAT64 should be native numbers
+        assert.strictEqual(typeof rowRaw.COLINT64, 'number');
+        assert.strictEqual(rowRaw.COLINT64, 1);
+        assert.strictEqual(typeof rowRaw.COLFLOAT64, 'number');
+        assert.strictEqual(rowRaw.COLFLOAT64, 3.14);
+
+        // 2. With wrapNumbers = true, wrapStructs = true
+        const [rowsWrapped] = (await database.run({
+          sql: selectAllTypes,
+          json: true,
+          jsonOptions: {wrapNumbers: true, wrapStructs: true},
+        })) as any;
+        assert.strictEqual(rowsWrapped.length, 3);
+        const rowWrapped = rowsWrapped[0];
+        // INT64 / FLOAT64 should be wrapped objects
+        assert(rowWrapped.COLINT64 instanceof Int);
+        assert.strictEqual(rowWrapped.COLINT64.value, '1');
+        assert(rowWrapped.COLFLOAT64 instanceof Float);
+        assert.strictEqual(rowWrapped.COLFLOAT64.value, 3.14);
       } finally {
         await database.close();
       }
@@ -2105,7 +2146,7 @@ describe('Spanner with mock server', () => {
         process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'false';
       });
 
-      after(() => {
+      after(async () => {
         delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS;
       });
       it('should make a request to BatchCreateSessions', async () => {
@@ -2212,7 +2253,7 @@ describe('Spanner with mock server', () => {
         process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'false';
       });
 
-      after(() => {
+      after(async () => {
         delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS;
       });
 
@@ -2239,7 +2280,7 @@ describe('Spanner with mock server', () => {
           'false';
       });
 
-      after(() => {
+      after(async () => {
         delete process.env
           .GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_PARTITIONED_OPS;
       });
@@ -2268,7 +2309,7 @@ describe('Spanner with mock server', () => {
           'false';
       });
 
-      after(() => {
+      after(async () => {
         delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS;
         delete process.env
           .GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_PARTITIONED_OPS;
@@ -2333,7 +2374,7 @@ describe('Spanner with mock server', () => {
         process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'false';
       });
 
-      after(() => {
+      after(async () => {
         delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS;
       });
 
@@ -2371,7 +2412,7 @@ describe('Spanner with mock server', () => {
         process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_FOR_RW = 'false';
       });
 
-      after(() => {
+      after(async () => {
         delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_FOR_RW;
       });
 
@@ -2410,7 +2451,7 @@ describe('Spanner with mock server', () => {
         process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_FOR_RW = 'false';
       });
 
-      after(() => {
+      after(async () => {
         delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS;
         delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_FOR_RW;
       });
@@ -2584,7 +2625,7 @@ describe('Spanner with mock server', () => {
         instanceWithEnvVar = spannerWithEnvVar.instance('instance');
       });
 
-      after(() => {
+      after(async () => {
         delete process.env.SPANNER_OPTIMIZER_VERSION;
         delete process.env.SPANNER_OPTIMIZER_STATISTICS_PACKAGE;
       });
@@ -2838,7 +2879,7 @@ describe('Spanner with mock server', () => {
       process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_FOR_RW = 'false';
     });
 
-    after(() => {
+    after(async () => {
       delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS;
       delete process.env
         .GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_PARTITIONED_OPS;
@@ -3279,7 +3320,7 @@ describe('Spanner with mock server', () => {
       process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_FOR_RW = 'false';
     });
 
-    after(() => {
+    after(async () => {
       delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS;
       delete process.env
         .GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_PARTITIONED_OPS;
@@ -4207,7 +4248,7 @@ describe('Spanner with mock server', () => {
         before(() => {
           process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'false';
         });
-        after(() => {
+        after(async () => {
           delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS;
         });
         it('should use session from pool', async () => {
@@ -7112,6 +7153,7 @@ describe('Spanner with mock server', () => {
       spanProcessors: [new SimpleSpanProcessor(exporter)],
     });
     provider.register();
+    _resetTracingEnabledForTest();
 
     after(async () => {
       await provider.shutdown();
@@ -7205,6 +7247,7 @@ describe('Spanner with mock server', () => {
     provider.register();
 
     beforeEach(async () => {
+      _resetTracingEnabledForTest();
       await exporter.forceFlush();
       await exporter.reset();
     });
@@ -7310,9 +7353,162 @@ describe('Spanner with mock server', () => {
         }
       });
     });
+  });
 
-    // TODO(@odeke-em): introduce tests for incremented attempts to verify
-    // that retries from GAX produce the required results.
+  describe('Tracing cache TTL', () => {
+    const ttlSandbox = sinon.createSandbox();
+    let warpOffset: number;
+
+    beforeEach(() => {
+      _resetTracingEnabledForTest();
+      warpOffset = 0;
+      const originalNow = Date.now;
+      ttlSandbox
+        .stub(Date, 'now')
+        .callsFake(() => originalNow.call(Date) + warpOffset);
+    });
+
+    afterEach(async () => {
+      ttlSandbox.restore();
+    });
+
+    it('should respect the 10-second TTL cache for global tracing checks', () => {
+      // 1. Initially no global tracer is configured, returns false
+      const getTracerProviderStub = ttlSandbox.stub(trace, 'getTracerProvider');
+      getTracerProviderStub.returns({
+        constructor: {name: 'ProxyTracerProvider'},
+        getDelegate: () => ({constructor: {name: 'NoopTracerProvider'}}),
+        getTracer: () => ({
+          startActiveSpan: (name, options, cb) =>
+            cb({setAttribute: () => {}, end: () => {}} as any),
+        }),
+      } as any);
+
+      assert.strictEqual(isTracingEnabled(), false);
+      assert.strictEqual(getTracerProviderStub.callCount, 1);
+
+      // 2. Even if OpenTelemetry is registered immediately after, it should hit the cache and return false
+      getTracerProviderStub.returns({
+        constructor: {name: 'ProxyTracerProvider'},
+        getDelegate: () => ({constructor: {name: 'NodeTracerProvider'}}),
+        getTracer: () => ({
+          startActiveSpan: (name, options, cb) =>
+            cb({setAttribute: () => {}, end: () => {}} as any),
+        }),
+      } as any);
+
+      assert.strictEqual(isTracingEnabled(), false);
+      // Call count remains 1 because it was cached!
+      assert.strictEqual(getTracerProviderStub.callCount, 1);
+
+      // 3. Advance clock by 9.9 seconds (still within 10s TTL)
+      warpOffset += 9900;
+      assert.strictEqual(isTracingEnabled(), false);
+      assert.strictEqual(getTracerProviderStub.callCount, 1);
+
+      // 4. Advance clock past the 10s TTL (e.g., 10.1 seconds total)
+      warpOffset += 200; // 9.9s + 0.2s = 10.1s
+      // Cache should be expired now, so it re-checks and auto-detects NodeTracerProvider!
+      assert.strictEqual(isTracingEnabled(), true);
+      assert.strictEqual(getTracerProviderStub.callCount, 2);
+
+      // 5. Once enabled, subsequent calls should permanently return true without re-evaluating or checking global provider
+      assert.strictEqual(isTracingEnabled(), true);
+      // Call count remains 2!
+      assert.strictEqual(getTracerProviderStub.callCount, 2);
+
+      // Advance clock by another 1 hour to prove it's permanently cached
+      warpOffset += 3600000;
+      assert.strictEqual(isTracingEnabled(), true);
+      assert.strictEqual(getTracerProviderStub.callCount, 2);
+    });
+
+    it('real application flow: should transition from untraced to traced after OTel registration and TTL expiration', async () => {
+      const exporter = new InMemorySpanExporter();
+      const provider = new NodeTracerProvider({
+        sampler: new AlwaysOnSampler(),
+        spanProcessors: [new SimpleSpanProcessor(exporter)],
+      });
+
+      const getTracerProviderStub = ttlSandbox.stub(trace, 'getTracerProvider');
+      // First phase: global provider is unconfigured (Proxy/Noop)
+      // We delegate getTracer to provider so that if getTracer is ever called, it works perfectly,
+      // but name is 'ProxyTracerProvider' so it is detected as unconfigured!
+      getTracerProviderStub.returns({
+        constructor: {name: 'ProxyTracerProvider'},
+        getDelegate: () => ({constructor: {name: 'NoopTracerProvider'}}),
+        getTracer: (name, version) => provider.getTracer(name, version),
+      } as any);
+
+      const localDatabase = newTestDatabase();
+
+      // First call: it shouldn't generate any spans!
+      const [rows1] = await localDatabase.run({sql: selectSql});
+      assert.strictEqual(rows1.length, 3);
+      assert.strictEqual(exporter.getFinishedSpans().length, 0);
+
+      // Second call immediately: because 10s TTL cache is still active, it should still NOT trace!
+      const [rows2] = await localDatabase.run({sql: selectSql});
+      assert.strictEqual(rows2.length, 3);
+      assert.strictEqual(exporter.getFinishedSpans().length, 0);
+
+      // Register the global provider in our stub
+      getTracerProviderStub.returns(provider);
+
+      // Advance clock past 10s TTL
+      warpOffset += 10100;
+
+      // Third call: cache has expired, so it auto-detects OTel and traces successfully!
+      const [rows3] = await localDatabase.run({sql: selectSql});
+      assert.strictEqual(rows3.length, 3);
+
+      // Verify that we successfully captured spans!
+      const finishedSpans = exporter.getFinishedSpans();
+      const spanNames = finishedSpans.map(s => s.name);
+      assert.ok(finishedSpans.length > 0);
+      assert.ok(spanNames.includes('CloudSpanner.Database.run'));
+
+      // Cleanup
+      await provider.shutdown();
+      await localDatabase.close();
+    });
+
+    it('should not cause issues when global OTel is registered before Spanner client (calls ensureInitialContextManagerSet twice)', async () => {
+      const exporter = new InMemorySpanExporter();
+      const provider = new NodeTracerProvider({
+        sampler: new AlwaysOnSampler(),
+        spanProcessors: [new SimpleSpanProcessor(exporter)],
+      });
+
+      // Setup trace.getTracerProvider stub to return the registered provider immediately
+      const getTracerProviderStub = ttlSandbox.stub(trace, 'getTracerProvider');
+      getTracerProviderStub.returns(provider);
+
+      // Creating client when global provider is already registered.
+      // This will invoke ensureInitialContextManagerSet() in isTracingEnabled check AND in constructor block.
+      const localSpanner = new Spanner({
+        servicePath: 'localhost',
+        port,
+        sslCreds: grpc.credentials.createInsecure(),
+      });
+      const localInstance = localSpanner.instance('instance');
+      const localDatabase = localInstance.database(
+        `database-pre-${dbCounter++}`,
+      );
+
+      // Verify the query traces successfully without any issue or crash
+      const [rows] = await localDatabase.run({sql: selectSql});
+      assert.strictEqual(rows.length, 3);
+
+      const finishedSpans = exporter.getFinishedSpans();
+      assert.ok(finishedSpans.length > 0);
+      const spanNames = finishedSpans.map(s => s.name);
+      assert.ok(spanNames.includes('CloudSpanner.Database.run'));
+
+      // Cleanup
+      await provider.shutdown();
+      await localSpanner.close();
+    });
   });
 });
 

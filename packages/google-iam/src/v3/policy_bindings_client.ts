@@ -18,11 +18,22 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -45,7 +56,7 @@ export class PolicyBindingsClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('iam');
@@ -58,11 +69,11 @@ export class PolicyBindingsClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  policyBindingsStub?: Promise<{[name: string]: Function}>;
+  policyBindingsStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of PolicyBindingsClient.
@@ -103,21 +114,42 @@ export class PolicyBindingsClient {
    *     const client = new PolicyBindingsClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof PolicyBindingsClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'iam.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -142,7 +174,7 @@ export class PolicyBindingsClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -156,15 +188,11 @@ export class PolicyBindingsClient {
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -185,34 +213,44 @@ export class PolicyBindingsClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      folderLocationPolicyBindingsPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/locations/{location}/policyBindings/{policy_binding}'
-      ),
+      folderLocationPolicyBindingsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'folders/{folder}/locations/{location}/policyBindings/{policy_binding}',
+        ),
       organizationPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}'
+        'organizations/{organization}',
       ),
       organizationLocationPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}'
+        'organizations/{organization}/locations/{location}',
       ),
-      organizationLocationPolicyBindingsPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/policyBindings/{policy_binding}'
-      ),
-      principalAccessBoundaryPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/principalAccessBoundaryPolicies/{principal_access_boundary_policy}'
-      ),
-      projectLocationPolicyBindingsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/policyBindings/{policy_binding}'
-      ),
+      organizationLocationPolicyBindingsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/policyBindings/{policy_binding}',
+        ),
+      principalAccessBoundaryPolicyPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/principalAccessBoundaryPolicies/{principal_access_boundary_policy}',
+        ),
+      projectLocationPolicyBindingsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/policyBindings/{policy_binding}',
+        ),
     };
 
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listPolicyBindings:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'policyBindings'),
-      searchTargetPolicyBindings:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'policyBindings')
+      listPolicyBindings: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'policyBindings',
+      ),
+      searchTargetPolicyBindings: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'policyBindings',
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -221,46 +259,68 @@ export class PolicyBindingsClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.GetOperation',get: '/v3/{name=projects/*/locations/*/operations/*}',additional_bindings: [{get: '/v3/{name=folders/*/locations/*/operations/*}',},{get: '/v3/{name=organizations/*/locations/*/operations/*}',}],
-      }];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v3/{name=projects/*/locations/*/operations/*}',
+          additional_bindings: [
+            { get: '/v3/{name=folders/*/locations/*/operations/*}' },
+            { get: '/v3/{name=organizations/*/locations/*/operations/*}' },
+          ],
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
     const createPolicyBindingResponse = protoFilesRoot.lookup(
-      '.google.iam.v3.PolicyBinding') as gax.protobuf.Type;
+      '.google.iam.v3.PolicyBinding',
+    ) as gax.protobuf.Type;
     const createPolicyBindingMetadata = protoFilesRoot.lookup(
-      '.google.iam.v3.OperationMetadata') as gax.protobuf.Type;
+      '.google.iam.v3.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updatePolicyBindingResponse = protoFilesRoot.lookup(
-      '.google.iam.v3.PolicyBinding') as gax.protobuf.Type;
+      '.google.iam.v3.PolicyBinding',
+    ) as gax.protobuf.Type;
     const updatePolicyBindingMetadata = protoFilesRoot.lookup(
-      '.google.iam.v3.OperationMetadata') as gax.protobuf.Type;
+      '.google.iam.v3.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deletePolicyBindingResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deletePolicyBindingMetadata = protoFilesRoot.lookup(
-      '.google.iam.v3.OperationMetadata') as gax.protobuf.Type;
+      '.google.iam.v3.OperationMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createPolicyBinding: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createPolicyBindingResponse.decode.bind(createPolicyBindingResponse),
-        createPolicyBindingMetadata.decode.bind(createPolicyBindingMetadata)),
+        createPolicyBindingMetadata.decode.bind(createPolicyBindingMetadata),
+      ),
       updatePolicyBinding: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updatePolicyBindingResponse.decode.bind(updatePolicyBindingResponse),
-        updatePolicyBindingMetadata.decode.bind(updatePolicyBindingMetadata)),
+        updatePolicyBindingMetadata.decode.bind(updatePolicyBindingMetadata),
+      ),
       deletePolicyBinding: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deletePolicyBindingResponse.decode.bind(deletePolicyBindingResponse),
-        deletePolicyBindingMetadata.decode.bind(deletePolicyBindingMetadata))
+        deletePolicyBindingMetadata.decode.bind(deletePolicyBindingMetadata),
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.iam.v3.PolicyBindings', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.iam.v3.PolicyBindings',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -291,28 +351,40 @@ export class PolicyBindingsClient {
     // Put together the "service stub" for
     // google.iam.v3.PolicyBindings.
     this.policyBindingsStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.iam.v3.PolicyBindings') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.iam.v3.PolicyBindings',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.iam.v3.PolicyBindings,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const policyBindingsStubMethods =
-        ['createPolicyBinding', 'getPolicyBinding', 'updatePolicyBinding', 'deletePolicyBinding', 'listPolicyBindings', 'searchTargetPolicyBindings'];
+    const policyBindingsStubMethods = [
+      'createPolicyBinding',
+      'getPolicyBinding',
+      'updatePolicyBinding',
+      'deletePolicyBinding',
+      'listPolicyBindings',
+      'searchTargetPolicyBindings',
+    ];
     for (const methodName of policyBindingsStubMethods) {
       const callPromise = this.policyBindingsStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -322,7 +394,7 @@ export class PolicyBindingsClient {
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -337,8 +409,14 @@ export class PolicyBindingsClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'iam.googleapis.com';
   }
@@ -349,8 +427,14 @@ export class PolicyBindingsClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'iam.googleapis.com';
   }
@@ -381,9 +465,7 @@ export class PolicyBindingsClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -392,8 +474,9 @@ export class PolicyBindingsClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -404,588 +487,819 @@ export class PolicyBindingsClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Gets a policy binding.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the policy binding to retrieve.
- *
- *   Format:
- *
- *   * `projects/{project_id}/locations/{location}/policyBindings/{policy_binding_id}`
- *   * `projects/{project_number}/locations/{location}/policyBindings/{policy_binding_id}`
- *   * `folders/{folder_id}/locations/{location}/policyBindings/{policy_binding_id}`
- *   * `organizations/{organization_id}/locations/{location}/policyBindings/{policy_binding_id}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.iam.v3.PolicyBinding|PolicyBinding}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v3/policy_bindings.get_policy_binding.js</caption>
- * region_tag:iam_v3_generated_PolicyBindings_GetPolicyBinding_async
- */
+  /**
+   * Gets a policy binding.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the policy binding to retrieve.
+   *
+   *   Format:
+   *
+   *   * `projects/{project_id}/locations/{location}/policyBindings/{policy_binding_id}`
+   *   * `projects/{project_number}/locations/{location}/policyBindings/{policy_binding_id}`
+   *   * `folders/{folder_id}/locations/{location}/policyBindings/{policy_binding_id}`
+   *   * `organizations/{organization_id}/locations/{location}/policyBindings/{policy_binding_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.iam.v3.PolicyBinding|PolicyBinding}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/policy_bindings.get_policy_binding.js</caption>
+   * region_tag:iam_v3_generated_PolicyBindings_GetPolicyBinding_async
+   */
   getPolicyBinding(
-      request?: protos.google.iam.v3.IGetPolicyBindingRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.iam.v3.IPolicyBinding,
-        protos.google.iam.v3.IGetPolicyBindingRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.iam.v3.IGetPolicyBindingRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.iam.v3.IPolicyBinding,
+      protos.google.iam.v3.IGetPolicyBindingRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getPolicyBinding(
-      request: protos.google.iam.v3.IGetPolicyBindingRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.iam.v3.IPolicyBinding,
-          protos.google.iam.v3.IGetPolicyBindingRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v3.IGetPolicyBindingRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.iam.v3.IPolicyBinding,
+      protos.google.iam.v3.IGetPolicyBindingRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getPolicyBinding(
-      request: protos.google.iam.v3.IGetPolicyBindingRequest,
-      callback: Callback<
-          protos.google.iam.v3.IPolicyBinding,
-          protos.google.iam.v3.IGetPolicyBindingRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v3.IGetPolicyBindingRequest,
+    callback: Callback<
+      protos.google.iam.v3.IPolicyBinding,
+      protos.google.iam.v3.IGetPolicyBindingRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getPolicyBinding(
-      request?: protos.google.iam.v3.IGetPolicyBindingRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.iam.v3.IGetPolicyBindingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.iam.v3.IPolicyBinding,
-          protos.google.iam.v3.IGetPolicyBindingRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.iam.v3.IPolicyBinding,
-          protos.google.iam.v3.IGetPolicyBindingRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.iam.v3.IPolicyBinding,
-        protos.google.iam.v3.IGetPolicyBindingRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.iam.v3.IGetPolicyBindingRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.iam.v3.IPolicyBinding,
+      protos.google.iam.v3.IGetPolicyBindingRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.iam.v3.IPolicyBinding,
+      protos.google.iam.v3.IGetPolicyBindingRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getPolicyBinding request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.iam.v3.IPolicyBinding,
-        protos.google.iam.v3.IGetPolicyBindingRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v3.IPolicyBinding,
+          protos.google.iam.v3.IGetPolicyBindingRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getPolicyBinding response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getPolicyBinding(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.iam.v3.IPolicyBinding,
-        protos.google.iam.v3.IGetPolicyBindingRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getPolicyBinding response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getPolicyBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v3.IPolicyBinding,
+          protos.google.iam.v3.IGetPolicyBindingRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getPolicyBinding response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
- * Creates a policy binding and returns a long-running operation.
- * Callers will need the IAM permissions on both the policy and target.
- * Once the binding is created, the policy is applied to the target.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource where this policy binding will be created.
- *   The binding parent is the closest Resource Manager resource (project,
- *   folder or organization) to the binding target.
- *
- *   Format:
- *
- *   * `projects/{project_id}/locations/{location}`
- *   * `projects/{project_number}/locations/{location}`
- *   * `folders/{folder_id}/locations/{location}`
- *   * `organizations/{organization_id}/locations/{location}`
- * @param {string} request.policyBindingId
- *   Required. The ID to use for the policy binding, which will become the final
- *   component of the policy binding's resource name.
- *
- *   This value must start with a lowercase letter followed by up to 62
- *   lowercase letters, numbers, hyphens, or dots. Pattern,
- *   /{@link protos.a-z0-9-\.|a-z}{2,62}/.
- * @param {google.iam.v3.PolicyBinding} request.policyBinding
- *   Required. The policy binding to create.
- * @param {boolean} [request.validateOnly]
- *   Optional. If set, validate the request and preview the creation, but do not
- *   actually post it.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v3/policy_bindings.create_policy_binding.js</caption>
- * region_tag:iam_v3_generated_PolicyBindings_CreatePolicyBinding_async
- */
+  /**
+   * Creates a policy binding and returns a long-running operation.
+   * Callers will need the IAM permissions on both the policy and target.
+   * Once the binding is created, the policy is applied to the target.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where this policy binding will be created.
+   *   The binding parent is the closest Resource Manager resource (project,
+   *   folder or organization) to the binding target.
+   *
+   *   Format:
+   *
+   *   * `projects/{project_id}/locations/{location}`
+   *   * `projects/{project_number}/locations/{location}`
+   *   * `folders/{folder_id}/locations/{location}`
+   *   * `organizations/{organization_id}/locations/{location}`
+   * @param {string} request.policyBindingId
+   *   Required. The ID to use for the policy binding, which will become the final
+   *   component of the policy binding's resource name.
+   *
+   *   This value must start with a lowercase letter followed by up to 62
+   *   lowercase letters, numbers, hyphens, or dots. Pattern,
+   *   /{@link protos.a-z0-9-\.|a-z}{2,62}/.
+   * @param {google.iam.v3.PolicyBinding} request.policyBinding
+   *   Required. The policy binding to create.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, validate the request and preview the creation, but do not
+   *   actually post it.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/policy_bindings.create_policy_binding.js</caption>
+   * region_tag:iam_v3_generated_PolicyBindings_CreatePolicyBinding_async
+   */
   createPolicyBinding(
-      request?: protos.google.iam.v3.ICreatePolicyBindingRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.iam.v3.IPolicyBinding, protos.google.iam.v3.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.iam.v3.ICreatePolicyBindingRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.iam.v3.IPolicyBinding,
+        protos.google.iam.v3.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createPolicyBinding(
-      request: protos.google.iam.v3.ICreatePolicyBindingRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.iam.v3.IPolicyBinding, protos.google.iam.v3.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v3.ICreatePolicyBindingRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.iam.v3.IPolicyBinding,
+        protos.google.iam.v3.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createPolicyBinding(
-      request: protos.google.iam.v3.ICreatePolicyBindingRequest,
-      callback: Callback<
-          LROperation<protos.google.iam.v3.IPolicyBinding, protos.google.iam.v3.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v3.ICreatePolicyBindingRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.iam.v3.IPolicyBinding,
+        protos.google.iam.v3.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createPolicyBinding(
-      request?: protos.google.iam.v3.ICreatePolicyBindingRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.iam.v3.IPolicyBinding, protos.google.iam.v3.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.iam.v3.IPolicyBinding, protos.google.iam.v3.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.iam.v3.IPolicyBinding, protos.google.iam.v3.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.iam.v3.ICreatePolicyBindingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.iam.v3.IPolicyBinding,
+            protos.google.iam.v3.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.iam.v3.IPolicyBinding,
+        protos.google.iam.v3.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.iam.v3.IPolicyBinding,
+        protos.google.iam.v3.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.iam.v3.IPolicyBinding, protos.google.iam.v3.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.iam.v3.IPolicyBinding,
+            protos.google.iam.v3.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createPolicyBinding response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createPolicyBinding request %j', request);
-    return this.innerApiCalls.createPolicyBinding(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.iam.v3.IPolicyBinding, protos.google.iam.v3.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createPolicyBinding response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createPolicyBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.iam.v3.IPolicyBinding,
+            protos.google.iam.v3.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createPolicyBinding response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createPolicyBinding()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v3/policy_bindings.create_policy_binding.js</caption>
- * region_tag:iam_v3_generated_PolicyBindings_CreatePolicyBinding_async
- */
-  async checkCreatePolicyBindingProgress(name: string): Promise<LROperation<protos.google.iam.v3.PolicyBinding, protos.google.iam.v3.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createPolicyBinding()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/policy_bindings.create_policy_binding.js</caption>
+   * region_tag:iam_v3_generated_PolicyBindings_CreatePolicyBinding_async
+   */
+  async checkCreatePolicyBindingProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.iam.v3.PolicyBinding,
+      protos.google.iam.v3.OperationMetadata
+    >
+  > {
     this._log.info('createPolicyBinding long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createPolicyBinding, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.iam.v3.PolicyBinding, protos.google.iam.v3.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createPolicyBinding,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.iam.v3.PolicyBinding,
+      protos.google.iam.v3.OperationMetadata
+    >;
   }
-/**
- * Updates a policy binding and returns a long-running operation.
- * Callers will need the IAM permissions on the policy and target in the
- * binding to update, and the IAM permission to remove the existing policy
- * from the binding. Target is immutable and cannot be updated. Once the
- * binding is updated, the new policy is applied to the target.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.iam.v3.PolicyBinding} request.policyBinding
- *   Required. The policy binding to update.
- *
- *   The policy binding's `name` field is used to identify the policy binding to
- *   update.
- * @param {boolean} [request.validateOnly]
- *   Optional. If set, validate the request and preview the update, but do not
- *   actually post it.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. The list of fields to update
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v3/policy_bindings.update_policy_binding.js</caption>
- * region_tag:iam_v3_generated_PolicyBindings_UpdatePolicyBinding_async
- */
+  /**
+   * Updates a policy binding and returns a long-running operation.
+   * Callers will need the IAM permissions on the policy and target in the
+   * binding to update, and the IAM permission to remove the existing policy
+   * from the binding. Target is immutable and cannot be updated. Once the
+   * binding is updated, the new policy is applied to the target.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.iam.v3.PolicyBinding} request.policyBinding
+   *   Required. The policy binding to update.
+   *
+   *   The policy binding's `name` field is used to identify the policy binding to
+   *   update.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, validate the request and preview the update, but do not
+   *   actually post it.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The list of fields to update
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/policy_bindings.update_policy_binding.js</caption>
+   * region_tag:iam_v3_generated_PolicyBindings_UpdatePolicyBinding_async
+   */
   updatePolicyBinding(
-      request?: protos.google.iam.v3.IUpdatePolicyBindingRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.iam.v3.IPolicyBinding, protos.google.iam.v3.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.iam.v3.IUpdatePolicyBindingRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.iam.v3.IPolicyBinding,
+        protos.google.iam.v3.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updatePolicyBinding(
-      request: protos.google.iam.v3.IUpdatePolicyBindingRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.iam.v3.IPolicyBinding, protos.google.iam.v3.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v3.IUpdatePolicyBindingRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.iam.v3.IPolicyBinding,
+        protos.google.iam.v3.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updatePolicyBinding(
-      request: protos.google.iam.v3.IUpdatePolicyBindingRequest,
-      callback: Callback<
-          LROperation<protos.google.iam.v3.IPolicyBinding, protos.google.iam.v3.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v3.IUpdatePolicyBindingRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.iam.v3.IPolicyBinding,
+        protos.google.iam.v3.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updatePolicyBinding(
-      request?: protos.google.iam.v3.IUpdatePolicyBindingRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.iam.v3.IPolicyBinding, protos.google.iam.v3.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.iam.v3.IPolicyBinding, protos.google.iam.v3.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.iam.v3.IPolicyBinding, protos.google.iam.v3.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.iam.v3.IUpdatePolicyBindingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.iam.v3.IPolicyBinding,
+            protos.google.iam.v3.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.iam.v3.IPolicyBinding,
+        protos.google.iam.v3.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.iam.v3.IPolicyBinding,
+        protos.google.iam.v3.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'policy_binding.name': request.policyBinding!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'policy_binding.name': request.policyBinding!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.iam.v3.IPolicyBinding, protos.google.iam.v3.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.iam.v3.IPolicyBinding,
+            protos.google.iam.v3.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updatePolicyBinding response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updatePolicyBinding request %j', request);
-    return this.innerApiCalls.updatePolicyBinding(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.iam.v3.IPolicyBinding, protos.google.iam.v3.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updatePolicyBinding response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updatePolicyBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.iam.v3.IPolicyBinding,
+            protos.google.iam.v3.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updatePolicyBinding response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updatePolicyBinding()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v3/policy_bindings.update_policy_binding.js</caption>
- * region_tag:iam_v3_generated_PolicyBindings_UpdatePolicyBinding_async
- */
-  async checkUpdatePolicyBindingProgress(name: string): Promise<LROperation<protos.google.iam.v3.PolicyBinding, protos.google.iam.v3.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updatePolicyBinding()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/policy_bindings.update_policy_binding.js</caption>
+   * region_tag:iam_v3_generated_PolicyBindings_UpdatePolicyBinding_async
+   */
+  async checkUpdatePolicyBindingProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.iam.v3.PolicyBinding,
+      protos.google.iam.v3.OperationMetadata
+    >
+  > {
     this._log.info('updatePolicyBinding long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updatePolicyBinding, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.iam.v3.PolicyBinding, protos.google.iam.v3.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updatePolicyBinding,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.iam.v3.PolicyBinding,
+      protos.google.iam.v3.OperationMetadata
+    >;
   }
-/**
- * Deletes a policy binding and returns a long-running operation.
- * Callers will need the IAM permissions on both the policy and target.
- * Once the binding is deleted, the policy no longer applies to the target.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the policy binding to delete.
- *
- *   Format:
- *
- *   * `projects/{project_id}/locations/{location}/policyBindings/{policy_binding_id}`
- *   * `projects/{project_number}/locations/{location}/policyBindings/{policy_binding_id}`
- *   * `folders/{folder_id}/locations/{location}/policyBindings/{policy_binding_id}`
- *   * `organizations/{organization_id}/locations/{location}/policyBindings/{policy_binding_id}`
- * @param {string} [request.etag]
- *   Optional. The etag of the policy binding.
- *   If this is provided, it must match the server's etag.
- * @param {boolean} [request.validateOnly]
- *   Optional. If set, validate the request and preview the deletion, but do not
- *   actually post it.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v3/policy_bindings.delete_policy_binding.js</caption>
- * region_tag:iam_v3_generated_PolicyBindings_DeletePolicyBinding_async
- */
+  /**
+   * Deletes a policy binding and returns a long-running operation.
+   * Callers will need the IAM permissions on both the policy and target.
+   * Once the binding is deleted, the policy no longer applies to the target.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the policy binding to delete.
+   *
+   *   Format:
+   *
+   *   * `projects/{project_id}/locations/{location}/policyBindings/{policy_binding_id}`
+   *   * `projects/{project_number}/locations/{location}/policyBindings/{policy_binding_id}`
+   *   * `folders/{folder_id}/locations/{location}/policyBindings/{policy_binding_id}`
+   *   * `organizations/{organization_id}/locations/{location}/policyBindings/{policy_binding_id}`
+   * @param {string} [request.etag]
+   *   Optional. The etag of the policy binding.
+   *   If this is provided, it must match the server's etag.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, validate the request and preview the deletion, but do not
+   *   actually post it.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/policy_bindings.delete_policy_binding.js</caption>
+   * region_tag:iam_v3_generated_PolicyBindings_DeletePolicyBinding_async
+   */
   deletePolicyBinding(
-      request?: protos.google.iam.v3.IDeletePolicyBindingRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.iam.v3.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.iam.v3.IDeletePolicyBindingRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.iam.v3.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deletePolicyBinding(
-      request: protos.google.iam.v3.IDeletePolicyBindingRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.iam.v3.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v3.IDeletePolicyBindingRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.iam.v3.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deletePolicyBinding(
-      request: protos.google.iam.v3.IDeletePolicyBindingRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.iam.v3.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v3.IDeletePolicyBindingRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.iam.v3.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deletePolicyBinding(
-      request?: protos.google.iam.v3.IDeletePolicyBindingRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.iam.v3.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.iam.v3.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.iam.v3.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.iam.v3.IDeletePolicyBindingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.iam.v3.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.iam.v3.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.iam.v3.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.iam.v3.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.iam.v3.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deletePolicyBinding response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deletePolicyBinding request %j', request);
-    return this.innerApiCalls.deletePolicyBinding(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.iam.v3.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deletePolicyBinding response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deletePolicyBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.iam.v3.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deletePolicyBinding response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deletePolicyBinding()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v3/policy_bindings.delete_policy_binding.js</caption>
- * region_tag:iam_v3_generated_PolicyBindings_DeletePolicyBinding_async
- */
-  async checkDeletePolicyBindingProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.iam.v3.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deletePolicyBinding()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/policy_bindings.delete_policy_binding.js</caption>
+   * region_tag:iam_v3_generated_PolicyBindings_DeletePolicyBinding_async
+   */
+  async checkDeletePolicyBindingProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.iam.v3.OperationMetadata
+    >
+  > {
     this._log.info('deletePolicyBinding long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deletePolicyBinding, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.iam.v3.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deletePolicyBinding,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.iam.v3.OperationMetadata
+    >;
   }
- /**
- * Lists policy bindings.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource, which owns the collection of policy
- *   bindings.
- *
- *   Format:
- *
- *   * `projects/{project_id}/locations/{location}`
- *   * `projects/{project_number}/locations/{location}`
- *   * `folders/{folder_id}/locations/{location}`
- *   * `organizations/{organization_id}/locations/{location}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of policy bindings to return. The service may
- *   return fewer than this value.
- *
- *   If unspecified, at most 50 policy bindings will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListPolicyBindings` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListPolicyBindings` must
- *   match the call that provided the page token.
- * @param {string} [request.filter]
- *   Optional. An expression for filtering the results of the request. Filter
- *   rules are case insensitive. Some eligible fields for filtering are:
- *
- *   + `target`
- *   + `policy`
- *
- *   Some examples of filter queries:
- *
- *   * `target:ex*`: The binding target's name starts with "ex".
- *   * `target:example`: The binding target's name is `example`.
- *   * `policy:example`: The binding policy's name is `example`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.iam.v3.PolicyBinding|PolicyBinding}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listPolicyBindingsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists policy bindings.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource, which owns the collection of policy
+   *   bindings.
+   *
+   *   Format:
+   *
+   *   * `projects/{project_id}/locations/{location}`
+   *   * `projects/{project_number}/locations/{location}`
+   *   * `folders/{folder_id}/locations/{location}`
+   *   * `organizations/{organization_id}/locations/{location}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of policy bindings to return. The service may
+   *   return fewer than this value.
+   *
+   *   If unspecified, at most 50 policy bindings will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListPolicyBindings` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListPolicyBindings` must
+   *   match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request. Filter
+   *   rules are case insensitive. Some eligible fields for filtering are:
+   *
+   *   + `target`
+   *   + `policy`
+   *
+   *   Some examples of filter queries:
+   *
+   *   * `target:ex*`: The binding target's name starts with "ex".
+   *   * `target:example`: The binding target's name is `example`.
+   *   * `policy:example`: The binding policy's name is `example`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.iam.v3.PolicyBinding|PolicyBinding}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listPolicyBindingsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listPolicyBindings(
-      request?: protos.google.iam.v3.IListPolicyBindingsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.iam.v3.IPolicyBinding[],
-        protos.google.iam.v3.IListPolicyBindingsRequest|null,
-        protos.google.iam.v3.IListPolicyBindingsResponse
-      ]>;
+    request?: protos.google.iam.v3.IListPolicyBindingsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.iam.v3.IPolicyBinding[],
+      protos.google.iam.v3.IListPolicyBindingsRequest | null,
+      protos.google.iam.v3.IListPolicyBindingsResponse,
+    ]
+  >;
   listPolicyBindings(
-      request: protos.google.iam.v3.IListPolicyBindingsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.iam.v3.IListPolicyBindingsRequest,
-          protos.google.iam.v3.IListPolicyBindingsResponse|null|undefined,
-          protos.google.iam.v3.IPolicyBinding>): void;
+    request: protos.google.iam.v3.IListPolicyBindingsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.iam.v3.IListPolicyBindingsRequest,
+      protos.google.iam.v3.IListPolicyBindingsResponse | null | undefined,
+      protos.google.iam.v3.IPolicyBinding
+    >,
+  ): void;
   listPolicyBindings(
-      request: protos.google.iam.v3.IListPolicyBindingsRequest,
-      callback: PaginationCallback<
-          protos.google.iam.v3.IListPolicyBindingsRequest,
-          protos.google.iam.v3.IListPolicyBindingsResponse|null|undefined,
-          protos.google.iam.v3.IPolicyBinding>): void;
+    request: protos.google.iam.v3.IListPolicyBindingsRequest,
+    callback: PaginationCallback<
+      protos.google.iam.v3.IListPolicyBindingsRequest,
+      protos.google.iam.v3.IListPolicyBindingsResponse | null | undefined,
+      protos.google.iam.v3.IPolicyBinding
+    >,
+  ): void;
   listPolicyBindings(
-      request?: protos.google.iam.v3.IListPolicyBindingsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.iam.v3.IListPolicyBindingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.iam.v3.IListPolicyBindingsRequest,
-          protos.google.iam.v3.IListPolicyBindingsResponse|null|undefined,
-          protos.google.iam.v3.IPolicyBinding>,
-      callback?: PaginationCallback<
-          protos.google.iam.v3.IListPolicyBindingsRequest,
-          protos.google.iam.v3.IListPolicyBindingsResponse|null|undefined,
-          protos.google.iam.v3.IPolicyBinding>):
-      Promise<[
-        protos.google.iam.v3.IPolicyBinding[],
-        protos.google.iam.v3.IListPolicyBindingsRequest|null,
-        protos.google.iam.v3.IListPolicyBindingsResponse
-      ]>|void {
+          protos.google.iam.v3.IListPolicyBindingsResponse | null | undefined,
+          protos.google.iam.v3.IPolicyBinding
+        >,
+    callback?: PaginationCallback<
+      protos.google.iam.v3.IListPolicyBindingsRequest,
+      protos.google.iam.v3.IListPolicyBindingsResponse | null | undefined,
+      protos.google.iam.v3.IPolicyBinding
+    >,
+  ): Promise<
+    [
+      protos.google.iam.v3.IPolicyBinding[],
+      protos.google.iam.v3.IListPolicyBindingsRequest | null,
+      protos.google.iam.v3.IListPolicyBindingsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.iam.v3.IListPolicyBindingsRequest,
-      protos.google.iam.v3.IListPolicyBindingsResponse|null|undefined,
-      protos.google.iam.v3.IPolicyBinding>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.iam.v3.IListPolicyBindingsRequest,
+          protos.google.iam.v3.IListPolicyBindingsResponse | null | undefined,
+          protos.google.iam.v3.IPolicyBinding
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listPolicyBindings values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -994,276 +1308,305 @@ export class PolicyBindingsClient {
     this._log.info('listPolicyBindings request %j', request);
     return this.innerApiCalls
       .listPolicyBindings(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.iam.v3.IPolicyBinding[],
-        protos.google.iam.v3.IListPolicyBindingsRequest|null,
-        protos.google.iam.v3.IListPolicyBindingsResponse
-      ]) => {
-        this._log.info('listPolicyBindings values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.iam.v3.IPolicyBinding[],
+          protos.google.iam.v3.IListPolicyBindingsRequest | null,
+          protos.google.iam.v3.IListPolicyBindingsResponse,
+        ]) => {
+          this._log.info('listPolicyBindings values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listPolicyBindings`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource, which owns the collection of policy
- *   bindings.
- *
- *   Format:
- *
- *   * `projects/{project_id}/locations/{location}`
- *   * `projects/{project_number}/locations/{location}`
- *   * `folders/{folder_id}/locations/{location}`
- *   * `organizations/{organization_id}/locations/{location}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of policy bindings to return. The service may
- *   return fewer than this value.
- *
- *   If unspecified, at most 50 policy bindings will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListPolicyBindings` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListPolicyBindings` must
- *   match the call that provided the page token.
- * @param {string} [request.filter]
- *   Optional. An expression for filtering the results of the request. Filter
- *   rules are case insensitive. Some eligible fields for filtering are:
- *
- *   + `target`
- *   + `policy`
- *
- *   Some examples of filter queries:
- *
- *   * `target:ex*`: The binding target's name starts with "ex".
- *   * `target:example`: The binding target's name is `example`.
- *   * `policy:example`: The binding policy's name is `example`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.iam.v3.PolicyBinding|PolicyBinding} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listPolicyBindingsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listPolicyBindings`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource, which owns the collection of policy
+   *   bindings.
+   *
+   *   Format:
+   *
+   *   * `projects/{project_id}/locations/{location}`
+   *   * `projects/{project_number}/locations/{location}`
+   *   * `folders/{folder_id}/locations/{location}`
+   *   * `organizations/{organization_id}/locations/{location}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of policy bindings to return. The service may
+   *   return fewer than this value.
+   *
+   *   If unspecified, at most 50 policy bindings will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListPolicyBindings` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListPolicyBindings` must
+   *   match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request. Filter
+   *   rules are case insensitive. Some eligible fields for filtering are:
+   *
+   *   + `target`
+   *   + `policy`
+   *
+   *   Some examples of filter queries:
+   *
+   *   * `target:ex*`: The binding target's name starts with "ex".
+   *   * `target:example`: The binding target's name is `example`.
+   *   * `policy:example`: The binding policy's name is `example`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.iam.v3.PolicyBinding|PolicyBinding} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listPolicyBindingsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listPolicyBindingsStream(
-      request?: protos.google.iam.v3.IListPolicyBindingsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.iam.v3.IListPolicyBindingsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listPolicyBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listPolicyBindings stream %j', request);
     return this.descriptors.page.listPolicyBindings.createStream(
       this.innerApiCalls.listPolicyBindings as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listPolicyBindings`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource, which owns the collection of policy
- *   bindings.
- *
- *   Format:
- *
- *   * `projects/{project_id}/locations/{location}`
- *   * `projects/{project_number}/locations/{location}`
- *   * `folders/{folder_id}/locations/{location}`
- *   * `organizations/{organization_id}/locations/{location}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of policy bindings to return. The service may
- *   return fewer than this value.
- *
- *   If unspecified, at most 50 policy bindings will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListPolicyBindings` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListPolicyBindings` must
- *   match the call that provided the page token.
- * @param {string} [request.filter]
- *   Optional. An expression for filtering the results of the request. Filter
- *   rules are case insensitive. Some eligible fields for filtering are:
- *
- *   + `target`
- *   + `policy`
- *
- *   Some examples of filter queries:
- *
- *   * `target:ex*`: The binding target's name starts with "ex".
- *   * `target:example`: The binding target's name is `example`.
- *   * `policy:example`: The binding policy's name is `example`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.iam.v3.PolicyBinding|PolicyBinding}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v3/policy_bindings.list_policy_bindings.js</caption>
- * region_tag:iam_v3_generated_PolicyBindings_ListPolicyBindings_async
- */
+  /**
+   * Equivalent to `listPolicyBindings`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource, which owns the collection of policy
+   *   bindings.
+   *
+   *   Format:
+   *
+   *   * `projects/{project_id}/locations/{location}`
+   *   * `projects/{project_number}/locations/{location}`
+   *   * `folders/{folder_id}/locations/{location}`
+   *   * `organizations/{organization_id}/locations/{location}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of policy bindings to return. The service may
+   *   return fewer than this value.
+   *
+   *   If unspecified, at most 50 policy bindings will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListPolicyBindings` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListPolicyBindings` must
+   *   match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request. Filter
+   *   rules are case insensitive. Some eligible fields for filtering are:
+   *
+   *   + `target`
+   *   + `policy`
+   *
+   *   Some examples of filter queries:
+   *
+   *   * `target:ex*`: The binding target's name starts with "ex".
+   *   * `target:example`: The binding target's name is `example`.
+   *   * `policy:example`: The binding policy's name is `example`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.iam.v3.PolicyBinding|PolicyBinding}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/policy_bindings.list_policy_bindings.js</caption>
+   * region_tag:iam_v3_generated_PolicyBindings_ListPolicyBindings_async
+   */
   listPolicyBindingsAsync(
-      request?: protos.google.iam.v3.IListPolicyBindingsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.iam.v3.IPolicyBinding>{
+    request?: protos.google.iam.v3.IListPolicyBindingsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.iam.v3.IPolicyBinding> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listPolicyBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listPolicyBindings iterate %j', request);
     return this.descriptors.page.listPolicyBindings.asyncIterate(
       this.innerApiCalls['listPolicyBindings'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.iam.v3.IPolicyBinding>;
   }
- /**
- * Search policy bindings by target. Returns all policy binding objects bound
- * directly to target.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.target
- *   Required. The target resource, which is bound to the policy in the binding.
- *
- *   Format:
- *
- *   * `//iam.googleapis.com/locations/global/workforcePools/POOL_ID`
- *   * `//iam.googleapis.com/projects/PROJECT_NUMBER/locations/global/workloadIdentityPools/POOL_ID`
- *   * `//iam.googleapis.com/locations/global/workspace/WORKSPACE_ID`
- *   * `//cloudresourcemanager.googleapis.com/projects/{project_number}`
- *   * `//cloudresourcemanager.googleapis.com/folders/{folder_id}`
- *   * `//cloudresourcemanager.googleapis.com/organizations/{organization_id}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of policy bindings to return. The service may
- *   return fewer than this value.
- *
- *   If unspecified, at most 50 policy bindings will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous
- *   `SearchTargetPolicyBindingsRequest` call. Provide this to retrieve the
- *   subsequent page.
- *
- *   When paginating, all other parameters provided to
- *   `SearchTargetPolicyBindingsRequest` must match the call that provided the
- *   page token.
- * @param {string} request.parent
- *   Required. The parent resource where this search will be performed. This
- *   should be the nearest Resource Manager resource (project, folder, or
- *   organization) to the target.
- *
- *   Format:
- *
- *   * `projects/{project_id}/locations/{location}`
- *   * `projects/{project_number}/locations/{location}`
- *   * `folders/{folder_id}/locations/{location}`
- *   * `organizations/{organization_id}/locations/{location}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.iam.v3.PolicyBinding|PolicyBinding}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `searchTargetPolicyBindingsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Search policy bindings by target. Returns all policy binding objects bound
+   * directly to target.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.target
+   *   Required. The target resource, which is bound to the policy in the binding.
+   *
+   *   Format:
+   *
+   *   * `//iam.googleapis.com/locations/global/workforcePools/POOL_ID`
+   *   * `//iam.googleapis.com/projects/PROJECT_NUMBER/locations/global/workloadIdentityPools/POOL_ID`
+   *   * `//iam.googleapis.com/locations/global/workspace/WORKSPACE_ID`
+   *   * `//cloudresourcemanager.googleapis.com/projects/{project_number}`
+   *   * `//cloudresourcemanager.googleapis.com/folders/{folder_id}`
+   *   * `//cloudresourcemanager.googleapis.com/organizations/{organization_id}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of policy bindings to return. The service may
+   *   return fewer than this value.
+   *
+   *   If unspecified, at most 50 policy bindings will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `SearchTargetPolicyBindingsRequest` call. Provide this to retrieve the
+   *   subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `SearchTargetPolicyBindingsRequest` must match the call that provided the
+   *   page token.
+   * @param {string} request.parent
+   *   Required. The parent resource where this search will be performed. This
+   *   should be the nearest Resource Manager resource (project, folder, or
+   *   organization) to the target.
+   *
+   *   Format:
+   *
+   *   * `projects/{project_id}/locations/{location}`
+   *   * `projects/{project_number}/locations/{location}`
+   *   * `folders/{folder_id}/locations/{location}`
+   *   * `organizations/{organization_id}/locations/{location}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.iam.v3.PolicyBinding|PolicyBinding}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `searchTargetPolicyBindingsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   searchTargetPolicyBindings(
-      request?: protos.google.iam.v3.ISearchTargetPolicyBindingsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.iam.v3.IPolicyBinding[],
-        protos.google.iam.v3.ISearchTargetPolicyBindingsRequest|null,
-        protos.google.iam.v3.ISearchTargetPolicyBindingsResponse
-      ]>;
+    request?: protos.google.iam.v3.ISearchTargetPolicyBindingsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.iam.v3.IPolicyBinding[],
+      protos.google.iam.v3.ISearchTargetPolicyBindingsRequest | null,
+      protos.google.iam.v3.ISearchTargetPolicyBindingsResponse,
+    ]
+  >;
   searchTargetPolicyBindings(
-      request: protos.google.iam.v3.ISearchTargetPolicyBindingsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.iam.v3.ISearchTargetPolicyBindingsRequest,
-          protos.google.iam.v3.ISearchTargetPolicyBindingsResponse|null|undefined,
-          protos.google.iam.v3.IPolicyBinding>): void;
+    request: protos.google.iam.v3.ISearchTargetPolicyBindingsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.iam.v3.ISearchTargetPolicyBindingsRequest,
+      | protos.google.iam.v3.ISearchTargetPolicyBindingsResponse
+      | null
+      | undefined,
+      protos.google.iam.v3.IPolicyBinding
+    >,
+  ): void;
   searchTargetPolicyBindings(
-      request: protos.google.iam.v3.ISearchTargetPolicyBindingsRequest,
-      callback: PaginationCallback<
-          protos.google.iam.v3.ISearchTargetPolicyBindingsRequest,
-          protos.google.iam.v3.ISearchTargetPolicyBindingsResponse|null|undefined,
-          protos.google.iam.v3.IPolicyBinding>): void;
+    request: protos.google.iam.v3.ISearchTargetPolicyBindingsRequest,
+    callback: PaginationCallback<
+      protos.google.iam.v3.ISearchTargetPolicyBindingsRequest,
+      | protos.google.iam.v3.ISearchTargetPolicyBindingsResponse
+      | null
+      | undefined,
+      protos.google.iam.v3.IPolicyBinding
+    >,
+  ): void;
   searchTargetPolicyBindings(
-      request?: protos.google.iam.v3.ISearchTargetPolicyBindingsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.iam.v3.ISearchTargetPolicyBindingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.iam.v3.ISearchTargetPolicyBindingsRequest,
-          protos.google.iam.v3.ISearchTargetPolicyBindingsResponse|null|undefined,
-          protos.google.iam.v3.IPolicyBinding>,
-      callback?: PaginationCallback<
-          protos.google.iam.v3.ISearchTargetPolicyBindingsRequest,
-          protos.google.iam.v3.ISearchTargetPolicyBindingsResponse|null|undefined,
-          protos.google.iam.v3.IPolicyBinding>):
-      Promise<[
-        protos.google.iam.v3.IPolicyBinding[],
-        protos.google.iam.v3.ISearchTargetPolicyBindingsRequest|null,
-        protos.google.iam.v3.ISearchTargetPolicyBindingsResponse
-      ]>|void {
+          | protos.google.iam.v3.ISearchTargetPolicyBindingsResponse
+          | null
+          | undefined,
+          protos.google.iam.v3.IPolicyBinding
+        >,
+    callback?: PaginationCallback<
+      protos.google.iam.v3.ISearchTargetPolicyBindingsRequest,
+      | protos.google.iam.v3.ISearchTargetPolicyBindingsResponse
+      | null
+      | undefined,
+      protos.google.iam.v3.IPolicyBinding
+    >,
+  ): Promise<
+    [
+      protos.google.iam.v3.IPolicyBinding[],
+      protos.google.iam.v3.ISearchTargetPolicyBindingsRequest | null,
+      protos.google.iam.v3.ISearchTargetPolicyBindingsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.iam.v3.ISearchTargetPolicyBindingsRequest,
-      protos.google.iam.v3.ISearchTargetPolicyBindingsResponse|null|undefined,
-      protos.google.iam.v3.IPolicyBinding>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.iam.v3.ISearchTargetPolicyBindingsRequest,
+          | protos.google.iam.v3.ISearchTargetPolicyBindingsResponse
+          | null
+          | undefined,
+          protos.google.iam.v3.IPolicyBinding
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('searchTargetPolicyBindings values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1272,169 +1615,174 @@ export class PolicyBindingsClient {
     this._log.info('searchTargetPolicyBindings request %j', request);
     return this.innerApiCalls
       .searchTargetPolicyBindings(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.iam.v3.IPolicyBinding[],
-        protos.google.iam.v3.ISearchTargetPolicyBindingsRequest|null,
-        protos.google.iam.v3.ISearchTargetPolicyBindingsResponse
-      ]) => {
-        this._log.info('searchTargetPolicyBindings values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.iam.v3.IPolicyBinding[],
+          protos.google.iam.v3.ISearchTargetPolicyBindingsRequest | null,
+          protos.google.iam.v3.ISearchTargetPolicyBindingsResponse,
+        ]) => {
+          this._log.info('searchTargetPolicyBindings values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `searchTargetPolicyBindings`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.target
- *   Required. The target resource, which is bound to the policy in the binding.
- *
- *   Format:
- *
- *   * `//iam.googleapis.com/locations/global/workforcePools/POOL_ID`
- *   * `//iam.googleapis.com/projects/PROJECT_NUMBER/locations/global/workloadIdentityPools/POOL_ID`
- *   * `//iam.googleapis.com/locations/global/workspace/WORKSPACE_ID`
- *   * `//cloudresourcemanager.googleapis.com/projects/{project_number}`
- *   * `//cloudresourcemanager.googleapis.com/folders/{folder_id}`
- *   * `//cloudresourcemanager.googleapis.com/organizations/{organization_id}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of policy bindings to return. The service may
- *   return fewer than this value.
- *
- *   If unspecified, at most 50 policy bindings will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous
- *   `SearchTargetPolicyBindingsRequest` call. Provide this to retrieve the
- *   subsequent page.
- *
- *   When paginating, all other parameters provided to
- *   `SearchTargetPolicyBindingsRequest` must match the call that provided the
- *   page token.
- * @param {string} request.parent
- *   Required. The parent resource where this search will be performed. This
- *   should be the nearest Resource Manager resource (project, folder, or
- *   organization) to the target.
- *
- *   Format:
- *
- *   * `projects/{project_id}/locations/{location}`
- *   * `projects/{project_number}/locations/{location}`
- *   * `folders/{folder_id}/locations/{location}`
- *   * `organizations/{organization_id}/locations/{location}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.iam.v3.PolicyBinding|PolicyBinding} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `searchTargetPolicyBindingsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `searchTargetPolicyBindings`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.target
+   *   Required. The target resource, which is bound to the policy in the binding.
+   *
+   *   Format:
+   *
+   *   * `//iam.googleapis.com/locations/global/workforcePools/POOL_ID`
+   *   * `//iam.googleapis.com/projects/PROJECT_NUMBER/locations/global/workloadIdentityPools/POOL_ID`
+   *   * `//iam.googleapis.com/locations/global/workspace/WORKSPACE_ID`
+   *   * `//cloudresourcemanager.googleapis.com/projects/{project_number}`
+   *   * `//cloudresourcemanager.googleapis.com/folders/{folder_id}`
+   *   * `//cloudresourcemanager.googleapis.com/organizations/{organization_id}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of policy bindings to return. The service may
+   *   return fewer than this value.
+   *
+   *   If unspecified, at most 50 policy bindings will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `SearchTargetPolicyBindingsRequest` call. Provide this to retrieve the
+   *   subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `SearchTargetPolicyBindingsRequest` must match the call that provided the
+   *   page token.
+   * @param {string} request.parent
+   *   Required. The parent resource where this search will be performed. This
+   *   should be the nearest Resource Manager resource (project, folder, or
+   *   organization) to the target.
+   *
+   *   Format:
+   *
+   *   * `projects/{project_id}/locations/{location}`
+   *   * `projects/{project_number}/locations/{location}`
+   *   * `folders/{folder_id}/locations/{location}`
+   *   * `organizations/{organization_id}/locations/{location}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.iam.v3.PolicyBinding|PolicyBinding} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `searchTargetPolicyBindingsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   searchTargetPolicyBindingsStream(
-      request?: protos.google.iam.v3.ISearchTargetPolicyBindingsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.iam.v3.ISearchTargetPolicyBindingsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['searchTargetPolicyBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('searchTargetPolicyBindings stream %j', request);
     return this.descriptors.page.searchTargetPolicyBindings.createStream(
       this.innerApiCalls.searchTargetPolicyBindings as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `searchTargetPolicyBindings`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.target
- *   Required. The target resource, which is bound to the policy in the binding.
- *
- *   Format:
- *
- *   * `//iam.googleapis.com/locations/global/workforcePools/POOL_ID`
- *   * `//iam.googleapis.com/projects/PROJECT_NUMBER/locations/global/workloadIdentityPools/POOL_ID`
- *   * `//iam.googleapis.com/locations/global/workspace/WORKSPACE_ID`
- *   * `//cloudresourcemanager.googleapis.com/projects/{project_number}`
- *   * `//cloudresourcemanager.googleapis.com/folders/{folder_id}`
- *   * `//cloudresourcemanager.googleapis.com/organizations/{organization_id}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of policy bindings to return. The service may
- *   return fewer than this value.
- *
- *   If unspecified, at most 50 policy bindings will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous
- *   `SearchTargetPolicyBindingsRequest` call. Provide this to retrieve the
- *   subsequent page.
- *
- *   When paginating, all other parameters provided to
- *   `SearchTargetPolicyBindingsRequest` must match the call that provided the
- *   page token.
- * @param {string} request.parent
- *   Required. The parent resource where this search will be performed. This
- *   should be the nearest Resource Manager resource (project, folder, or
- *   organization) to the target.
- *
- *   Format:
- *
- *   * `projects/{project_id}/locations/{location}`
- *   * `projects/{project_number}/locations/{location}`
- *   * `folders/{folder_id}/locations/{location}`
- *   * `organizations/{organization_id}/locations/{location}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.iam.v3.PolicyBinding|PolicyBinding}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v3/policy_bindings.search_target_policy_bindings.js</caption>
- * region_tag:iam_v3_generated_PolicyBindings_SearchTargetPolicyBindings_async
- */
+  /**
+   * Equivalent to `searchTargetPolicyBindings`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.target
+   *   Required. The target resource, which is bound to the policy in the binding.
+   *
+   *   Format:
+   *
+   *   * `//iam.googleapis.com/locations/global/workforcePools/POOL_ID`
+   *   * `//iam.googleapis.com/projects/PROJECT_NUMBER/locations/global/workloadIdentityPools/POOL_ID`
+   *   * `//iam.googleapis.com/locations/global/workspace/WORKSPACE_ID`
+   *   * `//cloudresourcemanager.googleapis.com/projects/{project_number}`
+   *   * `//cloudresourcemanager.googleapis.com/folders/{folder_id}`
+   *   * `//cloudresourcemanager.googleapis.com/organizations/{organization_id}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of policy bindings to return. The service may
+   *   return fewer than this value.
+   *
+   *   If unspecified, at most 50 policy bindings will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `SearchTargetPolicyBindingsRequest` call. Provide this to retrieve the
+   *   subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `SearchTargetPolicyBindingsRequest` must match the call that provided the
+   *   page token.
+   * @param {string} request.parent
+   *   Required. The parent resource where this search will be performed. This
+   *   should be the nearest Resource Manager resource (project, folder, or
+   *   organization) to the target.
+   *
+   *   Format:
+   *
+   *   * `projects/{project_id}/locations/{location}`
+   *   * `projects/{project_number}/locations/{location}`
+   *   * `folders/{folder_id}/locations/{location}`
+   *   * `organizations/{organization_id}/locations/{location}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.iam.v3.PolicyBinding|PolicyBinding}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/policy_bindings.search_target_policy_bindings.js</caption>
+   * region_tag:iam_v3_generated_PolicyBindings_SearchTargetPolicyBindings_async
+   */
   searchTargetPolicyBindingsAsync(
-      request?: protos.google.iam.v3.ISearchTargetPolicyBindingsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.iam.v3.IPolicyBinding>{
+    request?: protos.google.iam.v3.ISearchTargetPolicyBindingsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.iam.v3.IPolicyBinding> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['searchTargetPolicyBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('searchTargetPolicyBindings iterate %j', request);
     return this.descriptors.page.searchTargetPolicyBindings.asyncIterate(
       this.innerApiCalls['searchTargetPolicyBindings'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.iam.v3.IPolicyBinding>;
   }
-/**
+
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1469,12 +1817,11 @@ export class PolicyBindingsClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1507,12 +1854,12 @@ export class PolicyBindingsClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-/**
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1555,22 +1902,22 @@ export class PolicyBindingsClient {
       protos.google.longrunning.Operation,
       protos.google.longrunning.GetOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<[protos.google.longrunning.Operation]> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1605,15 +1952,15 @@ export class PolicyBindingsClient {
    */
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
+    options?: gax.CallOptions,
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1647,7 +1994,7 @@ export class PolicyBindingsClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-   cancelOperation(
+  cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -1660,25 +2007,24 @@ export class PolicyBindingsClient {
       protos.google.longrunning.CancelOperationRequest,
       protos.google.protobuf.Empty,
       {} | undefined | null
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
-
   /**
    * Deletes a long-running operation. This method indicates that the client is
    * no longer interested in the operation result. It does not cancel the
@@ -1717,22 +2063,22 @@ export class PolicyBindingsClient {
       protos.google.protobuf.Empty,
       protos.google.longrunning.DeleteOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -1748,7 +2094,11 @@ export class PolicyBindingsClient {
    * @param {string} policy_binding
    * @returns {string} Resource name string.
    */
-  folderLocationPolicyBindingsPath(folder:string,location:string,policyBinding:string) {
+  folderLocationPolicyBindingsPath(
+    folder: string,
+    location: string,
+    policyBinding: string,
+  ) {
     return this.pathTemplates.folderLocationPolicyBindingsPathTemplate.render({
       folder: folder,
       location: location,
@@ -1763,8 +2113,12 @@ export class PolicyBindingsClient {
    *   A fully-qualified path representing folder_location_policyBindings resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderLocationPolicyBindingsName(folderLocationPolicyBindingsName: string) {
-    return this.pathTemplates.folderLocationPolicyBindingsPathTemplate.match(folderLocationPolicyBindingsName).folder;
+  matchFolderFromFolderLocationPolicyBindingsName(
+    folderLocationPolicyBindingsName: string,
+  ) {
+    return this.pathTemplates.folderLocationPolicyBindingsPathTemplate.match(
+      folderLocationPolicyBindingsName,
+    ).folder;
   }
 
   /**
@@ -1774,8 +2128,12 @@ export class PolicyBindingsClient {
    *   A fully-qualified path representing folder_location_policyBindings resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromFolderLocationPolicyBindingsName(folderLocationPolicyBindingsName: string) {
-    return this.pathTemplates.folderLocationPolicyBindingsPathTemplate.match(folderLocationPolicyBindingsName).location;
+  matchLocationFromFolderLocationPolicyBindingsName(
+    folderLocationPolicyBindingsName: string,
+  ) {
+    return this.pathTemplates.folderLocationPolicyBindingsPathTemplate.match(
+      folderLocationPolicyBindingsName,
+    ).location;
   }
 
   /**
@@ -1785,8 +2143,12 @@ export class PolicyBindingsClient {
    *   A fully-qualified path representing folder_location_policyBindings resource.
    * @returns {string} A string representing the policy_binding.
    */
-  matchPolicyBindingFromFolderLocationPolicyBindingsName(folderLocationPolicyBindingsName: string) {
-    return this.pathTemplates.folderLocationPolicyBindingsPathTemplate.match(folderLocationPolicyBindingsName).policy_binding;
+  matchPolicyBindingFromFolderLocationPolicyBindingsName(
+    folderLocationPolicyBindingsName: string,
+  ) {
+    return this.pathTemplates.folderLocationPolicyBindingsPathTemplate.match(
+      folderLocationPolicyBindingsName,
+    ).policy_binding;
   }
 
   /**
@@ -1795,7 +2157,7 @@ export class PolicyBindingsClient {
    * @param {string} organization
    * @returns {string} Resource name string.
    */
-  organizationPath(organization:string) {
+  organizationPath(organization: string) {
     return this.pathTemplates.organizationPathTemplate.render({
       organization: organization,
     });
@@ -1809,7 +2171,8 @@ export class PolicyBindingsClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationName(organizationName: string) {
-    return this.pathTemplates.organizationPathTemplate.match(organizationName).organization;
+    return this.pathTemplates.organizationPathTemplate.match(organizationName)
+      .organization;
   }
 
   /**
@@ -1819,7 +2182,7 @@ export class PolicyBindingsClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  organizationLocationPath(organization:string,location:string) {
+  organizationLocationPath(organization: string, location: string) {
     return this.pathTemplates.organizationLocationPathTemplate.render({
       organization: organization,
       location: location,
@@ -1833,8 +2196,12 @@ export class PolicyBindingsClient {
    *   A fully-qualified path representing OrganizationLocation resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationName(organizationLocationName: string) {
-    return this.pathTemplates.organizationLocationPathTemplate.match(organizationLocationName).organization;
+  matchOrganizationFromOrganizationLocationName(
+    organizationLocationName: string,
+  ) {
+    return this.pathTemplates.organizationLocationPathTemplate.match(
+      organizationLocationName,
+    ).organization;
   }
 
   /**
@@ -1845,7 +2212,9 @@ export class PolicyBindingsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromOrganizationLocationName(organizationLocationName: string) {
-    return this.pathTemplates.organizationLocationPathTemplate.match(organizationLocationName).location;
+    return this.pathTemplates.organizationLocationPathTemplate.match(
+      organizationLocationName,
+    ).location;
   }
 
   /**
@@ -1856,12 +2225,18 @@ export class PolicyBindingsClient {
    * @param {string} policy_binding
    * @returns {string} Resource name string.
    */
-  organizationLocationPolicyBindingsPath(organization:string,location:string,policyBinding:string) {
-    return this.pathTemplates.organizationLocationPolicyBindingsPathTemplate.render({
-      organization: organization,
-      location: location,
-      policy_binding: policyBinding,
-    });
+  organizationLocationPolicyBindingsPath(
+    organization: string,
+    location: string,
+    policyBinding: string,
+  ) {
+    return this.pathTemplates.organizationLocationPolicyBindingsPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        policy_binding: policyBinding,
+      },
+    );
   }
 
   /**
@@ -1871,8 +2246,12 @@ export class PolicyBindingsClient {
    *   A fully-qualified path representing organization_location_policyBindings resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationPolicyBindingsName(organizationLocationPolicyBindingsName: string) {
-    return this.pathTemplates.organizationLocationPolicyBindingsPathTemplate.match(organizationLocationPolicyBindingsName).organization;
+  matchOrganizationFromOrganizationLocationPolicyBindingsName(
+    organizationLocationPolicyBindingsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationPolicyBindingsPathTemplate.match(
+      organizationLocationPolicyBindingsName,
+    ).organization;
   }
 
   /**
@@ -1882,8 +2261,12 @@ export class PolicyBindingsClient {
    *   A fully-qualified path representing organization_location_policyBindings resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationPolicyBindingsName(organizationLocationPolicyBindingsName: string) {
-    return this.pathTemplates.organizationLocationPolicyBindingsPathTemplate.match(organizationLocationPolicyBindingsName).location;
+  matchLocationFromOrganizationLocationPolicyBindingsName(
+    organizationLocationPolicyBindingsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationPolicyBindingsPathTemplate.match(
+      organizationLocationPolicyBindingsName,
+    ).location;
   }
 
   /**
@@ -1893,8 +2276,12 @@ export class PolicyBindingsClient {
    *   A fully-qualified path representing organization_location_policyBindings resource.
    * @returns {string} A string representing the policy_binding.
    */
-  matchPolicyBindingFromOrganizationLocationPolicyBindingsName(organizationLocationPolicyBindingsName: string) {
-    return this.pathTemplates.organizationLocationPolicyBindingsPathTemplate.match(organizationLocationPolicyBindingsName).policy_binding;
+  matchPolicyBindingFromOrganizationLocationPolicyBindingsName(
+    organizationLocationPolicyBindingsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationPolicyBindingsPathTemplate.match(
+      organizationLocationPolicyBindingsName,
+    ).policy_binding;
   }
 
   /**
@@ -1905,7 +2292,11 @@ export class PolicyBindingsClient {
    * @param {string} principal_access_boundary_policy
    * @returns {string} Resource name string.
    */
-  principalAccessBoundaryPolicyPath(organization:string,location:string,principalAccessBoundaryPolicy:string) {
+  principalAccessBoundaryPolicyPath(
+    organization: string,
+    location: string,
+    principalAccessBoundaryPolicy: string,
+  ) {
     return this.pathTemplates.principalAccessBoundaryPolicyPathTemplate.render({
       organization: organization,
       location: location,
@@ -1920,8 +2311,12 @@ export class PolicyBindingsClient {
    *   A fully-qualified path representing PrincipalAccessBoundaryPolicy resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromPrincipalAccessBoundaryPolicyName(principalAccessBoundaryPolicyName: string) {
-    return this.pathTemplates.principalAccessBoundaryPolicyPathTemplate.match(principalAccessBoundaryPolicyName).organization;
+  matchOrganizationFromPrincipalAccessBoundaryPolicyName(
+    principalAccessBoundaryPolicyName: string,
+  ) {
+    return this.pathTemplates.principalAccessBoundaryPolicyPathTemplate.match(
+      principalAccessBoundaryPolicyName,
+    ).organization;
   }
 
   /**
@@ -1931,8 +2326,12 @@ export class PolicyBindingsClient {
    *   A fully-qualified path representing PrincipalAccessBoundaryPolicy resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromPrincipalAccessBoundaryPolicyName(principalAccessBoundaryPolicyName: string) {
-    return this.pathTemplates.principalAccessBoundaryPolicyPathTemplate.match(principalAccessBoundaryPolicyName).location;
+  matchLocationFromPrincipalAccessBoundaryPolicyName(
+    principalAccessBoundaryPolicyName: string,
+  ) {
+    return this.pathTemplates.principalAccessBoundaryPolicyPathTemplate.match(
+      principalAccessBoundaryPolicyName,
+    ).location;
   }
 
   /**
@@ -1942,8 +2341,12 @@ export class PolicyBindingsClient {
    *   A fully-qualified path representing PrincipalAccessBoundaryPolicy resource.
    * @returns {string} A string representing the principal_access_boundary_policy.
    */
-  matchPrincipalAccessBoundaryPolicyFromPrincipalAccessBoundaryPolicyName(principalAccessBoundaryPolicyName: string) {
-    return this.pathTemplates.principalAccessBoundaryPolicyPathTemplate.match(principalAccessBoundaryPolicyName).principal_access_boundary_policy;
+  matchPrincipalAccessBoundaryPolicyFromPrincipalAccessBoundaryPolicyName(
+    principalAccessBoundaryPolicyName: string,
+  ) {
+    return this.pathTemplates.principalAccessBoundaryPolicyPathTemplate.match(
+      principalAccessBoundaryPolicyName,
+    ).principal_access_boundary_policy;
   }
 
   /**
@@ -1954,7 +2357,11 @@ export class PolicyBindingsClient {
    * @param {string} policy_binding
    * @returns {string} Resource name string.
    */
-  projectLocationPolicyBindingsPath(project:string,location:string,policyBinding:string) {
+  projectLocationPolicyBindingsPath(
+    project: string,
+    location: string,
+    policyBinding: string,
+  ) {
     return this.pathTemplates.projectLocationPolicyBindingsPathTemplate.render({
       project: project,
       location: location,
@@ -1969,8 +2376,12 @@ export class PolicyBindingsClient {
    *   A fully-qualified path representing project_location_policyBindings resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationPolicyBindingsName(projectLocationPolicyBindingsName: string) {
-    return this.pathTemplates.projectLocationPolicyBindingsPathTemplate.match(projectLocationPolicyBindingsName).project;
+  matchProjectFromProjectLocationPolicyBindingsName(
+    projectLocationPolicyBindingsName: string,
+  ) {
+    return this.pathTemplates.projectLocationPolicyBindingsPathTemplate.match(
+      projectLocationPolicyBindingsName,
+    ).project;
   }
 
   /**
@@ -1980,8 +2391,12 @@ export class PolicyBindingsClient {
    *   A fully-qualified path representing project_location_policyBindings resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationPolicyBindingsName(projectLocationPolicyBindingsName: string) {
-    return this.pathTemplates.projectLocationPolicyBindingsPathTemplate.match(projectLocationPolicyBindingsName).location;
+  matchLocationFromProjectLocationPolicyBindingsName(
+    projectLocationPolicyBindingsName: string,
+  ) {
+    return this.pathTemplates.projectLocationPolicyBindingsPathTemplate.match(
+      projectLocationPolicyBindingsName,
+    ).location;
   }
 
   /**
@@ -1991,8 +2406,12 @@ export class PolicyBindingsClient {
    *   A fully-qualified path representing project_location_policyBindings resource.
    * @returns {string} A string representing the policy_binding.
    */
-  matchPolicyBindingFromProjectLocationPolicyBindingsName(projectLocationPolicyBindingsName: string) {
-    return this.pathTemplates.projectLocationPolicyBindingsPathTemplate.match(projectLocationPolicyBindingsName).policy_binding;
+  matchPolicyBindingFromProjectLocationPolicyBindingsName(
+    projectLocationPolicyBindingsName: string,
+  ) {
+    return this.pathTemplates.projectLocationPolicyBindingsPathTemplate.match(
+      projectLocationPolicyBindingsName,
+    ).policy_binding;
   }
 
   /**
@@ -2003,11 +2422,13 @@ export class PolicyBindingsClient {
    */
   close(): Promise<void> {
     if (this.policyBindingsStub && !this._terminated) {
-      return this.policyBindingsStub.then(stub => {
+      return this.policyBindingsStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
         void this.operationsClient.close();
       });
     }

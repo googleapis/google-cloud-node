@@ -30,7 +30,7 @@ import retryRequest from 'retry-request';
 import {Duplex, DuplexOptions, Readable, Transform, Writable} from 'stream';
 import {teenyRequest} from 'teeny-request';
 import {Interceptor} from './service-object.js';
-import * as uuid from 'uuid';
+import * as crypto from 'crypto';
 import {DEFAULT_PROJECT_ID_TOKEN} from './service.js';
 import {
   getModuleFormat,
@@ -970,6 +970,24 @@ export class Util {
       delete reqOpts.json.autoPaginate;
       delete reqOpts.json.autoPaginateVal;
       reqOpts.json = replaceProjectIdToken(reqOpts.json, projectId);
+
+      const headers = reqOpts.headers || {};
+      if (
+        typeof (headers as any).set === 'function' &&
+        typeof (headers as any).has === 'function'
+      ) {
+        if (!(headers as any).has('content-type')) {
+          (headers as any).set('Content-Type', 'application/json');
+        }
+        reqOpts.headers = headers;
+      } else {
+        const hasContentType = Object.keys(headers).some(
+          key => key.toLowerCase() === 'content-type'
+        );
+        reqOpts.headers = hasContentType
+          ? headers
+          : { ...headers, 'Content-Type': 'application/json' };
+      }
     }
 
     reqOpts.uri = replaceProjectIdToken(reqOpts.uri, projectId);
@@ -1028,7 +1046,7 @@ export class Util {
       'User-Agent': getUserAgentString(),
       'x-goog-api-client': `${getRuntimeTrackingString()} gccl/${
         packageJson.version
-      }-${getModuleFormat()} gccl-invocation-id/${uuid.v4()}`,
+      }-${getModuleFormat()} gccl-invocation-id/${crypto.randomUUID()}`,
     };
 
     if (gcclGcsCmd) {

@@ -989,6 +989,171 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.storage.control.v2.StorageControl|getIntelligenceFinding}.
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @typedef GetIntelligenceFindingCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.storage.control.v2.IntelligenceFinding} [response] IntelligenceFinding
+                         */
+    
+                        /**
+                         * Calls GetIntelligenceFinding.
+                         * @function getIntelligenceFinding
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IGetIntelligenceFindingRequest} request GetIntelligenceFindingRequest message or plain object
+                         * @param {google.storage.control.v2.StorageControl.GetIntelligenceFindingCallback} callback Node-style callback called with the error, if any, and IntelligenceFinding
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(StorageControl.prototype.getIntelligenceFinding = function getIntelligenceFinding(request, callback) {
+                            return this.rpcCall(getIntelligenceFinding, $root.google.storage.control.v2.GetIntelligenceFindingRequest, $root.google.storage.control.v2.IntelligenceFinding, request, callback);
+                        }, "name", { value: "GetIntelligenceFinding" });
+    
+                        /**
+                         * Calls GetIntelligenceFinding.
+                         * @function getIntelligenceFinding
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IGetIntelligenceFindingRequest} request GetIntelligenceFindingRequest message or plain object
+                         * @returns {Promise<google.storage.control.v2.IntelligenceFinding>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.storage.control.v2.StorageControl|listIntelligenceFindings}.
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @typedef ListIntelligenceFindingsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.storage.control.v2.ListIntelligenceFindingsResponse} [response] ListIntelligenceFindingsResponse
+                         */
+    
+                        /**
+                         * Calls ListIntelligenceFindings.
+                         * @function listIntelligenceFindings
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IListIntelligenceFindingsRequest} request ListIntelligenceFindingsRequest message or plain object
+                         * @param {google.storage.control.v2.StorageControl.ListIntelligenceFindingsCallback} callback Node-style callback called with the error, if any, and ListIntelligenceFindingsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(StorageControl.prototype.listIntelligenceFindings = function listIntelligenceFindings(request, callback) {
+                            return this.rpcCall(listIntelligenceFindings, $root.google.storage.control.v2.ListIntelligenceFindingsRequest, $root.google.storage.control.v2.ListIntelligenceFindingsResponse, request, callback);
+                        }, "name", { value: "ListIntelligenceFindings" });
+    
+                        /**
+                         * Calls ListIntelligenceFindings.
+                         * @function listIntelligenceFindings
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IListIntelligenceFindingsRequest} request ListIntelligenceFindingsRequest message or plain object
+                         * @returns {Promise<google.storage.control.v2.ListIntelligenceFindingsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.storage.control.v2.StorageControl|summarizeIntelligenceFindings}.
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @typedef SummarizeIntelligenceFindingsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.storage.control.v2.SummarizeIntelligenceFindingsResponse} [response] SummarizeIntelligenceFindingsResponse
+                         */
+    
+                        /**
+                         * Calls SummarizeIntelligenceFindings.
+                         * @function summarizeIntelligenceFindings
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.ISummarizeIntelligenceFindingsRequest} request SummarizeIntelligenceFindingsRequest message or plain object
+                         * @param {google.storage.control.v2.StorageControl.SummarizeIntelligenceFindingsCallback} callback Node-style callback called with the error, if any, and SummarizeIntelligenceFindingsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(StorageControl.prototype.summarizeIntelligenceFindings = function summarizeIntelligenceFindings(request, callback) {
+                            return this.rpcCall(summarizeIntelligenceFindings, $root.google.storage.control.v2.SummarizeIntelligenceFindingsRequest, $root.google.storage.control.v2.SummarizeIntelligenceFindingsResponse, request, callback);
+                        }, "name", { value: "SummarizeIntelligenceFindings" });
+    
+                        /**
+                         * Calls SummarizeIntelligenceFindings.
+                         * @function summarizeIntelligenceFindings
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.ISummarizeIntelligenceFindingsRequest} request SummarizeIntelligenceFindingsRequest message or plain object
+                         * @returns {Promise<google.storage.control.v2.SummarizeIntelligenceFindingsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.storage.control.v2.StorageControl|getIntelligenceFindingRevision}.
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @typedef GetIntelligenceFindingRevisionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.storage.control.v2.IntelligenceFindingRevision} [response] IntelligenceFindingRevision
+                         */
+    
+                        /**
+                         * Calls GetIntelligenceFindingRevision.
+                         * @function getIntelligenceFindingRevision
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IGetIntelligenceFindingRevisionRequest} request GetIntelligenceFindingRevisionRequest message or plain object
+                         * @param {google.storage.control.v2.StorageControl.GetIntelligenceFindingRevisionCallback} callback Node-style callback called with the error, if any, and IntelligenceFindingRevision
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(StorageControl.prototype.getIntelligenceFindingRevision = function getIntelligenceFindingRevision(request, callback) {
+                            return this.rpcCall(getIntelligenceFindingRevision, $root.google.storage.control.v2.GetIntelligenceFindingRevisionRequest, $root.google.storage.control.v2.IntelligenceFindingRevision, request, callback);
+                        }, "name", { value: "GetIntelligenceFindingRevision" });
+    
+                        /**
+                         * Calls GetIntelligenceFindingRevision.
+                         * @function getIntelligenceFindingRevision
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IGetIntelligenceFindingRevisionRequest} request GetIntelligenceFindingRevisionRequest message or plain object
+                         * @returns {Promise<google.storage.control.v2.IntelligenceFindingRevision>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.storage.control.v2.StorageControl|listIntelligenceFindingRevisions}.
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @typedef ListIntelligenceFindingRevisionsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.storage.control.v2.ListIntelligenceFindingRevisionsResponse} [response] ListIntelligenceFindingRevisionsResponse
+                         */
+    
+                        /**
+                         * Calls ListIntelligenceFindingRevisions.
+                         * @function listIntelligenceFindingRevisions
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IListIntelligenceFindingRevisionsRequest} request ListIntelligenceFindingRevisionsRequest message or plain object
+                         * @param {google.storage.control.v2.StorageControl.ListIntelligenceFindingRevisionsCallback} callback Node-style callback called with the error, if any, and ListIntelligenceFindingRevisionsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(StorageControl.prototype.listIntelligenceFindingRevisions = function listIntelligenceFindingRevisions(request, callback) {
+                            return this.rpcCall(listIntelligenceFindingRevisions, $root.google.storage.control.v2.ListIntelligenceFindingRevisionsRequest, $root.google.storage.control.v2.ListIntelligenceFindingRevisionsResponse, request, callback);
+                        }, "name", { value: "ListIntelligenceFindingRevisions" });
+    
+                        /**
+                         * Calls ListIntelligenceFindingRevisions.
+                         * @function listIntelligenceFindingRevisions
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IListIntelligenceFindingRevisionsRequest} request ListIntelligenceFindingRevisionsRequest message or plain object
+                         * @returns {Promise<google.storage.control.v2.ListIntelligenceFindingRevisionsResponse>} Promise
+                         * @variation 2
+                         */
+    
                         return StorageControl;
                     })();
     
@@ -13990,6 +14155,8122 @@
                         return GetProjectIntelligenceConfigRequest;
                     })();
     
+                    v2.IntelligenceFinding = (function() {
+    
+                        /**
+                         * Properties of an IntelligenceFinding.
+                         * @memberof google.storage.control.v2
+                         * @interface IIntelligenceFinding
+                         * @property {string|null} [name] IntelligenceFinding name
+                         * @property {string|null} [description] IntelligenceFinding description
+                         * @property {google.storage.control.v2.FindingType|null} [type] IntelligenceFinding type
+                         * @property {google.storage.control.v2.FindingCategory|null} [category] IntelligenceFinding category
+                         * @property {google.storage.control.v2.FindingSeverity|null} [severity] IntelligenceFinding severity
+                         * @property {google.protobuf.ITimestamp|null} [createTime] IntelligenceFinding createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] IntelligenceFinding updateTime
+                         * @property {string|null} [targetResource] IntelligenceFinding targetResource
+                         * @property {Array.<string>|null} [associatedResources] IntelligenceFinding associatedResources
+                         * @property {google.type.IInterval|null} [observationPeriod] IntelligenceFinding observationPeriod
+                         * @property {google.storage.control.v2.IntelligenceFinding.IColdlineAndArchivalStorageOperationsSpike|null} [coldlineAndArchivalStorageOperationsSpike] IntelligenceFinding coldlineAndArchivalStorageOperationsSpike
+                         * @property {google.storage.control.v2.IntelligenceFinding.IThrottledRequestSpike|null} [throttledRequestsSpike] IntelligenceFinding throttledRequestsSpike
+                         * @property {google.storage.control.v2.IntelligenceFinding.ICrossRegionEgressSpike|null} [crossRegionEgressSpike] IntelligenceFinding crossRegionEgressSpike
+                         * @property {google.storage.control.v2.IntelligenceFinding.IStorageGrowthAboveTrend|null} [storageGrowthAboveTrend] IntelligenceFinding storageGrowthAboveTrend
+                         */
+    
+                        /**
+                         * Constructs a new IntelligenceFinding.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents an IntelligenceFinding.
+                         * @implements IIntelligenceFinding
+                         * @constructor
+                         * @param {google.storage.control.v2.IIntelligenceFinding=} [properties] Properties to set
+                         */
+                        function IntelligenceFinding(properties) {
+                            this.associatedResources = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * IntelligenceFinding name.
+                         * @member {string} name
+                         * @memberof google.storage.control.v2.IntelligenceFinding
+                         * @instance
+                         */
+                        IntelligenceFinding.prototype.name = "";
+    
+                        /**
+                         * IntelligenceFinding description.
+                         * @member {string} description
+                         * @memberof google.storage.control.v2.IntelligenceFinding
+                         * @instance
+                         */
+                        IntelligenceFinding.prototype.description = "";
+    
+                        /**
+                         * IntelligenceFinding type.
+                         * @member {google.storage.control.v2.FindingType} type
+                         * @memberof google.storage.control.v2.IntelligenceFinding
+                         * @instance
+                         */
+                        IntelligenceFinding.prototype.type = 0;
+    
+                        /**
+                         * IntelligenceFinding category.
+                         * @member {google.storage.control.v2.FindingCategory} category
+                         * @memberof google.storage.control.v2.IntelligenceFinding
+                         * @instance
+                         */
+                        IntelligenceFinding.prototype.category = 0;
+    
+                        /**
+                         * IntelligenceFinding severity.
+                         * @member {google.storage.control.v2.FindingSeverity} severity
+                         * @memberof google.storage.control.v2.IntelligenceFinding
+                         * @instance
+                         */
+                        IntelligenceFinding.prototype.severity = 0;
+    
+                        /**
+                         * IntelligenceFinding createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.storage.control.v2.IntelligenceFinding
+                         * @instance
+                         */
+                        IntelligenceFinding.prototype.createTime = null;
+    
+                        /**
+                         * IntelligenceFinding updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.storage.control.v2.IntelligenceFinding
+                         * @instance
+                         */
+                        IntelligenceFinding.prototype.updateTime = null;
+    
+                        /**
+                         * IntelligenceFinding targetResource.
+                         * @member {string} targetResource
+                         * @memberof google.storage.control.v2.IntelligenceFinding
+                         * @instance
+                         */
+                        IntelligenceFinding.prototype.targetResource = "";
+    
+                        /**
+                         * IntelligenceFinding associatedResources.
+                         * @member {Array.<string>} associatedResources
+                         * @memberof google.storage.control.v2.IntelligenceFinding
+                         * @instance
+                         */
+                        IntelligenceFinding.prototype.associatedResources = $util.emptyArray;
+    
+                        /**
+                         * IntelligenceFinding observationPeriod.
+                         * @member {google.type.IInterval|null|undefined} observationPeriod
+                         * @memberof google.storage.control.v2.IntelligenceFinding
+                         * @instance
+                         */
+                        IntelligenceFinding.prototype.observationPeriod = null;
+    
+                        /**
+                         * IntelligenceFinding coldlineAndArchivalStorageOperationsSpike.
+                         * @member {google.storage.control.v2.IntelligenceFinding.IColdlineAndArchivalStorageOperationsSpike|null|undefined} coldlineAndArchivalStorageOperationsSpike
+                         * @memberof google.storage.control.v2.IntelligenceFinding
+                         * @instance
+                         */
+                        IntelligenceFinding.prototype.coldlineAndArchivalStorageOperationsSpike = null;
+    
+                        /**
+                         * IntelligenceFinding throttledRequestsSpike.
+                         * @member {google.storage.control.v2.IntelligenceFinding.IThrottledRequestSpike|null|undefined} throttledRequestsSpike
+                         * @memberof google.storage.control.v2.IntelligenceFinding
+                         * @instance
+                         */
+                        IntelligenceFinding.prototype.throttledRequestsSpike = null;
+    
+                        /**
+                         * IntelligenceFinding crossRegionEgressSpike.
+                         * @member {google.storage.control.v2.IntelligenceFinding.ICrossRegionEgressSpike|null|undefined} crossRegionEgressSpike
+                         * @memberof google.storage.control.v2.IntelligenceFinding
+                         * @instance
+                         */
+                        IntelligenceFinding.prototype.crossRegionEgressSpike = null;
+    
+                        /**
+                         * IntelligenceFinding storageGrowthAboveTrend.
+                         * @member {google.storage.control.v2.IntelligenceFinding.IStorageGrowthAboveTrend|null|undefined} storageGrowthAboveTrend
+                         * @memberof google.storage.control.v2.IntelligenceFinding
+                         * @instance
+                         */
+                        IntelligenceFinding.prototype.storageGrowthAboveTrend = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * IntelligenceFinding intelligenceFindingDetails.
+                         * @member {"coldlineAndArchivalStorageOperationsSpike"|"throttledRequestsSpike"|"crossRegionEgressSpike"|"storageGrowthAboveTrend"|undefined} intelligenceFindingDetails
+                         * @memberof google.storage.control.v2.IntelligenceFinding
+                         * @instance
+                         */
+                        Object.defineProperty(IntelligenceFinding.prototype, "intelligenceFindingDetails", {
+                            get: $util.oneOfGetter($oneOfFields = ["coldlineAndArchivalStorageOperationsSpike", "throttledRequestsSpike", "crossRegionEgressSpike", "storageGrowthAboveTrend"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new IntelligenceFinding instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.IntelligenceFinding
+                         * @static
+                         * @param {google.storage.control.v2.IIntelligenceFinding=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.IntelligenceFinding} IntelligenceFinding instance
+                         */
+                        IntelligenceFinding.create = function create(properties) {
+                            return new IntelligenceFinding(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified IntelligenceFinding message. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.IntelligenceFinding
+                         * @static
+                         * @param {google.storage.control.v2.IIntelligenceFinding} message IntelligenceFinding message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        IntelligenceFinding.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.type);
+                            if (message.category != null && Object.hasOwnProperty.call(message, "category"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.category);
+                            if (message.severity != null && Object.hasOwnProperty.call(message, "severity"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.severity);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.targetResource != null && Object.hasOwnProperty.call(message, "targetResource"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.targetResource);
+                            if (message.associatedResources != null && message.associatedResources.length)
+                                for (var i = 0; i < message.associatedResources.length; ++i)
+                                    writer.uint32(/* id 9, wireType 2 =*/74).string(message.associatedResources[i]);
+                            if (message.observationPeriod != null && Object.hasOwnProperty.call(message, "observationPeriod"))
+                                $root.google.type.Interval.encode(message.observationPeriod, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.coldlineAndArchivalStorageOperationsSpike != null && Object.hasOwnProperty.call(message, "coldlineAndArchivalStorageOperationsSpike"))
+                                $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.encode(message.coldlineAndArchivalStorageOperationsSpike, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.throttledRequestsSpike != null && Object.hasOwnProperty.call(message, "throttledRequestsSpike"))
+                                $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.encode(message.throttledRequestsSpike, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                            if (message.crossRegionEgressSpike != null && Object.hasOwnProperty.call(message, "crossRegionEgressSpike"))
+                                $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.encode(message.crossRegionEgressSpike, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.storageGrowthAboveTrend != null && Object.hasOwnProperty.call(message, "storageGrowthAboveTrend"))
+                                $root.google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.encode(message.storageGrowthAboveTrend, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified IntelligenceFinding message, length delimited. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.IntelligenceFinding
+                         * @static
+                         * @param {google.storage.control.v2.IIntelligenceFinding} message IntelligenceFinding message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        IntelligenceFinding.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an IntelligenceFinding message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.IntelligenceFinding
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.IntelligenceFinding} IntelligenceFinding
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        IntelligenceFinding.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.IntelligenceFinding();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.type = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.category = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.severity = reader.int32();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 7: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 8: {
+                                        message.targetResource = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        if (!(message.associatedResources && message.associatedResources.length))
+                                            message.associatedResources = [];
+                                        message.associatedResources.push(reader.string());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.observationPeriod = $root.google.type.Interval.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 11: {
+                                        message.coldlineAndArchivalStorageOperationsSpike = $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 12: {
+                                        message.throttledRequestsSpike = $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 13: {
+                                        message.crossRegionEgressSpike = $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 14: {
+                                        message.storageGrowthAboveTrend = $root.google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an IntelligenceFinding message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.IntelligenceFinding
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.IntelligenceFinding} IntelligenceFinding
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        IntelligenceFinding.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an IntelligenceFinding message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.IntelligenceFinding
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        IntelligenceFinding.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.category != null && message.hasOwnProperty("category"))
+                                switch (message.category) {
+                                default:
+                                    return "category: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.severity != null && message.hasOwnProperty("severity"))
+                                switch (message.severity) {
+                                default:
+                                    return "severity: enum value expected";
+                                case 0:
+                                case 1:
+                                    break;
+                                }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime, long + 1);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime, long + 1);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.targetResource != null && message.hasOwnProperty("targetResource"))
+                                if (!$util.isString(message.targetResource))
+                                    return "targetResource: string expected";
+                            if (message.associatedResources != null && message.hasOwnProperty("associatedResources")) {
+                                if (!Array.isArray(message.associatedResources))
+                                    return "associatedResources: array expected";
+                                for (var i = 0; i < message.associatedResources.length; ++i)
+                                    if (!$util.isString(message.associatedResources[i]))
+                                        return "associatedResources: string[] expected";
+                            }
+                            if (message.observationPeriod != null && message.hasOwnProperty("observationPeriod")) {
+                                var error = $root.google.type.Interval.verify(message.observationPeriod, long + 1);
+                                if (error)
+                                    return "observationPeriod." + error;
+                            }
+                            if (message.coldlineAndArchivalStorageOperationsSpike != null && message.hasOwnProperty("coldlineAndArchivalStorageOperationsSpike")) {
+                                properties.intelligenceFindingDetails = 1;
+                                {
+                                    var error = $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.verify(message.coldlineAndArchivalStorageOperationsSpike, long + 1);
+                                    if (error)
+                                        return "coldlineAndArchivalStorageOperationsSpike." + error;
+                                }
+                            }
+                            if (message.throttledRequestsSpike != null && message.hasOwnProperty("throttledRequestsSpike")) {
+                                if (properties.intelligenceFindingDetails === 1)
+                                    return "intelligenceFindingDetails: multiple values";
+                                properties.intelligenceFindingDetails = 1;
+                                {
+                                    var error = $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.verify(message.throttledRequestsSpike, long + 1);
+                                    if (error)
+                                        return "throttledRequestsSpike." + error;
+                                }
+                            }
+                            if (message.crossRegionEgressSpike != null && message.hasOwnProperty("crossRegionEgressSpike")) {
+                                if (properties.intelligenceFindingDetails === 1)
+                                    return "intelligenceFindingDetails: multiple values";
+                                properties.intelligenceFindingDetails = 1;
+                                {
+                                    var error = $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.verify(message.crossRegionEgressSpike, long + 1);
+                                    if (error)
+                                        return "crossRegionEgressSpike." + error;
+                                }
+                            }
+                            if (message.storageGrowthAboveTrend != null && message.hasOwnProperty("storageGrowthAboveTrend")) {
+                                if (properties.intelligenceFindingDetails === 1)
+                                    return "intelligenceFindingDetails: multiple values";
+                                properties.intelligenceFindingDetails = 1;
+                                {
+                                    var error = $root.google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.verify(message.storageGrowthAboveTrend, long + 1);
+                                    if (error)
+                                        return "storageGrowthAboveTrend." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an IntelligenceFinding message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.IntelligenceFinding
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.IntelligenceFinding} IntelligenceFinding
+                         */
+                        IntelligenceFinding.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.storage.control.v2.IntelligenceFinding)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.storage.control.v2.IntelligenceFinding();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
+                            case "FINDING_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "FINDING_TYPE_COLDLINE_AND_ARCHIVAL_STORAGE_OPERATIONS_SPIKE":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "FINDING_TYPE_THROTTLED_REQUEST_SPIKE":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            case "FINDING_TYPE_CROSS_REGION_EGRESS_SPIKE":
+                            case 3:
+                                message.type = 3;
+                                break;
+                            case "FINDING_TYPE_STORAGE_GROWTH_ABOVE_TREND":
+                            case 4:
+                                message.type = 4;
+                                break;
+                            }
+                            switch (object.category) {
+                            default:
+                                if (typeof object.category === "number") {
+                                    message.category = object.category;
+                                    break;
+                                }
+                                break;
+                            case "FINDING_CATEGORY_UNSPECIFIED":
+                            case 0:
+                                message.category = 0;
+                                break;
+                            case "FINDING_CATEGORY_DATA_MANAGEMENT":
+                            case 1:
+                                message.category = 1;
+                                break;
+                            case "FINDING_CATEGORY_PERFORMANCE":
+                            case 2:
+                                message.category = 2;
+                                break;
+                            }
+                            switch (object.severity) {
+                            default:
+                                if (typeof object.severity === "number") {
+                                    message.severity = object.severity;
+                                    break;
+                                }
+                                break;
+                            case "FINDING_SEVERITY_UNSPECIFIED":
+                            case 0:
+                                message.severity = 0;
+                                break;
+                            case "FINDING_SEVERITY_CRITICAL":
+                            case 1:
+                                message.severity = 1;
+                                break;
+                            }
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.storage.control.v2.IntelligenceFinding.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime, long + 1);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.storage.control.v2.IntelligenceFinding.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime, long + 1);
+                            }
+                            if (object.targetResource != null)
+                                message.targetResource = String(object.targetResource);
+                            if (object.associatedResources) {
+                                if (!Array.isArray(object.associatedResources))
+                                    throw TypeError(".google.storage.control.v2.IntelligenceFinding.associatedResources: array expected");
+                                message.associatedResources = [];
+                                for (var i = 0; i < object.associatedResources.length; ++i)
+                                    message.associatedResources[i] = String(object.associatedResources[i]);
+                            }
+                            if (object.observationPeriod != null) {
+                                if (typeof object.observationPeriod !== "object")
+                                    throw TypeError(".google.storage.control.v2.IntelligenceFinding.observationPeriod: object expected");
+                                message.observationPeriod = $root.google.type.Interval.fromObject(object.observationPeriod, long + 1);
+                            }
+                            if (object.coldlineAndArchivalStorageOperationsSpike != null) {
+                                if (typeof object.coldlineAndArchivalStorageOperationsSpike !== "object")
+                                    throw TypeError(".google.storage.control.v2.IntelligenceFinding.coldlineAndArchivalStorageOperationsSpike: object expected");
+                                message.coldlineAndArchivalStorageOperationsSpike = $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.fromObject(object.coldlineAndArchivalStorageOperationsSpike, long + 1);
+                            }
+                            if (object.throttledRequestsSpike != null) {
+                                if (typeof object.throttledRequestsSpike !== "object")
+                                    throw TypeError(".google.storage.control.v2.IntelligenceFinding.throttledRequestsSpike: object expected");
+                                message.throttledRequestsSpike = $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.fromObject(object.throttledRequestsSpike, long + 1);
+                            }
+                            if (object.crossRegionEgressSpike != null) {
+                                if (typeof object.crossRegionEgressSpike !== "object")
+                                    throw TypeError(".google.storage.control.v2.IntelligenceFinding.crossRegionEgressSpike: object expected");
+                                message.crossRegionEgressSpike = $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.fromObject(object.crossRegionEgressSpike, long + 1);
+                            }
+                            if (object.storageGrowthAboveTrend != null) {
+                                if (typeof object.storageGrowthAboveTrend !== "object")
+                                    throw TypeError(".google.storage.control.v2.IntelligenceFinding.storageGrowthAboveTrend: object expected");
+                                message.storageGrowthAboveTrend = $root.google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.fromObject(object.storageGrowthAboveTrend, long + 1);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an IntelligenceFinding message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.IntelligenceFinding
+                         * @static
+                         * @param {google.storage.control.v2.IntelligenceFinding} message IntelligenceFinding
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        IntelligenceFinding.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.associatedResources = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.description = "";
+                                object.type = options.enums === String ? "FINDING_TYPE_UNSPECIFIED" : 0;
+                                object.category = options.enums === String ? "FINDING_CATEGORY_UNSPECIFIED" : 0;
+                                object.severity = options.enums === String ? "FINDING_SEVERITY_UNSPECIFIED" : 0;
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.targetResource = "";
+                                object.observationPeriod = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.storage.control.v2.FindingType[message.type] === undefined ? message.type : $root.google.storage.control.v2.FindingType[message.type] : message.type;
+                            if (message.category != null && message.hasOwnProperty("category"))
+                                object.category = options.enums === String ? $root.google.storage.control.v2.FindingCategory[message.category] === undefined ? message.category : $root.google.storage.control.v2.FindingCategory[message.category] : message.category;
+                            if (message.severity != null && message.hasOwnProperty("severity"))
+                                object.severity = options.enums === String ? $root.google.storage.control.v2.FindingSeverity[message.severity] === undefined ? message.severity : $root.google.storage.control.v2.FindingSeverity[message.severity] : message.severity;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.targetResource != null && message.hasOwnProperty("targetResource"))
+                                object.targetResource = message.targetResource;
+                            if (message.associatedResources && message.associatedResources.length) {
+                                object.associatedResources = [];
+                                for (var j = 0; j < message.associatedResources.length; ++j)
+                                    object.associatedResources[j] = message.associatedResources[j];
+                            }
+                            if (message.observationPeriod != null && message.hasOwnProperty("observationPeriod"))
+                                object.observationPeriod = $root.google.type.Interval.toObject(message.observationPeriod, options);
+                            if (message.coldlineAndArchivalStorageOperationsSpike != null && message.hasOwnProperty("coldlineAndArchivalStorageOperationsSpike")) {
+                                object.coldlineAndArchivalStorageOperationsSpike = $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.toObject(message.coldlineAndArchivalStorageOperationsSpike, options);
+                                if (options.oneofs)
+                                    object.intelligenceFindingDetails = "coldlineAndArchivalStorageOperationsSpike";
+                            }
+                            if (message.throttledRequestsSpike != null && message.hasOwnProperty("throttledRequestsSpike")) {
+                                object.throttledRequestsSpike = $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.toObject(message.throttledRequestsSpike, options);
+                                if (options.oneofs)
+                                    object.intelligenceFindingDetails = "throttledRequestsSpike";
+                            }
+                            if (message.crossRegionEgressSpike != null && message.hasOwnProperty("crossRegionEgressSpike")) {
+                                object.crossRegionEgressSpike = $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.toObject(message.crossRegionEgressSpike, options);
+                                if (options.oneofs)
+                                    object.intelligenceFindingDetails = "crossRegionEgressSpike";
+                            }
+                            if (message.storageGrowthAboveTrend != null && message.hasOwnProperty("storageGrowthAboveTrend")) {
+                                object.storageGrowthAboveTrend = $root.google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.toObject(message.storageGrowthAboveTrend, options);
+                                if (options.oneofs)
+                                    object.intelligenceFindingDetails = "storageGrowthAboveTrend";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this IntelligenceFinding to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.IntelligenceFinding
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        IntelligenceFinding.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for IntelligenceFinding
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.IntelligenceFinding
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        IntelligenceFinding.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.IntelligenceFinding";
+                        };
+    
+                        IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike = (function() {
+    
+                            /**
+                             * Properties of a ColdlineAndArchivalStorageOperationsSpike.
+                             * @memberof google.storage.control.v2.IntelligenceFinding
+                             * @interface IColdlineAndArchivalStorageOperationsSpike
+                             * @property {number|null} [percentageIncrease] ColdlineAndArchivalStorageOperationsSpike percentageIncrease
+                             * @property {number|Long|null} [totalOperationsCount] ColdlineAndArchivalStorageOperationsSpike totalOperationsCount
+                             * @property {Array.<google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.IBucketContribution>|null} [topBuckets] ColdlineAndArchivalStorageOperationsSpike topBuckets
+                             */
+    
+                            /**
+                             * Constructs a new ColdlineAndArchivalStorageOperationsSpike.
+                             * @memberof google.storage.control.v2.IntelligenceFinding
+                             * @classdesc Represents a ColdlineAndArchivalStorageOperationsSpike.
+                             * @implements IColdlineAndArchivalStorageOperationsSpike
+                             * @constructor
+                             * @param {google.storage.control.v2.IntelligenceFinding.IColdlineAndArchivalStorageOperationsSpike=} [properties] Properties to set
+                             */
+                            function ColdlineAndArchivalStorageOperationsSpike(properties) {
+                                this.topBuckets = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ColdlineAndArchivalStorageOperationsSpike percentageIncrease.
+                             * @member {number} percentageIncrease
+                             * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike
+                             * @instance
+                             */
+                            ColdlineAndArchivalStorageOperationsSpike.prototype.percentageIncrease = 0;
+    
+                            /**
+                             * ColdlineAndArchivalStorageOperationsSpike totalOperationsCount.
+                             * @member {number|Long} totalOperationsCount
+                             * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike
+                             * @instance
+                             */
+                            ColdlineAndArchivalStorageOperationsSpike.prototype.totalOperationsCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * ColdlineAndArchivalStorageOperationsSpike topBuckets.
+                             * @member {Array.<google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.IBucketContribution>} topBuckets
+                             * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike
+                             * @instance
+                             */
+                            ColdlineAndArchivalStorageOperationsSpike.prototype.topBuckets = $util.emptyArray;
+    
+                            /**
+                             * Creates a new ColdlineAndArchivalStorageOperationsSpike instance using the specified properties.
+                             * @function create
+                             * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike
+                             * @static
+                             * @param {google.storage.control.v2.IntelligenceFinding.IColdlineAndArchivalStorageOperationsSpike=} [properties] Properties to set
+                             * @returns {google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike} ColdlineAndArchivalStorageOperationsSpike instance
+                             */
+                            ColdlineAndArchivalStorageOperationsSpike.create = function create(properties) {
+                                return new ColdlineAndArchivalStorageOperationsSpike(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ColdlineAndArchivalStorageOperationsSpike message. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike
+                             * @static
+                             * @param {google.storage.control.v2.IntelligenceFinding.IColdlineAndArchivalStorageOperationsSpike} message ColdlineAndArchivalStorageOperationsSpike message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ColdlineAndArchivalStorageOperationsSpike.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.percentageIncrease != null && Object.hasOwnProperty.call(message, "percentageIncrease"))
+                                    writer.uint32(/* id 1, wireType 1 =*/9).double(message.percentageIncrease);
+                                if (message.totalOperationsCount != null && Object.hasOwnProperty.call(message, "totalOperationsCount"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int64(message.totalOperationsCount);
+                                if (message.topBuckets != null && message.topBuckets.length)
+                                    for (var i = 0; i < message.topBuckets.length; ++i)
+                                        $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.encode(message.topBuckets[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ColdlineAndArchivalStorageOperationsSpike message, length delimited. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike
+                             * @static
+                             * @param {google.storage.control.v2.IntelligenceFinding.IColdlineAndArchivalStorageOperationsSpike} message ColdlineAndArchivalStorageOperationsSpike message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ColdlineAndArchivalStorageOperationsSpike.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ColdlineAndArchivalStorageOperationsSpike message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike} ColdlineAndArchivalStorageOperationsSpike
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ColdlineAndArchivalStorageOperationsSpike.decode = function decode(reader, length, error, long) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.percentageIncrease = reader.double();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.totalOperationsCount = reader.int64();
+                                            break;
+                                        }
+                                    case 3: {
+                                            if (!(message.topBuckets && message.topBuckets.length))
+                                                message.topBuckets = [];
+                                            message.topBuckets.push($root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.decode(reader, reader.uint32(), undefined, long + 1));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7, long);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ColdlineAndArchivalStorageOperationsSpike message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike} ColdlineAndArchivalStorageOperationsSpike
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ColdlineAndArchivalStorageOperationsSpike.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ColdlineAndArchivalStorageOperationsSpike message.
+                             * @function verify
+                             * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ColdlineAndArchivalStorageOperationsSpike.verify = function verify(message, long) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
+                                if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                    if (typeof message.percentageIncrease !== "number")
+                                        return "percentageIncrease: number expected";
+                                if (message.totalOperationsCount != null && message.hasOwnProperty("totalOperationsCount"))
+                                    if (!$util.isInteger(message.totalOperationsCount) && !(message.totalOperationsCount && $util.isInteger(message.totalOperationsCount.low) && $util.isInteger(message.totalOperationsCount.high)))
+                                        return "totalOperationsCount: integer|Long expected";
+                                if (message.topBuckets != null && message.hasOwnProperty("topBuckets")) {
+                                    if (!Array.isArray(message.topBuckets))
+                                        return "topBuckets: array expected";
+                                    for (var i = 0; i < message.topBuckets.length; ++i) {
+                                        var error = $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.verify(message.topBuckets[i], long + 1);
+                                        if (error)
+                                            return "topBuckets." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ColdlineAndArchivalStorageOperationsSpike message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike} ColdlineAndArchivalStorageOperationsSpike
+                             */
+                            ColdlineAndArchivalStorageOperationsSpike.fromObject = function fromObject(object, long) {
+                                if (object instanceof $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike)
+                                    return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var message = new $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike();
+                                if (object.percentageIncrease != null)
+                                    message.percentageIncrease = Number(object.percentageIncrease);
+                                if (object.totalOperationsCount != null)
+                                    if ($util.Long)
+                                        (message.totalOperationsCount = $util.Long.fromValue(object.totalOperationsCount)).unsigned = false;
+                                    else if (typeof object.totalOperationsCount === "string")
+                                        message.totalOperationsCount = parseInt(object.totalOperationsCount, 10);
+                                    else if (typeof object.totalOperationsCount === "number")
+                                        message.totalOperationsCount = object.totalOperationsCount;
+                                    else if (typeof object.totalOperationsCount === "object")
+                                        message.totalOperationsCount = new $util.LongBits(object.totalOperationsCount.low >>> 0, object.totalOperationsCount.high >>> 0).toNumber();
+                                if (object.topBuckets) {
+                                    if (!Array.isArray(object.topBuckets))
+                                        throw TypeError(".google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.topBuckets: array expected");
+                                    message.topBuckets = [];
+                                    for (var i = 0; i < object.topBuckets.length; ++i) {
+                                        if (typeof object.topBuckets[i] !== "object")
+                                            throw TypeError(".google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.topBuckets: object expected");
+                                        message.topBuckets[i] = $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.fromObject(object.topBuckets[i], long + 1);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ColdlineAndArchivalStorageOperationsSpike message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike
+                             * @static
+                             * @param {google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike} message ColdlineAndArchivalStorageOperationsSpike
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ColdlineAndArchivalStorageOperationsSpike.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.topBuckets = [];
+                                if (options.defaults) {
+                                    object.percentageIncrease = 0;
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.totalOperationsCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.totalOperationsCount = options.longs === String ? "0" : 0;
+                                }
+                                if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                    object.percentageIncrease = options.json && !isFinite(message.percentageIncrease) ? String(message.percentageIncrease) : message.percentageIncrease;
+                                if (message.totalOperationsCount != null && message.hasOwnProperty("totalOperationsCount"))
+                                    if (typeof message.totalOperationsCount === "number")
+                                        object.totalOperationsCount = options.longs === String ? String(message.totalOperationsCount) : message.totalOperationsCount;
+                                    else
+                                        object.totalOperationsCount = options.longs === String ? $util.Long.prototype.toString.call(message.totalOperationsCount) : options.longs === Number ? new $util.LongBits(message.totalOperationsCount.low >>> 0, message.totalOperationsCount.high >>> 0).toNumber() : message.totalOperationsCount;
+                                if (message.topBuckets && message.topBuckets.length) {
+                                    object.topBuckets = [];
+                                    for (var j = 0; j < message.topBuckets.length; ++j)
+                                        object.topBuckets[j] = $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.toObject(message.topBuckets[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ColdlineAndArchivalStorageOperationsSpike to JSON.
+                             * @function toJSON
+                             * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ColdlineAndArchivalStorageOperationsSpike.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ColdlineAndArchivalStorageOperationsSpike
+                             * @function getTypeUrl
+                             * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ColdlineAndArchivalStorageOperationsSpike.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike";
+                            };
+    
+                            ColdlineAndArchivalStorageOperationsSpike.BucketContribution = (function() {
+    
+                                /**
+                                 * Properties of a BucketContribution.
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike
+                                 * @interface IBucketContribution
+                                 * @property {string|null} [bucket] BucketContribution bucket
+                                 * @property {number|null} [percentageIncrease] BucketContribution percentageIncrease
+                                 * @property {number|Long|null} [totalOperationsCount] BucketContribution totalOperationsCount
+                                 * @property {google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.IContribution|null} [contribution] BucketContribution contribution
+                                 * @property {google.rpc.IStatus|null} [error] BucketContribution error
+                                 */
+    
+                                /**
+                                 * Constructs a new BucketContribution.
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike
+                                 * @classdesc Represents a BucketContribution.
+                                 * @implements IBucketContribution
+                                 * @constructor
+                                 * @param {google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.IBucketContribution=} [properties] Properties to set
+                                 */
+                                function BucketContribution(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * BucketContribution bucket.
+                                 * @member {string} bucket
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution
+                                 * @instance
+                                 */
+                                BucketContribution.prototype.bucket = "";
+    
+                                /**
+                                 * BucketContribution percentageIncrease.
+                                 * @member {number} percentageIncrease
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution
+                                 * @instance
+                                 */
+                                BucketContribution.prototype.percentageIncrease = 0;
+    
+                                /**
+                                 * BucketContribution totalOperationsCount.
+                                 * @member {number|Long} totalOperationsCount
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution
+                                 * @instance
+                                 */
+                                BucketContribution.prototype.totalOperationsCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                                /**
+                                 * BucketContribution contribution.
+                                 * @member {google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.IContribution|null|undefined} contribution
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution
+                                 * @instance
+                                 */
+                                BucketContribution.prototype.contribution = null;
+    
+                                /**
+                                 * BucketContribution error.
+                                 * @member {google.rpc.IStatus|null|undefined} error
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution
+                                 * @instance
+                                 */
+                                BucketContribution.prototype.error = null;
+    
+                                // OneOf field names bound to virtual getters and setters
+                                var $oneOfFields;
+    
+                                /**
+                                 * BucketContribution details.
+                                 * @member {"contribution"|"error"|undefined} details
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution
+                                 * @instance
+                                 */
+                                Object.defineProperty(BucketContribution.prototype, "details", {
+                                    get: $util.oneOfGetter($oneOfFields = ["contribution", "error"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * Creates a new BucketContribution instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution
+                                 * @static
+                                 * @param {google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.IBucketContribution=} [properties] Properties to set
+                                 * @returns {google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution} BucketContribution instance
+                                 */
+                                BucketContribution.create = function create(properties) {
+                                    return new BucketContribution(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified BucketContribution message. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution
+                                 * @static
+                                 * @param {google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.IBucketContribution} message BucketContribution message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                BucketContribution.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.bucket);
+                                    if (message.percentageIncrease != null && Object.hasOwnProperty.call(message, "percentageIncrease"))
+                                        writer.uint32(/* id 2, wireType 1 =*/17).double(message.percentageIncrease);
+                                    if (message.totalOperationsCount != null && Object.hasOwnProperty.call(message, "totalOperationsCount"))
+                                        writer.uint32(/* id 3, wireType 0 =*/24).int64(message.totalOperationsCount);
+                                    if (message.contribution != null && Object.hasOwnProperty.call(message, "contribution"))
+                                        $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.encode(message.contribution, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                    if (message.error != null && Object.hasOwnProperty.call(message, "error"))
+                                        $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified BucketContribution message, length delimited. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution
+                                 * @static
+                                 * @param {google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.IBucketContribution} message BucketContribution message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                BucketContribution.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a BucketContribution message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution} BucketContribution
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                BucketContribution.decode = function decode(reader, length, error, long) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $Reader.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.bucket = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.percentageIncrease = reader.double();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.totalOperationsCount = reader.int64();
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.contribution = $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.decode(reader, reader.uint32(), undefined, long + 1);
+                                                break;
+                                            }
+                                        case 5: {
+                                                message.error = $root.google.rpc.Status.decode(reader, reader.uint32(), undefined, long + 1);
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7, long);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a BucketContribution message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution} BucketContribution
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                BucketContribution.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a BucketContribution message.
+                                 * @function verify
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                BucketContribution.verify = function verify(message, long) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        return "maximum nesting depth exceeded";
+                                    var properties = {};
+                                    if (message.bucket != null && message.hasOwnProperty("bucket"))
+                                        if (!$util.isString(message.bucket))
+                                            return "bucket: string expected";
+                                    if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                        if (typeof message.percentageIncrease !== "number")
+                                            return "percentageIncrease: number expected";
+                                    if (message.totalOperationsCount != null && message.hasOwnProperty("totalOperationsCount"))
+                                        if (!$util.isInteger(message.totalOperationsCount) && !(message.totalOperationsCount && $util.isInteger(message.totalOperationsCount.low) && $util.isInteger(message.totalOperationsCount.high)))
+                                            return "totalOperationsCount: integer|Long expected";
+                                    if (message.contribution != null && message.hasOwnProperty("contribution")) {
+                                        properties.details = 1;
+                                        {
+                                            var error = $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.verify(message.contribution, long + 1);
+                                            if (error)
+                                                return "contribution." + error;
+                                        }
+                                    }
+                                    if (message.error != null && message.hasOwnProperty("error")) {
+                                        if (properties.details === 1)
+                                            return "details: multiple values";
+                                        properties.details = 1;
+                                        {
+                                            var error = $root.google.rpc.Status.verify(message.error, long + 1);
+                                            if (error)
+                                                return "error." + error;
+                                        }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a BucketContribution message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution} BucketContribution
+                                 */
+                                BucketContribution.fromObject = function fromObject(object, long) {
+                                    if (object instanceof $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution)
+                                        return object;
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
+                                    var message = new $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution();
+                                    if (object.bucket != null)
+                                        message.bucket = String(object.bucket);
+                                    if (object.percentageIncrease != null)
+                                        message.percentageIncrease = Number(object.percentageIncrease);
+                                    if (object.totalOperationsCount != null)
+                                        if ($util.Long)
+                                            (message.totalOperationsCount = $util.Long.fromValue(object.totalOperationsCount)).unsigned = false;
+                                        else if (typeof object.totalOperationsCount === "string")
+                                            message.totalOperationsCount = parseInt(object.totalOperationsCount, 10);
+                                        else if (typeof object.totalOperationsCount === "number")
+                                            message.totalOperationsCount = object.totalOperationsCount;
+                                        else if (typeof object.totalOperationsCount === "object")
+                                            message.totalOperationsCount = new $util.LongBits(object.totalOperationsCount.low >>> 0, object.totalOperationsCount.high >>> 0).toNumber();
+                                    if (object.contribution != null) {
+                                        if (typeof object.contribution !== "object")
+                                            throw TypeError(".google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.contribution: object expected");
+                                        message.contribution = $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.fromObject(object.contribution, long + 1);
+                                    }
+                                    if (object.error != null) {
+                                        if (typeof object.error !== "object")
+                                            throw TypeError(".google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.error: object expected");
+                                        message.error = $root.google.rpc.Status.fromObject(object.error, long + 1);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a BucketContribution message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution
+                                 * @static
+                                 * @param {google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution} message BucketContribution
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                BucketContribution.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.bucket = "";
+                                        object.percentageIncrease = 0;
+                                        if ($util.Long) {
+                                            var long = new $util.Long(0, 0, false);
+                                            object.totalOperationsCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                        } else
+                                            object.totalOperationsCount = options.longs === String ? "0" : 0;
+                                    }
+                                    if (message.bucket != null && message.hasOwnProperty("bucket"))
+                                        object.bucket = message.bucket;
+                                    if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                        object.percentageIncrease = options.json && !isFinite(message.percentageIncrease) ? String(message.percentageIncrease) : message.percentageIncrease;
+                                    if (message.totalOperationsCount != null && message.hasOwnProperty("totalOperationsCount"))
+                                        if (typeof message.totalOperationsCount === "number")
+                                            object.totalOperationsCount = options.longs === String ? String(message.totalOperationsCount) : message.totalOperationsCount;
+                                        else
+                                            object.totalOperationsCount = options.longs === String ? $util.Long.prototype.toString.call(message.totalOperationsCount) : options.longs === Number ? new $util.LongBits(message.totalOperationsCount.low >>> 0, message.totalOperationsCount.high >>> 0).toNumber() : message.totalOperationsCount;
+                                    if (message.contribution != null && message.hasOwnProperty("contribution")) {
+                                        object.contribution = $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.toObject(message.contribution, options);
+                                        if (options.oneofs)
+                                            object.details = "contribution";
+                                    }
+                                    if (message.error != null && message.hasOwnProperty("error")) {
+                                        object.error = $root.google.rpc.Status.toObject(message.error, options);
+                                        if (options.oneofs)
+                                            object.details = "error";
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this BucketContribution to JSON.
+                                 * @function toJSON
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                BucketContribution.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for BucketContribution
+                                 * @function getTypeUrl
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                BucketContribution.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution";
+                                };
+    
+                                BucketContribution.Contribution = (function() {
+    
+                                    /**
+                                     * Properties of a Contribution.
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution
+                                     * @interface IContribution
+                                     * @property {Array.<google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.IPrefixContribution>|null} [topPrefixes] Contribution topPrefixes
+                                     */
+    
+                                    /**
+                                     * Constructs a new Contribution.
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution
+                                     * @classdesc Represents a Contribution.
+                                     * @implements IContribution
+                                     * @constructor
+                                     * @param {google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.IContribution=} [properties] Properties to set
+                                     */
+                                    function Contribution(properties) {
+                                        this.topPrefixes = [];
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * Contribution topPrefixes.
+                                     * @member {Array.<google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.IPrefixContribution>} topPrefixes
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution
+                                     * @instance
+                                     */
+                                    Contribution.prototype.topPrefixes = $util.emptyArray;
+    
+                                    /**
+                                     * Creates a new Contribution instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution
+                                     * @static
+                                     * @param {google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.IContribution=} [properties] Properties to set
+                                     * @returns {google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution} Contribution instance
+                                     */
+                                    Contribution.create = function create(properties) {
+                                        return new Contribution(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Contribution message. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution
+                                     * @static
+                                     * @param {google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.IContribution} message Contribution message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Contribution.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.topPrefixes != null && message.topPrefixes.length)
+                                            for (var i = 0; i < message.topPrefixes.length; ++i)
+                                                $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution.encode(message.topPrefixes[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Contribution message, length delimited. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution
+                                     * @static
+                                     * @param {google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.IContribution} message Contribution message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Contribution.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a Contribution message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution} Contribution
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Contribution.decode = function decode(reader, length, error, long) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        if (long === undefined)
+                                            long = 0;
+                                        if (long > $Reader.recursionLimit)
+                                            throw Error("maximum nesting depth exceeded");
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            if (tag === error)
+                                                break;
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    if (!(message.topPrefixes && message.topPrefixes.length))
+                                                        message.topPrefixes = [];
+                                                    message.topPrefixes.push($root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution.decode(reader, reader.uint32(), undefined, long + 1));
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7, long);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a Contribution message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution} Contribution
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Contribution.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a Contribution message.
+                                     * @function verify
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    Contribution.verify = function verify(message, long) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (long === undefined)
+                                            long = 0;
+                                        if (long > $util.recursionLimit)
+                                            return "maximum nesting depth exceeded";
+                                        if (message.topPrefixes != null && message.hasOwnProperty("topPrefixes")) {
+                                            if (!Array.isArray(message.topPrefixes))
+                                                return "topPrefixes: array expected";
+                                            for (var i = 0; i < message.topPrefixes.length; ++i) {
+                                                var error = $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution.verify(message.topPrefixes[i], long + 1);
+                                                if (error)
+                                                    return "topPrefixes." + error;
+                                            }
+                                        }
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a Contribution message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution} Contribution
+                                     */
+                                    Contribution.fromObject = function fromObject(object, long) {
+                                        if (object instanceof $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution)
+                                            return object;
+                                        if (long === undefined)
+                                            long = 0;
+                                        if (long > $util.recursionLimit)
+                                            throw Error("maximum nesting depth exceeded");
+                                        var message = new $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution();
+                                        if (object.topPrefixes) {
+                                            if (!Array.isArray(object.topPrefixes))
+                                                throw TypeError(".google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.topPrefixes: array expected");
+                                            message.topPrefixes = [];
+                                            for (var i = 0; i < object.topPrefixes.length; ++i) {
+                                                if (typeof object.topPrefixes[i] !== "object")
+                                                    throw TypeError(".google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.topPrefixes: object expected");
+                                                message.topPrefixes[i] = $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution.fromObject(object.topPrefixes[i], long + 1);
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a Contribution message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution
+                                     * @static
+                                     * @param {google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution} message Contribution
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    Contribution.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.arrays || options.defaults)
+                                            object.topPrefixes = [];
+                                        if (message.topPrefixes && message.topPrefixes.length) {
+                                            object.topPrefixes = [];
+                                            for (var j = 0; j < message.topPrefixes.length; ++j)
+                                                object.topPrefixes[j] = $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution.toObject(message.topPrefixes[j], options);
+                                        }
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this Contribution to JSON.
+                                     * @function toJSON
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    Contribution.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for Contribution
+                                     * @function getTypeUrl
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    Contribution.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution";
+                                    };
+    
+                                    Contribution.PrefixContribution = (function() {
+    
+                                        /**
+                                         * Properties of a PrefixContribution.
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution
+                                         * @interface IPrefixContribution
+                                         * @property {string|null} [prefix] PrefixContribution prefix
+                                         * @property {number|null} [percentageIncrease] PrefixContribution percentageIncrease
+                                         * @property {number|Long|null} [totalOperationsCount] PrefixContribution totalOperationsCount
+                                         */
+    
+                                        /**
+                                         * Constructs a new PrefixContribution.
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution
+                                         * @classdesc Represents a PrefixContribution.
+                                         * @implements IPrefixContribution
+                                         * @constructor
+                                         * @param {google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.IPrefixContribution=} [properties] Properties to set
+                                         */
+                                        function PrefixContribution(properties) {
+                                            if (properties)
+                                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                                        this[keys[i]] = properties[keys[i]];
+                                        }
+    
+                                        /**
+                                         * PrefixContribution prefix.
+                                         * @member {string} prefix
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @instance
+                                         */
+                                        PrefixContribution.prototype.prefix = "";
+    
+                                        /**
+                                         * PrefixContribution percentageIncrease.
+                                         * @member {number} percentageIncrease
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @instance
+                                         */
+                                        PrefixContribution.prototype.percentageIncrease = 0;
+    
+                                        /**
+                                         * PrefixContribution totalOperationsCount.
+                                         * @member {number|Long} totalOperationsCount
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @instance
+                                         */
+                                        PrefixContribution.prototype.totalOperationsCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                                        /**
+                                         * Creates a new PrefixContribution instance using the specified properties.
+                                         * @function create
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @static
+                                         * @param {google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.IPrefixContribution=} [properties] Properties to set
+                                         * @returns {google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution} PrefixContribution instance
+                                         */
+                                        PrefixContribution.create = function create(properties) {
+                                            return new PrefixContribution(properties);
+                                        };
+    
+                                        /**
+                                         * Encodes the specified PrefixContribution message. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution.verify|verify} messages.
+                                         * @function encode
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @static
+                                         * @param {google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.IPrefixContribution} message PrefixContribution message or plain object to encode
+                                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                                         * @returns {$protobuf.Writer} Writer
+                                         */
+                                        PrefixContribution.encode = function encode(message, writer) {
+                                            if (!writer)
+                                                writer = $Writer.create();
+                                            if (message.prefix != null && Object.hasOwnProperty.call(message, "prefix"))
+                                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.prefix);
+                                            if (message.percentageIncrease != null && Object.hasOwnProperty.call(message, "percentageIncrease"))
+                                                writer.uint32(/* id 2, wireType 1 =*/17).double(message.percentageIncrease);
+                                            if (message.totalOperationsCount != null && Object.hasOwnProperty.call(message, "totalOperationsCount"))
+                                                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.totalOperationsCount);
+                                            return writer;
+                                        };
+    
+                                        /**
+                                         * Encodes the specified PrefixContribution message, length delimited. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution.verify|verify} messages.
+                                         * @function encodeDelimited
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @static
+                                         * @param {google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.IPrefixContribution} message PrefixContribution message or plain object to encode
+                                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                                         * @returns {$protobuf.Writer} Writer
+                                         */
+                                        PrefixContribution.encodeDelimited = function encodeDelimited(message, writer) {
+                                            return this.encode(message, writer).ldelim();
+                                        };
+    
+                                        /**
+                                         * Decodes a PrefixContribution message from the specified reader or buffer.
+                                         * @function decode
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @static
+                                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                         * @param {number} [length] Message length if known beforehand
+                                         * @returns {google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution} PrefixContribution
+                                         * @throws {Error} If the payload is not a reader or valid buffer
+                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                         */
+                                        PrefixContribution.decode = function decode(reader, length, error, long) {
+                                            if (!(reader instanceof $Reader))
+                                                reader = $Reader.create(reader);
+                                            if (long === undefined)
+                                                long = 0;
+                                            if (long > $Reader.recursionLimit)
+                                                throw Error("maximum nesting depth exceeded");
+                                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution();
+                                            while (reader.pos < end) {
+                                                var tag = reader.uint32();
+                                                if (tag === error)
+                                                    break;
+                                                switch (tag >>> 3) {
+                                                case 1: {
+                                                        message.prefix = reader.string();
+                                                        break;
+                                                    }
+                                                case 2: {
+                                                        message.percentageIncrease = reader.double();
+                                                        break;
+                                                    }
+                                                case 3: {
+                                                        message.totalOperationsCount = reader.int64();
+                                                        break;
+                                                    }
+                                                default:
+                                                    reader.skipType(tag & 7, long);
+                                                    break;
+                                                }
+                                            }
+                                            return message;
+                                        };
+    
+                                        /**
+                                         * Decodes a PrefixContribution message from the specified reader or buffer, length delimited.
+                                         * @function decodeDelimited
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @static
+                                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                         * @returns {google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution} PrefixContribution
+                                         * @throws {Error} If the payload is not a reader or valid buffer
+                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                         */
+                                        PrefixContribution.decodeDelimited = function decodeDelimited(reader) {
+                                            if (!(reader instanceof $Reader))
+                                                reader = new $Reader(reader);
+                                            return this.decode(reader, reader.uint32());
+                                        };
+    
+                                        /**
+                                         * Verifies a PrefixContribution message.
+                                         * @function verify
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @static
+                                         * @param {Object.<string,*>} message Plain object to verify
+                                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                         */
+                                        PrefixContribution.verify = function verify(message, long) {
+                                            if (typeof message !== "object" || message === null)
+                                                return "object expected";
+                                            if (long === undefined)
+                                                long = 0;
+                                            if (long > $util.recursionLimit)
+                                                return "maximum nesting depth exceeded";
+                                            if (message.prefix != null && message.hasOwnProperty("prefix"))
+                                                if (!$util.isString(message.prefix))
+                                                    return "prefix: string expected";
+                                            if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                                if (typeof message.percentageIncrease !== "number")
+                                                    return "percentageIncrease: number expected";
+                                            if (message.totalOperationsCount != null && message.hasOwnProperty("totalOperationsCount"))
+                                                if (!$util.isInteger(message.totalOperationsCount) && !(message.totalOperationsCount && $util.isInteger(message.totalOperationsCount.low) && $util.isInteger(message.totalOperationsCount.high)))
+                                                    return "totalOperationsCount: integer|Long expected";
+                                            return null;
+                                        };
+    
+                                        /**
+                                         * Creates a PrefixContribution message from a plain object. Also converts values to their respective internal types.
+                                         * @function fromObject
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @static
+                                         * @param {Object.<string,*>} object Plain object
+                                         * @returns {google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution} PrefixContribution
+                                         */
+                                        PrefixContribution.fromObject = function fromObject(object, long) {
+                                            if (object instanceof $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution)
+                                                return object;
+                                            if (long === undefined)
+                                                long = 0;
+                                            if (long > $util.recursionLimit)
+                                                throw Error("maximum nesting depth exceeded");
+                                            var message = new $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution();
+                                            if (object.prefix != null)
+                                                message.prefix = String(object.prefix);
+                                            if (object.percentageIncrease != null)
+                                                message.percentageIncrease = Number(object.percentageIncrease);
+                                            if (object.totalOperationsCount != null)
+                                                if ($util.Long)
+                                                    (message.totalOperationsCount = $util.Long.fromValue(object.totalOperationsCount)).unsigned = false;
+                                                else if (typeof object.totalOperationsCount === "string")
+                                                    message.totalOperationsCount = parseInt(object.totalOperationsCount, 10);
+                                                else if (typeof object.totalOperationsCount === "number")
+                                                    message.totalOperationsCount = object.totalOperationsCount;
+                                                else if (typeof object.totalOperationsCount === "object")
+                                                    message.totalOperationsCount = new $util.LongBits(object.totalOperationsCount.low >>> 0, object.totalOperationsCount.high >>> 0).toNumber();
+                                            return message;
+                                        };
+    
+                                        /**
+                                         * Creates a plain object from a PrefixContribution message. Also converts values to other types if specified.
+                                         * @function toObject
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @static
+                                         * @param {google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution} message PrefixContribution
+                                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                         * @returns {Object.<string,*>} Plain object
+                                         */
+                                        PrefixContribution.toObject = function toObject(message, options) {
+                                            if (!options)
+                                                options = {};
+                                            var object = {};
+                                            if (options.defaults) {
+                                                object.prefix = "";
+                                                object.percentageIncrease = 0;
+                                                if ($util.Long) {
+                                                    var long = new $util.Long(0, 0, false);
+                                                    object.totalOperationsCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                                } else
+                                                    object.totalOperationsCount = options.longs === String ? "0" : 0;
+                                            }
+                                            if (message.prefix != null && message.hasOwnProperty("prefix"))
+                                                object.prefix = message.prefix;
+                                            if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                                object.percentageIncrease = options.json && !isFinite(message.percentageIncrease) ? String(message.percentageIncrease) : message.percentageIncrease;
+                                            if (message.totalOperationsCount != null && message.hasOwnProperty("totalOperationsCount"))
+                                                if (typeof message.totalOperationsCount === "number")
+                                                    object.totalOperationsCount = options.longs === String ? String(message.totalOperationsCount) : message.totalOperationsCount;
+                                                else
+                                                    object.totalOperationsCount = options.longs === String ? $util.Long.prototype.toString.call(message.totalOperationsCount) : options.longs === Number ? new $util.LongBits(message.totalOperationsCount.low >>> 0, message.totalOperationsCount.high >>> 0).toNumber() : message.totalOperationsCount;
+                                            return object;
+                                        };
+    
+                                        /**
+                                         * Converts this PrefixContribution to JSON.
+                                         * @function toJSON
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @instance
+                                         * @returns {Object.<string,*>} JSON object
+                                         */
+                                        PrefixContribution.prototype.toJSON = function toJSON() {
+                                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                        };
+    
+                                        /**
+                                         * Gets the default type url for PrefixContribution
+                                         * @function getTypeUrl
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @static
+                                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                         * @returns {string} The default type url
+                                         */
+                                        PrefixContribution.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                            if (typeUrlPrefix === undefined) {
+                                                typeUrlPrefix = "type.googleapis.com";
+                                            }
+                                            return typeUrlPrefix + "/google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution";
+                                        };
+    
+                                        return PrefixContribution;
+                                    })();
+    
+                                    return Contribution;
+                                })();
+    
+                                return BucketContribution;
+                            })();
+    
+                            return ColdlineAndArchivalStorageOperationsSpike;
+                        })();
+    
+                        IntelligenceFinding.CrossRegionEgressSpike = (function() {
+    
+                            /**
+                             * Properties of a CrossRegionEgressSpike.
+                             * @memberof google.storage.control.v2.IntelligenceFinding
+                             * @interface ICrossRegionEgressSpike
+                             * @property {number|Long|null} [totalEgressBytes] CrossRegionEgressSpike totalEgressBytes
+                             * @property {number|null} [percentageIncrease] CrossRegionEgressSpike percentageIncrease
+                             * @property {Array.<google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.IBucketContribution>|null} [topBuckets] CrossRegionEgressSpike topBuckets
+                             */
+    
+                            /**
+                             * Constructs a new CrossRegionEgressSpike.
+                             * @memberof google.storage.control.v2.IntelligenceFinding
+                             * @classdesc Represents a CrossRegionEgressSpike.
+                             * @implements ICrossRegionEgressSpike
+                             * @constructor
+                             * @param {google.storage.control.v2.IntelligenceFinding.ICrossRegionEgressSpike=} [properties] Properties to set
+                             */
+                            function CrossRegionEgressSpike(properties) {
+                                this.topBuckets = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CrossRegionEgressSpike totalEgressBytes.
+                             * @member {number|Long} totalEgressBytes
+                             * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike
+                             * @instance
+                             */
+                            CrossRegionEgressSpike.prototype.totalEgressBytes = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * CrossRegionEgressSpike percentageIncrease.
+                             * @member {number} percentageIncrease
+                             * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike
+                             * @instance
+                             */
+                            CrossRegionEgressSpike.prototype.percentageIncrease = 0;
+    
+                            /**
+                             * CrossRegionEgressSpike topBuckets.
+                             * @member {Array.<google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.IBucketContribution>} topBuckets
+                             * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike
+                             * @instance
+                             */
+                            CrossRegionEgressSpike.prototype.topBuckets = $util.emptyArray;
+    
+                            /**
+                             * Creates a new CrossRegionEgressSpike instance using the specified properties.
+                             * @function create
+                             * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike
+                             * @static
+                             * @param {google.storage.control.v2.IntelligenceFinding.ICrossRegionEgressSpike=} [properties] Properties to set
+                             * @returns {google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike} CrossRegionEgressSpike instance
+                             */
+                            CrossRegionEgressSpike.create = function create(properties) {
+                                return new CrossRegionEgressSpike(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CrossRegionEgressSpike message. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike
+                             * @static
+                             * @param {google.storage.control.v2.IntelligenceFinding.ICrossRegionEgressSpike} message CrossRegionEgressSpike message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CrossRegionEgressSpike.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.totalEgressBytes != null && Object.hasOwnProperty.call(message, "totalEgressBytes"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int64(message.totalEgressBytes);
+                                if (message.percentageIncrease != null && Object.hasOwnProperty.call(message, "percentageIncrease"))
+                                    writer.uint32(/* id 2, wireType 1 =*/17).double(message.percentageIncrease);
+                                if (message.topBuckets != null && message.topBuckets.length)
+                                    for (var i = 0; i < message.topBuckets.length; ++i)
+                                        $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.encode(message.topBuckets[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CrossRegionEgressSpike message, length delimited. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike
+                             * @static
+                             * @param {google.storage.control.v2.IntelligenceFinding.ICrossRegionEgressSpike} message CrossRegionEgressSpike message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CrossRegionEgressSpike.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CrossRegionEgressSpike message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike} CrossRegionEgressSpike
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CrossRegionEgressSpike.decode = function decode(reader, length, error, long) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.totalEgressBytes = reader.int64();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.percentageIncrease = reader.double();
+                                            break;
+                                        }
+                                    case 3: {
+                                            if (!(message.topBuckets && message.topBuckets.length))
+                                                message.topBuckets = [];
+                                            message.topBuckets.push($root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.decode(reader, reader.uint32(), undefined, long + 1));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7, long);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CrossRegionEgressSpike message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike} CrossRegionEgressSpike
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CrossRegionEgressSpike.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CrossRegionEgressSpike message.
+                             * @function verify
+                             * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CrossRegionEgressSpike.verify = function verify(message, long) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
+                                if (message.totalEgressBytes != null && message.hasOwnProperty("totalEgressBytes"))
+                                    if (!$util.isInteger(message.totalEgressBytes) && !(message.totalEgressBytes && $util.isInteger(message.totalEgressBytes.low) && $util.isInteger(message.totalEgressBytes.high)))
+                                        return "totalEgressBytes: integer|Long expected";
+                                if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                    if (typeof message.percentageIncrease !== "number")
+                                        return "percentageIncrease: number expected";
+                                if (message.topBuckets != null && message.hasOwnProperty("topBuckets")) {
+                                    if (!Array.isArray(message.topBuckets))
+                                        return "topBuckets: array expected";
+                                    for (var i = 0; i < message.topBuckets.length; ++i) {
+                                        var error = $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.verify(message.topBuckets[i], long + 1);
+                                        if (error)
+                                            return "topBuckets." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CrossRegionEgressSpike message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike} CrossRegionEgressSpike
+                             */
+                            CrossRegionEgressSpike.fromObject = function fromObject(object, long) {
+                                if (object instanceof $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike)
+                                    return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var message = new $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike();
+                                if (object.totalEgressBytes != null)
+                                    if ($util.Long)
+                                        (message.totalEgressBytes = $util.Long.fromValue(object.totalEgressBytes)).unsigned = false;
+                                    else if (typeof object.totalEgressBytes === "string")
+                                        message.totalEgressBytes = parseInt(object.totalEgressBytes, 10);
+                                    else if (typeof object.totalEgressBytes === "number")
+                                        message.totalEgressBytes = object.totalEgressBytes;
+                                    else if (typeof object.totalEgressBytes === "object")
+                                        message.totalEgressBytes = new $util.LongBits(object.totalEgressBytes.low >>> 0, object.totalEgressBytes.high >>> 0).toNumber();
+                                if (object.percentageIncrease != null)
+                                    message.percentageIncrease = Number(object.percentageIncrease);
+                                if (object.topBuckets) {
+                                    if (!Array.isArray(object.topBuckets))
+                                        throw TypeError(".google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.topBuckets: array expected");
+                                    message.topBuckets = [];
+                                    for (var i = 0; i < object.topBuckets.length; ++i) {
+                                        if (typeof object.topBuckets[i] !== "object")
+                                            throw TypeError(".google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.topBuckets: object expected");
+                                        message.topBuckets[i] = $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.fromObject(object.topBuckets[i], long + 1);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CrossRegionEgressSpike message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike
+                             * @static
+                             * @param {google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike} message CrossRegionEgressSpike
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CrossRegionEgressSpike.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.topBuckets = [];
+                                if (options.defaults) {
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.totalEgressBytes = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.totalEgressBytes = options.longs === String ? "0" : 0;
+                                    object.percentageIncrease = 0;
+                                }
+                                if (message.totalEgressBytes != null && message.hasOwnProperty("totalEgressBytes"))
+                                    if (typeof message.totalEgressBytes === "number")
+                                        object.totalEgressBytes = options.longs === String ? String(message.totalEgressBytes) : message.totalEgressBytes;
+                                    else
+                                        object.totalEgressBytes = options.longs === String ? $util.Long.prototype.toString.call(message.totalEgressBytes) : options.longs === Number ? new $util.LongBits(message.totalEgressBytes.low >>> 0, message.totalEgressBytes.high >>> 0).toNumber() : message.totalEgressBytes;
+                                if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                    object.percentageIncrease = options.json && !isFinite(message.percentageIncrease) ? String(message.percentageIncrease) : message.percentageIncrease;
+                                if (message.topBuckets && message.topBuckets.length) {
+                                    object.topBuckets = [];
+                                    for (var j = 0; j < message.topBuckets.length; ++j)
+                                        object.topBuckets[j] = $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.toObject(message.topBuckets[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CrossRegionEgressSpike to JSON.
+                             * @function toJSON
+                             * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CrossRegionEgressSpike.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CrossRegionEgressSpike
+                             * @function getTypeUrl
+                             * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CrossRegionEgressSpike.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike";
+                            };
+    
+                            CrossRegionEgressSpike.BucketContribution = (function() {
+    
+                                /**
+                                 * Properties of a BucketContribution.
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike
+                                 * @interface IBucketContribution
+                                 * @property {string|null} [bucket] BucketContribution bucket
+                                 * @property {number|Long|null} [totalEgressBytes] BucketContribution totalEgressBytes
+                                 * @property {number|null} [percentageIncrease] BucketContribution percentageIncrease
+                                 * @property {google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.IContribution|null} [contribution] BucketContribution contribution
+                                 * @property {google.rpc.IStatus|null} [error] BucketContribution error
+                                 */
+    
+                                /**
+                                 * Constructs a new BucketContribution.
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike
+                                 * @classdesc Represents a BucketContribution.
+                                 * @implements IBucketContribution
+                                 * @constructor
+                                 * @param {google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.IBucketContribution=} [properties] Properties to set
+                                 */
+                                function BucketContribution(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * BucketContribution bucket.
+                                 * @member {string} bucket
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution
+                                 * @instance
+                                 */
+                                BucketContribution.prototype.bucket = "";
+    
+                                /**
+                                 * BucketContribution totalEgressBytes.
+                                 * @member {number|Long} totalEgressBytes
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution
+                                 * @instance
+                                 */
+                                BucketContribution.prototype.totalEgressBytes = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                                /**
+                                 * BucketContribution percentageIncrease.
+                                 * @member {number} percentageIncrease
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution
+                                 * @instance
+                                 */
+                                BucketContribution.prototype.percentageIncrease = 0;
+    
+                                /**
+                                 * BucketContribution contribution.
+                                 * @member {google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.IContribution|null|undefined} contribution
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution
+                                 * @instance
+                                 */
+                                BucketContribution.prototype.contribution = null;
+    
+                                /**
+                                 * BucketContribution error.
+                                 * @member {google.rpc.IStatus|null|undefined} error
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution
+                                 * @instance
+                                 */
+                                BucketContribution.prototype.error = null;
+    
+                                // OneOf field names bound to virtual getters and setters
+                                var $oneOfFields;
+    
+                                /**
+                                 * BucketContribution details.
+                                 * @member {"contribution"|"error"|undefined} details
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution
+                                 * @instance
+                                 */
+                                Object.defineProperty(BucketContribution.prototype, "details", {
+                                    get: $util.oneOfGetter($oneOfFields = ["contribution", "error"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * Creates a new BucketContribution instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution
+                                 * @static
+                                 * @param {google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.IBucketContribution=} [properties] Properties to set
+                                 * @returns {google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution} BucketContribution instance
+                                 */
+                                BucketContribution.create = function create(properties) {
+                                    return new BucketContribution(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified BucketContribution message. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution
+                                 * @static
+                                 * @param {google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.IBucketContribution} message BucketContribution message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                BucketContribution.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.bucket);
+                                    if (message.totalEgressBytes != null && Object.hasOwnProperty.call(message, "totalEgressBytes"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int64(message.totalEgressBytes);
+                                    if (message.percentageIncrease != null && Object.hasOwnProperty.call(message, "percentageIncrease"))
+                                        writer.uint32(/* id 3, wireType 1 =*/25).double(message.percentageIncrease);
+                                    if (message.contribution != null && Object.hasOwnProperty.call(message, "contribution"))
+                                        $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.encode(message.contribution, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                    if (message.error != null && Object.hasOwnProperty.call(message, "error"))
+                                        $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified BucketContribution message, length delimited. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution
+                                 * @static
+                                 * @param {google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.IBucketContribution} message BucketContribution message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                BucketContribution.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a BucketContribution message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution} BucketContribution
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                BucketContribution.decode = function decode(reader, length, error, long) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $Reader.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.bucket = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.totalEgressBytes = reader.int64();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.percentageIncrease = reader.double();
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.contribution = $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.decode(reader, reader.uint32(), undefined, long + 1);
+                                                break;
+                                            }
+                                        case 5: {
+                                                message.error = $root.google.rpc.Status.decode(reader, reader.uint32(), undefined, long + 1);
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7, long);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a BucketContribution message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution} BucketContribution
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                BucketContribution.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a BucketContribution message.
+                                 * @function verify
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                BucketContribution.verify = function verify(message, long) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        return "maximum nesting depth exceeded";
+                                    var properties = {};
+                                    if (message.bucket != null && message.hasOwnProperty("bucket"))
+                                        if (!$util.isString(message.bucket))
+                                            return "bucket: string expected";
+                                    if (message.totalEgressBytes != null && message.hasOwnProperty("totalEgressBytes"))
+                                        if (!$util.isInteger(message.totalEgressBytes) && !(message.totalEgressBytes && $util.isInteger(message.totalEgressBytes.low) && $util.isInteger(message.totalEgressBytes.high)))
+                                            return "totalEgressBytes: integer|Long expected";
+                                    if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                        if (typeof message.percentageIncrease !== "number")
+                                            return "percentageIncrease: number expected";
+                                    if (message.contribution != null && message.hasOwnProperty("contribution")) {
+                                        properties.details = 1;
+                                        {
+                                            var error = $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.verify(message.contribution, long + 1);
+                                            if (error)
+                                                return "contribution." + error;
+                                        }
+                                    }
+                                    if (message.error != null && message.hasOwnProperty("error")) {
+                                        if (properties.details === 1)
+                                            return "details: multiple values";
+                                        properties.details = 1;
+                                        {
+                                            var error = $root.google.rpc.Status.verify(message.error, long + 1);
+                                            if (error)
+                                                return "error." + error;
+                                        }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a BucketContribution message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution} BucketContribution
+                                 */
+                                BucketContribution.fromObject = function fromObject(object, long) {
+                                    if (object instanceof $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution)
+                                        return object;
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
+                                    var message = new $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution();
+                                    if (object.bucket != null)
+                                        message.bucket = String(object.bucket);
+                                    if (object.totalEgressBytes != null)
+                                        if ($util.Long)
+                                            (message.totalEgressBytes = $util.Long.fromValue(object.totalEgressBytes)).unsigned = false;
+                                        else if (typeof object.totalEgressBytes === "string")
+                                            message.totalEgressBytes = parseInt(object.totalEgressBytes, 10);
+                                        else if (typeof object.totalEgressBytes === "number")
+                                            message.totalEgressBytes = object.totalEgressBytes;
+                                        else if (typeof object.totalEgressBytes === "object")
+                                            message.totalEgressBytes = new $util.LongBits(object.totalEgressBytes.low >>> 0, object.totalEgressBytes.high >>> 0).toNumber();
+                                    if (object.percentageIncrease != null)
+                                        message.percentageIncrease = Number(object.percentageIncrease);
+                                    if (object.contribution != null) {
+                                        if (typeof object.contribution !== "object")
+                                            throw TypeError(".google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.contribution: object expected");
+                                        message.contribution = $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.fromObject(object.contribution, long + 1);
+                                    }
+                                    if (object.error != null) {
+                                        if (typeof object.error !== "object")
+                                            throw TypeError(".google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.error: object expected");
+                                        message.error = $root.google.rpc.Status.fromObject(object.error, long + 1);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a BucketContribution message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution
+                                 * @static
+                                 * @param {google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution} message BucketContribution
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                BucketContribution.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.bucket = "";
+                                        if ($util.Long) {
+                                            var long = new $util.Long(0, 0, false);
+                                            object.totalEgressBytes = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                        } else
+                                            object.totalEgressBytes = options.longs === String ? "0" : 0;
+                                        object.percentageIncrease = 0;
+                                    }
+                                    if (message.bucket != null && message.hasOwnProperty("bucket"))
+                                        object.bucket = message.bucket;
+                                    if (message.totalEgressBytes != null && message.hasOwnProperty("totalEgressBytes"))
+                                        if (typeof message.totalEgressBytes === "number")
+                                            object.totalEgressBytes = options.longs === String ? String(message.totalEgressBytes) : message.totalEgressBytes;
+                                        else
+                                            object.totalEgressBytes = options.longs === String ? $util.Long.prototype.toString.call(message.totalEgressBytes) : options.longs === Number ? new $util.LongBits(message.totalEgressBytes.low >>> 0, message.totalEgressBytes.high >>> 0).toNumber() : message.totalEgressBytes;
+                                    if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                        object.percentageIncrease = options.json && !isFinite(message.percentageIncrease) ? String(message.percentageIncrease) : message.percentageIncrease;
+                                    if (message.contribution != null && message.hasOwnProperty("contribution")) {
+                                        object.contribution = $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.toObject(message.contribution, options);
+                                        if (options.oneofs)
+                                            object.details = "contribution";
+                                    }
+                                    if (message.error != null && message.hasOwnProperty("error")) {
+                                        object.error = $root.google.rpc.Status.toObject(message.error, options);
+                                        if (options.oneofs)
+                                            object.details = "error";
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this BucketContribution to JSON.
+                                 * @function toJSON
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                BucketContribution.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for BucketContribution
+                                 * @function getTypeUrl
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                BucketContribution.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution";
+                                };
+    
+                                BucketContribution.Contribution = (function() {
+    
+                                    /**
+                                     * Properties of a Contribution.
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution
+                                     * @interface IContribution
+                                     * @property {Array.<google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.IPrefixContribution>|null} [topPrefixes] Contribution topPrefixes
+                                     */
+    
+                                    /**
+                                     * Constructs a new Contribution.
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution
+                                     * @classdesc Represents a Contribution.
+                                     * @implements IContribution
+                                     * @constructor
+                                     * @param {google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.IContribution=} [properties] Properties to set
+                                     */
+                                    function Contribution(properties) {
+                                        this.topPrefixes = [];
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * Contribution topPrefixes.
+                                     * @member {Array.<google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.IPrefixContribution>} topPrefixes
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution
+                                     * @instance
+                                     */
+                                    Contribution.prototype.topPrefixes = $util.emptyArray;
+    
+                                    /**
+                                     * Creates a new Contribution instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution
+                                     * @static
+                                     * @param {google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.IContribution=} [properties] Properties to set
+                                     * @returns {google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution} Contribution instance
+                                     */
+                                    Contribution.create = function create(properties) {
+                                        return new Contribution(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Contribution message. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution
+                                     * @static
+                                     * @param {google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.IContribution} message Contribution message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Contribution.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.topPrefixes != null && message.topPrefixes.length)
+                                            for (var i = 0; i < message.topPrefixes.length; ++i)
+                                                $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution.encode(message.topPrefixes[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Contribution message, length delimited. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution
+                                     * @static
+                                     * @param {google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.IContribution} message Contribution message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Contribution.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a Contribution message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution} Contribution
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Contribution.decode = function decode(reader, length, error, long) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        if (long === undefined)
+                                            long = 0;
+                                        if (long > $Reader.recursionLimit)
+                                            throw Error("maximum nesting depth exceeded");
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            if (tag === error)
+                                                break;
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    if (!(message.topPrefixes && message.topPrefixes.length))
+                                                        message.topPrefixes = [];
+                                                    message.topPrefixes.push($root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution.decode(reader, reader.uint32(), undefined, long + 1));
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7, long);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a Contribution message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution} Contribution
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Contribution.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a Contribution message.
+                                     * @function verify
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    Contribution.verify = function verify(message, long) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (long === undefined)
+                                            long = 0;
+                                        if (long > $util.recursionLimit)
+                                            return "maximum nesting depth exceeded";
+                                        if (message.topPrefixes != null && message.hasOwnProperty("topPrefixes")) {
+                                            if (!Array.isArray(message.topPrefixes))
+                                                return "topPrefixes: array expected";
+                                            for (var i = 0; i < message.topPrefixes.length; ++i) {
+                                                var error = $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution.verify(message.topPrefixes[i], long + 1);
+                                                if (error)
+                                                    return "topPrefixes." + error;
+                                            }
+                                        }
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a Contribution message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution} Contribution
+                                     */
+                                    Contribution.fromObject = function fromObject(object, long) {
+                                        if (object instanceof $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution)
+                                            return object;
+                                        if (long === undefined)
+                                            long = 0;
+                                        if (long > $util.recursionLimit)
+                                            throw Error("maximum nesting depth exceeded");
+                                        var message = new $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution();
+                                        if (object.topPrefixes) {
+                                            if (!Array.isArray(object.topPrefixes))
+                                                throw TypeError(".google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.topPrefixes: array expected");
+                                            message.topPrefixes = [];
+                                            for (var i = 0; i < object.topPrefixes.length; ++i) {
+                                                if (typeof object.topPrefixes[i] !== "object")
+                                                    throw TypeError(".google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.topPrefixes: object expected");
+                                                message.topPrefixes[i] = $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution.fromObject(object.topPrefixes[i], long + 1);
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a Contribution message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution
+                                     * @static
+                                     * @param {google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution} message Contribution
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    Contribution.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.arrays || options.defaults)
+                                            object.topPrefixes = [];
+                                        if (message.topPrefixes && message.topPrefixes.length) {
+                                            object.topPrefixes = [];
+                                            for (var j = 0; j < message.topPrefixes.length; ++j)
+                                                object.topPrefixes[j] = $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution.toObject(message.topPrefixes[j], options);
+                                        }
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this Contribution to JSON.
+                                     * @function toJSON
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    Contribution.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for Contribution
+                                     * @function getTypeUrl
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    Contribution.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution";
+                                    };
+    
+                                    Contribution.PrefixContribution = (function() {
+    
+                                        /**
+                                         * Properties of a PrefixContribution.
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution
+                                         * @interface IPrefixContribution
+                                         * @property {string|null} [prefix] PrefixContribution prefix
+                                         * @property {number|Long|null} [totalEgressBytes] PrefixContribution totalEgressBytes
+                                         * @property {number|null} [percentageIncrease] PrefixContribution percentageIncrease
+                                         */
+    
+                                        /**
+                                         * Constructs a new PrefixContribution.
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution
+                                         * @classdesc Represents a PrefixContribution.
+                                         * @implements IPrefixContribution
+                                         * @constructor
+                                         * @param {google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.IPrefixContribution=} [properties] Properties to set
+                                         */
+                                        function PrefixContribution(properties) {
+                                            if (properties)
+                                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                                        this[keys[i]] = properties[keys[i]];
+                                        }
+    
+                                        /**
+                                         * PrefixContribution prefix.
+                                         * @member {string} prefix
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @instance
+                                         */
+                                        PrefixContribution.prototype.prefix = "";
+    
+                                        /**
+                                         * PrefixContribution totalEgressBytes.
+                                         * @member {number|Long} totalEgressBytes
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @instance
+                                         */
+                                        PrefixContribution.prototype.totalEgressBytes = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                                        /**
+                                         * PrefixContribution percentageIncrease.
+                                         * @member {number} percentageIncrease
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @instance
+                                         */
+                                        PrefixContribution.prototype.percentageIncrease = 0;
+    
+                                        /**
+                                         * Creates a new PrefixContribution instance using the specified properties.
+                                         * @function create
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @static
+                                         * @param {google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.IPrefixContribution=} [properties] Properties to set
+                                         * @returns {google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution} PrefixContribution instance
+                                         */
+                                        PrefixContribution.create = function create(properties) {
+                                            return new PrefixContribution(properties);
+                                        };
+    
+                                        /**
+                                         * Encodes the specified PrefixContribution message. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution.verify|verify} messages.
+                                         * @function encode
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @static
+                                         * @param {google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.IPrefixContribution} message PrefixContribution message or plain object to encode
+                                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                                         * @returns {$protobuf.Writer} Writer
+                                         */
+                                        PrefixContribution.encode = function encode(message, writer) {
+                                            if (!writer)
+                                                writer = $Writer.create();
+                                            if (message.prefix != null && Object.hasOwnProperty.call(message, "prefix"))
+                                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.prefix);
+                                            if (message.totalEgressBytes != null && Object.hasOwnProperty.call(message, "totalEgressBytes"))
+                                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.totalEgressBytes);
+                                            if (message.percentageIncrease != null && Object.hasOwnProperty.call(message, "percentageIncrease"))
+                                                writer.uint32(/* id 3, wireType 1 =*/25).double(message.percentageIncrease);
+                                            return writer;
+                                        };
+    
+                                        /**
+                                         * Encodes the specified PrefixContribution message, length delimited. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution.verify|verify} messages.
+                                         * @function encodeDelimited
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @static
+                                         * @param {google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.IPrefixContribution} message PrefixContribution message or plain object to encode
+                                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                                         * @returns {$protobuf.Writer} Writer
+                                         */
+                                        PrefixContribution.encodeDelimited = function encodeDelimited(message, writer) {
+                                            return this.encode(message, writer).ldelim();
+                                        };
+    
+                                        /**
+                                         * Decodes a PrefixContribution message from the specified reader or buffer.
+                                         * @function decode
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @static
+                                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                         * @param {number} [length] Message length if known beforehand
+                                         * @returns {google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution} PrefixContribution
+                                         * @throws {Error} If the payload is not a reader or valid buffer
+                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                         */
+                                        PrefixContribution.decode = function decode(reader, length, error, long) {
+                                            if (!(reader instanceof $Reader))
+                                                reader = $Reader.create(reader);
+                                            if (long === undefined)
+                                                long = 0;
+                                            if (long > $Reader.recursionLimit)
+                                                throw Error("maximum nesting depth exceeded");
+                                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution();
+                                            while (reader.pos < end) {
+                                                var tag = reader.uint32();
+                                                if (tag === error)
+                                                    break;
+                                                switch (tag >>> 3) {
+                                                case 1: {
+                                                        message.prefix = reader.string();
+                                                        break;
+                                                    }
+                                                case 2: {
+                                                        message.totalEgressBytes = reader.int64();
+                                                        break;
+                                                    }
+                                                case 3: {
+                                                        message.percentageIncrease = reader.double();
+                                                        break;
+                                                    }
+                                                default:
+                                                    reader.skipType(tag & 7, long);
+                                                    break;
+                                                }
+                                            }
+                                            return message;
+                                        };
+    
+                                        /**
+                                         * Decodes a PrefixContribution message from the specified reader or buffer, length delimited.
+                                         * @function decodeDelimited
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @static
+                                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                         * @returns {google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution} PrefixContribution
+                                         * @throws {Error} If the payload is not a reader or valid buffer
+                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                         */
+                                        PrefixContribution.decodeDelimited = function decodeDelimited(reader) {
+                                            if (!(reader instanceof $Reader))
+                                                reader = new $Reader(reader);
+                                            return this.decode(reader, reader.uint32());
+                                        };
+    
+                                        /**
+                                         * Verifies a PrefixContribution message.
+                                         * @function verify
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @static
+                                         * @param {Object.<string,*>} message Plain object to verify
+                                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                         */
+                                        PrefixContribution.verify = function verify(message, long) {
+                                            if (typeof message !== "object" || message === null)
+                                                return "object expected";
+                                            if (long === undefined)
+                                                long = 0;
+                                            if (long > $util.recursionLimit)
+                                                return "maximum nesting depth exceeded";
+                                            if (message.prefix != null && message.hasOwnProperty("prefix"))
+                                                if (!$util.isString(message.prefix))
+                                                    return "prefix: string expected";
+                                            if (message.totalEgressBytes != null && message.hasOwnProperty("totalEgressBytes"))
+                                                if (!$util.isInteger(message.totalEgressBytes) && !(message.totalEgressBytes && $util.isInteger(message.totalEgressBytes.low) && $util.isInteger(message.totalEgressBytes.high)))
+                                                    return "totalEgressBytes: integer|Long expected";
+                                            if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                                if (typeof message.percentageIncrease !== "number")
+                                                    return "percentageIncrease: number expected";
+                                            return null;
+                                        };
+    
+                                        /**
+                                         * Creates a PrefixContribution message from a plain object. Also converts values to their respective internal types.
+                                         * @function fromObject
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @static
+                                         * @param {Object.<string,*>} object Plain object
+                                         * @returns {google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution} PrefixContribution
+                                         */
+                                        PrefixContribution.fromObject = function fromObject(object, long) {
+                                            if (object instanceof $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution)
+                                                return object;
+                                            if (long === undefined)
+                                                long = 0;
+                                            if (long > $util.recursionLimit)
+                                                throw Error("maximum nesting depth exceeded");
+                                            var message = new $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution();
+                                            if (object.prefix != null)
+                                                message.prefix = String(object.prefix);
+                                            if (object.totalEgressBytes != null)
+                                                if ($util.Long)
+                                                    (message.totalEgressBytes = $util.Long.fromValue(object.totalEgressBytes)).unsigned = false;
+                                                else if (typeof object.totalEgressBytes === "string")
+                                                    message.totalEgressBytes = parseInt(object.totalEgressBytes, 10);
+                                                else if (typeof object.totalEgressBytes === "number")
+                                                    message.totalEgressBytes = object.totalEgressBytes;
+                                                else if (typeof object.totalEgressBytes === "object")
+                                                    message.totalEgressBytes = new $util.LongBits(object.totalEgressBytes.low >>> 0, object.totalEgressBytes.high >>> 0).toNumber();
+                                            if (object.percentageIncrease != null)
+                                                message.percentageIncrease = Number(object.percentageIncrease);
+                                            return message;
+                                        };
+    
+                                        /**
+                                         * Creates a plain object from a PrefixContribution message. Also converts values to other types if specified.
+                                         * @function toObject
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @static
+                                         * @param {google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution} message PrefixContribution
+                                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                         * @returns {Object.<string,*>} Plain object
+                                         */
+                                        PrefixContribution.toObject = function toObject(message, options) {
+                                            if (!options)
+                                                options = {};
+                                            var object = {};
+                                            if (options.defaults) {
+                                                object.prefix = "";
+                                                if ($util.Long) {
+                                                    var long = new $util.Long(0, 0, false);
+                                                    object.totalEgressBytes = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                                } else
+                                                    object.totalEgressBytes = options.longs === String ? "0" : 0;
+                                                object.percentageIncrease = 0;
+                                            }
+                                            if (message.prefix != null && message.hasOwnProperty("prefix"))
+                                                object.prefix = message.prefix;
+                                            if (message.totalEgressBytes != null && message.hasOwnProperty("totalEgressBytes"))
+                                                if (typeof message.totalEgressBytes === "number")
+                                                    object.totalEgressBytes = options.longs === String ? String(message.totalEgressBytes) : message.totalEgressBytes;
+                                                else
+                                                    object.totalEgressBytes = options.longs === String ? $util.Long.prototype.toString.call(message.totalEgressBytes) : options.longs === Number ? new $util.LongBits(message.totalEgressBytes.low >>> 0, message.totalEgressBytes.high >>> 0).toNumber() : message.totalEgressBytes;
+                                            if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                                object.percentageIncrease = options.json && !isFinite(message.percentageIncrease) ? String(message.percentageIncrease) : message.percentageIncrease;
+                                            return object;
+                                        };
+    
+                                        /**
+                                         * Converts this PrefixContribution to JSON.
+                                         * @function toJSON
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @instance
+                                         * @returns {Object.<string,*>} JSON object
+                                         */
+                                        PrefixContribution.prototype.toJSON = function toJSON() {
+                                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                        };
+    
+                                        /**
+                                         * Gets the default type url for PrefixContribution
+                                         * @function getTypeUrl
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @static
+                                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                         * @returns {string} The default type url
+                                         */
+                                        PrefixContribution.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                            if (typeUrlPrefix === undefined) {
+                                                typeUrlPrefix = "type.googleapis.com";
+                                            }
+                                            return typeUrlPrefix + "/google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution";
+                                        };
+    
+                                        return PrefixContribution;
+                                    })();
+    
+                                    return Contribution;
+                                })();
+    
+                                return BucketContribution;
+                            })();
+    
+                            return CrossRegionEgressSpike;
+                        })();
+    
+                        IntelligenceFinding.ThrottledRequestSpike = (function() {
+    
+                            /**
+                             * Properties of a ThrottledRequestSpike.
+                             * @memberof google.storage.control.v2.IntelligenceFinding
+                             * @interface IThrottledRequestSpike
+                             * @property {number|Long|null} [throttledRequests] ThrottledRequestSpike throttledRequests
+                             * @property {number|null} [percentageIncrease] ThrottledRequestSpike percentageIncrease
+                             * @property {Array.<google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.IBucketContribution>|null} [topBuckets] ThrottledRequestSpike topBuckets
+                             */
+    
+                            /**
+                             * Constructs a new ThrottledRequestSpike.
+                             * @memberof google.storage.control.v2.IntelligenceFinding
+                             * @classdesc Represents a ThrottledRequestSpike.
+                             * @implements IThrottledRequestSpike
+                             * @constructor
+                             * @param {google.storage.control.v2.IntelligenceFinding.IThrottledRequestSpike=} [properties] Properties to set
+                             */
+                            function ThrottledRequestSpike(properties) {
+                                this.topBuckets = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ThrottledRequestSpike throttledRequests.
+                             * @member {number|Long} throttledRequests
+                             * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike
+                             * @instance
+                             */
+                            ThrottledRequestSpike.prototype.throttledRequests = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * ThrottledRequestSpike percentageIncrease.
+                             * @member {number} percentageIncrease
+                             * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike
+                             * @instance
+                             */
+                            ThrottledRequestSpike.prototype.percentageIncrease = 0;
+    
+                            /**
+                             * ThrottledRequestSpike topBuckets.
+                             * @member {Array.<google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.IBucketContribution>} topBuckets
+                             * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike
+                             * @instance
+                             */
+                            ThrottledRequestSpike.prototype.topBuckets = $util.emptyArray;
+    
+                            /**
+                             * Creates a new ThrottledRequestSpike instance using the specified properties.
+                             * @function create
+                             * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike
+                             * @static
+                             * @param {google.storage.control.v2.IntelligenceFinding.IThrottledRequestSpike=} [properties] Properties to set
+                             * @returns {google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike} ThrottledRequestSpike instance
+                             */
+                            ThrottledRequestSpike.create = function create(properties) {
+                                return new ThrottledRequestSpike(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ThrottledRequestSpike message. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike
+                             * @static
+                             * @param {google.storage.control.v2.IntelligenceFinding.IThrottledRequestSpike} message ThrottledRequestSpike message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ThrottledRequestSpike.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.throttledRequests != null && Object.hasOwnProperty.call(message, "throttledRequests"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int64(message.throttledRequests);
+                                if (message.percentageIncrease != null && Object.hasOwnProperty.call(message, "percentageIncrease"))
+                                    writer.uint32(/* id 2, wireType 1 =*/17).double(message.percentageIncrease);
+                                if (message.topBuckets != null && message.topBuckets.length)
+                                    for (var i = 0; i < message.topBuckets.length; ++i)
+                                        $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.encode(message.topBuckets[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ThrottledRequestSpike message, length delimited. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike
+                             * @static
+                             * @param {google.storage.control.v2.IntelligenceFinding.IThrottledRequestSpike} message ThrottledRequestSpike message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ThrottledRequestSpike.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ThrottledRequestSpike message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike} ThrottledRequestSpike
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ThrottledRequestSpike.decode = function decode(reader, length, error, long) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.throttledRequests = reader.int64();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.percentageIncrease = reader.double();
+                                            break;
+                                        }
+                                    case 3: {
+                                            if (!(message.topBuckets && message.topBuckets.length))
+                                                message.topBuckets = [];
+                                            message.topBuckets.push($root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.decode(reader, reader.uint32(), undefined, long + 1));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7, long);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ThrottledRequestSpike message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike} ThrottledRequestSpike
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ThrottledRequestSpike.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ThrottledRequestSpike message.
+                             * @function verify
+                             * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ThrottledRequestSpike.verify = function verify(message, long) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
+                                if (message.throttledRequests != null && message.hasOwnProperty("throttledRequests"))
+                                    if (!$util.isInteger(message.throttledRequests) && !(message.throttledRequests && $util.isInteger(message.throttledRequests.low) && $util.isInteger(message.throttledRequests.high)))
+                                        return "throttledRequests: integer|Long expected";
+                                if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                    if (typeof message.percentageIncrease !== "number")
+                                        return "percentageIncrease: number expected";
+                                if (message.topBuckets != null && message.hasOwnProperty("topBuckets")) {
+                                    if (!Array.isArray(message.topBuckets))
+                                        return "topBuckets: array expected";
+                                    for (var i = 0; i < message.topBuckets.length; ++i) {
+                                        var error = $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.verify(message.topBuckets[i], long + 1);
+                                        if (error)
+                                            return "topBuckets." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ThrottledRequestSpike message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike} ThrottledRequestSpike
+                             */
+                            ThrottledRequestSpike.fromObject = function fromObject(object, long) {
+                                if (object instanceof $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike)
+                                    return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var message = new $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike();
+                                if (object.throttledRequests != null)
+                                    if ($util.Long)
+                                        (message.throttledRequests = $util.Long.fromValue(object.throttledRequests)).unsigned = false;
+                                    else if (typeof object.throttledRequests === "string")
+                                        message.throttledRequests = parseInt(object.throttledRequests, 10);
+                                    else if (typeof object.throttledRequests === "number")
+                                        message.throttledRequests = object.throttledRequests;
+                                    else if (typeof object.throttledRequests === "object")
+                                        message.throttledRequests = new $util.LongBits(object.throttledRequests.low >>> 0, object.throttledRequests.high >>> 0).toNumber();
+                                if (object.percentageIncrease != null)
+                                    message.percentageIncrease = Number(object.percentageIncrease);
+                                if (object.topBuckets) {
+                                    if (!Array.isArray(object.topBuckets))
+                                        throw TypeError(".google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.topBuckets: array expected");
+                                    message.topBuckets = [];
+                                    for (var i = 0; i < object.topBuckets.length; ++i) {
+                                        if (typeof object.topBuckets[i] !== "object")
+                                            throw TypeError(".google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.topBuckets: object expected");
+                                        message.topBuckets[i] = $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.fromObject(object.topBuckets[i], long + 1);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ThrottledRequestSpike message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike
+                             * @static
+                             * @param {google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike} message ThrottledRequestSpike
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ThrottledRequestSpike.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.topBuckets = [];
+                                if (options.defaults) {
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.throttledRequests = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.throttledRequests = options.longs === String ? "0" : 0;
+                                    object.percentageIncrease = 0;
+                                }
+                                if (message.throttledRequests != null && message.hasOwnProperty("throttledRequests"))
+                                    if (typeof message.throttledRequests === "number")
+                                        object.throttledRequests = options.longs === String ? String(message.throttledRequests) : message.throttledRequests;
+                                    else
+                                        object.throttledRequests = options.longs === String ? $util.Long.prototype.toString.call(message.throttledRequests) : options.longs === Number ? new $util.LongBits(message.throttledRequests.low >>> 0, message.throttledRequests.high >>> 0).toNumber() : message.throttledRequests;
+                                if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                    object.percentageIncrease = options.json && !isFinite(message.percentageIncrease) ? String(message.percentageIncrease) : message.percentageIncrease;
+                                if (message.topBuckets && message.topBuckets.length) {
+                                    object.topBuckets = [];
+                                    for (var j = 0; j < message.topBuckets.length; ++j)
+                                        object.topBuckets[j] = $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.toObject(message.topBuckets[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ThrottledRequestSpike to JSON.
+                             * @function toJSON
+                             * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ThrottledRequestSpike.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ThrottledRequestSpike
+                             * @function getTypeUrl
+                             * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ThrottledRequestSpike.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike";
+                            };
+    
+                            ThrottledRequestSpike.BucketContribution = (function() {
+    
+                                /**
+                                 * Properties of a BucketContribution.
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike
+                                 * @interface IBucketContribution
+                                 * @property {string|null} [bucket] BucketContribution bucket
+                                 * @property {number|Long|null} [throttledRequests] BucketContribution throttledRequests
+                                 * @property {number|null} [percentageIncrease] BucketContribution percentageIncrease
+                                 * @property {google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.IContribution|null} [contribution] BucketContribution contribution
+                                 * @property {google.rpc.IStatus|null} [error] BucketContribution error
+                                 */
+    
+                                /**
+                                 * Constructs a new BucketContribution.
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike
+                                 * @classdesc Represents a BucketContribution.
+                                 * @implements IBucketContribution
+                                 * @constructor
+                                 * @param {google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.IBucketContribution=} [properties] Properties to set
+                                 */
+                                function BucketContribution(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * BucketContribution bucket.
+                                 * @member {string} bucket
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution
+                                 * @instance
+                                 */
+                                BucketContribution.prototype.bucket = "";
+    
+                                /**
+                                 * BucketContribution throttledRequests.
+                                 * @member {number|Long} throttledRequests
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution
+                                 * @instance
+                                 */
+                                BucketContribution.prototype.throttledRequests = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                                /**
+                                 * BucketContribution percentageIncrease.
+                                 * @member {number} percentageIncrease
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution
+                                 * @instance
+                                 */
+                                BucketContribution.prototype.percentageIncrease = 0;
+    
+                                /**
+                                 * BucketContribution contribution.
+                                 * @member {google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.IContribution|null|undefined} contribution
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution
+                                 * @instance
+                                 */
+                                BucketContribution.prototype.contribution = null;
+    
+                                /**
+                                 * BucketContribution error.
+                                 * @member {google.rpc.IStatus|null|undefined} error
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution
+                                 * @instance
+                                 */
+                                BucketContribution.prototype.error = null;
+    
+                                // OneOf field names bound to virtual getters and setters
+                                var $oneOfFields;
+    
+                                /**
+                                 * BucketContribution details.
+                                 * @member {"contribution"|"error"|undefined} details
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution
+                                 * @instance
+                                 */
+                                Object.defineProperty(BucketContribution.prototype, "details", {
+                                    get: $util.oneOfGetter($oneOfFields = ["contribution", "error"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * Creates a new BucketContribution instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution
+                                 * @static
+                                 * @param {google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.IBucketContribution=} [properties] Properties to set
+                                 * @returns {google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution} BucketContribution instance
+                                 */
+                                BucketContribution.create = function create(properties) {
+                                    return new BucketContribution(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified BucketContribution message. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution
+                                 * @static
+                                 * @param {google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.IBucketContribution} message BucketContribution message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                BucketContribution.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.bucket);
+                                    if (message.throttledRequests != null && Object.hasOwnProperty.call(message, "throttledRequests"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int64(message.throttledRequests);
+                                    if (message.percentageIncrease != null && Object.hasOwnProperty.call(message, "percentageIncrease"))
+                                        writer.uint32(/* id 3, wireType 1 =*/25).double(message.percentageIncrease);
+                                    if (message.contribution != null && Object.hasOwnProperty.call(message, "contribution"))
+                                        $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.encode(message.contribution, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                    if (message.error != null && Object.hasOwnProperty.call(message, "error"))
+                                        $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified BucketContribution message, length delimited. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution
+                                 * @static
+                                 * @param {google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.IBucketContribution} message BucketContribution message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                BucketContribution.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a BucketContribution message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution} BucketContribution
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                BucketContribution.decode = function decode(reader, length, error, long) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $Reader.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.bucket = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.throttledRequests = reader.int64();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.percentageIncrease = reader.double();
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.contribution = $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.decode(reader, reader.uint32(), undefined, long + 1);
+                                                break;
+                                            }
+                                        case 5: {
+                                                message.error = $root.google.rpc.Status.decode(reader, reader.uint32(), undefined, long + 1);
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7, long);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a BucketContribution message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution} BucketContribution
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                BucketContribution.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a BucketContribution message.
+                                 * @function verify
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                BucketContribution.verify = function verify(message, long) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        return "maximum nesting depth exceeded";
+                                    var properties = {};
+                                    if (message.bucket != null && message.hasOwnProperty("bucket"))
+                                        if (!$util.isString(message.bucket))
+                                            return "bucket: string expected";
+                                    if (message.throttledRequests != null && message.hasOwnProperty("throttledRequests"))
+                                        if (!$util.isInteger(message.throttledRequests) && !(message.throttledRequests && $util.isInteger(message.throttledRequests.low) && $util.isInteger(message.throttledRequests.high)))
+                                            return "throttledRequests: integer|Long expected";
+                                    if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                        if (typeof message.percentageIncrease !== "number")
+                                            return "percentageIncrease: number expected";
+                                    if (message.contribution != null && message.hasOwnProperty("contribution")) {
+                                        properties.details = 1;
+                                        {
+                                            var error = $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.verify(message.contribution, long + 1);
+                                            if (error)
+                                                return "contribution." + error;
+                                        }
+                                    }
+                                    if (message.error != null && message.hasOwnProperty("error")) {
+                                        if (properties.details === 1)
+                                            return "details: multiple values";
+                                        properties.details = 1;
+                                        {
+                                            var error = $root.google.rpc.Status.verify(message.error, long + 1);
+                                            if (error)
+                                                return "error." + error;
+                                        }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a BucketContribution message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution} BucketContribution
+                                 */
+                                BucketContribution.fromObject = function fromObject(object, long) {
+                                    if (object instanceof $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution)
+                                        return object;
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
+                                    var message = new $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution();
+                                    if (object.bucket != null)
+                                        message.bucket = String(object.bucket);
+                                    if (object.throttledRequests != null)
+                                        if ($util.Long)
+                                            (message.throttledRequests = $util.Long.fromValue(object.throttledRequests)).unsigned = false;
+                                        else if (typeof object.throttledRequests === "string")
+                                            message.throttledRequests = parseInt(object.throttledRequests, 10);
+                                        else if (typeof object.throttledRequests === "number")
+                                            message.throttledRequests = object.throttledRequests;
+                                        else if (typeof object.throttledRequests === "object")
+                                            message.throttledRequests = new $util.LongBits(object.throttledRequests.low >>> 0, object.throttledRequests.high >>> 0).toNumber();
+                                    if (object.percentageIncrease != null)
+                                        message.percentageIncrease = Number(object.percentageIncrease);
+                                    if (object.contribution != null) {
+                                        if (typeof object.contribution !== "object")
+                                            throw TypeError(".google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.contribution: object expected");
+                                        message.contribution = $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.fromObject(object.contribution, long + 1);
+                                    }
+                                    if (object.error != null) {
+                                        if (typeof object.error !== "object")
+                                            throw TypeError(".google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.error: object expected");
+                                        message.error = $root.google.rpc.Status.fromObject(object.error, long + 1);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a BucketContribution message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution
+                                 * @static
+                                 * @param {google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution} message BucketContribution
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                BucketContribution.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.bucket = "";
+                                        if ($util.Long) {
+                                            var long = new $util.Long(0, 0, false);
+                                            object.throttledRequests = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                        } else
+                                            object.throttledRequests = options.longs === String ? "0" : 0;
+                                        object.percentageIncrease = 0;
+                                    }
+                                    if (message.bucket != null && message.hasOwnProperty("bucket"))
+                                        object.bucket = message.bucket;
+                                    if (message.throttledRequests != null && message.hasOwnProperty("throttledRequests"))
+                                        if (typeof message.throttledRequests === "number")
+                                            object.throttledRequests = options.longs === String ? String(message.throttledRequests) : message.throttledRequests;
+                                        else
+                                            object.throttledRequests = options.longs === String ? $util.Long.prototype.toString.call(message.throttledRequests) : options.longs === Number ? new $util.LongBits(message.throttledRequests.low >>> 0, message.throttledRequests.high >>> 0).toNumber() : message.throttledRequests;
+                                    if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                        object.percentageIncrease = options.json && !isFinite(message.percentageIncrease) ? String(message.percentageIncrease) : message.percentageIncrease;
+                                    if (message.contribution != null && message.hasOwnProperty("contribution")) {
+                                        object.contribution = $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.toObject(message.contribution, options);
+                                        if (options.oneofs)
+                                            object.details = "contribution";
+                                    }
+                                    if (message.error != null && message.hasOwnProperty("error")) {
+                                        object.error = $root.google.rpc.Status.toObject(message.error, options);
+                                        if (options.oneofs)
+                                            object.details = "error";
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this BucketContribution to JSON.
+                                 * @function toJSON
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                BucketContribution.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for BucketContribution
+                                 * @function getTypeUrl
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                BucketContribution.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution";
+                                };
+    
+                                BucketContribution.Contribution = (function() {
+    
+                                    /**
+                                     * Properties of a Contribution.
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution
+                                     * @interface IContribution
+                                     * @property {Array.<google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.IPrefixContribution>|null} [topPrefixes] Contribution topPrefixes
+                                     */
+    
+                                    /**
+                                     * Constructs a new Contribution.
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution
+                                     * @classdesc Represents a Contribution.
+                                     * @implements IContribution
+                                     * @constructor
+                                     * @param {google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.IContribution=} [properties] Properties to set
+                                     */
+                                    function Contribution(properties) {
+                                        this.topPrefixes = [];
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * Contribution topPrefixes.
+                                     * @member {Array.<google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.IPrefixContribution>} topPrefixes
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution
+                                     * @instance
+                                     */
+                                    Contribution.prototype.topPrefixes = $util.emptyArray;
+    
+                                    /**
+                                     * Creates a new Contribution instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution
+                                     * @static
+                                     * @param {google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.IContribution=} [properties] Properties to set
+                                     * @returns {google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution} Contribution instance
+                                     */
+                                    Contribution.create = function create(properties) {
+                                        return new Contribution(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Contribution message. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution
+                                     * @static
+                                     * @param {google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.IContribution} message Contribution message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Contribution.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.topPrefixes != null && message.topPrefixes.length)
+                                            for (var i = 0; i < message.topPrefixes.length; ++i)
+                                                $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution.encode(message.topPrefixes[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Contribution message, length delimited. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution
+                                     * @static
+                                     * @param {google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.IContribution} message Contribution message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Contribution.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a Contribution message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution} Contribution
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Contribution.decode = function decode(reader, length, error, long) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        if (long === undefined)
+                                            long = 0;
+                                        if (long > $Reader.recursionLimit)
+                                            throw Error("maximum nesting depth exceeded");
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            if (tag === error)
+                                                break;
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    if (!(message.topPrefixes && message.topPrefixes.length))
+                                                        message.topPrefixes = [];
+                                                    message.topPrefixes.push($root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution.decode(reader, reader.uint32(), undefined, long + 1));
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7, long);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a Contribution message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution} Contribution
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Contribution.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a Contribution message.
+                                     * @function verify
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    Contribution.verify = function verify(message, long) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (long === undefined)
+                                            long = 0;
+                                        if (long > $util.recursionLimit)
+                                            return "maximum nesting depth exceeded";
+                                        if (message.topPrefixes != null && message.hasOwnProperty("topPrefixes")) {
+                                            if (!Array.isArray(message.topPrefixes))
+                                                return "topPrefixes: array expected";
+                                            for (var i = 0; i < message.topPrefixes.length; ++i) {
+                                                var error = $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution.verify(message.topPrefixes[i], long + 1);
+                                                if (error)
+                                                    return "topPrefixes." + error;
+                                            }
+                                        }
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a Contribution message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution} Contribution
+                                     */
+                                    Contribution.fromObject = function fromObject(object, long) {
+                                        if (object instanceof $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution)
+                                            return object;
+                                        if (long === undefined)
+                                            long = 0;
+                                        if (long > $util.recursionLimit)
+                                            throw Error("maximum nesting depth exceeded");
+                                        var message = new $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution();
+                                        if (object.topPrefixes) {
+                                            if (!Array.isArray(object.topPrefixes))
+                                                throw TypeError(".google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.topPrefixes: array expected");
+                                            message.topPrefixes = [];
+                                            for (var i = 0; i < object.topPrefixes.length; ++i) {
+                                                if (typeof object.topPrefixes[i] !== "object")
+                                                    throw TypeError(".google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.topPrefixes: object expected");
+                                                message.topPrefixes[i] = $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution.fromObject(object.topPrefixes[i], long + 1);
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a Contribution message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution
+                                     * @static
+                                     * @param {google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution} message Contribution
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    Contribution.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.arrays || options.defaults)
+                                            object.topPrefixes = [];
+                                        if (message.topPrefixes && message.topPrefixes.length) {
+                                            object.topPrefixes = [];
+                                            for (var j = 0; j < message.topPrefixes.length; ++j)
+                                                object.topPrefixes[j] = $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution.toObject(message.topPrefixes[j], options);
+                                        }
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this Contribution to JSON.
+                                     * @function toJSON
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    Contribution.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for Contribution
+                                     * @function getTypeUrl
+                                     * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    Contribution.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution";
+                                    };
+    
+                                    Contribution.PrefixContribution = (function() {
+    
+                                        /**
+                                         * Properties of a PrefixContribution.
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution
+                                         * @interface IPrefixContribution
+                                         * @property {string|null} [prefix] PrefixContribution prefix
+                                         * @property {number|Long|null} [throttledRequests] PrefixContribution throttledRequests
+                                         * @property {number|null} [percentageIncrease] PrefixContribution percentageIncrease
+                                         */
+    
+                                        /**
+                                         * Constructs a new PrefixContribution.
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution
+                                         * @classdesc Represents a PrefixContribution.
+                                         * @implements IPrefixContribution
+                                         * @constructor
+                                         * @param {google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.IPrefixContribution=} [properties] Properties to set
+                                         */
+                                        function PrefixContribution(properties) {
+                                            if (properties)
+                                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                                        this[keys[i]] = properties[keys[i]];
+                                        }
+    
+                                        /**
+                                         * PrefixContribution prefix.
+                                         * @member {string} prefix
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @instance
+                                         */
+                                        PrefixContribution.prototype.prefix = "";
+    
+                                        /**
+                                         * PrefixContribution throttledRequests.
+                                         * @member {number|Long} throttledRequests
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @instance
+                                         */
+                                        PrefixContribution.prototype.throttledRequests = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                                        /**
+                                         * PrefixContribution percentageIncrease.
+                                         * @member {number} percentageIncrease
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @instance
+                                         */
+                                        PrefixContribution.prototype.percentageIncrease = 0;
+    
+                                        /**
+                                         * Creates a new PrefixContribution instance using the specified properties.
+                                         * @function create
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @static
+                                         * @param {google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.IPrefixContribution=} [properties] Properties to set
+                                         * @returns {google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution} PrefixContribution instance
+                                         */
+                                        PrefixContribution.create = function create(properties) {
+                                            return new PrefixContribution(properties);
+                                        };
+    
+                                        /**
+                                         * Encodes the specified PrefixContribution message. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution.verify|verify} messages.
+                                         * @function encode
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @static
+                                         * @param {google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.IPrefixContribution} message PrefixContribution message or plain object to encode
+                                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                                         * @returns {$protobuf.Writer} Writer
+                                         */
+                                        PrefixContribution.encode = function encode(message, writer) {
+                                            if (!writer)
+                                                writer = $Writer.create();
+                                            if (message.prefix != null && Object.hasOwnProperty.call(message, "prefix"))
+                                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.prefix);
+                                            if (message.throttledRequests != null && Object.hasOwnProperty.call(message, "throttledRequests"))
+                                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.throttledRequests);
+                                            if (message.percentageIncrease != null && Object.hasOwnProperty.call(message, "percentageIncrease"))
+                                                writer.uint32(/* id 3, wireType 1 =*/25).double(message.percentageIncrease);
+                                            return writer;
+                                        };
+    
+                                        /**
+                                         * Encodes the specified PrefixContribution message, length delimited. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution.verify|verify} messages.
+                                         * @function encodeDelimited
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @static
+                                         * @param {google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.IPrefixContribution} message PrefixContribution message or plain object to encode
+                                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                                         * @returns {$protobuf.Writer} Writer
+                                         */
+                                        PrefixContribution.encodeDelimited = function encodeDelimited(message, writer) {
+                                            return this.encode(message, writer).ldelim();
+                                        };
+    
+                                        /**
+                                         * Decodes a PrefixContribution message from the specified reader or buffer.
+                                         * @function decode
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @static
+                                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                         * @param {number} [length] Message length if known beforehand
+                                         * @returns {google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution} PrefixContribution
+                                         * @throws {Error} If the payload is not a reader or valid buffer
+                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                         */
+                                        PrefixContribution.decode = function decode(reader, length, error, long) {
+                                            if (!(reader instanceof $Reader))
+                                                reader = $Reader.create(reader);
+                                            if (long === undefined)
+                                                long = 0;
+                                            if (long > $Reader.recursionLimit)
+                                                throw Error("maximum nesting depth exceeded");
+                                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution();
+                                            while (reader.pos < end) {
+                                                var tag = reader.uint32();
+                                                if (tag === error)
+                                                    break;
+                                                switch (tag >>> 3) {
+                                                case 1: {
+                                                        message.prefix = reader.string();
+                                                        break;
+                                                    }
+                                                case 2: {
+                                                        message.throttledRequests = reader.int64();
+                                                        break;
+                                                    }
+                                                case 3: {
+                                                        message.percentageIncrease = reader.double();
+                                                        break;
+                                                    }
+                                                default:
+                                                    reader.skipType(tag & 7, long);
+                                                    break;
+                                                }
+                                            }
+                                            return message;
+                                        };
+    
+                                        /**
+                                         * Decodes a PrefixContribution message from the specified reader or buffer, length delimited.
+                                         * @function decodeDelimited
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @static
+                                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                         * @returns {google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution} PrefixContribution
+                                         * @throws {Error} If the payload is not a reader or valid buffer
+                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                         */
+                                        PrefixContribution.decodeDelimited = function decodeDelimited(reader) {
+                                            if (!(reader instanceof $Reader))
+                                                reader = new $Reader(reader);
+                                            return this.decode(reader, reader.uint32());
+                                        };
+    
+                                        /**
+                                         * Verifies a PrefixContribution message.
+                                         * @function verify
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @static
+                                         * @param {Object.<string,*>} message Plain object to verify
+                                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                         */
+                                        PrefixContribution.verify = function verify(message, long) {
+                                            if (typeof message !== "object" || message === null)
+                                                return "object expected";
+                                            if (long === undefined)
+                                                long = 0;
+                                            if (long > $util.recursionLimit)
+                                                return "maximum nesting depth exceeded";
+                                            if (message.prefix != null && message.hasOwnProperty("prefix"))
+                                                if (!$util.isString(message.prefix))
+                                                    return "prefix: string expected";
+                                            if (message.throttledRequests != null && message.hasOwnProperty("throttledRequests"))
+                                                if (!$util.isInteger(message.throttledRequests) && !(message.throttledRequests && $util.isInteger(message.throttledRequests.low) && $util.isInteger(message.throttledRequests.high)))
+                                                    return "throttledRequests: integer|Long expected";
+                                            if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                                if (typeof message.percentageIncrease !== "number")
+                                                    return "percentageIncrease: number expected";
+                                            return null;
+                                        };
+    
+                                        /**
+                                         * Creates a PrefixContribution message from a plain object. Also converts values to their respective internal types.
+                                         * @function fromObject
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @static
+                                         * @param {Object.<string,*>} object Plain object
+                                         * @returns {google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution} PrefixContribution
+                                         */
+                                        PrefixContribution.fromObject = function fromObject(object, long) {
+                                            if (object instanceof $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution)
+                                                return object;
+                                            if (long === undefined)
+                                                long = 0;
+                                            if (long > $util.recursionLimit)
+                                                throw Error("maximum nesting depth exceeded");
+                                            var message = new $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution();
+                                            if (object.prefix != null)
+                                                message.prefix = String(object.prefix);
+                                            if (object.throttledRequests != null)
+                                                if ($util.Long)
+                                                    (message.throttledRequests = $util.Long.fromValue(object.throttledRequests)).unsigned = false;
+                                                else if (typeof object.throttledRequests === "string")
+                                                    message.throttledRequests = parseInt(object.throttledRequests, 10);
+                                                else if (typeof object.throttledRequests === "number")
+                                                    message.throttledRequests = object.throttledRequests;
+                                                else if (typeof object.throttledRequests === "object")
+                                                    message.throttledRequests = new $util.LongBits(object.throttledRequests.low >>> 0, object.throttledRequests.high >>> 0).toNumber();
+                                            if (object.percentageIncrease != null)
+                                                message.percentageIncrease = Number(object.percentageIncrease);
+                                            return message;
+                                        };
+    
+                                        /**
+                                         * Creates a plain object from a PrefixContribution message. Also converts values to other types if specified.
+                                         * @function toObject
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @static
+                                         * @param {google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution} message PrefixContribution
+                                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                         * @returns {Object.<string,*>} Plain object
+                                         */
+                                        PrefixContribution.toObject = function toObject(message, options) {
+                                            if (!options)
+                                                options = {};
+                                            var object = {};
+                                            if (options.defaults) {
+                                                object.prefix = "";
+                                                if ($util.Long) {
+                                                    var long = new $util.Long(0, 0, false);
+                                                    object.throttledRequests = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                                } else
+                                                    object.throttledRequests = options.longs === String ? "0" : 0;
+                                                object.percentageIncrease = 0;
+                                            }
+                                            if (message.prefix != null && message.hasOwnProperty("prefix"))
+                                                object.prefix = message.prefix;
+                                            if (message.throttledRequests != null && message.hasOwnProperty("throttledRequests"))
+                                                if (typeof message.throttledRequests === "number")
+                                                    object.throttledRequests = options.longs === String ? String(message.throttledRequests) : message.throttledRequests;
+                                                else
+                                                    object.throttledRequests = options.longs === String ? $util.Long.prototype.toString.call(message.throttledRequests) : options.longs === Number ? new $util.LongBits(message.throttledRequests.low >>> 0, message.throttledRequests.high >>> 0).toNumber() : message.throttledRequests;
+                                            if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                                object.percentageIncrease = options.json && !isFinite(message.percentageIncrease) ? String(message.percentageIncrease) : message.percentageIncrease;
+                                            return object;
+                                        };
+    
+                                        /**
+                                         * Converts this PrefixContribution to JSON.
+                                         * @function toJSON
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @instance
+                                         * @returns {Object.<string,*>} JSON object
+                                         */
+                                        PrefixContribution.prototype.toJSON = function toJSON() {
+                                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                        };
+    
+                                        /**
+                                         * Gets the default type url for PrefixContribution
+                                         * @function getTypeUrl
+                                         * @memberof google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution
+                                         * @static
+                                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                         * @returns {string} The default type url
+                                         */
+                                        PrefixContribution.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                            if (typeUrlPrefix === undefined) {
+                                                typeUrlPrefix = "type.googleapis.com";
+                                            }
+                                            return typeUrlPrefix + "/google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution";
+                                        };
+    
+                                        return PrefixContribution;
+                                    })();
+    
+                                    return Contribution;
+                                })();
+    
+                                return BucketContribution;
+                            })();
+    
+                            return ThrottledRequestSpike;
+                        })();
+    
+                        IntelligenceFinding.StorageGrowthAboveTrend = (function() {
+    
+                            /**
+                             * Properties of a StorageGrowthAboveTrend.
+                             * @memberof google.storage.control.v2.IntelligenceFinding
+                             * @interface IStorageGrowthAboveTrend
+                             * @property {number|Long|null} [totalStorageGrowthBytes] StorageGrowthAboveTrend totalStorageGrowthBytes
+                             * @property {number|null} [percentageIncrease] StorageGrowthAboveTrend percentageIncrease
+                             * @property {Array.<google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.IBucketContribution>|null} [topBuckets] StorageGrowthAboveTrend topBuckets
+                             */
+    
+                            /**
+                             * Constructs a new StorageGrowthAboveTrend.
+                             * @memberof google.storage.control.v2.IntelligenceFinding
+                             * @classdesc Represents a StorageGrowthAboveTrend.
+                             * @implements IStorageGrowthAboveTrend
+                             * @constructor
+                             * @param {google.storage.control.v2.IntelligenceFinding.IStorageGrowthAboveTrend=} [properties] Properties to set
+                             */
+                            function StorageGrowthAboveTrend(properties) {
+                                this.topBuckets = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * StorageGrowthAboveTrend totalStorageGrowthBytes.
+                             * @member {number|Long} totalStorageGrowthBytes
+                             * @memberof google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend
+                             * @instance
+                             */
+                            StorageGrowthAboveTrend.prototype.totalStorageGrowthBytes = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * StorageGrowthAboveTrend percentageIncrease.
+                             * @member {number} percentageIncrease
+                             * @memberof google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend
+                             * @instance
+                             */
+                            StorageGrowthAboveTrend.prototype.percentageIncrease = 0;
+    
+                            /**
+                             * StorageGrowthAboveTrend topBuckets.
+                             * @member {Array.<google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.IBucketContribution>} topBuckets
+                             * @memberof google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend
+                             * @instance
+                             */
+                            StorageGrowthAboveTrend.prototype.topBuckets = $util.emptyArray;
+    
+                            /**
+                             * Creates a new StorageGrowthAboveTrend instance using the specified properties.
+                             * @function create
+                             * @memberof google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend
+                             * @static
+                             * @param {google.storage.control.v2.IntelligenceFinding.IStorageGrowthAboveTrend=} [properties] Properties to set
+                             * @returns {google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend} StorageGrowthAboveTrend instance
+                             */
+                            StorageGrowthAboveTrend.create = function create(properties) {
+                                return new StorageGrowthAboveTrend(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified StorageGrowthAboveTrend message. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend
+                             * @static
+                             * @param {google.storage.control.v2.IntelligenceFinding.IStorageGrowthAboveTrend} message StorageGrowthAboveTrend message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            StorageGrowthAboveTrend.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.totalStorageGrowthBytes != null && Object.hasOwnProperty.call(message, "totalStorageGrowthBytes"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int64(message.totalStorageGrowthBytes);
+                                if (message.percentageIncrease != null && Object.hasOwnProperty.call(message, "percentageIncrease"))
+                                    writer.uint32(/* id 2, wireType 1 =*/17).double(message.percentageIncrease);
+                                if (message.topBuckets != null && message.topBuckets.length)
+                                    for (var i = 0; i < message.topBuckets.length; ++i)
+                                        $root.google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution.encode(message.topBuckets[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified StorageGrowthAboveTrend message, length delimited. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend
+                             * @static
+                             * @param {google.storage.control.v2.IntelligenceFinding.IStorageGrowthAboveTrend} message StorageGrowthAboveTrend message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            StorageGrowthAboveTrend.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a StorageGrowthAboveTrend message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend} StorageGrowthAboveTrend
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            StorageGrowthAboveTrend.decode = function decode(reader, length, error, long) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.totalStorageGrowthBytes = reader.int64();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.percentageIncrease = reader.double();
+                                            break;
+                                        }
+                                    case 3: {
+                                            if (!(message.topBuckets && message.topBuckets.length))
+                                                message.topBuckets = [];
+                                            message.topBuckets.push($root.google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution.decode(reader, reader.uint32(), undefined, long + 1));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7, long);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a StorageGrowthAboveTrend message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend} StorageGrowthAboveTrend
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            StorageGrowthAboveTrend.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a StorageGrowthAboveTrend message.
+                             * @function verify
+                             * @memberof google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            StorageGrowthAboveTrend.verify = function verify(message, long) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
+                                if (message.totalStorageGrowthBytes != null && message.hasOwnProperty("totalStorageGrowthBytes"))
+                                    if (!$util.isInteger(message.totalStorageGrowthBytes) && !(message.totalStorageGrowthBytes && $util.isInteger(message.totalStorageGrowthBytes.low) && $util.isInteger(message.totalStorageGrowthBytes.high)))
+                                        return "totalStorageGrowthBytes: integer|Long expected";
+                                if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                    if (typeof message.percentageIncrease !== "number")
+                                        return "percentageIncrease: number expected";
+                                if (message.topBuckets != null && message.hasOwnProperty("topBuckets")) {
+                                    if (!Array.isArray(message.topBuckets))
+                                        return "topBuckets: array expected";
+                                    for (var i = 0; i < message.topBuckets.length; ++i) {
+                                        var error = $root.google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution.verify(message.topBuckets[i], long + 1);
+                                        if (error)
+                                            return "topBuckets." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a StorageGrowthAboveTrend message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend} StorageGrowthAboveTrend
+                             */
+                            StorageGrowthAboveTrend.fromObject = function fromObject(object, long) {
+                                if (object instanceof $root.google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend)
+                                    return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var message = new $root.google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend();
+                                if (object.totalStorageGrowthBytes != null)
+                                    if ($util.Long)
+                                        (message.totalStorageGrowthBytes = $util.Long.fromValue(object.totalStorageGrowthBytes)).unsigned = false;
+                                    else if (typeof object.totalStorageGrowthBytes === "string")
+                                        message.totalStorageGrowthBytes = parseInt(object.totalStorageGrowthBytes, 10);
+                                    else if (typeof object.totalStorageGrowthBytes === "number")
+                                        message.totalStorageGrowthBytes = object.totalStorageGrowthBytes;
+                                    else if (typeof object.totalStorageGrowthBytes === "object")
+                                        message.totalStorageGrowthBytes = new $util.LongBits(object.totalStorageGrowthBytes.low >>> 0, object.totalStorageGrowthBytes.high >>> 0).toNumber();
+                                if (object.percentageIncrease != null)
+                                    message.percentageIncrease = Number(object.percentageIncrease);
+                                if (object.topBuckets) {
+                                    if (!Array.isArray(object.topBuckets))
+                                        throw TypeError(".google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.topBuckets: array expected");
+                                    message.topBuckets = [];
+                                    for (var i = 0; i < object.topBuckets.length; ++i) {
+                                        if (typeof object.topBuckets[i] !== "object")
+                                            throw TypeError(".google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.topBuckets: object expected");
+                                        message.topBuckets[i] = $root.google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution.fromObject(object.topBuckets[i], long + 1);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a StorageGrowthAboveTrend message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend
+                             * @static
+                             * @param {google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend} message StorageGrowthAboveTrend
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            StorageGrowthAboveTrend.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.topBuckets = [];
+                                if (options.defaults) {
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.totalStorageGrowthBytes = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.totalStorageGrowthBytes = options.longs === String ? "0" : 0;
+                                    object.percentageIncrease = 0;
+                                }
+                                if (message.totalStorageGrowthBytes != null && message.hasOwnProperty("totalStorageGrowthBytes"))
+                                    if (typeof message.totalStorageGrowthBytes === "number")
+                                        object.totalStorageGrowthBytes = options.longs === String ? String(message.totalStorageGrowthBytes) : message.totalStorageGrowthBytes;
+                                    else
+                                        object.totalStorageGrowthBytes = options.longs === String ? $util.Long.prototype.toString.call(message.totalStorageGrowthBytes) : options.longs === Number ? new $util.LongBits(message.totalStorageGrowthBytes.low >>> 0, message.totalStorageGrowthBytes.high >>> 0).toNumber() : message.totalStorageGrowthBytes;
+                                if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                    object.percentageIncrease = options.json && !isFinite(message.percentageIncrease) ? String(message.percentageIncrease) : message.percentageIncrease;
+                                if (message.topBuckets && message.topBuckets.length) {
+                                    object.topBuckets = [];
+                                    for (var j = 0; j < message.topBuckets.length; ++j)
+                                        object.topBuckets[j] = $root.google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution.toObject(message.topBuckets[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this StorageGrowthAboveTrend to JSON.
+                             * @function toJSON
+                             * @memberof google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            StorageGrowthAboveTrend.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for StorageGrowthAboveTrend
+                             * @function getTypeUrl
+                             * @memberof google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            StorageGrowthAboveTrend.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend";
+                            };
+    
+                            StorageGrowthAboveTrend.BucketContribution = (function() {
+    
+                                /**
+                                 * Properties of a BucketContribution.
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend
+                                 * @interface IBucketContribution
+                                 * @property {string|null} [bucket] BucketContribution bucket
+                                 * @property {number|Long|null} [totalStorageGrowthBytes] BucketContribution totalStorageGrowthBytes
+                                 * @property {number|null} [percentageIncrease] BucketContribution percentageIncrease
+                                 * @property {google.rpc.IStatus|null} [error] BucketContribution error
+                                 */
+    
+                                /**
+                                 * Constructs a new BucketContribution.
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend
+                                 * @classdesc Represents a BucketContribution.
+                                 * @implements IBucketContribution
+                                 * @constructor
+                                 * @param {google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.IBucketContribution=} [properties] Properties to set
+                                 */
+                                function BucketContribution(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * BucketContribution bucket.
+                                 * @member {string} bucket
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution
+                                 * @instance
+                                 */
+                                BucketContribution.prototype.bucket = "";
+    
+                                /**
+                                 * BucketContribution totalStorageGrowthBytes.
+                                 * @member {number|Long} totalStorageGrowthBytes
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution
+                                 * @instance
+                                 */
+                                BucketContribution.prototype.totalStorageGrowthBytes = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                                /**
+                                 * BucketContribution percentageIncrease.
+                                 * @member {number} percentageIncrease
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution
+                                 * @instance
+                                 */
+                                BucketContribution.prototype.percentageIncrease = 0;
+    
+                                /**
+                                 * BucketContribution error.
+                                 * @member {google.rpc.IStatus|null|undefined} error
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution
+                                 * @instance
+                                 */
+                                BucketContribution.prototype.error = null;
+    
+                                // OneOf field names bound to virtual getters and setters
+                                var $oneOfFields;
+    
+                                /**
+                                 * BucketContribution details.
+                                 * @member {"error"|undefined} details
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution
+                                 * @instance
+                                 */
+                                Object.defineProperty(BucketContribution.prototype, "details", {
+                                    get: $util.oneOfGetter($oneOfFields = ["error"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * Creates a new BucketContribution instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution
+                                 * @static
+                                 * @param {google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.IBucketContribution=} [properties] Properties to set
+                                 * @returns {google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution} BucketContribution instance
+                                 */
+                                BucketContribution.create = function create(properties) {
+                                    return new BucketContribution(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified BucketContribution message. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution
+                                 * @static
+                                 * @param {google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.IBucketContribution} message BucketContribution message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                BucketContribution.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.bucket);
+                                    if (message.totalStorageGrowthBytes != null && Object.hasOwnProperty.call(message, "totalStorageGrowthBytes"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int64(message.totalStorageGrowthBytes);
+                                    if (message.percentageIncrease != null && Object.hasOwnProperty.call(message, "percentageIncrease"))
+                                        writer.uint32(/* id 3, wireType 1 =*/25).double(message.percentageIncrease);
+                                    if (message.error != null && Object.hasOwnProperty.call(message, "error"))
+                                        $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified BucketContribution message, length delimited. Does not implicitly {@link google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution
+                                 * @static
+                                 * @param {google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.IBucketContribution} message BucketContribution message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                BucketContribution.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a BucketContribution message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution} BucketContribution
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                BucketContribution.decode = function decode(reader, length, error, long) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $Reader.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.bucket = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.totalStorageGrowthBytes = reader.int64();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.percentageIncrease = reader.double();
+                                                break;
+                                            }
+                                        case 5: {
+                                                message.error = $root.google.rpc.Status.decode(reader, reader.uint32(), undefined, long + 1);
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7, long);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a BucketContribution message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution} BucketContribution
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                BucketContribution.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a BucketContribution message.
+                                 * @function verify
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                BucketContribution.verify = function verify(message, long) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        return "maximum nesting depth exceeded";
+                                    var properties = {};
+                                    if (message.bucket != null && message.hasOwnProperty("bucket"))
+                                        if (!$util.isString(message.bucket))
+                                            return "bucket: string expected";
+                                    if (message.totalStorageGrowthBytes != null && message.hasOwnProperty("totalStorageGrowthBytes"))
+                                        if (!$util.isInteger(message.totalStorageGrowthBytes) && !(message.totalStorageGrowthBytes && $util.isInteger(message.totalStorageGrowthBytes.low) && $util.isInteger(message.totalStorageGrowthBytes.high)))
+                                            return "totalStorageGrowthBytes: integer|Long expected";
+                                    if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                        if (typeof message.percentageIncrease !== "number")
+                                            return "percentageIncrease: number expected";
+                                    if (message.error != null && message.hasOwnProperty("error")) {
+                                        properties.details = 1;
+                                        {
+                                            var error = $root.google.rpc.Status.verify(message.error, long + 1);
+                                            if (error)
+                                                return "error." + error;
+                                        }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a BucketContribution message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution} BucketContribution
+                                 */
+                                BucketContribution.fromObject = function fromObject(object, long) {
+                                    if (object instanceof $root.google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution)
+                                        return object;
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
+                                    var message = new $root.google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution();
+                                    if (object.bucket != null)
+                                        message.bucket = String(object.bucket);
+                                    if (object.totalStorageGrowthBytes != null)
+                                        if ($util.Long)
+                                            (message.totalStorageGrowthBytes = $util.Long.fromValue(object.totalStorageGrowthBytes)).unsigned = false;
+                                        else if (typeof object.totalStorageGrowthBytes === "string")
+                                            message.totalStorageGrowthBytes = parseInt(object.totalStorageGrowthBytes, 10);
+                                        else if (typeof object.totalStorageGrowthBytes === "number")
+                                            message.totalStorageGrowthBytes = object.totalStorageGrowthBytes;
+                                        else if (typeof object.totalStorageGrowthBytes === "object")
+                                            message.totalStorageGrowthBytes = new $util.LongBits(object.totalStorageGrowthBytes.low >>> 0, object.totalStorageGrowthBytes.high >>> 0).toNumber();
+                                    if (object.percentageIncrease != null)
+                                        message.percentageIncrease = Number(object.percentageIncrease);
+                                    if (object.error != null) {
+                                        if (typeof object.error !== "object")
+                                            throw TypeError(".google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution.error: object expected");
+                                        message.error = $root.google.rpc.Status.fromObject(object.error, long + 1);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a BucketContribution message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution
+                                 * @static
+                                 * @param {google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution} message BucketContribution
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                BucketContribution.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.bucket = "";
+                                        if ($util.Long) {
+                                            var long = new $util.Long(0, 0, false);
+                                            object.totalStorageGrowthBytes = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                        } else
+                                            object.totalStorageGrowthBytes = options.longs === String ? "0" : 0;
+                                        object.percentageIncrease = 0;
+                                    }
+                                    if (message.bucket != null && message.hasOwnProperty("bucket"))
+                                        object.bucket = message.bucket;
+                                    if (message.totalStorageGrowthBytes != null && message.hasOwnProperty("totalStorageGrowthBytes"))
+                                        if (typeof message.totalStorageGrowthBytes === "number")
+                                            object.totalStorageGrowthBytes = options.longs === String ? String(message.totalStorageGrowthBytes) : message.totalStorageGrowthBytes;
+                                        else
+                                            object.totalStorageGrowthBytes = options.longs === String ? $util.Long.prototype.toString.call(message.totalStorageGrowthBytes) : options.longs === Number ? new $util.LongBits(message.totalStorageGrowthBytes.low >>> 0, message.totalStorageGrowthBytes.high >>> 0).toNumber() : message.totalStorageGrowthBytes;
+                                    if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                        object.percentageIncrease = options.json && !isFinite(message.percentageIncrease) ? String(message.percentageIncrease) : message.percentageIncrease;
+                                    if (message.error != null && message.hasOwnProperty("error")) {
+                                        object.error = $root.google.rpc.Status.toObject(message.error, options);
+                                        if (options.oneofs)
+                                            object.details = "error";
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this BucketContribution to JSON.
+                                 * @function toJSON
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                BucketContribution.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for BucketContribution
+                                 * @function getTypeUrl
+                                 * @memberof google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                BucketContribution.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution";
+                                };
+    
+                                return BucketContribution;
+                            })();
+    
+                            return StorageGrowthAboveTrend;
+                        })();
+    
+                        return IntelligenceFinding;
+                    })();
+    
+                    v2.IntelligenceFindingRevision = (function() {
+    
+                        /**
+                         * Properties of an IntelligenceFindingRevision.
+                         * @memberof google.storage.control.v2
+                         * @interface IIntelligenceFindingRevision
+                         * @property {string|null} [name] IntelligenceFindingRevision name
+                         * @property {google.storage.control.v2.IIntelligenceFinding|null} [snapshot] IntelligenceFindingRevision snapshot
+                         * @property {google.protobuf.ITimestamp|null} [createTime] IntelligenceFindingRevision createTime
+                         */
+    
+                        /**
+                         * Constructs a new IntelligenceFindingRevision.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents an IntelligenceFindingRevision.
+                         * @implements IIntelligenceFindingRevision
+                         * @constructor
+                         * @param {google.storage.control.v2.IIntelligenceFindingRevision=} [properties] Properties to set
+                         */
+                        function IntelligenceFindingRevision(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * IntelligenceFindingRevision name.
+                         * @member {string} name
+                         * @memberof google.storage.control.v2.IntelligenceFindingRevision
+                         * @instance
+                         */
+                        IntelligenceFindingRevision.prototype.name = "";
+    
+                        /**
+                         * IntelligenceFindingRevision snapshot.
+                         * @member {google.storage.control.v2.IIntelligenceFinding|null|undefined} snapshot
+                         * @memberof google.storage.control.v2.IntelligenceFindingRevision
+                         * @instance
+                         */
+                        IntelligenceFindingRevision.prototype.snapshot = null;
+    
+                        /**
+                         * IntelligenceFindingRevision createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.storage.control.v2.IntelligenceFindingRevision
+                         * @instance
+                         */
+                        IntelligenceFindingRevision.prototype.createTime = null;
+    
+                        /**
+                         * Creates a new IntelligenceFindingRevision instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.IntelligenceFindingRevision
+                         * @static
+                         * @param {google.storage.control.v2.IIntelligenceFindingRevision=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.IntelligenceFindingRevision} IntelligenceFindingRevision instance
+                         */
+                        IntelligenceFindingRevision.create = function create(properties) {
+                            return new IntelligenceFindingRevision(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified IntelligenceFindingRevision message. Does not implicitly {@link google.storage.control.v2.IntelligenceFindingRevision.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.IntelligenceFindingRevision
+                         * @static
+                         * @param {google.storage.control.v2.IIntelligenceFindingRevision} message IntelligenceFindingRevision message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        IntelligenceFindingRevision.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.snapshot != null && Object.hasOwnProperty.call(message, "snapshot"))
+                                $root.google.storage.control.v2.IntelligenceFinding.encode(message.snapshot, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified IntelligenceFindingRevision message, length delimited. Does not implicitly {@link google.storage.control.v2.IntelligenceFindingRevision.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.IntelligenceFindingRevision
+                         * @static
+                         * @param {google.storage.control.v2.IIntelligenceFindingRevision} message IntelligenceFindingRevision message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        IntelligenceFindingRevision.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an IntelligenceFindingRevision message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.IntelligenceFindingRevision
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.IntelligenceFindingRevision} IntelligenceFindingRevision
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        IntelligenceFindingRevision.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.IntelligenceFindingRevision();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.snapshot = $root.google.storage.control.v2.IntelligenceFinding.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 3: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an IntelligenceFindingRevision message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.IntelligenceFindingRevision
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.IntelligenceFindingRevision} IntelligenceFindingRevision
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        IntelligenceFindingRevision.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an IntelligenceFindingRevision message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.IntelligenceFindingRevision
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        IntelligenceFindingRevision.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.snapshot != null && message.hasOwnProperty("snapshot")) {
+                                var error = $root.google.storage.control.v2.IntelligenceFinding.verify(message.snapshot, long + 1);
+                                if (error)
+                                    return "snapshot." + error;
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime, long + 1);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an IntelligenceFindingRevision message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.IntelligenceFindingRevision
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.IntelligenceFindingRevision} IntelligenceFindingRevision
+                         */
+                        IntelligenceFindingRevision.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.storage.control.v2.IntelligenceFindingRevision)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.storage.control.v2.IntelligenceFindingRevision();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.snapshot != null) {
+                                if (typeof object.snapshot !== "object")
+                                    throw TypeError(".google.storage.control.v2.IntelligenceFindingRevision.snapshot: object expected");
+                                message.snapshot = $root.google.storage.control.v2.IntelligenceFinding.fromObject(object.snapshot, long + 1);
+                            }
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.storage.control.v2.IntelligenceFindingRevision.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime, long + 1);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an IntelligenceFindingRevision message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.IntelligenceFindingRevision
+                         * @static
+                         * @param {google.storage.control.v2.IntelligenceFindingRevision} message IntelligenceFindingRevision
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        IntelligenceFindingRevision.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.snapshot = null;
+                                object.createTime = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.snapshot != null && message.hasOwnProperty("snapshot"))
+                                object.snapshot = $root.google.storage.control.v2.IntelligenceFinding.toObject(message.snapshot, options);
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this IntelligenceFindingRevision to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.IntelligenceFindingRevision
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        IntelligenceFindingRevision.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for IntelligenceFindingRevision
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.IntelligenceFindingRevision
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        IntelligenceFindingRevision.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.IntelligenceFindingRevision";
+                        };
+    
+                        return IntelligenceFindingRevision;
+                    })();
+    
+                    v2.GetIntelligenceFindingRequest = (function() {
+    
+                        /**
+                         * Properties of a GetIntelligenceFindingRequest.
+                         * @memberof google.storage.control.v2
+                         * @interface IGetIntelligenceFindingRequest
+                         * @property {string|null} [name] GetIntelligenceFindingRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetIntelligenceFindingRequest.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents a GetIntelligenceFindingRequest.
+                         * @implements IGetIntelligenceFindingRequest
+                         * @constructor
+                         * @param {google.storage.control.v2.IGetIntelligenceFindingRequest=} [properties] Properties to set
+                         */
+                        function GetIntelligenceFindingRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetIntelligenceFindingRequest name.
+                         * @member {string} name
+                         * @memberof google.storage.control.v2.GetIntelligenceFindingRequest
+                         * @instance
+                         */
+                        GetIntelligenceFindingRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetIntelligenceFindingRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.GetIntelligenceFindingRequest
+                         * @static
+                         * @param {google.storage.control.v2.IGetIntelligenceFindingRequest=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.GetIntelligenceFindingRequest} GetIntelligenceFindingRequest instance
+                         */
+                        GetIntelligenceFindingRequest.create = function create(properties) {
+                            return new GetIntelligenceFindingRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetIntelligenceFindingRequest message. Does not implicitly {@link google.storage.control.v2.GetIntelligenceFindingRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.GetIntelligenceFindingRequest
+                         * @static
+                         * @param {google.storage.control.v2.IGetIntelligenceFindingRequest} message GetIntelligenceFindingRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetIntelligenceFindingRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetIntelligenceFindingRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.GetIntelligenceFindingRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.GetIntelligenceFindingRequest
+                         * @static
+                         * @param {google.storage.control.v2.IGetIntelligenceFindingRequest} message GetIntelligenceFindingRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetIntelligenceFindingRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetIntelligenceFindingRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.GetIntelligenceFindingRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.GetIntelligenceFindingRequest} GetIntelligenceFindingRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetIntelligenceFindingRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.GetIntelligenceFindingRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetIntelligenceFindingRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.GetIntelligenceFindingRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.GetIntelligenceFindingRequest} GetIntelligenceFindingRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetIntelligenceFindingRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetIntelligenceFindingRequest message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.GetIntelligenceFindingRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetIntelligenceFindingRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetIntelligenceFindingRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.GetIntelligenceFindingRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.GetIntelligenceFindingRequest} GetIntelligenceFindingRequest
+                         */
+                        GetIntelligenceFindingRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.storage.control.v2.GetIntelligenceFindingRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.storage.control.v2.GetIntelligenceFindingRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetIntelligenceFindingRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.GetIntelligenceFindingRequest
+                         * @static
+                         * @param {google.storage.control.v2.GetIntelligenceFindingRequest} message GetIntelligenceFindingRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetIntelligenceFindingRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetIntelligenceFindingRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.GetIntelligenceFindingRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetIntelligenceFindingRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetIntelligenceFindingRequest
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.GetIntelligenceFindingRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetIntelligenceFindingRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.GetIntelligenceFindingRequest";
+                        };
+    
+                        return GetIntelligenceFindingRequest;
+                    })();
+    
+                    v2.ListIntelligenceFindingsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListIntelligenceFindingsRequest.
+                         * @memberof google.storage.control.v2
+                         * @interface IListIntelligenceFindingsRequest
+                         * @property {string|null} [parent] ListIntelligenceFindingsRequest parent
+                         * @property {string|null} [filter] ListIntelligenceFindingsRequest filter
+                         * @property {number|null} [pageSize] ListIntelligenceFindingsRequest pageSize
+                         * @property {string|null} [pageToken] ListIntelligenceFindingsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListIntelligenceFindingsRequest.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents a ListIntelligenceFindingsRequest.
+                         * @implements IListIntelligenceFindingsRequest
+                         * @constructor
+                         * @param {google.storage.control.v2.IListIntelligenceFindingsRequest=} [properties] Properties to set
+                         */
+                        function ListIntelligenceFindingsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListIntelligenceFindingsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingsRequest
+                         * @instance
+                         */
+                        ListIntelligenceFindingsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListIntelligenceFindingsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingsRequest
+                         * @instance
+                         */
+                        ListIntelligenceFindingsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListIntelligenceFindingsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingsRequest
+                         * @instance
+                         */
+                        ListIntelligenceFindingsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListIntelligenceFindingsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingsRequest
+                         * @instance
+                         */
+                        ListIntelligenceFindingsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListIntelligenceFindingsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingsRequest
+                         * @static
+                         * @param {google.storage.control.v2.IListIntelligenceFindingsRequest=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.ListIntelligenceFindingsRequest} ListIntelligenceFindingsRequest instance
+                         */
+                        ListIntelligenceFindingsRequest.create = function create(properties) {
+                            return new ListIntelligenceFindingsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListIntelligenceFindingsRequest message. Does not implicitly {@link google.storage.control.v2.ListIntelligenceFindingsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingsRequest
+                         * @static
+                         * @param {google.storage.control.v2.IListIntelligenceFindingsRequest} message ListIntelligenceFindingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListIntelligenceFindingsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.filter);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListIntelligenceFindingsRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.ListIntelligenceFindingsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingsRequest
+                         * @static
+                         * @param {google.storage.control.v2.IListIntelligenceFindingsRequest} message ListIntelligenceFindingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListIntelligenceFindingsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListIntelligenceFindingsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.ListIntelligenceFindingsRequest} ListIntelligenceFindingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListIntelligenceFindingsRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.ListIntelligenceFindingsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListIntelligenceFindingsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.ListIntelligenceFindingsRequest} ListIntelligenceFindingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListIntelligenceFindingsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListIntelligenceFindingsRequest message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListIntelligenceFindingsRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListIntelligenceFindingsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.ListIntelligenceFindingsRequest} ListIntelligenceFindingsRequest
+                         */
+                        ListIntelligenceFindingsRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.storage.control.v2.ListIntelligenceFindingsRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.storage.control.v2.ListIntelligenceFindingsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListIntelligenceFindingsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingsRequest
+                         * @static
+                         * @param {google.storage.control.v2.ListIntelligenceFindingsRequest} message ListIntelligenceFindingsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListIntelligenceFindingsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.filter = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListIntelligenceFindingsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListIntelligenceFindingsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListIntelligenceFindingsRequest
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListIntelligenceFindingsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.ListIntelligenceFindingsRequest";
+                        };
+    
+                        return ListIntelligenceFindingsRequest;
+                    })();
+    
+                    v2.ListIntelligenceFindingsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListIntelligenceFindingsResponse.
+                         * @memberof google.storage.control.v2
+                         * @interface IListIntelligenceFindingsResponse
+                         * @property {Array.<google.storage.control.v2.IIntelligenceFinding>|null} [intelligenceFindings] ListIntelligenceFindingsResponse intelligenceFindings
+                         * @property {string|null} [nextPageToken] ListIntelligenceFindingsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListIntelligenceFindingsResponse.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents a ListIntelligenceFindingsResponse.
+                         * @implements IListIntelligenceFindingsResponse
+                         * @constructor
+                         * @param {google.storage.control.v2.IListIntelligenceFindingsResponse=} [properties] Properties to set
+                         */
+                        function ListIntelligenceFindingsResponse(properties) {
+                            this.intelligenceFindings = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListIntelligenceFindingsResponse intelligenceFindings.
+                         * @member {Array.<google.storage.control.v2.IIntelligenceFinding>} intelligenceFindings
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingsResponse
+                         * @instance
+                         */
+                        ListIntelligenceFindingsResponse.prototype.intelligenceFindings = $util.emptyArray;
+    
+                        /**
+                         * ListIntelligenceFindingsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingsResponse
+                         * @instance
+                         */
+                        ListIntelligenceFindingsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListIntelligenceFindingsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingsResponse
+                         * @static
+                         * @param {google.storage.control.v2.IListIntelligenceFindingsResponse=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.ListIntelligenceFindingsResponse} ListIntelligenceFindingsResponse instance
+                         */
+                        ListIntelligenceFindingsResponse.create = function create(properties) {
+                            return new ListIntelligenceFindingsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListIntelligenceFindingsResponse message. Does not implicitly {@link google.storage.control.v2.ListIntelligenceFindingsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingsResponse
+                         * @static
+                         * @param {google.storage.control.v2.IListIntelligenceFindingsResponse} message ListIntelligenceFindingsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListIntelligenceFindingsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.intelligenceFindings != null && message.intelligenceFindings.length)
+                                for (var i = 0; i < message.intelligenceFindings.length; ++i)
+                                    $root.google.storage.control.v2.IntelligenceFinding.encode(message.intelligenceFindings[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListIntelligenceFindingsResponse message, length delimited. Does not implicitly {@link google.storage.control.v2.ListIntelligenceFindingsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingsResponse
+                         * @static
+                         * @param {google.storage.control.v2.IListIntelligenceFindingsResponse} message ListIntelligenceFindingsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListIntelligenceFindingsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListIntelligenceFindingsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.ListIntelligenceFindingsResponse} ListIntelligenceFindingsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListIntelligenceFindingsResponse.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.ListIntelligenceFindingsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.intelligenceFindings && message.intelligenceFindings.length))
+                                            message.intelligenceFindings = [];
+                                        message.intelligenceFindings.push($root.google.storage.control.v2.IntelligenceFinding.decode(reader, reader.uint32(), undefined, long + 1));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListIntelligenceFindingsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.ListIntelligenceFindingsResponse} ListIntelligenceFindingsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListIntelligenceFindingsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListIntelligenceFindingsResponse message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListIntelligenceFindingsResponse.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.intelligenceFindings != null && message.hasOwnProperty("intelligenceFindings")) {
+                                if (!Array.isArray(message.intelligenceFindings))
+                                    return "intelligenceFindings: array expected";
+                                for (var i = 0; i < message.intelligenceFindings.length; ++i) {
+                                    var error = $root.google.storage.control.v2.IntelligenceFinding.verify(message.intelligenceFindings[i], long + 1);
+                                    if (error)
+                                        return "intelligenceFindings." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListIntelligenceFindingsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.ListIntelligenceFindingsResponse} ListIntelligenceFindingsResponse
+                         */
+                        ListIntelligenceFindingsResponse.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.storage.control.v2.ListIntelligenceFindingsResponse)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.storage.control.v2.ListIntelligenceFindingsResponse();
+                            if (object.intelligenceFindings) {
+                                if (!Array.isArray(object.intelligenceFindings))
+                                    throw TypeError(".google.storage.control.v2.ListIntelligenceFindingsResponse.intelligenceFindings: array expected");
+                                message.intelligenceFindings = [];
+                                for (var i = 0; i < object.intelligenceFindings.length; ++i) {
+                                    if (typeof object.intelligenceFindings[i] !== "object")
+                                        throw TypeError(".google.storage.control.v2.ListIntelligenceFindingsResponse.intelligenceFindings: object expected");
+                                    message.intelligenceFindings[i] = $root.google.storage.control.v2.IntelligenceFinding.fromObject(object.intelligenceFindings[i], long + 1);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListIntelligenceFindingsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingsResponse
+                         * @static
+                         * @param {google.storage.control.v2.ListIntelligenceFindingsResponse} message ListIntelligenceFindingsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListIntelligenceFindingsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.intelligenceFindings = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.intelligenceFindings && message.intelligenceFindings.length) {
+                                object.intelligenceFindings = [];
+                                for (var j = 0; j < message.intelligenceFindings.length; ++j)
+                                    object.intelligenceFindings[j] = $root.google.storage.control.v2.IntelligenceFinding.toObject(message.intelligenceFindings[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListIntelligenceFindingsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListIntelligenceFindingsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListIntelligenceFindingsResponse
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListIntelligenceFindingsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.ListIntelligenceFindingsResponse";
+                        };
+    
+                        return ListIntelligenceFindingsResponse;
+                    })();
+    
+                    v2.SummarizeIntelligenceFindingsRequest = (function() {
+    
+                        /**
+                         * Properties of a SummarizeIntelligenceFindingsRequest.
+                         * @memberof google.storage.control.v2
+                         * @interface ISummarizeIntelligenceFindingsRequest
+                         * @property {string|null} [parent] SummarizeIntelligenceFindingsRequest parent
+                         * @property {google.storage.control.v2.SummarizeIntelligenceFindingsRequest.ResourceScope|null} [resourceScope] SummarizeIntelligenceFindingsRequest resourceScope
+                         * @property {string|null} [filter] SummarizeIntelligenceFindingsRequest filter
+                         * @property {number|null} [pageSize] SummarizeIntelligenceFindingsRequest pageSize
+                         * @property {string|null} [pageToken] SummarizeIntelligenceFindingsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new SummarizeIntelligenceFindingsRequest.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents a SummarizeIntelligenceFindingsRequest.
+                         * @implements ISummarizeIntelligenceFindingsRequest
+                         * @constructor
+                         * @param {google.storage.control.v2.ISummarizeIntelligenceFindingsRequest=} [properties] Properties to set
+                         */
+                        function SummarizeIntelligenceFindingsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SummarizeIntelligenceFindingsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.storage.control.v2.SummarizeIntelligenceFindingsRequest
+                         * @instance
+                         */
+                        SummarizeIntelligenceFindingsRequest.prototype.parent = "";
+    
+                        /**
+                         * SummarizeIntelligenceFindingsRequest resourceScope.
+                         * @member {google.storage.control.v2.SummarizeIntelligenceFindingsRequest.ResourceScope} resourceScope
+                         * @memberof google.storage.control.v2.SummarizeIntelligenceFindingsRequest
+                         * @instance
+                         */
+                        SummarizeIntelligenceFindingsRequest.prototype.resourceScope = 0;
+    
+                        /**
+                         * SummarizeIntelligenceFindingsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.storage.control.v2.SummarizeIntelligenceFindingsRequest
+                         * @instance
+                         */
+                        SummarizeIntelligenceFindingsRequest.prototype.filter = "";
+    
+                        /**
+                         * SummarizeIntelligenceFindingsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.storage.control.v2.SummarizeIntelligenceFindingsRequest
+                         * @instance
+                         */
+                        SummarizeIntelligenceFindingsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * SummarizeIntelligenceFindingsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.storage.control.v2.SummarizeIntelligenceFindingsRequest
+                         * @instance
+                         */
+                        SummarizeIntelligenceFindingsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new SummarizeIntelligenceFindingsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.SummarizeIntelligenceFindingsRequest
+                         * @static
+                         * @param {google.storage.control.v2.ISummarizeIntelligenceFindingsRequest=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.SummarizeIntelligenceFindingsRequest} SummarizeIntelligenceFindingsRequest instance
+                         */
+                        SummarizeIntelligenceFindingsRequest.create = function create(properties) {
+                            return new SummarizeIntelligenceFindingsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SummarizeIntelligenceFindingsRequest message. Does not implicitly {@link google.storage.control.v2.SummarizeIntelligenceFindingsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.SummarizeIntelligenceFindingsRequest
+                         * @static
+                         * @param {google.storage.control.v2.ISummarizeIntelligenceFindingsRequest} message SummarizeIntelligenceFindingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SummarizeIntelligenceFindingsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.resourceScope != null && Object.hasOwnProperty.call(message, "resourceScope"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.resourceScope);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.filter);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SummarizeIntelligenceFindingsRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.SummarizeIntelligenceFindingsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.SummarizeIntelligenceFindingsRequest
+                         * @static
+                         * @param {google.storage.control.v2.ISummarizeIntelligenceFindingsRequest} message SummarizeIntelligenceFindingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SummarizeIntelligenceFindingsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SummarizeIntelligenceFindingsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.SummarizeIntelligenceFindingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.SummarizeIntelligenceFindingsRequest} SummarizeIntelligenceFindingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SummarizeIntelligenceFindingsRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.SummarizeIntelligenceFindingsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.resourceScope = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SummarizeIntelligenceFindingsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.SummarizeIntelligenceFindingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.SummarizeIntelligenceFindingsRequest} SummarizeIntelligenceFindingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SummarizeIntelligenceFindingsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SummarizeIntelligenceFindingsRequest message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.SummarizeIntelligenceFindingsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SummarizeIntelligenceFindingsRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.resourceScope != null && message.hasOwnProperty("resourceScope"))
+                                switch (message.resourceScope) {
+                                default:
+                                    return "resourceScope: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SummarizeIntelligenceFindingsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.SummarizeIntelligenceFindingsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.SummarizeIntelligenceFindingsRequest} SummarizeIntelligenceFindingsRequest
+                         */
+                        SummarizeIntelligenceFindingsRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.storage.control.v2.SummarizeIntelligenceFindingsRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.storage.control.v2.SummarizeIntelligenceFindingsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            switch (object.resourceScope) {
+                            default:
+                                if (typeof object.resourceScope === "number") {
+                                    message.resourceScope = object.resourceScope;
+                                    break;
+                                }
+                                break;
+                            case "RESOURCE_SCOPE_UNSPECIFIED":
+                            case 0:
+                                message.resourceScope = 0;
+                                break;
+                            case "PARENT":
+                            case 1:
+                                message.resourceScope = 1;
+                                break;
+                            case "PROJECT":
+                            case 2:
+                                message.resourceScope = 2;
+                                break;
+                            }
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SummarizeIntelligenceFindingsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.SummarizeIntelligenceFindingsRequest
+                         * @static
+                         * @param {google.storage.control.v2.SummarizeIntelligenceFindingsRequest} message SummarizeIntelligenceFindingsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SummarizeIntelligenceFindingsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.resourceScope = options.enums === String ? "RESOURCE_SCOPE_UNSPECIFIED" : 0;
+                                object.filter = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.resourceScope != null && message.hasOwnProperty("resourceScope"))
+                                object.resourceScope = options.enums === String ? $root.google.storage.control.v2.SummarizeIntelligenceFindingsRequest.ResourceScope[message.resourceScope] === undefined ? message.resourceScope : $root.google.storage.control.v2.SummarizeIntelligenceFindingsRequest.ResourceScope[message.resourceScope] : message.resourceScope;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SummarizeIntelligenceFindingsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.SummarizeIntelligenceFindingsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SummarizeIntelligenceFindingsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SummarizeIntelligenceFindingsRequest
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.SummarizeIntelligenceFindingsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SummarizeIntelligenceFindingsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.SummarizeIntelligenceFindingsRequest";
+                        };
+    
+                        /**
+                         * ResourceScope enum.
+                         * @name google.storage.control.v2.SummarizeIntelligenceFindingsRequest.ResourceScope
+                         * @enum {number}
+                         * @property {number} RESOURCE_SCOPE_UNSPECIFIED=0 RESOURCE_SCOPE_UNSPECIFIED value
+                         * @property {number} PARENT=1 PARENT value
+                         * @property {number} PROJECT=2 PROJECT value
+                         */
+                        SummarizeIntelligenceFindingsRequest.ResourceScope = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "RESOURCE_SCOPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PARENT"] = 1;
+                            values[valuesById[2] = "PROJECT"] = 2;
+                            return values;
+                        })();
+    
+                        return SummarizeIntelligenceFindingsRequest;
+                    })();
+    
+                    v2.SummarizeIntelligenceFindingsResponse = (function() {
+    
+                        /**
+                         * Properties of a SummarizeIntelligenceFindingsResponse.
+                         * @memberof google.storage.control.v2
+                         * @interface ISummarizeIntelligenceFindingsResponse
+                         * @property {Array.<google.storage.control.v2.IFindingSummary>|null} [findingSummaries] SummarizeIntelligenceFindingsResponse findingSummaries
+                         * @property {string|null} [nextPageToken] SummarizeIntelligenceFindingsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new SummarizeIntelligenceFindingsResponse.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents a SummarizeIntelligenceFindingsResponse.
+                         * @implements ISummarizeIntelligenceFindingsResponse
+                         * @constructor
+                         * @param {google.storage.control.v2.ISummarizeIntelligenceFindingsResponse=} [properties] Properties to set
+                         */
+                        function SummarizeIntelligenceFindingsResponse(properties) {
+                            this.findingSummaries = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SummarizeIntelligenceFindingsResponse findingSummaries.
+                         * @member {Array.<google.storage.control.v2.IFindingSummary>} findingSummaries
+                         * @memberof google.storage.control.v2.SummarizeIntelligenceFindingsResponse
+                         * @instance
+                         */
+                        SummarizeIntelligenceFindingsResponse.prototype.findingSummaries = $util.emptyArray;
+    
+                        /**
+                         * SummarizeIntelligenceFindingsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.storage.control.v2.SummarizeIntelligenceFindingsResponse
+                         * @instance
+                         */
+                        SummarizeIntelligenceFindingsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new SummarizeIntelligenceFindingsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.SummarizeIntelligenceFindingsResponse
+                         * @static
+                         * @param {google.storage.control.v2.ISummarizeIntelligenceFindingsResponse=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.SummarizeIntelligenceFindingsResponse} SummarizeIntelligenceFindingsResponse instance
+                         */
+                        SummarizeIntelligenceFindingsResponse.create = function create(properties) {
+                            return new SummarizeIntelligenceFindingsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SummarizeIntelligenceFindingsResponse message. Does not implicitly {@link google.storage.control.v2.SummarizeIntelligenceFindingsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.SummarizeIntelligenceFindingsResponse
+                         * @static
+                         * @param {google.storage.control.v2.ISummarizeIntelligenceFindingsResponse} message SummarizeIntelligenceFindingsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SummarizeIntelligenceFindingsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.findingSummaries != null && message.findingSummaries.length)
+                                for (var i = 0; i < message.findingSummaries.length; ++i)
+                                    $root.google.storage.control.v2.FindingSummary.encode(message.findingSummaries[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SummarizeIntelligenceFindingsResponse message, length delimited. Does not implicitly {@link google.storage.control.v2.SummarizeIntelligenceFindingsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.SummarizeIntelligenceFindingsResponse
+                         * @static
+                         * @param {google.storage.control.v2.ISummarizeIntelligenceFindingsResponse} message SummarizeIntelligenceFindingsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SummarizeIntelligenceFindingsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SummarizeIntelligenceFindingsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.SummarizeIntelligenceFindingsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.SummarizeIntelligenceFindingsResponse} SummarizeIntelligenceFindingsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SummarizeIntelligenceFindingsResponse.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.SummarizeIntelligenceFindingsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.findingSummaries && message.findingSummaries.length))
+                                            message.findingSummaries = [];
+                                        message.findingSummaries.push($root.google.storage.control.v2.FindingSummary.decode(reader, reader.uint32(), undefined, long + 1));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SummarizeIntelligenceFindingsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.SummarizeIntelligenceFindingsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.SummarizeIntelligenceFindingsResponse} SummarizeIntelligenceFindingsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SummarizeIntelligenceFindingsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SummarizeIntelligenceFindingsResponse message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.SummarizeIntelligenceFindingsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SummarizeIntelligenceFindingsResponse.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.findingSummaries != null && message.hasOwnProperty("findingSummaries")) {
+                                if (!Array.isArray(message.findingSummaries))
+                                    return "findingSummaries: array expected";
+                                for (var i = 0; i < message.findingSummaries.length; ++i) {
+                                    var error = $root.google.storage.control.v2.FindingSummary.verify(message.findingSummaries[i], long + 1);
+                                    if (error)
+                                        return "findingSummaries." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SummarizeIntelligenceFindingsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.SummarizeIntelligenceFindingsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.SummarizeIntelligenceFindingsResponse} SummarizeIntelligenceFindingsResponse
+                         */
+                        SummarizeIntelligenceFindingsResponse.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.storage.control.v2.SummarizeIntelligenceFindingsResponse)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.storage.control.v2.SummarizeIntelligenceFindingsResponse();
+                            if (object.findingSummaries) {
+                                if (!Array.isArray(object.findingSummaries))
+                                    throw TypeError(".google.storage.control.v2.SummarizeIntelligenceFindingsResponse.findingSummaries: array expected");
+                                message.findingSummaries = [];
+                                for (var i = 0; i < object.findingSummaries.length; ++i) {
+                                    if (typeof object.findingSummaries[i] !== "object")
+                                        throw TypeError(".google.storage.control.v2.SummarizeIntelligenceFindingsResponse.findingSummaries: object expected");
+                                    message.findingSummaries[i] = $root.google.storage.control.v2.FindingSummary.fromObject(object.findingSummaries[i], long + 1);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SummarizeIntelligenceFindingsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.SummarizeIntelligenceFindingsResponse
+                         * @static
+                         * @param {google.storage.control.v2.SummarizeIntelligenceFindingsResponse} message SummarizeIntelligenceFindingsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SummarizeIntelligenceFindingsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.findingSummaries = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.findingSummaries && message.findingSummaries.length) {
+                                object.findingSummaries = [];
+                                for (var j = 0; j < message.findingSummaries.length; ++j)
+                                    object.findingSummaries[j] = $root.google.storage.control.v2.FindingSummary.toObject(message.findingSummaries[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SummarizeIntelligenceFindingsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.SummarizeIntelligenceFindingsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SummarizeIntelligenceFindingsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SummarizeIntelligenceFindingsResponse
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.SummarizeIntelligenceFindingsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SummarizeIntelligenceFindingsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.SummarizeIntelligenceFindingsResponse";
+                        };
+    
+                        return SummarizeIntelligenceFindingsResponse;
+                    })();
+    
+                    v2.GetIntelligenceFindingRevisionRequest = (function() {
+    
+                        /**
+                         * Properties of a GetIntelligenceFindingRevisionRequest.
+                         * @memberof google.storage.control.v2
+                         * @interface IGetIntelligenceFindingRevisionRequest
+                         * @property {string|null} [name] GetIntelligenceFindingRevisionRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetIntelligenceFindingRevisionRequest.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents a GetIntelligenceFindingRevisionRequest.
+                         * @implements IGetIntelligenceFindingRevisionRequest
+                         * @constructor
+                         * @param {google.storage.control.v2.IGetIntelligenceFindingRevisionRequest=} [properties] Properties to set
+                         */
+                        function GetIntelligenceFindingRevisionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetIntelligenceFindingRevisionRequest name.
+                         * @member {string} name
+                         * @memberof google.storage.control.v2.GetIntelligenceFindingRevisionRequest
+                         * @instance
+                         */
+                        GetIntelligenceFindingRevisionRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetIntelligenceFindingRevisionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.GetIntelligenceFindingRevisionRequest
+                         * @static
+                         * @param {google.storage.control.v2.IGetIntelligenceFindingRevisionRequest=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.GetIntelligenceFindingRevisionRequest} GetIntelligenceFindingRevisionRequest instance
+                         */
+                        GetIntelligenceFindingRevisionRequest.create = function create(properties) {
+                            return new GetIntelligenceFindingRevisionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetIntelligenceFindingRevisionRequest message. Does not implicitly {@link google.storage.control.v2.GetIntelligenceFindingRevisionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.GetIntelligenceFindingRevisionRequest
+                         * @static
+                         * @param {google.storage.control.v2.IGetIntelligenceFindingRevisionRequest} message GetIntelligenceFindingRevisionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetIntelligenceFindingRevisionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetIntelligenceFindingRevisionRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.GetIntelligenceFindingRevisionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.GetIntelligenceFindingRevisionRequest
+                         * @static
+                         * @param {google.storage.control.v2.IGetIntelligenceFindingRevisionRequest} message GetIntelligenceFindingRevisionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetIntelligenceFindingRevisionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetIntelligenceFindingRevisionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.GetIntelligenceFindingRevisionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.GetIntelligenceFindingRevisionRequest} GetIntelligenceFindingRevisionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetIntelligenceFindingRevisionRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.GetIntelligenceFindingRevisionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetIntelligenceFindingRevisionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.GetIntelligenceFindingRevisionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.GetIntelligenceFindingRevisionRequest} GetIntelligenceFindingRevisionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetIntelligenceFindingRevisionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetIntelligenceFindingRevisionRequest message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.GetIntelligenceFindingRevisionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetIntelligenceFindingRevisionRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetIntelligenceFindingRevisionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.GetIntelligenceFindingRevisionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.GetIntelligenceFindingRevisionRequest} GetIntelligenceFindingRevisionRequest
+                         */
+                        GetIntelligenceFindingRevisionRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.storage.control.v2.GetIntelligenceFindingRevisionRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.storage.control.v2.GetIntelligenceFindingRevisionRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetIntelligenceFindingRevisionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.GetIntelligenceFindingRevisionRequest
+                         * @static
+                         * @param {google.storage.control.v2.GetIntelligenceFindingRevisionRequest} message GetIntelligenceFindingRevisionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetIntelligenceFindingRevisionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetIntelligenceFindingRevisionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.GetIntelligenceFindingRevisionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetIntelligenceFindingRevisionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetIntelligenceFindingRevisionRequest
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.GetIntelligenceFindingRevisionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetIntelligenceFindingRevisionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.GetIntelligenceFindingRevisionRequest";
+                        };
+    
+                        return GetIntelligenceFindingRevisionRequest;
+                    })();
+    
+                    v2.ListIntelligenceFindingRevisionsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListIntelligenceFindingRevisionsRequest.
+                         * @memberof google.storage.control.v2
+                         * @interface IListIntelligenceFindingRevisionsRequest
+                         * @property {string|null} [parent] ListIntelligenceFindingRevisionsRequest parent
+                         * @property {number|null} [pageSize] ListIntelligenceFindingRevisionsRequest pageSize
+                         * @property {string|null} [pageToken] ListIntelligenceFindingRevisionsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListIntelligenceFindingRevisionsRequest.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents a ListIntelligenceFindingRevisionsRequest.
+                         * @implements IListIntelligenceFindingRevisionsRequest
+                         * @constructor
+                         * @param {google.storage.control.v2.IListIntelligenceFindingRevisionsRequest=} [properties] Properties to set
+                         */
+                        function ListIntelligenceFindingRevisionsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListIntelligenceFindingRevisionsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingRevisionsRequest
+                         * @instance
+                         */
+                        ListIntelligenceFindingRevisionsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListIntelligenceFindingRevisionsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingRevisionsRequest
+                         * @instance
+                         */
+                        ListIntelligenceFindingRevisionsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListIntelligenceFindingRevisionsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingRevisionsRequest
+                         * @instance
+                         */
+                        ListIntelligenceFindingRevisionsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListIntelligenceFindingRevisionsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingRevisionsRequest
+                         * @static
+                         * @param {google.storage.control.v2.IListIntelligenceFindingRevisionsRequest=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.ListIntelligenceFindingRevisionsRequest} ListIntelligenceFindingRevisionsRequest instance
+                         */
+                        ListIntelligenceFindingRevisionsRequest.create = function create(properties) {
+                            return new ListIntelligenceFindingRevisionsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListIntelligenceFindingRevisionsRequest message. Does not implicitly {@link google.storage.control.v2.ListIntelligenceFindingRevisionsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingRevisionsRequest
+                         * @static
+                         * @param {google.storage.control.v2.IListIntelligenceFindingRevisionsRequest} message ListIntelligenceFindingRevisionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListIntelligenceFindingRevisionsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListIntelligenceFindingRevisionsRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.ListIntelligenceFindingRevisionsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingRevisionsRequest
+                         * @static
+                         * @param {google.storage.control.v2.IListIntelligenceFindingRevisionsRequest} message ListIntelligenceFindingRevisionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListIntelligenceFindingRevisionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListIntelligenceFindingRevisionsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingRevisionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.ListIntelligenceFindingRevisionsRequest} ListIntelligenceFindingRevisionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListIntelligenceFindingRevisionsRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.ListIntelligenceFindingRevisionsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListIntelligenceFindingRevisionsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingRevisionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.ListIntelligenceFindingRevisionsRequest} ListIntelligenceFindingRevisionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListIntelligenceFindingRevisionsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListIntelligenceFindingRevisionsRequest message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingRevisionsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListIntelligenceFindingRevisionsRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListIntelligenceFindingRevisionsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingRevisionsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.ListIntelligenceFindingRevisionsRequest} ListIntelligenceFindingRevisionsRequest
+                         */
+                        ListIntelligenceFindingRevisionsRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.storage.control.v2.ListIntelligenceFindingRevisionsRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.storage.control.v2.ListIntelligenceFindingRevisionsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListIntelligenceFindingRevisionsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingRevisionsRequest
+                         * @static
+                         * @param {google.storage.control.v2.ListIntelligenceFindingRevisionsRequest} message ListIntelligenceFindingRevisionsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListIntelligenceFindingRevisionsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListIntelligenceFindingRevisionsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingRevisionsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListIntelligenceFindingRevisionsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListIntelligenceFindingRevisionsRequest
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingRevisionsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListIntelligenceFindingRevisionsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.ListIntelligenceFindingRevisionsRequest";
+                        };
+    
+                        return ListIntelligenceFindingRevisionsRequest;
+                    })();
+    
+                    v2.ListIntelligenceFindingRevisionsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListIntelligenceFindingRevisionsResponse.
+                         * @memberof google.storage.control.v2
+                         * @interface IListIntelligenceFindingRevisionsResponse
+                         * @property {Array.<google.storage.control.v2.IIntelligenceFindingRevision>|null} [intelligenceFindingRevisions] ListIntelligenceFindingRevisionsResponse intelligenceFindingRevisions
+                         * @property {string|null} [nextPageToken] ListIntelligenceFindingRevisionsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListIntelligenceFindingRevisionsResponse.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents a ListIntelligenceFindingRevisionsResponse.
+                         * @implements IListIntelligenceFindingRevisionsResponse
+                         * @constructor
+                         * @param {google.storage.control.v2.IListIntelligenceFindingRevisionsResponse=} [properties] Properties to set
+                         */
+                        function ListIntelligenceFindingRevisionsResponse(properties) {
+                            this.intelligenceFindingRevisions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListIntelligenceFindingRevisionsResponse intelligenceFindingRevisions.
+                         * @member {Array.<google.storage.control.v2.IIntelligenceFindingRevision>} intelligenceFindingRevisions
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingRevisionsResponse
+                         * @instance
+                         */
+                        ListIntelligenceFindingRevisionsResponse.prototype.intelligenceFindingRevisions = $util.emptyArray;
+    
+                        /**
+                         * ListIntelligenceFindingRevisionsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingRevisionsResponse
+                         * @instance
+                         */
+                        ListIntelligenceFindingRevisionsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListIntelligenceFindingRevisionsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingRevisionsResponse
+                         * @static
+                         * @param {google.storage.control.v2.IListIntelligenceFindingRevisionsResponse=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.ListIntelligenceFindingRevisionsResponse} ListIntelligenceFindingRevisionsResponse instance
+                         */
+                        ListIntelligenceFindingRevisionsResponse.create = function create(properties) {
+                            return new ListIntelligenceFindingRevisionsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListIntelligenceFindingRevisionsResponse message. Does not implicitly {@link google.storage.control.v2.ListIntelligenceFindingRevisionsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingRevisionsResponse
+                         * @static
+                         * @param {google.storage.control.v2.IListIntelligenceFindingRevisionsResponse} message ListIntelligenceFindingRevisionsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListIntelligenceFindingRevisionsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.intelligenceFindingRevisions != null && message.intelligenceFindingRevisions.length)
+                                for (var i = 0; i < message.intelligenceFindingRevisions.length; ++i)
+                                    $root.google.storage.control.v2.IntelligenceFindingRevision.encode(message.intelligenceFindingRevisions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListIntelligenceFindingRevisionsResponse message, length delimited. Does not implicitly {@link google.storage.control.v2.ListIntelligenceFindingRevisionsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingRevisionsResponse
+                         * @static
+                         * @param {google.storage.control.v2.IListIntelligenceFindingRevisionsResponse} message ListIntelligenceFindingRevisionsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListIntelligenceFindingRevisionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListIntelligenceFindingRevisionsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingRevisionsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.ListIntelligenceFindingRevisionsResponse} ListIntelligenceFindingRevisionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListIntelligenceFindingRevisionsResponse.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.ListIntelligenceFindingRevisionsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.intelligenceFindingRevisions && message.intelligenceFindingRevisions.length))
+                                            message.intelligenceFindingRevisions = [];
+                                        message.intelligenceFindingRevisions.push($root.google.storage.control.v2.IntelligenceFindingRevision.decode(reader, reader.uint32(), undefined, long + 1));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListIntelligenceFindingRevisionsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingRevisionsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.ListIntelligenceFindingRevisionsResponse} ListIntelligenceFindingRevisionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListIntelligenceFindingRevisionsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListIntelligenceFindingRevisionsResponse message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingRevisionsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListIntelligenceFindingRevisionsResponse.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.intelligenceFindingRevisions != null && message.hasOwnProperty("intelligenceFindingRevisions")) {
+                                if (!Array.isArray(message.intelligenceFindingRevisions))
+                                    return "intelligenceFindingRevisions: array expected";
+                                for (var i = 0; i < message.intelligenceFindingRevisions.length; ++i) {
+                                    var error = $root.google.storage.control.v2.IntelligenceFindingRevision.verify(message.intelligenceFindingRevisions[i], long + 1);
+                                    if (error)
+                                        return "intelligenceFindingRevisions." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListIntelligenceFindingRevisionsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingRevisionsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.ListIntelligenceFindingRevisionsResponse} ListIntelligenceFindingRevisionsResponse
+                         */
+                        ListIntelligenceFindingRevisionsResponse.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.storage.control.v2.ListIntelligenceFindingRevisionsResponse)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.storage.control.v2.ListIntelligenceFindingRevisionsResponse();
+                            if (object.intelligenceFindingRevisions) {
+                                if (!Array.isArray(object.intelligenceFindingRevisions))
+                                    throw TypeError(".google.storage.control.v2.ListIntelligenceFindingRevisionsResponse.intelligenceFindingRevisions: array expected");
+                                message.intelligenceFindingRevisions = [];
+                                for (var i = 0; i < object.intelligenceFindingRevisions.length; ++i) {
+                                    if (typeof object.intelligenceFindingRevisions[i] !== "object")
+                                        throw TypeError(".google.storage.control.v2.ListIntelligenceFindingRevisionsResponse.intelligenceFindingRevisions: object expected");
+                                    message.intelligenceFindingRevisions[i] = $root.google.storage.control.v2.IntelligenceFindingRevision.fromObject(object.intelligenceFindingRevisions[i], long + 1);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListIntelligenceFindingRevisionsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingRevisionsResponse
+                         * @static
+                         * @param {google.storage.control.v2.ListIntelligenceFindingRevisionsResponse} message ListIntelligenceFindingRevisionsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListIntelligenceFindingRevisionsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.intelligenceFindingRevisions = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.intelligenceFindingRevisions && message.intelligenceFindingRevisions.length) {
+                                object.intelligenceFindingRevisions = [];
+                                for (var j = 0; j < message.intelligenceFindingRevisions.length; ++j)
+                                    object.intelligenceFindingRevisions[j] = $root.google.storage.control.v2.IntelligenceFindingRevision.toObject(message.intelligenceFindingRevisions[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListIntelligenceFindingRevisionsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingRevisionsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListIntelligenceFindingRevisionsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListIntelligenceFindingRevisionsResponse
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.ListIntelligenceFindingRevisionsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListIntelligenceFindingRevisionsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.ListIntelligenceFindingRevisionsResponse";
+                        };
+    
+                        return ListIntelligenceFindingRevisionsResponse;
+                    })();
+    
+                    v2.FindingSummary = (function() {
+    
+                        /**
+                         * Properties of a FindingSummary.
+                         * @memberof google.storage.control.v2
+                         * @interface IFindingSummary
+                         * @property {google.storage.control.v2.FindingType|null} [type] FindingSummary type
+                         * @property {google.storage.control.v2.FindingCategory|null} [category] FindingSummary category
+                         * @property {string|null} [targetResource] FindingSummary targetResource
+                         * @property {google.protobuf.ITimestamp|null} [createTime] FindingSummary createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] FindingSummary updateTime
+                         * @property {google.storage.control.v2.FindingSeverity|null} [severity] FindingSummary severity
+                         * @property {Array.<google.storage.control.v2.FindingSummary.ISummaryDetails>|null} [summaryDetails] FindingSummary summaryDetails
+                         */
+    
+                        /**
+                         * Constructs a new FindingSummary.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents a FindingSummary.
+                         * @implements IFindingSummary
+                         * @constructor
+                         * @param {google.storage.control.v2.IFindingSummary=} [properties] Properties to set
+                         */
+                        function FindingSummary(properties) {
+                            this.summaryDetails = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FindingSummary type.
+                         * @member {google.storage.control.v2.FindingType} type
+                         * @memberof google.storage.control.v2.FindingSummary
+                         * @instance
+                         */
+                        FindingSummary.prototype.type = 0;
+    
+                        /**
+                         * FindingSummary category.
+                         * @member {google.storage.control.v2.FindingCategory} category
+                         * @memberof google.storage.control.v2.FindingSummary
+                         * @instance
+                         */
+                        FindingSummary.prototype.category = 0;
+    
+                        /**
+                         * FindingSummary targetResource.
+                         * @member {string} targetResource
+                         * @memberof google.storage.control.v2.FindingSummary
+                         * @instance
+                         */
+                        FindingSummary.prototype.targetResource = "";
+    
+                        /**
+                         * FindingSummary createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.storage.control.v2.FindingSummary
+                         * @instance
+                         */
+                        FindingSummary.prototype.createTime = null;
+    
+                        /**
+                         * FindingSummary updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.storage.control.v2.FindingSummary
+                         * @instance
+                         */
+                        FindingSummary.prototype.updateTime = null;
+    
+                        /**
+                         * FindingSummary severity.
+                         * @member {google.storage.control.v2.FindingSeverity} severity
+                         * @memberof google.storage.control.v2.FindingSummary
+                         * @instance
+                         */
+                        FindingSummary.prototype.severity = 0;
+    
+                        /**
+                         * FindingSummary summaryDetails.
+                         * @member {Array.<google.storage.control.v2.FindingSummary.ISummaryDetails>} summaryDetails
+                         * @memberof google.storage.control.v2.FindingSummary
+                         * @instance
+                         */
+                        FindingSummary.prototype.summaryDetails = $util.emptyArray;
+    
+                        /**
+                         * Creates a new FindingSummary instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.FindingSummary
+                         * @static
+                         * @param {google.storage.control.v2.IFindingSummary=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.FindingSummary} FindingSummary instance
+                         */
+                        FindingSummary.create = function create(properties) {
+                            return new FindingSummary(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FindingSummary message. Does not implicitly {@link google.storage.control.v2.FindingSummary.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.FindingSummary
+                         * @static
+                         * @param {google.storage.control.v2.IFindingSummary} message FindingSummary message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FindingSummary.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
+                            if (message.category != null && Object.hasOwnProperty.call(message, "category"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.category);
+                            if (message.targetResource != null && Object.hasOwnProperty.call(message, "targetResource"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.targetResource);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.severity != null && Object.hasOwnProperty.call(message, "severity"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.severity);
+                            if (message.summaryDetails != null && message.summaryDetails.length)
+                                for (var i = 0; i < message.summaryDetails.length; ++i)
+                                    $root.google.storage.control.v2.FindingSummary.SummaryDetails.encode(message.summaryDetails[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FindingSummary message, length delimited. Does not implicitly {@link google.storage.control.v2.FindingSummary.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.FindingSummary
+                         * @static
+                         * @param {google.storage.control.v2.IFindingSummary} message FindingSummary message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FindingSummary.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FindingSummary message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.FindingSummary
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.FindingSummary} FindingSummary
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FindingSummary.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.FindingSummary();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.type = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.category = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.targetResource = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 6: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 7: {
+                                        message.severity = reader.int32();
+                                        break;
+                                    }
+                                case 8: {
+                                        if (!(message.summaryDetails && message.summaryDetails.length))
+                                            message.summaryDetails = [];
+                                        message.summaryDetails.push($root.google.storage.control.v2.FindingSummary.SummaryDetails.decode(reader, reader.uint32(), undefined, long + 1));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FindingSummary message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.FindingSummary
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.FindingSummary} FindingSummary
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FindingSummary.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FindingSummary message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.FindingSummary
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FindingSummary.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.category != null && message.hasOwnProperty("category"))
+                                switch (message.category) {
+                                default:
+                                    return "category: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.targetResource != null && message.hasOwnProperty("targetResource"))
+                                if (!$util.isString(message.targetResource))
+                                    return "targetResource: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime, long + 1);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime, long + 1);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.severity != null && message.hasOwnProperty("severity"))
+                                switch (message.severity) {
+                                default:
+                                    return "severity: enum value expected";
+                                case 0:
+                                case 1:
+                                    break;
+                                }
+                            if (message.summaryDetails != null && message.hasOwnProperty("summaryDetails")) {
+                                if (!Array.isArray(message.summaryDetails))
+                                    return "summaryDetails: array expected";
+                                for (var i = 0; i < message.summaryDetails.length; ++i) {
+                                    var error = $root.google.storage.control.v2.FindingSummary.SummaryDetails.verify(message.summaryDetails[i], long + 1);
+                                    if (error)
+                                        return "summaryDetails." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FindingSummary message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.FindingSummary
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.FindingSummary} FindingSummary
+                         */
+                        FindingSummary.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.storage.control.v2.FindingSummary)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.storage.control.v2.FindingSummary();
+                            switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
+                            case "FINDING_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "FINDING_TYPE_COLDLINE_AND_ARCHIVAL_STORAGE_OPERATIONS_SPIKE":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "FINDING_TYPE_THROTTLED_REQUEST_SPIKE":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            case "FINDING_TYPE_CROSS_REGION_EGRESS_SPIKE":
+                            case 3:
+                                message.type = 3;
+                                break;
+                            case "FINDING_TYPE_STORAGE_GROWTH_ABOVE_TREND":
+                            case 4:
+                                message.type = 4;
+                                break;
+                            }
+                            switch (object.category) {
+                            default:
+                                if (typeof object.category === "number") {
+                                    message.category = object.category;
+                                    break;
+                                }
+                                break;
+                            case "FINDING_CATEGORY_UNSPECIFIED":
+                            case 0:
+                                message.category = 0;
+                                break;
+                            case "FINDING_CATEGORY_DATA_MANAGEMENT":
+                            case 1:
+                                message.category = 1;
+                                break;
+                            case "FINDING_CATEGORY_PERFORMANCE":
+                            case 2:
+                                message.category = 2;
+                                break;
+                            }
+                            if (object.targetResource != null)
+                                message.targetResource = String(object.targetResource);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.storage.control.v2.FindingSummary.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime, long + 1);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.storage.control.v2.FindingSummary.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime, long + 1);
+                            }
+                            switch (object.severity) {
+                            default:
+                                if (typeof object.severity === "number") {
+                                    message.severity = object.severity;
+                                    break;
+                                }
+                                break;
+                            case "FINDING_SEVERITY_UNSPECIFIED":
+                            case 0:
+                                message.severity = 0;
+                                break;
+                            case "FINDING_SEVERITY_CRITICAL":
+                            case 1:
+                                message.severity = 1;
+                                break;
+                            }
+                            if (object.summaryDetails) {
+                                if (!Array.isArray(object.summaryDetails))
+                                    throw TypeError(".google.storage.control.v2.FindingSummary.summaryDetails: array expected");
+                                message.summaryDetails = [];
+                                for (var i = 0; i < object.summaryDetails.length; ++i) {
+                                    if (typeof object.summaryDetails[i] !== "object")
+                                        throw TypeError(".google.storage.control.v2.FindingSummary.summaryDetails: object expected");
+                                    message.summaryDetails[i] = $root.google.storage.control.v2.FindingSummary.SummaryDetails.fromObject(object.summaryDetails[i], long + 1);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FindingSummary message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.FindingSummary
+                         * @static
+                         * @param {google.storage.control.v2.FindingSummary} message FindingSummary
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FindingSummary.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.summaryDetails = [];
+                            if (options.defaults) {
+                                object.type = options.enums === String ? "FINDING_TYPE_UNSPECIFIED" : 0;
+                                object.category = options.enums === String ? "FINDING_CATEGORY_UNSPECIFIED" : 0;
+                                object.targetResource = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.severity = options.enums === String ? "FINDING_SEVERITY_UNSPECIFIED" : 0;
+                            }
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.storage.control.v2.FindingType[message.type] === undefined ? message.type : $root.google.storage.control.v2.FindingType[message.type] : message.type;
+                            if (message.category != null && message.hasOwnProperty("category"))
+                                object.category = options.enums === String ? $root.google.storage.control.v2.FindingCategory[message.category] === undefined ? message.category : $root.google.storage.control.v2.FindingCategory[message.category] : message.category;
+                            if (message.targetResource != null && message.hasOwnProperty("targetResource"))
+                                object.targetResource = message.targetResource;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.severity != null && message.hasOwnProperty("severity"))
+                                object.severity = options.enums === String ? $root.google.storage.control.v2.FindingSeverity[message.severity] === undefined ? message.severity : $root.google.storage.control.v2.FindingSeverity[message.severity] : message.severity;
+                            if (message.summaryDetails && message.summaryDetails.length) {
+                                object.summaryDetails = [];
+                                for (var j = 0; j < message.summaryDetails.length; ++j)
+                                    object.summaryDetails[j] = $root.google.storage.control.v2.FindingSummary.SummaryDetails.toObject(message.summaryDetails[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FindingSummary to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.FindingSummary
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FindingSummary.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FindingSummary
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.FindingSummary
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FindingSummary.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.FindingSummary";
+                        };
+    
+                        FindingSummary.SummaryDetails = (function() {
+    
+                            /**
+                             * Properties of a SummaryDetails.
+                             * @memberof google.storage.control.v2.FindingSummary
+                             * @interface ISummaryDetails
+                             * @property {number|Long|null} [count] SummaryDetails count
+                             * @property {number|null} [percentage] SummaryDetails percentage
+                             * @property {google.storage.control.v2.FindingSummary.SummaryDetails.ResourceType|null} [resourceType] SummaryDetails resourceType
+                             * @property {string|null} [description] SummaryDetails description
+                             */
+    
+                            /**
+                             * Constructs a new SummaryDetails.
+                             * @memberof google.storage.control.v2.FindingSummary
+                             * @classdesc Represents a SummaryDetails.
+                             * @implements ISummaryDetails
+                             * @constructor
+                             * @param {google.storage.control.v2.FindingSummary.ISummaryDetails=} [properties] Properties to set
+                             */
+                            function SummaryDetails(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SummaryDetails count.
+                             * @member {number|Long|null|undefined} count
+                             * @memberof google.storage.control.v2.FindingSummary.SummaryDetails
+                             * @instance
+                             */
+                            SummaryDetails.prototype.count = null;
+    
+                            /**
+                             * SummaryDetails percentage.
+                             * @member {number|null|undefined} percentage
+                             * @memberof google.storage.control.v2.FindingSummary.SummaryDetails
+                             * @instance
+                             */
+                            SummaryDetails.prototype.percentage = null;
+    
+                            /**
+                             * SummaryDetails resourceType.
+                             * @member {google.storage.control.v2.FindingSummary.SummaryDetails.ResourceType} resourceType
+                             * @memberof google.storage.control.v2.FindingSummary.SummaryDetails
+                             * @instance
+                             */
+                            SummaryDetails.prototype.resourceType = 0;
+    
+                            /**
+                             * SummaryDetails description.
+                             * @member {string} description
+                             * @memberof google.storage.control.v2.FindingSummary.SummaryDetails
+                             * @instance
+                             */
+                            SummaryDetails.prototype.description = "";
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * SummaryDetails magnitude.
+                             * @member {"count"|"percentage"|undefined} magnitude
+                             * @memberof google.storage.control.v2.FindingSummary.SummaryDetails
+                             * @instance
+                             */
+                            Object.defineProperty(SummaryDetails.prototype, "magnitude", {
+                                get: $util.oneOfGetter($oneOfFields = ["count", "percentage"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new SummaryDetails instance using the specified properties.
+                             * @function create
+                             * @memberof google.storage.control.v2.FindingSummary.SummaryDetails
+                             * @static
+                             * @param {google.storage.control.v2.FindingSummary.ISummaryDetails=} [properties] Properties to set
+                             * @returns {google.storage.control.v2.FindingSummary.SummaryDetails} SummaryDetails instance
+                             */
+                            SummaryDetails.create = function create(properties) {
+                                return new SummaryDetails(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SummaryDetails message. Does not implicitly {@link google.storage.control.v2.FindingSummary.SummaryDetails.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.storage.control.v2.FindingSummary.SummaryDetails
+                             * @static
+                             * @param {google.storage.control.v2.FindingSummary.ISummaryDetails} message SummaryDetails message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SummaryDetails.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.count != null && Object.hasOwnProperty.call(message, "count"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int64(message.count);
+                                if (message.percentage != null && Object.hasOwnProperty.call(message, "percentage"))
+                                    writer.uint32(/* id 2, wireType 5 =*/21).float(message.percentage);
+                                if (message.resourceType != null && Object.hasOwnProperty.call(message, "resourceType"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.resourceType);
+                                if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.description);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SummaryDetails message, length delimited. Does not implicitly {@link google.storage.control.v2.FindingSummary.SummaryDetails.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.storage.control.v2.FindingSummary.SummaryDetails
+                             * @static
+                             * @param {google.storage.control.v2.FindingSummary.ISummaryDetails} message SummaryDetails message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SummaryDetails.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SummaryDetails message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.storage.control.v2.FindingSummary.SummaryDetails
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.storage.control.v2.FindingSummary.SummaryDetails} SummaryDetails
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SummaryDetails.decode = function decode(reader, length, error, long) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.FindingSummary.SummaryDetails();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.count = reader.int64();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.percentage = reader.float();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.resourceType = reader.int32();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.description = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7, long);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SummaryDetails message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.storage.control.v2.FindingSummary.SummaryDetails
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.storage.control.v2.FindingSummary.SummaryDetails} SummaryDetails
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SummaryDetails.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SummaryDetails message.
+                             * @function verify
+                             * @memberof google.storage.control.v2.FindingSummary.SummaryDetails
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SummaryDetails.verify = function verify(message, long) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
+                                var properties = {};
+                                if (message.count != null && message.hasOwnProperty("count")) {
+                                    properties.magnitude = 1;
+                                    if (!$util.isInteger(message.count) && !(message.count && $util.isInteger(message.count.low) && $util.isInteger(message.count.high)))
+                                        return "count: integer|Long expected";
+                                }
+                                if (message.percentage != null && message.hasOwnProperty("percentage")) {
+                                    if (properties.magnitude === 1)
+                                        return "magnitude: multiple values";
+                                    properties.magnitude = 1;
+                                    if (typeof message.percentage !== "number")
+                                        return "percentage: number expected";
+                                }
+                                if (message.resourceType != null && message.hasOwnProperty("resourceType"))
+                                    switch (message.resourceType) {
+                                    default:
+                                        return "resourceType: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.description != null && message.hasOwnProperty("description"))
+                                    if (!$util.isString(message.description))
+                                        return "description: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SummaryDetails message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.storage.control.v2.FindingSummary.SummaryDetails
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.storage.control.v2.FindingSummary.SummaryDetails} SummaryDetails
+                             */
+                            SummaryDetails.fromObject = function fromObject(object, long) {
+                                if (object instanceof $root.google.storage.control.v2.FindingSummary.SummaryDetails)
+                                    return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var message = new $root.google.storage.control.v2.FindingSummary.SummaryDetails();
+                                if (object.count != null)
+                                    if ($util.Long)
+                                        (message.count = $util.Long.fromValue(object.count)).unsigned = false;
+                                    else if (typeof object.count === "string")
+                                        message.count = parseInt(object.count, 10);
+                                    else if (typeof object.count === "number")
+                                        message.count = object.count;
+                                    else if (typeof object.count === "object")
+                                        message.count = new $util.LongBits(object.count.low >>> 0, object.count.high >>> 0).toNumber();
+                                if (object.percentage != null)
+                                    message.percentage = Number(object.percentage);
+                                switch (object.resourceType) {
+                                default:
+                                    if (typeof object.resourceType === "number") {
+                                        message.resourceType = object.resourceType;
+                                        break;
+                                    }
+                                    break;
+                                case "RESOURCE_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.resourceType = 0;
+                                    break;
+                                case "PROJECT":
+                                case 1:
+                                    message.resourceType = 1;
+                                    break;
+                                case "BUCKET":
+                                case 2:
+                                    message.resourceType = 2;
+                                    break;
+                                }
+                                if (object.description != null)
+                                    message.description = String(object.description);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SummaryDetails message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.storage.control.v2.FindingSummary.SummaryDetails
+                             * @static
+                             * @param {google.storage.control.v2.FindingSummary.SummaryDetails} message SummaryDetails
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SummaryDetails.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.resourceType = options.enums === String ? "RESOURCE_TYPE_UNSPECIFIED" : 0;
+                                    object.description = "";
+                                }
+                                if (message.count != null && message.hasOwnProperty("count")) {
+                                    if (typeof message.count === "number")
+                                        object.count = options.longs === String ? String(message.count) : message.count;
+                                    else
+                                        object.count = options.longs === String ? $util.Long.prototype.toString.call(message.count) : options.longs === Number ? new $util.LongBits(message.count.low >>> 0, message.count.high >>> 0).toNumber() : message.count;
+                                    if (options.oneofs)
+                                        object.magnitude = "count";
+                                }
+                                if (message.percentage != null && message.hasOwnProperty("percentage")) {
+                                    object.percentage = options.json && !isFinite(message.percentage) ? String(message.percentage) : message.percentage;
+                                    if (options.oneofs)
+                                        object.magnitude = "percentage";
+                                }
+                                if (message.resourceType != null && message.hasOwnProperty("resourceType"))
+                                    object.resourceType = options.enums === String ? $root.google.storage.control.v2.FindingSummary.SummaryDetails.ResourceType[message.resourceType] === undefined ? message.resourceType : $root.google.storage.control.v2.FindingSummary.SummaryDetails.ResourceType[message.resourceType] : message.resourceType;
+                                if (message.description != null && message.hasOwnProperty("description"))
+                                    object.description = message.description;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SummaryDetails to JSON.
+                             * @function toJSON
+                             * @memberof google.storage.control.v2.FindingSummary.SummaryDetails
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SummaryDetails.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SummaryDetails
+                             * @function getTypeUrl
+                             * @memberof google.storage.control.v2.FindingSummary.SummaryDetails
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SummaryDetails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.storage.control.v2.FindingSummary.SummaryDetails";
+                            };
+    
+                            /**
+                             * ResourceType enum.
+                             * @name google.storage.control.v2.FindingSummary.SummaryDetails.ResourceType
+                             * @enum {number}
+                             * @property {number} RESOURCE_TYPE_UNSPECIFIED=0 RESOURCE_TYPE_UNSPECIFIED value
+                             * @property {number} PROJECT=1 PROJECT value
+                             * @property {number} BUCKET=2 BUCKET value
+                             */
+                            SummaryDetails.ResourceType = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "RESOURCE_TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "PROJECT"] = 1;
+                                values[valuesById[2] = "BUCKET"] = 2;
+                                return values;
+                            })();
+    
+                            return SummaryDetails;
+                        })();
+    
+                        return FindingSummary;
+                    })();
+    
+                    /**
+                     * FindingType enum.
+                     * @name google.storage.control.v2.FindingType
+                     * @enum {number}
+                     * @property {number} FINDING_TYPE_UNSPECIFIED=0 FINDING_TYPE_UNSPECIFIED value
+                     * @property {number} FINDING_TYPE_COLDLINE_AND_ARCHIVAL_STORAGE_OPERATIONS_SPIKE=1 FINDING_TYPE_COLDLINE_AND_ARCHIVAL_STORAGE_OPERATIONS_SPIKE value
+                     * @property {number} FINDING_TYPE_THROTTLED_REQUEST_SPIKE=2 FINDING_TYPE_THROTTLED_REQUEST_SPIKE value
+                     * @property {number} FINDING_TYPE_CROSS_REGION_EGRESS_SPIKE=3 FINDING_TYPE_CROSS_REGION_EGRESS_SPIKE value
+                     * @property {number} FINDING_TYPE_STORAGE_GROWTH_ABOVE_TREND=4 FINDING_TYPE_STORAGE_GROWTH_ABOVE_TREND value
+                     */
+                    v2.FindingType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "FINDING_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "FINDING_TYPE_COLDLINE_AND_ARCHIVAL_STORAGE_OPERATIONS_SPIKE"] = 1;
+                        values[valuesById[2] = "FINDING_TYPE_THROTTLED_REQUEST_SPIKE"] = 2;
+                        values[valuesById[3] = "FINDING_TYPE_CROSS_REGION_EGRESS_SPIKE"] = 3;
+                        values[valuesById[4] = "FINDING_TYPE_STORAGE_GROWTH_ABOVE_TREND"] = 4;
+                        return values;
+                    })();
+    
+                    /**
+                     * FindingCategory enum.
+                     * @name google.storage.control.v2.FindingCategory
+                     * @enum {number}
+                     * @property {number} FINDING_CATEGORY_UNSPECIFIED=0 FINDING_CATEGORY_UNSPECIFIED value
+                     * @property {number} FINDING_CATEGORY_DATA_MANAGEMENT=1 FINDING_CATEGORY_DATA_MANAGEMENT value
+                     * @property {number} FINDING_CATEGORY_PERFORMANCE=2 FINDING_CATEGORY_PERFORMANCE value
+                     */
+                    v2.FindingCategory = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "FINDING_CATEGORY_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "FINDING_CATEGORY_DATA_MANAGEMENT"] = 1;
+                        values[valuesById[2] = "FINDING_CATEGORY_PERFORMANCE"] = 2;
+                        return values;
+                    })();
+    
+                    /**
+                     * FindingSeverity enum.
+                     * @name google.storage.control.v2.FindingSeverity
+                     * @enum {number}
+                     * @property {number} FINDING_SEVERITY_UNSPECIFIED=0 FINDING_SEVERITY_UNSPECIFIED value
+                     * @property {number} FINDING_SEVERITY_CRITICAL=1 FINDING_SEVERITY_CRITICAL value
+                     */
+                    v2.FindingSeverity = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "FINDING_SEVERITY_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "FINDING_SEVERITY_CRITICAL"] = 1;
+                        return values;
+                    })();
+    
                     return v2;
                 })();
     
@@ -14340,7 +22621,7 @@
                      * @typedef ComposeObjectCallback
                      * @type {function}
                      * @param {Error|null} error Error, if any
-                     * @param {google.storage.v2.StorageObject} [response] StorageObject
+                     * @param {google.storage.v2.StorageObject} [response] Object
                      */
     
                     /**
@@ -14349,7 +22630,7 @@
                      * @memberof google.storage.v2.Storage
                      * @instance
                      * @param {google.storage.v2.IComposeObjectRequest} request ComposeObjectRequest message or plain object
-                     * @param {google.storage.v2.Storage.ComposeObjectCallback} callback Node-style callback called with the error, if any, and StorageObject
+                     * @param {google.storage.v2.Storage.ComposeObjectCallback} callback Node-style callback called with the error, if any, and Object
                      * @returns {undefined}
                      * @variation 1
                      */
@@ -14406,7 +22687,7 @@
                      * @typedef RestoreObjectCallback
                      * @type {function}
                      * @param {Error|null} error Error, if any
-                     * @param {google.storage.v2.StorageObject} [response] StorageObject
+                     * @param {google.storage.v2.StorageObject} [response] Object
                      */
     
                     /**
@@ -14415,7 +22696,7 @@
                      * @memberof google.storage.v2.Storage
                      * @instance
                      * @param {google.storage.v2.IRestoreObjectRequest} request RestoreObjectRequest message or plain object
-                     * @param {google.storage.v2.Storage.RestoreObjectCallback} callback Node-style callback called with the error, if any, and StorageObject
+                     * @param {google.storage.v2.Storage.RestoreObjectCallback} callback Node-style callback called with the error, if any, and Object
                      * @returns {undefined}
                      * @variation 1
                      */
@@ -14472,7 +22753,7 @@
                      * @typedef GetObjectCallback
                      * @type {function}
                      * @param {Error|null} error Error, if any
-                     * @param {google.storage.v2.StorageObject} [response] StorageObject
+                     * @param {google.storage.v2.StorageObject} [response] Object
                      */
     
                     /**
@@ -14481,7 +22762,7 @@
                      * @memberof google.storage.v2.Storage
                      * @instance
                      * @param {google.storage.v2.IGetObjectRequest} request GetObjectRequest message or plain object
-                     * @param {google.storage.v2.Storage.GetObjectCallback} callback Node-style callback called with the error, if any, and StorageObject
+                     * @param {google.storage.v2.Storage.GetObjectCallback} callback Node-style callback called with the error, if any, and Object
                      * @returns {undefined}
                      * @variation 1
                      */
@@ -14571,7 +22852,7 @@
                      * @typedef UpdateObjectCallback
                      * @type {function}
                      * @param {Error|null} error Error, if any
-                     * @param {google.storage.v2.StorageObject} [response] StorageObject
+                     * @param {google.storage.v2.StorageObject} [response] Object
                      */
     
                     /**
@@ -14580,7 +22861,7 @@
                      * @memberof google.storage.v2.Storage
                      * @instance
                      * @param {google.storage.v2.IUpdateObjectRequest} request UpdateObjectRequest message or plain object
-                     * @param {google.storage.v2.Storage.UpdateObjectCallback} callback Node-style callback called with the error, if any, and StorageObject
+                     * @param {google.storage.v2.Storage.UpdateObjectCallback} callback Node-style callback called with the error, if any, and Object
                      * @returns {undefined}
                      * @variation 1
                      */
@@ -14802,7 +23083,7 @@
                      * @typedef MoveObjectCallback
                      * @type {function}
                      * @param {Error|null} error Error, if any
-                     * @param {google.storage.v2.StorageObject} [response] StorageObject
+                     * @param {google.storage.v2.StorageObject} [response] Object
                      */
     
                     /**
@@ -14811,7 +23092,7 @@
                      * @memberof google.storage.v2.Storage
                      * @instance
                      * @param {google.storage.v2.IMoveObjectRequest} request MoveObjectRequest message or plain object
-                     * @param {google.storage.v2.Storage.MoveObjectCallback} callback Node-style callback called with the error, if any, and StorageObject
+                     * @param {google.storage.v2.Storage.MoveObjectCallback} callback Node-style callback called with the error, if any, and Object
                      * @returns {undefined}
                      * @variation 1
                      */
@@ -40823,56 +49104,56 @@
                     return CustomerEncryption;
                 })();
     
-                v2.StorageObject = (function() {
+                v2.Object = (function() {
     
                     /**
-                     * Properties of a StorageObject.
+                     * Properties of an Object.
                      * @memberof google.storage.v2
-                     * @interface IStorageObject
-                     * @property {string|null} [name] StorageObject name
-                     * @property {string|null} [bucket] StorageObject bucket
-                     * @property {string|null} [etag] StorageObject etag
-                     * @property {number|Long|null} [generation] StorageObject generation
-                     * @property {string|null} [restoreToken] StorageObject restoreToken
-                     * @property {number|Long|null} [metageneration] StorageObject metageneration
-                     * @property {string|null} [storageClass] StorageObject storageClass
-                     * @property {number|Long|null} [size] StorageObject size
-                     * @property {string|null} [contentEncoding] StorageObject contentEncoding
-                     * @property {string|null} [contentDisposition] StorageObject contentDisposition
-                     * @property {string|null} [cacheControl] StorageObject cacheControl
-                     * @property {Array.<google.storage.v2.IObjectAccessControl>|null} [acl] StorageObject acl
-                     * @property {string|null} [contentLanguage] StorageObject contentLanguage
-                     * @property {google.protobuf.ITimestamp|null} [deleteTime] StorageObject deleteTime
-                     * @property {google.protobuf.ITimestamp|null} [finalizeTime] StorageObject finalizeTime
-                     * @property {string|null} [contentType] StorageObject contentType
-                     * @property {google.protobuf.ITimestamp|null} [createTime] StorageObject createTime
-                     * @property {number|null} [componentCount] StorageObject componentCount
-                     * @property {google.storage.v2.IObjectChecksums|null} [checksums] StorageObject checksums
-                     * @property {google.protobuf.ITimestamp|null} [updateTime] StorageObject updateTime
-                     * @property {string|null} [kmsKey] StorageObject kmsKey
-                     * @property {google.protobuf.ITimestamp|null} [updateStorageClassTime] StorageObject updateStorageClassTime
-                     * @property {boolean|null} [temporaryHold] StorageObject temporaryHold
-                     * @property {google.protobuf.ITimestamp|null} [retentionExpireTime] StorageObject retentionExpireTime
-                     * @property {Object.<string,string>|null} [metadata] StorageObject metadata
-                     * @property {google.storage.v2.IObjectContexts|null} [contexts] StorageObject contexts
-                     * @property {boolean|null} [eventBasedHold] StorageObject eventBasedHold
-                     * @property {google.storage.v2.IOwner|null} [owner] StorageObject owner
-                     * @property {google.storage.v2.ICustomerEncryption|null} [customerEncryption] StorageObject customerEncryption
-                     * @property {google.protobuf.ITimestamp|null} [customTime] StorageObject customTime
-                     * @property {google.protobuf.ITimestamp|null} [softDeleteTime] StorageObject softDeleteTime
-                     * @property {google.protobuf.ITimestamp|null} [hardDeleteTime] StorageObject hardDeleteTime
-                     * @property {google.storage.v2.StorageObject.IRetention|null} [retention] StorageObject retention
+                     * @interface IObject
+                     * @property {string|null} [name] Object name
+                     * @property {string|null} [bucket] Object bucket
+                     * @property {string|null} [etag] Object etag
+                     * @property {number|Long|null} [generation] Object generation
+                     * @property {string|null} [restoreToken] Object restoreToken
+                     * @property {number|Long|null} [metageneration] Object metageneration
+                     * @property {string|null} [storageClass] Object storageClass
+                     * @property {number|Long|null} [size] Object size
+                     * @property {string|null} [contentEncoding] Object contentEncoding
+                     * @property {string|null} [contentDisposition] Object contentDisposition
+                     * @property {string|null} [cacheControl] Object cacheControl
+                     * @property {Array.<google.storage.v2.IObjectAccessControl>|null} [acl] Object acl
+                     * @property {string|null} [contentLanguage] Object contentLanguage
+                     * @property {google.protobuf.ITimestamp|null} [deleteTime] Object deleteTime
+                     * @property {google.protobuf.ITimestamp|null} [finalizeTime] Object finalizeTime
+                     * @property {string|null} [contentType] Object contentType
+                     * @property {google.protobuf.ITimestamp|null} [createTime] Object createTime
+                     * @property {number|null} [componentCount] Object componentCount
+                     * @property {google.storage.v2.IObjectChecksums|null} [checksums] Object checksums
+                     * @property {google.protobuf.ITimestamp|null} [updateTime] Object updateTime
+                     * @property {string|null} [kmsKey] Object kmsKey
+                     * @property {google.protobuf.ITimestamp|null} [updateStorageClassTime] Object updateStorageClassTime
+                     * @property {boolean|null} [temporaryHold] Object temporaryHold
+                     * @property {google.protobuf.ITimestamp|null} [retentionExpireTime] Object retentionExpireTime
+                     * @property {Object.<string,string>|null} [metadata] Object metadata
+                     * @property {google.storage.v2.IObjectContexts|null} [contexts] Object contexts
+                     * @property {boolean|null} [eventBasedHold] Object eventBasedHold
+                     * @property {google.storage.v2.IOwner|null} [owner] Object owner
+                     * @property {google.storage.v2.ICustomerEncryption|null} [customerEncryption] Object customerEncryption
+                     * @property {google.protobuf.ITimestamp|null} [customTime] Object customTime
+                     * @property {google.protobuf.ITimestamp|null} [softDeleteTime] Object softDeleteTime
+                     * @property {google.protobuf.ITimestamp|null} [hardDeleteTime] Object hardDeleteTime
+                     * @property {google.storage.v2.StorageObject.IRetention|null} [retention] Object retention
                      */
     
                     /**
-                     * Constructs a new StorageObject.
+                     * Constructs a new Object.
                      * @memberof google.storage.v2
-                     * @classdesc Represents a StorageObject.
-                     * @implements IStorageObject
+                     * @classdesc Represents an Object.
+                     * @implements IObject
                      * @constructor
                      * @param {google.storage.v2.IStorageObject=} [properties] Properties to set
                      */
-                    function StorageObject(properties) {
+                    function Object(properties) {
                         this.acl = [];
                         this.metadata = {};
                         if (properties)
@@ -40882,318 +49163,318 @@
                     }
     
                     /**
-                     * StorageObject name.
+                     * Object name.
                      * @member {string} name
                      * @memberof google.storage.v2.StorageObject
                      * @instance
                      */
-                    StorageObject.prototype.name = "";
+                    Object.prototype.name = "";
     
                     /**
-                     * StorageObject bucket.
+                     * Object bucket.
                      * @member {string} bucket
                      * @memberof google.storage.v2.StorageObject
                      * @instance
                      */
-                    StorageObject.prototype.bucket = "";
+                    Object.prototype.bucket = "";
     
                     /**
-                     * StorageObject etag.
+                     * Object etag.
                      * @member {string} etag
                      * @memberof google.storage.v2.StorageObject
                      * @instance
                      */
-                    StorageObject.prototype.etag = "";
+                    Object.prototype.etag = "";
     
                     /**
-                     * StorageObject generation.
+                     * Object generation.
                      * @member {number|Long} generation
                      * @memberof google.storage.v2.StorageObject
                      * @instance
                      */
-                    StorageObject.prototype.generation = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                    Object.prototype.generation = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
                     /**
-                     * StorageObject restoreToken.
+                     * Object restoreToken.
                      * @member {string|null|undefined} restoreToken
                      * @memberof google.storage.v2.StorageObject
                      * @instance
                      */
-                    StorageObject.prototype.restoreToken = null;
+                    Object.prototype.restoreToken = null;
     
                     /**
-                     * StorageObject metageneration.
+                     * Object metageneration.
                      * @member {number|Long} metageneration
                      * @memberof google.storage.v2.StorageObject
                      * @instance
                      */
-                    StorageObject.prototype.metageneration = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                    Object.prototype.metageneration = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
                     /**
-                     * StorageObject storageClass.
+                     * Object storageClass.
                      * @member {string} storageClass
                      * @memberof google.storage.v2.StorageObject
                      * @instance
                      */
-                    StorageObject.prototype.storageClass = "";
+                    Object.prototype.storageClass = "";
     
                     /**
-                     * StorageObject size.
+                     * Object size.
                      * @member {number|Long} size
                      * @memberof google.storage.v2.StorageObject
                      * @instance
                      */
-                    StorageObject.prototype.size = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                    Object.prototype.size = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
                     /**
-                     * StorageObject contentEncoding.
+                     * Object contentEncoding.
                      * @member {string} contentEncoding
                      * @memberof google.storage.v2.StorageObject
                      * @instance
                      */
-                    StorageObject.prototype.contentEncoding = "";
+                    Object.prototype.contentEncoding = "";
     
                     /**
-                     * StorageObject contentDisposition.
+                     * Object contentDisposition.
                      * @member {string} contentDisposition
                      * @memberof google.storage.v2.StorageObject
                      * @instance
                      */
-                    StorageObject.prototype.contentDisposition = "";
+                    Object.prototype.contentDisposition = "";
     
                     /**
-                     * StorageObject cacheControl.
+                     * Object cacheControl.
                      * @member {string} cacheControl
                      * @memberof google.storage.v2.StorageObject
                      * @instance
                      */
-                    StorageObject.prototype.cacheControl = "";
+                    Object.prototype.cacheControl = "";
     
                     /**
-                     * StorageObject acl.
+                     * Object acl.
                      * @member {Array.<google.storage.v2.IObjectAccessControl>} acl
                      * @memberof google.storage.v2.StorageObject
                      * @instance
                      */
-                    StorageObject.prototype.acl = $util.emptyArray;
+                    Object.prototype.acl = $util.emptyArray;
     
                     /**
-                     * StorageObject contentLanguage.
+                     * Object contentLanguage.
                      * @member {string} contentLanguage
                      * @memberof google.storage.v2.StorageObject
                      * @instance
                      */
-                    StorageObject.prototype.contentLanguage = "";
+                    Object.prototype.contentLanguage = "";
     
                     /**
-                     * StorageObject deleteTime.
+                     * Object deleteTime.
                      * @member {google.protobuf.ITimestamp|null|undefined} deleteTime
                      * @memberof google.storage.v2.StorageObject
                      * @instance
                      */
-                    StorageObject.prototype.deleteTime = null;
+                    Object.prototype.deleteTime = null;
     
                     /**
-                     * StorageObject finalizeTime.
+                     * Object finalizeTime.
                      * @member {google.protobuf.ITimestamp|null|undefined} finalizeTime
                      * @memberof google.storage.v2.StorageObject
                      * @instance
                      */
-                    StorageObject.prototype.finalizeTime = null;
+                    Object.prototype.finalizeTime = null;
     
                     /**
-                     * StorageObject contentType.
+                     * Object contentType.
                      * @member {string} contentType
                      * @memberof google.storage.v2.StorageObject
                      * @instance
                      */
-                    StorageObject.prototype.contentType = "";
+                    Object.prototype.contentType = "";
     
                     /**
-                     * StorageObject createTime.
+                     * Object createTime.
                      * @member {google.protobuf.ITimestamp|null|undefined} createTime
                      * @memberof google.storage.v2.StorageObject
                      * @instance
                      */
-                    StorageObject.prototype.createTime = null;
+                    Object.prototype.createTime = null;
     
                     /**
-                     * StorageObject componentCount.
+                     * Object componentCount.
                      * @member {number} componentCount
                      * @memberof google.storage.v2.StorageObject
                      * @instance
                      */
-                    StorageObject.prototype.componentCount = 0;
+                    Object.prototype.componentCount = 0;
     
                     /**
-                     * StorageObject checksums.
+                     * Object checksums.
                      * @member {google.storage.v2.IObjectChecksums|null|undefined} checksums
                      * @memberof google.storage.v2.StorageObject
                      * @instance
                      */
-                    StorageObject.prototype.checksums = null;
+                    Object.prototype.checksums = null;
     
                     /**
-                     * StorageObject updateTime.
+                     * Object updateTime.
                      * @member {google.protobuf.ITimestamp|null|undefined} updateTime
                      * @memberof google.storage.v2.StorageObject
                      * @instance
                      */
-                    StorageObject.prototype.updateTime = null;
+                    Object.prototype.updateTime = null;
     
                     /**
-                     * StorageObject kmsKey.
+                     * Object kmsKey.
                      * @member {string} kmsKey
                      * @memberof google.storage.v2.StorageObject
                      * @instance
                      */
-                    StorageObject.prototype.kmsKey = "";
+                    Object.prototype.kmsKey = "";
     
                     /**
-                     * StorageObject updateStorageClassTime.
+                     * Object updateStorageClassTime.
                      * @member {google.protobuf.ITimestamp|null|undefined} updateStorageClassTime
                      * @memberof google.storage.v2.StorageObject
                      * @instance
                      */
-                    StorageObject.prototype.updateStorageClassTime = null;
+                    Object.prototype.updateStorageClassTime = null;
     
                     /**
-                     * StorageObject temporaryHold.
+                     * Object temporaryHold.
                      * @member {boolean} temporaryHold
                      * @memberof google.storage.v2.StorageObject
                      * @instance
                      */
-                    StorageObject.prototype.temporaryHold = false;
+                    Object.prototype.temporaryHold = false;
     
                     /**
-                     * StorageObject retentionExpireTime.
+                     * Object retentionExpireTime.
                      * @member {google.protobuf.ITimestamp|null|undefined} retentionExpireTime
                      * @memberof google.storage.v2.StorageObject
                      * @instance
                      */
-                    StorageObject.prototype.retentionExpireTime = null;
+                    Object.prototype.retentionExpireTime = null;
     
                     /**
-                     * StorageObject metadata.
+                     * Object metadata.
                      * @member {Object.<string,string>} metadata
                      * @memberof google.storage.v2.StorageObject
                      * @instance
                      */
-                    StorageObject.prototype.metadata = $util.emptyObject;
+                    Object.prototype.metadata = $util.emptyObject;
     
                     /**
-                     * StorageObject contexts.
+                     * Object contexts.
                      * @member {google.storage.v2.IObjectContexts|null|undefined} contexts
                      * @memberof google.storage.v2.StorageObject
                      * @instance
                      */
-                    StorageObject.prototype.contexts = null;
+                    Object.prototype.contexts = null;
     
                     /**
-                     * StorageObject eventBasedHold.
+                     * Object eventBasedHold.
                      * @member {boolean|null|undefined} eventBasedHold
                      * @memberof google.storage.v2.StorageObject
                      * @instance
                      */
-                    StorageObject.prototype.eventBasedHold = null;
+                    Object.prototype.eventBasedHold = null;
     
                     /**
-                     * StorageObject owner.
+                     * Object owner.
                      * @member {google.storage.v2.IOwner|null|undefined} owner
                      * @memberof google.storage.v2.StorageObject
                      * @instance
                      */
-                    StorageObject.prototype.owner = null;
+                    Object.prototype.owner = null;
     
                     /**
-                     * StorageObject customerEncryption.
+                     * Object customerEncryption.
                      * @member {google.storage.v2.ICustomerEncryption|null|undefined} customerEncryption
                      * @memberof google.storage.v2.StorageObject
                      * @instance
                      */
-                    StorageObject.prototype.customerEncryption = null;
+                    Object.prototype.customerEncryption = null;
     
                     /**
-                     * StorageObject customTime.
+                     * Object customTime.
                      * @member {google.protobuf.ITimestamp|null|undefined} customTime
                      * @memberof google.storage.v2.StorageObject
                      * @instance
                      */
-                    StorageObject.prototype.customTime = null;
+                    Object.prototype.customTime = null;
     
                     /**
-                     * StorageObject softDeleteTime.
+                     * Object softDeleteTime.
                      * @member {google.protobuf.ITimestamp|null|undefined} softDeleteTime
                      * @memberof google.storage.v2.StorageObject
                      * @instance
                      */
-                    StorageObject.prototype.softDeleteTime = null;
+                    Object.prototype.softDeleteTime = null;
     
                     /**
-                     * StorageObject hardDeleteTime.
+                     * Object hardDeleteTime.
                      * @member {google.protobuf.ITimestamp|null|undefined} hardDeleteTime
                      * @memberof google.storage.v2.StorageObject
                      * @instance
                      */
-                    StorageObject.prototype.hardDeleteTime = null;
+                    Object.prototype.hardDeleteTime = null;
     
                     /**
-                     * StorageObject retention.
+                     * Object retention.
                      * @member {google.storage.v2.StorageObject.IRetention|null|undefined} retention
                      * @memberof google.storage.v2.StorageObject
                      * @instance
                      */
-                    StorageObject.prototype.retention = null;
+                    Object.prototype.retention = null;
     
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
                     // Virtual OneOf for proto3 optional field
-                    Object.defineProperty(StorageObject.prototype, "_restoreToken", {
+                    Object.defineProperty(Object.prototype, "_restoreToken", {
                         get: $util.oneOfGetter($oneOfFields = ["restoreToken"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
                     // Virtual OneOf for proto3 optional field
-                    Object.defineProperty(StorageObject.prototype, "_eventBasedHold", {
+                    Object.defineProperty(Object.prototype, "_eventBasedHold", {
                         get: $util.oneOfGetter($oneOfFields = ["eventBasedHold"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
                     // Virtual OneOf for proto3 optional field
-                    Object.defineProperty(StorageObject.prototype, "_softDeleteTime", {
+                    Object.defineProperty(Object.prototype, "_softDeleteTime", {
                         get: $util.oneOfGetter($oneOfFields = ["softDeleteTime"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
                     // Virtual OneOf for proto3 optional field
-                    Object.defineProperty(StorageObject.prototype, "_hardDeleteTime", {
+                    Object.defineProperty(Object.prototype, "_hardDeleteTime", {
                         get: $util.oneOfGetter($oneOfFields = ["hardDeleteTime"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
                     /**
-                     * Creates a new StorageObject instance using the specified properties.
+                     * Creates a new Object instance using the specified properties.
                      * @function create
                      * @memberof google.storage.v2.StorageObject
                      * @static
                      * @param {google.storage.v2.IStorageObject=} [properties] Properties to set
-                     * @returns {google.storage.v2.StorageObject} StorageObject instance
+                     * @returns {google.storage.v2.StorageObject} Object instance
                      */
-                    StorageObject.create = function create(properties) {
-                        return new StorageObject(properties);
+                    Object.create = function create(properties) {
+                        return new Object(properties);
                     };
     
                     /**
-                     * Encodes the specified StorageObject message. Does not implicitly {@link google.storage.v2.StorageObject.verify|verify} messages.
+                     * Encodes the specified Object message. Does not implicitly {@link google.storage.v2.StorageObject.verify|verify} messages.
                      * @function encode
                      * @memberof google.storage.v2.StorageObject
                      * @static
-                     * @param {google.storage.v2.IStorageObject} message StorageObject message or plain object to encode
+                     * @param {google.storage.v2.IStorageObject} message Object message or plain object to encode
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    StorageObject.encode = function encode(message, writer) {
+                    Object.encode = function encode(message, writer) {
                         if (!writer)
                             writer = $Writer.create();
                         if (message.name != null && Object.hasOwnProperty.call(message, "name"))
@@ -41268,30 +49549,30 @@
                     };
     
                     /**
-                     * Encodes the specified StorageObject message, length delimited. Does not implicitly {@link google.storage.v2.StorageObject.verify|verify} messages.
+                     * Encodes the specified Object message, length delimited. Does not implicitly {@link google.storage.v2.StorageObject.verify|verify} messages.
                      * @function encodeDelimited
                      * @memberof google.storage.v2.StorageObject
                      * @static
-                     * @param {google.storage.v2.IStorageObject} message StorageObject message or plain object to encode
+                     * @param {google.storage.v2.IStorageObject} message Object message or plain object to encode
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    StorageObject.encodeDelimited = function encodeDelimited(message, writer) {
+                    Object.encodeDelimited = function encodeDelimited(message, writer) {
                         return this.encode(message, writer).ldelim();
                     };
     
                     /**
-                     * Decodes a StorageObject message from the specified reader or buffer.
+                     * Decodes an Object message from the specified reader or buffer.
                      * @function decode
                      * @memberof google.storage.v2.StorageObject
                      * @static
                      * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                      * @param {number} [length] Message length if known beforehand
-                     * @returns {google.storage.v2.StorageObject} StorageObject
+                     * @returns {google.storage.v2.StorageObject} Object
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    StorageObject.decode = function decode(reader, length, error, long) {
+                    Object.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         if (long === undefined)
@@ -41468,30 +49749,30 @@
                     };
     
                     /**
-                     * Decodes a StorageObject message from the specified reader or buffer, length delimited.
+                     * Decodes an Object message from the specified reader or buffer, length delimited.
                      * @function decodeDelimited
                      * @memberof google.storage.v2.StorageObject
                      * @static
                      * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.storage.v2.StorageObject} StorageObject
+                     * @returns {google.storage.v2.StorageObject} Object
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    StorageObject.decodeDelimited = function decodeDelimited(reader) {
+                    Object.decodeDelimited = function decodeDelimited(reader) {
                         if (!(reader instanceof $Reader))
                             reader = new $Reader(reader);
                         return this.decode(reader, reader.uint32());
                     };
     
                     /**
-                     * Verifies a StorageObject message.
+                     * Verifies an Object message.
                      * @function verify
                      * @memberof google.storage.v2.StorageObject
                      * @static
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    StorageObject.verify = function verify(message, long) {
+                    Object.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
                         if (long === undefined)
@@ -41651,14 +49932,14 @@
                     };
     
                     /**
-                     * Creates a StorageObject message from a plain object. Also converts values to their respective internal types.
+                     * Creates an Object message from a plain object. Also converts values to their respective internal types.
                      * @function fromObject
                      * @memberof google.storage.v2.StorageObject
                      * @static
                      * @param {Object.<string,*>} object Plain object
-                     * @returns {google.storage.v2.StorageObject} StorageObject
+                     * @returns {google.storage.v2.StorageObject} Object
                      */
-                    StorageObject.fromObject = function fromObject(object, long) {
+                    Object.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.StorageObject)
                             return object;
                         if (long === undefined)
@@ -41815,15 +50096,15 @@
                     };
     
                     /**
-                     * Creates a plain object from a StorageObject message. Also converts values to other types if specified.
+                     * Creates a plain object from an Object message. Also converts values to other types if specified.
                      * @function toObject
                      * @memberof google.storage.v2.StorageObject
                      * @static
-                     * @param {google.storage.v2.StorageObject} message StorageObject
+                     * @param {google.storage.v2.StorageObject} message Object
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    StorageObject.toObject = function toObject(message, options) {
+                    Object.toObject = function toObject(message, options) {
                         if (!options)
                             options = {};
                         var object = {};
@@ -41973,32 +50254,32 @@
                     };
     
                     /**
-                     * Converts this StorageObject to JSON.
+                     * Converts this Object to JSON.
                      * @function toJSON
                      * @memberof google.storage.v2.StorageObject
                      * @instance
                      * @returns {Object.<string,*>} JSON object
                      */
-                    StorageObject.prototype.toJSON = function toJSON() {
+                    Object.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
                     /**
-                     * Gets the default type url for StorageObject
+                     * Gets the default type url for Object
                      * @function getTypeUrl
                      * @memberof google.storage.v2.StorageObject
                      * @static
                      * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns {string} The default type url
                      */
-                    StorageObject.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    Object.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
                         if (typeUrlPrefix === undefined) {
                             typeUrlPrefix = "type.googleapis.com";
                         }
                         return typeUrlPrefix + "/google.storage.v2.StorageObject";
                     };
     
-                    StorageObject.Retention = (function() {
+                    Object.Retention = (function() {
     
                         /**
                          * Properties of a Retention.
@@ -42284,7 +50565,7 @@
                         return Retention;
                     })();
     
-                    return StorageObject;
+                    return Object;
                 })();
     
                 v2.ObjectAccessControl = (function() {
@@ -69993,6 +78274,257 @@
                 };
     
                 return Expr;
+            })();
+    
+            type.Interval = (function() {
+    
+                /**
+                 * Properties of an Interval.
+                 * @memberof google.type
+                 * @interface IInterval
+                 * @property {google.protobuf.ITimestamp|null} [startTime] Interval startTime
+                 * @property {google.protobuf.ITimestamp|null} [endTime] Interval endTime
+                 */
+    
+                /**
+                 * Constructs a new Interval.
+                 * @memberof google.type
+                 * @classdesc Represents an Interval.
+                 * @implements IInterval
+                 * @constructor
+                 * @param {google.type.IInterval=} [properties] Properties to set
+                 */
+                function Interval(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Interval startTime.
+                 * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                 * @memberof google.type.Interval
+                 * @instance
+                 */
+                Interval.prototype.startTime = null;
+    
+                /**
+                 * Interval endTime.
+                 * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                 * @memberof google.type.Interval
+                 * @instance
+                 */
+                Interval.prototype.endTime = null;
+    
+                /**
+                 * Creates a new Interval instance using the specified properties.
+                 * @function create
+                 * @memberof google.type.Interval
+                 * @static
+                 * @param {google.type.IInterval=} [properties] Properties to set
+                 * @returns {google.type.Interval} Interval instance
+                 */
+                Interval.create = function create(properties) {
+                    return new Interval(properties);
+                };
+    
+                /**
+                 * Encodes the specified Interval message. Does not implicitly {@link google.type.Interval.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.type.Interval
+                 * @static
+                 * @param {google.type.IInterval} message Interval message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Interval.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                        $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                        $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Interval message, length delimited. Does not implicitly {@link google.type.Interval.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.type.Interval
+                 * @static
+                 * @param {google.type.IInterval} message Interval message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Interval.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Interval message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.type.Interval
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.type.Interval} Interval
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Interval.decode = function decode(reader, length, error, long) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.Interval();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                break;
+                            }
+                        case 2: {
+                                message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7, long);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Interval message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.type.Interval
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.type.Interval} Interval
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Interval.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Interval message.
+                 * @function verify
+                 * @memberof google.type.Interval
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Interval.verify = function verify(message, long) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
+                    if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                        var error = $root.google.protobuf.Timestamp.verify(message.startTime, long + 1);
+                        if (error)
+                            return "startTime." + error;
+                    }
+                    if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                        var error = $root.google.protobuf.Timestamp.verify(message.endTime, long + 1);
+                        if (error)
+                            return "endTime." + error;
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates an Interval message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.type.Interval
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.type.Interval} Interval
+                 */
+                Interval.fromObject = function fromObject(object, long) {
+                    if (object instanceof $root.google.type.Interval)
+                        return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
+                    var message = new $root.google.type.Interval();
+                    if (object.startTime != null) {
+                        if (typeof object.startTime !== "object")
+                            throw TypeError(".google.type.Interval.startTime: object expected");
+                        message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime, long + 1);
+                    }
+                    if (object.endTime != null) {
+                        if (typeof object.endTime !== "object")
+                            throw TypeError(".google.type.Interval.endTime: object expected");
+                        message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime, long + 1);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Interval message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.type.Interval
+                 * @static
+                 * @param {google.type.Interval} message Interval
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Interval.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.startTime = null;
+                        object.endTime = null;
+                    }
+                    if (message.startTime != null && message.hasOwnProperty("startTime"))
+                        object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
+                    if (message.endTime != null && message.hasOwnProperty("endTime"))
+                        object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                    return object;
+                };
+    
+                /**
+                 * Converts this Interval to JSON.
+                 * @function toJSON
+                 * @memberof google.type.Interval
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Interval.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Interval
+                 * @function getTypeUrl
+                 * @memberof google.type.Interval
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Interval.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.type.Interval";
+                };
+    
+                return Interval;
             })();
     
             type.Date = (function() {

@@ -87,6 +87,10 @@ describe('Session', () => {
     request: () => {},
     formattedName_: 'formatted-database-name',
     parent: INSTANCE,
+    commonHeaders_: {
+      [CLOUD_RESOURCE_HEADER]: 'formatted-database-name',
+      [AFE_SERVER_TIMING_HEADER]: 'true',
+    },
   };
 
   const NAME = 'session-name';

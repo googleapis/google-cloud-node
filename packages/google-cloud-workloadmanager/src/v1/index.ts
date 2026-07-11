@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {WorkloadManagerClient} from './workload_manager_client';
+export { WorkloadManagerClient } from './workload_manager_client';

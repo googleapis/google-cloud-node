@@ -40,7 +40,7 @@ export function updateSamples() {
       let content = fs.readFileSync(filePath, 'utf8');
 
       content = content.replace(
-        /const\s+\{StorageClient\}\s*=\s*require\('@google-cloud\/storage'\)\.v2;/g,
+        /const\s+\{StorageClient\}\s*=\s*require\('@google-cloud\/(storage|storage-control)'\)\.v2;/g,
         "const {StorageControlClient} = require('@google-cloud/storage-control');",
       );
 

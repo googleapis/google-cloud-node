@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/appoptimize-v0.1.1...appoptimize-v0.2.0) (2026-05-27)
+
+
+### Features
+
+* Clean up per-package eslintrc configurations ([b053d0e](https://github.com/googleapis/google-cloud-node/commit/b053d0edfa1ade74ce069279af86f058c77a589b))
+
 ## [0.1.1](https://github.com/googleapis/google-cloud-node/compare/appoptimize-v0.1.0...appoptimize-v0.1.1) (2026-05-13)
 
 

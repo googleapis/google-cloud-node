@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/support-v2.3.0...support-v2.4.0) (2026-06-16)
+
+
+### Features
+
+* Local OwlBot generation batch 4 ([#8615](https://github.com/googleapis/google-cloud-node/issues/8615)) ([f629251](https://github.com/googleapis/google-cloud-node/commit/f629251e27e51aa06003b4846a497d5a7c411cc2))
+
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/support-v2.2.2...support-v2.3.0) (2026-06-01)
+
+
+### Features
+
+* [cloudsupport] v2 version for `GetComment` and `GetAttachment` ([#8281](https://github.com/googleapis/google-cloud-node/issues/8281)) ([c83b9a6](https://github.com/googleapis/google-cloud-node/commit/c83b9a659cae7f366e77c43421732f3bdd6b47dd))
+
 ## [2.2.2](https://github.com/googleapis/google-cloud-node/compare/support-v2.2.1...support-v2.2.2) (2026-05-01)
 
 

@@ -36,6 +36,7 @@ export { GlobalNetworkEndpointGroupsClient } from './global_network_endpoint_gro
 export { GlobalOperationsClient } from './global_operations_client';
 export { GlobalOrganizationOperationsClient } from './global_organization_operations_client';
 export { GlobalPublicDelegatedPrefixesClient } from './global_public_delegated_prefixes_client';
+export { GlobalVmExtensionPoliciesClient } from './global_vm_extension_policies_client';
 export { HealthChecksClient } from './health_checks_client';
 export { ImageFamilyViewsClient } from './image_family_views_client';
 export { ImagesClient } from './images_client';
@@ -110,6 +111,8 @@ export { ReservationsClient } from './reservations_client';
 export { ReservationSlotsClient } from './reservation_slots_client';
 export { ReservationSubBlocksClient } from './reservation_sub_blocks_client';
 export { ResourcePoliciesClient } from './resource_policies_client';
+export { RolloutPlansClient } from './rollout_plans_client';
+export { RolloutsClient } from './rollouts_client';
 export { RoutersClient } from './routers_client';
 export { RoutesClient } from './routes_client';
 export { SecurityPoliciesClient } from './security_policies_client';

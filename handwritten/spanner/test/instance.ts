@@ -80,6 +80,9 @@ describe('Instance', () => {
     projectId: 'project-id',
     instances_: new Map(),
     projectFormattedName_: 'projects/project-id',
+    commonHeaders_: {
+      [AFE_SERVER_TIMING_HEADER]: 'true',
+    },
   } as {} as Spanner;
 
   const NAME = 'instance-name';

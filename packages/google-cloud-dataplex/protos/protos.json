@@ -1380,10 +1380,268 @@
                         "ACTION_REQUIRED": 4
                       }
                     },
+                    "ChangeRequest": {
+                      "options": {
+                        "(google.api.resource).type": "dataplex.googleapis.com/ChangeRequest",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/changeRequests/{change_request}",
+                        "(google.api.resource).plural": "changeRequests",
+                        "(google.api.resource).singular": "changeRequest"
+                      },
+                      "oneofs": {
+                        "changePayload": {
+                          "oneof": [
+                            "createEntry",
+                            "updateEntry",
+                            "deleteEntry",
+                            "createEntryLink",
+                            "deleteEntryLink",
+                            "createGlossary",
+                            "updateGlossary",
+                            "deleteGlossary",
+                            "createGlossaryCategory",
+                            "updateGlossaryCategory",
+                            "deleteGlossaryCategory",
+                            "createGlossaryTerm",
+                            "updateGlossaryTerm",
+                            "deleteGlossaryTerm",
+                            "dataProductAccessRequest"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "justification": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "author": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "*"
+                          }
+                        },
+                        "createEntry": {
+                          "type": "CreateEntryRequest",
+                          "id": 10
+                        },
+                        "updateEntry": {
+                          "type": "UpdateEntryRequest",
+                          "id": 11
+                        },
+                        "deleteEntry": {
+                          "type": "DeleteEntryRequest",
+                          "id": 12
+                        },
+                        "createEntryLink": {
+                          "type": "CreateEntryLinkRequest",
+                          "id": 13
+                        },
+                        "deleteEntryLink": {
+                          "type": "DeleteEntryLinkRequest",
+                          "id": 14
+                        },
+                        "createGlossary": {
+                          "type": "CreateGlossaryRequest",
+                          "id": 20
+                        },
+                        "updateGlossary": {
+                          "type": "UpdateGlossaryRequest",
+                          "id": 21
+                        },
+                        "deleteGlossary": {
+                          "type": "DeleteGlossaryRequest",
+                          "id": 22
+                        },
+                        "createGlossaryCategory": {
+                          "type": "CreateGlossaryCategoryRequest",
+                          "id": 23
+                        },
+                        "updateGlossaryCategory": {
+                          "type": "UpdateGlossaryCategoryRequest",
+                          "id": 24
+                        },
+                        "deleteGlossaryCategory": {
+                          "type": "DeleteGlossaryCategoryRequest",
+                          "id": 26
+                        },
+                        "createGlossaryTerm": {
+                          "type": "CreateGlossaryTermRequest",
+                          "id": 27
+                        },
+                        "updateGlossaryTerm": {
+                          "type": "UpdateGlossaryTermRequest",
+                          "id": 28
+                        },
+                        "deleteGlossaryTerm": {
+                          "type": "DeleteGlossaryTermRequest",
+                          "id": 30
+                        },
+                        "dataProductAccessRequest": {
+                          "type": "DataProductAccessRequest",
+                          "id": 32
+                        },
+                        "changeType": {
+                          "type": "ChangeType",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "rejectionComment": {
+                          "type": "string",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "approver": {
+                          "type": "string",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "NEW": 1,
+                            "APPROVED": 2,
+                            "REJECTED": 3,
+                            "EXPIRED": 4,
+                            "REVOKED": 5
+                          }
+                        },
+                        "ChangeType": {
+                          "values": {
+                            "CHANGE_TYPE_UNSPECIFIED": 0,
+                            "CREATE_ENTRY": 1,
+                            "UPDATE_ENTRY": 2,
+                            "DELETE_ENTRY": 3,
+                            "CREATE_ENTRY_LINK": 4,
+                            "DELETE_ENTRY_LINK": 5,
+                            "CREATE_GLOSSARY": 7,
+                            "UPDATE_GLOSSARY": 8,
+                            "DELETE_GLOSSARY": 9,
+                            "CREATE_GLOSSARY_CATEGORY": 10,
+                            "UPDATE_GLOSSARY_CATEGORY": 11,
+                            "DELETE_GLOSSARY_CATEGORY": 13,
+                            "CREATE_GLOSSARY_TERM": 14,
+                            "UPDATE_GLOSSARY_TERM": 15,
+                            "DELETE_GLOSSARY_TERM": 17,
+                            "REQUEST_DATA_PRODUCT_ACCESS": 33
+                          }
+                        }
+                      }
+                    },
+                    "DataProductAccessRequest": {
+                      "oneofs": {
+                        "_requestedPrincipal": {
+                          "oneof": [
+                            "requestedPrincipal"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataplex.googleapis.com/DataProduct"
+                          }
+                        },
+                        "accessGroupId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "accessGroupDisplayName": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "requestedPrincipal": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "BusinessGlossaryService": {
                       "options": {
                         "(google.api.default_host)": "dataplex.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/cloud-platform.read-only,https://www.googleapis.com/auth/dataplex.read-write,https://www.googleapis.com/auth/dataplex.readonly"
                       },
                       "methods": {
                         "CreateGlossary": {
@@ -2315,7 +2573,7 @@
                     "DataplexService": {
                       "options": {
                         "(google.api.default_host)": "dataplex.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/cloud-platform.read-only,https://www.googleapis.com/auth/dataplex.read-write,https://www.googleapis.com/auth/dataplex.readonly"
                       },
                       "methods": {
                         "CreateLake": {
@@ -4735,6 +4993,22 @@
                             }
                           ]
                         },
+                        "ModifyEntry": {
+                          "requestType": "ModifyEntryRequest",
+                          "responseType": "Entry",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*}:modifyEntry",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*}:modifyEntry",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
                         "SearchEntries": {
                           "requestType": "SearchEntriesRequest",
                           "responseType": "SearchEntriesResponse",
@@ -6402,10 +6676,57 @@
                             "(google.api.resource_reference).type": "dataplex.googleapis.com/Entry"
                           }
                         },
+                        "context": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "options": {
                           "keyType": "string",
                           "type": "string",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ModifyEntryRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "entry": {
+                          "type": "Entry",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "deleteMissingAspects": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "aspectKeys": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -7617,7 +7938,7 @@
                     "CmekService": {
                       "options": {
                         "(google.api.default_host)": "dataplex.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/dataplex.read-write"
                       },
                       "methods": {
                         "CreateEncryptionConfig": {
@@ -8077,6 +8398,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "unstructuredDataOptions": {
+                              "type": "UnstructuredDataOptions",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -8129,6 +8457,17 @@
                                   }
                                 },
                                 "typeInferenceDisabled": {
+                                  "type": "bool",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "UnstructuredDataOptions": {
+                              "fields": {
+                                "semanticInferenceEnabled": {
                                   "type": "bool",
                                   "id": 2,
                                   "options": {
@@ -8464,7 +8803,7 @@
                     "DataProductService": {
                       "options": {
                         "(google.api.default_host)": "dataplex.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/cloud-platform.read-only,https://www.googleapis.com/auth/dataplex.read-write,https://www.googleapis.com/auth/dataplex.readonly"
                       },
                       "methods": {
                         "CreateDataProduct": {
@@ -8582,6 +8921,26 @@
                                 "response_type": "DataProduct",
                                 "metadata_type": "OperationMetadata"
                               }
+                            }
+                          ]
+                        },
+                        "RequestDataProductAccess": {
+                          "requestType": "RequestDataProductAccessRequest",
+                          "responseType": "RequestDataProductAccessResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/dataProducts/*}:requestAccess",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,change_request"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/dataProducts/*}:requestAccess",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,change_request"
                             }
                           ]
                         },
@@ -8712,6 +9071,13 @@
                         "(google.api.resource).plural": "dataProducts",
                         "(google.api.resource).singular": "dataProduct"
                       },
+                      "oneofs": {
+                        "_accessApprovalConfig": {
+                          "oneof": [
+                            "accessApprovalConfig"
+                          ]
+                        }
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -8800,6 +9166,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "accessApprovalConfig": {
+                          "type": "AccessApprovalConfig",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {
@@ -8809,6 +9183,11 @@
                               "oneof": [
                                 "googleGroup"
                               ]
+                            },
+                            "_serviceAccount": {
+                              "oneof": [
+                                "serviceAccount"
+                              ]
                             }
                           },
                           "fields": {
@@ -8817,6 +9196,14 @@
                               "id": 1,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "serviceAccount": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
                               }
                             }
                           }
@@ -8849,6 +9236,18 @@
                               "id": 4,
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "AccessApprovalConfig": {
+                          "fields": {
+                            "approverEmails": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }
@@ -9095,6 +9494,43 @@
                         }
                       }
                     },
+                    "RequestDataProductAccessRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataplex.googleapis.com/DataProduct"
+                          }
+                        },
+                        "changeRequest": {
+                          "type": "ChangeRequest",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "RequestDataProductAccessResponse": {
+                      "fields": {
+                        "changeRequestName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "dataplex.googleapis.com/ChangeRequest"
+                          }
+                        }
+                      }
+                    },
                     "CreateDataAssetRequest": {
                       "fields": {
                         "parent": {
@@ -9287,6 +9723,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "mode": {
+                          "type": "Mode",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -9324,6 +9767,13 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
+                          }
+                        },
+                        "Mode": {
+                          "values": {
+                            "MODE_UNSPECIFIED": 0,
+                            "STANDARD": 1,
+                            "LIGHTWEIGHT": 2
                           }
                         }
                       }
@@ -9816,6 +10266,20 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "enableCatalogBasedRules": {
+                          "type": "bool",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -10227,7 +10691,8 @@
                             "statisticRangeExpectation",
                             "rowConditionExpectation",
                             "tableConditionExpectation",
-                            "sqlAssertion"
+                            "sqlAssertion",
+                            "templateReference"
                           ]
                         }
                       },
@@ -10267,6 +10732,10 @@
                         "sqlAssertion": {
                           "type": "SqlAssertion",
                           "id": 202
+                        },
+                        "templateReference": {
+                          "type": "TemplateReference",
+                          "id": 5
                         },
                         "column": {
                           "type": "string",
@@ -10315,6 +10784,21 @@
                           "id": 506,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "attributes": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 507,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "ruleSource": {
+                          "type": "RuleSource",
+                          "id": 508,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
                         "debugQueries": {
@@ -10470,6 +10954,138 @@
                             }
                           }
                         },
+                        "TemplateReference": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dataplex.googleapis.com/Entry"
+                              }
+                            },
+                            "values": {
+                              "keyType": "string",
+                              "type": "ParameterValue",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "resolvedSql": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "ruleTemplate": {
+                              "type": "DataQualityRuleTemplate",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "ParameterValue": {
+                              "fields": {
+                                "value": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "RuleSource": {
+                          "fields": {
+                            "rulePathElements": {
+                              "rule": "repeated",
+                              "type": "RulePathElement",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "RulePathElement": {
+                              "oneofs": {
+                                "sourceType": {
+                                  "oneof": [
+                                    "entrySource",
+                                    "entryLinkSource"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "entrySource": {
+                                  "type": "EntrySource",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "entryLinkSource": {
+                                  "type": "EntryLinkSource",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "EntrySource": {
+                                  "fields": {
+                                    "entryType": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                      }
+                                    },
+                                    "entry": {
+                                      "type": "string",
+                                      "id": 2,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                      }
+                                    },
+                                    "displayName": {
+                                      "type": "string",
+                                      "id": 3,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                      }
+                                    }
+                                  }
+                                },
+                                "EntryLinkSource": {
+                                  "fields": {
+                                    "entryLinkType": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                      }
+                                    },
+                                    "entryLink": {
+                                      "type": "string",
+                                      "id": 2,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
                         "DebugQuery": {
                           "fields": {
                             "description": {
@@ -10531,11 +11147,84 @@
                         }
                       }
                     },
+                    "DataQualityRuleTemplate": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "dimension": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "sqlCollection": {
+                          "rule": "repeated",
+                          "type": "Sql",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "inputParameters": {
+                          "keyType": "string",
+                          "type": "ParameterDescription",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "capabilities": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Sql": {
+                          "fields": {
+                            "query": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "ParameterDescription": {
+                          "fields": {
+                            "description": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "defaultValue": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
                     "DataTaxonomyService": {
                       "options": {
                         "deprecated": true,
                         "(google.api.default_host)": "dataplex.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/dataplex.read-write"
                       },
                       "methods": {
                         "CreateDataTaxonomy": {
@@ -11738,7 +12427,7 @@
                     "DataScanService": {
                       "options": {
                         "(google.api.default_host)": "dataplex.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/cloud-platform.read-only,https://www.googleapis.com/auth/dataplex.read-write,https://www.googleapis.com/auth/dataplex.readonly"
                       },
                       "methods": {
                         "CreateDataScan": {
@@ -11915,6 +12604,26 @@
                             }
                           ]
                         },
+                        "CancelDataScanJob": {
+                          "requestType": "CancelDataScanJobRequest",
+                          "responseType": "CancelDataScanJobResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/dataScans/*/jobs/*}:cancel",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/dataScans/*/jobs/*}:cancel",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
                         "GenerateDataQualityRules": {
                           "requestType": "GenerateDataQualityRulesRequest",
                           "responseType": "GenerateDataQualityRulesResponse",
@@ -11964,7 +12673,7 @@
                           "type": "string",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "validateOnly": {
@@ -12200,6 +12909,21 @@
                         }
                       }
                     },
+                    "CancelDataScanJobRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataplex.googleapis.com/DataScanJob"
+                          }
+                        }
+                      }
+                    },
+                    "CancelDataScanJobResponse": {
+                      "fields": {}
+                    },
                     "GenerateDataQualityRulesRequest": {
                       "fields": {
                         "name": {
@@ -12373,6 +13097,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "executionIdentity": {
+                          "type": "ExecutionIdentity",
+                          "id": 300,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
                         }
                       },
                       "nested": {
@@ -12428,6 +13159,59 @@
                         }
                       }
                     },
+                    "ExecutionIdentity": {
+                      "oneofs": {
+                        "identity": {
+                          "oneof": [
+                            "dataplexServiceAgent",
+                            "userCredential",
+                            "serviceAccount"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "dataplexServiceAgent": {
+                          "type": "DataplexServiceAgent",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "userCredential": {
+                          "type": "UserCredential",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "serviceAccount": {
+                          "type": "ServiceAccount",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "DataplexServiceAgent": {
+                          "fields": {}
+                        },
+                        "UserCredential": {
+                          "fields": {}
+                        },
+                        "ServiceAccount": {
+                          "fields": {
+                            "email": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
                     "DataScanJob": {
                       "options": {
                         "(google.api.resource).type": "dataplex.googleapis.com/DataScanJob",
@@ -12470,6 +13254,13 @@
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "partialFailureMessage": {
+                          "type": "string",
+                          "id": 9,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -12575,7 +13366,8 @@
                             "CANCELLED": 3,
                             "SUCCEEDED": 4,
                             "FAILED": 5,
-                            "PENDING": 7
+                            "PENDING": 7,
+                            "SUCCEEDED_WITH_ERRORS": 8
                           }
                         }
                       }
@@ -13277,7 +14069,8 @@
                             "STATISTIC_RANGE_EXPECTATION": 6,
                             "TABLE_CONDITION_EXPECTATION": 7,
                             "UNIQUENESS_EXPECTATION": 8,
-                            "SQL_ASSERTION": 9
+                            "SQL_ASSERTION": 9,
+                            "TEMPLATE_REFERENCE": 10
                           }
                         },
                         "EvaluationType": {
@@ -13356,7 +14149,7 @@
                     "MetadataService": {
                       "options": {
                         "(google.api.default_host)": "dataplex.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/dataplex.read-write"
                       },
                       "methods": {
                         "CreateEntity": {

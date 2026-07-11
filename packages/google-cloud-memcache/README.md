@@ -66,7 +66,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | reschedule maintenance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memcache/samples/generated/v1/cloud_memcache.reschedule_maintenance.js) |
 | update instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memcache/samples/generated/v1/cloud_memcache.update_instance.js) |
 | update parameters | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memcache/samples/generated/v1/cloud_memcache.update_parameters.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memcache/samples/generated/v1/snippet_metadata_google.cloud.memcache.v1.json) |
 | apply parameters | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memcache/samples/generated/v1beta2/cloud_memcache.apply_parameters.js) |
 | apply software update | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memcache/samples/generated/v1beta2/cloud_memcache.apply_software_update.js) |
 | create instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memcache/samples/generated/v1beta2/cloud_memcache.create_instance.js) |
@@ -76,7 +75,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | reschedule maintenance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memcache/samples/generated/v1beta2/cloud_memcache.reschedule_maintenance.js) |
 | update instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memcache/samples/generated/v1beta2/cloud_memcache.update_instance.js) |
 | update parameters | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memcache/samples/generated/v1beta2/cloud_memcache.update_parameters.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memcache/samples/generated/v1beta2/snippet_metadata_google.cloud.memcache.v1beta2.json) |
 
 
 ## Supported Node.js Versions
@@ -110,7 +108,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memcache/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -120,7 +118,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memcache/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

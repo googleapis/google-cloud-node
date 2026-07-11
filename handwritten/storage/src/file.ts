@@ -2187,6 +2187,29 @@ class File extends ServiceObject<File, FileMetadata> {
       // remove temporary noop listener as we now create a pipeline that handles the errors
       emitStream.removeListener('error', noop);
 
+      if (fileWriteStream.destroyed) {
+        let callbackCalled = false;
+        const onError = (err: Error) => {
+          if (!callbackCalled) {
+            callbackCalled = true;
+            pipelineCallback(err);
+          }
+        };
+        fileWriteStream.once('error', onError);
+        emitStream.destroy();
+
+        process.nextTick(() => {
+          fileWriteStream.removeListener('error', onError);
+          if (!callbackCalled) {
+            callbackCalled = true;
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const err = (fileWriteStream as any).errored || new Error('Write stream destroyed');
+            pipelineCallback(err);
+          }
+        });
+        return;
+      }
+
       pipeline(
         emitStream,
         ...(transformStreams as [Transform]),

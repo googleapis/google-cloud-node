@@ -2433,6 +2433,169 @@ describe('v1.SpannerClient', () => {
     });
   });
 
+  describe('fetchCacheUpdate', () => {
+    it('invokes fetchCacheUpdate without error', async () => {
+      const client = new spannerModule.v1.SpannerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.spanner.v1.FetchCacheUpdateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.spanner.v1.FetchCacheUpdateRequest',
+        ['database'],
+      );
+      request.database = defaultValue1;
+      const expectedHeaderRequestParams = `database=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.spanner.v1.CacheUpdate(),
+      );
+      client.innerApiCalls.fetchCacheUpdate =
+        stubServerStreamingCall(expectedResponse);
+      const stream = client.fetchCacheUpdate(request);
+      const promise = new Promise((resolve, reject) => {
+        stream.on('data', (response: protos.google.spanner.v1.CacheUpdate) => {
+          resolve(response);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.fetchCacheUpdate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchCacheUpdate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchCacheUpdate without error and gaxServerStreamingRetries enabled', async () => {
+      const client = new spannerModule.v1.SpannerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+        gaxServerStreamingRetries: true,
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.spanner.v1.FetchCacheUpdateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.spanner.v1.FetchCacheUpdateRequest',
+        ['database'],
+      );
+      request.database = defaultValue1;
+      const expectedHeaderRequestParams = `database=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.spanner.v1.CacheUpdate(),
+      );
+      client.innerApiCalls.fetchCacheUpdate =
+        stubServerStreamingCall(expectedResponse);
+      const stream = client.fetchCacheUpdate(request);
+      const promise = new Promise((resolve, reject) => {
+        stream.on('data', (response: protos.google.spanner.v1.CacheUpdate) => {
+          resolve(response);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.fetchCacheUpdate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchCacheUpdate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchCacheUpdate with error', async () => {
+      const client = new spannerModule.v1.SpannerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.spanner.v1.FetchCacheUpdateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.spanner.v1.FetchCacheUpdateRequest',
+        ['database'],
+      );
+      request.database = defaultValue1;
+      const expectedHeaderRequestParams = `database=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.fetchCacheUpdate = stubServerStreamingCall(
+        undefined,
+        expectedError,
+      );
+      const stream = client.fetchCacheUpdate(request);
+      const promise = new Promise((resolve, reject) => {
+        stream.on('data', (response: protos.google.spanner.v1.CacheUpdate) => {
+          resolve(response);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      const actualRequest = (
+        client.innerApiCalls.fetchCacheUpdate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchCacheUpdate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchCacheUpdate with closed client', async () => {
+      const client = new spannerModule.v1.SpannerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.spanner.v1.FetchCacheUpdateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.spanner.v1.FetchCacheUpdateRequest',
+        ['database'],
+      );
+      request.database = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      const stream = client.fetchCacheUpdate(request, {
+        retryRequestOptions: {noResponseRetries: 0},
+      });
+      const promise = new Promise((resolve, reject) => {
+        stream.on('data', (response: protos.google.spanner.v1.CacheUpdate) => {
+          resolve(response);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+    });
+    it('should create a client with gaxServerStreamingRetries enabled', () => {
+      const client = new spannerModule.v1.SpannerClient({
+        gaxServerStreamingRetries: true,
+      });
+      assert(client);
+    });
+  });
+
   describe('listSessions', () => {
     it('invokes listSessions without error', async () => {
       const client = new spannerModule.v1.SpannerClient({

@@ -18,11 +18,20 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -46,7 +55,7 @@ export class AttachedClustersClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('gkemulticloud');
@@ -59,10 +68,10 @@ export class AttachedClustersClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  pathTemplates: {[name: string]: gax.PathTemplate};
+  innerApiCalls: { [name: string]: Function };
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  attachedClustersStub?: Promise<{[name: string]: Function}>;
+  attachedClustersStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of AttachedClustersClient.
@@ -103,21 +112,42 @@ export class AttachedClustersClient {
    *     const client = new AttachedClustersClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof AttachedClustersClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'gkemulticloud.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== this._servicePath && !('scopes' in opts)) {
@@ -139,7 +169,7 @@ export class AttachedClustersClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -153,10 +183,7 @@ export class AttachedClustersClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -178,37 +205,37 @@ export class AttachedClustersClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       attachedClusterPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/attachedClusters/{attached_cluster}'
+        'projects/{project}/locations/{location}/attachedClusters/{attached_cluster}',
       ),
       attachedServerConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/attachedServerConfig'
+        'projects/{project}/locations/{location}/attachedServerConfig',
       ),
       awsClusterPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/awsClusters/{aws_cluster}'
+        'projects/{project}/locations/{location}/awsClusters/{aws_cluster}',
       ),
       awsNodePoolPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/awsClusters/{aws_cluster}/awsNodePools/{aws_node_pool}'
+        'projects/{project}/locations/{location}/awsClusters/{aws_cluster}/awsNodePools/{aws_node_pool}',
       ),
       awsServerConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/awsServerConfig'
+        'projects/{project}/locations/{location}/awsServerConfig',
       ),
       azureClientPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/azureClients/{azure_client}'
+        'projects/{project}/locations/{location}/azureClients/{azure_client}',
       ),
       azureClusterPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/azureClusters/{azure_cluster}'
+        'projects/{project}/locations/{location}/azureClusters/{azure_cluster}',
       ),
       azureNodePoolPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/azureClusters/{azure_cluster}/azureNodePools/{azure_node_pool}'
+        'projects/{project}/locations/{location}/azureClusters/{azure_cluster}/azureNodePools/{azure_node_pool}',
       ),
       azureServerConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/azureServerConfig'
+        'projects/{project}/locations/{location}/azureServerConfig',
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
     };
 
@@ -216,8 +243,11 @@ export class AttachedClustersClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listAttachedClusters:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'attachedClusters')
+      listAttachedClusters: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'attachedClusters',
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -226,53 +256,104 @@ export class AttachedClustersClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',}];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
+          body: '*',
+        },
+        {
+          selector: 'google.longrunning.Operations.DeleteOperation',
+          delete: '/v1/{name=projects/*/locations/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1/{name=projects/*/locations/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v1/{name=projects/*/locations/*}/operations',
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
     const createAttachedClusterResponse = protoFilesRoot.lookup(
-      '.google.cloud.gkemulticloud.v1.AttachedCluster') as gax.protobuf.Type;
+      '.google.cloud.gkemulticloud.v1.AttachedCluster',
+    ) as gax.protobuf.Type;
     const createAttachedClusterMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkemulticloud.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.gkemulticloud.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateAttachedClusterResponse = protoFilesRoot.lookup(
-      '.google.cloud.gkemulticloud.v1.AttachedCluster') as gax.protobuf.Type;
+      '.google.cloud.gkemulticloud.v1.AttachedCluster',
+    ) as gax.protobuf.Type;
     const updateAttachedClusterMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkemulticloud.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.gkemulticloud.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const importAttachedClusterResponse = protoFilesRoot.lookup(
-      '.google.cloud.gkemulticloud.v1.AttachedCluster') as gax.protobuf.Type;
+      '.google.cloud.gkemulticloud.v1.AttachedCluster',
+    ) as gax.protobuf.Type;
     const importAttachedClusterMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkemulticloud.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.gkemulticloud.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteAttachedClusterResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteAttachedClusterMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkemulticloud.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.gkemulticloud.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createAttachedCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createAttachedClusterResponse.decode.bind(createAttachedClusterResponse),
-        createAttachedClusterMetadata.decode.bind(createAttachedClusterMetadata)),
+        createAttachedClusterResponse.decode.bind(
+          createAttachedClusterResponse,
+        ),
+        createAttachedClusterMetadata.decode.bind(
+          createAttachedClusterMetadata,
+        ),
+      ),
       updateAttachedCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        updateAttachedClusterResponse.decode.bind(updateAttachedClusterResponse),
-        updateAttachedClusterMetadata.decode.bind(updateAttachedClusterMetadata)),
+        updateAttachedClusterResponse.decode.bind(
+          updateAttachedClusterResponse,
+        ),
+        updateAttachedClusterMetadata.decode.bind(
+          updateAttachedClusterMetadata,
+        ),
+      ),
       importAttachedCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        importAttachedClusterResponse.decode.bind(importAttachedClusterResponse),
-        importAttachedClusterMetadata.decode.bind(importAttachedClusterMetadata)),
+        importAttachedClusterResponse.decode.bind(
+          importAttachedClusterResponse,
+        ),
+        importAttachedClusterMetadata.decode.bind(
+          importAttachedClusterMetadata,
+        ),
+      ),
       deleteAttachedCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deleteAttachedClusterResponse.decode.bind(deleteAttachedClusterResponse),
-        deleteAttachedClusterMetadata.decode.bind(deleteAttachedClusterMetadata))
+        deleteAttachedClusterResponse.decode.bind(
+          deleteAttachedClusterResponse,
+        ),
+        deleteAttachedClusterMetadata.decode.bind(
+          deleteAttachedClusterMetadata,
+        ),
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.gkemulticloud.v1.AttachedClusters', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.gkemulticloud.v1.AttachedClusters',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -303,28 +384,43 @@ export class AttachedClustersClient {
     // Put together the "service stub" for
     // google.cloud.gkemulticloud.v1.AttachedClusters.
     this.attachedClustersStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.gkemulticloud.v1.AttachedClusters') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.gkemulticloud.v1.AttachedClusters',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.gkemulticloud.v1.AttachedClusters,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const attachedClustersStubMethods =
-        ['createAttachedCluster', 'updateAttachedCluster', 'importAttachedCluster', 'getAttachedCluster', 'listAttachedClusters', 'deleteAttachedCluster', 'getAttachedServerConfig', 'generateAttachedClusterInstallManifest', 'generateAttachedClusterAgentToken'];
+    const attachedClustersStubMethods = [
+      'createAttachedCluster',
+      'updateAttachedCluster',
+      'importAttachedCluster',
+      'getAttachedCluster',
+      'listAttachedClusters',
+      'deleteAttachedCluster',
+      'getAttachedServerConfig',
+      'generateAttachedClusterInstallManifest',
+      'generateAttachedClusterAgentToken',
+    ];
     for (const methodName of attachedClustersStubMethods) {
       const callPromise = this.attachedClustersStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -334,7 +430,7 @@ export class AttachedClustersClient {
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -349,8 +445,14 @@ export class AttachedClustersClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'gkemulticloud.googleapis.com';
   }
@@ -361,8 +463,14 @@ export class AttachedClustersClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'gkemulticloud.googleapis.com';
   }
@@ -393,9 +501,7 @@ export class AttachedClustersClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -404,8 +510,9 @@ export class AttachedClustersClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -416,1090 +523,1574 @@ export class AttachedClustersClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Describes a specific
- * {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster} resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the
- *   {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster} resource
- *   to describe.
- *
- *   `AttachedCluster` names are formatted as
- *   `projects/<project-id>/locations/<region>/attachedClusters/<cluster-id>`.
- *
- *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
- *   for more details on Google Cloud Platform resource names.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/attached_clusters.get_attached_cluster.js</caption>
- * region_tag:gkemulticloud_v1_generated_AttachedClusters_GetAttachedCluster_async
- */
+  /**
+   * Describes a specific
+   * {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster} resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the
+   *   {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster} resource
+   *   to describe.
+   *
+   *   `AttachedCluster` names are formatted as
+   *   `projects/<project-id>/locations/<region>/attachedClusters/<cluster-id>`.
+   *
+   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+   *   for more details on Google Cloud Platform resource names.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/attached_clusters.get_attached_cluster.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AttachedClusters_GetAttachedCluster_async
+   */
   getAttachedCluster(
-      request?: protos.google.cloud.gkemulticloud.v1.IGetAttachedClusterRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
-        protos.google.cloud.gkemulticloud.v1.IGetAttachedClusterRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkemulticloud.v1.IGetAttachedClusterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+      (
+        | protos.google.cloud.gkemulticloud.v1.IGetAttachedClusterRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getAttachedCluster(
-      request: protos.google.cloud.gkemulticloud.v1.IGetAttachedClusterRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
-          protos.google.cloud.gkemulticloud.v1.IGetAttachedClusterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IGetAttachedClusterRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+      | protos.google.cloud.gkemulticloud.v1.IGetAttachedClusterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getAttachedCluster(
-      request: protos.google.cloud.gkemulticloud.v1.IGetAttachedClusterRequest,
-      callback: Callback<
-          protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
-          protos.google.cloud.gkemulticloud.v1.IGetAttachedClusterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IGetAttachedClusterRequest,
+    callback: Callback<
+      protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+      | protos.google.cloud.gkemulticloud.v1.IGetAttachedClusterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getAttachedCluster(
-      request?: protos.google.cloud.gkemulticloud.v1.IGetAttachedClusterRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.gkemulticloud.v1.IGetAttachedClusterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
-          protos.google.cloud.gkemulticloud.v1.IGetAttachedClusterRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
-          protos.google.cloud.gkemulticloud.v1.IGetAttachedClusterRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
-        protos.google.cloud.gkemulticloud.v1.IGetAttachedClusterRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.gkemulticloud.v1.IGetAttachedClusterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+      | protos.google.cloud.gkemulticloud.v1.IGetAttachedClusterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+      (
+        | protos.google.cloud.gkemulticloud.v1.IGetAttachedClusterRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getAttachedCluster request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
-        protos.google.cloud.gkemulticloud.v1.IGetAttachedClusterRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+          | protos.google.cloud.gkemulticloud.v1.IGetAttachedClusterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getAttachedCluster response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getAttachedCluster(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
-        protos.google.cloud.gkemulticloud.v1.IGetAttachedClusterRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getAttachedCluster response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getAttachedCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+          (
+            | protos.google.cloud.gkemulticloud.v1.IGetAttachedClusterRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAttachedCluster response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Returns information, such as supported Kubernetes versions, on a given
- * Google Cloud location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the
- *   {@link protos.google.cloud.gkemulticloud.v1.AttachedServerConfig|AttachedServerConfig}
- *   resource to describe.
- *
- *   `AttachedServerConfig` names are formatted as
- *   `projects/<project-id>/locations/<region>/attachedServerConfig`.
- *
- *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
- *   for more details on Google Cloud resource names.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.AttachedServerConfig|AttachedServerConfig}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/attached_clusters.get_attached_server_config.js</caption>
- * region_tag:gkemulticloud_v1_generated_AttachedClusters_GetAttachedServerConfig_async
- */
+  /**
+   * Returns information, such as supported Kubernetes versions, on a given
+   * Google Cloud location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the
+   *   {@link protos.google.cloud.gkemulticloud.v1.AttachedServerConfig|AttachedServerConfig}
+   *   resource to describe.
+   *
+   *   `AttachedServerConfig` names are formatted as
+   *   `projects/<project-id>/locations/<region>/attachedServerConfig`.
+   *
+   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+   *   for more details on Google Cloud resource names.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.AttachedServerConfig|AttachedServerConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/attached_clusters.get_attached_server_config.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AttachedClusters_GetAttachedServerConfig_async
+   */
   getAttachedServerConfig(
-      request?: protos.google.cloud.gkemulticloud.v1.IGetAttachedServerConfigRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.gkemulticloud.v1.IAttachedServerConfig,
-        protos.google.cloud.gkemulticloud.v1.IGetAttachedServerConfigRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkemulticloud.v1.IGetAttachedServerConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.gkemulticloud.v1.IAttachedServerConfig,
+      (
+        | protos.google.cloud.gkemulticloud.v1.IGetAttachedServerConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getAttachedServerConfig(
-      request: protos.google.cloud.gkemulticloud.v1.IGetAttachedServerConfigRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.gkemulticloud.v1.IAttachedServerConfig,
-          protos.google.cloud.gkemulticloud.v1.IGetAttachedServerConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IGetAttachedServerConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.gkemulticloud.v1.IAttachedServerConfig,
+      | protos.google.cloud.gkemulticloud.v1.IGetAttachedServerConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getAttachedServerConfig(
-      request: protos.google.cloud.gkemulticloud.v1.IGetAttachedServerConfigRequest,
-      callback: Callback<
-          protos.google.cloud.gkemulticloud.v1.IAttachedServerConfig,
-          protos.google.cloud.gkemulticloud.v1.IGetAttachedServerConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IGetAttachedServerConfigRequest,
+    callback: Callback<
+      protos.google.cloud.gkemulticloud.v1.IAttachedServerConfig,
+      | protos.google.cloud.gkemulticloud.v1.IGetAttachedServerConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getAttachedServerConfig(
-      request?: protos.google.cloud.gkemulticloud.v1.IGetAttachedServerConfigRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.gkemulticloud.v1.IGetAttachedServerConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.gkemulticloud.v1.IAttachedServerConfig,
-          protos.google.cloud.gkemulticloud.v1.IGetAttachedServerConfigRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.gkemulticloud.v1.IAttachedServerConfig,
-          protos.google.cloud.gkemulticloud.v1.IGetAttachedServerConfigRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.gkemulticloud.v1.IAttachedServerConfig,
-        protos.google.cloud.gkemulticloud.v1.IGetAttachedServerConfigRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.gkemulticloud.v1.IGetAttachedServerConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.gkemulticloud.v1.IAttachedServerConfig,
+      | protos.google.cloud.gkemulticloud.v1.IGetAttachedServerConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.gkemulticloud.v1.IAttachedServerConfig,
+      (
+        | protos.google.cloud.gkemulticloud.v1.IGetAttachedServerConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getAttachedServerConfig request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.gkemulticloud.v1.IAttachedServerConfig,
-        protos.google.cloud.gkemulticloud.v1.IGetAttachedServerConfigRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkemulticloud.v1.IAttachedServerConfig,
+          | protos.google.cloud.gkemulticloud.v1.IGetAttachedServerConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getAttachedServerConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getAttachedServerConfig(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.gkemulticloud.v1.IAttachedServerConfig,
-        protos.google.cloud.gkemulticloud.v1.IGetAttachedServerConfigRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getAttachedServerConfig response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getAttachedServerConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkemulticloud.v1.IAttachedServerConfig,
+          (
+            | protos.google.cloud.gkemulticloud.v1.IGetAttachedServerConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAttachedServerConfig response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Generates the install manifest to be installed on the target cluster.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent location where this
- *   {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster} resource
- *   will be created.
- *
- *   Location names are formatted as `projects/<project-id>/locations/<region>`.
- *
- *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
- *   for more details on Google Cloud resource names.
- * @param {string} request.attachedClusterId
- *   Required. A client provided ID of the resource. Must be unique within the
- *   parent resource.
- *
- *   The provided ID will be part of the
- *   {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster} resource
- *   name formatted as
- *   `projects/<project-id>/locations/<region>/attachedClusters/<cluster-id>`.
- *
- *   Valid characters are `/{@link protos.0-9|a-z}-/`. Cannot be longer than 63 characters.
- *
- *   When generating an install manifest for importing an existing Membership
- *   resource, the attached_cluster_id field must be the Membership id.
- *
- *   Membership names are formatted as
- *   `projects/<project-id>/locations/<region>/memberships/<membership-id>`.
- * @param {string} request.platformVersion
- *   Required. The platform version for the cluster (e.g. `1.19.0-gke.1000`).
- *
- *   You can list all supported versions on a given Google Cloud region by
- *   calling
- *   {@link protos.google.cloud.gkemulticloud.v1.AttachedClusters.GetAttachedServerConfig|GetAttachedServerConfig}.
- * @param {google.cloud.gkemulticloud.v1.AttachedProxyConfig} [request.proxyConfig]
- *   Optional. Proxy configuration for outbound HTTP(S) traffic.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.GenerateAttachedClusterInstallManifestResponse|GenerateAttachedClusterInstallManifestResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/attached_clusters.generate_attached_cluster_install_manifest.js</caption>
- * region_tag:gkemulticloud_v1_generated_AttachedClusters_GenerateAttachedClusterInstallManifest_async
- */
+  /**
+   * Generates the install manifest to be installed on the target cluster.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent location where this
+   *   {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster} resource
+   *   will be created.
+   *
+   *   Location names are formatted as `projects/<project-id>/locations/<region>`.
+   *
+   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+   *   for more details on Google Cloud resource names.
+   * @param {string} request.attachedClusterId
+   *   Required. A client provided ID of the resource. Must be unique within the
+   *   parent resource.
+   *
+   *   The provided ID will be part of the
+   *   {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster} resource
+   *   name formatted as
+   *   `projects/<project-id>/locations/<region>/attachedClusters/<cluster-id>`.
+   *
+   *   Valid characters are `/{@link protos.0-9|a-z}-/`. Cannot be longer than 63 characters.
+   *
+   *   When generating an install manifest for importing an existing Membership
+   *   resource, the attached_cluster_id field must be the Membership id.
+   *
+   *   Membership names are formatted as
+   *   `projects/<project-id>/locations/<region>/memberships/<membership-id>`.
+   * @param {string} request.platformVersion
+   *   Required. The platform version for the cluster (e.g. `1.19.0-gke.1000`).
+   *
+   *   You can list all supported versions on a given Google Cloud region by
+   *   calling
+   *   {@link protos.google.cloud.gkemulticloud.v1.AttachedClusters.GetAttachedServerConfig|GetAttachedServerConfig}.
+   * @param {google.cloud.gkemulticloud.v1.AttachedProxyConfig} [request.proxyConfig]
+   *   Optional. Proxy configuration for outbound HTTP(S) traffic.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.GenerateAttachedClusterInstallManifestResponse|GenerateAttachedClusterInstallManifestResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/attached_clusters.generate_attached_cluster_install_manifest.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AttachedClusters_GenerateAttachedClusterInstallManifest_async
+   */
   generateAttachedClusterInstallManifest(
-      request?: protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestResponse,
-        protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestResponse,
+      (
+        | protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   generateAttachedClusterInstallManifest(
-      request: protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestResponse,
-          protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestResponse,
+      | protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   generateAttachedClusterInstallManifest(
-      request: protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestRequest,
-      callback: Callback<
-          protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestResponse,
-          protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestRequest,
+    callback: Callback<
+      protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestResponse,
+      | protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   generateAttachedClusterInstallManifest(
-      request?: protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestResponse,
-          protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestResponse,
-          protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestResponse,
-        protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestResponse,
+      | protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestResponse,
+      (
+        | protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    this._log.info('generateAttachedClusterInstallManifest request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestResponse,
-        protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    this._log.info(
+      'generateAttachedClusterInstallManifest request %j',
+      request,
+    );
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestResponse,
+          | protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('generateAttachedClusterInstallManifest response %j', response);
+          this._log.info(
+            'generateAttachedClusterInstallManifest response %j',
+            response,
+          );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.generateAttachedClusterInstallManifest(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestResponse,
-        protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('generateAttachedClusterInstallManifest response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .generateAttachedClusterInstallManifest(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestResponse,
+          (
+            | protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'generateAttachedClusterInstallManifest response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Generates an access token for a cluster agent.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.attachedCluster
- *   Required.
- * @param {string} request.subjectToken
- *   Required.
- * @param {string} request.subjectTokenType
- *   Required.
- * @param {string} request.version
- *   Required.
- * @param {string} [request.grantType]
- *   Optional.
- * @param {string} [request.audience]
- *   Optional.
- * @param {string} [request.scope]
- *   Optional.
- * @param {string} [request.requestedTokenType]
- *   Optional.
- * @param {string} [request.options]
- *   Optional.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.GenerateAttachedClusterAgentTokenResponse|GenerateAttachedClusterAgentTokenResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/attached_clusters.generate_attached_cluster_agent_token.js</caption>
- * region_tag:gkemulticloud_v1_generated_AttachedClusters_GenerateAttachedClusterAgentToken_async
- */
+  /**
+   * Generates an access token for a cluster agent.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.attachedCluster
+   *   Required.
+   * @param {string} request.subjectToken
+   *   Required.
+   * @param {string} request.subjectTokenType
+   *   Required.
+   * @param {string} request.version
+   *   Required.
+   * @param {string} [request.grantType]
+   *   Optional.
+   * @param {string} [request.audience]
+   *   Optional.
+   * @param {string} [request.scope]
+   *   Optional.
+   * @param {string} [request.requestedTokenType]
+   *   Optional.
+   * @param {string} [request.options]
+   *   Optional.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.GenerateAttachedClusterAgentTokenResponse|GenerateAttachedClusterAgentTokenResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/attached_clusters.generate_attached_cluster_agent_token.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AttachedClusters_GenerateAttachedClusterAgentToken_async
+   */
   generateAttachedClusterAgentToken(
-      request?: protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenResponse,
-        protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenResponse,
+      (
+        | protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   generateAttachedClusterAgentToken(
-      request: protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenResponse,
-          protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenResponse,
+      | protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   generateAttachedClusterAgentToken(
-      request: protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenRequest,
-      callback: Callback<
-          protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenResponse,
-          protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenRequest,
+    callback: Callback<
+      protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenResponse,
+      | protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   generateAttachedClusterAgentToken(
-      request?: protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenResponse,
-          protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenResponse,
-          protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenResponse,
-        protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenResponse,
+      | protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenResponse,
+      (
+        | protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'attached_cluster': request.attachedCluster ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        attached_cluster: request.attachedCluster ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('generateAttachedClusterAgentToken request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenResponse,
-        protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenResponse,
+          | protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('generateAttachedClusterAgentToken response %j', response);
+          this._log.info(
+            'generateAttachedClusterAgentToken response %j',
+            response,
+          );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.generateAttachedClusterAgentToken(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenResponse,
-        protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('generateAttachedClusterAgentToken response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .generateAttachedClusterAgentToken(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenResponse,
+          (
+            | protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'generateAttachedClusterAgentToken response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
- * Creates a new
- * {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster} resource
- * on a given Google Cloud Platform project and region.
- *
- * If successful, the response contains a newly created
- * {@link protos.google.longrunning.Operation|Operation} resource that can be
- * described to track the status of the operation.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent location where this
- *   {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster} resource
- *   will be created.
- *
- *   Location names are formatted as `projects/<project-id>/locations/<region>`.
- *
- *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
- *   for more details on Google Cloud resource names.
- * @param {google.cloud.gkemulticloud.v1.AttachedCluster} request.attachedCluster
- *   Required. The specification of the
- *   {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster} to create.
- * @param {string} request.attachedClusterId
- *   Required. A client provided ID the resource. Must be unique within the
- *   parent resource.
- *
- *   The provided ID will be part of the
- *   {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster} resource
- *   name formatted as
- *   `projects/<project-id>/locations/<region>/attachedClusters/<cluster-id>`.
- *
- *   Valid characters are `/{@link protos.0-9|a-z}-/`. Cannot be longer than 63 characters.
- * @param {boolean} request.validateOnly
- *   If set, only validate the request, but do not actually create the cluster.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/attached_clusters.create_attached_cluster.js</caption>
- * region_tag:gkemulticloud_v1_generated_AttachedClusters_CreateAttachedCluster_async
- */
+  /**
+   * Creates a new
+   * {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster} resource
+   * on a given Google Cloud Platform project and region.
+   *
+   * If successful, the response contains a newly created
+   * {@link protos.google.longrunning.Operation|Operation} resource that can be
+   * described to track the status of the operation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent location where this
+   *   {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster} resource
+   *   will be created.
+   *
+   *   Location names are formatted as `projects/<project-id>/locations/<region>`.
+   *
+   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+   *   for more details on Google Cloud resource names.
+   * @param {google.cloud.gkemulticloud.v1.AttachedCluster} request.attachedCluster
+   *   Required. The specification of the
+   *   {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster} to create.
+   * @param {string} request.attachedClusterId
+   *   Required. A client provided ID the resource. Must be unique within the
+   *   parent resource.
+   *
+   *   The provided ID will be part of the
+   *   {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster} resource
+   *   name formatted as
+   *   `projects/<project-id>/locations/<region>/attachedClusters/<cluster-id>`.
+   *
+   *   Valid characters are `/{@link protos.0-9|a-z}-/`. Cannot be longer than 63 characters.
+   * @param {boolean} request.validateOnly
+   *   If set, only validate the request, but do not actually create the cluster.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/attached_clusters.create_attached_cluster.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AttachedClusters_CreateAttachedCluster_async
+   */
   createAttachedCluster(
-      request?: protos.google.cloud.gkemulticloud.v1.ICreateAttachedClusterRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.gkemulticloud.v1.IAttachedCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkemulticloud.v1.ICreateAttachedClusterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createAttachedCluster(
-      request: protos.google.cloud.gkemulticloud.v1.ICreateAttachedClusterRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAttachedCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.ICreateAttachedClusterRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createAttachedCluster(
-      request: protos.google.cloud.gkemulticloud.v1.ICreateAttachedClusterRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAttachedCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.ICreateAttachedClusterRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createAttachedCluster(
-      request?: protos.google.cloud.gkemulticloud.v1.ICreateAttachedClusterRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAttachedCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAttachedCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.gkemulticloud.v1.IAttachedCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.gkemulticloud.v1.ICreateAttachedClusterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAttachedCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createAttachedCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createAttachedCluster request %j', request);
-    return this.innerApiCalls.createAttachedCluster(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.gkemulticloud.v1.IAttachedCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createAttachedCluster response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createAttachedCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createAttachedCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createAttachedCluster()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/attached_clusters.create_attached_cluster.js</caption>
- * region_tag:gkemulticloud_v1_generated_AttachedClusters_CreateAttachedCluster_async
- */
-  async checkCreateAttachedClusterProgress(name: string): Promise<LROperation<protos.google.cloud.gkemulticloud.v1.AttachedCluster, protos.google.cloud.gkemulticloud.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createAttachedCluster()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/attached_clusters.create_attached_cluster.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AttachedClusters_CreateAttachedCluster_async
+   */
+  async checkCreateAttachedClusterProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.gkemulticloud.v1.AttachedCluster,
+      protos.google.cloud.gkemulticloud.v1.OperationMetadata
+    >
+  > {
     this._log.info('createAttachedCluster long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createAttachedCluster, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.gkemulticloud.v1.AttachedCluster, protos.google.cloud.gkemulticloud.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createAttachedCluster,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.gkemulticloud.v1.AttachedCluster,
+      protos.google.cloud.gkemulticloud.v1.OperationMetadata
+    >;
   }
-/**
- * Updates an
- * {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster}.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.gkemulticloud.v1.AttachedCluster} request.attachedCluster
- *   Required. The
- *   {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster} resource
- *   to update.
- * @param {boolean} request.validateOnly
- *   If set, only validate the request, but do not actually update the cluster.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. Mask of fields to update. At least one path must be supplied in
- *   this field. The elements of the repeated paths field can only include these
- *   fields from
- *   {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster}:
- *
- *    *   `annotations`.
- *    *   `authorization.admin_groups`.
- *    *   `authorization.admin_users`.
- *    *   `binary_authorization.evaluation_mode`.
- *    *   `description`.
- *    *   `logging_config.component_config.enable_components`.
- *    *   `monitoring_config.managed_prometheus_config.enabled`.
- *    *   `platform_version`.
- *    *   `proxy_config.kubernetes_secret.name`.
- *    *   `proxy_config.kubernetes_secret.namespace`.
- *    *   `security_posture_config.vulnerability_mode`
- *    *   `monitoring_config.cloud_monitoring_config.enabled`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/attached_clusters.update_attached_cluster.js</caption>
- * region_tag:gkemulticloud_v1_generated_AttachedClusters_UpdateAttachedCluster_async
- */
+  /**
+   * Updates an
+   * {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.gkemulticloud.v1.AttachedCluster} request.attachedCluster
+   *   Required. The
+   *   {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster} resource
+   *   to update.
+   * @param {boolean} request.validateOnly
+   *   If set, only validate the request, but do not actually update the cluster.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Mask of fields to update. At least one path must be supplied in
+   *   this field. The elements of the repeated paths field can only include these
+   *   fields from
+   *   {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster}:
+   *
+   *    *   `annotations`.
+   *    *   `authorization.admin_groups`.
+   *    *   `authorization.admin_users`.
+   *    *   `binary_authorization.evaluation_mode`.
+   *    *   `description`.
+   *    *   `logging_config.component_config.enable_components`.
+   *    *   `monitoring_config.managed_prometheus_config.enabled`.
+   *    *   `platform_version`.
+   *    *   `proxy_config.kubernetes_secret.name`.
+   *    *   `proxy_config.kubernetes_secret.namespace`.
+   *    *   `security_posture_config.vulnerability_mode`
+   *    *   `monitoring_config.cloud_monitoring_config.enabled`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/attached_clusters.update_attached_cluster.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AttachedClusters_UpdateAttachedCluster_async
+   */
   updateAttachedCluster(
-      request?: protos.google.cloud.gkemulticloud.v1.IUpdateAttachedClusterRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.gkemulticloud.v1.IAttachedCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkemulticloud.v1.IUpdateAttachedClusterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateAttachedCluster(
-      request: protos.google.cloud.gkemulticloud.v1.IUpdateAttachedClusterRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAttachedCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IUpdateAttachedClusterRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateAttachedCluster(
-      request: protos.google.cloud.gkemulticloud.v1.IUpdateAttachedClusterRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAttachedCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IUpdateAttachedClusterRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateAttachedCluster(
-      request?: protos.google.cloud.gkemulticloud.v1.IUpdateAttachedClusterRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAttachedCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAttachedCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.gkemulticloud.v1.IAttachedCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.gkemulticloud.v1.IUpdateAttachedClusterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'attached_cluster.name': request.attachedCluster!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'attached_cluster.name': request.attachedCluster!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAttachedCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateAttachedCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateAttachedCluster request %j', request);
-    return this.innerApiCalls.updateAttachedCluster(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.gkemulticloud.v1.IAttachedCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateAttachedCluster response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateAttachedCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAttachedCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateAttachedCluster()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/attached_clusters.update_attached_cluster.js</caption>
- * region_tag:gkemulticloud_v1_generated_AttachedClusters_UpdateAttachedCluster_async
- */
-  async checkUpdateAttachedClusterProgress(name: string): Promise<LROperation<protos.google.cloud.gkemulticloud.v1.AttachedCluster, protos.google.cloud.gkemulticloud.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateAttachedCluster()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/attached_clusters.update_attached_cluster.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AttachedClusters_UpdateAttachedCluster_async
+   */
+  async checkUpdateAttachedClusterProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.gkemulticloud.v1.AttachedCluster,
+      protos.google.cloud.gkemulticloud.v1.OperationMetadata
+    >
+  > {
     this._log.info('updateAttachedCluster long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateAttachedCluster, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.gkemulticloud.v1.AttachedCluster, protos.google.cloud.gkemulticloud.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateAttachedCluster,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.gkemulticloud.v1.AttachedCluster,
+      protos.google.cloud.gkemulticloud.v1.OperationMetadata
+    >;
   }
-/**
- * Imports creates a new
- * {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster} resource
- * by importing an existing Fleet Membership resource.
- *
- * Attached Clusters created before the introduction of the Anthos Multi-Cloud
- * API can be imported through this method.
- *
- * If successful, the response contains a newly created
- * {@link protos.google.longrunning.Operation|Operation} resource that can be
- * described to track the status of the operation.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent location where this
- *   {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster} resource
- *   will be created.
- *
- *   Location names are formatted as `projects/<project-id>/locations/<region>`.
- *
- *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
- *   for more details on Google Cloud resource names.
- * @param {boolean} request.validateOnly
- *   If set, only validate the request, but do not actually import the cluster.
- * @param {string} request.fleetMembership
- *   Required. The name of the fleet membership resource to import.
- * @param {string} request.platformVersion
- *   Required. The platform version for the cluster (e.g. `1.19.0-gke.1000`).
- *
- *   You can list all supported versions on a given Google Cloud region by
- *   calling
- *   {@link protos.google.cloud.gkemulticloud.v1.AttachedClusters.GetAttachedServerConfig|GetAttachedServerConfig}.
- * @param {string} request.distribution
- *   Required. The Kubernetes distribution of the underlying attached cluster.
- *
- *   Supported values: ["eks", "aks", "generic"].
- * @param {google.cloud.gkemulticloud.v1.AttachedProxyConfig} [request.proxyConfig]
- *   Optional. Proxy configuration for outbound HTTP(S) traffic.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/attached_clusters.import_attached_cluster.js</caption>
- * region_tag:gkemulticloud_v1_generated_AttachedClusters_ImportAttachedCluster_async
- */
+  /**
+   * Imports creates a new
+   * {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster} resource
+   * by importing an existing Fleet Membership resource.
+   *
+   * Attached Clusters created before the introduction of the Anthos Multi-Cloud
+   * API can be imported through this method.
+   *
+   * If successful, the response contains a newly created
+   * {@link protos.google.longrunning.Operation|Operation} resource that can be
+   * described to track the status of the operation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent location where this
+   *   {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster} resource
+   *   will be created.
+   *
+   *   Location names are formatted as `projects/<project-id>/locations/<region>`.
+   *
+   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+   *   for more details on Google Cloud resource names.
+   * @param {boolean} request.validateOnly
+   *   If set, only validate the request, but do not actually import the cluster.
+   * @param {string} request.fleetMembership
+   *   Required. The name of the fleet membership resource to import.
+   * @param {string} request.platformVersion
+   *   Required. The platform version for the cluster (e.g. `1.19.0-gke.1000`).
+   *
+   *   You can list all supported versions on a given Google Cloud region by
+   *   calling
+   *   {@link protos.google.cloud.gkemulticloud.v1.AttachedClusters.GetAttachedServerConfig|GetAttachedServerConfig}.
+   * @param {string} request.distribution
+   *   Required. The Kubernetes distribution of the underlying attached cluster.
+   *
+   *   Supported values: ["eks", "aks", "generic"].
+   * @param {google.cloud.gkemulticloud.v1.AttachedProxyConfig} [request.proxyConfig]
+   *   Optional. Proxy configuration for outbound HTTP(S) traffic.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/attached_clusters.import_attached_cluster.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AttachedClusters_ImportAttachedCluster_async
+   */
   importAttachedCluster(
-      request?: protos.google.cloud.gkemulticloud.v1.IImportAttachedClusterRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.gkemulticloud.v1.IAttachedCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkemulticloud.v1.IImportAttachedClusterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   importAttachedCluster(
-      request: protos.google.cloud.gkemulticloud.v1.IImportAttachedClusterRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAttachedCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IImportAttachedClusterRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   importAttachedCluster(
-      request: protos.google.cloud.gkemulticloud.v1.IImportAttachedClusterRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAttachedCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IImportAttachedClusterRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   importAttachedCluster(
-      request?: protos.google.cloud.gkemulticloud.v1.IImportAttachedClusterRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAttachedCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAttachedCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.gkemulticloud.v1.IAttachedCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.gkemulticloud.v1.IImportAttachedClusterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAttachedCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('importAttachedCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('importAttachedCluster request %j', request);
-    return this.innerApiCalls.importAttachedCluster(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.gkemulticloud.v1.IAttachedCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('importAttachedCluster response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .importAttachedCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('importAttachedCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `importAttachedCluster()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/attached_clusters.import_attached_cluster.js</caption>
- * region_tag:gkemulticloud_v1_generated_AttachedClusters_ImportAttachedCluster_async
- */
-  async checkImportAttachedClusterProgress(name: string): Promise<LROperation<protos.google.cloud.gkemulticloud.v1.AttachedCluster, protos.google.cloud.gkemulticloud.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `importAttachedCluster()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/attached_clusters.import_attached_cluster.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AttachedClusters_ImportAttachedCluster_async
+   */
+  async checkImportAttachedClusterProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.gkemulticloud.v1.AttachedCluster,
+      protos.google.cloud.gkemulticloud.v1.OperationMetadata
+    >
+  > {
     this._log.info('importAttachedCluster long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.importAttachedCluster, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.gkemulticloud.v1.AttachedCluster, protos.google.cloud.gkemulticloud.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.importAttachedCluster,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.gkemulticloud.v1.AttachedCluster,
+      protos.google.cloud.gkemulticloud.v1.OperationMetadata
+    >;
   }
-/**
- * Deletes a specific
- * {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster} resource.
- *
- * If successful, the response contains a newly created
- * {@link protos.google.longrunning.Operation|Operation} resource that can be
- * described to track the status of the operation.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name the
- *   {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster} to delete.
- *
- *   `AttachedCluster` names are formatted as
- *   `projects/<project-id>/locations/<region>/attachedClusters/<cluster-id>`.
- *
- *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
- *   for more details on Google Cloud Platform resource names.
- * @param {boolean} request.validateOnly
- *   If set, only validate the request, but do not actually delete the resource.
- * @param {boolean} request.allowMissing
- *   If set to true, and the
- *   {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster} resource
- *   is not found, the request will succeed but no action will be taken on the
- *   server and a completed {@link protos.google.longrunning.Operation|Operation} will be
- *   returned.
- *
- *   Useful for idempotent deletion.
- * @param {boolean} request.ignoreErrors
- *   If set to true, the deletion of
- *   {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster} resource
- *   will succeed even if errors occur during deleting in cluster resources.
- *   Using this parameter may result in orphaned resources in the cluster.
- * @param {string} request.etag
- *   The current etag of the
- *   {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster}.
- *
- *   Allows clients to perform deletions through optimistic concurrency control.
- *
- *   If the provided etag does not match the current etag of the cluster,
- *   the request will fail and an ABORTED error will be returned.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/attached_clusters.delete_attached_cluster.js</caption>
- * region_tag:gkemulticloud_v1_generated_AttachedClusters_DeleteAttachedCluster_async
- */
+  /**
+   * Deletes a specific
+   * {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster} resource.
+   *
+   * If successful, the response contains a newly created
+   * {@link protos.google.longrunning.Operation|Operation} resource that can be
+   * described to track the status of the operation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name the
+   *   {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster} to delete.
+   *
+   *   `AttachedCluster` names are formatted as
+   *   `projects/<project-id>/locations/<region>/attachedClusters/<cluster-id>`.
+   *
+   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+   *   for more details on Google Cloud Platform resource names.
+   * @param {boolean} request.validateOnly
+   *   If set, only validate the request, but do not actually delete the resource.
+   * @param {boolean} request.allowMissing
+   *   If set to true, and the
+   *   {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster} resource
+   *   is not found, the request will succeed but no action will be taken on the
+   *   server and a completed {@link protos.google.longrunning.Operation|Operation} will be
+   *   returned.
+   *
+   *   Useful for idempotent deletion.
+   * @param {boolean} request.ignoreErrors
+   *   If set to true, the deletion of
+   *   {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster} resource
+   *   will succeed even if errors occur during deleting in cluster resources.
+   *   Using this parameter may result in orphaned resources in the cluster.
+   * @param {string} request.etag
+   *   The current etag of the
+   *   {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster}.
+   *
+   *   Allows clients to perform deletions through optimistic concurrency control.
+   *
+   *   If the provided etag does not match the current etag of the cluster,
+   *   the request will fail and an ABORTED error will be returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/attached_clusters.delete_attached_cluster.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AttachedClusters_DeleteAttachedCluster_async
+   */
   deleteAttachedCluster(
-      request?: protos.google.cloud.gkemulticloud.v1.IDeleteAttachedClusterRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkemulticloud.v1.IDeleteAttachedClusterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteAttachedCluster(
-      request: protos.google.cloud.gkemulticloud.v1.IDeleteAttachedClusterRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IDeleteAttachedClusterRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteAttachedCluster(
-      request: protos.google.cloud.gkemulticloud.v1.IDeleteAttachedClusterRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IDeleteAttachedClusterRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteAttachedCluster(
-      request?: protos.google.cloud.gkemulticloud.v1.IDeleteAttachedClusterRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.gkemulticloud.v1.IDeleteAttachedClusterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteAttachedCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteAttachedCluster request %j', request);
-    return this.innerApiCalls.deleteAttachedCluster(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteAttachedCluster response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteAttachedCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAttachedCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteAttachedCluster()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/attached_clusters.delete_attached_cluster.js</caption>
- * region_tag:gkemulticloud_v1_generated_AttachedClusters_DeleteAttachedCluster_async
- */
-  async checkDeleteAttachedClusterProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.gkemulticloud.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteAttachedCluster()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/attached_clusters.delete_attached_cluster.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AttachedClusters_DeleteAttachedCluster_async
+   */
+  async checkDeleteAttachedClusterProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.gkemulticloud.v1.OperationMetadata
+    >
+  > {
     this._log.info('deleteAttachedCluster long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteAttachedCluster, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.gkemulticloud.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteAttachedCluster,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.gkemulticloud.v1.OperationMetadata
+    >;
   }
- /**
- * Lists all {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster}
- * resources on a given Google Cloud project and region.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent location which owns this collection of
- *   {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster} resources.
- *
- *   Location names are formatted as `projects/<project-id>/locations/<region>`.
- *
- *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
- *   for more details on Google Cloud Platform resource names.
- * @param {number} request.pageSize
- *   The maximum number of items to return.
- *
- *   If not specified, a default value of 50 will be used by the service.
- *   Regardless of the pageSize value, the response can include a partial list
- *   and a caller should only rely on response's
- *   {@link protos.google.cloud.gkemulticloud.v1.ListAttachedClustersResponse.next_page_token|nextPageToken}
- *   to determine if there are more instances left to be queried.
- * @param {string} request.pageToken
- *   The `nextPageToken` value returned from a previous
- *   {@link protos.google.cloud.gkemulticloud.v1.AttachedClusters.ListAttachedClusters|attachedClusters.list}
- *   request, if any.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listAttachedClustersAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists all {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster}
+   * resources on a given Google Cloud project and region.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent location which owns this collection of
+   *   {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster} resources.
+   *
+   *   Location names are formatted as `projects/<project-id>/locations/<region>`.
+   *
+   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+   *   for more details on Google Cloud Platform resource names.
+   * @param {number} request.pageSize
+   *   The maximum number of items to return.
+   *
+   *   If not specified, a default value of 50 will be used by the service.
+   *   Regardless of the pageSize value, the response can include a partial list
+   *   and a caller should only rely on response's
+   *   {@link protos.google.cloud.gkemulticloud.v1.ListAttachedClustersResponse.next_page_token|nextPageToken}
+   *   to determine if there are more instances left to be queried.
+   * @param {string} request.pageToken
+   *   The `nextPageToken` value returned from a previous
+   *   {@link protos.google.cloud.gkemulticloud.v1.AttachedClusters.ListAttachedClusters|attachedClusters.list}
+   *   request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAttachedClustersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listAttachedClusters(
-      request?: protos.google.cloud.gkemulticloud.v1.IListAttachedClustersRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.gkemulticloud.v1.IAttachedCluster[],
-        protos.google.cloud.gkemulticloud.v1.IListAttachedClustersRequest|null,
-        protos.google.cloud.gkemulticloud.v1.IListAttachedClustersResponse
-      ]>;
+    request?: protos.google.cloud.gkemulticloud.v1.IListAttachedClustersRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.gkemulticloud.v1.IAttachedCluster[],
+      protos.google.cloud.gkemulticloud.v1.IListAttachedClustersRequest | null,
+      protos.google.cloud.gkemulticloud.v1.IListAttachedClustersResponse,
+    ]
+  >;
   listAttachedClusters(
-      request: protos.google.cloud.gkemulticloud.v1.IListAttachedClustersRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.gkemulticloud.v1.IListAttachedClustersRequest,
-          protos.google.cloud.gkemulticloud.v1.IListAttachedClustersResponse|null|undefined,
-          protos.google.cloud.gkemulticloud.v1.IAttachedCluster>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IListAttachedClustersRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.gkemulticloud.v1.IListAttachedClustersRequest,
+      | protos.google.cloud.gkemulticloud.v1.IListAttachedClustersResponse
+      | null
+      | undefined,
+      protos.google.cloud.gkemulticloud.v1.IAttachedCluster
+    >,
+  ): void;
   listAttachedClusters(
-      request: protos.google.cloud.gkemulticloud.v1.IListAttachedClustersRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.gkemulticloud.v1.IListAttachedClustersRequest,
-          protos.google.cloud.gkemulticloud.v1.IListAttachedClustersResponse|null|undefined,
-          protos.google.cloud.gkemulticloud.v1.IAttachedCluster>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IListAttachedClustersRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.gkemulticloud.v1.IListAttachedClustersRequest,
+      | protos.google.cloud.gkemulticloud.v1.IListAttachedClustersResponse
+      | null
+      | undefined,
+      protos.google.cloud.gkemulticloud.v1.IAttachedCluster
+    >,
+  ): void;
   listAttachedClusters(
-      request?: protos.google.cloud.gkemulticloud.v1.IListAttachedClustersRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.gkemulticloud.v1.IListAttachedClustersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.gkemulticloud.v1.IListAttachedClustersRequest,
-          protos.google.cloud.gkemulticloud.v1.IListAttachedClustersResponse|null|undefined,
-          protos.google.cloud.gkemulticloud.v1.IAttachedCluster>,
-      callback?: PaginationCallback<
-          protos.google.cloud.gkemulticloud.v1.IListAttachedClustersRequest,
-          protos.google.cloud.gkemulticloud.v1.IListAttachedClustersResponse|null|undefined,
-          protos.google.cloud.gkemulticloud.v1.IAttachedCluster>):
-      Promise<[
-        protos.google.cloud.gkemulticloud.v1.IAttachedCluster[],
-        protos.google.cloud.gkemulticloud.v1.IListAttachedClustersRequest|null,
-        protos.google.cloud.gkemulticloud.v1.IListAttachedClustersResponse
-      ]>|void {
+          | protos.google.cloud.gkemulticloud.v1.IListAttachedClustersResponse
+          | null
+          | undefined,
+          protos.google.cloud.gkemulticloud.v1.IAttachedCluster
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.gkemulticloud.v1.IListAttachedClustersRequest,
+      | protos.google.cloud.gkemulticloud.v1.IListAttachedClustersResponse
+      | null
+      | undefined,
+      protos.google.cloud.gkemulticloud.v1.IAttachedCluster
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.gkemulticloud.v1.IAttachedCluster[],
+      protos.google.cloud.gkemulticloud.v1.IListAttachedClustersRequest | null,
+      protos.google.cloud.gkemulticloud.v1.IListAttachedClustersResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.gkemulticloud.v1.IListAttachedClustersRequest,
-      protos.google.cloud.gkemulticloud.v1.IListAttachedClustersResponse|null|undefined,
-      protos.google.cloud.gkemulticloud.v1.IAttachedCluster>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.gkemulticloud.v1.IListAttachedClustersRequest,
+          | protos.google.cloud.gkemulticloud.v1.IListAttachedClustersResponse
+          | null
+          | undefined,
+          protos.google.cloud.gkemulticloud.v1.IAttachedCluster
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listAttachedClusters values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1508,137 +2099,141 @@ export class AttachedClustersClient {
     this._log.info('listAttachedClusters request %j', request);
     return this.innerApiCalls
       .listAttachedClusters(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.gkemulticloud.v1.IAttachedCluster[],
-        protos.google.cloud.gkemulticloud.v1.IListAttachedClustersRequest|null,
-        protos.google.cloud.gkemulticloud.v1.IListAttachedClustersResponse
-      ]) => {
-        this._log.info('listAttachedClusters values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.gkemulticloud.v1.IAttachedCluster[],
+          protos.google.cloud.gkemulticloud.v1.IListAttachedClustersRequest | null,
+          protos.google.cloud.gkemulticloud.v1.IListAttachedClustersResponse,
+        ]) => {
+          this._log.info('listAttachedClusters values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listAttachedClusters`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent location which owns this collection of
- *   {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster} resources.
- *
- *   Location names are formatted as `projects/<project-id>/locations/<region>`.
- *
- *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
- *   for more details on Google Cloud Platform resource names.
- * @param {number} request.pageSize
- *   The maximum number of items to return.
- *
- *   If not specified, a default value of 50 will be used by the service.
- *   Regardless of the pageSize value, the response can include a partial list
- *   and a caller should only rely on response's
- *   {@link protos.google.cloud.gkemulticloud.v1.ListAttachedClustersResponse.next_page_token|nextPageToken}
- *   to determine if there are more instances left to be queried.
- * @param {string} request.pageToken
- *   The `nextPageToken` value returned from a previous
- *   {@link protos.google.cloud.gkemulticloud.v1.AttachedClusters.ListAttachedClusters|attachedClusters.list}
- *   request, if any.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listAttachedClustersAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listAttachedClusters`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent location which owns this collection of
+   *   {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster} resources.
+   *
+   *   Location names are formatted as `projects/<project-id>/locations/<region>`.
+   *
+   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+   *   for more details on Google Cloud Platform resource names.
+   * @param {number} request.pageSize
+   *   The maximum number of items to return.
+   *
+   *   If not specified, a default value of 50 will be used by the service.
+   *   Regardless of the pageSize value, the response can include a partial list
+   *   and a caller should only rely on response's
+   *   {@link protos.google.cloud.gkemulticloud.v1.ListAttachedClustersResponse.next_page_token|nextPageToken}
+   *   to determine if there are more instances left to be queried.
+   * @param {string} request.pageToken
+   *   The `nextPageToken` value returned from a previous
+   *   {@link protos.google.cloud.gkemulticloud.v1.AttachedClusters.ListAttachedClusters|attachedClusters.list}
+   *   request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAttachedClustersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listAttachedClustersStream(
-      request?: protos.google.cloud.gkemulticloud.v1.IListAttachedClustersRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.gkemulticloud.v1.IListAttachedClustersRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listAttachedClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listAttachedClusters stream %j', request);
     return this.descriptors.page.listAttachedClusters.createStream(
       this.innerApiCalls.listAttachedClusters as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listAttachedClusters`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent location which owns this collection of
- *   {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster} resources.
- *
- *   Location names are formatted as `projects/<project-id>/locations/<region>`.
- *
- *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
- *   for more details on Google Cloud Platform resource names.
- * @param {number} request.pageSize
- *   The maximum number of items to return.
- *
- *   If not specified, a default value of 50 will be used by the service.
- *   Regardless of the pageSize value, the response can include a partial list
- *   and a caller should only rely on response's
- *   {@link protos.google.cloud.gkemulticloud.v1.ListAttachedClustersResponse.next_page_token|nextPageToken}
- *   to determine if there are more instances left to be queried.
- * @param {string} request.pageToken
- *   The `nextPageToken` value returned from a previous
- *   {@link protos.google.cloud.gkemulticloud.v1.AttachedClusters.ListAttachedClusters|attachedClusters.list}
- *   request, if any.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/attached_clusters.list_attached_clusters.js</caption>
- * region_tag:gkemulticloud_v1_generated_AttachedClusters_ListAttachedClusters_async
- */
+  /**
+   * Equivalent to `listAttachedClusters`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent location which owns this collection of
+   *   {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster} resources.
+   *
+   *   Location names are formatted as `projects/<project-id>/locations/<region>`.
+   *
+   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+   *   for more details on Google Cloud Platform resource names.
+   * @param {number} request.pageSize
+   *   The maximum number of items to return.
+   *
+   *   If not specified, a default value of 50 will be used by the service.
+   *   Regardless of the pageSize value, the response can include a partial list
+   *   and a caller should only rely on response's
+   *   {@link protos.google.cloud.gkemulticloud.v1.ListAttachedClustersResponse.next_page_token|nextPageToken}
+   *   to determine if there are more instances left to be queried.
+   * @param {string} request.pageToken
+   *   The `nextPageToken` value returned from a previous
+   *   {@link protos.google.cloud.gkemulticloud.v1.AttachedClusters.ListAttachedClusters|attachedClusters.list}
+   *   request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.gkemulticloud.v1.AttachedCluster|AttachedCluster}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/attached_clusters.list_attached_clusters.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AttachedClusters_ListAttachedClusters_async
+   */
   listAttachedClustersAsync(
-      request?: protos.google.cloud.gkemulticloud.v1.IListAttachedClustersRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.gkemulticloud.v1.IAttachedCluster>{
+    request?: protos.google.cloud.gkemulticloud.v1.IListAttachedClustersRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.gkemulticloud.v1.IAttachedCluster> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listAttachedClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listAttachedClusters iterate %j', request);
     return this.descriptors.page.listAttachedClusters.asyncIterate(
       this.innerApiCalls['listAttachedClusters'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.gkemulticloud.v1.IAttachedCluster>;
   }
-/**
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1681,22 +2276,22 @@ export class AttachedClustersClient {
       protos.google.longrunning.Operation,
       protos.google.longrunning.GetOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<[protos.google.longrunning.Operation]> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1731,15 +2326,15 @@ export class AttachedClustersClient {
    */
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
+    options?: gax.CallOptions,
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1773,7 +2368,7 @@ export class AttachedClustersClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-   cancelOperation(
+  cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -1786,25 +2381,24 @@ export class AttachedClustersClient {
       protos.google.longrunning.CancelOperationRequest,
       protos.google.protobuf.Empty,
       {} | undefined | null
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
-
   /**
    * Deletes a long-running operation. This method indicates that the client is
    * no longer interested in the operation result. It does not cancel the
@@ -1843,22 +2437,22 @@ export class AttachedClustersClient {
       protos.google.protobuf.Empty,
       protos.google.longrunning.DeleteOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -1874,7 +2468,11 @@ export class AttachedClustersClient {
    * @param {string} attached_cluster
    * @returns {string} Resource name string.
    */
-  attachedClusterPath(project:string,location:string,attachedCluster:string) {
+  attachedClusterPath(
+    project: string,
+    location: string,
+    attachedCluster: string,
+  ) {
     return this.pathTemplates.attachedClusterPathTemplate.render({
       project: project,
       location: location,
@@ -1890,7 +2488,9 @@ export class AttachedClustersClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAttachedClusterName(attachedClusterName: string) {
-    return this.pathTemplates.attachedClusterPathTemplate.match(attachedClusterName).project;
+    return this.pathTemplates.attachedClusterPathTemplate.match(
+      attachedClusterName,
+    ).project;
   }
 
   /**
@@ -1901,7 +2501,9 @@ export class AttachedClustersClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAttachedClusterName(attachedClusterName: string) {
-    return this.pathTemplates.attachedClusterPathTemplate.match(attachedClusterName).location;
+    return this.pathTemplates.attachedClusterPathTemplate.match(
+      attachedClusterName,
+    ).location;
   }
 
   /**
@@ -1912,7 +2514,9 @@ export class AttachedClustersClient {
    * @returns {string} A string representing the attached_cluster.
    */
   matchAttachedClusterFromAttachedClusterName(attachedClusterName: string) {
-    return this.pathTemplates.attachedClusterPathTemplate.match(attachedClusterName).attached_cluster;
+    return this.pathTemplates.attachedClusterPathTemplate.match(
+      attachedClusterName,
+    ).attached_cluster;
   }
 
   /**
@@ -1922,7 +2526,7 @@ export class AttachedClustersClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  attachedServerConfigPath(project:string,location:string) {
+  attachedServerConfigPath(project: string, location: string) {
     return this.pathTemplates.attachedServerConfigPathTemplate.render({
       project: project,
       location: location,
@@ -1937,7 +2541,9 @@ export class AttachedClustersClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAttachedServerConfigName(attachedServerConfigName: string) {
-    return this.pathTemplates.attachedServerConfigPathTemplate.match(attachedServerConfigName).project;
+    return this.pathTemplates.attachedServerConfigPathTemplate.match(
+      attachedServerConfigName,
+    ).project;
   }
 
   /**
@@ -1948,7 +2554,9 @@ export class AttachedClustersClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAttachedServerConfigName(attachedServerConfigName: string) {
-    return this.pathTemplates.attachedServerConfigPathTemplate.match(attachedServerConfigName).location;
+    return this.pathTemplates.attachedServerConfigPathTemplate.match(
+      attachedServerConfigName,
+    ).location;
   }
 
   /**
@@ -1959,7 +2567,7 @@ export class AttachedClustersClient {
    * @param {string} aws_cluster
    * @returns {string} Resource name string.
    */
-  awsClusterPath(project:string,location:string,awsCluster:string) {
+  awsClusterPath(project: string, location: string, awsCluster: string) {
     return this.pathTemplates.awsClusterPathTemplate.render({
       project: project,
       location: location,
@@ -1975,7 +2583,8 @@ export class AttachedClustersClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAwsClusterName(awsClusterName: string) {
-    return this.pathTemplates.awsClusterPathTemplate.match(awsClusterName).project;
+    return this.pathTemplates.awsClusterPathTemplate.match(awsClusterName)
+      .project;
   }
 
   /**
@@ -1986,7 +2595,8 @@ export class AttachedClustersClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAwsClusterName(awsClusterName: string) {
-    return this.pathTemplates.awsClusterPathTemplate.match(awsClusterName).location;
+    return this.pathTemplates.awsClusterPathTemplate.match(awsClusterName)
+      .location;
   }
 
   /**
@@ -1997,7 +2607,8 @@ export class AttachedClustersClient {
    * @returns {string} A string representing the aws_cluster.
    */
   matchAwsClusterFromAwsClusterName(awsClusterName: string) {
-    return this.pathTemplates.awsClusterPathTemplate.match(awsClusterName).aws_cluster;
+    return this.pathTemplates.awsClusterPathTemplate.match(awsClusterName)
+      .aws_cluster;
   }
 
   /**
@@ -2009,7 +2620,12 @@ export class AttachedClustersClient {
    * @param {string} aws_node_pool
    * @returns {string} Resource name string.
    */
-  awsNodePoolPath(project:string,location:string,awsCluster:string,awsNodePool:string) {
+  awsNodePoolPath(
+    project: string,
+    location: string,
+    awsCluster: string,
+    awsNodePool: string,
+  ) {
     return this.pathTemplates.awsNodePoolPathTemplate.render({
       project: project,
       location: location,
@@ -2026,7 +2642,8 @@ export class AttachedClustersClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAwsNodePoolName(awsNodePoolName: string) {
-    return this.pathTemplates.awsNodePoolPathTemplate.match(awsNodePoolName).project;
+    return this.pathTemplates.awsNodePoolPathTemplate.match(awsNodePoolName)
+      .project;
   }
 
   /**
@@ -2037,7 +2654,8 @@ export class AttachedClustersClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAwsNodePoolName(awsNodePoolName: string) {
-    return this.pathTemplates.awsNodePoolPathTemplate.match(awsNodePoolName).location;
+    return this.pathTemplates.awsNodePoolPathTemplate.match(awsNodePoolName)
+      .location;
   }
 
   /**
@@ -2048,7 +2666,8 @@ export class AttachedClustersClient {
    * @returns {string} A string representing the aws_cluster.
    */
   matchAwsClusterFromAwsNodePoolName(awsNodePoolName: string) {
-    return this.pathTemplates.awsNodePoolPathTemplate.match(awsNodePoolName).aws_cluster;
+    return this.pathTemplates.awsNodePoolPathTemplate.match(awsNodePoolName)
+      .aws_cluster;
   }
 
   /**
@@ -2059,7 +2678,8 @@ export class AttachedClustersClient {
    * @returns {string} A string representing the aws_node_pool.
    */
   matchAwsNodePoolFromAwsNodePoolName(awsNodePoolName: string) {
-    return this.pathTemplates.awsNodePoolPathTemplate.match(awsNodePoolName).aws_node_pool;
+    return this.pathTemplates.awsNodePoolPathTemplate.match(awsNodePoolName)
+      .aws_node_pool;
   }
 
   /**
@@ -2069,7 +2689,7 @@ export class AttachedClustersClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  awsServerConfigPath(project:string,location:string) {
+  awsServerConfigPath(project: string, location: string) {
     return this.pathTemplates.awsServerConfigPathTemplate.render({
       project: project,
       location: location,
@@ -2084,7 +2704,9 @@ export class AttachedClustersClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAwsServerConfigName(awsServerConfigName: string) {
-    return this.pathTemplates.awsServerConfigPathTemplate.match(awsServerConfigName).project;
+    return this.pathTemplates.awsServerConfigPathTemplate.match(
+      awsServerConfigName,
+    ).project;
   }
 
   /**
@@ -2095,7 +2717,9 @@ export class AttachedClustersClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAwsServerConfigName(awsServerConfigName: string) {
-    return this.pathTemplates.awsServerConfigPathTemplate.match(awsServerConfigName).location;
+    return this.pathTemplates.awsServerConfigPathTemplate.match(
+      awsServerConfigName,
+    ).location;
   }
 
   /**
@@ -2106,7 +2730,7 @@ export class AttachedClustersClient {
    * @param {string} azure_client
    * @returns {string} Resource name string.
    */
-  azureClientPath(project:string,location:string,azureClient:string) {
+  azureClientPath(project: string, location: string, azureClient: string) {
     return this.pathTemplates.azureClientPathTemplate.render({
       project: project,
       location: location,
@@ -2122,7 +2746,8 @@ export class AttachedClustersClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAzureClientName(azureClientName: string) {
-    return this.pathTemplates.azureClientPathTemplate.match(azureClientName).project;
+    return this.pathTemplates.azureClientPathTemplate.match(azureClientName)
+      .project;
   }
 
   /**
@@ -2133,7 +2758,8 @@ export class AttachedClustersClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAzureClientName(azureClientName: string) {
-    return this.pathTemplates.azureClientPathTemplate.match(azureClientName).location;
+    return this.pathTemplates.azureClientPathTemplate.match(azureClientName)
+      .location;
   }
 
   /**
@@ -2144,7 +2770,8 @@ export class AttachedClustersClient {
    * @returns {string} A string representing the azure_client.
    */
   matchAzureClientFromAzureClientName(azureClientName: string) {
-    return this.pathTemplates.azureClientPathTemplate.match(azureClientName).azure_client;
+    return this.pathTemplates.azureClientPathTemplate.match(azureClientName)
+      .azure_client;
   }
 
   /**
@@ -2155,7 +2782,7 @@ export class AttachedClustersClient {
    * @param {string} azure_cluster
    * @returns {string} Resource name string.
    */
-  azureClusterPath(project:string,location:string,azureCluster:string) {
+  azureClusterPath(project: string, location: string, azureCluster: string) {
     return this.pathTemplates.azureClusterPathTemplate.render({
       project: project,
       location: location,
@@ -2171,7 +2798,8 @@ export class AttachedClustersClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAzureClusterName(azureClusterName: string) {
-    return this.pathTemplates.azureClusterPathTemplate.match(azureClusterName).project;
+    return this.pathTemplates.azureClusterPathTemplate.match(azureClusterName)
+      .project;
   }
 
   /**
@@ -2182,7 +2810,8 @@ export class AttachedClustersClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAzureClusterName(azureClusterName: string) {
-    return this.pathTemplates.azureClusterPathTemplate.match(azureClusterName).location;
+    return this.pathTemplates.azureClusterPathTemplate.match(azureClusterName)
+      .location;
   }
 
   /**
@@ -2193,7 +2822,8 @@ export class AttachedClustersClient {
    * @returns {string} A string representing the azure_cluster.
    */
   matchAzureClusterFromAzureClusterName(azureClusterName: string) {
-    return this.pathTemplates.azureClusterPathTemplate.match(azureClusterName).azure_cluster;
+    return this.pathTemplates.azureClusterPathTemplate.match(azureClusterName)
+      .azure_cluster;
   }
 
   /**
@@ -2205,7 +2835,12 @@ export class AttachedClustersClient {
    * @param {string} azure_node_pool
    * @returns {string} Resource name string.
    */
-  azureNodePoolPath(project:string,location:string,azureCluster:string,azureNodePool:string) {
+  azureNodePoolPath(
+    project: string,
+    location: string,
+    azureCluster: string,
+    azureNodePool: string,
+  ) {
     return this.pathTemplates.azureNodePoolPathTemplate.render({
       project: project,
       location: location,
@@ -2222,7 +2857,8 @@ export class AttachedClustersClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAzureNodePoolName(azureNodePoolName: string) {
-    return this.pathTemplates.azureNodePoolPathTemplate.match(azureNodePoolName).project;
+    return this.pathTemplates.azureNodePoolPathTemplate.match(azureNodePoolName)
+      .project;
   }
 
   /**
@@ -2233,7 +2869,8 @@ export class AttachedClustersClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAzureNodePoolName(azureNodePoolName: string) {
-    return this.pathTemplates.azureNodePoolPathTemplate.match(azureNodePoolName).location;
+    return this.pathTemplates.azureNodePoolPathTemplate.match(azureNodePoolName)
+      .location;
   }
 
   /**
@@ -2244,7 +2881,8 @@ export class AttachedClustersClient {
    * @returns {string} A string representing the azure_cluster.
    */
   matchAzureClusterFromAzureNodePoolName(azureNodePoolName: string) {
-    return this.pathTemplates.azureNodePoolPathTemplate.match(azureNodePoolName).azure_cluster;
+    return this.pathTemplates.azureNodePoolPathTemplate.match(azureNodePoolName)
+      .azure_cluster;
   }
 
   /**
@@ -2255,7 +2893,8 @@ export class AttachedClustersClient {
    * @returns {string} A string representing the azure_node_pool.
    */
   matchAzureNodePoolFromAzureNodePoolName(azureNodePoolName: string) {
-    return this.pathTemplates.azureNodePoolPathTemplate.match(azureNodePoolName).azure_node_pool;
+    return this.pathTemplates.azureNodePoolPathTemplate.match(azureNodePoolName)
+      .azure_node_pool;
   }
 
   /**
@@ -2265,7 +2904,7 @@ export class AttachedClustersClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  azureServerConfigPath(project:string,location:string) {
+  azureServerConfigPath(project: string, location: string) {
     return this.pathTemplates.azureServerConfigPathTemplate.render({
       project: project,
       location: location,
@@ -2280,7 +2919,9 @@ export class AttachedClustersClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAzureServerConfigName(azureServerConfigName: string) {
-    return this.pathTemplates.azureServerConfigPathTemplate.match(azureServerConfigName).project;
+    return this.pathTemplates.azureServerConfigPathTemplate.match(
+      azureServerConfigName,
+    ).project;
   }
 
   /**
@@ -2291,7 +2932,9 @@ export class AttachedClustersClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAzureServerConfigName(azureServerConfigName: string) {
-    return this.pathTemplates.azureServerConfigPathTemplate.match(azureServerConfigName).location;
+    return this.pathTemplates.azureServerConfigPathTemplate.match(
+      azureServerConfigName,
+    ).location;
   }
 
   /**
@@ -2301,7 +2944,7 @@ export class AttachedClustersClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -2336,7 +2979,7 @@ export class AttachedClustersClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -2361,7 +3004,7 @@ export class AttachedClustersClient {
    */
   close(): Promise<void> {
     if (this.attachedClustersStub && !this._terminated) {
-      return this.attachedClustersStub.then(stub => {
+      return this.attachedClustersStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

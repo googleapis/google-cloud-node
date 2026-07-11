@@ -20,7 +20,7 @@ import {
   GoogleAuthOptions,
 } from 'google-auth-library';
 import * as r from 'teeny-request';
-import * as uuid from 'uuid';
+import * as crypto from 'crypto';
 
 import {Interceptor} from './service-object.js';
 import {
@@ -274,7 +274,7 @@ export class Service {
       'User-Agent': userAgent,
       'x-goog-api-client': `${getRuntimeTrackingString()} gccl/${
         pkg.version
-      }-${getModuleFormat()} gccl-invocation-id/${uuid.v4()}`,
+      }-${getModuleFormat()} gccl-invocation-id/${crypto.randomUUID()}`,
     };
 
     if (reqOpts[GCCL_GCS_CMD_KEY]) {

@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {MigrationCenterClient} from './migration_center_client';
+export { MigrationCenterClient } from './migration_center_client';

@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {AppOptimizeClient} from '@google-cloud/appoptimize';
+import { AppOptimizeClient } from '@google-cloud/appoptimize';
 
 // check that the client class type name can be used
 function doStuffWithAppOptimizeClient(client: AppOptimizeClient) {

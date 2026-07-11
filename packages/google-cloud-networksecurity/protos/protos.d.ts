@@ -3270,6 +3270,9 @@ export namespace google {
                     /** AuthzPolicy httpRules */
                     httpRules?: (google.cloud.networksecurity.v1.AuthzPolicy.IAuthzRule[]|null);
 
+                    /** AuthzPolicy networkRules */
+                    networkRules?: (google.cloud.networksecurity.v1.AuthzPolicy.IAuthzRule[]|null);
+
                     /** AuthzPolicy action */
                     action?: (google.cloud.networksecurity.v1.AuthzPolicy.AuthzAction|keyof typeof google.cloud.networksecurity.v1.AuthzPolicy.AuthzAction|null);
 
@@ -3309,6 +3312,9 @@ export namespace google {
 
                     /** AuthzPolicy httpRules. */
                     public httpRules: google.cloud.networksecurity.v1.AuthzPolicy.IAuthzRule[];
+
+                    /** AuthzPolicy networkRules. */
+                    public networkRules: google.cloud.networksecurity.v1.AuthzPolicy.IAuthzRule[];
 
                     /** AuthzPolicy action. */
                     public action: (google.cloud.networksecurity.v1.AuthzPolicy.AuthzAction|keyof typeof google.cloud.networksecurity.v1.AuthzPolicy.AuthzAction);
@@ -4597,6 +4603,9 @@ export namespace google {
 
                                 /** RequestOperation mcp */
                                 mcp?: (google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.To.RequestOperation.IMCP|null);
+
+                                /** RequestOperation snis */
+                                snis?: (google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.IStringMatch[]|null);
                             }
 
                             /** Represents a RequestOperation. */
@@ -4622,6 +4631,9 @@ export namespace google {
 
                                 /** RequestOperation mcp. */
                                 public mcp?: (google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.To.RequestOperation.IMCP|null);
+
+                                /** RequestOperation snis. */
+                                public snis: google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.IStringMatch[];
 
                                 /**
                                  * Creates a new RequestOperation instance using the specified properties.
@@ -8860,6 +8872,20 @@ export namespace google {
                     public listFirewallEndpoints(request: google.cloud.networksecurity.v1.IListFirewallEndpointsRequest): Promise<google.cloud.networksecurity.v1.ListFirewallEndpointsResponse>;
 
                     /**
+                     * Calls ListProjectFirewallEndpoints.
+                     * @param request ListFirewallEndpointsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListFirewallEndpointsResponse
+                     */
+                    public listProjectFirewallEndpoints(request: google.cloud.networksecurity.v1.IListFirewallEndpointsRequest, callback: google.cloud.networksecurity.v1.FirewallActivation.ListProjectFirewallEndpointsCallback): void;
+
+                    /**
+                     * Calls ListProjectFirewallEndpoints.
+                     * @param request ListFirewallEndpointsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listProjectFirewallEndpoints(request: google.cloud.networksecurity.v1.IListFirewallEndpointsRequest): Promise<google.cloud.networksecurity.v1.ListFirewallEndpointsResponse>;
+
+                    /**
                      * Calls GetFirewallEndpoint.
                      * @param request GetFirewallEndpointRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and FirewallEndpoint
@@ -8872,6 +8898,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public getFirewallEndpoint(request: google.cloud.networksecurity.v1.IGetFirewallEndpointRequest): Promise<google.cloud.networksecurity.v1.FirewallEndpoint>;
+
+                    /**
+                     * Calls GetProjectFirewallEndpoint.
+                     * @param request GetFirewallEndpointRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FirewallEndpoint
+                     */
+                    public getProjectFirewallEndpoint(request: google.cloud.networksecurity.v1.IGetFirewallEndpointRequest, callback: google.cloud.networksecurity.v1.FirewallActivation.GetProjectFirewallEndpointCallback): void;
+
+                    /**
+                     * Calls GetProjectFirewallEndpoint.
+                     * @param request GetFirewallEndpointRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getProjectFirewallEndpoint(request: google.cloud.networksecurity.v1.IGetFirewallEndpointRequest): Promise<google.cloud.networksecurity.v1.FirewallEndpoint>;
 
                     /**
                      * Calls CreateFirewallEndpoint.
@@ -8888,6 +8928,20 @@ export namespace google {
                     public createFirewallEndpoint(request: google.cloud.networksecurity.v1.ICreateFirewallEndpointRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls CreateProjectFirewallEndpoint.
+                     * @param request CreateFirewallEndpointRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createProjectFirewallEndpoint(request: google.cloud.networksecurity.v1.ICreateFirewallEndpointRequest, callback: google.cloud.networksecurity.v1.FirewallActivation.CreateProjectFirewallEndpointCallback): void;
+
+                    /**
+                     * Calls CreateProjectFirewallEndpoint.
+                     * @param request CreateFirewallEndpointRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createProjectFirewallEndpoint(request: google.cloud.networksecurity.v1.ICreateFirewallEndpointRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls DeleteFirewallEndpoint.
                      * @param request DeleteFirewallEndpointRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -8902,6 +8956,20 @@ export namespace google {
                     public deleteFirewallEndpoint(request: google.cloud.networksecurity.v1.IDeleteFirewallEndpointRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls DeleteProjectFirewallEndpoint.
+                     * @param request DeleteFirewallEndpointRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteProjectFirewallEndpoint(request: google.cloud.networksecurity.v1.IDeleteFirewallEndpointRequest, callback: google.cloud.networksecurity.v1.FirewallActivation.DeleteProjectFirewallEndpointCallback): void;
+
+                    /**
+                     * Calls DeleteProjectFirewallEndpoint.
+                     * @param request DeleteFirewallEndpointRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteProjectFirewallEndpoint(request: google.cloud.networksecurity.v1.IDeleteFirewallEndpointRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls UpdateFirewallEndpoint.
                      * @param request UpdateFirewallEndpointRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -8914,6 +8982,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public updateFirewallEndpoint(request: google.cloud.networksecurity.v1.IUpdateFirewallEndpointRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateProjectFirewallEndpoint.
+                     * @param request UpdateFirewallEndpointRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateProjectFirewallEndpoint(request: google.cloud.networksecurity.v1.IUpdateFirewallEndpointRequest, callback: google.cloud.networksecurity.v1.FirewallActivation.UpdateProjectFirewallEndpointCallback): void;
+
+                    /**
+                     * Calls UpdateProjectFirewallEndpoint.
+                     * @param request UpdateFirewallEndpointRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateProjectFirewallEndpoint(request: google.cloud.networksecurity.v1.IUpdateFirewallEndpointRequest): Promise<google.longrunning.Operation>;
 
                     /**
                      * Calls ListFirewallEndpointAssociations.
@@ -8996,11 +9078,25 @@ export namespace google {
                     type ListFirewallEndpointsCallback = (error: (Error|null), response?: google.cloud.networksecurity.v1.ListFirewallEndpointsResponse) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.FirewallActivation|listProjectFirewallEndpoints}.
+                     * @param error Error, if any
+                     * @param [response] ListFirewallEndpointsResponse
+                     */
+                    type ListProjectFirewallEndpointsCallback = (error: (Error|null), response?: google.cloud.networksecurity.v1.ListFirewallEndpointsResponse) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.networksecurity.v1.FirewallActivation|getFirewallEndpoint}.
                      * @param error Error, if any
                      * @param [response] FirewallEndpoint
                      */
                     type GetFirewallEndpointCallback = (error: (Error|null), response?: google.cloud.networksecurity.v1.FirewallEndpoint) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.FirewallActivation|getProjectFirewallEndpoint}.
+                     * @param error Error, if any
+                     * @param [response] FirewallEndpoint
+                     */
+                    type GetProjectFirewallEndpointCallback = (error: (Error|null), response?: google.cloud.networksecurity.v1.FirewallEndpoint) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.networksecurity.v1.FirewallActivation|createFirewallEndpoint}.
@@ -9010,6 +9106,13 @@ export namespace google {
                     type CreateFirewallEndpointCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.FirewallActivation|createProjectFirewallEndpoint}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateProjectFirewallEndpointCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.networksecurity.v1.FirewallActivation|deleteFirewallEndpoint}.
                      * @param error Error, if any
                      * @param [response] Operation
@@ -9017,11 +9120,25 @@ export namespace google {
                     type DeleteFirewallEndpointCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.FirewallActivation|deleteProjectFirewallEndpoint}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteProjectFirewallEndpointCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.networksecurity.v1.FirewallActivation|updateFirewallEndpoint}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type UpdateFirewallEndpointCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.FirewallActivation|updateProjectFirewallEndpoint}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateProjectFirewallEndpointCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.networksecurity.v1.FirewallActivation|listFirewallEndpointAssociations}.
@@ -25747,6 +25864,240 @@ export namespace google {
                     }
                 }
 
+                /** Represents a SecurityProfileGroupService */
+                class SecurityProfileGroupService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new SecurityProfileGroupService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new SecurityProfileGroupService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): SecurityProfileGroupService;
+
+                    /**
+                     * Calls ListSecurityProfileGroups.
+                     * @param request ListSecurityProfileGroupsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListSecurityProfileGroupsResponse
+                     */
+                    public listSecurityProfileGroups(request: google.cloud.networksecurity.v1.IListSecurityProfileGroupsRequest, callback: google.cloud.networksecurity.v1.SecurityProfileGroupService.ListSecurityProfileGroupsCallback): void;
+
+                    /**
+                     * Calls ListSecurityProfileGroups.
+                     * @param request ListSecurityProfileGroupsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listSecurityProfileGroups(request: google.cloud.networksecurity.v1.IListSecurityProfileGroupsRequest): Promise<google.cloud.networksecurity.v1.ListSecurityProfileGroupsResponse>;
+
+                    /**
+                     * Calls GetSecurityProfileGroup.
+                     * @param request GetSecurityProfileGroupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SecurityProfileGroup
+                     */
+                    public getSecurityProfileGroup(request: google.cloud.networksecurity.v1.IGetSecurityProfileGroupRequest, callback: google.cloud.networksecurity.v1.SecurityProfileGroupService.GetSecurityProfileGroupCallback): void;
+
+                    /**
+                     * Calls GetSecurityProfileGroup.
+                     * @param request GetSecurityProfileGroupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getSecurityProfileGroup(request: google.cloud.networksecurity.v1.IGetSecurityProfileGroupRequest): Promise<google.cloud.networksecurity.v1.SecurityProfileGroup>;
+
+                    /**
+                     * Calls CreateSecurityProfileGroup.
+                     * @param request CreateSecurityProfileGroupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createSecurityProfileGroup(request: google.cloud.networksecurity.v1.ICreateSecurityProfileGroupRequest, callback: google.cloud.networksecurity.v1.SecurityProfileGroupService.CreateSecurityProfileGroupCallback): void;
+
+                    /**
+                     * Calls CreateSecurityProfileGroup.
+                     * @param request CreateSecurityProfileGroupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createSecurityProfileGroup(request: google.cloud.networksecurity.v1.ICreateSecurityProfileGroupRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateSecurityProfileGroup.
+                     * @param request UpdateSecurityProfileGroupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateSecurityProfileGroup(request: google.cloud.networksecurity.v1.IUpdateSecurityProfileGroupRequest, callback: google.cloud.networksecurity.v1.SecurityProfileGroupService.UpdateSecurityProfileGroupCallback): void;
+
+                    /**
+                     * Calls UpdateSecurityProfileGroup.
+                     * @param request UpdateSecurityProfileGroupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateSecurityProfileGroup(request: google.cloud.networksecurity.v1.IUpdateSecurityProfileGroupRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteSecurityProfileGroup.
+                     * @param request DeleteSecurityProfileGroupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteSecurityProfileGroup(request: google.cloud.networksecurity.v1.IDeleteSecurityProfileGroupRequest, callback: google.cloud.networksecurity.v1.SecurityProfileGroupService.DeleteSecurityProfileGroupCallback): void;
+
+                    /**
+                     * Calls DeleteSecurityProfileGroup.
+                     * @param request DeleteSecurityProfileGroupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteSecurityProfileGroup(request: google.cloud.networksecurity.v1.IDeleteSecurityProfileGroupRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListSecurityProfiles.
+                     * @param request ListSecurityProfilesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListSecurityProfilesResponse
+                     */
+                    public listSecurityProfiles(request: google.cloud.networksecurity.v1.IListSecurityProfilesRequest, callback: google.cloud.networksecurity.v1.SecurityProfileGroupService.ListSecurityProfilesCallback): void;
+
+                    /**
+                     * Calls ListSecurityProfiles.
+                     * @param request ListSecurityProfilesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listSecurityProfiles(request: google.cloud.networksecurity.v1.IListSecurityProfilesRequest): Promise<google.cloud.networksecurity.v1.ListSecurityProfilesResponse>;
+
+                    /**
+                     * Calls GetSecurityProfile.
+                     * @param request GetSecurityProfileRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SecurityProfile
+                     */
+                    public getSecurityProfile(request: google.cloud.networksecurity.v1.IGetSecurityProfileRequest, callback: google.cloud.networksecurity.v1.SecurityProfileGroupService.GetSecurityProfileCallback): void;
+
+                    /**
+                     * Calls GetSecurityProfile.
+                     * @param request GetSecurityProfileRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getSecurityProfile(request: google.cloud.networksecurity.v1.IGetSecurityProfileRequest): Promise<google.cloud.networksecurity.v1.SecurityProfile>;
+
+                    /**
+                     * Calls CreateSecurityProfile.
+                     * @param request CreateSecurityProfileRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createSecurityProfile(request: google.cloud.networksecurity.v1.ICreateSecurityProfileRequest, callback: google.cloud.networksecurity.v1.SecurityProfileGroupService.CreateSecurityProfileCallback): void;
+
+                    /**
+                     * Calls CreateSecurityProfile.
+                     * @param request CreateSecurityProfileRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createSecurityProfile(request: google.cloud.networksecurity.v1.ICreateSecurityProfileRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateSecurityProfile.
+                     * @param request UpdateSecurityProfileRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateSecurityProfile(request: google.cloud.networksecurity.v1.IUpdateSecurityProfileRequest, callback: google.cloud.networksecurity.v1.SecurityProfileGroupService.UpdateSecurityProfileCallback): void;
+
+                    /**
+                     * Calls UpdateSecurityProfile.
+                     * @param request UpdateSecurityProfileRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateSecurityProfile(request: google.cloud.networksecurity.v1.IUpdateSecurityProfileRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteSecurityProfile.
+                     * @param request DeleteSecurityProfileRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteSecurityProfile(request: google.cloud.networksecurity.v1.IDeleteSecurityProfileRequest, callback: google.cloud.networksecurity.v1.SecurityProfileGroupService.DeleteSecurityProfileCallback): void;
+
+                    /**
+                     * Calls DeleteSecurityProfile.
+                     * @param request DeleteSecurityProfileRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteSecurityProfile(request: google.cloud.networksecurity.v1.IDeleteSecurityProfileRequest): Promise<google.longrunning.Operation>;
+                }
+
+                namespace SecurityProfileGroupService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.SecurityProfileGroupService|listSecurityProfileGroups}.
+                     * @param error Error, if any
+                     * @param [response] ListSecurityProfileGroupsResponse
+                     */
+                    type ListSecurityProfileGroupsCallback = (error: (Error|null), response?: google.cloud.networksecurity.v1.ListSecurityProfileGroupsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.SecurityProfileGroupService|getSecurityProfileGroup}.
+                     * @param error Error, if any
+                     * @param [response] SecurityProfileGroup
+                     */
+                    type GetSecurityProfileGroupCallback = (error: (Error|null), response?: google.cloud.networksecurity.v1.SecurityProfileGroup) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.SecurityProfileGroupService|createSecurityProfileGroup}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateSecurityProfileGroupCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.SecurityProfileGroupService|updateSecurityProfileGroup}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateSecurityProfileGroupCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.SecurityProfileGroupService|deleteSecurityProfileGroup}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteSecurityProfileGroupCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.SecurityProfileGroupService|listSecurityProfiles}.
+                     * @param error Error, if any
+                     * @param [response] ListSecurityProfilesResponse
+                     */
+                    type ListSecurityProfilesCallback = (error: (Error|null), response?: google.cloud.networksecurity.v1.ListSecurityProfilesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.SecurityProfileGroupService|getSecurityProfile}.
+                     * @param error Error, if any
+                     * @param [response] SecurityProfile
+                     */
+                    type GetSecurityProfileCallback = (error: (Error|null), response?: google.cloud.networksecurity.v1.SecurityProfile) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.SecurityProfileGroupService|createSecurityProfile}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateSecurityProfileCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.SecurityProfileGroupService|updateSecurityProfile}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateSecurityProfileCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.SecurityProfileGroupService|deleteSecurityProfile}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteSecurityProfileCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+                }
+
                 /** Represents an OrganizationSecurityProfileGroupService */
                 class OrganizationSecurityProfileGroupService extends $protobuf.rpc.Service {
 
@@ -27223,6 +27574,1686 @@ export namespace google {
 
                     /**
                      * Gets the default type url for DeleteSecurityProfileRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a SSERealmService */
+                class SSERealmService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new SSERealmService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new SSERealmService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): SSERealmService;
+
+                    /**
+                     * Calls ListSACRealms.
+                     * @param request ListSACRealmsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListSACRealmsResponse
+                     */
+                    public listSACRealms(request: google.cloud.networksecurity.v1.IListSACRealmsRequest, callback: google.cloud.networksecurity.v1.SSERealmService.ListSACRealmsCallback): void;
+
+                    /**
+                     * Calls ListSACRealms.
+                     * @param request ListSACRealmsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listSACRealms(request: google.cloud.networksecurity.v1.IListSACRealmsRequest): Promise<google.cloud.networksecurity.v1.ListSACRealmsResponse>;
+
+                    /**
+                     * Calls GetSACRealm.
+                     * @param request GetSACRealmRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SACRealm
+                     */
+                    public getSACRealm(request: google.cloud.networksecurity.v1.IGetSACRealmRequest, callback: google.cloud.networksecurity.v1.SSERealmService.GetSACRealmCallback): void;
+
+                    /**
+                     * Calls GetSACRealm.
+                     * @param request GetSACRealmRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getSACRealm(request: google.cloud.networksecurity.v1.IGetSACRealmRequest): Promise<google.cloud.networksecurity.v1.SACRealm>;
+
+                    /**
+                     * Calls CreateSACRealm.
+                     * @param request CreateSACRealmRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createSACRealm(request: google.cloud.networksecurity.v1.ICreateSACRealmRequest, callback: google.cloud.networksecurity.v1.SSERealmService.CreateSACRealmCallback): void;
+
+                    /**
+                     * Calls CreateSACRealm.
+                     * @param request CreateSACRealmRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createSACRealm(request: google.cloud.networksecurity.v1.ICreateSACRealmRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteSACRealm.
+                     * @param request DeleteSACRealmRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteSACRealm(request: google.cloud.networksecurity.v1.IDeleteSACRealmRequest, callback: google.cloud.networksecurity.v1.SSERealmService.DeleteSACRealmCallback): void;
+
+                    /**
+                     * Calls DeleteSACRealm.
+                     * @param request DeleteSACRealmRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteSACRealm(request: google.cloud.networksecurity.v1.IDeleteSACRealmRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListSACAttachments.
+                     * @param request ListSACAttachmentsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListSACAttachmentsResponse
+                     */
+                    public listSACAttachments(request: google.cloud.networksecurity.v1.IListSACAttachmentsRequest, callback: google.cloud.networksecurity.v1.SSERealmService.ListSACAttachmentsCallback): void;
+
+                    /**
+                     * Calls ListSACAttachments.
+                     * @param request ListSACAttachmentsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listSACAttachments(request: google.cloud.networksecurity.v1.IListSACAttachmentsRequest): Promise<google.cloud.networksecurity.v1.ListSACAttachmentsResponse>;
+
+                    /**
+                     * Calls GetSACAttachment.
+                     * @param request GetSACAttachmentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SACAttachment
+                     */
+                    public getSACAttachment(request: google.cloud.networksecurity.v1.IGetSACAttachmentRequest, callback: google.cloud.networksecurity.v1.SSERealmService.GetSACAttachmentCallback): void;
+
+                    /**
+                     * Calls GetSACAttachment.
+                     * @param request GetSACAttachmentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getSACAttachment(request: google.cloud.networksecurity.v1.IGetSACAttachmentRequest): Promise<google.cloud.networksecurity.v1.SACAttachment>;
+
+                    /**
+                     * Calls CreateSACAttachment.
+                     * @param request CreateSACAttachmentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createSACAttachment(request: google.cloud.networksecurity.v1.ICreateSACAttachmentRequest, callback: google.cloud.networksecurity.v1.SSERealmService.CreateSACAttachmentCallback): void;
+
+                    /**
+                     * Calls CreateSACAttachment.
+                     * @param request CreateSACAttachmentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createSACAttachment(request: google.cloud.networksecurity.v1.ICreateSACAttachmentRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteSACAttachment.
+                     * @param request DeleteSACAttachmentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteSACAttachment(request: google.cloud.networksecurity.v1.IDeleteSACAttachmentRequest, callback: google.cloud.networksecurity.v1.SSERealmService.DeleteSACAttachmentCallback): void;
+
+                    /**
+                     * Calls DeleteSACAttachment.
+                     * @param request DeleteSACAttachmentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteSACAttachment(request: google.cloud.networksecurity.v1.IDeleteSACAttachmentRequest): Promise<google.longrunning.Operation>;
+                }
+
+                namespace SSERealmService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.SSERealmService|listSACRealms}.
+                     * @param error Error, if any
+                     * @param [response] ListSACRealmsResponse
+                     */
+                    type ListSACRealmsCallback = (error: (Error|null), response?: google.cloud.networksecurity.v1.ListSACRealmsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.SSERealmService|getSACRealm}.
+                     * @param error Error, if any
+                     * @param [response] SACRealm
+                     */
+                    type GetSACRealmCallback = (error: (Error|null), response?: google.cloud.networksecurity.v1.SACRealm) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.SSERealmService|createSACRealm}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateSACRealmCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.SSERealmService|deleteSACRealm}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteSACRealmCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.SSERealmService|listSACAttachments}.
+                     * @param error Error, if any
+                     * @param [response] ListSACAttachmentsResponse
+                     */
+                    type ListSACAttachmentsCallback = (error: (Error|null), response?: google.cloud.networksecurity.v1.ListSACAttachmentsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.SSERealmService|getSACAttachment}.
+                     * @param error Error, if any
+                     * @param [response] SACAttachment
+                     */
+                    type GetSACAttachmentCallback = (error: (Error|null), response?: google.cloud.networksecurity.v1.SACAttachment) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.SSERealmService|createSACAttachment}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateSACAttachmentCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.SSERealmService|deleteSACAttachment}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteSACAttachmentCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+                }
+
+                /** Properties of a SACRealm. */
+                interface ISACRealm {
+
+                    /** SACRealm name */
+                    name?: (string|null);
+
+                    /** SACRealm createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SACRealm updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SACRealm labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** SACRealm securityService */
+                    securityService?: (google.cloud.networksecurity.v1.SACRealm.SecurityService|keyof typeof google.cloud.networksecurity.v1.SACRealm.SecurityService|null);
+
+                    /** SACRealm pairingKey */
+                    pairingKey?: (google.cloud.networksecurity.v1.SACRealm.IPairingKey|null);
+
+                    /** SACRealm state */
+                    state?: (google.cloud.networksecurity.v1.SACRealm.State|keyof typeof google.cloud.networksecurity.v1.SACRealm.State|null);
+                }
+
+                /** Represents a SACRealm. */
+                class SACRealm implements ISACRealm {
+
+                    /**
+                     * Constructs a new SACRealm.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.ISACRealm);
+
+                    /** SACRealm name. */
+                    public name: string;
+
+                    /** SACRealm createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SACRealm updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SACRealm labels. */
+                    public labels: { [k: string]: string };
+
+                    /** SACRealm securityService. */
+                    public securityService: (google.cloud.networksecurity.v1.SACRealm.SecurityService|keyof typeof google.cloud.networksecurity.v1.SACRealm.SecurityService);
+
+                    /** SACRealm pairingKey. */
+                    public pairingKey?: (google.cloud.networksecurity.v1.SACRealm.IPairingKey|null);
+
+                    /** SACRealm state. */
+                    public state: (google.cloud.networksecurity.v1.SACRealm.State|keyof typeof google.cloud.networksecurity.v1.SACRealm.State);
+
+                    /**
+                     * Creates a new SACRealm instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SACRealm instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.ISACRealm): google.cloud.networksecurity.v1.SACRealm;
+
+                    /**
+                     * Encodes the specified SACRealm message. Does not implicitly {@link google.cloud.networksecurity.v1.SACRealm.verify|verify} messages.
+                     * @param message SACRealm message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.ISACRealm, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SACRealm message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.SACRealm.verify|verify} messages.
+                     * @param message SACRealm message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.ISACRealm, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SACRealm message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SACRealm
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.SACRealm;
+
+                    /**
+                     * Decodes a SACRealm message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SACRealm
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.SACRealm;
+
+                    /**
+                     * Verifies a SACRealm message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SACRealm message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SACRealm
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.SACRealm;
+
+                    /**
+                     * Creates a plain object from a SACRealm message. Also converts values to other types if specified.
+                     * @param message SACRealm
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.SACRealm, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SACRealm to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SACRealm
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SACRealm {
+
+                    /** Properties of a PairingKey. */
+                    interface IPairingKey {
+
+                        /** PairingKey key */
+                        key?: (string|null);
+
+                        /** PairingKey expireTime */
+                        expireTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a PairingKey. */
+                    class PairingKey implements IPairingKey {
+
+                        /**
+                         * Constructs a new PairingKey.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.networksecurity.v1.SACRealm.IPairingKey);
+
+                        /** PairingKey key. */
+                        public key: string;
+
+                        /** PairingKey expireTime. */
+                        public expireTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new PairingKey instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PairingKey instance
+                         */
+                        public static create(properties?: google.cloud.networksecurity.v1.SACRealm.IPairingKey): google.cloud.networksecurity.v1.SACRealm.PairingKey;
+
+                        /**
+                         * Encodes the specified PairingKey message. Does not implicitly {@link google.cloud.networksecurity.v1.SACRealm.PairingKey.verify|verify} messages.
+                         * @param message PairingKey message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.networksecurity.v1.SACRealm.IPairingKey, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PairingKey message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.SACRealm.PairingKey.verify|verify} messages.
+                         * @param message PairingKey message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.networksecurity.v1.SACRealm.IPairingKey, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PairingKey message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PairingKey
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.SACRealm.PairingKey;
+
+                        /**
+                         * Decodes a PairingKey message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PairingKey
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.SACRealm.PairingKey;
+
+                        /**
+                         * Verifies a PairingKey message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PairingKey message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PairingKey
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.SACRealm.PairingKey;
+
+                        /**
+                         * Creates a plain object from a PairingKey message. Also converts values to other types if specified.
+                         * @param message PairingKey
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.networksecurity.v1.SACRealm.PairingKey, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PairingKey to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PairingKey
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** SecurityService enum. */
+                    enum SecurityService {
+                        SECURITY_SERVICE_UNSPECIFIED = 0,
+                        PALO_ALTO_PRISMA_ACCESS = 1
+                    }
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        PENDING_PARTNER_ATTACHMENT = 7,
+                        PARTNER_ATTACHED = 1,
+                        PARTNER_DETACHED = 2,
+                        KEY_EXPIRED = 3
+                    }
+                }
+
+                /** Properties of a ListSACRealmsRequest. */
+                interface IListSACRealmsRequest {
+
+                    /** ListSACRealmsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListSACRealmsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListSACRealmsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListSACRealmsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListSACRealmsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListSACRealmsRequest. */
+                class ListSACRealmsRequest implements IListSACRealmsRequest {
+
+                    /**
+                     * Constructs a new ListSACRealmsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IListSACRealmsRequest);
+
+                    /** ListSACRealmsRequest parent. */
+                    public parent: string;
+
+                    /** ListSACRealmsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListSACRealmsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListSACRealmsRequest filter. */
+                    public filter: string;
+
+                    /** ListSACRealmsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListSACRealmsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSACRealmsRequest instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IListSACRealmsRequest): google.cloud.networksecurity.v1.ListSACRealmsRequest;
+
+                    /**
+                     * Encodes the specified ListSACRealmsRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.ListSACRealmsRequest.verify|verify} messages.
+                     * @param message ListSACRealmsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IListSACRealmsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSACRealmsRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.ListSACRealmsRequest.verify|verify} messages.
+                     * @param message ListSACRealmsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IListSACRealmsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSACRealmsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSACRealmsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.ListSACRealmsRequest;
+
+                    /**
+                     * Decodes a ListSACRealmsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSACRealmsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.ListSACRealmsRequest;
+
+                    /**
+                     * Verifies a ListSACRealmsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSACRealmsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSACRealmsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.ListSACRealmsRequest;
+
+                    /**
+                     * Creates a plain object from a ListSACRealmsRequest message. Also converts values to other types if specified.
+                     * @param message ListSACRealmsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.ListSACRealmsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSACRealmsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSACRealmsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSACRealmsResponse. */
+                interface IListSACRealmsResponse {
+
+                    /** ListSACRealmsResponse sacRealms */
+                    sacRealms?: (google.cloud.networksecurity.v1.ISACRealm[]|null);
+
+                    /** ListSACRealmsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListSACRealmsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListSACRealmsResponse. */
+                class ListSACRealmsResponse implements IListSACRealmsResponse {
+
+                    /**
+                     * Constructs a new ListSACRealmsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IListSACRealmsResponse);
+
+                    /** ListSACRealmsResponse sacRealms. */
+                    public sacRealms: google.cloud.networksecurity.v1.ISACRealm[];
+
+                    /** ListSACRealmsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListSACRealmsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListSACRealmsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSACRealmsResponse instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IListSACRealmsResponse): google.cloud.networksecurity.v1.ListSACRealmsResponse;
+
+                    /**
+                     * Encodes the specified ListSACRealmsResponse message. Does not implicitly {@link google.cloud.networksecurity.v1.ListSACRealmsResponse.verify|verify} messages.
+                     * @param message ListSACRealmsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IListSACRealmsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSACRealmsResponse message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.ListSACRealmsResponse.verify|verify} messages.
+                     * @param message ListSACRealmsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IListSACRealmsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSACRealmsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSACRealmsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.ListSACRealmsResponse;
+
+                    /**
+                     * Decodes a ListSACRealmsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSACRealmsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.ListSACRealmsResponse;
+
+                    /**
+                     * Verifies a ListSACRealmsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSACRealmsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSACRealmsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.ListSACRealmsResponse;
+
+                    /**
+                     * Creates a plain object from a ListSACRealmsResponse message. Also converts values to other types if specified.
+                     * @param message ListSACRealmsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.ListSACRealmsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSACRealmsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSACRealmsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetSACRealmRequest. */
+                interface IGetSACRealmRequest {
+
+                    /** GetSACRealmRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetSACRealmRequest. */
+                class GetSACRealmRequest implements IGetSACRealmRequest {
+
+                    /**
+                     * Constructs a new GetSACRealmRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IGetSACRealmRequest);
+
+                    /** GetSACRealmRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetSACRealmRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetSACRealmRequest instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IGetSACRealmRequest): google.cloud.networksecurity.v1.GetSACRealmRequest;
+
+                    /**
+                     * Encodes the specified GetSACRealmRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.GetSACRealmRequest.verify|verify} messages.
+                     * @param message GetSACRealmRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IGetSACRealmRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetSACRealmRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.GetSACRealmRequest.verify|verify} messages.
+                     * @param message GetSACRealmRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IGetSACRealmRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetSACRealmRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetSACRealmRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.GetSACRealmRequest;
+
+                    /**
+                     * Decodes a GetSACRealmRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetSACRealmRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.GetSACRealmRequest;
+
+                    /**
+                     * Verifies a GetSACRealmRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetSACRealmRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetSACRealmRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.GetSACRealmRequest;
+
+                    /**
+                     * Creates a plain object from a GetSACRealmRequest message. Also converts values to other types if specified.
+                     * @param message GetSACRealmRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.GetSACRealmRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetSACRealmRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetSACRealmRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateSACRealmRequest. */
+                interface ICreateSACRealmRequest {
+
+                    /** CreateSACRealmRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateSACRealmRequest sacRealmId */
+                    sacRealmId?: (string|null);
+
+                    /** CreateSACRealmRequest sacRealm */
+                    sacRealm?: (google.cloud.networksecurity.v1.ISACRealm|null);
+
+                    /** CreateSACRealmRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateSACRealmRequest. */
+                class CreateSACRealmRequest implements ICreateSACRealmRequest {
+
+                    /**
+                     * Constructs a new CreateSACRealmRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.ICreateSACRealmRequest);
+
+                    /** CreateSACRealmRequest parent. */
+                    public parent: string;
+
+                    /** CreateSACRealmRequest sacRealmId. */
+                    public sacRealmId: string;
+
+                    /** CreateSACRealmRequest sacRealm. */
+                    public sacRealm?: (google.cloud.networksecurity.v1.ISACRealm|null);
+
+                    /** CreateSACRealmRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateSACRealmRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateSACRealmRequest instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.ICreateSACRealmRequest): google.cloud.networksecurity.v1.CreateSACRealmRequest;
+
+                    /**
+                     * Encodes the specified CreateSACRealmRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.CreateSACRealmRequest.verify|verify} messages.
+                     * @param message CreateSACRealmRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.ICreateSACRealmRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateSACRealmRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.CreateSACRealmRequest.verify|verify} messages.
+                     * @param message CreateSACRealmRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.ICreateSACRealmRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateSACRealmRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateSACRealmRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.CreateSACRealmRequest;
+
+                    /**
+                     * Decodes a CreateSACRealmRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateSACRealmRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.CreateSACRealmRequest;
+
+                    /**
+                     * Verifies a CreateSACRealmRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateSACRealmRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateSACRealmRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.CreateSACRealmRequest;
+
+                    /**
+                     * Creates a plain object from a CreateSACRealmRequest message. Also converts values to other types if specified.
+                     * @param message CreateSACRealmRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.CreateSACRealmRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateSACRealmRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateSACRealmRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteSACRealmRequest. */
+                interface IDeleteSACRealmRequest {
+
+                    /** DeleteSACRealmRequest name */
+                    name?: (string|null);
+
+                    /** DeleteSACRealmRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteSACRealmRequest. */
+                class DeleteSACRealmRequest implements IDeleteSACRealmRequest {
+
+                    /**
+                     * Constructs a new DeleteSACRealmRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IDeleteSACRealmRequest);
+
+                    /** DeleteSACRealmRequest name. */
+                    public name: string;
+
+                    /** DeleteSACRealmRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteSACRealmRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteSACRealmRequest instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IDeleteSACRealmRequest): google.cloud.networksecurity.v1.DeleteSACRealmRequest;
+
+                    /**
+                     * Encodes the specified DeleteSACRealmRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.DeleteSACRealmRequest.verify|verify} messages.
+                     * @param message DeleteSACRealmRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IDeleteSACRealmRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteSACRealmRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.DeleteSACRealmRequest.verify|verify} messages.
+                     * @param message DeleteSACRealmRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IDeleteSACRealmRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteSACRealmRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteSACRealmRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.DeleteSACRealmRequest;
+
+                    /**
+                     * Decodes a DeleteSACRealmRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteSACRealmRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.DeleteSACRealmRequest;
+
+                    /**
+                     * Verifies a DeleteSACRealmRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteSACRealmRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteSACRealmRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.DeleteSACRealmRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteSACRealmRequest message. Also converts values to other types if specified.
+                     * @param message DeleteSACRealmRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.DeleteSACRealmRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteSACRealmRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteSACRealmRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SACAttachment. */
+                interface ISACAttachment {
+
+                    /** SACAttachment name */
+                    name?: (string|null);
+
+                    /** SACAttachment createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SACAttachment updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SACAttachment labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** SACAttachment sacRealm */
+                    sacRealm?: (string|null);
+
+                    /** SACAttachment nccGateway */
+                    nccGateway?: (string|null);
+
+                    /** SACAttachment state */
+                    state?: (google.cloud.networksecurity.v1.SACAttachment.State|keyof typeof google.cloud.networksecurity.v1.SACAttachment.State|null);
+                }
+
+                /** Represents a SACAttachment. */
+                class SACAttachment implements ISACAttachment {
+
+                    /**
+                     * Constructs a new SACAttachment.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.ISACAttachment);
+
+                    /** SACAttachment name. */
+                    public name: string;
+
+                    /** SACAttachment createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SACAttachment updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SACAttachment labels. */
+                    public labels: { [k: string]: string };
+
+                    /** SACAttachment sacRealm. */
+                    public sacRealm: string;
+
+                    /** SACAttachment nccGateway. */
+                    public nccGateway: string;
+
+                    /** SACAttachment state. */
+                    public state: (google.cloud.networksecurity.v1.SACAttachment.State|keyof typeof google.cloud.networksecurity.v1.SACAttachment.State);
+
+                    /**
+                     * Creates a new SACAttachment instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SACAttachment instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.ISACAttachment): google.cloud.networksecurity.v1.SACAttachment;
+
+                    /**
+                     * Encodes the specified SACAttachment message. Does not implicitly {@link google.cloud.networksecurity.v1.SACAttachment.verify|verify} messages.
+                     * @param message SACAttachment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.ISACAttachment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SACAttachment message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.SACAttachment.verify|verify} messages.
+                     * @param message SACAttachment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.ISACAttachment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SACAttachment message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SACAttachment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.SACAttachment;
+
+                    /**
+                     * Decodes a SACAttachment message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SACAttachment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.SACAttachment;
+
+                    /**
+                     * Verifies a SACAttachment message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SACAttachment message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SACAttachment
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.SACAttachment;
+
+                    /**
+                     * Creates a plain object from a SACAttachment message. Also converts values to other types if specified.
+                     * @param message SACAttachment
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.SACAttachment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SACAttachment to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SACAttachment
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SACAttachment {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        PENDING_PARTNER_ATTACHMENT = 1,
+                        PARTNER_ATTACHED = 2,
+                        PARTNER_DETACHED = 3
+                    }
+                }
+
+                /** Properties of a ListSACAttachmentsRequest. */
+                interface IListSACAttachmentsRequest {
+
+                    /** ListSACAttachmentsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListSACAttachmentsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListSACAttachmentsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListSACAttachmentsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListSACAttachmentsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListSACAttachmentsRequest. */
+                class ListSACAttachmentsRequest implements IListSACAttachmentsRequest {
+
+                    /**
+                     * Constructs a new ListSACAttachmentsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IListSACAttachmentsRequest);
+
+                    /** ListSACAttachmentsRequest parent. */
+                    public parent: string;
+
+                    /** ListSACAttachmentsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListSACAttachmentsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListSACAttachmentsRequest filter. */
+                    public filter: string;
+
+                    /** ListSACAttachmentsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListSACAttachmentsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSACAttachmentsRequest instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IListSACAttachmentsRequest): google.cloud.networksecurity.v1.ListSACAttachmentsRequest;
+
+                    /**
+                     * Encodes the specified ListSACAttachmentsRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.ListSACAttachmentsRequest.verify|verify} messages.
+                     * @param message ListSACAttachmentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IListSACAttachmentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSACAttachmentsRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.ListSACAttachmentsRequest.verify|verify} messages.
+                     * @param message ListSACAttachmentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IListSACAttachmentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSACAttachmentsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSACAttachmentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.ListSACAttachmentsRequest;
+
+                    /**
+                     * Decodes a ListSACAttachmentsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSACAttachmentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.ListSACAttachmentsRequest;
+
+                    /**
+                     * Verifies a ListSACAttachmentsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSACAttachmentsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSACAttachmentsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.ListSACAttachmentsRequest;
+
+                    /**
+                     * Creates a plain object from a ListSACAttachmentsRequest message. Also converts values to other types if specified.
+                     * @param message ListSACAttachmentsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.ListSACAttachmentsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSACAttachmentsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSACAttachmentsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSACAttachmentsResponse. */
+                interface IListSACAttachmentsResponse {
+
+                    /** ListSACAttachmentsResponse sacAttachments */
+                    sacAttachments?: (google.cloud.networksecurity.v1.ISACAttachment[]|null);
+
+                    /** ListSACAttachmentsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListSACAttachmentsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListSACAttachmentsResponse. */
+                class ListSACAttachmentsResponse implements IListSACAttachmentsResponse {
+
+                    /**
+                     * Constructs a new ListSACAttachmentsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IListSACAttachmentsResponse);
+
+                    /** ListSACAttachmentsResponse sacAttachments. */
+                    public sacAttachments: google.cloud.networksecurity.v1.ISACAttachment[];
+
+                    /** ListSACAttachmentsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListSACAttachmentsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListSACAttachmentsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSACAttachmentsResponse instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IListSACAttachmentsResponse): google.cloud.networksecurity.v1.ListSACAttachmentsResponse;
+
+                    /**
+                     * Encodes the specified ListSACAttachmentsResponse message. Does not implicitly {@link google.cloud.networksecurity.v1.ListSACAttachmentsResponse.verify|verify} messages.
+                     * @param message ListSACAttachmentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IListSACAttachmentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSACAttachmentsResponse message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.ListSACAttachmentsResponse.verify|verify} messages.
+                     * @param message ListSACAttachmentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IListSACAttachmentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSACAttachmentsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSACAttachmentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.ListSACAttachmentsResponse;
+
+                    /**
+                     * Decodes a ListSACAttachmentsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSACAttachmentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.ListSACAttachmentsResponse;
+
+                    /**
+                     * Verifies a ListSACAttachmentsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSACAttachmentsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSACAttachmentsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.ListSACAttachmentsResponse;
+
+                    /**
+                     * Creates a plain object from a ListSACAttachmentsResponse message. Also converts values to other types if specified.
+                     * @param message ListSACAttachmentsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.ListSACAttachmentsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSACAttachmentsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSACAttachmentsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetSACAttachmentRequest. */
+                interface IGetSACAttachmentRequest {
+
+                    /** GetSACAttachmentRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetSACAttachmentRequest. */
+                class GetSACAttachmentRequest implements IGetSACAttachmentRequest {
+
+                    /**
+                     * Constructs a new GetSACAttachmentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IGetSACAttachmentRequest);
+
+                    /** GetSACAttachmentRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetSACAttachmentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetSACAttachmentRequest instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IGetSACAttachmentRequest): google.cloud.networksecurity.v1.GetSACAttachmentRequest;
+
+                    /**
+                     * Encodes the specified GetSACAttachmentRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.GetSACAttachmentRequest.verify|verify} messages.
+                     * @param message GetSACAttachmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IGetSACAttachmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetSACAttachmentRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.GetSACAttachmentRequest.verify|verify} messages.
+                     * @param message GetSACAttachmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IGetSACAttachmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetSACAttachmentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetSACAttachmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.GetSACAttachmentRequest;
+
+                    /**
+                     * Decodes a GetSACAttachmentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetSACAttachmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.GetSACAttachmentRequest;
+
+                    /**
+                     * Verifies a GetSACAttachmentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetSACAttachmentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetSACAttachmentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.GetSACAttachmentRequest;
+
+                    /**
+                     * Creates a plain object from a GetSACAttachmentRequest message. Also converts values to other types if specified.
+                     * @param message GetSACAttachmentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.GetSACAttachmentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetSACAttachmentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetSACAttachmentRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateSACAttachmentRequest. */
+                interface ICreateSACAttachmentRequest {
+
+                    /** CreateSACAttachmentRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateSACAttachmentRequest sacAttachmentId */
+                    sacAttachmentId?: (string|null);
+
+                    /** CreateSACAttachmentRequest sacAttachment */
+                    sacAttachment?: (google.cloud.networksecurity.v1.ISACAttachment|null);
+
+                    /** CreateSACAttachmentRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateSACAttachmentRequest. */
+                class CreateSACAttachmentRequest implements ICreateSACAttachmentRequest {
+
+                    /**
+                     * Constructs a new CreateSACAttachmentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.ICreateSACAttachmentRequest);
+
+                    /** CreateSACAttachmentRequest parent. */
+                    public parent: string;
+
+                    /** CreateSACAttachmentRequest sacAttachmentId. */
+                    public sacAttachmentId: string;
+
+                    /** CreateSACAttachmentRequest sacAttachment. */
+                    public sacAttachment?: (google.cloud.networksecurity.v1.ISACAttachment|null);
+
+                    /** CreateSACAttachmentRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateSACAttachmentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateSACAttachmentRequest instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.ICreateSACAttachmentRequest): google.cloud.networksecurity.v1.CreateSACAttachmentRequest;
+
+                    /**
+                     * Encodes the specified CreateSACAttachmentRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.CreateSACAttachmentRequest.verify|verify} messages.
+                     * @param message CreateSACAttachmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.ICreateSACAttachmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateSACAttachmentRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.CreateSACAttachmentRequest.verify|verify} messages.
+                     * @param message CreateSACAttachmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.ICreateSACAttachmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateSACAttachmentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateSACAttachmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.CreateSACAttachmentRequest;
+
+                    /**
+                     * Decodes a CreateSACAttachmentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateSACAttachmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.CreateSACAttachmentRequest;
+
+                    /**
+                     * Verifies a CreateSACAttachmentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateSACAttachmentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateSACAttachmentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.CreateSACAttachmentRequest;
+
+                    /**
+                     * Creates a plain object from a CreateSACAttachmentRequest message. Also converts values to other types if specified.
+                     * @param message CreateSACAttachmentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.CreateSACAttachmentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateSACAttachmentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateSACAttachmentRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteSACAttachmentRequest. */
+                interface IDeleteSACAttachmentRequest {
+
+                    /** DeleteSACAttachmentRequest name */
+                    name?: (string|null);
+
+                    /** DeleteSACAttachmentRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteSACAttachmentRequest. */
+                class DeleteSACAttachmentRequest implements IDeleteSACAttachmentRequest {
+
+                    /**
+                     * Constructs a new DeleteSACAttachmentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IDeleteSACAttachmentRequest);
+
+                    /** DeleteSACAttachmentRequest name. */
+                    public name: string;
+
+                    /** DeleteSACAttachmentRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteSACAttachmentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteSACAttachmentRequest instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IDeleteSACAttachmentRequest): google.cloud.networksecurity.v1.DeleteSACAttachmentRequest;
+
+                    /**
+                     * Encodes the specified DeleteSACAttachmentRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.DeleteSACAttachmentRequest.verify|verify} messages.
+                     * @param message DeleteSACAttachmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IDeleteSACAttachmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteSACAttachmentRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.DeleteSACAttachmentRequest.verify|verify} messages.
+                     * @param message DeleteSACAttachmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IDeleteSACAttachmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteSACAttachmentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteSACAttachmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.DeleteSACAttachmentRequest;
+
+                    /**
+                     * Decodes a DeleteSACAttachmentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteSACAttachmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.DeleteSACAttachmentRequest;
+
+                    /**
+                     * Verifies a DeleteSACAttachmentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteSACAttachmentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteSACAttachmentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.DeleteSACAttachmentRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteSACAttachmentRequest message. Also converts values to other types if specified.
+                     * @param message DeleteSACAttachmentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.DeleteSACAttachmentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteSACAttachmentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteSACAttachmentRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -61848,6 +63879,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations */
             destinations?: (google.api.ClientLibraryDestination[]|null);
+
+            /** CommonLanguageSettings selectiveGapicGeneration */
+            selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
         }
 
         /** Represents a CommonLanguageSettings. */
@@ -61864,6 +63898,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations. */
             public destinations: google.api.ClientLibraryDestination[];
+
+            /** CommonLanguageSettings selectiveGapicGeneration. */
+            public selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
 
             /**
              * Creates a new CommonLanguageSettings instance using the specified properties.
@@ -62565,6 +64602,9 @@ export namespace google {
 
             /** PythonSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures */
+            experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
         }
 
         /** Represents a PythonSettings. */
@@ -62578,6 +64618,9 @@ export namespace google {
 
             /** PythonSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures. */
+            public experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
 
             /**
              * Creates a new PythonSettings instance using the specified properties.
@@ -62655,6 +64698,118 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace PythonSettings {
+
+            /** Properties of an ExperimentalFeatures. */
+            interface IExperimentalFeatures {
+
+                /** ExperimentalFeatures restAsyncIoEnabled */
+                restAsyncIoEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled */
+                protobufPythonicTypesEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures unversionedPackageDisabled */
+                unversionedPackageDisabled?: (boolean|null);
+            }
+
+            /** Represents an ExperimentalFeatures. */
+            class ExperimentalFeatures implements IExperimentalFeatures {
+
+                /**
+                 * Constructs a new ExperimentalFeatures.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.api.PythonSettings.IExperimentalFeatures);
+
+                /** ExperimentalFeatures restAsyncIoEnabled. */
+                public restAsyncIoEnabled: boolean;
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled. */
+                public protobufPythonicTypesEnabled: boolean;
+
+                /** ExperimentalFeatures unversionedPackageDisabled. */
+                public unversionedPackageDisabled: boolean;
+
+                /**
+                 * Creates a new ExperimentalFeatures instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ExperimentalFeatures instance
+                 */
+                public static create(properties?: google.api.PythonSettings.IExperimentalFeatures): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Verifies an ExperimentalFeatures message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ExperimentalFeatures
+                 */
+                public static fromObject(object: { [k: string]: any }): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
+                 * @param message ExperimentalFeatures
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.api.PythonSettings.ExperimentalFeatures, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ExperimentalFeatures to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ExperimentalFeatures
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
         }
 
         /** Properties of a NodeSettings. */
@@ -62983,6 +65138,9 @@ export namespace google {
 
             /** GoSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices */
+            renamedServices?: ({ [k: string]: string }|null);
         }
 
         /** Represents a GoSettings. */
@@ -62996,6 +65154,9 @@ export namespace google {
 
             /** GoSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices. */
+            public renamedServices: { [k: string]: string };
 
             /**
              * Creates a new GoSettings instance using the specified properties.
@@ -63321,6 +65482,109 @@ export namespace google {
             PACKAGE_MANAGER = 20
         }
 
+        /** Properties of a SelectiveGapicGeneration. */
+        interface ISelectiveGapicGeneration {
+
+            /** SelectiveGapicGeneration methods */
+            methods?: (string[]|null);
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal */
+            generateOmittedAsInternal?: (boolean|null);
+        }
+
+        /** Represents a SelectiveGapicGeneration. */
+        class SelectiveGapicGeneration implements ISelectiveGapicGeneration {
+
+            /**
+             * Constructs a new SelectiveGapicGeneration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ISelectiveGapicGeneration);
+
+            /** SelectiveGapicGeneration methods. */
+            public methods: string[];
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal. */
+            public generateOmittedAsInternal: boolean;
+
+            /**
+             * Creates a new SelectiveGapicGeneration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns SelectiveGapicGeneration instance
+             */
+            public static create(properties?: google.api.ISelectiveGapicGeneration): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Verifies a SelectiveGapicGeneration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns SelectiveGapicGeneration
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
+             * @param message SelectiveGapicGeneration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.SelectiveGapicGeneration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this SelectiveGapicGeneration to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SelectiveGapicGeneration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** LaunchStage enum. */
         enum LaunchStage {
             LAUNCH_STAGE_UNSPECIFIED = 0,
@@ -63351,6 +65615,9 @@ export namespace google {
 
             /** FieldInfo format */
             format?: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format|null);
+
+            /** FieldInfo referencedTypes */
+            referencedTypes?: (google.api.ITypeReference[]|null);
         }
 
         /** Represents a FieldInfo. */
@@ -63364,6 +65631,9 @@ export namespace google {
 
             /** FieldInfo format. */
             public format: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format);
+
+            /** FieldInfo referencedTypes. */
+            public referencedTypes: google.api.ITypeReference[];
 
             /**
              * Creates a new FieldInfo instance using the specified properties.
@@ -63453,6 +65723,103 @@ export namespace google {
                 IPV6 = 3,
                 IPV4_OR_IPV6 = 4
             }
+        }
+
+        /** Properties of a TypeReference. */
+        interface ITypeReference {
+
+            /** TypeReference typeName */
+            typeName?: (string|null);
+        }
+
+        /** Represents a TypeReference. */
+        class TypeReference implements ITypeReference {
+
+            /**
+             * Constructs a new TypeReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ITypeReference);
+
+            /** TypeReference typeName. */
+            public typeName: string;
+
+            /**
+             * Creates a new TypeReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns TypeReference instance
+             */
+            public static create(properties?: google.api.ITypeReference): google.api.TypeReference;
+
+            /**
+             * Encodes the specified TypeReference message. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+             * @param message TypeReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified TypeReference message, length delimited. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+             * @param message TypeReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a TypeReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns TypeReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.TypeReference;
+
+            /**
+             * Decodes a TypeReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns TypeReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.TypeReference;
+
+            /**
+             * Verifies a TypeReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a TypeReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns TypeReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.TypeReference;
+
+            /**
+             * Creates a plain object from a TypeReference message. Also converts values to other types if specified.
+             * @param message TypeReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.TypeReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this TypeReference to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for TypeReference
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a ResourceDescriptor. */
@@ -63811,6 +66178,7 @@ export namespace google {
         /** Edition enum. */
         enum Edition {
             EDITION_UNKNOWN = 0,
+            EDITION_LEGACY = 900,
             EDITION_PROTO2 = 998,
             EDITION_PROTO3 = 999,
             EDITION_2023 = 1000,
@@ -63840,6 +66208,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency */
             weakDependency?: (number[]|null);
+
+            /** FileDescriptorProto optionDependency */
+            optionDependency?: (string[]|null);
 
             /** FileDescriptorProto messageType */
             messageType?: (google.protobuf.IDescriptorProto[]|null);
@@ -63889,6 +66260,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency. */
             public weakDependency: number[];
+
+            /** FileDescriptorProto optionDependency. */
+            public optionDependency: string[];
 
             /** FileDescriptorProto messageType. */
             public messageType: google.protobuf.IDescriptorProto[];
@@ -64024,6 +66398,9 @@ export namespace google {
 
             /** DescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** DescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents a DescriptorProto. */
@@ -64064,6 +66441,9 @@ export namespace google {
 
             /** DescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** DescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new DescriptorProto instance using the specified properties.
@@ -64912,6 +67292,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** EnumDescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents an EnumDescriptorProto. */
@@ -64937,6 +67320,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** EnumDescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new EnumDescriptorProto instance using the specified properties.
@@ -65872,6 +68258,9 @@ export namespace google {
             /** FieldOptions features */
             features?: (google.protobuf.IFeatureSet|null);
 
+            /** FieldOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -65929,6 +68318,9 @@ export namespace google {
 
             /** FieldOptions features. */
             public features?: (google.protobuf.IFeatureSet|null);
+
+            /** FieldOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -66145,6 +68537,121 @@ export namespace google {
 
                 /**
                  * Gets the default type url for EditionDefault
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a FeatureSupport. */
+            interface IFeatureSupport {
+
+                /** FeatureSupport editionIntroduced */
+                editionIntroduced?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport editionDeprecated */
+                editionDeprecated?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport deprecationWarning */
+                deprecationWarning?: (string|null);
+
+                /** FeatureSupport editionRemoved */
+                editionRemoved?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+            }
+
+            /** Represents a FeatureSupport. */
+            class FeatureSupport implements IFeatureSupport {
+
+                /**
+                 * Constructs a new FeatureSupport.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FieldOptions.IFeatureSupport);
+
+                /** FeatureSupport editionIntroduced. */
+                public editionIntroduced: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport editionDeprecated. */
+                public editionDeprecated: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport deprecationWarning. */
+                public deprecationWarning: string;
+
+                /** FeatureSupport editionRemoved. */
+                public editionRemoved: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /**
+                 * Creates a new FeatureSupport instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns FeatureSupport instance
+                 */
+                public static create(properties?: google.protobuf.FieldOptions.IFeatureSupport): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Verifies a FeatureSupport message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns FeatureSupport
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
+                 * @param message FeatureSupport
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FieldOptions.FeatureSupport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this FeatureSupport to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for FeatureSupport
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -66388,6 +68895,9 @@ export namespace google {
             /** EnumValueOptions debugRedact */
             debugRedact?: (boolean|null);
 
+            /** EnumValueOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** EnumValueOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -66409,6 +68919,9 @@ export namespace google {
 
             /** EnumValueOptions debugRedact. */
             public debugRedact: boolean;
+
+            /** EnumValueOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** EnumValueOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -67002,6 +69515,12 @@ export namespace google {
 
             /** FeatureSet jsonFormat */
             jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
+
+            /** FeatureSet enforceNamingStyle */
+            enforceNamingStyle?: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle|null);
+
+            /** FeatureSet defaultSymbolVisibility */
+            defaultSymbolVisibility?: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null);
         }
 
         /** Represents a FeatureSet. */
@@ -67030,6 +69549,12 @@ export namespace google {
 
             /** FeatureSet jsonFormat. */
             public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
+
+            /** FeatureSet enforceNamingStyle. */
+            public enforceNamingStyle: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle);
+
+            /** FeatureSet defaultSymbolVisibility. */
+            public defaultSymbolVisibility: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility);
 
             /**
              * Creates a new FeatureSet instance using the specified properties.
@@ -67153,6 +69678,116 @@ export namespace google {
                 ALLOW = 1,
                 LEGACY_BEST_EFFORT = 2
             }
+
+            /** EnforceNamingStyle enum. */
+            enum EnforceNamingStyle {
+                ENFORCE_NAMING_STYLE_UNKNOWN = 0,
+                STYLE2024 = 1,
+                STYLE_LEGACY = 2
+            }
+
+            /** Properties of a VisibilityFeature. */
+            interface IVisibilityFeature {
+            }
+
+            /** Represents a VisibilityFeature. */
+            class VisibilityFeature implements IVisibilityFeature {
+
+                /**
+                 * Constructs a new VisibilityFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IVisibilityFeature);
+
+                /**
+                 * Creates a new VisibilityFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns VisibilityFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IVisibilityFeature): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Verifies a VisibilityFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns VisibilityFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
+                 * @param message VisibilityFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.VisibilityFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this VisibilityFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for VisibilityFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace VisibilityFeature {
+
+                /** DefaultSymbolVisibility enum. */
+                enum DefaultSymbolVisibility {
+                    DEFAULT_SYMBOL_VISIBILITY_UNKNOWN = 0,
+                    EXPORT_ALL = 1,
+                    EXPORT_TOP_LEVEL = 2,
+                    LOCAL_ALL = 3,
+                    STRICT = 4
+                }
+            }
         }
 
         /** Properties of a FeatureSetDefaults. */
@@ -67272,8 +69907,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition */
                 edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
 
-                /** FeatureSetEditionDefault features */
-                features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures */
+                overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures */
+                fixedFeatures?: (google.protobuf.IFeatureSet|null);
             }
 
             /** Represents a FeatureSetEditionDefault. */
@@ -67288,8 +69926,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition. */
                 public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
 
-                /** FeatureSetEditionDefault features. */
-                public features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures. */
+                public overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures. */
+                public fixedFeatures?: (google.protobuf.IFeatureSet|null);
 
                 /**
                  * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -67820,6 +70461,13 @@ export namespace google {
                     ALIAS = 2
                 }
             }
+        }
+
+        /** SymbolVisibility enum. */
+        enum SymbolVisibility {
+            VISIBILITY_UNSET = 0,
+            VISIBILITY_LOCAL = 1,
+            VISIBILITY_EXPORT = 2
         }
 
         /** Properties of a Duration. */
