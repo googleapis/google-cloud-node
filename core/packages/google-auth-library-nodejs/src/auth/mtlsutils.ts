@@ -68,7 +68,7 @@ export enum MtlsEndpointUsagePolicy {
  * @returns The resolved MtlsEndpointUsagePolicy.
  */
 export function getMtlsEndpointUsagePolicy(): MtlsEndpointUsagePolicy {
-  const policy = process.env.GOOGLE_API_USE_MTLS_ENDPOINT;
+  const policy = process.env.GOOGLE_API_USE_MTLS_ENDPOINT?.toLowerCase();
   if (policy === 'never') {
     return MtlsEndpointUsagePolicy.NEVER;
   } else if (policy === 'always') {

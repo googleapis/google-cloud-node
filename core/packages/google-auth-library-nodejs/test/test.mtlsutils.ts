@@ -23,6 +23,8 @@ import {
   getClientCertAndKey,
   CertificateSourceUnavailableError,
   InvalidConfigurationError,
+  getMtlsEndpointUsagePolicy,
+  MtlsEndpointUsagePolicy,
 } from '../src/auth/mtlsutils';
 import * as util from '../src/util';
 
@@ -175,6 +177,22 @@ describe('mtlsutils', () => {
       await assert.rejects(
         getClientCertAndKey(invalidConfigPath),
         CertificateSourceUnavailableError,
+      );
+    });
+  });
+
+  describe('getMtlsEndpointUsagePolicy', () => {
+    it('returns NEVER or ALWAYS case-insensitively', () => {
+      process.env.GOOGLE_API_USE_MTLS_ENDPOINT = 'NeVeR';
+      assert.strictEqual(
+        getMtlsEndpointUsagePolicy(),
+        MtlsEndpointUsagePolicy.NEVER,
+      );
+
+      process.env.GOOGLE_API_USE_MTLS_ENDPOINT = 'AlWaYs';
+      assert.strictEqual(
+        getMtlsEndpointUsagePolicy(),
+        MtlsEndpointUsagePolicy.ALWAYS,
       );
     });
   });
