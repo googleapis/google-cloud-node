@@ -61,7 +61,7 @@ steps:
     echo "Codecov reporting (if desired) would be integrated here."
   dir: 'handwritten/spanner'
   id: 'coverage-report'
-  waitFor: ['run-system-tests']
+  waitFor: ['run-system-tests-regular']
 
 # If you use Secret Manager for credentials, uncomment and configure:
 # availableSecrets:
