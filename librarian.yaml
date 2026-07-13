@@ -16,8 +16,27 @@ version: v0.24.0
 repo: googleapis/google-cloud-node
 sources:
   googleapis:
-    commit: b6f9ff05aaec18070232a1ab36da98e684bc7909
-    sha256: 91788c6f956a0a409abe89a304c123cff73cb0ebb46b494e56d7ac9ece86f8cf
+    commit: 2b625c91510a2e8320a778bc88af8b65bc4a19a2
+    sha256: 503314c3f49e4de70138d35d5b9b12cca0c74d7c5ba34380895440b83aa45b94
+tools:
+  pnpm:
+    - name: gapic-generator-typescript
+      version: gapic-generator-v4.12.1
+      package: https://github.com/googleapis/google-cloud-node/archive/gapic-generator-v4.12.1.tar.gz
+      checksum: 477e4a9b3442457667846bd5c629d1c059e7caf2d5a3ebce95da626a2d42ea80
+      build:
+        - pnpm install
+        - ./node_modules/.bin/tsc
+        - cp -a templates protos build/
+        - pnpm add -g "$PWD"
+    - name: gapic-node-processing
+      version: 0.1.8
+    - name: gapic-tools
+      version: 1.0.6
+    - name: protobufjs
+      version: 7.5.8
+    - name: protobufjs-cli
+      version: 1.2.0
 default:
   keep:
     - librarian.js
@@ -824,12 +843,11 @@ libraries:
         nodejs:
           mixins: google.longrunning.Operations;google.cloud.location.Locations
       - path: google/cloud/dialogflow/cx/v3beta1
-        nodejs:
-          mixins: google.longrunning.Operations;google.cloud.location.Locations
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v3
+      metadata_name_override: dialogflow-cx
+      name_pretty_override: Dialogflow CX API
   - name: google-cloud-discoveryengine
     version: 2.8.0
     apis:
@@ -1129,7 +1147,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-memorystore
-    version: 0.6.1
+    version: 0.7.0
     apis:
       - path: google/cloud/memorystore/v1
       - path: google/cloud/memorystore/v1beta
@@ -1329,6 +1347,16 @@ libraries:
     copyright_year: "2026"
     nodejs:
       default_version: v1
+  - name: google-cloud-productregistry
+    apis:
+      - path: google/cloud/productregistry/v1
+    copyright_year: "2026"
+  - name: google-cloud-pubsub-api
+    version: 0.1.0
+    apis:
+      - path: google/pubsub/v1
+    nodejs:
+      package_name: '@google-cloud/pubsub-api'
   - name: google-cloud-rapidmigrationassessment
     version: 2.2.2
     apis:
@@ -1362,7 +1390,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-redis-cluster
-    version: 0.11.0
+    version: 0.12.0
     apis:
       - path: google/cloud/redis/cluster/v1
       - path: google/cloud/redis/cluster/v1beta1
@@ -1747,9 +1775,10 @@ libraries:
     version: 5.1.1
     apis:
       - path: google/cloud/workflows/v1
+      - path: google/cloud/workflows/executions/v1
       - path: google/cloud/workflows/v1beta
+      - path: google/cloud/workflows/executions/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-workloadmanager
@@ -1784,6 +1813,12 @@ libraries:
     nodejs:
       default_version: v1beta3
       package_name: '@google-cloud/dataflow'
+  - name: google-developer-knowledge
+    apis:
+      - path: google/developers/knowledge/v1
+    copyright_year: "2026"
+    nodejs:
+      package_name: '@google/developer-knowledge'
   - name: google-devicesandservices-health
     version: 0.3.0
     apis:
@@ -2119,7 +2154,7 @@ libraries:
       package_name: '@google-shopping/quota'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
   - name: google-shopping-merchant-reports
-    version: 0.15.0
+    version: 0.16.0
     apis:
       - path: google/shopping/merchant/reports/v1
       - path: google/shopping/merchant/reports/v1beta

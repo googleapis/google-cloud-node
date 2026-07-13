@@ -5,6 +5,179 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "3391fd27d1c15e051293207a07c6db00e760d370",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8672"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/projectify",
+      "id": "ef7418ba-36d6-4c30-a8ea-13c4434195a7",
+      "createTime": "2026-06-24T18:20:52.474Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "chore",
+          "sha": "bd61260a93db997e09c39958eb4e4f89916203c6",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "8824"
+          ],
+          "breakingChangeNote": "Drop support for Node.js versions < 18."
+        },
+        {
+          "type": "fix",
+          "sha": "be6bfb42b768fafb40ab0d7298367acbccefc6ae",
+          "message": "Re-enable tests",
+          "issues": [
+            "8828"
+          ],
+          "scope": "cloud-profiler"
+        },
+        {
+          "type": "fix",
+          "sha": "ea623da20f374cfa480fb9fdb7758afd0a993a8e",
+          "message": "Update dependency protobufjs to v7.5.5 [security]",
+          "issues": [
+            "8071"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "7.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/profiler",
+      "id": "73eab495-b7c3-40c5-896f-572b43fdd379",
+      "createTime": "2026-07-08T17:10:18.122Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3391fd27d1c15e051293207a07c6db00e760d370",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8672"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/precise-date",
+      "id": "ef93f9b7-739d-49a7-aa75-f1c04b9ab908",
+      "createTime": "2026-06-24T18:20:54.504Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a2415320b9c840f6ae27894451abb561a080ff82",
+          "message": "Consolidate prettierignore and prettierrc files: handwritten",
+          "issues": [
+            "8081"
+          ]
+        }
+      ],
+      "version": "7.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "gaxios",
+      "id": "6b65487d-c5a9-45df-adf7-524481537017",
+      "createTime": "2026-07-07T04:38:13.492Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3391fd27d1c15e051293207a07c6db00e760d370",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8672"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/promisify",
+      "id": "20912a56-2568-49fa-a6ba-180bdfa33d32",
+      "createTime": "2026-06-24T18:20:52.132Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a2415320b9c840f6ae27894451abb561a080ff82",
+          "message": "Consolidate prettierignore and prettierrc files: handwritten",
+          "issues": [
+            "8081"
+          ]
+        }
+      ],
+      "version": "0.16.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/reports",
+      "id": "2db81b06-da11-4258-9851-75e4731580bc",
+      "createTime": "2026-07-07T04:29:41.741Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a2415320b9c840f6ae27894451abb561a080ff82",
+          "message": "Consolidate prettierignore and prettierrc files: handwritten",
+          "issues": [
+            "8081"
+          ]
+        }
+      ],
+      "version": "0.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis-cluster",
+      "id": "2b5ed336-af93-40d3-afff-18a9ba82a111",
+      "createTime": "2026-07-07T04:29:41.717Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a2415320b9c840f6ae27894451abb561a080ff82",
+          "message": "Consolidate prettierignore and prettierrc files: handwritten",
+          "issues": [
+            "8081"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/memorystore",
+      "id": "f6f204a5-eab8-44ad-9ae6-432c873b4caa",
+      "createTime": "2026-07-07T04:29:41.694Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e132e80349d8531c1cb9193255ad55ace1db5329",
+          "message": "Kokoro pipeline for system test",
+          "issues": [
+            "8751"
+          ],
+          "scope": "spanner"
+        }
+      ],
+      "version": "8.8.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/spanner",
+      "id": "91efec41-6f4d-46a2-85e4-30da0709e6a2",
+      "createTime": "2026-07-06T06:28:40.860Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "d9399f0cf44b79e2b38ce429b17709ee9845544e",
           "message": "Migrate google-cloud-capacityplanner to librarian v0.22.0",
           "issues": [
@@ -81457,5 +81630,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-06-30T19:41:56.401Z"
+  "updateTime": "2026-07-08T17:10:18.122Z"
 }

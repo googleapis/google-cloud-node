@@ -92,7 +92,7 @@ tests_with_credentials="core/packages/google-auth-library-nodejs/ packages/googl
 # on Windows due to incompatible npm scripts.
 # 
 # Until these packages can be updated to be OS agnostic, we will skip them on Windows.
-windows_exempt_tests="core/ core/packages/ core/dev-packages/ .github/scripts/fixtures/ .github/scripts/tests/ core/packages/gapic-node-processing/ core/packages/typeless-sample-bot/"
+windows_exempt_tests="core/ core/packages/ core/dev-packages/ .github/scripts/fixtures/ .github/scripts/tests/ core/packages/gapic-node-processing/ core/packages/typeless-sample-bot/ handwritten/cloud-profiler/"
 
 for subdir in ${subdirs[@]}; do
     for d in `ls -d ${subdir}/*/`; do
@@ -133,8 +133,8 @@ for subdir in ${subdirs[@]}; do
             continue
         fi
 
-        # Our CI uses Git Bash on Windows to execute this script, which returns "msys" for OSTYPE.
-        if [[ "$OSTYPE" == "msys" ]]; then
+        # Our CI uses Git Bash on Windows to execute this script, which returns "msys" or "cygwin" for OSTYPE.
+        if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" || "$OS" == "Windows_NT" ]]; then
             if [[ "${windows_exempt_tests}" =~ "${d}" ]]; then
                 echo "Skipping ${d} on Windows (in exemption list)"
                 continue
