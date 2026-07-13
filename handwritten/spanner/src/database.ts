@@ -596,7 +596,7 @@ class Database extends common.GrpcServiceObject {
       typeof optionsOrCallback === 'function' ? optionsOrCallback : cb!;
 
     const reqOpts = {
-      database: extend(
+      database: Object.assign(
         {
           name: this.formattedName_,
         },
@@ -1027,7 +1027,7 @@ class Database extends common.GrpcServiceObject {
       typeof optionsOrCallback === 'function' ? optionsOrCallback : cb!;
     const options =
       typeof optionsOrCallback === 'object' && optionsOrCallback
-        ? extend({}, optionsOrCallback)
+        ? Object.assign({}, optionsOrCallback)
         : ({} as CreateSessionOptions);
 
     const reqOpts: google.spanner.v1.ICreateSessionRequest = {
@@ -1951,7 +1951,7 @@ class Database extends common.GrpcServiceObject {
         ? optionsOrCallback
         : ({} as GetSessionsOptions);
     const gaxOpts = extend(true, {}, options.gaxOptions);
-    let reqOpts = extend({}, options, {
+    const reqOpts = Object.assign({}, options, {
       database: this.formattedName_,
     });
     delete reqOpts.gaxOptions;
@@ -1959,14 +1959,14 @@ class Database extends common.GrpcServiceObject {
     // Copy over pageSize and pageToken values from gaxOptions.
     // However values set on options take precedence.
     if (gaxOpts) {
-      reqOpts = extend(
-        {},
-        {
-          pageSize: (gaxOpts as GetSessionsOptions).pageSize,
-          pageToken: (gaxOpts as GetSessionsOptions).pageToken,
-        },
-        reqOpts,
-      );
+      const pageSize = (gaxOpts as GetSessionsOptions).pageSize;
+      const pageToken = (gaxOpts as GetSessionsOptions).pageToken;
+      if (pageSize !== undefined && (reqOpts as any).pageSize === undefined) {
+        (reqOpts as any).pageSize = pageSize;
+      }
+      if (pageToken !== undefined && (reqOpts as any).pageToken === undefined) {
+        (reqOpts as any).pageToken = pageToken;
+      }
       delete (gaxOpts as GetSessionsOptions).pageSize;
       delete (gaxOpts as GetSessionsOptions).pageToken;
     }
@@ -2004,7 +2004,7 @@ class Database extends common.GrpcServiceObject {
           }
           span.end();
           const nextQuery = nextPageRequest!
-            ? extend({}, options, nextPageRequest!)
+            ? Object.assign({}, options, nextPageRequest!)
             : null;
           callback!(err, sessionInstances!, nextQuery, ...args);
         },
@@ -2055,7 +2055,7 @@ class Database extends common.GrpcServiceObject {
   getSessionsStream(options: GetSessionsOptions = {}): NodeJS.ReadableStream {
     const gaxOpts = extend(true, {}, options.gaxOptions);
 
-    let reqOpts = extend({}, options, {
+    const reqOpts = Object.assign({}, options, {
       database: this.formattedName_,
     });
     delete reqOpts.gaxOptions;
@@ -2063,14 +2063,14 @@ class Database extends common.GrpcServiceObject {
     // Copy over pageSize and pageToken values from gaxOptions.
     // However values set on options take precedence.
     if (gaxOpts) {
-      reqOpts = extend(
-        {},
-        {
-          pageSize: (gaxOpts as GetSessionsOptions).pageSize,
-          pageToken: (gaxOpts as GetSessionsOptions).pageToken,
-        },
-        reqOpts,
-      );
+      const pageSize = (gaxOpts as GetSessionsOptions).pageSize;
+      const pageToken = (gaxOpts as GetSessionsOptions).pageToken;
+      if (pageSize !== undefined && (reqOpts as any).pageSize === undefined) {
+        (reqOpts as any).pageSize = pageSize;
+      }
+      if (pageToken !== undefined && (reqOpts as any).pageToken === undefined) {
+        (reqOpts as any).pageToken = pageToken;
+      }
       delete (gaxOpts as GetSessionsOptions).pageSize;
       delete (gaxOpts as GetSessionsOptions).pageToken;
     }
@@ -2476,21 +2476,21 @@ class Database extends common.GrpcServiceObject {
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
     const callback =
       typeof optionsOrCallback === 'function' ? optionsOrCallback : cb!;
-    let reqOpts = {
+    const reqOpts = {
       parent: this.formattedName_,
     };
 
     // Copy over pageSize and pageToken values from gaxOptions.
     // However, values set on options take precedence.
     if (gaxOpts) {
-      reqOpts = extend(
-        {},
-        {
-          pageSize: (gaxOpts as GetDatabaseRolesOptions).pageSize,
-          pageToken: (gaxOpts as GetDatabaseRolesOptions).pageToken,
-        },
-        reqOpts,
-      );
+      const pageSize = (gaxOpts as GetDatabaseRolesOptions).pageSize;
+      const pageToken = (gaxOpts as GetDatabaseRolesOptions).pageToken;
+      if (pageSize !== undefined && (reqOpts as any).pageSize === undefined) {
+        (reqOpts as any).pageSize = pageSize;
+      }
+      if (pageToken !== undefined && (reqOpts as any).pageToken === undefined) {
+        (reqOpts as any).pageToken = pageToken;
+      }
       delete (gaxOpts as GetDatabaseRolesOptions).pageSize;
       delete (gaxOpts as GetDatabaseRolesOptions).pageToken;
     }
@@ -2508,7 +2508,7 @@ class Database extends common.GrpcServiceObject {
       },
       (err, roles, nextPageRequest, ...args) => {
         const nextQuery = nextPageRequest!
-          ? extend({}, gaxOpts, nextPageRequest!)
+          ? Object.assign({}, gaxOpts, nextPageRequest!)
           : null;
 
         callback!(err, roles, nextQuery, ...args);
@@ -4051,7 +4051,7 @@ class Database extends common.GrpcServiceObject {
       };
     }
     const reqOpts: databaseAdmin.spanner.admin.database.v1.IUpdateDatabaseDdlRequest =
-      extend(
+      Object.assign(
         {
           database: this.formattedName_,
         },

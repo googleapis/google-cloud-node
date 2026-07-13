@@ -739,7 +739,7 @@ class Spanner extends GrpcService {
     const reqOpts = {
       parent: this.projectFormattedName_,
       instanceId: formattedName.split('/').pop(),
-      instance: extend(
+      instance: Object.assign(
         {
           name: formattedName,
           displayName,
@@ -892,7 +892,7 @@ class Spanner extends GrpcService {
 
     const gaxOpts = extend(true, {}, options.gaxOptions);
 
-    let reqOpts = extend({}, options, {
+    const reqOpts = Object.assign({}, options, {
       parent: 'projects/' + this.projectId,
     });
 
@@ -901,14 +901,14 @@ class Spanner extends GrpcService {
     // Copy over pageSize and pageToken values from gaxOptions.
     // However values set on options take precedence.
     if (gaxOpts) {
-      reqOpts = extend(
-        {},
-        {
-          pageSize: (gaxOpts as GetInstancesOptions).pageSize,
-          pageToken: (gaxOpts as GetInstancesOptions).pageToken,
-        },
-        reqOpts,
-      );
+      const pageSize = (gaxOpts as GetInstancesOptions).pageSize;
+      const pageToken = (gaxOpts as GetInstancesOptions).pageToken;
+      if (pageSize !== undefined && (reqOpts as any).pageSize === undefined) {
+        (reqOpts as any).pageSize = pageSize;
+      }
+      if (pageToken !== undefined && (reqOpts as any).pageToken === undefined) {
+        (reqOpts as any).pageToken = pageToken;
+      }
       delete (gaxOpts as GetInstancesOptions).pageToken;
       delete (gaxOpts as GetInstancesOptions).pageSize;
     }
@@ -931,7 +931,7 @@ class Spanner extends GrpcService {
           });
         }
         const nextQuery = nextPageRequest!
-          ? extend({}, options, nextPageRequest!)
+          ? Object.assign({}, options, nextPageRequest!)
           : null;
         callback!(err, instanceInstances, nextQuery, ...args);
       },
@@ -977,8 +977,7 @@ class Spanner extends GrpcService {
    */
   getInstancesStream(options: GetInstancesOptions = {}): NodeJS.ReadableStream {
     const gaxOpts = extend(true, {}, options.gaxOptions);
-
-    let reqOpts = extend({}, options, {
+    const reqOpts = Object.assign({}, options, {
       parent: 'projects/' + this.projectId,
     });
     delete reqOpts.gaxOptions;
@@ -986,14 +985,14 @@ class Spanner extends GrpcService {
     // Copy over pageSize and pageToken values from gaxOptions.
     // However values set on options take precedence.
     if (gaxOpts) {
-      reqOpts = extend(
-        {},
-        {
-          pageSize: (gaxOpts as GetInstancesOptions).pageSize,
-          pageToken: (gaxOpts as GetInstancesOptions).pageToken,
-        },
-        reqOpts,
-      );
+      const pageSize = (gaxOpts as GetInstancesOptions).pageSize;
+      const pageToken = (gaxOpts as GetInstancesOptions).pageToken;
+      if (pageSize !== undefined && (reqOpts as any).pageSize === undefined) {
+        (reqOpts as any).pageSize = pageSize;
+      }
+      if (pageToken !== undefined && (reqOpts as any).pageToken === undefined) {
+        (reqOpts as any).pageToken = pageToken;
+      }
       delete (gaxOpts as GetInstancesOptions).pageSize;
       delete (gaxOpts as GetInstancesOptions).pageToken;
     }
@@ -1141,7 +1140,7 @@ class Spanner extends GrpcService {
     const reqOpts = {
       parent: this.projectFormattedName_,
       instanceConfigId: formattedName.split('/').pop(),
-      instanceConfig: extend(
+      instanceConfig: Object.assign(
         {
           name: formattedName,
           displayName,
@@ -1286,7 +1285,7 @@ class Spanner extends GrpcService {
         : ({} as GetInstanceConfigsOptions);
 
     const gaxOpts = extend(true, {}, options.gaxOptions);
-    let reqOpts = extend({}, options, {
+    const reqOpts = Object.assign({}, options, {
       parent: 'projects/' + this.projectId,
     });
     delete reqOpts.gaxOptions;
@@ -1294,14 +1293,14 @@ class Spanner extends GrpcService {
     // Copy over pageSize and pageToken values from gaxOptions.
     // However values set on options take precedence.
     if (gaxOpts) {
-      reqOpts = extend(
-        {},
-        {
-          pageSize: (gaxOpts as GetInstanceConfigsOptions).pageSize,
-          pageToken: (gaxOpts as GetInstanceConfigsOptions).pageToken,
-        },
-        reqOpts,
-      );
+      const pageSize = (gaxOpts as GetInstanceConfigsOptions).pageSize;
+      const pageToken = (gaxOpts as GetInstanceConfigsOptions).pageToken;
+      if (pageSize !== undefined && (reqOpts as any).pageSize === undefined) {
+        (reqOpts as any).pageSize = pageSize;
+      }
+      if (pageToken !== undefined && (reqOpts as any).pageToken === undefined) {
+        (reqOpts as any).pageToken = pageToken;
+      }
       delete (gaxOpts as GetInstanceConfigsOptions).pageSize;
       delete (gaxOpts as GetInstanceConfigsOptions).pageToken;
     }
@@ -1316,7 +1315,7 @@ class Spanner extends GrpcService {
       },
       (err, instanceConfigs, nextPageRequest, ...args) => {
         const nextQuery = nextPageRequest!
-          ? extend({}, options, nextPageRequest!)
+          ? Object.assign({}, options, nextPageRequest!)
           : null;
         callback!(err, instanceConfigs, nextQuery, ...args);
       },
@@ -1363,21 +1362,21 @@ class Spanner extends GrpcService {
   ): NodeJS.ReadableStream {
     const gaxOpts = extend(true, {}, options.gaxOptions);
 
-    let reqOpts = extend({}, options, {
+    const reqOpts = Object.assign({}, options, {
       parent: 'projects/' + this.projectId,
     });
 
     // Copy over pageSize and pageToken values from gaxOptions.
     // However values set on options take precedence.
     if (gaxOpts) {
-      reqOpts = extend(
-        {},
-        {
-          pageSize: (gaxOpts as GetInstancesOptions).pageSize,
-          pageToken: (gaxOpts as GetInstancesOptions).pageToken,
-        },
-        reqOpts,
-      );
+      const pageSize = (gaxOpts as GetInstancesOptions).pageSize;
+      const pageToken = (gaxOpts as GetInstancesOptions).pageToken;
+      if (pageSize !== undefined && (reqOpts as any).pageSize === undefined) {
+        (reqOpts as any).pageSize = pageSize;
+      }
+      if (pageToken !== undefined && (reqOpts as any).pageToken === undefined) {
+        (reqOpts as any).pageToken = pageToken;
+      }
       delete (gaxOpts as GetInstancesOptions).pageSize;
       delete (gaxOpts as GetInstancesOptions).pageToken;
     }
@@ -1469,13 +1468,13 @@ class Spanner extends GrpcService {
         ? optionsOrCallback
         : ({} as GetInstanceConfigOptions);
 
-    const reqOpts = extend(
+    const reqOpts = Object.assign(
       {},
       {
         name: 'projects/' + this.projectId + '/instanceConfigs/' + name,
       },
     );
-    const gaxOpts = extend({}, options.gaxOptions);
+    const gaxOpts = Object.assign({}, options.gaxOptions);
 
     return this.request(
       {
@@ -1577,7 +1576,7 @@ class Spanner extends GrpcService {
         ? optionsOrCallback
         : ({} as GetInstanceConfigOperationsOptions);
     const gaxOpts = extend(true, {}, options.gaxOptions);
-    let reqOpts = extend({}, options, {
+    const reqOpts = Object.assign({}, options, {
       parent: this.projectFormattedName_,
     });
     delete reqOpts.gaxOptions;
@@ -1585,14 +1584,15 @@ class Spanner extends GrpcService {
     // Copy over pageSize and pageToken values from gaxOptions.
     // However, values set on options take precedence.
     if (gaxOpts) {
-      reqOpts = extend(
-        {},
-        {
-          pageSize: (gaxOpts as GetInstanceConfigOperationsOptions).pageSize,
-          pageToken: (gaxOpts as GetInstanceConfigOperationsOptions).pageToken,
-        },
-        reqOpts,
-      );
+      const pageSize = (gaxOpts as GetInstanceConfigOperationsOptions).pageSize;
+      const pageToken = (gaxOpts as GetInstanceConfigOperationsOptions)
+        .pageToken;
+      if (pageSize !== undefined && (reqOpts as any).pageSize === undefined) {
+        (reqOpts as any).pageSize = pageSize;
+      }
+      if (pageToken !== undefined && (reqOpts as any).pageToken === undefined) {
+        (reqOpts as any).pageToken = pageToken;
+      }
       delete (gaxOpts as GetInstanceConfigOperationsOptions).pageSize;
       delete (gaxOpts as GetInstanceConfigOperationsOptions).pageToken;
     }
@@ -1607,7 +1607,7 @@ class Spanner extends GrpcService {
       },
       (err, operations, nextPageRequest, ...args) => {
         const nextQuery = nextPageRequest!
-          ? extend({}, options, nextPageRequest!)
+          ? Object.assign({}, options, nextPageRequest!)
           : null;
 
         callback!(err, operations, nextQuery, ...args);
