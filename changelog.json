@@ -4,6 +4,33 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "f120e17e588d0a0d7fbf037aa17ab1c869dda90e",
+          "message": "Update package.json template to monorepo repository/homepage schema and >=18 engines range",
+          "issues": [
+            "8840"
+          ],
+          "scope": "generator"
+        },
+        {
+          "type": "fix",
+          "sha": "8e5188877da05a226e9976b2e5057eaec5054d1f",
+          "message": "Add long dependency to CJS template and update baselines",
+          "issues": [
+            "8685"
+          ],
+          "scope": "generator"
+        }
+      ],
+      "version": "4.12.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gapic-generator",
+      "id": "2c1d7762-f374-4efa-af7b-35a8fe25c005",
+      "createTime": "2026-07-13T16:42:44.861Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "57a5482a4031f87c14120740deb5a805a6801e17",
           "message": "Onboard a new library",
@@ -82049,5 +82076,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-07-13T18:34:06.499Z"
+  "updateTime": "2026-07-13T16:42:44.861Z"
 }
