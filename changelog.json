@@ -5,6 +5,31 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "a2415320b9c840f6ae27894451abb561a080ff82",
+          "message": "Consolidate prettierignore and prettierrc files: handwritten",
+          "issues": [
+            "8081"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "d258379599691e0a7bb9d99e6f655ff4e1918893",
+          "message": "Remove dependency on the eventid package",
+          "issues": [
+            "8687"
+          ]
+        }
+      ],
+      "version": "11.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/logging",
+      "id": "492e7985-087e-45ca-94a3-5e180be93b76",
+      "createTime": "2026-07-10T21:08:08.325Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "3391fd27d1c15e051293207a07c6db00e760d370",
           "message": "Update API sources and regenerate",
           "issues": [
@@ -81630,5 +81655,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-07-08T17:10:18.122Z"
+  "updateTime": "2026-07-10T21:08:08.325Z"
 }
