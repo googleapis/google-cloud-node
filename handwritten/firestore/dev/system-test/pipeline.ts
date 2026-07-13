@@ -6953,7 +6953,8 @@ describe.skip('Pipeline class', () => {
 // Search tests require a collection with an index, so the test setup and tear
 // down is managed different from the rest of the Pipeline tests. To accomplish
 // this, we break these tests into a separate describe
-describe.skipClassic('Pipeline search', () => {
+describe.skip('Pipeline search', () => {
+  // Tests have been skipped due to failures from kokoro to GCB migration.
   let firestore: Firestore;
   let restaurantsCollection: CollectionReference;
 
@@ -7620,7 +7621,8 @@ describe.skipClassic('Pipeline search', () => {
 // This is the Query integration tests from the lite API (no cache support)
 // with some additional test cases added for more complete coverage.
 // eslint-disable-next-line no-restricted-properties
-describe.skipClassic('Query to Pipeline', () => {
+describe.skip('Query to Pipeline', () => {
+  // Tests have been skipped due to failures from kokoro to GCB migration.
   async function execute(ppl: Pipeline): Promise<PipelineSnapshot> {
     return ppl.execute();
   }
