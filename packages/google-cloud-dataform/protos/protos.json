@@ -15,8 +15,8 @@
                     "java_package": "com.google.cloud.dataform.v1",
                     "php_namespace": "Google\\Cloud\\Dataform\\V1",
                     "ruby_package": "Google::Cloud::Dataform::V1",
-                    "(google.api.resource_definition).type": "aiplatform.googleapis.com/NotebookRuntimeTemplate",
-                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/notebookRuntimeTemplates/{notebook_runtime_template}"
+                    "(google.api.resource_definition).type": "developerconnect.googleapis.com/GitRepositoryLink",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/connections/{connection}/gitRepositoryLinks/{git_repository_link}"
                   },
                   "nested": {
                     "Dataform": {
@@ -1518,6 +1518,13 @@
                       },
                       "nested": {
                         "GitRemoteSettings": {
+                          "oneofs": {
+                            "_gitRepositoryLink": {
+                              "oneof": [
+                                "gitRepositoryLink"
+                              ]
+                            }
+                          },
                           "fields": {
                             "url": {
                               "type": "string",
@@ -1530,7 +1537,14 @@
                               "type": "string",
                               "id": 2,
                               "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "effectiveDefaultBranch": {
+                              "type": "string",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
                             },
                             "authenticationTokenSecretVersion": {
@@ -1546,6 +1560,15 @@
                               "id": 5,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "gitRepositoryLink": {
+                              "type": "string",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).type": "developerconnect.googleapis.com/GitRepositoryLink",
+                                "proto3_optional": true
                               }
                             },
                             "tokenStatus": {

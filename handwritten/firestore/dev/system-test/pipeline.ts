@@ -384,7 +384,7 @@ describe.skipClassic('Pipeline class', () => {
       });
 
       it('can execute delete stage within a transaction', async () => {
-        const promise = firestore.runTransaction(async transaction => {
+        await firestore.runTransaction(async transaction => {
           const deletePpl = firestore
             .pipeline()
             .collection(dmlCol.path)
@@ -395,9 +395,8 @@ describe.skipClassic('Pipeline class', () => {
           expectResults(deleteRes, {documents_modified: 1});
         });
 
-        await expect(promise).to.be.rejectedWith(
-          /Transactional DML operations are not yet supported/,
-        );
+        const docSnap = await dmlCol.doc('book2').get();
+        expect(docSnap.exists).to.be.false;
       });
 
       it('can execute update stage with addFields', async () => {
