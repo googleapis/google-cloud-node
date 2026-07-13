@@ -565,6 +565,7 @@ describe('Spanner', () => {
     };
 
     it.skip('GOOGLE_STANDARD_SQL should throw an error for incorrect value types', async () => {
+      // TODO: Re-enable this test once GCB migration issues are resolved.
       // Test skipped for regular session kokoro to GCB migration errors.
       await incorrectValueType(googleSqlTable);
     });
