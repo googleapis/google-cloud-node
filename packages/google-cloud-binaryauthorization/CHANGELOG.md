@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.5.0](https://github.com/googleapis/google-cloud-node/compare/binary-authorization-v4.4.1...binary-authorization-v4.5.0) (2026-07-13)
+
+
+### Features
+
+* Update googleapis source and regenerate client libraries ([#8821](https://github.com/googleapis/google-cloud-node/issues/8821)) ([2a3a77c](https://github.com/googleapis/google-cloud-node/commit/2a3a77ceaa4ff2c7e1a2ec0338a770fa60b738a9))
+
 ## [4.4.1](https://github.com/googleapis/google-cloud-node/compare/binary-authorization-v4.4.0...binary-authorization-v4.4.1) (2026-05-01)
 
 
