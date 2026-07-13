@@ -1557,7 +1557,7 @@ describe.skip('DocumentReference class', () => {
       .be.true;
   });
 
-  describe.skip('watch', () => {
+  describe('watch', () => {
     const currentDeferred = new DeferredPromise<DocumentSnapshot>();
 
     function resetPromise() {
