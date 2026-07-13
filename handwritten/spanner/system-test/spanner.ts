@@ -571,6 +571,7 @@ describe('Spanner', () => {
     });
 
     it.skip('POSTGRESQL should throw an error for incorrect value types', async () => {
+      // TODO: Re-enable this test once GCB migration issues are resolved.
       // Test skipped for regular session kokoro to GCB migration errors.
       await incorrectValueType(postgreSqlTable);
     });
@@ -1213,6 +1214,7 @@ describe('Spanner', () => {
       };
 
       it.skip('GOOGLE_STANDARD_SQL should throw for out of bounds values', async () => {
+        // TODO: Re-enable this test once GCB migration issues are resolved.
         // Test skipped for regular session kokoro to GCB migration errors.
         await numericInsertOutOfBounds(
           Spanner.GOOGLE_STANDARD_SQL,
@@ -1221,6 +1223,7 @@ describe('Spanner', () => {
       });
 
       it.skip('POSTGRESQL should throw for out of bounds values', async () => {
+        // TODO: Re-enable this test once GCB migration issues are resolved.
         // Test skipped for regular session kokoro to GCB migration errors.
         await numericInsertOutOfBounds(
           Spanner.POSTGRESQL,
