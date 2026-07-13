@@ -1959,16 +1959,15 @@ class Database extends common.GrpcServiceObject {
     // Copy over pageSize and pageToken values from gaxOptions.
     // However values set on options take precedence.
     if (gaxOpts) {
-      const pageSize = (gaxOpts as GetSessionsOptions).pageSize;
-      const pageToken = (gaxOpts as GetSessionsOptions).pageToken;
-      if (pageSize !== undefined && (reqOpts as any).pageSize === undefined) {
-        (reqOpts as any).pageSize = pageSize;
+      const gax = gaxOpts as GetSessionsOptions;
+      if (gax.pageSize !== undefined) {
+        reqOpts.pageSize ??= gax.pageSize;
+        delete gax.pageSize;
       }
-      if (pageToken !== undefined && (reqOpts as any).pageToken === undefined) {
-        (reqOpts as any).pageToken = pageToken;
+      if (gax.pageToken !== undefined) {
+        reqOpts.pageToken ??= gax.pageToken;
+        delete gax.pageToken;
       }
-      delete (gaxOpts as GetSessionsOptions).pageSize;
-      delete (gaxOpts as GetSessionsOptions).pageToken;
     }
 
     const headers = this._metadataWithRequestId(
@@ -2063,16 +2062,15 @@ class Database extends common.GrpcServiceObject {
     // Copy over pageSize and pageToken values from gaxOptions.
     // However values set on options take precedence.
     if (gaxOpts) {
-      const pageSize = (gaxOpts as GetSessionsOptions).pageSize;
-      const pageToken = (gaxOpts as GetSessionsOptions).pageToken;
-      if (pageSize !== undefined && (reqOpts as any).pageSize === undefined) {
-        (reqOpts as any).pageSize = pageSize;
+      const gax = gaxOpts as GetSessionsOptions;
+      if (gax.pageSize !== undefined) {
+        reqOpts.pageSize ??= gax.pageSize;
+        delete gax.pageSize;
       }
-      if (pageToken !== undefined && (reqOpts as any).pageToken === undefined) {
-        (reqOpts as any).pageToken = pageToken;
+      if (gax.pageToken !== undefined) {
+        reqOpts.pageToken ??= gax.pageToken;
+        delete gax.pageToken;
       }
-      delete (gaxOpts as GetSessionsOptions).pageSize;
-      delete (gaxOpts as GetSessionsOptions).pageToken;
     }
 
     return this.requestStream({
@@ -2483,16 +2481,15 @@ class Database extends common.GrpcServiceObject {
     // Copy over pageSize and pageToken values from gaxOptions.
     // However, values set on options take precedence.
     if (gaxOpts) {
-      const pageSize = (gaxOpts as GetDatabaseRolesOptions).pageSize;
-      const pageToken = (gaxOpts as GetDatabaseRolesOptions).pageToken;
-      if (pageSize !== undefined && (reqOpts as any).pageSize === undefined) {
-        (reqOpts as any).pageSize = pageSize;
+      const gax = gaxOpts as GetDatabaseRolesOptions;
+      if (gax.pageSize !== undefined) {
+        (reqOpts as any).pageSize ??= gax.pageSize;
+        delete gax.pageSize;
       }
-      if (pageToken !== undefined && (reqOpts as any).pageToken === undefined) {
-        (reqOpts as any).pageToken = pageToken;
+      if (gax.pageToken !== undefined) {
+        (reqOpts as any).pageToken ??= gax.pageToken;
+        delete gax.pageToken;
       }
-      delete (gaxOpts as GetDatabaseRolesOptions).pageSize;
-      delete (gaxOpts as GetDatabaseRolesOptions).pageToken;
     }
 
     this.request<

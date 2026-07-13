@@ -412,16 +412,15 @@ class Instance extends common.GrpcServiceObject {
     // Copy over pageSize and pageToken values from gaxOptions.
     // However values set on options take precedence.
     if (gaxOpts) {
-      const pageSize = (gaxOpts as GetBackupsOptions).pageSize;
-      const pageToken = (gaxOpts as GetBackupsOptions).pageToken;
-      if (pageSize !== undefined && (reqOpts as any).pageSize === undefined) {
-        (reqOpts as any).pageSize = pageSize;
+      const gax = gaxOpts as GetBackupsOptions;
+      if (gax.pageSize !== undefined) {
+        reqOpts.pageSize ??= gax.pageSize;
+        delete gax.pageSize;
       }
-      if (pageToken !== undefined && (reqOpts as any).pageToken === undefined) {
-        (reqOpts as any).pageToken = pageToken;
+      if (gax.pageToken !== undefined) {
+        reqOpts.pageToken ??= gax.pageToken;
+        delete gax.pageToken;
       }
-      delete (gaxOpts as GetBackupsOptions).pageSize;
-      delete (gaxOpts as GetBackupsOptions).pageToken;
     }
 
     this.request<
@@ -503,16 +502,15 @@ class Instance extends common.GrpcServiceObject {
     // Copy over pageSize and pageToken values from gaxOptions.
     // However values set on options take precedence.
     if (gaxOpts) {
-      const pageSize = (gaxOpts as GetBackupsOptions).pageSize;
-      const pageToken = (gaxOpts as GetBackupsOptions).pageToken;
-      if (pageSize !== undefined && (reqOpts as any).pageSize === undefined) {
-        (reqOpts as any).pageSize = pageSize;
+      const gax = gaxOpts as GetBackupsOptions;
+      if (gax.pageSize !== undefined) {
+        reqOpts.pageSize ??= gax.pageSize;
+        delete gax.pageSize;
       }
-      if (pageToken !== undefined && (reqOpts as any).pageToken === undefined) {
-        (reqOpts as any).pageToken = pageToken;
+      if (gax.pageToken !== undefined) {
+        reqOpts.pageToken ??= gax.pageToken;
+        delete gax.pageToken;
       }
-      delete (gaxOpts as GetBackupsOptions).pageSize;
-      delete (gaxOpts as GetBackupsOptions).pageToken;
     }
 
     return this.requestStream({
@@ -618,16 +616,15 @@ class Instance extends common.GrpcServiceObject {
     // Copy over pageSize and pageToken values from gaxOptions.
     // However values set on options take precedence.
     if (gaxOpts) {
-      const pageSize = (gaxOpts as GetBackupsOptions).pageSize;
-      const pageToken = (gaxOpts as GetBackupsOptions).pageToken;
-      if (pageSize !== undefined && (reqOpts as any).pageSize === undefined) {
-        (reqOpts as any).pageSize = pageSize;
+      const gax = gaxOpts as GetBackupsOptions;
+      if (gax.pageSize !== undefined) {
+        reqOpts.pageSize ??= gax.pageSize;
+        delete gax.pageSize;
       }
-      if (pageToken !== undefined && (reqOpts as any).pageToken === undefined) {
-        (reqOpts as any).pageToken = pageToken;
+      if (gax.pageToken !== undefined) {
+        reqOpts.pageToken ??= gax.pageToken;
+        delete gax.pageToken;
       }
-      delete (gaxOpts as GetBackupsOptions).pageSize;
-      delete (gaxOpts as GetBackupsOptions).pageToken;
     }
 
     this.request<
@@ -746,16 +743,15 @@ class Instance extends common.GrpcServiceObject {
     // Copy over pageSize and pageToken values from gaxOptions.
     // However values set on options take precedence.
     if (gaxOpts) {
-      const pageSize = (gaxOpts as GetBackupsOptions).pageSize;
-      const pageToken = (gaxOpts as GetBackupsOptions).pageToken;
-      if (pageSize !== undefined && (reqOpts as any).pageSize === undefined) {
-        (reqOpts as any).pageSize = pageSize;
+      const gax = gaxOpts as GetBackupsOptions;
+      if (gax.pageSize !== undefined) {
+        reqOpts.pageSize ??= gax.pageSize;
+        delete gax.pageSize;
       }
-      if (pageToken !== undefined && (reqOpts as any).pageToken === undefined) {
-        (reqOpts as any).pageToken = pageToken;
+      if (gax.pageToken !== undefined) {
+        reqOpts.pageToken ??= gax.pageToken;
+        delete gax.pageToken;
       }
-      delete (gaxOpts as GetBackupsOptions).pageSize;
-      delete (gaxOpts as GetBackupsOptions).pageToken;
     }
 
     this.request<
@@ -1346,16 +1342,15 @@ class Instance extends common.GrpcServiceObject {
     // Copy over pageSize and pageToken values from gaxOptions.
     // However values set on options take precedence.
     if (gaxOpts) {
-      const pageSize = (gaxOpts as GetBackupsOptions).pageSize;
-      const pageToken = (gaxOpts as GetBackupsOptions).pageToken;
-      if (pageSize !== undefined && (reqOpts as any).pageSize === undefined) {
-        (reqOpts as any).pageSize = pageSize;
+      const gax = gaxOpts as GetBackupsOptions;
+      if (gax.pageSize !== undefined) {
+        reqOpts.pageSize ??= gax.pageSize;
+        delete gax.pageSize;
       }
-      if (pageToken !== undefined && (reqOpts as any).pageToken === undefined) {
-        (reqOpts as any).pageToken = pageToken;
+      if (gax.pageToken !== undefined) {
+        reqOpts.pageToken ??= gax.pageToken;
+        delete gax.pageToken;
       }
-      delete (gaxOpts as GetBackupsOptions).pageSize;
-      delete (gaxOpts as GetBackupsOptions).pageToken;
     }
 
     this.request<
@@ -1438,16 +1433,15 @@ class Instance extends common.GrpcServiceObject {
     // Copy over pageSize and pageToken values from gaxOptions.
     // However values set on options take precedence.
     if (gaxOpts) {
-      const pageSize = (gaxOpts as GetBackupsOptions).pageSize;
-      const pageToken = (gaxOpts as GetBackupsOptions).pageToken;
-      if (pageSize !== undefined && (reqOpts as any).pageSize === undefined) {
-        (reqOpts as any).pageSize = pageSize;
+      const gax = gaxOpts as GetBackupsOptions;
+      if (gax.pageSize !== undefined) {
+        reqOpts.pageSize ??= gax.pageSize;
+        delete gax.pageSize;
       }
-      if (pageToken !== undefined && (reqOpts as any).pageToken === undefined) {
-        (reqOpts as any).pageToken = pageToken;
+      if (gax.pageToken !== undefined) {
+        reqOpts.pageToken ??= gax.pageToken;
+        delete gax.pageToken;
       }
-      delete (gaxOpts as GetBackupsOptions).pageSize;
-      delete (gaxOpts as GetBackupsOptions).pageToken;
     }
 
     return this.requestStream({
